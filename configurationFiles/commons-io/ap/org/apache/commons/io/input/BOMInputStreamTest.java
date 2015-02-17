@@ -78,7 +78,7 @@ private static class ExpectCloseInputStream extends InputStream {
 
     public void testSupportCode() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode");
-        InputStream in = createDataStream(new byte[]{ 'A' , 'B' }, true);
+        InputStream in = createDataStream(new byte[]{ 'A' , 'B' }, false);
         byte[] buf = new byte[1024];
         int len = in.read(buf);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),434,len);
@@ -91,8 +91,53 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSupportCode_literalMutation342() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode_literalMutation342");
+    public void testSupportCode_literalMutation670() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode_literalMutation670");
+        InputStream in = createDataStream(new byte[]{ 'A' , 'B' }, true);
+        byte[] buf = new byte[1025];
+        int len = in.read(buf);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),434,len);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),435,((buf[0]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),436,((buf[1]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),437,((buf[2]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),438,((buf[3]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),439,((buf[4]) & 255));
+        assertData(new byte[]{ ((byte)(239)) , ((byte)(187)) , ((byte)(191)) , 'A' , 'B' }, buf, len);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSupportCode_literalMutation671() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode_literalMutation671");
+        InputStream in = createDataStream(new byte[]{ 'A' , 'B' }, true);
+        byte[] buf = new byte[512];
+        int len = in.read(buf);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),434,len);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),435,((buf[0]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),436,((buf[1]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),437,((buf[2]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),438,((buf[3]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),439,((buf[4]) & 255));
+        assertData(new byte[]{ ((byte)(239)) , ((byte)(187)) , ((byte)(191)) , 'A' , 'B' }, buf, len);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSupportCode_literalMutation672() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode_literalMutation672");
+        InputStream in = createDataStream(new byte[]{ 'A' , 'B' }, true);
+        byte[] buf = new byte[2048];
+        int len = in.read(buf);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),434,len);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),435,((buf[0]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),436,((buf[1]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),437,((buf[2]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),438,((buf[3]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),439,((buf[4]) & 255));
+        assertData(new byte[]{ ((byte)(239)) , ((byte)(187)) , ((byte)(191)) , 'A' , 'B' }, buf, len);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSupportCode_literalMutation673() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode_literalMutation673");
         InputStream in = createDataStream(new byte[]{ 'A' , 'B' }, true);
         byte[] buf = new byte[1023];
         int len = in.read(buf);
@@ -106,8 +151,53 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSupportCode_literalMutation343() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode_literalMutation343");
+    public void testSupportCode_literalMutation674() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode_literalMutation674");
+        InputStream in = createDataStream(new byte[]{ 'A' , 'B' }, true);
+        byte[] buf = new byte[1024];
+        int len = in.read(buf);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),434,len);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),435,((buf[0]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),436,((buf[1]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),437,((buf[2]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),438,((buf[3]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),439,((buf[4]) & 255));
+        assertData(new byte[]{ ((byte)(238)) , ((byte)(187)) , ((byte)(191)) , 'A' , 'B' }, buf, len);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSupportCode_literalMutation675() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode_literalMutation675");
+        InputStream in = createDataStream(new byte[]{ 'A' , 'B' }, true);
+        byte[] buf = new byte[1024];
+        int len = in.read(buf);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),434,len);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),435,((buf[0]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),436,((buf[1]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),437,((buf[2]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),438,((buf[3]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),439,((buf[4]) & 255));
+        assertData(new byte[]{ ((byte)(119)) , ((byte)(187)) , ((byte)(191)) , 'A' , 'B' }, buf, len);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSupportCode_literalMutation676() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode_literalMutation676");
+        InputStream in = createDataStream(new byte[]{ 'A' , 'B' }, true);
+        byte[] buf = new byte[1024];
+        int len = in.read(buf);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),434,len);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),435,((buf[0]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),436,((buf[1]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),437,((buf[2]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),438,((buf[3]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),439,((buf[4]) & 255));
+        assertData(new byte[]{ ((byte)(478)) , ((byte)(187)) , ((byte)(191)) , 'A' , 'B' }, buf, len);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSupportCode_literalMutation677() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode_literalMutation677");
         InputStream in = createDataStream(new byte[]{ 'A' , 'B' }, true);
         byte[] buf = new byte[1024];
         int len = in.read(buf);
@@ -121,8 +211,8 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSupportCode_literalMutation344() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode_literalMutation344");
+    public void testSupportCode_literalMutation678() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode_literalMutation678");
         InputStream in = createDataStream(new byte[]{ 'A' , 'B' }, true);
         byte[] buf = new byte[1024];
         int len = in.read(buf);
@@ -136,8 +226,53 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSupportCode_literalMutation345() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode_literalMutation345");
+    public void testSupportCode_literalMutation679() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode_literalMutation679");
+        InputStream in = createDataStream(new byte[]{ 'A' , 'B' }, true);
+        byte[] buf = new byte[1024];
+        int len = in.read(buf);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),434,len);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),435,((buf[0]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),436,((buf[1]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),437,((buf[2]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),438,((buf[3]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),439,((buf[4]) & 255));
+        assertData(new byte[]{ ((byte)(239)) , ((byte)(186)) , ((byte)(191)) , 'A' , 'B' }, buf, len);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSupportCode_literalMutation680() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode_literalMutation680");
+        InputStream in = createDataStream(new byte[]{ 'A' , 'B' }, true);
+        byte[] buf = new byte[1024];
+        int len = in.read(buf);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),434,len);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),435,((buf[0]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),436,((buf[1]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),437,((buf[2]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),438,((buf[3]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),439,((buf[4]) & 255));
+        assertData(new byte[]{ ((byte)(239)) , ((byte)(93)) , ((byte)(191)) , 'A' , 'B' }, buf, len);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSupportCode_literalMutation681() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode_literalMutation681");
+        InputStream in = createDataStream(new byte[]{ 'A' , 'B' }, true);
+        byte[] buf = new byte[1024];
+        int len = in.read(buf);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),434,len);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),435,((buf[0]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),436,((buf[1]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),437,((buf[2]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),438,((buf[3]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),439,((buf[4]) & 255));
+        assertData(new byte[]{ ((byte)(239)) , ((byte)(374)) , ((byte)(191)) , 'A' , 'B' }, buf, len);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSupportCode_literalMutation682() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode_literalMutation682");
         InputStream in = createDataStream(new byte[]{ 'A' , 'B' }, true);
         byte[] buf = new byte[1024];
         int len = in.read(buf);
@@ -148,6 +283,51 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),438,((buf[3]) & 255));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),439,((buf[4]) & 255));
         assertData(new byte[]{ ((byte)(239)) , ((byte)(187)) , ((byte)(190)) , 'A' , 'B' }, buf, len);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSupportCode_literalMutation683() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode_literalMutation683");
+        InputStream in = createDataStream(new byte[]{ 'A' , 'B' }, true);
+        byte[] buf = new byte[1024];
+        int len = in.read(buf);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),434,len);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),435,((buf[0]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),436,((buf[1]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),437,((buf[2]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),438,((buf[3]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),439,((buf[4]) & 255));
+        assertData(new byte[]{ ((byte)(239)) , ((byte)(187)) , ((byte)(95)) , 'A' , 'B' }, buf, len);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSupportCode_literalMutation684() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode_literalMutation684");
+        InputStream in = createDataStream(new byte[]{ 'A' , 'B' }, true);
+        byte[] buf = new byte[1024];
+        int len = in.read(buf);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),434,len);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),435,((buf[0]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),436,((buf[1]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),437,((buf[2]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),438,((buf[3]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),439,((buf[4]) & 255));
+        assertData(new byte[]{ ((byte)(239)) , ((byte)(187)) , ((byte)(382)) , 'A' , 'B' }, buf, len);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSupportCode_literalMutation685() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSupportCode_literalMutation685");
+        InputStream in = createDataStream(new byte[]{ 'A' , 'B' }, true);
+        byte[] buf = new byte[1024];
+        int len = in.read(buf);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),434,len);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),435,((buf[0]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),436,((buf[1]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),437,((buf[2]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),438,((buf[3]) & 255));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),439,((buf[4]) & 255));
+        assertData(new byte[]{ ((byte)(239)) , ((byte)(187)) , ((byte)(192)) , 'A' , 'B' }, buf, len);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -169,7 +349,7 @@ private static class ExpectCloseInputStream extends InputStream {
     public void testReadWithoutBOM() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadWithoutBOM");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
-        BOMInputStream in = new BOMInputStream(createDataStream(data, false));
+        BOMInputStream in = new BOMInputStream(createDataStream(data, true));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),416,in,415,in.read());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),418,in,417,in.read());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),420,in,419,in.read());
@@ -184,7 +364,7 @@ private static class ExpectCloseInputStream extends InputStream {
     public void testReadEmpty() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadEmpty");
         byte[] data = new byte[]{  };
-        BOMInputStream in = new BOMInputStream(createDataStream(data, false));
+        BOMInputStream in = new BOMInputStream(createDataStream(data, true));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),337,-1);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),339,in,338,in.read());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),341,in,340,in.hasBOM());
@@ -232,7 +412,7 @@ private static class ExpectCloseInputStream extends InputStream {
     public void testReadWithBOM() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadWithBOM");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
-        BOMInputStream in = new BOMInputStream(createDataStream(data, true));
+        BOMInputStream in = new BOMInputStream(createDataStream(data, false));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),382,in,381,in.read());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),384,in,383,in.read());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),386,in,385,in.read());
@@ -284,10 +464,10 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testReadWithBOMInclude_literalMutation294() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadWithBOMInclude_literalMutation294");
+    public void testReadWithBOMInclude_literalMutation596() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadWithBOMInclude_literalMutation596");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
-        BOMInputStream in = new BOMInputStream(createDataStream(data, true) , true);
+        BOMInputStream in = new BOMInputStream(createDataStream(data, true) , false);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),360,in,359,in.read());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),362,in,361,in.read());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),364,in,363,in.read());
@@ -306,7 +486,7 @@ private static class ExpectCloseInputStream extends InputStream {
     public void testGetBOMFirstThenReadInclude() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetBOMFirstThenReadInclude");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
-        BOMInputStream in = new BOMInputStream(createDataStream(data, true) , true);
+        BOMInputStream in = new BOMInputStream(createDataStream(data, false) , true);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),275,in,274,in.hasBOM());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),277,in,276,in.hasBOM(org.apache.commons.io.ByteOrderMark.UTF_8));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),278,org.apache.commons.io.ByteOrderMark.UTF_8);
@@ -322,8 +502,8 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testGetBOMFirstThenReadInclude_literalMutation227() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetBOMFirstThenReadInclude_literalMutation227");
+    public void testGetBOMFirstThenReadInclude_literalMutation488() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetBOMFirstThenReadInclude_literalMutation488");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
         BOMInputStream in = new BOMInputStream(createDataStream(data, true) , false);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),275,in,274,in.hasBOM());
@@ -344,7 +524,7 @@ private static class ExpectCloseInputStream extends InputStream {
     public void testReadWithMultipleBOM() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadWithMultipleBOM");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
-        BOMInputStream in = new BOMInputStream(createDataStream(data, true) , ByteOrderMark.UTF_16BE , ByteOrderMark.UTF_8);
+        BOMInputStream in = new BOMInputStream(createDataStream(data, false) , ByteOrderMark.UTF_16BE , ByteOrderMark.UTF_8);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),398,in,397,in.read());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),400,in,399,in.read());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),402,in,401,in.read());
@@ -368,8 +548,38 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testEmptyBufferWithoutBOM_literalMutation218() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyBufferWithoutBOM_literalMutation218");
+    public void testEmptyBufferWithoutBOM_literalMutation476() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyBufferWithoutBOM_literalMutation476");
+        byte[] data = new byte[]{  };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1025];
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),271,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),273,in,272,in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testEmptyBufferWithoutBOM_literalMutation477() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyBufferWithoutBOM_literalMutation477");
+        byte[] data = new byte[]{  };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[512];
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),271,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),273,in,272,in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testEmptyBufferWithoutBOM_literalMutation478() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyBufferWithoutBOM_literalMutation478");
+        byte[] data = new byte[]{  };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[2048];
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),271,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),273,in,272,in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testEmptyBufferWithoutBOM_literalMutation479() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyBufferWithoutBOM_literalMutation479");
         byte[] data = new byte[]{  };
         InputStream in = new BOMInputStream(createDataStream(data, false));
         byte[] buf = new byte[1023];
@@ -381,18 +591,48 @@ private static class ExpectCloseInputStream extends InputStream {
     public void testEmptyBufferWithBOM() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyBufferWithBOM");
         byte[] data = new byte[]{  };
-        InputStream in = new BOMInputStream(createDataStream(data, true));
+        InputStream in = new BOMInputStream(createDataStream(data, false));
         byte[] buf = new byte[1024];
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),268,-1);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),270,in,269,in.read(buf));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testEmptyBufferWithBOM_literalMutation216() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyBufferWithBOM_literalMutation216");
+    public void testEmptyBufferWithBOM_literalMutation471() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyBufferWithBOM_literalMutation471");
         byte[] data = new byte[]{  };
         InputStream in = new BOMInputStream(createDataStream(data, true));
         byte[] buf = new byte[1025];
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),268,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),270,in,269,in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testEmptyBufferWithBOM_literalMutation472() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyBufferWithBOM_literalMutation472");
+        byte[] data = new byte[]{  };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        byte[] buf = new byte[512];
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),268,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),270,in,269,in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testEmptyBufferWithBOM_literalMutation473() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyBufferWithBOM_literalMutation473");
+        byte[] data = new byte[]{  };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        byte[] buf = new byte[2048];
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),268,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),270,in,269,in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testEmptyBufferWithBOM_literalMutation474() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyBufferWithBOM_literalMutation474");
+        byte[] data = new byte[]{  };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        byte[] buf = new byte[1023];
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),268,-1);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),270,in,269,in.read(buf));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -412,14 +652,41 @@ private static class ExpectCloseInputStream extends InputStream {
     public void testLargeBufferWithoutBOM() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLargeBufferWithoutBOM");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
-        InputStream in = new BOMInputStream(createDataStream(data, false));
+        InputStream in = new BOMInputStream(createDataStream(data, true));
         byte[] buf = new byte[1024];
         assertData(data, buf, in.read(buf));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLargeBufferWithoutBOM_literalMutation237() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLargeBufferWithoutBOM_literalMutation237");
+    public void testLargeBufferWithoutBOM_literalMutation501() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLargeBufferWithoutBOM_literalMutation501");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1025];
+        assertData(data, buf, in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLargeBufferWithoutBOM_literalMutation502() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLargeBufferWithoutBOM_literalMutation502");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[512];
+        assertData(data, buf, in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLargeBufferWithoutBOM_literalMutation503() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLargeBufferWithoutBOM_literalMutation503");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[2048];
+        assertData(data, buf, in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLargeBufferWithoutBOM_literalMutation504() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLargeBufferWithoutBOM_literalMutation504");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
         InputStream in = new BOMInputStream(createDataStream(data, false));
         byte[] buf = new byte[1023];
@@ -456,11 +723,38 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLargeBufferWithBOM_literalMutation232() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLargeBufferWithBOM_literalMutation232");
+    public void testLargeBufferWithBOM_literalMutation493() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLargeBufferWithBOM_literalMutation493");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
         InputStream in = new BOMInputStream(createDataStream(data, true));
         byte[] buf = new byte[1025];
+        assertData(data, buf, in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLargeBufferWithBOM_literalMutation494() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLargeBufferWithBOM_literalMutation494");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        byte[] buf = new byte[512];
+        assertData(data, buf, in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLargeBufferWithBOM_literalMutation495() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLargeBufferWithBOM_literalMutation495");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        byte[] buf = new byte[2048];
+        assertData(data, buf, in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLargeBufferWithBOM_literalMutation496() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLargeBufferWithBOM_literalMutation496");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        byte[] buf = new byte[1023];
         assertData(data, buf, in.read(buf));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -508,8 +802,38 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSmallBufferWithoutBOM_literalMutation331() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation331");
+    public void testSmallBufferWithoutBOM_literalMutation648() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation648");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1025];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 2));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithoutBOM_literalMutation649() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation649");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[512];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 2));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithoutBOM_literalMutation650() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation650");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[2048];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 2));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithoutBOM_literalMutation651() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation651");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
         InputStream in = new BOMInputStream(createDataStream(data, false));
         byte[] buf = new byte[1023];
@@ -518,8 +842,8 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSmallBufferWithoutBOM_literalMutation334() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation334");
+    public void testSmallBufferWithoutBOM_literalMutation654() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation654");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
         InputStream in = new BOMInputStream(createDataStream(data, false));
         byte[] buf = new byte[1024];
@@ -528,8 +852,48 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSmallBufferWithoutBOM_literalMutation335() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation335");
+    public void testSmallBufferWithoutBOM_literalMutation655() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation655");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1024];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, -1, 2));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithoutBOM_literalMutation656() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation656");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1024];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 2));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithoutBOM_literalMutation657() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation657");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1024];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 1));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithoutBOM_literalMutation658() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation658");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1024];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 4));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithoutBOM_literalMutation659() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation659");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
         InputStream in = new BOMInputStream(createDataStream(data, false));
         byte[] buf = new byte[1024];
@@ -538,8 +902,18 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSmallBufferWithoutBOM_literalMutation337() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation337");
+    public void testSmallBufferWithoutBOM_literalMutation661() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation661");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1024];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 2));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 1, 2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithoutBOM_literalMutation662() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation662");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
         InputStream in = new BOMInputStream(createDataStream(data, false));
         byte[] buf = new byte[1024];
@@ -548,8 +922,38 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSmallBufferWithoutBOM_literalMutation338() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation338");
+    public void testSmallBufferWithoutBOM_literalMutation663() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation663");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1024];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 2));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithoutBOM_literalMutation664() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation664");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1024];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 2));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 1));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithoutBOM_literalMutation665() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation665");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1024];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 2));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithoutBOM_literalMutation666() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithoutBOM_literalMutation666");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
         InputStream in = new BOMInputStream(createDataStream(data, false));
         byte[] buf = new byte[1024];
@@ -612,8 +1016,8 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSmallBufferWithBOM_literalMutation319() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation319");
+    public void testSmallBufferWithBOM_literalMutation625() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation625");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
         InputStream in = new BOMInputStream(createDataStream(data, true));
         byte[] buf = new byte[1025];
@@ -622,8 +1026,48 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSmallBufferWithBOM_literalMutation322() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation322");
+    public void testSmallBufferWithBOM_literalMutation626() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation626");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        byte[] buf = new byte[512];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 2));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithBOM_literalMutation627() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation627");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        byte[] buf = new byte[2048];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 2));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithBOM_literalMutation628() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation628");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        byte[] buf = new byte[1023];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 2));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithBOM_literalMutation631() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation631");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        byte[] buf = new byte[1024];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 1, 2));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithBOM_literalMutation632() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation632");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
         InputStream in = new BOMInputStream(createDataStream(data, true));
         byte[] buf = new byte[1024];
@@ -632,8 +1076,18 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSmallBufferWithBOM_literalMutation323() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation323");
+    public void testSmallBufferWithBOM_literalMutation633() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation633");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        byte[] buf = new byte[1024];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 2));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithBOM_literalMutation634() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation634");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
         InputStream in = new BOMInputStream(createDataStream(data, true));
         byte[] buf = new byte[1024];
@@ -642,8 +1096,38 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSmallBufferWithBOM_literalMutation325() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation325");
+    public void testSmallBufferWithBOM_literalMutation635() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation635");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        byte[] buf = new byte[1024];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 4));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithBOM_literalMutation636() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation636");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        byte[] buf = new byte[1024];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 3));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithBOM_literalMutation638() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation638");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        byte[] buf = new byte[1024];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 2));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 1, 2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithBOM_literalMutation639() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation639");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
         InputStream in = new BOMInputStream(createDataStream(data, true));
         byte[] buf = new byte[1024];
@@ -652,13 +1136,43 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSmallBufferWithBOM_literalMutation326() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation326");
+    public void testSmallBufferWithBOM_literalMutation640() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation640");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        byte[] buf = new byte[1024];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 2));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithBOM_literalMutation641() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation641");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
         InputStream in = new BOMInputStream(createDataStream(data, true));
         byte[] buf = new byte[1024];
         assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 2));
         assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 1));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithBOM_literalMutation642() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation642");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        byte[] buf = new byte[1024];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 2));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSmallBufferWithBOM_literalMutation643() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSmallBufferWithBOM_literalMutation643");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        byte[] buf = new byte[1024];
+        assertData(new byte[]{ 'A' , 'B' }, buf, in.read(buf, 0, 2));
+        assertData(new byte[]{ 'C' }, buf, in.read(buf, 0, 3));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -684,6 +1198,42 @@ private static class ExpectCloseInputStream extends InputStream {
 
     public void testLeadingNonBOMSingleRead() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMSingleRead");
+        byte[] data = new byte[]{ ((byte)(238)) , ((byte)(171)) , ((byte)(205)) };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),313,in,312,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),315,in,314,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),317,in,316,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,in,319,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMSingleRead_literalMutation523() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMSingleRead_literalMutation523");
+        byte[] data = new byte[]{ ((byte)(119)) , ((byte)(171)) , ((byte)(205)) };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),313,in,312,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),315,in,314,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),317,in,316,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,in,319,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMSingleRead_literalMutation524() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMSingleRead_literalMutation524");
+        byte[] data = new byte[]{ ((byte)(478)) , ((byte)(171)) , ((byte)(205)) };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),313,in,312,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),315,in,314,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),317,in,316,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,in,319,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMSingleRead_literalMutation525() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMSingleRead_literalMutation525");
         byte[] data = new byte[]{ ((byte)(240)) , ((byte)(171)) , ((byte)(205)) };
         InputStream in = new BOMInputStream(createDataStream(data, false));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),313,in,312,in.read());
@@ -694,8 +1244,20 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLeadingNonBOMSingleRead_literalMutation244() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMSingleRead_literalMutation244");
+    public void testLeadingNonBOMSingleRead_literalMutation526() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMSingleRead_literalMutation526");
+        byte[] data = new byte[]{ ((byte)(239)) , ((byte)(172)) , ((byte)(205)) };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),313,in,312,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),315,in,314,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),317,in,316,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,in,319,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMSingleRead_literalMutation527() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMSingleRead_literalMutation527");
         byte[] data = new byte[]{ ((byte)(239)) , ((byte)(170)) , ((byte)(205)) };
         InputStream in = new BOMInputStream(createDataStream(data, false));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),313,in,312,in.read());
@@ -706,8 +1268,44 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLeadingNonBOMSingleRead_literalMutation245() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMSingleRead_literalMutation245");
+    public void testLeadingNonBOMSingleRead_literalMutation528() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMSingleRead_literalMutation528");
+        byte[] data = new byte[]{ ((byte)(239)) , ((byte)(85)) , ((byte)(205)) };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),313,in,312,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),315,in,314,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),317,in,316,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,in,319,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMSingleRead_literalMutation529() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMSingleRead_literalMutation529");
+        byte[] data = new byte[]{ ((byte)(239)) , ((byte)(342)) , ((byte)(205)) };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),313,in,312,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),315,in,314,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),317,in,316,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,in,319,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMSingleRead_literalMutation530() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMSingleRead_literalMutation530");
+        byte[] data = new byte[]{ ((byte)(239)) , ((byte)(171)) , ((byte)(206)) };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),313,in,312,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),315,in,314,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),317,in,316,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,in,319,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMSingleRead_literalMutation531() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMSingleRead_literalMutation531");
         byte[] data = new byte[]{ ((byte)(239)) , ((byte)(171)) , ((byte)(204)) };
         InputStream in = new BOMInputStream(createDataStream(data, false));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),313,in,312,in.read());
@@ -718,10 +1316,34 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLeadingNonBOMSingleRead_literalMutation246() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMSingleRead_literalMutation246");
-        byte[] data = new byte[]{ ((byte)(239)) , ((byte)(171)) , ((byte)(205)) };
+    public void testLeadingNonBOMSingleRead_literalMutation532() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMSingleRead_literalMutation532");
+        byte[] data = new byte[]{ ((byte)(239)) , ((byte)(171)) , ((byte)(102)) };
         InputStream in = new BOMInputStream(createDataStream(data, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),313,in,312,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),315,in,314,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),317,in,316,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,in,319,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMSingleRead_literalMutation533() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMSingleRead_literalMutation533");
+        byte[] data = new byte[]{ ((byte)(239)) , ((byte)(171)) , ((byte)(410)) };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),313,in,312,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),315,in,314,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),317,in,316,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,in,319,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMSingleRead_literalMutation534() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMSingleRead_literalMutation534");
+        byte[] data = new byte[]{ ((byte)(239)) , ((byte)(171)) , ((byte)(205)) };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),313,in,312,in.read());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),315,in,314,in.read());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),317,in,316,in.read());
@@ -743,6 +1365,33 @@ private static class ExpectCloseInputStream extends InputStream {
 
     public void testLeadingNonBOMBufferedRead() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead");
+        byte[] data = new byte[]{ ((byte)(238)) , ((byte)(171)) , ((byte)(205)) };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1024];
+        assertData(data, buf, in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMBufferedRead_literalMutation506() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead_literalMutation506");
+        byte[] data = new byte[]{ ((byte)(119)) , ((byte)(171)) , ((byte)(205)) };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1024];
+        assertData(data, buf, in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMBufferedRead_literalMutation507() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead_literalMutation507");
+        byte[] data = new byte[]{ ((byte)(478)) , ((byte)(171)) , ((byte)(205)) };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1024];
+        assertData(data, buf, in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMBufferedRead_literalMutation508() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead_literalMutation508");
         byte[] data = new byte[]{ ((byte)(240)) , ((byte)(171)) , ((byte)(205)) };
         InputStream in = new BOMInputStream(createDataStream(data, false));
         byte[] buf = new byte[1024];
@@ -750,8 +1399,8 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLeadingNonBOMBufferedRead_literalMutation239() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead_literalMutation239");
+    public void testLeadingNonBOMBufferedRead_literalMutation509() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead_literalMutation509");
         byte[] data = new byte[]{ ((byte)(239)) , ((byte)(172)) , ((byte)(205)) };
         InputStream in = new BOMInputStream(createDataStream(data, false));
         byte[] buf = new byte[1024];
@@ -759,8 +1408,35 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLeadingNonBOMBufferedRead_literalMutation240() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead_literalMutation240");
+    public void testLeadingNonBOMBufferedRead_literalMutation510() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead_literalMutation510");
+        byte[] data = new byte[]{ ((byte)(239)) , ((byte)(170)) , ((byte)(205)) };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1024];
+        assertData(data, buf, in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMBufferedRead_literalMutation511() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead_literalMutation511");
+        byte[] data = new byte[]{ ((byte)(239)) , ((byte)(85)) , ((byte)(205)) };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1024];
+        assertData(data, buf, in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMBufferedRead_literalMutation512() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead_literalMutation512");
+        byte[] data = new byte[]{ ((byte)(239)) , ((byte)(342)) , ((byte)(205)) };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1024];
+        assertData(data, buf, in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMBufferedRead_literalMutation513() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead_literalMutation513");
         byte[] data = new byte[]{ ((byte)(239)) , ((byte)(171)) , ((byte)(206)) };
         InputStream in = new BOMInputStream(createDataStream(data, false));
         byte[] buf = new byte[1024];
@@ -768,8 +1444,35 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLeadingNonBOMBufferedRead_literalMutation241() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead_literalMutation241");
+    public void testLeadingNonBOMBufferedRead_literalMutation514() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead_literalMutation514");
+        byte[] data = new byte[]{ ((byte)(239)) , ((byte)(171)) , ((byte)(204)) };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1024];
+        assertData(data, buf, in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMBufferedRead_literalMutation515() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead_literalMutation515");
+        byte[] data = new byte[]{ ((byte)(239)) , ((byte)(171)) , ((byte)(102)) };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1024];
+        assertData(data, buf, in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMBufferedRead_literalMutation516() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead_literalMutation516");
+        byte[] data = new byte[]{ ((byte)(239)) , ((byte)(171)) , ((byte)(410)) };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1024];
+        assertData(data, buf, in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMBufferedRead_literalMutation517() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead_literalMutation517");
         byte[] data = new byte[]{ ((byte)(239)) , ((byte)(171)) , ((byte)(205)) };
         InputStream in = new BOMInputStream(createDataStream(data, true));
         byte[] buf = new byte[1024];
@@ -777,8 +1480,35 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLeadingNonBOMBufferedRead_literalMutation242() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead_literalMutation242");
+    public void testLeadingNonBOMBufferedRead_literalMutation518() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead_literalMutation518");
+        byte[] data = new byte[]{ ((byte)(239)) , ((byte)(171)) , ((byte)(205)) };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[1025];
+        assertData(data, buf, in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMBufferedRead_literalMutation519() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead_literalMutation519");
+        byte[] data = new byte[]{ ((byte)(239)) , ((byte)(171)) , ((byte)(205)) };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[512];
+        assertData(data, buf, in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMBufferedRead_literalMutation520() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead_literalMutation520");
+        byte[] data = new byte[]{ ((byte)(239)) , ((byte)(171)) , ((byte)(205)) };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        byte[] buf = new byte[2048];
+        assertData(data, buf, in.read(buf));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLeadingNonBOMBufferedRead_literalMutation521() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLeadingNonBOMBufferedRead_literalMutation521");
         byte[] data = new byte[]{ ((byte)(239)) , ((byte)(171)) , ((byte)(205)) };
         InputStream in = new BOMInputStream(createDataStream(data, false));
         byte[] buf = new byte[1023];
@@ -809,14 +1539,32 @@ private static class ExpectCloseInputStream extends InputStream {
     public void testSkipWithoutBOM() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkipWithoutBOM");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
-        InputStream in = new BOMInputStream(createDataStream(data, false));
+        InputStream in = new BOMInputStream(createDataStream(data, true));
         in.skip(2L);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),433,in,432,in.read());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSkipWithoutBOM_literalMutation314() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkipWithoutBOM_literalMutation314");
+    public void testSkipWithoutBOM_literalMutation618() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkipWithoutBOM_literalMutation618");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        in.skip(1L);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),433,in,432,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSkipWithoutBOM_literalMutation619() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkipWithoutBOM_literalMutation619");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        in.skip(4L);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),433,in,432,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSkipWithoutBOM_literalMutation620() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkipWithoutBOM_literalMutation620");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
         InputStream in = new BOMInputStream(createDataStream(data, false));
         in.skip(3L);
@@ -847,14 +1595,32 @@ private static class ExpectCloseInputStream extends InputStream {
     public void testSkipWithBOM() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkipWithBOM");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
-        InputStream in = new BOMInputStream(createDataStream(data, true));
+        InputStream in = new BOMInputStream(createDataStream(data, false));
         in.skip(2L);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),431,in,430,in.read());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSkipWithBOM_literalMutation308() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkipWithBOM_literalMutation308");
+    public void testSkipWithBOM_literalMutation610() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkipWithBOM_literalMutation610");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        in.skip(1L);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),431,in,430,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSkipWithBOM_literalMutation611() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkipWithBOM_literalMutation611");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        in.skip(4L);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),431,in,430,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSkipWithBOM_literalMutation612() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkipWithBOM_literalMutation612");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
         InputStream in = new BOMInputStream(createDataStream(data, true));
         in.skip(3L);
@@ -965,8 +1731,50 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMarkResetAfterReadWithoutBOM_literalMutation258() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetAfterReadWithoutBOM_literalMutation258");
+    public void testMarkResetAfterReadWithoutBOM_literalMutation549() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetAfterReadWithoutBOM_literalMutation549");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,in,325,in.markSupported());
+        in.read();
+        in.mark(9);
+        in.read();
+        in.read();
+        in.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,in,327,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testMarkResetAfterReadWithoutBOM_literalMutation550() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetAfterReadWithoutBOM_literalMutation550");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,in,325,in.markSupported());
+        in.read();
+        in.mark(5);
+        in.read();
+        in.read();
+        in.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,in,327,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testMarkResetAfterReadWithoutBOM_literalMutation551() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetAfterReadWithoutBOM_literalMutation551");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,in,325,in.markSupported());
+        in.read();
+        in.mark(20);
+        in.read();
+        in.read();
+        in.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,in,327,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testMarkResetAfterReadWithoutBOM_literalMutation552() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetAfterReadWithoutBOM_literalMutation552");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
         InputStream in = new BOMInputStream(createDataStream(data, false));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,in,325,in.markSupported());
@@ -1132,7 +1940,7 @@ private static class ExpectCloseInputStream extends InputStream {
     public void testMarkResetAfterReadWithBOM() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetAfterReadWithBOM");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
-        InputStream in = new BOMInputStream(createDataStream(data, true));
+        InputStream in = new BOMInputStream(createDataStream(data, false));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,in,321,in.markSupported());
         in.read();
         in.mark(10);
@@ -1143,13 +1951,55 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMarkResetAfterReadWithBOM_literalMutation252() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetAfterReadWithBOM_literalMutation252");
+    public void testMarkResetAfterReadWithBOM_literalMutation540() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetAfterReadWithBOM_literalMutation540");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
         InputStream in = new BOMInputStream(createDataStream(data, true));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,in,321,in.markSupported());
         in.read();
         in.mark(9);
+        in.read();
+        in.read();
+        in.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,in,323,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testMarkResetAfterReadWithBOM_literalMutation541() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetAfterReadWithBOM_literalMutation541");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,in,321,in.markSupported());
+        in.read();
+        in.mark(5);
+        in.read();
+        in.read();
+        in.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,in,323,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testMarkResetAfterReadWithBOM_literalMutation542() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetAfterReadWithBOM_literalMutation542");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,in,321,in.markSupported());
+        in.read();
+        in.mark(20);
+        in.read();
+        in.read();
+        in.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,in,323,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testMarkResetAfterReadWithBOM_literalMutation543() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetAfterReadWithBOM_literalMutation543");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,in,321,in.markSupported());
+        in.read();
+        in.mark(11);
         in.read();
         in.read();
         in.reset();
@@ -1300,8 +2150,47 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMarkResetBeforeReadWithoutBOM_literalMutation270() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetBeforeReadWithoutBOM_literalMutation270");
+    public void testMarkResetBeforeReadWithoutBOM_literalMutation567() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetBeforeReadWithoutBOM_literalMutation567");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,in,333,in.markSupported());
+        in.mark(9);
+        in.read();
+        in.read();
+        in.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,in,335,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testMarkResetBeforeReadWithoutBOM_literalMutation568() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetBeforeReadWithoutBOM_literalMutation568");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,in,333,in.markSupported());
+        in.mark(5);
+        in.read();
+        in.read();
+        in.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,in,335,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testMarkResetBeforeReadWithoutBOM_literalMutation569() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetBeforeReadWithoutBOM_literalMutation569");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
+        InputStream in = new BOMInputStream(createDataStream(data, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,in,333,in.markSupported());
+        in.mark(20);
+        in.read();
+        in.read();
+        in.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,in,335,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testMarkResetBeforeReadWithoutBOM_literalMutation570() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetBeforeReadWithoutBOM_literalMutation570");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
         InputStream in = new BOMInputStream(createDataStream(data, false));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,in,333,in.markSupported());
@@ -1438,12 +2327,51 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMarkResetBeforeReadWithBOM_literalMutation264() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetBeforeReadWithBOM_literalMutation264");
+    public void testMarkResetBeforeReadWithBOM_literalMutation558() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetBeforeReadWithBOM_literalMutation558");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
         InputStream in = new BOMInputStream(createDataStream(data, true));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,in,329,in.markSupported());
         in.mark(9);
+        in.read();
+        in.read();
+        in.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,in,331,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testMarkResetBeforeReadWithBOM_literalMutation559() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetBeforeReadWithBOM_literalMutation559");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,in,329,in.markSupported());
+        in.mark(5);
+        in.read();
+        in.read();
+        in.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,in,331,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testMarkResetBeforeReadWithBOM_literalMutation560() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetBeforeReadWithBOM_literalMutation560");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,in,329,in.markSupported());
+        in.mark(20);
+        in.read();
+        in.read();
+        in.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,in,331,in.read());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testMarkResetBeforeReadWithBOM_literalMutation561() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkResetBeforeReadWithBOM_literalMutation561");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
+        InputStream in = new BOMInputStream(createDataStream(data, true));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,in,329,in.markSupported());
+        in.mark(11);
         in.read();
         in.read();
         in.reset();
@@ -1514,7 +2442,7 @@ private static class ExpectCloseInputStream extends InputStream {
     public void testAvailableWithBOM() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAvailableWithBOM");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' , 'D' };
-        InputStream in = new BOMInputStream(createDataStream(data, true));
+        InputStream in = new BOMInputStream(createDataStream(data, false));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),265,in,264,in.available());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1523,7 +2451,7 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoBoms");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
         try {
-            new BOMInputStream(createDataStream(data, true) , false , ((ByteOrderMark[])(null)));
+            new BOMInputStream(createDataStream(data, false) , false , ((ByteOrderMark[])(null)));
         } catch (IllegalArgumentException e) {
         }
         try {
@@ -1533,11 +2461,11 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testNoBoms_literalMutation275() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoBoms_literalMutation275");
+    public void testNoBoms_literalMutation575() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoBoms_literalMutation575");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
         try {
-            new BOMInputStream(createDataStream(data, true) , false , ((ByteOrderMark[])(null)));
+            new BOMInputStream(createDataStream(data, true) , true , ((ByteOrderMark[])(null)));
         } catch (IllegalArgumentException e) {
         }
         try {
@@ -1547,8 +2475,8 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testNoBoms_literalMutation277() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoBoms_literalMutation277");
+    public void testNoBoms_literalMutation577() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoBoms_literalMutation577");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
         try {
             new BOMInputStream(createDataStream(data, true) , false , ((ByteOrderMark[])(null)));
@@ -1561,22 +2489,22 @@ private static class ExpectCloseInputStream extends InputStream {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testNoBoms_literalMutation278() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoBoms_literalMutation278");
+    public void testNoBoms_literalMutation578() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoBoms_literalMutation578");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
         try {
             new BOMInputStream(createDataStream(data, true) , false , ((ByteOrderMark[])(null)));
         } catch (IllegalArgumentException e) {
         }
         try {
-            new BOMInputStream(createDataStream(data, true) , false , new ByteOrderMark[0]);
+            new BOMInputStream(createDataStream(data, true) , true , new ByteOrderMark[0]);
         } catch (IllegalArgumentException e) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testNoBoms_literalMutation279() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoBoms_literalMutation279");
+    public void testNoBoms_literalMutation579() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoBoms_literalMutation579");
         byte[] data = new byte[]{ 'A' , 'B' , 'C' };
         try {
             new BOMInputStream(createDataStream(data, true) , false , ((ByteOrderMark[])(null)));
@@ -1584,6 +2512,34 @@ private static class ExpectCloseInputStream extends InputStream {
         }
         try {
             new BOMInputStream(createDataStream(data, true) , false , new ByteOrderMark[1]);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNoBoms_literalMutation580() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoBoms_literalMutation580");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        try {
+            new BOMInputStream(createDataStream(data, true) , false , ((ByteOrderMark[])(null)));
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new BOMInputStream(createDataStream(data, true) , false , new ByteOrderMark[-1]);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNoBoms_literalMutation581() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoBoms_literalMutation581");
+        byte[] data = new byte[]{ 'A' , 'B' , 'C' };
+        try {
+            new BOMInputStream(createDataStream(data, true) , false , ((ByteOrderMark[])(null)));
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new BOMInputStream(createDataStream(data, true) , false , new ByteOrderMark[0]);
         } catch (IllegalArgumentException e) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -1599,7 +2555,7 @@ private static class ExpectCloseInputStream extends InputStream {
 
     public void testReadTwiceWithoutBOM() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadTwiceWithoutBOM");
-        readBOMInputStreamTwice("foo");
+        readBOMInputStreamTwice("bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1619,7 +2575,7 @@ private static class ExpectCloseInputStream extends InputStream {
 
     public void testReadTwiceWithBOM() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadTwiceWithBOM");
-        readBOMInputStreamTwice("foo");
+        readBOMInputStreamTwice("bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

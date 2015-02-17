@@ -68,62 +68,62 @@ public class DaitchMokotoffSoundexTest extends StringEncoderAbstractTest<org.apa
     @Test
     public void testEncodeIgnoreApostrophes() throws EncoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes");
-        checkEncodingVariations("foo", new String[]{ "OBrien" , "\'OBrien" , "O\'Brien" , "OB\'rien" , "OBr\'ien" , "OBri\'en" , "OBrie\'n" , "OBrien\'" });
+        checkEncodingVariations("bar", new String[]{ "OBrien" , "\'OBrien" , "O\'Brien" , "OB\'rien" , "OBr\'ien" , "OBri\'en" , "OBrie\'n" , "OBrien\'" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testEncodeIgnoreApostrophes_literalMutation722() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation722");
-        checkEncodingVariations("079600", new String[]{ "foo" , "\'OBrien" , "O\'Brien" , "OB\'rien" , "OBr\'ien" , "OBri\'en" , "OBrie\'n" , "OBrien\'" });
+    public void testEncodeIgnoreApostrophes_literalMutation795() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation795");
+        checkEncodingVariations("079600", new String[]{ "bar" , "\'OBrien" , "O\'Brien" , "OB\'rien" , "OBr\'ien" , "OBri\'en" , "OBrie\'n" , "OBrien\'" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testEncodeIgnoreApostrophes_literalMutation723() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation723");
-        checkEncodingVariations("079600", new String[]{ "OBrien" , "foo" , "O\'Brien" , "OB\'rien" , "OBr\'ien" , "OBri\'en" , "OBrie\'n" , "OBrien\'" });
+    public void testEncodeIgnoreApostrophes_literalMutation796() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation796");
+        checkEncodingVariations("079600", new String[]{ "OBrien" , "bar" , "O\'Brien" , "OB\'rien" , "OBr\'ien" , "OBri\'en" , "OBrie\'n" , "OBrien\'" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testEncodeIgnoreApostrophes_literalMutation724() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation724");
+    public void testEncodeIgnoreApostrophes_literalMutation797() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation797");
         checkEncodingVariations("079600", new String[]{ "OBrien" , "\'OBrien" , "foo" , "OB\'rien" , "OBr\'ien" , "OBri\'en" , "OBrie\'n" , "OBrien\'" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testEncodeIgnoreApostrophes_literalMutation725() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation725");
+    public void testEncodeIgnoreApostrophes_literalMutation798() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation798");
         checkEncodingVariations("079600", new String[]{ "OBrien" , "\'OBrien" , "O\'Brien" , "foo" , "OBr\'ien" , "OBri\'en" , "OBrie\'n" , "OBrien\'" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testEncodeIgnoreApostrophes_literalMutation726() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation726");
-        checkEncodingVariations("079600", new String[]{ "OBrien" , "\'OBrien" , "O\'Brien" , "OB\'rien" , "foo" , "OBri\'en" , "OBrie\'n" , "OBrien\'" });
+    public void testEncodeIgnoreApostrophes_literalMutation799() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation799");
+        checkEncodingVariations("079600", new String[]{ "OBrien" , "\'OBrien" , "O\'Brien" , "OB\'rien" , "bar" , "OBri\'en" , "OBrie\'n" , "OBrien\'" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testEncodeIgnoreApostrophes_literalMutation727() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation727");
-        checkEncodingVariations("079600", new String[]{ "OBrien" , "\'OBrien" , "O\'Brien" , "OB\'rien" , "OBr\'ien" , "foo" , "OBrie\'n" , "OBrien\'" });
+    public void testEncodeIgnoreApostrophes_literalMutation800() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation800");
+        checkEncodingVariations("079600", new String[]{ "OBrien" , "\'OBrien" , "O\'Brien" , "OB\'rien" , "OBr\'ien" , "bar" , "OBrie\'n" , "OBrien\'" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testEncodeIgnoreApostrophes_literalMutation728() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation728");
-        checkEncodingVariations("079600", new String[]{ "OBrien" , "\'OBrien" , "O\'Brien" , "OB\'rien" , "OBr\'ien" , "OBri\'en" , "foo" , "OBrien\'" });
+    public void testEncodeIgnoreApostrophes_literalMutation801() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation801");
+        checkEncodingVariations("079600", new String[]{ "OBrien" , "\'OBrien" , "O\'Brien" , "OB\'rien" , "OBr\'ien" , "OBri\'en" , "bar" , "OBrien\'" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testEncodeIgnoreApostrophes_literalMutation729() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation729");
+    public void testEncodeIgnoreApostrophes_literalMutation802() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation802");
         checkEncodingVariations("079600", new String[]{ "OBrien" , "\'OBrien" , "O\'Brien" , "OB\'rien" , "OBr\'ien" , "OBri\'en" , "OBrie\'n" , "foo" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -155,7 +155,7 @@ public class DaitchMokotoffSoundexTest extends StringEncoderAbstractTest<org.apa
 @Test
     public void testEncodeIgnoreHyphens() throws EncoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens");
-        checkEncodingVariations("foo", new String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
+        checkEncodingVariations("bar", new String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -165,8 +165,8 @@ public class DaitchMokotoffSoundexTest extends StringEncoderAbstractTest<org.apa
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation731() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation731");
+    public void testEncodeIgnoreHyphens_literalMutation804() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation804");
         checkEncodingVariations("565463", new String[]{ "foo" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -177,8 +177,8 @@ public class DaitchMokotoffSoundexTest extends StringEncoderAbstractTest<org.apa
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation732() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation732");
+    public void testEncodeIgnoreHyphens_literalMutation805() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation805");
         checkEncodingVariations("565463", new String[]{ "KINGSMITH" , "foo" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -189,9 +189,9 @@ public class DaitchMokotoffSoundexTest extends StringEncoderAbstractTest<org.apa
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation733() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation733");
-        checkEncodingVariations("565463", new String[]{ "KINGSMITH" , "-KINGSMITH" , "foo" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
+    public void testEncodeIgnoreHyphens_literalMutation806() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation806");
+        checkEncodingVariations("565463", new String[]{ "KINGSMITH" , "-KINGSMITH" , "bar" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -201,9 +201,9 @@ public class DaitchMokotoffSoundexTest extends StringEncoderAbstractTest<org.apa
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation734() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation734");
-        checkEncodingVariations("565463", new String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "foo" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
+    public void testEncodeIgnoreHyphens_literalMutation807() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation807");
+        checkEncodingVariations("565463", new String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "bar" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -213,8 +213,8 @@ public class DaitchMokotoffSoundexTest extends StringEncoderAbstractTest<org.apa
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation735() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation735");
+    public void testEncodeIgnoreHyphens_literalMutation808() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation808");
         checkEncodingVariations("565463", new String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "foo" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -225,8 +225,8 @@ public class DaitchMokotoffSoundexTest extends StringEncoderAbstractTest<org.apa
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation736() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation736");
+    public void testEncodeIgnoreHyphens_literalMutation809() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation809");
         checkEncodingVariations("565463", new String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "foo" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -237,9 +237,9 @@ public class DaitchMokotoffSoundexTest extends StringEncoderAbstractTest<org.apa
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation737() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation737");
-        checkEncodingVariations("565463", new String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "foo" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
+    public void testEncodeIgnoreHyphens_literalMutation810() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation810");
+        checkEncodingVariations("565463", new String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "bar" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -249,9 +249,9 @@ public class DaitchMokotoffSoundexTest extends StringEncoderAbstractTest<org.apa
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation738() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation738");
-        checkEncodingVariations("565463", new String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "foo" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
+    public void testEncodeIgnoreHyphens_literalMutation811() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation811");
+        checkEncodingVariations("565463", new String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "bar" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -261,8 +261,8 @@ public class DaitchMokotoffSoundexTest extends StringEncoderAbstractTest<org.apa
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation739() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation739");
+    public void testEncodeIgnoreHyphens_literalMutation812() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation812");
         checkEncodingVariations("565463", new String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "foo" , "KINGSMIT-H" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -273,9 +273,9 @@ public class DaitchMokotoffSoundexTest extends StringEncoderAbstractTest<org.apa
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation740() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation740");
-        checkEncodingVariations("565463", new String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "foo" , "KINGSMITH-" });
+    public void testEncodeIgnoreHyphens_literalMutation813() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation813");
+        checkEncodingVariations("565463", new String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "bar" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -285,9 +285,9 @@ public class DaitchMokotoffSoundexTest extends StringEncoderAbstractTest<org.apa
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation741() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation741");
-        checkEncodingVariations("565463", new String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "foo" });
+    public void testEncodeIgnoreHyphens_literalMutation814() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation814");
+        checkEncodingVariations("565463", new String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "bar" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

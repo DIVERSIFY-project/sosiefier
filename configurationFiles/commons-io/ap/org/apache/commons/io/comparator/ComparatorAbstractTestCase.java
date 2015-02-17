@@ -146,8 +146,65 @@ public void testSortArray() {
     /** 
      * Test the comparator array sort.
      */
-public void testSortArray_literalMutation2257() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortArray_literalMutation2257");
+public void testSortArray_literalMutation3205() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortArray_literalMutation3205");
+        File[] files = new File[2];
+        files[0] = equalFile1;
+        files[1] = moreFile;
+        files[2] = lessFile;
+        comparator.sort(files);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1305,lessFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1306,files[0]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1307,equalFile1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1308,files[1]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1309,moreFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1310,files[2]);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the comparator array sort.
+     */
+public void testSortArray_literalMutation3206() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortArray_literalMutation3206");
+        File[] files = new File[1];
+        files[0] = equalFile1;
+        files[1] = moreFile;
+        files[2] = lessFile;
+        comparator.sort(files);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1305,lessFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1306,files[0]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1307,equalFile1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1308,files[1]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1309,moreFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1310,files[2]);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the comparator array sort.
+     */
+public void testSortArray_literalMutation3207() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortArray_literalMutation3207");
+        File[] files = new File[6];
+        files[0] = equalFile1;
+        files[1] = moreFile;
+        files[2] = lessFile;
+        comparator.sort(files);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1305,lessFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1306,files[0]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1307,equalFile1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1308,files[1]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1309,moreFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1310,files[2]);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the comparator array sort.
+     */
+public void testSortArray_literalMutation3208() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortArray_literalMutation3208");
         File[] files = new File[3];
         files[1] = equalFile1;
         files[1] = moreFile;
@@ -165,8 +222,46 @@ public void testSortArray_literalMutation2257() {
     /** 
      * Test the comparator array sort.
      */
-public void testSortArray_literalMutation2258() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortArray_literalMutation2258");
+public void testSortArray_literalMutation3209() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortArray_literalMutation3209");
+        File[] files = new File[3];
+        files[-1] = equalFile1;
+        files[1] = moreFile;
+        files[2] = lessFile;
+        comparator.sort(files);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1305,lessFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1306,files[0]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1307,equalFile1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1308,files[1]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1309,moreFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1310,files[2]);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the comparator array sort.
+     */
+public void testSortArray_literalMutation3210() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortArray_literalMutation3210");
+        File[] files = new File[3];
+        files[0] = equalFile1;
+        files[1] = moreFile;
+        files[2] = lessFile;
+        comparator.sort(files);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1305,lessFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1306,files[0]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1307,equalFile1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1308,files[1]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1309,moreFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1310,files[2]);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the comparator array sort.
+     */
+public void testSortArray_literalMutation3211() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortArray_literalMutation3211");
         File[] files = new File[3];
         files[0] = equalFile1;
         files[2] = moreFile;
@@ -184,8 +279,84 @@ public void testSortArray_literalMutation2258() {
     /** 
      * Test the comparator array sort.
      */
-public void testSortArray_literalMutation2259() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortArray_literalMutation2259");
+public void testSortArray_literalMutation3212() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortArray_literalMutation3212");
+        File[] files = new File[3];
+        files[0] = equalFile1;
+        files[0] = moreFile;
+        files[2] = lessFile;
+        comparator.sort(files);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1305,lessFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1306,files[0]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1307,equalFile1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1308,files[1]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1309,moreFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1310,files[2]);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the comparator array sort.
+     */
+public void testSortArray_literalMutation3213() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortArray_literalMutation3213");
+        File[] files = new File[3];
+        files[0] = equalFile1;
+        files[0] = moreFile;
+        files[2] = lessFile;
+        comparator.sort(files);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1305,lessFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1306,files[0]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1307,equalFile1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1308,files[1]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1309,moreFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1310,files[2]);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the comparator array sort.
+     */
+public void testSortArray_literalMutation3214() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortArray_literalMutation3214");
+        File[] files = new File[3];
+        files[0] = equalFile1;
+        files[1] = moreFile;
+        files[1] = lessFile;
+        comparator.sort(files);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1305,lessFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1306,files[0]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1307,equalFile1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1308,files[1]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1309,moreFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1310,files[2]);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the comparator array sort.
+     */
+public void testSortArray_literalMutation3215() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortArray_literalMutation3215");
+        File[] files = new File[3];
+        files[0] = equalFile1;
+        files[1] = moreFile;
+        files[4] = lessFile;
+        comparator.sort(files);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1305,lessFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1306,files[0]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1307,equalFile1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1308,files[1]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1309,moreFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1310,files[2]);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the comparator array sort.
+     */
+public void testSortArray_literalMutation3216() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortArray_literalMutation3216");
         File[] files = new File[3];
         files[0] = equalFile1;
         files[1] = moreFile;

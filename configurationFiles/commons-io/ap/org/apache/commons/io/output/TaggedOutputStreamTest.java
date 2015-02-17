@@ -133,8 +133,8 @@ public class TaggedOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testNormalStream_literalMutation2477() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNormalStream_literalMutation2477");
+    public void testNormalStream_literalMutation3665() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNormalStream_literalMutation3665");
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             OutputStream stream = new TaggedOutputStream(buffer);
@@ -152,8 +152,84 @@ public class TaggedOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testNormalStream_literalMutation2478() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNormalStream_literalMutation2478");
+    public void testNormalStream_literalMutation3666() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNormalStream_literalMutation3666");
+        try {
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            OutputStream stream = new TaggedOutputStream(buffer);
+            stream.write('a');
+            stream.write(new byte[]{ 'b' });
+            stream.write(new byte[]{ 'c' }, -1, 1);
+            stream.flush();
+            stream.close();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1664,buffer,1663,buffer.size());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1665,buffer.toByteArray()[0]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1666,buffer.toByteArray()[1]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1667,buffer.toByteArray()[2]);
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNormalStream_literalMutation3667() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNormalStream_literalMutation3667");
+        try {
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            OutputStream stream = new TaggedOutputStream(buffer);
+            stream.write('a');
+            stream.write(new byte[]{ 'b' });
+            stream.write(new byte[]{ 'c' }, 0, 1);
+            stream.flush();
+            stream.close();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1664,buffer,1663,buffer.size());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1665,buffer.toByteArray()[0]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1666,buffer.toByteArray()[1]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1667,buffer.toByteArray()[2]);
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNormalStream_literalMutation3668() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNormalStream_literalMutation3668");
+        try {
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            OutputStream stream = new TaggedOutputStream(buffer);
+            stream.write('a');
+            stream.write(new byte[]{ 'b' });
+            stream.write(new byte[]{ 'c' }, 0, 2);
+            stream.flush();
+            stream.close();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1664,buffer,1663,buffer.size());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1665,buffer.toByteArray()[0]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1666,buffer.toByteArray()[1]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1667,buffer.toByteArray()[2]);
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNormalStream_literalMutation3669() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNormalStream_literalMutation3669");
+        try {
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            OutputStream stream = new TaggedOutputStream(buffer);
+            stream.write('a');
+            stream.write(new byte[]{ 'b' });
+            stream.write(new byte[]{ 'c' }, 0, 0);
+            stream.flush();
+            stream.close();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1664,buffer,1663,buffer.size());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1665,buffer.toByteArray()[0]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1666,buffer.toByteArray()[1]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1667,buffer.toByteArray()[2]);
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNormalStream_literalMutation3670() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNormalStream_literalMutation3670");
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             OutputStream stream = new TaggedOutputStream(buffer);
@@ -463,8 +539,8 @@ public class TaggedOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testBrokenStream_literalMutation2472() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBrokenStream_literalMutation2472");
+    public void testBrokenStream_literalMutation3660() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBrokenStream_literalMutation3660");
         IOException exception = new IOException("foo");
         TaggedOutputStream stream = new TaggedOutputStream(new BrokenOutputStream(exception));
         try {
@@ -561,9 +637,9 @@ public class TaggedOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testOtherException_literalMutation2479() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOtherException_literalMutation2479");
-        IOException exception = new IOException("foo");
+    public void testOtherException_literalMutation3671() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOtherException_literalMutation3671");
+        IOException exception = new IOException("bar");
         OutputStream closed = new ClosedOutputStream();
         TaggedOutputStream stream = new TaggedOutputStream(closed);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1669,stream,1668,stream.isCauseOf(exception));

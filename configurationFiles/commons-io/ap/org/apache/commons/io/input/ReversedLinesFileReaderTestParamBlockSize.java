@@ -111,7 +111,7 @@ public class ReversedLinesFileReaderTestParamBlockSize {
     @Test
     public void testUTF8FileCRBreaks() throws IOException, URISyntaxException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUTF8FileCRBreaks");
-        File testFileIso = new File(getClass().getResource("foo").toURI());
+        File testFileIso = new File(getClass().getResource("bar").toURI());
         reversedLinesFileReader = new ReversedLinesFileReader(testFileIso , testParamBlockSize , UTF_8);
         assertFileWithShrinkingTestLines(reversedLinesFileReader);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -174,17 +174,17 @@ public class ReversedLinesFileReaderTestParamBlockSize {
     @Test
     public void testUTF16BEFile() throws IOException, URISyntaxException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUTF16BEFile");
-        File testFileUTF16BE = new File(getClass().getResource("foo").toURI());
+        File testFileUTF16BE = new File(getClass().getResource("bar").toURI());
         reversedLinesFileReader = new ReversedLinesFileReader(testFileUTF16BE , testParamBlockSize , "UTF-16BE");
         assertFileWithShrinkingTestLines(reversedLinesFileReader);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testUTF16BEFile_literalMutation578() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUTF16BEFile_literalMutation578");
+    public void testUTF16BEFile_literalMutation1249() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUTF16BEFile_literalMutation1249");
         File testFileUTF16BE = new File(getClass().getResource("/test-file-utf16be.bin").toURI());
-        reversedLinesFileReader = new ReversedLinesFileReader(testFileUTF16BE , testParamBlockSize , "foo");
+        reversedLinesFileReader = new ReversedLinesFileReader(testFileUTF16BE , testParamBlockSize , "bar");
         assertFileWithShrinkingTestLines(reversedLinesFileReader);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -217,8 +217,8 @@ public class ReversedLinesFileReaderTestParamBlockSize {
     }
 
     @Test
-    public void testUTF16LEFile_literalMutation580() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUTF16LEFile_literalMutation580");
+    public void testUTF16LEFile_literalMutation1251() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUTF16LEFile_literalMutation1251");
         File testFileUTF16LE = new File(getClass().getResource("/test-file-utf16le.bin").toURI());
         reversedLinesFileReader = new ReversedLinesFileReader(testFileUTF16LE , testParamBlockSize , "foo");
         assertFileWithShrinkingTestLines(reversedLinesFileReader);
@@ -258,7 +258,7 @@ public class ReversedLinesFileReaderTestParamBlockSize {
     @Test
     public void testShiftJISFile() throws IOException, URISyntaxException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShiftJISFile");
-        File testFileShiftJIS = new File(getClass().getResource("foo").toURI());
+        File testFileShiftJIS = new File(getClass().getResource("bar").toURI());
         reversedLinesFileReader = new ReversedLinesFileReader(testFileShiftJIS , testParamBlockSize , "Shift_JIS");
         ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(TEST_LINE_SHIFT_JIS2, reversedLinesFileReader.readLine());
         ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(TEST_LINE_SHIFT_JIS1, reversedLinesFileReader.readLine());
@@ -266,10 +266,10 @@ public class ReversedLinesFileReaderTestParamBlockSize {
     }
 
     @Test
-    public void testShiftJISFile_literalMutation576() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShiftJISFile_literalMutation576");
+    public void testShiftJISFile_literalMutation1247() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShiftJISFile_literalMutation1247");
         File testFileShiftJIS = new File(getClass().getResource("/test-file-shiftjis.bin").toURI());
-        reversedLinesFileReader = new ReversedLinesFileReader(testFileShiftJIS , testParamBlockSize , "foo");
+        reversedLinesFileReader = new ReversedLinesFileReader(testFileShiftJIS , testParamBlockSize , "bar");
         ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(TEST_LINE_SHIFT_JIS2, reversedLinesFileReader.readLine());
         ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(TEST_LINE_SHIFT_JIS1, reversedLinesFileReader.readLine());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -332,10 +332,10 @@ public class ReversedLinesFileReaderTestParamBlockSize {
     }
 
     @Test
-    public void testFileSizeIsExactMultipleOfBlockSize_literalMutation565() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFileSizeIsExactMultipleOfBlockSize_literalMutation565");
-        int blockSize = 10;
-        File testFile20Bytes = new File(getClass().getResource("foo").toURI());
+    public void testFileSizeIsExactMultipleOfBlockSize_literalMutation1223() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFileSizeIsExactMultipleOfBlockSize_literalMutation1223");
+        int blockSize = 5;
+        File testFile20Bytes = new File(getClass().getResource("/test-file-20byteslength.bin").toURI());
         reversedLinesFileReader = new ReversedLinesFileReader(testFile20Bytes , blockSize , ISO_8859_1);
         String testLine = "123456789";
         ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(testLine, reversedLinesFileReader.readLine());
@@ -344,12 +344,48 @@ public class ReversedLinesFileReaderTestParamBlockSize {
     }
 
     @Test
-    public void testFileSizeIsExactMultipleOfBlockSize_literalMutation566() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFileSizeIsExactMultipleOfBlockSize_literalMutation566");
+    public void testFileSizeIsExactMultipleOfBlockSize_literalMutation1224() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFileSizeIsExactMultipleOfBlockSize_literalMutation1224");
+        int blockSize = 20;
+        File testFile20Bytes = new File(getClass().getResource("/test-file-20byteslength.bin").toURI());
+        reversedLinesFileReader = new ReversedLinesFileReader(testFile20Bytes , blockSize , ISO_8859_1);
+        String testLine = "123456789";
+        ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(testLine, reversedLinesFileReader.readLine());
+        ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(testLine, reversedLinesFileReader.readLine());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testFileSizeIsExactMultipleOfBlockSize_literalMutation1225() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFileSizeIsExactMultipleOfBlockSize_literalMutation1225");
+        int blockSize = 11;
+        File testFile20Bytes = new File(getClass().getResource("/test-file-20byteslength.bin").toURI());
+        reversedLinesFileReader = new ReversedLinesFileReader(testFile20Bytes , blockSize , ISO_8859_1);
+        String testLine = "123456789";
+        ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(testLine, reversedLinesFileReader.readLine());
+        ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(testLine, reversedLinesFileReader.readLine());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testFileSizeIsExactMultipleOfBlockSize_literalMutation1226() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFileSizeIsExactMultipleOfBlockSize_literalMutation1226");
+        int blockSize = 10;
+        File testFile20Bytes = new File(getClass().getResource("bar").toURI());
+        reversedLinesFileReader = new ReversedLinesFileReader(testFile20Bytes , blockSize , ISO_8859_1);
+        String testLine = "123456789";
+        ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(testLine, reversedLinesFileReader.readLine());
+        ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(testLine, reversedLinesFileReader.readLine());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testFileSizeIsExactMultipleOfBlockSize_literalMutation1227() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFileSizeIsExactMultipleOfBlockSize_literalMutation1227");
         int blockSize = 10;
         File testFile20Bytes = new File(getClass().getResource("/test-file-20byteslength.bin").toURI());
         reversedLinesFileReader = new ReversedLinesFileReader(testFile20Bytes , blockSize , ISO_8859_1);
-        String testLine = "foo";
+        String testLine = "bar";
         ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(testLine, reversedLinesFileReader.readLine());
         ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(testLine, reversedLinesFileReader.readLine());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -377,6 +413,15 @@ public class ReversedLinesFileReaderTestParamBlockSize {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test
+    public void testUTF8FileWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUTF8FileWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines");
+        File testFileUtf8 = new File(getClass().getResource("/test-file-utf8-win-linebr.bin").toURI());
+        reversedLinesFileReader = new ReversedLinesFileReader(testFileUtf8 , testParamBlockSize , UTF_8);
+        assertFileWithShrinkingTestLines(reversedLinesFileReader);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     @Test(timeout = 1000)
     public void testUTF8FileWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_add242() throws IOException, URISyntaxException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUTF8FileWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_add242");
@@ -388,8 +433,8 @@ public class ReversedLinesFileReaderTestParamBlockSize {
     }
 
     @Test
-    public void testUTF8FileWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUTF8FileWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines");
+    public void testUTF8FileWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1255() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUTF8FileWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1255");
         File testFileUtf8 = new File(getClass().getResource("foo").toURI());
         reversedLinesFileReader = new ReversedLinesFileReader(testFileUtf8 , testParamBlockSize , UTF_8);
         assertFileWithShrinkingTestLines(reversedLinesFileReader);
@@ -437,7 +482,7 @@ public class ReversedLinesFileReaderTestParamBlockSize {
     @Test
     public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines() throws IOException, URISyntaxException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines");
-        File testFileIso = new File(getClass().getResource("foo").toURI());
+        File testFileIso = new File(getClass().getResource("bar").toURI());
         reversedLinesFileReader = new ReversedLinesFileReader(testFileIso , testParamBlockSize , ISO_8859_1);
         for (int i = 3 ; i > 0 ; i--) {
             for (int j = 1 ; j <= 3 ; j++) {
@@ -449,8 +494,8 @@ public class ReversedLinesFileReaderTestParamBlockSize {
     }
 
     @Test
-    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation569() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation569");
+    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1230() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1230");
         File testFileIso = new File(getClass().getResource("/test-file-iso8859-1-shortlines-win-linebr.bin").toURI());
         reversedLinesFileReader = new ReversedLinesFileReader(testFileIso , testParamBlockSize , ISO_8859_1);
         for (int i = 4 ; i > 0 ; i--) {
@@ -463,8 +508,50 @@ public class ReversedLinesFileReaderTestParamBlockSize {
     }
 
     @Test
-    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation570() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation570");
+    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1231() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1231");
+        File testFileIso = new File(getClass().getResource("/test-file-iso8859-1-shortlines-win-linebr.bin").toURI());
+        reversedLinesFileReader = new ReversedLinesFileReader(testFileIso , testParamBlockSize , ISO_8859_1);
+        for (int i = 2 ; i > 0 ; i--) {
+            for (int j = 1 ; j <= 3 ; j++) {
+                ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks("", reversedLinesFileReader.readLine());
+            }
+            ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(("" + i), reversedLinesFileReader.readLine());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1232() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1232");
+        File testFileIso = new File(getClass().getResource("/test-file-iso8859-1-shortlines-win-linebr.bin").toURI());
+        reversedLinesFileReader = new ReversedLinesFileReader(testFileIso , testParamBlockSize , ISO_8859_1);
+        for (int i = 1 ; i > 0 ; i--) {
+            for (int j = 1 ; j <= 3 ; j++) {
+                ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks("", reversedLinesFileReader.readLine());
+            }
+            ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(("" + i), reversedLinesFileReader.readLine());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1233() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1233");
+        File testFileIso = new File(getClass().getResource("/test-file-iso8859-1-shortlines-win-linebr.bin").toURI());
+        reversedLinesFileReader = new ReversedLinesFileReader(testFileIso , testParamBlockSize , ISO_8859_1);
+        for (int i = 6 ; i > 0 ; i--) {
+            for (int j = 1 ; j <= 3 ; j++) {
+                ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks("", reversedLinesFileReader.readLine());
+            }
+            ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(("" + i), reversedLinesFileReader.readLine());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1234() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1234");
         File testFileIso = new File(getClass().getResource("/test-file-iso8859-1-shortlines-win-linebr.bin").toURI());
         reversedLinesFileReader = new ReversedLinesFileReader(testFileIso , testParamBlockSize , ISO_8859_1);
         for (int i = 3 ; i > 1 ; i--) {
@@ -477,8 +564,36 @@ public class ReversedLinesFileReaderTestParamBlockSize {
     }
 
     @Test
-    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation571() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation571");
+    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1235() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1235");
+        File testFileIso = new File(getClass().getResource("/test-file-iso8859-1-shortlines-win-linebr.bin").toURI());
+        reversedLinesFileReader = new ReversedLinesFileReader(testFileIso , testParamBlockSize , ISO_8859_1);
+        for (int i = 3 ; i > -1 ; i--) {
+            for (int j = 1 ; j <= 3 ; j++) {
+                ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks("", reversedLinesFileReader.readLine());
+            }
+            ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(("" + i), reversedLinesFileReader.readLine());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1236() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1236");
+        File testFileIso = new File(getClass().getResource("/test-file-iso8859-1-shortlines-win-linebr.bin").toURI());
+        reversedLinesFileReader = new ReversedLinesFileReader(testFileIso , testParamBlockSize , ISO_8859_1);
+        for (int i = 3 ; i > 0 ; i--) {
+            for (int j = 1 ; j <= 3 ; j++) {
+                ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks("", reversedLinesFileReader.readLine());
+            }
+            ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(("" + i), reversedLinesFileReader.readLine());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1237() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1237");
         File testFileIso = new File(getClass().getResource("/test-file-iso8859-1-shortlines-win-linebr.bin").toURI());
         reversedLinesFileReader = new ReversedLinesFileReader(testFileIso , testParamBlockSize , ISO_8859_1);
         for (int i = 3 ; i > 0 ; i--) {
@@ -491,8 +606,50 @@ public class ReversedLinesFileReaderTestParamBlockSize {
     }
 
     @Test
-    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation572() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation572");
+    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1238() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1238");
+        File testFileIso = new File(getClass().getResource("/test-file-iso8859-1-shortlines-win-linebr.bin").toURI());
+        reversedLinesFileReader = new ReversedLinesFileReader(testFileIso , testParamBlockSize , ISO_8859_1);
+        for (int i = 3 ; i > 0 ; i--) {
+            for (int j = 0 ; j <= 3 ; j++) {
+                ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks("", reversedLinesFileReader.readLine());
+            }
+            ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(("" + i), reversedLinesFileReader.readLine());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1239() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1239");
+        File testFileIso = new File(getClass().getResource("/test-file-iso8859-1-shortlines-win-linebr.bin").toURI());
+        reversedLinesFileReader = new ReversedLinesFileReader(testFileIso , testParamBlockSize , ISO_8859_1);
+        for (int i = 3 ; i > 0 ; i--) {
+            for (int j = 0 ; j <= 3 ; j++) {
+                ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks("", reversedLinesFileReader.readLine());
+            }
+            ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(("" + i), reversedLinesFileReader.readLine());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1240() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1240");
+        File testFileIso = new File(getClass().getResource("/test-file-iso8859-1-shortlines-win-linebr.bin").toURI());
+        reversedLinesFileReader = new ReversedLinesFileReader(testFileIso , testParamBlockSize , ISO_8859_1);
+        for (int i = 3 ; i > 0 ; i--) {
+            for (int j = 1 ; j <= 4 ; j++) {
+                ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks("", reversedLinesFileReader.readLine());
+            }
+            ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(("" + i), reversedLinesFileReader.readLine());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1241() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1241");
         File testFileIso = new File(getClass().getResource("/test-file-iso8859-1-shortlines-win-linebr.bin").toURI());
         reversedLinesFileReader = new ReversedLinesFileReader(testFileIso , testParamBlockSize , ISO_8859_1);
         for (int i = 3 ; i > 0 ; i--) {
@@ -505,8 +662,36 @@ public class ReversedLinesFileReaderTestParamBlockSize {
     }
 
     @Test
-    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation573() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation573");
+    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1242() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1242");
+        File testFileIso = new File(getClass().getResource("/test-file-iso8859-1-shortlines-win-linebr.bin").toURI());
+        reversedLinesFileReader = new ReversedLinesFileReader(testFileIso , testParamBlockSize , ISO_8859_1);
+        for (int i = 3 ; i > 0 ; i--) {
+            for (int j = 1 ; j <= 1 ; j++) {
+                ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks("", reversedLinesFileReader.readLine());
+            }
+            ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(("" + i), reversedLinesFileReader.readLine());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1243() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1243");
+        File testFileIso = new File(getClass().getResource("/test-file-iso8859-1-shortlines-win-linebr.bin").toURI());
+        reversedLinesFileReader = new ReversedLinesFileReader(testFileIso , testParamBlockSize , ISO_8859_1);
+        for (int i = 3 ; i > 0 ; i--) {
+            for (int j = 1 ; j <= 6 ; j++) {
+                ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks("", reversedLinesFileReader.readLine());
+            }
+            ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(("" + i), reversedLinesFileReader.readLine());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1244() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1244");
         File testFileIso = new File(getClass().getResource("/test-file-iso8859-1-shortlines-win-linebr.bin").toURI());
         reversedLinesFileReader = new ReversedLinesFileReader(testFileIso , testParamBlockSize , ISO_8859_1);
         for (int i = 3 ; i > 0 ; i--) {
@@ -519,15 +704,15 @@ public class ReversedLinesFileReaderTestParamBlockSize {
     }
 
     @Test
-    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation574() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation574");
+    public void testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1245() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsoFileManyWindowsBreaksSmallBlockSize2VerifyBlockSpanningNewLines_literalMutation1245");
         File testFileIso = new File(getClass().getResource("/test-file-iso8859-1-shortlines-win-linebr.bin").toURI());
         reversedLinesFileReader = new ReversedLinesFileReader(testFileIso , testParamBlockSize , ISO_8859_1);
         for (int i = 3 ; i > 0 ; i--) {
             for (int j = 1 ; j <= 3 ; j++) {
                 ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks("", reversedLinesFileReader.readLine());
             }
-            ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(("foo" + i), reversedLinesFileReader.readLine());
+            ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(("bar" + i), reversedLinesFileReader.readLine());
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -567,8 +752,8 @@ public class ReversedLinesFileReaderTestParamBlockSize {
     }
 
     @Test(expected = UnsupportedEncodingException.class)
-    public void testUnsupportedEncodingUTF16_literalMutation588() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingUTF16_literalMutation588");
+    public void testUnsupportedEncodingUTF16_literalMutation1259() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingUTF16_literalMutation1259");
         File testFileEmpty = new File(getClass().getResource("/test-file-empty.bin").toURI());
         new ReversedLinesFileReader(testFileEmpty , testParamBlockSize , "foo");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -583,10 +768,10 @@ public class ReversedLinesFileReaderTestParamBlockSize {
     }
 
     @Test(expected = UnsupportedEncodingException.class)
-    public void testUnsupportedEncodingBig5_literalMutation586() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingBig5_literalMutation586");
+    public void testUnsupportedEncodingBig5_literalMutation1257() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingBig5_literalMutation1257");
         File testFileEncodingBig5 = new File(getClass().getResource("/test-file-empty.bin").toURI());
-        new ReversedLinesFileReader(testFileEncodingBig5 , testParamBlockSize , "foo");
+        new ReversedLinesFileReader(testFileEncodingBig5 , testParamBlockSize , "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

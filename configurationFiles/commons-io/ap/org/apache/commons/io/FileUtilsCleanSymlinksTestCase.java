@@ -155,8 +155,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithSymlinkFile_literalMutation3105() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithSymlinkFile_literalMutation3105");
+    public void testCleanDirWithSymlinkFile_literalMutation4810() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithSymlinkFile_literalMutation4810");
         if (java.lang.System.getProperty("os.name").startsWith("foo")) {
             return ;
         } 
@@ -179,8 +179,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithSymlinkFile_literalMutation3106() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithSymlinkFile_literalMutation3106");
+    public void testCleanDirWithSymlinkFile_literalMutation4811() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithSymlinkFile_literalMutation4811");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -203,8 +203,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithSymlinkFile_literalMutation3107() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithSymlinkFile_literalMutation3107");
+    public void testCleanDirWithSymlinkFile_literalMutation4812() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithSymlinkFile_literalMutation4812");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -227,8 +227,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithSymlinkFile_literalMutation3108() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithSymlinkFile_literalMutation3108");
+    public void testCleanDirWithSymlinkFile_literalMutation4813() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithSymlinkFile_literalMutation4813");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -251,8 +251,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithSymlinkFile_literalMutation3109() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithSymlinkFile_literalMutation3109");
+    public void testCleanDirWithSymlinkFile_literalMutation4814() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithSymlinkFile_literalMutation4814");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -275,8 +275,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithSymlinkFile_literalMutation3110() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithSymlinkFile_literalMutation3110");
+    public void testCleanDirWithSymlinkFile_literalMutation4815() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithSymlinkFile_literalMutation4815");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -501,7 +501,7 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
 
     public void testCleanDirWithASymlinkDir() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithASymlinkDir");
-        if (java.lang.System.getProperty("foo").startsWith("Win")) {
+        if (java.lang.System.getProperty("bar").startsWith("Win")) {
             return ;
         } 
         final File realOuter = new File(top , "realouter");
@@ -523,8 +523,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithASymlinkDir_literalMutation3088() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithASymlinkDir_literalMutation3088");
+    public void testCleanDirWithASymlinkDir_literalMutation4793() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithASymlinkDir_literalMutation4793");
         if (java.lang.System.getProperty("os.name").startsWith("foo")) {
             return ;
         } 
@@ -547,12 +547,12 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithASymlinkDir_literalMutation3089() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithASymlinkDir_literalMutation3089");
+    public void testCleanDirWithASymlinkDir_literalMutation4794() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithASymlinkDir_literalMutation4794");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
-        final File realOuter = new File(top , "foo");
+        final File realOuter = new File(top , "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2500,realOuter,2499,realOuter.mkdirs());
         final File realInner = new File(realOuter , "realinner");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2502,realInner,2501,realInner.mkdirs());
@@ -571,14 +571,14 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithASymlinkDir_literalMutation3090() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithASymlinkDir_literalMutation3090");
+    public void testCleanDirWithASymlinkDir_literalMutation4795() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithASymlinkDir_literalMutation4795");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
         final File realOuter = new File(top , "realouter");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2500,realOuter,2499,realOuter.mkdirs());
-        final File realInner = new File(realOuter , "foo");
+        final File realInner = new File(realOuter , "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2502,realInner,2501,realInner.mkdirs());
         org.apache.commons.io.FileUtils.touch(new File(realInner , "file1"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2503,realInner.list().length);
@@ -595,8 +595,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithASymlinkDir_literalMutation3091() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithASymlinkDir_literalMutation3091");
+    public void testCleanDirWithASymlinkDir_literalMutation4796() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithASymlinkDir_literalMutation4796");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -604,7 +604,7 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2500,realOuter,2499,realOuter.mkdirs());
         final File realInner = new File(realOuter , "realinner");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2502,realInner,2501,realInner.mkdirs());
-        org.apache.commons.io.FileUtils.touch(new File(realInner , "foo"));
+        org.apache.commons.io.FileUtils.touch(new File(realInner , "bar"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2503,realInner.list().length);
         final File randomDirectory = new File(top , "randomDir");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2505,randomDirectory,2504,randomDirectory.mkdirs());
@@ -619,8 +619,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithASymlinkDir_literalMutation3092() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithASymlinkDir_literalMutation3092");
+    public void testCleanDirWithASymlinkDir_literalMutation4797() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithASymlinkDir_literalMutation4797");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -630,7 +630,7 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2502,realInner,2501,realInner.mkdirs());
         org.apache.commons.io.FileUtils.touch(new File(realInner , "file1"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2503,realInner.list().length);
-        final File randomDirectory = new File(top , "foo");
+        final File randomDirectory = new File(top , "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2505,randomDirectory,2504,randomDirectory.mkdirs());
         org.apache.commons.io.FileUtils.touch(new File(randomDirectory , "randomfile"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2506,randomDirectory.list().length);
@@ -643,8 +643,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithASymlinkDir_literalMutation3093() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithASymlinkDir_literalMutation3093");
+    public void testCleanDirWithASymlinkDir_literalMutation4798() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithASymlinkDir_literalMutation4798");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -667,8 +667,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithASymlinkDir_literalMutation3094() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithASymlinkDir_literalMutation3094");
+    public void testCleanDirWithASymlinkDir_literalMutation4799() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithASymlinkDir_literalMutation4799");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -682,7 +682,7 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2505,randomDirectory,2504,randomDirectory.mkdirs());
         org.apache.commons.io.FileUtils.touch(new File(randomDirectory , "randomfile"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2506,randomDirectory.list().length);
-        final File symlinkDirectory = new File(realOuter , "foo");
+        final File symlinkDirectory = new File(realOuter , "bar");
         setupSymlink(randomDirectory, symlinkDirectory);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2507,symlinkDirectory.list().length);
         org.apache.commons.io.FileUtils.cleanDirectory(realOuter);
@@ -934,7 +934,7 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
 
     public void testCleanDirWithParentSymlinks() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithParentSymlinks");
-        if (java.lang.System.getProperty("foo").startsWith("Win")) {
+        if (java.lang.System.getProperty("bar").startsWith("Win")) {
             return ;
         } 
         final File realParent = new File(top , "realparent");
@@ -959,8 +959,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithParentSymlinks_literalMutation3096() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithParentSymlinks_literalMutation3096");
+    public void testCleanDirWithParentSymlinks_literalMutation4801() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithParentSymlinks_literalMutation4801");
         if (java.lang.System.getProperty("os.name").startsWith("foo")) {
             return ;
         } 
@@ -986,12 +986,12 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithParentSymlinks_literalMutation3097() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithParentSymlinks_literalMutation3097");
+    public void testCleanDirWithParentSymlinks_literalMutation4802() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithParentSymlinks_literalMutation4802");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
-        final File realParent = new File(top , "foo");
+        final File realParent = new File(top , "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2511,realParent,2510,realParent.mkdirs());
         final File realInner = new File(realParent , "realinner");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2513,realInner,2512,realInner.mkdirs());
@@ -1013,14 +1013,14 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithParentSymlinks_literalMutation3098() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithParentSymlinks_literalMutation3098");
+    public void testCleanDirWithParentSymlinks_literalMutation4803() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithParentSymlinks_literalMutation4803");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
         final File realParent = new File(top , "realparent");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2511,realParent,2510,realParent.mkdirs());
-        final File realInner = new File(realParent , "foo");
+        final File realInner = new File(realParent , "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2513,realInner,2512,realInner.mkdirs());
         org.apache.commons.io.FileUtils.touch(new File(realInner , "file1"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2514,realInner.list().length);
@@ -1040,8 +1040,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithParentSymlinks_literalMutation3099() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithParentSymlinks_literalMutation3099");
+    public void testCleanDirWithParentSymlinks_literalMutation4804() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithParentSymlinks_literalMutation4804");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -1067,8 +1067,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithParentSymlinks_literalMutation3100() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithParentSymlinks_literalMutation3100");
+    public void testCleanDirWithParentSymlinks_literalMutation4805() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithParentSymlinks_literalMutation4805");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -1094,8 +1094,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithParentSymlinks_literalMutation3101() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithParentSymlinks_literalMutation3101");
+    public void testCleanDirWithParentSymlinks_literalMutation4806() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithParentSymlinks_literalMutation4806");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -1107,7 +1107,7 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2514,realInner.list().length);
         final File randomDirectory = new File(top , "randomDir");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2516,randomDirectory,2515,randomDirectory.mkdirs());
-        org.apache.commons.io.FileUtils.touch(new File(randomDirectory , "foo"));
+        org.apache.commons.io.FileUtils.touch(new File(randomDirectory , "bar"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2517,randomDirectory.list().length);
         final File symlinkDirectory = new File(realParent , "fakeinner");
         setupSymlink(randomDirectory, symlinkDirectory);
@@ -1121,8 +1121,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithParentSymlinks_literalMutation3102() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithParentSymlinks_literalMutation3102");
+    public void testCleanDirWithParentSymlinks_literalMutation4807() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithParentSymlinks_literalMutation4807");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -1148,8 +1148,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCleanDirWithParentSymlinks_literalMutation3103() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithParentSymlinks_literalMutation3103");
+    public void testCleanDirWithParentSymlinks_literalMutation4808() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCleanDirWithParentSymlinks_literalMutation4808");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -1166,7 +1166,7 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         final File symlinkDirectory = new File(realParent , "fakeinner");
         setupSymlink(randomDirectory, symlinkDirectory);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2518,symlinkDirectory.list().length);
-        final File symlinkParentDirectory = new File(top , "foo");
+        final File symlinkParentDirectory = new File(top , "bar");
         setupSymlink(realParent, symlinkParentDirectory);
         org.apache.commons.io.FileUtils.cleanDirectory(symlinkParentDirectory);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2519,symlinkParentDirectory.list().length);
@@ -1384,8 +1384,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testStillClearsIfGivenDirectoryIsASymlink_literalMutation3126() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStillClearsIfGivenDirectoryIsASymlink_literalMutation3126");
+    public void testStillClearsIfGivenDirectoryIsASymlink_literalMutation4831() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStillClearsIfGivenDirectoryIsASymlink_literalMutation4831");
         if (java.lang.System.getProperty("os.name").startsWith("foo")) {
             return ;
         } 
@@ -1401,8 +1401,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testStillClearsIfGivenDirectoryIsASymlink_literalMutation3127() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStillClearsIfGivenDirectoryIsASymlink_literalMutation3127");
+    public void testStillClearsIfGivenDirectoryIsASymlink_literalMutation4832() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStillClearsIfGivenDirectoryIsASymlink_literalMutation4832");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -1418,8 +1418,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testStillClearsIfGivenDirectoryIsASymlink_literalMutation3128() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStillClearsIfGivenDirectoryIsASymlink_literalMutation3128");
+    public void testStillClearsIfGivenDirectoryIsASymlink_literalMutation4833() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStillClearsIfGivenDirectoryIsASymlink_literalMutation4833");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -1435,8 +1435,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testStillClearsIfGivenDirectoryIsASymlink_literalMutation3129() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStillClearsIfGivenDirectoryIsASymlink_literalMutation3129");
+    public void testStillClearsIfGivenDirectoryIsASymlink_literalMutation4834() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStillClearsIfGivenDirectoryIsASymlink_literalMutation4834");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -1444,7 +1444,7 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2552,randomDirectory,2551,randomDirectory.mkdirs());
         org.apache.commons.io.FileUtils.touch(new File(randomDirectory , "randomfile"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2553,randomDirectory.list().length);
-        final File symlinkDirectory = new File(top , "foo");
+        final File symlinkDirectory = new File(top , "bar");
         setupSymlink(randomDirectory, symlinkDirectory);
         org.apache.commons.io.FileUtils.cleanDirectory(symlinkDirectory);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2554,symlinkDirectory.list().length);
@@ -1533,9 +1533,9 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testIdentifiesSymlinkDir_literalMutation3118() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIdentifiesSymlinkDir_literalMutation3118");
-        if (java.lang.System.getProperty("os.name").startsWith("foo")) {
+    public void testIdentifiesSymlinkDir_literalMutation4823() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIdentifiesSymlinkDir_literalMutation4823");
+        if (java.lang.System.getProperty("os.name").startsWith("bar")) {
             return ;
         } 
         final File randomDirectory = new File(top , "randomDir");
@@ -1547,8 +1547,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testIdentifiesSymlinkDir_literalMutation3119() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIdentifiesSymlinkDir_literalMutation3119");
+    public void testIdentifiesSymlinkDir_literalMutation4824() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIdentifiesSymlinkDir_literalMutation4824");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -1561,14 +1561,14 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testIdentifiesSymlinkDir_literalMutation3120() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIdentifiesSymlinkDir_literalMutation3120");
+    public void testIdentifiesSymlinkDir_literalMutation4825() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIdentifiesSymlinkDir_literalMutation4825");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
         final File randomDirectory = new File(top , "randomDir");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2542,randomDirectory,2541,randomDirectory.mkdirs());
-        final File symlinkDirectory = new File(top , "foo");
+        final File symlinkDirectory = new File(top , "bar");
         setupSymlink(randomDirectory, symlinkDirectory);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2544,null,2543,org.apache.commons.io.FileUtils.isSymlink(symlinkDirectory));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2546,null,2545,org.apache.commons.io.FileUtils.isSymlink(randomDirectory));
@@ -1635,9 +1635,9 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testIdentifiesSymlinkFile_literalMutation3122() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIdentifiesSymlinkFile_literalMutation3122");
-        if (java.lang.System.getProperty("os.name").startsWith("foo")) {
+    public void testIdentifiesSymlinkFile_literalMutation4827() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIdentifiesSymlinkFile_literalMutation4827");
+        if (java.lang.System.getProperty("os.name").startsWith("bar")) {
             return ;
         } 
         final File randomFile = new File(top , "randomfile");
@@ -1649,12 +1649,12 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testIdentifiesSymlinkFile_literalMutation3123() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIdentifiesSymlinkFile_literalMutation3123");
+    public void testIdentifiesSymlinkFile_literalMutation4828() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIdentifiesSymlinkFile_literalMutation4828");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
-        final File randomFile = new File(top , "foo");
+        final File randomFile = new File(top , "bar");
         org.apache.commons.io.FileUtils.touch(randomFile);
         final File symlinkFile = new File(top , "fakeinner");
         setupSymlink(randomFile, symlinkFile);
@@ -1663,14 +1663,14 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testIdentifiesSymlinkFile_literalMutation3124() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIdentifiesSymlinkFile_literalMutation3124");
+    public void testIdentifiesSymlinkFile_literalMutation4829() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIdentifiesSymlinkFile_literalMutation4829");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
         final File randomFile = new File(top , "randomfile");
         org.apache.commons.io.FileUtils.touch(randomFile);
-        final File symlinkFile = new File(top , "foo");
+        final File symlinkFile = new File(top , "bar");
         setupSymlink(randomFile, symlinkFile);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2548,null,2547,org.apache.commons.io.FileUtils.isSymlink(symlinkFile));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2550,null,2549,org.apache.commons.io.FileUtils.isSymlink(randomFile));
@@ -1763,8 +1763,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCorrectlyIdentifySymlinkWithParentSymLink_literalMutation3112() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCorrectlyIdentifySymlinkWithParentSymLink_literalMutation3112");
+    public void testCorrectlyIdentifySymlinkWithParentSymLink_literalMutation4817() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCorrectlyIdentifySymlinkWithParentSymLink_literalMutation4817");
         if (java.lang.System.getProperty("os.name").startsWith("foo")) {
             return ;
         } 
@@ -1781,12 +1781,12 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCorrectlyIdentifySymlinkWithParentSymLink_literalMutation3113() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCorrectlyIdentifySymlinkWithParentSymLink_literalMutation3113");
+    public void testCorrectlyIdentifySymlinkWithParentSymLink_literalMutation4818() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCorrectlyIdentifySymlinkWithParentSymLink_literalMutation4818");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
-        final File realParent = new File(top , "foo");
+        final File realParent = new File(top , "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2534,realParent,2533,realParent.mkdirs());
         final File symlinkParentDirectory = new File(top , "fakeparent");
         setupSymlink(realParent, symlinkParentDirectory);
@@ -1799,8 +1799,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCorrectlyIdentifySymlinkWithParentSymLink_literalMutation3114() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCorrectlyIdentifySymlinkWithParentSymLink_literalMutation3114");
+    public void testCorrectlyIdentifySymlinkWithParentSymLink_literalMutation4819() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCorrectlyIdentifySymlinkWithParentSymLink_literalMutation4819");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -1817,8 +1817,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCorrectlyIdentifySymlinkWithParentSymLink_literalMutation3115() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCorrectlyIdentifySymlinkWithParentSymLink_literalMutation3115");
+    public void testCorrectlyIdentifySymlinkWithParentSymLink_literalMutation4820() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCorrectlyIdentifySymlinkWithParentSymLink_literalMutation4820");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -1835,8 +1835,8 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCorrectlyIdentifySymlinkWithParentSymLink_literalMutation3116() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCorrectlyIdentifySymlinkWithParentSymLink_literalMutation3116");
+    public void testCorrectlyIdentifySymlinkWithParentSymLink_literalMutation4821() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCorrectlyIdentifySymlinkWithParentSymLink_literalMutation4821");
         if (java.lang.System.getProperty("os.name").startsWith("Win")) {
             return ;
         } 
@@ -1846,7 +1846,7 @@ public class FileUtilsCleanSymlinksTestCase extends FileBasedTestCase {
         setupSymlink(realParent, symlinkParentDirectory);
         final File realChild = new File(symlinkParentDirectory , "realChild");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2536,realChild,2535,realChild.mkdirs());
-        final File symlinkChild = new File(symlinkParentDirectory , "foo");
+        final File symlinkChild = new File(symlinkParentDirectory , "bar");
         setupSymlink(realChild, symlinkChild);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2538,null,2537,org.apache.commons.io.FileUtils.isSymlink(symlinkChild));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2540,null,2539,org.apache.commons.io.FileUtils.isSymlink(realChild));

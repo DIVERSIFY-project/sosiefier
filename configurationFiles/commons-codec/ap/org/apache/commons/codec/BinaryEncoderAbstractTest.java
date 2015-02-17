@@ -21,7 +21,23 @@ public abstract class BinaryEncoderAbstractTest {
     public void testEncodeEmpty() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeEmpty");
         final BinaryEncoder encoder = makeEncoder();
+        encoder.encode(new byte[1]);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeEmpty_literalMutation4469() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeEmpty_literalMutation4469");
+        final BinaryEncoder encoder = makeEncoder();
         encoder.encode(new byte[-1]);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeEmpty_literalMutation4470() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeEmpty_literalMutation4470");
+        final BinaryEncoder encoder = makeEncoder();
+        encoder.encode(new byte[0]);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

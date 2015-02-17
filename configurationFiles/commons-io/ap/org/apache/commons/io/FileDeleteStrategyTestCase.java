@@ -164,7 +164,7 @@ public class FileDeleteStrategyTestCase extends FileBasedTestCase {
     public void testDeleteNormal() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteNormal");
         File baseDir = FileBasedTestCase.getTestDirectory();
-        File subDir = new File(baseDir , "foo");
+        File subDir = new File(baseDir , "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2396,subDir,2395,subDir.mkdir());
         File subFile = new File(subDir , "a.txt");
         createFile(subFile, 16);
@@ -186,8 +186,8 @@ public class FileDeleteStrategyTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testDeleteNormal_literalMutation2789() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteNormal_literalMutation2789");
+    public void testDeleteNormal_literalMutation4338() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteNormal_literalMutation4338");
         File baseDir = FileBasedTestCase.getTestDirectory();
         File subDir = new File(baseDir , "test");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2396,subDir,2395,subDir.mkdir());
@@ -211,8 +211,83 @@ public class FileDeleteStrategyTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testDeleteNormal_literalMutation2790() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteNormal_literalMutation2790");
+    public void testDeleteNormal_literalMutation4339() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteNormal_literalMutation4339");
+        File baseDir = FileBasedTestCase.getTestDirectory();
+        File subDir = new File(baseDir , "test");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2396,subDir,2395,subDir.mkdir());
+        File subFile = new File(subDir , "a.txt");
+        createFile(subFile, 8);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2398,subDir,2397,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2400,subFile,2399,subFile.exists());
+        try {
+            FileDeleteStrategy.NORMAL.delete(subDir);
+        } catch (IOException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2402,subDir,2401,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2404,subFile,2403,subFile.exists());
+        FileDeleteStrategy.NORMAL.delete(subFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2406,subDir,2405,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2408,subFile,2407,subFile.exists());
+        FileDeleteStrategy.NORMAL.delete(subDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2410,subDir,2409,subDir.exists());
+        FileDeleteStrategy.NORMAL.delete(subDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2412,subDir,2411,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testDeleteNormal_literalMutation4340() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteNormal_literalMutation4340");
+        File baseDir = FileBasedTestCase.getTestDirectory();
+        File subDir = new File(baseDir , "test");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2396,subDir,2395,subDir.mkdir());
+        File subFile = new File(subDir , "a.txt");
+        createFile(subFile, 32);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2398,subDir,2397,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2400,subFile,2399,subFile.exists());
+        try {
+            FileDeleteStrategy.NORMAL.delete(subDir);
+        } catch (IOException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2402,subDir,2401,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2404,subFile,2403,subFile.exists());
+        FileDeleteStrategy.NORMAL.delete(subFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2406,subDir,2405,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2408,subFile,2407,subFile.exists());
+        FileDeleteStrategy.NORMAL.delete(subDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2410,subDir,2409,subDir.exists());
+        FileDeleteStrategy.NORMAL.delete(subDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2412,subDir,2411,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testDeleteNormal_literalMutation4341() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteNormal_literalMutation4341");
+        File baseDir = FileBasedTestCase.getTestDirectory();
+        File subDir = new File(baseDir , "test");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2396,subDir,2395,subDir.mkdir());
+        File subFile = new File(subDir , "a.txt");
+        createFile(subFile, 17);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2398,subDir,2397,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2400,subFile,2399,subFile.exists());
+        try {
+            FileDeleteStrategy.NORMAL.delete(subDir);
+        } catch (IOException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2402,subDir,2401,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2404,subFile,2403,subFile.exists());
+        FileDeleteStrategy.NORMAL.delete(subFile);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2406,subDir,2405,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2408,subFile,2407,subFile.exists());
+        FileDeleteStrategy.NORMAL.delete(subDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2410,subDir,2409,subDir.exists());
+        FileDeleteStrategy.NORMAL.delete(subDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2412,subDir,2411,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testDeleteNormal_literalMutation4342() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteNormal_literalMutation4342");
         File baseDir = FileBasedTestCase.getTestDirectory();
         File subDir = new File(baseDir , "test");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2396,subDir,2395,subDir.mkdir());
@@ -363,7 +438,7 @@ public class FileDeleteStrategyTestCase extends FileBasedTestCase {
     public void testDeleteQuietlyNormal() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteQuietlyNormal");
         File baseDir = FileBasedTestCase.getTestDirectory();
-        File subDir = new File(baseDir , "foo");
+        File subDir = new File(baseDir , "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2416,subDir,2415,subDir.mkdir());
         File subFile = new File(subDir , "a.txt");
         createFile(subFile, 16);
@@ -382,12 +457,12 @@ public class FileDeleteStrategyTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testDeleteQuietlyNormal_literalMutation2793() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteQuietlyNormal_literalMutation2793");
+    public void testDeleteQuietlyNormal_literalMutation4345() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteQuietlyNormal_literalMutation4345");
         File baseDir = FileBasedTestCase.getTestDirectory();
         File subDir = new File(baseDir , "test");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2416,subDir,2415,subDir.mkdir());
-        File subFile = new File(subDir , "foo");
+        File subFile = new File(subDir , "bar");
         createFile(subFile, 16);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2418,subDir,2417,subDir.exists());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2420,subFile,2419,subFile.exists());
@@ -404,13 +479,79 @@ public class FileDeleteStrategyTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testDeleteQuietlyNormal_literalMutation2794() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteQuietlyNormal_literalMutation2794");
+    public void testDeleteQuietlyNormal_literalMutation4346() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteQuietlyNormal_literalMutation4346");
+        File baseDir = FileBasedTestCase.getTestDirectory();
+        File subDir = new File(baseDir , "test");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2416,subDir,2415,subDir.mkdir());
+        File subFile = new File(subDir , "a.txt");
+        createFile(subFile, 8);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2418,subDir,2417,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2420,subFile,2419,subFile.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2422,org.apache.commons.io.FileDeleteStrategy.NORMAL,2421,org.apache.commons.io.FileDeleteStrategy.NORMAL.deleteQuietly(subDir));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2424,subDir,2423,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2426,subFile,2425,subFile.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2428,org.apache.commons.io.FileDeleteStrategy.NORMAL,2427,org.apache.commons.io.FileDeleteStrategy.NORMAL.deleteQuietly(subFile));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2430,subDir,2429,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2432,subFile,2431,subFile.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2434,org.apache.commons.io.FileDeleteStrategy.NORMAL,2433,org.apache.commons.io.FileDeleteStrategy.NORMAL.deleteQuietly(subDir));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2436,subDir,2435,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2438,org.apache.commons.io.FileDeleteStrategy.NORMAL,2437,org.apache.commons.io.FileDeleteStrategy.NORMAL.deleteQuietly(subDir));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2440,subDir,2439,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testDeleteQuietlyNormal_literalMutation4347() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteQuietlyNormal_literalMutation4347");
+        File baseDir = FileBasedTestCase.getTestDirectory();
+        File subDir = new File(baseDir , "test");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2416,subDir,2415,subDir.mkdir());
+        File subFile = new File(subDir , "a.txt");
+        createFile(subFile, 32);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2418,subDir,2417,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2420,subFile,2419,subFile.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2422,org.apache.commons.io.FileDeleteStrategy.NORMAL,2421,org.apache.commons.io.FileDeleteStrategy.NORMAL.deleteQuietly(subDir));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2424,subDir,2423,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2426,subFile,2425,subFile.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2428,org.apache.commons.io.FileDeleteStrategy.NORMAL,2427,org.apache.commons.io.FileDeleteStrategy.NORMAL.deleteQuietly(subFile));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2430,subDir,2429,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2432,subFile,2431,subFile.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2434,org.apache.commons.io.FileDeleteStrategy.NORMAL,2433,org.apache.commons.io.FileDeleteStrategy.NORMAL.deleteQuietly(subDir));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2436,subDir,2435,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2438,org.apache.commons.io.FileDeleteStrategy.NORMAL,2437,org.apache.commons.io.FileDeleteStrategy.NORMAL.deleteQuietly(subDir));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2440,subDir,2439,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testDeleteQuietlyNormal_literalMutation4348() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteQuietlyNormal_literalMutation4348");
         File baseDir = FileBasedTestCase.getTestDirectory();
         File subDir = new File(baseDir , "test");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2416,subDir,2415,subDir.mkdir());
         File subFile = new File(subDir , "a.txt");
         createFile(subFile, 17);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2418,subDir,2417,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2420,subFile,2419,subFile.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2422,org.apache.commons.io.FileDeleteStrategy.NORMAL,2421,org.apache.commons.io.FileDeleteStrategy.NORMAL.deleteQuietly(subDir));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2424,subDir,2423,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2426,subFile,2425,subFile.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2428,org.apache.commons.io.FileDeleteStrategy.NORMAL,2427,org.apache.commons.io.FileDeleteStrategy.NORMAL.deleteQuietly(subFile));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2430,subDir,2429,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2432,subFile,2431,subFile.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2434,org.apache.commons.io.FileDeleteStrategy.NORMAL,2433,org.apache.commons.io.FileDeleteStrategy.NORMAL.deleteQuietly(subDir));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2436,subDir,2435,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2438,org.apache.commons.io.FileDeleteStrategy.NORMAL,2437,org.apache.commons.io.FileDeleteStrategy.NORMAL.deleteQuietly(subDir));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2440,subDir,2439,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testDeleteQuietlyNormal_literalMutation4349() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteQuietlyNormal_literalMutation4349");
+        File baseDir = FileBasedTestCase.getTestDirectory();
+        File subDir = new File(baseDir , "test");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2416,subDir,2415,subDir.mkdir());
+        File subFile = new File(subDir , "a.txt");
+        createFile(subFile, 15);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2418,subDir,2417,subDir.exists());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2420,subFile,2419,subFile.exists());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2422,org.apache.commons.io.FileDeleteStrategy.NORMAL,2421,org.apache.commons.io.FileDeleteStrategy.NORMAL.deleteQuietly(subDir));
@@ -508,7 +649,7 @@ public class FileDeleteStrategyTestCase extends FileBasedTestCase {
     public void testDeleteForce() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteForce");
         File baseDir = FileBasedTestCase.getTestDirectory();
-        File subDir = new File(baseDir , "foo");
+        File subDir = new File(baseDir , "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2384,subDir,2383,subDir.mkdir());
         File subFile = new File(subDir , "a.txt");
         createFile(subFile, 16);
@@ -522,8 +663,8 @@ public class FileDeleteStrategyTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testDeleteForce_literalMutation2786() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteForce_literalMutation2786");
+    public void testDeleteForce_literalMutation4332() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteForce_literalMutation4332");
         File baseDir = FileBasedTestCase.getTestDirectory();
         File subDir = new File(baseDir , "test");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2384,subDir,2383,subDir.mkdir());
@@ -539,8 +680,59 @@ public class FileDeleteStrategyTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testDeleteForce_literalMutation2787() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteForce_literalMutation2787");
+    public void testDeleteForce_literalMutation4333() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteForce_literalMutation4333");
+        File baseDir = FileBasedTestCase.getTestDirectory();
+        File subDir = new File(baseDir , "test");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2384,subDir,2383,subDir.mkdir());
+        File subFile = new File(subDir , "a.txt");
+        createFile(subFile, 8);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2386,subDir,2385,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2388,subFile,2387,subFile.exists());
+        FileDeleteStrategy.FORCE.delete(subDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2390,subDir,2389,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2392,subFile,2391,subFile.exists());
+        FileDeleteStrategy.FORCE.delete(subDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2394,subDir,2393,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testDeleteForce_literalMutation4334() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteForce_literalMutation4334");
+        File baseDir = FileBasedTestCase.getTestDirectory();
+        File subDir = new File(baseDir , "test");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2384,subDir,2383,subDir.mkdir());
+        File subFile = new File(subDir , "a.txt");
+        createFile(subFile, 32);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2386,subDir,2385,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2388,subFile,2387,subFile.exists());
+        FileDeleteStrategy.FORCE.delete(subDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2390,subDir,2389,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2392,subFile,2391,subFile.exists());
+        FileDeleteStrategy.FORCE.delete(subDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2394,subDir,2393,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testDeleteForce_literalMutation4335() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteForce_literalMutation4335");
+        File baseDir = FileBasedTestCase.getTestDirectory();
+        File subDir = new File(baseDir , "test");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2384,subDir,2383,subDir.mkdir());
+        File subFile = new File(subDir , "a.txt");
+        createFile(subFile, 17);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2386,subDir,2385,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2388,subFile,2387,subFile.exists());
+        FileDeleteStrategy.FORCE.delete(subDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2390,subDir,2389,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2392,subFile,2391,subFile.exists());
+        FileDeleteStrategy.FORCE.delete(subDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2394,subDir,2393,subDir.exists());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testDeleteForce_literalMutation4336() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeleteForce_literalMutation4336");
         File baseDir = FileBasedTestCase.getTestDirectory();
         File subDir = new File(baseDir , "test");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2384,subDir,2383,subDir.mkdir());

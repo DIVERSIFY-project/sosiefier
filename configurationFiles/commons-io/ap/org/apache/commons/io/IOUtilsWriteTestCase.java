@@ -89,10 +89,10 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_byteArrayToOutputStream_literalMutation4429() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToOutputStream_literalMutation4429");
+    public void testWrite_byteArrayToOutputStream_literalMutation6634() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToOutputStream_literalMutation6634");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         IOUtils.write(inData, out);
         out.off();
         out.flush();
@@ -191,8 +191,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_byteArrayToOutputStream_nullData_literalMutation4431() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToOutputStream_nullData_literalMutation4431");
+    public void testWrite_byteArrayToOutputStream_nullData_literalMutation6636() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToOutputStream_nullData_literalMutation6636");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         IOUtils.write(((byte[])(null)), out);
@@ -297,7 +297,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
     public void testWrite_byteArrayToWriter() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         IOUtils.write(inData, writer);
         out.off();
@@ -308,8 +308,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_byteArrayToWriter_literalMutation4435() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_literalMutation4435");
+    public void testWrite_byteArrayToWriter_literalMutation6640() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_literalMutation6640");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
@@ -322,11 +322,11 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_byteArrayToWriter_literalMutation4436() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_literalMutation4436");
+    public void testWrite_byteArrayToWriter_literalMutation6641() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_literalMutation6641");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
-        Writer writer = new OutputStreamWriter(baout , "foo");
+        Writer writer = new OutputStreamWriter(baout , "bar");
         IOUtils.write(inData, writer);
         out.off();
         writer.flush();
@@ -423,7 +423,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
     public void testWrite_byteArrayToWriter_nullData() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_nullData");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         IOUtils.write(((byte[])(null)), writer);
         out.off();
@@ -432,10 +432,10 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_byteArrayToWriter_nullData_literalMutation4455() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_nullData_literalMutation4455");
+    public void testWrite_byteArrayToWriter_nullData_literalMutation6660() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_nullData_literalMutation6660");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         IOUtils.write(((byte[])(null)), writer);
         out.off();
@@ -444,11 +444,11 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_byteArrayToWriter_nullData_literalMutation4456() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_nullData_literalMutation4456");
+    public void testWrite_byteArrayToWriter_nullData_literalMutation6661() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_nullData_literalMutation6661");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
-        Writer writer = new OutputStreamWriter(baout , "foo");
+        Writer writer = new OutputStreamWriter(baout , "bar");
         IOUtils.write(((byte[])(null)), writer);
         out.off();
         writer.flush();
@@ -554,7 +554,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
     public void testWrite_byteArrayToWriter_Encoding() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         IOUtils.write(inData, writer, "UTF8");
         out.off();
@@ -565,10 +565,10 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_byteArrayToWriter_Encoding_literalMutation4438() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_literalMutation4438");
+    public void testWrite_byteArrayToWriter_Encoding_literalMutation6643() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_literalMutation6643");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         IOUtils.write(inData, writer, "UTF8");
         out.off();
@@ -579,8 +579,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_byteArrayToWriter_Encoding_literalMutation4439() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_literalMutation4439");
+    public void testWrite_byteArrayToWriter_Encoding_literalMutation6644() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_literalMutation6644");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         Writer writer = new OutputStreamWriter(baout , "foo");
@@ -593,12 +593,12 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_byteArrayToWriter_Encoding_literalMutation4440() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_literalMutation4440");
+    public void testWrite_byteArrayToWriter_Encoding_literalMutation6645() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_literalMutation6645");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
-        IOUtils.write(inData, writer, "foo");
+        IOUtils.write(inData, writer, "bar");
         out.off();
         writer.flush();
         byte[] bytes = baout.toByteArray();
@@ -607,8 +607,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_byteArrayToWriter_Encoding_literalMutation4441() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_literalMutation4441");
+    public void testWrite_byteArrayToWriter_Encoding_literalMutation6646() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_literalMutation6646");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
@@ -616,13 +616,13 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         out.off();
         writer.flush();
         byte[] bytes = baout.toByteArray();
-        bytes = new String(bytes , "foo").getBytes("US-ASCII");
+        bytes = new String(bytes , "bar").getBytes("US-ASCII");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5625,null,5624,java.util.Arrays.equals(inData, bytes));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_byteArrayToWriter_Encoding_literalMutation4442() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_literalMutation4442");
+    public void testWrite_byteArrayToWriter_Encoding_literalMutation6647() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_literalMutation6647");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
@@ -731,10 +731,10 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_byteArrayToWriter_Encoding_nullData_literalMutation4444() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_nullData_literalMutation4444");
+    public void testWrite_byteArrayToWriter_Encoding_nullData_literalMutation6649() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_nullData_literalMutation6649");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         IOUtils.write(((byte[])(null)), writer, "UTF8");
         out.off();
@@ -743,8 +743,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_byteArrayToWriter_Encoding_nullData_literalMutation4445() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_nullData_literalMutation4445");
+    public void testWrite_byteArrayToWriter_Encoding_nullData_literalMutation6650() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_nullData_literalMutation6650");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         Writer writer = new OutputStreamWriter(baout , "foo");
@@ -755,8 +755,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_byteArrayToWriter_Encoding_nullData_literalMutation4447() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_nullData_literalMutation4447");
+    public void testWrite_byteArrayToWriter_Encoding_nullData_literalMutation6652() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_nullData_literalMutation6652");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
@@ -817,7 +817,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
     public void testWrite_byteArrayToWriter_Encoding_nullWriter() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_nullWriter");
         try {
-            IOUtils.write(inData, ((Writer)(null)), "foo");
+            IOUtils.write(inData, ((Writer)(null)), "bar");
         } catch (NullPointerException ex) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -885,8 +885,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_byteArrayToWriter_Encoding_nullEncoding_literalMutation4449() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_nullEncoding_literalMutation4449");
+    public void testWrite_byteArrayToWriter_Encoding_nullEncoding_literalMutation6654() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_nullEncoding_literalMutation6654");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
@@ -899,8 +899,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_byteArrayToWriter_Encoding_nullEncoding_literalMutation4450() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_nullEncoding_literalMutation4450");
+    public void testWrite_byteArrayToWriter_Encoding_nullEncoding_literalMutation6655() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_byteArrayToWriter_Encoding_nullEncoding_literalMutation6655");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         Writer writer = new OutputStreamWriter(baout , "foo");
@@ -1017,8 +1017,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charSequenceToOutputStream_literalMutation4493() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_literalMutation4493");
+    public void testWrite_charSequenceToOutputStream_literalMutation6698() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_literalMutation6698");
         CharSequence csq = new StringBuilder(new String(inData , "US-ASCII"));
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
@@ -1031,8 +1031,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charSequenceToOutputStream_literalMutation4494() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_literalMutation4494");
+    public void testWrite_charSequenceToOutputStream_literalMutation6699() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_literalMutation6699");
         CharSequence csq = new StringBuilder(new String(inData , "US-ASCII"));
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
@@ -1137,10 +1137,10 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charSequenceToOutputStream_nullData_literalMutation4507() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_nullData_literalMutation4507");
+    public void testWrite_charSequenceToOutputStream_nullData_literalMutation6712() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_nullData_literalMutation6712");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         IOUtils.write(((CharSequence)(null)), out);
         out.off();
         out.flush();
@@ -1253,7 +1253,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
 
     public void testWrite_charSequenceToOutputStream_Encoding() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_Encoding");
-        CharSequence csq = new StringBuilder(new String(inData , "foo"));
+        CharSequence csq = new StringBuilder(new String(inData , "bar"));
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         IOUtils.write(csq, out, "UTF16");
@@ -1265,11 +1265,11 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charSequenceToOutputStream_Encoding_literalMutation4496() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_Encoding_literalMutation4496");
+    public void testWrite_charSequenceToOutputStream_Encoding_literalMutation6701() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_Encoding_literalMutation6701");
         CharSequence csq = new StringBuilder(new String(inData , "US-ASCII"));
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         IOUtils.write(csq, out, "UTF16");
         out.off();
         out.flush();
@@ -1279,11 +1279,11 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charSequenceToOutputStream_Encoding_literalMutation4497() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_Encoding_literalMutation4497");
+    public void testWrite_charSequenceToOutputStream_Encoding_literalMutation6702() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_Encoding_literalMutation6702");
         CharSequence csq = new StringBuilder(new String(inData , "US-ASCII"));
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         IOUtils.write(csq, out, "UTF16");
         out.off();
         out.flush();
@@ -1293,12 +1293,12 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charSequenceToOutputStream_Encoding_literalMutation4498() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_Encoding_literalMutation4498");
+    public void testWrite_charSequenceToOutputStream_Encoding_literalMutation6703() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_Encoding_literalMutation6703");
         CharSequence csq = new StringBuilder(new String(inData , "US-ASCII"));
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
-        IOUtils.write(csq, out, "foo");
+        IOUtils.write(csq, out, "bar");
         out.off();
         out.flush();
         byte[] bytes = baout.toByteArray();
@@ -1307,8 +1307,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charSequenceToOutputStream_Encoding_literalMutation4499() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_Encoding_literalMutation4499");
+    public void testWrite_charSequenceToOutputStream_Encoding_literalMutation6704() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_Encoding_literalMutation6704");
         CharSequence csq = new StringBuilder(new String(inData , "US-ASCII"));
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
@@ -1321,8 +1321,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charSequenceToOutputStream_Encoding_literalMutation4500() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_Encoding_literalMutation4500");
+    public void testWrite_charSequenceToOutputStream_Encoding_literalMutation6705() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_Encoding_literalMutation6705");
         CharSequence csq = new StringBuilder(new String(inData , "US-ASCII"));
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
@@ -1330,7 +1330,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         out.off();
         out.flush();
         byte[] bytes = baout.toByteArray();
-        bytes = new String(bytes , "UTF16").getBytes("foo");
+        bytes = new String(bytes , "UTF16").getBytes("bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5664,null,5663,java.util.Arrays.equals(inData, bytes));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1427,8 +1427,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charSequenceToOutputStream_Encoding_nullData_literalMutation4501() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_Encoding_nullData_literalMutation4501");
+    public void testWrite_charSequenceToOutputStream_Encoding_nullData_literalMutation6706() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_Encoding_nullData_literalMutation6706");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         IOUtils.write(((CharSequence)(null)), out);
@@ -1438,10 +1438,10 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charSequenceToOutputStream_Encoding_nullData_literalMutation4502() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_Encoding_nullData_literalMutation4502");
+    public void testWrite_charSequenceToOutputStream_Encoding_nullData_literalMutation6707() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_Encoding_nullData_literalMutation6707");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         IOUtils.write(((CharSequence)(null)), out);
         out.off();
         out.flush();
@@ -1504,9 +1504,9 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charSequenceToOutputStream_Encoding_nullStream_literalMutation4504() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_Encoding_nullStream_literalMutation4504");
-        CharSequence csq = new StringBuilder(new String(inData , "foo"));
+    public void testWrite_charSequenceToOutputStream_Encoding_nullStream_literalMutation6709() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_Encoding_nullStream_literalMutation6709");
+        CharSequence csq = new StringBuilder(new String(inData , "bar"));
         try {
             IOUtils.write(csq, ((java.io.OutputStream)(null)));
         } catch (NullPointerException ex) {
@@ -1576,8 +1576,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charSequenceToOutputStream_nullEncoding_literalMutation4510() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_nullEncoding_literalMutation4510");
+    public void testWrite_charSequenceToOutputStream_nullEncoding_literalMutation6715() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_nullEncoding_literalMutation6715");
         CharSequence csq = new StringBuilder(new String(inData , "US-ASCII"));
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
@@ -1590,8 +1590,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charSequenceToOutputStream_nullEncoding_literalMutation4511() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_nullEncoding_literalMutation4511");
+    public void testWrite_charSequenceToOutputStream_nullEncoding_literalMutation6716() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToOutputStream_nullEncoding_literalMutation6716");
         CharSequence csq = new StringBuilder(new String(inData , "US-ASCII"));
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
@@ -1699,7 +1699,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
 
     public void testWrite_charSequenceToWriter() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToWriter");
-        CharSequence csq = new StringBuilder(new String(inData , "foo"));
+        CharSequence csq = new StringBuilder(new String(inData , "bar"));
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
@@ -1712,8 +1712,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charSequenceToWriter_literalMutation4516() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToWriter_literalMutation4516");
+    public void testWrite_charSequenceToWriter_literalMutation6721() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToWriter_literalMutation6721");
         CharSequence csq = new StringBuilder(new String(inData , "US-ASCII"));
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
@@ -1727,11 +1727,11 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charSequenceToWriter_literalMutation4517() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToWriter_literalMutation4517");
+    public void testWrite_charSequenceToWriter_literalMutation6722() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToWriter_literalMutation6722");
         CharSequence csq = new StringBuilder(new String(inData , "US-ASCII"));
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         IOUtils.write(csq, writer);
         out.off();
@@ -1742,8 +1742,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charSequenceToWriter_literalMutation4518() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToWriter_literalMutation4518");
+    public void testWrite_charSequenceToWriter_literalMutation6723() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToWriter_literalMutation6723");
         CharSequence csq = new StringBuilder(new String(inData , "US-ASCII"));
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
@@ -1847,7 +1847,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
     public void testWrite_charSequenceToWriter_Encoding_nullData() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToWriter_Encoding_nullData");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         IOUtils.write(((CharSequence)(null)), writer);
         out.off();
@@ -1856,10 +1856,10 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charSequenceToWriter_Encoding_nullData_literalMutation4520() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToWriter_Encoding_nullData_literalMutation4520");
+    public void testWrite_charSequenceToWriter_Encoding_nullData_literalMutation6725() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToWriter_Encoding_nullData_literalMutation6725");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         IOUtils.write(((CharSequence)(null)), writer);
         out.off();
@@ -1868,8 +1868,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charSequenceToWriter_Encoding_nullData_literalMutation4521() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToWriter_Encoding_nullData_literalMutation4521");
+    public void testWrite_charSequenceToWriter_Encoding_nullData_literalMutation6726() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charSequenceToWriter_Encoding_nullData_literalMutation6726");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         Writer writer = new OutputStreamWriter(baout , "foo");
@@ -2000,11 +2000,11 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_stringToOutputStream_literalMutation4526() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_literalMutation4526");
+    public void testWrite_stringToOutputStream_literalMutation6731() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_literalMutation6731");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         IOUtils.write(str, out);
         out.off();
         out.flush();
@@ -2014,8 +2014,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_stringToOutputStream_literalMutation4527() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_literalMutation4527");
+    public void testWrite_stringToOutputStream_literalMutation6732() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_literalMutation6732");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
@@ -2120,10 +2120,10 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_stringToOutputStream_nullData_literalMutation4540() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_nullData_literalMutation4540");
+    public void testWrite_stringToOutputStream_nullData_literalMutation6745() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_nullData_literalMutation6745");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         IOUtils.write(((String)(null)), out);
         out.off();
         out.flush();
@@ -2178,7 +2178,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
 
     public void testWrite_stringToOutputStream_nullStream() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_nullStream");
-        String str = new String(inData , "foo");
+        String str = new String(inData , "bar");
         try {
             IOUtils.write(str, ((java.io.OutputStream)(null)));
         } catch (NullPointerException ex) {
@@ -2248,11 +2248,11 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_stringToOutputStream_Encoding_literalMutation4529() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_Encoding_literalMutation4529");
+    public void testWrite_stringToOutputStream_Encoding_literalMutation6734() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_Encoding_literalMutation6734");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         IOUtils.write(str, out, "UTF16");
         out.off();
         out.flush();
@@ -2262,8 +2262,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_stringToOutputStream_Encoding_literalMutation4530() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_Encoding_literalMutation4530");
+    public void testWrite_stringToOutputStream_Encoding_literalMutation6735() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_Encoding_literalMutation6735");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
@@ -2276,12 +2276,12 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_stringToOutputStream_Encoding_literalMutation4531() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_Encoding_literalMutation4531");
+    public void testWrite_stringToOutputStream_Encoding_literalMutation6736() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_Encoding_literalMutation6736");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
-        IOUtils.write(str, out, "foo");
+        IOUtils.write(str, out, "bar");
         out.off();
         out.flush();
         byte[] bytes = baout.toByteArray();
@@ -2290,8 +2290,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_stringToOutputStream_Encoding_literalMutation4532() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_Encoding_literalMutation4532");
+    public void testWrite_stringToOutputStream_Encoding_literalMutation6737() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_Encoding_literalMutation6737");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
@@ -2304,8 +2304,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_stringToOutputStream_Encoding_literalMutation4533() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_Encoding_literalMutation4533");
+    public void testWrite_stringToOutputStream_Encoding_literalMutation6738() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_Encoding_literalMutation6738");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
@@ -2313,7 +2313,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         out.off();
         out.flush();
         byte[] bytes = baout.toByteArray();
-        bytes = new String(bytes , "UTF16").getBytes("foo");
+        bytes = new String(bytes , "UTF16").getBytes("bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5680,null,5679,java.util.Arrays.equals(inData, bytes));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2410,8 +2410,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_stringToOutputStream_Encoding_nullData_literalMutation4535() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_Encoding_nullData_literalMutation4535");
+    public void testWrite_stringToOutputStream_Encoding_nullData_literalMutation6740() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_Encoding_nullData_literalMutation6740");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         IOUtils.write(((String)(null)), out);
@@ -2468,7 +2468,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
 
     public void testWrite_stringToOutputStream_Encoding_nullStream() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_Encoding_nullStream");
-        String str = new String(inData , "foo");
+        String str = new String(inData , "bar");
         try {
             IOUtils.write(str, ((java.io.OutputStream)(null)));
         } catch (NullPointerException ex) {
@@ -2526,7 +2526,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
 
     public void testWrite_stringToOutputStream_nullEncoding() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_nullEncoding");
-        String str = new String(inData , "foo");
+        String str = new String(inData , "bar");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         IOUtils.write(str, out, ((String)(null)));
@@ -2538,8 +2538,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_stringToOutputStream_nullEncoding_literalMutation4543() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_nullEncoding_literalMutation4543");
+    public void testWrite_stringToOutputStream_nullEncoding_literalMutation6748() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_nullEncoding_literalMutation6748");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
@@ -2552,11 +2552,11 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_stringToOutputStream_nullEncoding_literalMutation4544() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_nullEncoding_literalMutation4544");
+    public void testWrite_stringToOutputStream_nullEncoding_literalMutation6749() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToOutputStream_nullEncoding_literalMutation6749");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         IOUtils.write(str, out, ((String)(null)));
         out.off();
         out.flush();
@@ -2674,11 +2674,11 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_stringToWriter_literalMutation4549() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToWriter_literalMutation4549");
+    public void testWrite_stringToWriter_literalMutation6754() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToWriter_literalMutation6754");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         IOUtils.write(str, writer);
         out.off();
@@ -2689,8 +2689,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_stringToWriter_literalMutation4550() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToWriter_literalMutation4550");
+    public void testWrite_stringToWriter_literalMutation6755() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToWriter_literalMutation6755");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
@@ -2704,8 +2704,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_stringToWriter_literalMutation4551() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToWriter_literalMutation4551");
+    public void testWrite_stringToWriter_literalMutation6756() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToWriter_literalMutation6756");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
@@ -2818,10 +2818,10 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_stringToWriter_Encoding_nullData_literalMutation4553() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToWriter_Encoding_nullData_literalMutation4553");
+    public void testWrite_stringToWriter_Encoding_nullData_literalMutation6758() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToWriter_Encoding_nullData_literalMutation6758");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         IOUtils.write(((String)(null)), writer);
         out.off();
@@ -2830,11 +2830,11 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_stringToWriter_Encoding_nullData_literalMutation4554() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToWriter_Encoding_nullData_literalMutation4554");
+    public void testWrite_stringToWriter_Encoding_nullData_literalMutation6759() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToWriter_Encoding_nullData_literalMutation6759");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
-        Writer writer = new OutputStreamWriter(baout , "foo");
+        Writer writer = new OutputStreamWriter(baout , "bar");
         IOUtils.write(((String)(null)), writer);
         out.off();
         writer.flush();
@@ -2892,7 +2892,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
 
     public void testWrite_stringToWriter_Encoding_nullStream() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_stringToWriter_Encoding_nullStream");
-        String str = new String(inData , "foo");
+        String str = new String(inData , "bar");
         try {
             IOUtils.write(str, ((Writer)(null)));
         } catch (NullPointerException ex) {
@@ -2950,7 +2950,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
 
     public void testWrite_charArrayToOutputStream() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream");
-        String str = new String(inData , "foo");
+        String str = new String(inData , "bar");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         IOUtils.write(str.toCharArray(), out);
@@ -2962,8 +2962,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charArrayToOutputStream_literalMutation4460() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_literalMutation4460");
+    public void testWrite_charArrayToOutputStream_literalMutation6665() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_literalMutation6665");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
@@ -2976,8 +2976,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charArrayToOutputStream_literalMutation4461() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_literalMutation4461");
+    public void testWrite_charArrayToOutputStream_literalMutation6666() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_literalMutation6666");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
@@ -3082,8 +3082,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charArrayToOutputStream_nullData_literalMutation4474() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_nullData_literalMutation4474");
+    public void testWrite_charArrayToOutputStream_nullData_literalMutation6679() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_nullData_literalMutation6679");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         IOUtils.write(((char[])(null)), out);
@@ -3198,7 +3198,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
 
     public void testWrite_charArrayToOutputStream_Encoding() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_Encoding");
-        String str = new String(inData , "foo");
+        String str = new String(inData , "bar");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         IOUtils.write(str.toCharArray(), out, "UTF16");
@@ -3210,8 +3210,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charArrayToOutputStream_Encoding_literalMutation4463() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_Encoding_literalMutation4463");
+    public void testWrite_charArrayToOutputStream_Encoding_literalMutation6668() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_Encoding_literalMutation6668");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
@@ -3224,8 +3224,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charArrayToOutputStream_Encoding_literalMutation4464() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_Encoding_literalMutation4464");
+    public void testWrite_charArrayToOutputStream_Encoding_literalMutation6669() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_Encoding_literalMutation6669");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
@@ -3238,12 +3238,12 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charArrayToOutputStream_Encoding_literalMutation4465() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_Encoding_literalMutation4465");
+    public void testWrite_charArrayToOutputStream_Encoding_literalMutation6670() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_Encoding_literalMutation6670");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
-        IOUtils.write(str.toCharArray(), out, "foo");
+        IOUtils.write(str.toCharArray(), out, "bar");
         out.off();
         out.flush();
         byte[] bytes = baout.toByteArray();
@@ -3252,8 +3252,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charArrayToOutputStream_Encoding_literalMutation4466() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_Encoding_literalMutation4466");
+    public void testWrite_charArrayToOutputStream_Encoding_literalMutation6671() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_Encoding_literalMutation6671");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
@@ -3266,8 +3266,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charArrayToOutputStream_Encoding_literalMutation4467() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_Encoding_literalMutation4467");
+    public void testWrite_charArrayToOutputStream_Encoding_literalMutation6672() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_Encoding_literalMutation6672");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
@@ -3275,7 +3275,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         out.off();
         out.flush();
         byte[] bytes = baout.toByteArray();
-        bytes = new String(bytes , "UTF16").getBytes("foo");
+        bytes = new String(bytes , "UTF16").getBytes("bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5641,null,5640,java.util.Arrays.equals(inData, bytes));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -3364,7 +3364,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
     public void testWrite_charArrayToOutputStream_Encoding_nullData() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_Encoding_nullData");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         IOUtils.write(((char[])(null)), out);
         out.off();
         out.flush();
@@ -3372,10 +3372,10 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charArrayToOutputStream_Encoding_nullData_literalMutation4469() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_Encoding_nullData_literalMutation4469");
+    public void testWrite_charArrayToOutputStream_Encoding_nullData_literalMutation6674() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_Encoding_nullData_literalMutation6674");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         IOUtils.write(((char[])(null)), out);
         out.off();
         out.flush();
@@ -3488,7 +3488,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
 
     public void testWrite_charArrayToOutputStream_nullEncoding() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_nullEncoding");
-        String str = new String(inData , "foo");
+        String str = new String(inData , "bar");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         IOUtils.write(str.toCharArray(), out, ((String)(null)));
@@ -3500,8 +3500,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charArrayToOutputStream_nullEncoding_literalMutation4477() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_nullEncoding_literalMutation4477");
+    public void testWrite_charArrayToOutputStream_nullEncoding_literalMutation6682() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_nullEncoding_literalMutation6682");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
@@ -3514,8 +3514,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charArrayToOutputStream_nullEncoding_literalMutation4478() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_nullEncoding_literalMutation4478");
+    public void testWrite_charArrayToOutputStream_nullEncoding_literalMutation6683() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToOutputStream_nullEncoding_literalMutation6683");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
@@ -3636,8 +3636,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charArrayToWriter_literalMutation4483() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToWriter_literalMutation4483");
+    public void testWrite_charArrayToWriter_literalMutation6688() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToWriter_literalMutation6688");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
@@ -3651,11 +3651,11 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charArrayToWriter_literalMutation4484() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToWriter_literalMutation4484");
+    public void testWrite_charArrayToWriter_literalMutation6689() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToWriter_literalMutation6689");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         IOUtils.write(str.toCharArray(), writer);
         out.off();
@@ -3666,12 +3666,12 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charArrayToWriter_literalMutation4485() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToWriter_literalMutation4485");
+    public void testWrite_charArrayToWriter_literalMutation6690() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToWriter_literalMutation6690");
         String str = new String(inData , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
-        Writer writer = new OutputStreamWriter(baout , "foo");
+        Writer writer = new OutputStreamWriter(baout , "bar");
         IOUtils.write(str.toCharArray(), writer);
         out.off();
         writer.flush();
@@ -3771,7 +3771,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
     public void testWrite_charArrayToWriter_Encoding_nullData() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToWriter_Encoding_nullData");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         IOUtils.write(((char[])(null)), writer);
         out.off();
@@ -3780,10 +3780,10 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charArrayToWriter_Encoding_nullData_literalMutation4487() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToWriter_Encoding_nullData_literalMutation4487");
+    public void testWrite_charArrayToWriter_Encoding_nullData_literalMutation6692() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToWriter_Encoding_nullData_literalMutation6692");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         IOUtils.write(((char[])(null)), writer);
         out.off();
@@ -3792,8 +3792,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charArrayToWriter_Encoding_nullData_literalMutation4488() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToWriter_Encoding_nullData_literalMutation4488");
+    public void testWrite_charArrayToWriter_Encoding_nullData_literalMutation6693() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToWriter_Encoding_nullData_literalMutation6693");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         Writer writer = new OutputStreamWriter(baout , "foo");
@@ -3862,9 +3862,9 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWrite_charArrayToWriter_Encoding_nullStream_literalMutation4490() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToWriter_Encoding_nullStream_literalMutation4490");
-        String str = new String(inData , "foo");
+    public void testWrite_charArrayToWriter_Encoding_nullStream_literalMutation6695() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWrite_charArrayToWriter_Encoding_nullStream_literalMutation6695");
+        String str = new String(inData , "bar");
         try {
             IOUtils.write(str.toCharArray(), ((Writer)(null)));
         } catch (NullPointerException ex) {
@@ -3942,9 +3942,9 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_literalMutation4335() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_literalMutation4335");
-        Object[] data = new Object[]{ "hello" , new StringBuffer("foo") , "" , "this is" , null , "some text" };
+    public void testWriteLines_OutputStream_literalMutation6540() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_literalMutation6540");
+        Object[] data = new Object[]{ "hello" , new StringBuffer("bar") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
@@ -3958,9 +3958,9 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_literalMutation4336() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_literalMutation4336");
-        Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "foo" , "this is" , null , "some text" };
+    public void testWriteLines_OutputStream_literalMutation6541() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_literalMutation6541");
+        Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "bar" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
@@ -3974,9 +3974,9 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_literalMutation4337() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_literalMutation4337");
-        Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "foo" , null , "some text" };
+    public void testWriteLines_OutputStream_literalMutation6542() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_literalMutation6542");
+        Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "bar" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
@@ -3990,9 +3990,9 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_literalMutation4339() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_literalMutation4339");
-        Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "this is" , null , "foo" };
+    public void testWriteLines_OutputStream_literalMutation6544() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_literalMutation6544");
+        Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "this is" , null , "bar" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
@@ -4006,8 +4006,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_literalMutation4340() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_literalMutation4340");
+    public void testWriteLines_OutputStream_literalMutation6545() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_literalMutation6545");
         Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -4022,12 +4022,12 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_literalMutation4341() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_literalMutation4341");
+    public void testWriteLines_OutputStream_literalMutation6546() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_literalMutation6546");
         Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , false);
         IOUtils.writeLines(list, "*", out);
         out.off();
         out.flush();
@@ -4038,13 +4038,13 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_literalMutation4342() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_literalMutation4342");
+    public void testWriteLines_OutputStream_literalMutation6547() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_literalMutation6547");
         Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
-        IOUtils.writeLines(list, "foo", out);
+        IOUtils.writeLines(list, "bar", out);
         out.off();
         out.flush();
         String expected = "hello*world**this is**some text*";
@@ -4054,8 +4054,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_literalMutation4343() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_literalMutation4343");
+    public void testWriteLines_OutputStream_literalMutation6548() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_literalMutation6548");
         Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -4168,8 +4168,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_nullData_literalMutation4386() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_nullData_literalMutation4386");
+    public void testWriteLines_OutputStream_nullData_literalMutation6591() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_nullData_literalMutation6591");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , false);
         IOUtils.writeLines(((List<?>)(null)), "*", out);
@@ -4179,11 +4179,11 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_nullData_literalMutation4388() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_nullData_literalMutation4388");
+    public void testWriteLines_OutputStream_nullData_literalMutation6593() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_nullData_literalMutation6593");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
-        IOUtils.writeLines(((List<?>)(null)), "foo", out);
+        IOUtils.writeLines(((List<?>)(null)), "bar", out);
         out.off();
         out.flush();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5608,baout,5607,baout.size());
@@ -4293,9 +4293,9 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_nullSeparator_literalMutation4390() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_nullSeparator_literalMutation4390");
-        Object[] data = new Object[]{ "hello" , "foo" };
+    public void testWriteLines_OutputStream_nullSeparator_literalMutation6595() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_nullSeparator_literalMutation6595");
+        Object[] data = new Object[]{ "hello" , "bar" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
@@ -4309,12 +4309,12 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_nullSeparator_literalMutation4391() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_nullSeparator_literalMutation4391");
+    public void testWriteLines_OutputStream_nullSeparator_literalMutation6596() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_nullSeparator_literalMutation6596");
         Object[] data = new Object[]{ "hello" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         IOUtils.writeLines(list, ((String)(null)), out);
         out.off();
         out.flush();
@@ -4325,12 +4325,12 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_nullSeparator_literalMutation4392() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_nullSeparator_literalMutation4392");
+    public void testWriteLines_OutputStream_nullSeparator_literalMutation6597() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_nullSeparator_literalMutation6597");
         Object[] data = new Object[]{ "hello" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , false);
         IOUtils.writeLines(list, ((String)(null)), out);
         out.off();
         out.flush();
@@ -4341,8 +4341,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_nullSeparator_literalMutation4394() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_nullSeparator_literalMutation4394");
+    public void testWriteLines_OutputStream_nullSeparator_literalMutation6599() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_nullSeparator_literalMutation6599");
         Object[] data = new Object[]{ "hello" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -4357,8 +4357,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_nullSeparator_literalMutation4395() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_nullSeparator_literalMutation4395");
+    public void testWriteLines_OutputStream_nullSeparator_literalMutation6600() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_nullSeparator_literalMutation6600");
         Object[] data = new Object[]{ "hello" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -4436,7 +4436,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
 
     public void testWriteLines_OutputStream_nullStream() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_nullStream");
-        Object[] data = new Object[]{ "foo" , "world" };
+        Object[] data = new Object[]{ "bar" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         try {
             IOUtils.writeLines(list, "*", ((java.io.OutputStream)(null)));
@@ -4445,8 +4445,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_nullStream_literalMutation4397() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_nullStream_literalMutation4397");
+    public void testWriteLines_OutputStream_nullStream_literalMutation6602() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_nullStream_literalMutation6602");
         Object[] data = new Object[]{ "hello" , "foo" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         try {
@@ -4456,8 +4456,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_nullStream_literalMutation4398() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_nullStream_literalMutation4398");
+    public void testWriteLines_OutputStream_nullStream_literalMutation6603() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_nullStream_literalMutation6603");
         Object[] data = new Object[]{ "hello" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         try {
@@ -4537,9 +4537,9 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_literalMutation4345() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_literalMutation4345");
-        Object[] data = new Object[]{ "hello荤" , new StringBuffer("foo") , "" , "this is" , null , "some text" };
+    public void testWriteLines_OutputStream_Encoding_literalMutation6550() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_literalMutation6550");
+        Object[] data = new Object[]{ "hello荤" , new StringBuffer("bar") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
@@ -4553,8 +4553,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_literalMutation4346() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_literalMutation4346");
+    public void testWriteLines_OutputStream_Encoding_literalMutation6551() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_literalMutation6551");
         Object[] data = new Object[]{ "hello荤" , new StringBuffer("world") , "foo" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -4569,8 +4569,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_literalMutation4347() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_literalMutation4347");
+    public void testWriteLines_OutputStream_Encoding_literalMutation6552() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_literalMutation6552");
         Object[] data = new Object[]{ "hello荤" , new StringBuffer("world") , "" , "foo" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -4585,8 +4585,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_literalMutation4349() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_literalMutation4349");
+    public void testWriteLines_OutputStream_Encoding_literalMutation6554() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_literalMutation6554");
         Object[] data = new Object[]{ "hello荤" , new StringBuffer("world") , "" , "this is" , null , "foo" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -4601,12 +4601,12 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_literalMutation4350() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_literalMutation4350");
+    public void testWriteLines_OutputStream_Encoding_literalMutation6555() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_literalMutation6555");
         Object[] data = new Object[]{ "hello荤" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         IOUtils.writeLines(list, "*", out, "UTF-8");
         out.off();
         out.flush();
@@ -4617,8 +4617,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_literalMutation4351() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_literalMutation4351");
+    public void testWriteLines_OutputStream_Encoding_literalMutation6556() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_literalMutation6556");
         Object[] data = new Object[]{ "hello荤" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -4633,13 +4633,13 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_literalMutation4352() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_literalMutation4352");
+    public void testWriteLines_OutputStream_Encoding_literalMutation6557() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_literalMutation6557");
         Object[] data = new Object[]{ "hello荤" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
-        IOUtils.writeLines(list, "foo", out, "UTF-8");
+        IOUtils.writeLines(list, "bar", out, "UTF-8");
         out.off();
         out.flush();
         String expected = "hello荤*world**this is**some text*";
@@ -4649,13 +4649,13 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_literalMutation4353() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_literalMutation4353");
+    public void testWriteLines_OutputStream_Encoding_literalMutation6558() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_literalMutation6558");
         Object[] data = new Object[]{ "hello荤" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
-        IOUtils.writeLines(list, "*", out, "foo");
+        IOUtils.writeLines(list, "*", out, "bar");
         out.off();
         out.flush();
         String expected = "hello荤*world**this is**some text*";
@@ -4665,8 +4665,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_literalMutation4354() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_literalMutation4354");
+    public void testWriteLines_OutputStream_Encoding_literalMutation6559() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_literalMutation6559");
         Object[] data = new Object[]{ "hello荤" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -4674,15 +4674,15 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         IOUtils.writeLines(list, "*", out, "UTF-8");
         out.off();
         out.flush();
-        String expected = "foo";
+        String expected = "bar";
         String actual = baout.toString("UTF-8");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5597,expected);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5598,actual);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_literalMutation4355() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_literalMutation4355");
+    public void testWriteLines_OutputStream_Encoding_literalMutation6560() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_literalMutation6560");
         Object[] data = new Object[]{ "hello荤" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -4787,7 +4787,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
     public void testWriteLines_OutputStream_Encoding_nullData() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullData");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         IOUtils.writeLines(((List<?>)(null)), "*", out, "US-ASCII");
         out.off();
         out.flush();
@@ -4795,8 +4795,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_nullData_literalMutation4357() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullData_literalMutation4357");
+    public void testWriteLines_OutputStream_Encoding_nullData_literalMutation6562() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullData_literalMutation6562");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , false);
         IOUtils.writeLines(((List<?>)(null)), "*", out, "US-ASCII");
@@ -4806,8 +4806,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_nullData_literalMutation4359() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullData_literalMutation4359");
+    public void testWriteLines_OutputStream_Encoding_nullData_literalMutation6564() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullData_literalMutation6564");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         IOUtils.writeLines(((List<?>)(null)), "foo", out, "US-ASCII");
@@ -4817,8 +4817,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_nullData_literalMutation4360() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullData_literalMutation4360");
+    public void testWriteLines_OutputStream_Encoding_nullData_literalMutation6565() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullData_literalMutation6565");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         IOUtils.writeLines(((List<?>)(null)), "*", out, "foo");
@@ -4931,9 +4931,9 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation4373() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation4373");
-        Object[] data = new Object[]{ "hello" , "foo" };
+    public void testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation6578() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation6578");
+        Object[] data = new Object[]{ "hello" , "bar" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
@@ -4947,12 +4947,12 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation4374() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation4374");
+    public void testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation6579() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation6579");
         Object[] data = new Object[]{ "hello" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         IOUtils.writeLines(list, ((String)(null)), out, "US-ASCII");
         out.off();
         out.flush();
@@ -4963,8 +4963,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation4375() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation4375");
+    public void testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation6580() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation6580");
         Object[] data = new Object[]{ "hello" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -4979,13 +4979,13 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation4377() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation4377");
+    public void testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation6582() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation6582");
         Object[] data = new Object[]{ "hello" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
-        IOUtils.writeLines(list, ((String)(null)), out, "foo");
+        IOUtils.writeLines(list, ((String)(null)), out, "bar");
         out.off();
         out.flush();
         String expected = (("hello" + (IOUtils.LINE_SEPARATOR)) + "world") + (IOUtils.LINE_SEPARATOR);
@@ -4995,8 +4995,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation4378() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation4378");
+    public void testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation6583() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation6583");
         Object[] data = new Object[]{ "hello" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -5011,8 +5011,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation4379() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation4379");
+    public void testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation6584() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullSeparator_literalMutation6584");
         Object[] data = new Object[]{ "hello" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -5090,7 +5090,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
 
     public void testWriteLines_OutputStream_Encoding_nullStream() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullStream");
-        Object[] data = new Object[]{ "foo" , "world" };
+        Object[] data = new Object[]{ "bar" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         try {
             IOUtils.writeLines(list, "*", ((java.io.OutputStream)(null)), "US-ASCII");
@@ -5099,9 +5099,9 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_nullStream_literalMutation4381() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullStream_literalMutation4381");
-        Object[] data = new Object[]{ "hello" , "foo" };
+    public void testWriteLines_OutputStream_Encoding_nullStream_literalMutation6586() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullStream_literalMutation6586");
+        Object[] data = new Object[]{ "hello" , "bar" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         try {
             IOUtils.writeLines(list, "*", ((java.io.OutputStream)(null)), "US-ASCII");
@@ -5110,23 +5110,23 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_nullStream_literalMutation4382() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullStream_literalMutation4382");
+    public void testWriteLines_OutputStream_Encoding_nullStream_literalMutation6587() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullStream_literalMutation6587");
         Object[] data = new Object[]{ "hello" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         try {
-            IOUtils.writeLines(list, "foo", ((java.io.OutputStream)(null)), "US-ASCII");
+            IOUtils.writeLines(list, "bar", ((java.io.OutputStream)(null)), "US-ASCII");
         } catch (NullPointerException ex) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_nullStream_literalMutation4384() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullStream_literalMutation4384");
+    public void testWriteLines_OutputStream_Encoding_nullStream_literalMutation6589() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullStream_literalMutation6589");
         Object[] data = new Object[]{ "hello" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         try {
-            IOUtils.writeLines(list, "*", ((java.io.OutputStream)(null)), "foo");
+            IOUtils.writeLines(list, "*", ((java.io.OutputStream)(null)), "bar");
         } catch (NullPointerException ex) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -5188,7 +5188,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
 
     public void testWriteLines_OutputStream_Encoding_nullEncoding() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullEncoding");
-        Object[] data = new Object[]{ "foo" , new StringBuffer("world") , "" , "this is" , null , "some text" };
+        Object[] data = new Object[]{ "bar" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
@@ -5202,9 +5202,9 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation4362() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation4362");
-        Object[] data = new Object[]{ "hello" , new StringBuffer("foo") , "" , "this is" , null , "some text" };
+    public void testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation6567() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation6567");
+        Object[] data = new Object[]{ "hello" , new StringBuffer("bar") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
@@ -5218,8 +5218,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation4363() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation4363");
+    public void testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation6568() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation6568");
         Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "foo" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -5234,9 +5234,9 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation4364() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation4364");
-        Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "foo" , null , "some text" };
+    public void testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation6569() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation6569");
+        Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "bar" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
@@ -5250,8 +5250,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation4366() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation4366");
+    public void testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation6571() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation6571");
         Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "this is" , null , "foo" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -5266,12 +5266,12 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation4367() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation4367");
+    public void testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation6572() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation6572");
         Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         IOUtils.writeLines(list, "*", out, ((String)(null)));
         out.off();
         out.flush();
@@ -5282,8 +5282,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation4368() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation4368");
+    public void testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation6573() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation6573");
         Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -5298,13 +5298,13 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation4369() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation4369");
+    public void testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation6574() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation6574");
         Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
-        IOUtils.writeLines(list, "foo", out, ((String)(null)));
+        IOUtils.writeLines(list, "bar", out, ((String)(null)));
         out.off();
         out.flush();
         String expected = "hello*world**this is**some text*";
@@ -5314,8 +5314,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation4371() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation4371");
+    public void testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation6576() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_OutputStream_Encoding_nullEncoding_literalMutation6576");
         Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -5437,7 +5437,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
 
     public void testWriteLines_Writer() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer");
-        Object[] data = new Object[]{ "foo" , new StringBuffer("world") , "" , "this is" , null , "some text" };
+        Object[] data = new Object[]{ "bar" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
@@ -5452,8 +5452,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_Writer_literalMutation4401() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_literalMutation4401");
+    public void testWriteLines_Writer_literalMutation6606() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_literalMutation6606");
         Object[] data = new Object[]{ "hello" , new StringBuffer("foo") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -5469,9 +5469,9 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_Writer_literalMutation4402() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_literalMutation4402");
-        Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "foo" , "this is" , null , "some text" };
+    public void testWriteLines_Writer_literalMutation6607() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_literalMutation6607");
+        Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "bar" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
@@ -5486,8 +5486,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_Writer_literalMutation4403() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_literalMutation4403");
+    public void testWriteLines_Writer_literalMutation6608() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_literalMutation6608");
         Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "foo" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -5503,9 +5503,9 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_Writer_literalMutation4405() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_literalMutation4405");
-        Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "this is" , null , "foo" };
+    public void testWriteLines_Writer_literalMutation6610() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_literalMutation6610");
+        Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "this is" , null , "bar" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
@@ -5520,12 +5520,12 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_Writer_literalMutation4406() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_literalMutation4406");
+    public void testWriteLines_Writer_literalMutation6611() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_literalMutation6611");
         Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         IOUtils.writeLines(list, "*", writer);
         out.off();
@@ -5537,12 +5537,12 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_Writer_literalMutation4407() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_literalMutation4407");
+    public void testWriteLines_Writer_literalMutation6612() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_literalMutation6612");
         Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         IOUtils.writeLines(list, "*", writer);
         out.off();
@@ -5554,13 +5554,13 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_Writer_literalMutation4408() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_literalMutation4408");
+    public void testWriteLines_Writer_literalMutation6613() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_literalMutation6613");
         Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
-        Writer writer = new OutputStreamWriter(baout , "foo");
+        Writer writer = new OutputStreamWriter(baout , "bar");
         IOUtils.writeLines(list, "*", writer);
         out.off();
         writer.flush();
@@ -5571,14 +5571,14 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_Writer_literalMutation4409() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_literalMutation4409");
+    public void testWriteLines_Writer_literalMutation6614() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_literalMutation6614");
         Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
-        IOUtils.writeLines(list, "foo", writer);
+        IOUtils.writeLines(list, "bar", writer);
         out.off();
         writer.flush();
         String expected = "hello*world**this is**some text*";
@@ -5588,8 +5588,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_Writer_literalMutation4410() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_literalMutation4410");
+    public void testWriteLines_Writer_literalMutation6615() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_literalMutation6615");
         Object[] data = new Object[]{ "hello" , new StringBuffer("world") , "" , "this is" , null , "some text" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -5710,8 +5710,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_Writer_nullData_literalMutation4412() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullData_literalMutation4412");
+    public void testWriteLines_Writer_nullData_literalMutation6617() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullData_literalMutation6617");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
@@ -5722,8 +5722,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_Writer_nullData_literalMutation4413() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullData_literalMutation4413");
+    public void testWriteLines_Writer_nullData_literalMutation6618() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullData_literalMutation6618");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         Writer writer = new OutputStreamWriter(baout , "foo");
@@ -5734,8 +5734,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_Writer_nullData_literalMutation4415() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullData_literalMutation4415");
+    public void testWriteLines_Writer_nullData_literalMutation6620() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullData_literalMutation6620");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
@@ -5841,7 +5841,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
 
     public void testWriteLines_Writer_nullSeparator() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullSeparator");
-        Object[] data = new Object[]{ "foo" , "world" };
+        Object[] data = new Object[]{ "bar" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
@@ -5856,9 +5856,9 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_Writer_nullSeparator_literalMutation4417() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullSeparator_literalMutation4417");
-        Object[] data = new Object[]{ "hello" , "foo" };
+    public void testWriteLines_Writer_nullSeparator_literalMutation6622() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullSeparator_literalMutation6622");
+        Object[] data = new Object[]{ "hello" , "bar" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
@@ -5873,8 +5873,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_Writer_nullSeparator_literalMutation4418() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullSeparator_literalMutation4418");
+    public void testWriteLines_Writer_nullSeparator_literalMutation6623() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullSeparator_literalMutation6623");
         Object[] data = new Object[]{ "hello" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -5890,8 +5890,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_Writer_nullSeparator_literalMutation4419() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullSeparator_literalMutation4419");
+    public void testWriteLines_Writer_nullSeparator_literalMutation6624() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullSeparator_literalMutation6624");
         Object[] data = new Object[]{ "hello" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -5907,13 +5907,13 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_Writer_nullSeparator_literalMutation4420() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullSeparator_literalMutation4420");
+    public void testWriteLines_Writer_nullSeparator_literalMutation6625() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullSeparator_literalMutation6625");
         Object[] data = new Object[]{ "hello" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
-        Writer writer = new OutputStreamWriter(baout , "foo");
+        Writer writer = new OutputStreamWriter(baout , "bar");
         IOUtils.writeLines(list, ((String)(null)), writer);
         out.off();
         writer.flush();
@@ -5924,8 +5924,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_Writer_nullSeparator_literalMutation4422() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullSeparator_literalMutation4422");
+    public void testWriteLines_Writer_nullSeparator_literalMutation6627() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullSeparator_literalMutation6627");
         Object[] data = new Object[]{ "hello" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -5941,8 +5941,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_Writer_nullSeparator_literalMutation4423() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullSeparator_literalMutation4423");
+    public void testWriteLines_Writer_nullSeparator_literalMutation6628() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullSeparator_literalMutation6628");
         Object[] data = new Object[]{ "hello" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -5951,7 +5951,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         IOUtils.writeLines(list, ((String)(null)), writer);
         out.off();
         writer.flush();
-        String expected = (("hello" + (IOUtils.LINE_SEPARATOR)) + "foo") + (IOUtils.LINE_SEPARATOR);
+        String expected = (("hello" + (IOUtils.LINE_SEPARATOR)) + "bar") + (IOUtils.LINE_SEPARATOR);
         String actual = baout.toString();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5615,expected);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5616,actual);
@@ -6024,7 +6024,7 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
 
     public void testWriteLines_Writer_nullStream() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullStream");
-        Object[] data = new Object[]{ "foo" , "world" };
+        Object[] data = new Object[]{ "bar" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         try {
             IOUtils.writeLines(list, "*", ((Writer)(null)));
@@ -6033,9 +6033,9 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_Writer_nullStream_literalMutation4425() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullStream_literalMutation4425");
-        Object[] data = new Object[]{ "hello" , "foo" };
+    public void testWriteLines_Writer_nullStream_literalMutation6630() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullStream_literalMutation6630");
+        Object[] data = new Object[]{ "hello" , "bar" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         try {
             IOUtils.writeLines(list, "*", ((Writer)(null)));
@@ -6044,8 +6044,8 @@ public class IOUtilsWriteTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteLines_Writer_nullStream_literalMutation4426() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullStream_literalMutation4426");
+    public void testWriteLines_Writer_nullStream_literalMutation6631() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteLines_Writer_nullStream_literalMutation6631");
         Object[] data = new Object[]{ "hello" , "world" };
         List<java.lang.Object> list = java.util.Arrays.asList(data);
         try {

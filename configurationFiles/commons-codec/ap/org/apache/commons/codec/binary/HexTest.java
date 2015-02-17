@@ -80,7 +80,7 @@ private void checkDecodeHexOddCharacters(final char[] data) {
     public void testCustomCharset() throws UnsupportedEncodingException, DecoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCustomCharset");
         for (final String name : java.nio.charset.Charset.availableCharsets().keySet()) {
-            testCustomCharset(name, "foo");
+            testCustomCharset(name, "bar");
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -141,7 +141,7 @@ private void checkDecodeHexOddCharacters(final char[] data) {
      */
 private void testCustomCharset(final String name, final String parent) throws UnsupportedEncodingException, DecoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCustomCharset");
-        if ((charsetSanityCheck(name)) == false) {
+        if ((charsetSanityCheck(name)) == true) {
             return ;
         } 
         log(((parent + "=") + name));
@@ -177,12 +177,12 @@ private void testCustomCharset(final String name, final String parent) throws Un
      * @throws UnsupportedEncodingException
      * @throws DecoderException
      */
-private void testCustomCharset_literalMutation2557(final String name, final String parent) throws UnsupportedEncodingException, DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCustomCharset_literalMutation2557");
+private void testCustomCharset_literalMutation4389(final String name, final String parent) throws UnsupportedEncodingException, DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCustomCharset_literalMutation4389");
         if ((charsetSanityCheck(name)) == false) {
             return ;
         } 
-        log(((parent + "foo") + name));
+        log(((parent + "bar") + name));
         final Hex customCodec = new Hex(name);
         final String sourceString = "Hello World";
         final byte[] sourceBytes = sourceString.getBytes(name);
@@ -215,14 +215,14 @@ private void testCustomCharset_literalMutation2557(final String name, final Stri
      * @throws UnsupportedEncodingException
      * @throws DecoderException
      */
-private void testCustomCharset_literalMutation2558(final String name, final String parent) throws UnsupportedEncodingException, DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCustomCharset_literalMutation2558");
+private void testCustomCharset_literalMutation4390(final String name, final String parent) throws UnsupportedEncodingException, DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCustomCharset_literalMutation4390");
         if ((charsetSanityCheck(name)) == false) {
             return ;
         } 
         log(((parent + "=") + name));
         final Hex customCodec = new Hex(name);
-        final String sourceString = "foo";
+        final String sourceString = "bar";
         final byte[] sourceBytes = sourceString.getBytes(name);
         final byte[] actualEncodedBytes = customCodec.encode(sourceBytes);
         String expectedHexString = Hex.encodeHexString(sourceBytes);
@@ -253,8 +253,8 @@ private void testCustomCharset_literalMutation2558(final String name, final Stri
      * @throws UnsupportedEncodingException
      * @throws DecoderException
      */
-private void testCustomCharset_literalMutation2559(final String name, final String parent) throws UnsupportedEncodingException, DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCustomCharset_literalMutation2559");
+private void testCustomCharset_literalMutation4391(final String name, final String parent) throws UnsupportedEncodingException, DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCustomCharset_literalMutation4391");
         if ((charsetSanityCheck(name)) == false) {
             return ;
         } 
@@ -352,11 +352,33 @@ private void testCustomCharset_literalMutation2559(final String name, final Stri
     public void testDecodeArrayOddCharacters() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeArrayOddCharacters");
         try {
+            new Hex().decode(new byte[]{ 66 });
+        } catch (final DecoderException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeArrayOddCharacters_literalMutation4393() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeArrayOddCharacters_literalMutation4393");
+        try {
             new Hex().decode(new byte[]{ 64 });
         } catch (final DecoderException e) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
+
+    @Test
+    public void testDecodeArrayOddCharacters_literalMutation4394() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeArrayOddCharacters_literalMutation4394");
+        try {
+            new Hex().decode(new byte[]{ 32 });
+        } catch (final DecoderException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+   
 
     @Test(timeout = 1000)
     public void testDecodeBadCharacterPos0_add507() {
@@ -394,7 +416,7 @@ private void testCustomCharset_literalMutation2559(final String name, final Stri
     public void testDecodeBadCharacterPos1() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeBadCharacterPos1");
         try {
-            new Hex().decode("foo");
+            new Hex().decode("bar");
         } catch (final DecoderException e) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -415,7 +437,37 @@ private void testCustomCharset_literalMutation2559(final String name, final Stri
     public void testDecodeClassCastException() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeClassCastException");
         try {
+            new Hex().decode(new int[]{ 66 });
+        } catch (final DecoderException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeClassCastException_literalMutation4399() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeClassCastException_literalMutation4399");
+        try {
             new Hex().decode(new int[]{ 64 });
+        } catch (final DecoderException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeClassCastException_literalMutation4400() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeClassCastException_literalMutation4400");
+        try {
+            new Hex().decode(new int[]{ 32 });
+        } catch (final DecoderException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeClassCastException_literalMutation4401() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeClassCastException_literalMutation4401");
+        try {
+            new Hex().decode(new int[]{ 130 });
         } catch (final DecoderException e) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -478,7 +530,7 @@ private void testCustomCharset_literalMutation2559(final String name, final Stri
     public void testDecodeStringOddCharacters() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeStringOddCharacters");
         try {
-            new Hex().decode("foo");
+            new Hex().decode("bar");
         } catch (final DecoderException e) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -509,6 +561,36 @@ private void testCustomCharset_literalMutation2559(final String name, final Stri
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeClassCastException");
         try {
             new Hex().encode(new int[]{ 66 });
+        } catch (final EncoderException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeClassCastException_literalMutation4413() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeClassCastException_literalMutation4413");
+        try {
+            new Hex().encode(new int[]{ 64 });
+        } catch (final EncoderException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeClassCastException_literalMutation4414() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeClassCastException_literalMutation4414");
+        try {
+            new Hex().encode(new int[]{ 32 });
+        } catch (final EncoderException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeClassCastException_literalMutation4415() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeClassCastException_literalMutation4415");
+        try {
+            new Hex().encode(new int[]{ 130 });
         } catch (final EncoderException e) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -568,8 +650,8 @@ private void testCustomCharset_literalMutation2559(final String name, final Stri
     }
 
     @Test
-    public void testEncodeDecodeRandom_literalMutation2575() throws DecoderException, EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation2575");
+    public void testEncodeDecodeRandom_literalMutation4416() throws DecoderException, EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation4416");
         final Random random = new Random();
         final Hex hex = new Hex();
         for (int i = 4 ; i > 0 ; i--) {
@@ -594,8 +676,86 @@ private void testCustomCharset_literalMutation2559(final String name, final Stri
     }
 
     @Test
-    public void testEncodeDecodeRandom_literalMutation2576() throws DecoderException, EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation2576");
+    public void testEncodeDecodeRandom_literalMutation4417() throws DecoderException, EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation4417");
+        final Random random = new Random();
+        final Hex hex = new Hex();
+        for (int i = 2 ; i > 0 ; i--) {
+            final byte[] data = new byte[(random.nextInt(10000)) + 1];
+            random.nextBytes(data);
+            final char[] encodedChars = Hex.encodeHex(data);
+            byte[] decodedBytes = Hex.decodeHex(encodedChars);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2610,null,2609,java.util.Arrays.equals(data, decodedBytes));
+            final byte[] encodedStringBytes = hex.encode(data);
+            decodedBytes = hex.decode(encodedStringBytes);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2612,null,2611,java.util.Arrays.equals(data, decodedBytes));
+            String dataString = new String(encodedChars);
+            char[] encodedStringChars = ((char[])(hex.encode(dataString)));
+            decodedBytes = ((byte[])(hex.decode(encodedStringChars)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2614,null,2613,java.util.Arrays.equals(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(dataString), decodedBytes));
+            dataString = new String(encodedChars);
+            encodedStringChars = ((char[])(hex.encode(dataString)));
+            decodedBytes = ((byte[])(hex.decode(new String(encodedStringChars))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2616,null,2615,java.util.Arrays.equals(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(dataString), decodedBytes));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeRandom_literalMutation4418() throws DecoderException, EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation4418");
+        final Random random = new Random();
+        final Hex hex = new Hex();
+        for (int i = 10 ; i > 0 ; i--) {
+            final byte[] data = new byte[(random.nextInt(10000)) + 1];
+            random.nextBytes(data);
+            final char[] encodedChars = Hex.encodeHex(data);
+            byte[] decodedBytes = Hex.decodeHex(encodedChars);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2610,null,2609,java.util.Arrays.equals(data, decodedBytes));
+            final byte[] encodedStringBytes = hex.encode(data);
+            decodedBytes = hex.decode(encodedStringBytes);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2612,null,2611,java.util.Arrays.equals(data, decodedBytes));
+            String dataString = new String(encodedChars);
+            char[] encodedStringChars = ((char[])(hex.encode(dataString)));
+            decodedBytes = ((byte[])(hex.decode(encodedStringChars)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2614,null,2613,java.util.Arrays.equals(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(dataString), decodedBytes));
+            dataString = new String(encodedChars);
+            encodedStringChars = ((char[])(hex.encode(dataString)));
+            decodedBytes = ((byte[])(hex.decode(new String(encodedStringChars))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2616,null,2615,java.util.Arrays.equals(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(dataString), decodedBytes));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeRandom_literalMutation4419() throws DecoderException, EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation4419");
+        final Random random = new Random();
+        final Hex hex = new Hex();
+        for (int i = 6 ; i > 0 ; i--) {
+            final byte[] data = new byte[(random.nextInt(10000)) + 1];
+            random.nextBytes(data);
+            final char[] encodedChars = Hex.encodeHex(data);
+            byte[] decodedBytes = Hex.decodeHex(encodedChars);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2610,null,2609,java.util.Arrays.equals(data, decodedBytes));
+            final byte[] encodedStringBytes = hex.encode(data);
+            decodedBytes = hex.decode(encodedStringBytes);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2612,null,2611,java.util.Arrays.equals(data, decodedBytes));
+            String dataString = new String(encodedChars);
+            char[] encodedStringChars = ((char[])(hex.encode(dataString)));
+            decodedBytes = ((byte[])(hex.decode(encodedStringChars)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2614,null,2613,java.util.Arrays.equals(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(dataString), decodedBytes));
+            dataString = new String(encodedChars);
+            encodedStringChars = ((char[])(hex.encode(dataString)));
+            decodedBytes = ((byte[])(hex.decode(new String(encodedStringChars))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2616,null,2615,java.util.Arrays.equals(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(dataString), decodedBytes));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeRandom_literalMutation4420() throws DecoderException, EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation4420");
         final Random random = new Random();
         final Hex hex = new Hex();
         for (int i = 5 ; i > 1 ; i--) {
@@ -620,8 +780,60 @@ private void testCustomCharset_literalMutation2559(final String name, final Stri
     }
 
     @Test
-    public void testEncodeDecodeRandom_literalMutation2577() throws DecoderException, EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation2577");
+    public void testEncodeDecodeRandom_literalMutation4421() throws DecoderException, EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation4421");
+        final Random random = new Random();
+        final Hex hex = new Hex();
+        for (int i = 5 ; i > -1 ; i--) {
+            final byte[] data = new byte[(random.nextInt(10000)) + 1];
+            random.nextBytes(data);
+            final char[] encodedChars = Hex.encodeHex(data);
+            byte[] decodedBytes = Hex.decodeHex(encodedChars);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2610,null,2609,java.util.Arrays.equals(data, decodedBytes));
+            final byte[] encodedStringBytes = hex.encode(data);
+            decodedBytes = hex.decode(encodedStringBytes);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2612,null,2611,java.util.Arrays.equals(data, decodedBytes));
+            String dataString = new String(encodedChars);
+            char[] encodedStringChars = ((char[])(hex.encode(dataString)));
+            decodedBytes = ((byte[])(hex.decode(encodedStringChars)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2614,null,2613,java.util.Arrays.equals(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(dataString), decodedBytes));
+            dataString = new String(encodedChars);
+            encodedStringChars = ((char[])(hex.encode(dataString)));
+            decodedBytes = ((byte[])(hex.decode(new String(encodedStringChars))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2616,null,2615,java.util.Arrays.equals(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(dataString), decodedBytes));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeRandom_literalMutation4422() throws DecoderException, EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation4422");
+        final Random random = new Random();
+        final Hex hex = new Hex();
+        for (int i = 5 ; i > 0 ; i--) {
+            final byte[] data = new byte[(random.nextInt(10000)) + 1];
+            random.nextBytes(data);
+            final char[] encodedChars = Hex.encodeHex(data);
+            byte[] decodedBytes = Hex.decodeHex(encodedChars);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2610,null,2609,java.util.Arrays.equals(data, decodedBytes));
+            final byte[] encodedStringBytes = hex.encode(data);
+            decodedBytes = hex.decode(encodedStringBytes);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2612,null,2611,java.util.Arrays.equals(data, decodedBytes));
+            String dataString = new String(encodedChars);
+            char[] encodedStringChars = ((char[])(hex.encode(dataString)));
+            decodedBytes = ((byte[])(hex.decode(encodedStringChars)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2614,null,2613,java.util.Arrays.equals(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(dataString), decodedBytes));
+            dataString = new String(encodedChars);
+            encodedStringChars = ((char[])(hex.encode(dataString)));
+            decodedBytes = ((byte[])(hex.decode(new String(encodedStringChars))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2616,null,2615,java.util.Arrays.equals(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(dataString), decodedBytes));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeRandom_literalMutation4423() throws DecoderException, EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation4423");
         final Random random = new Random();
         final Hex hex = new Hex();
         for (int i = 5 ; i > 0 ; i--) {
@@ -646,12 +858,142 @@ private void testCustomCharset_literalMutation2559(final String name, final Stri
     }
 
     @Test
-    public void testEncodeDecodeRandom_literalMutation2578() throws DecoderException, EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation2578");
+    public void testEncodeDecodeRandom_literalMutation4424() throws DecoderException, EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation4424");
+        final Random random = new Random();
+        final Hex hex = new Hex();
+        for (int i = 5 ; i > 0 ; i--) {
+            final byte[] data = new byte[(random.nextInt(9999)) + 1];
+            random.nextBytes(data);
+            final char[] encodedChars = Hex.encodeHex(data);
+            byte[] decodedBytes = Hex.decodeHex(encodedChars);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2610,null,2609,java.util.Arrays.equals(data, decodedBytes));
+            final byte[] encodedStringBytes = hex.encode(data);
+            decodedBytes = hex.decode(encodedStringBytes);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2612,null,2611,java.util.Arrays.equals(data, decodedBytes));
+            String dataString = new String(encodedChars);
+            char[] encodedStringChars = ((char[])(hex.encode(dataString)));
+            decodedBytes = ((byte[])(hex.decode(encodedStringChars)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2614,null,2613,java.util.Arrays.equals(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(dataString), decodedBytes));
+            dataString = new String(encodedChars);
+            encodedStringChars = ((char[])(hex.encode(dataString)));
+            decodedBytes = ((byte[])(hex.decode(new String(encodedStringChars))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2616,null,2615,java.util.Arrays.equals(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(dataString), decodedBytes));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeRandom_literalMutation4425() throws DecoderException, EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation4425");
+        final Random random = new Random();
+        final Hex hex = new Hex();
+        for (int i = 5 ; i > 0 ; i--) {
+            final byte[] data = new byte[(random.nextInt(5000)) + 1];
+            random.nextBytes(data);
+            final char[] encodedChars = Hex.encodeHex(data);
+            byte[] decodedBytes = Hex.decodeHex(encodedChars);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2610,null,2609,java.util.Arrays.equals(data, decodedBytes));
+            final byte[] encodedStringBytes = hex.encode(data);
+            decodedBytes = hex.decode(encodedStringBytes);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2612,null,2611,java.util.Arrays.equals(data, decodedBytes));
+            String dataString = new String(encodedChars);
+            char[] encodedStringChars = ((char[])(hex.encode(dataString)));
+            decodedBytes = ((byte[])(hex.decode(encodedStringChars)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2614,null,2613,java.util.Arrays.equals(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(dataString), decodedBytes));
+            dataString = new String(encodedChars);
+            encodedStringChars = ((char[])(hex.encode(dataString)));
+            decodedBytes = ((byte[])(hex.decode(new String(encodedStringChars))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2616,null,2615,java.util.Arrays.equals(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(dataString), decodedBytes));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeRandom_literalMutation4426() throws DecoderException, EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation4426");
+        final Random random = new Random();
+        final Hex hex = new Hex();
+        for (int i = 5 ; i > 0 ; i--) {
+            final byte[] data = new byte[(random.nextInt(20000)) + 1];
+            random.nextBytes(data);
+            final char[] encodedChars = Hex.encodeHex(data);
+            byte[] decodedBytes = Hex.decodeHex(encodedChars);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2610,null,2609,java.util.Arrays.equals(data, decodedBytes));
+            final byte[] encodedStringBytes = hex.encode(data);
+            decodedBytes = hex.decode(encodedStringBytes);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2612,null,2611,java.util.Arrays.equals(data, decodedBytes));
+            String dataString = new String(encodedChars);
+            char[] encodedStringChars = ((char[])(hex.encode(dataString)));
+            decodedBytes = ((byte[])(hex.decode(encodedStringChars)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2614,null,2613,java.util.Arrays.equals(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(dataString), decodedBytes));
+            dataString = new String(encodedChars);
+            encodedStringChars = ((char[])(hex.encode(dataString)));
+            decodedBytes = ((byte[])(hex.decode(new String(encodedStringChars))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2616,null,2615,java.util.Arrays.equals(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(dataString), decodedBytes));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeRandom_literalMutation4427() throws DecoderException, EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation4427");
         final Random random = new Random();
         final Hex hex = new Hex();
         for (int i = 5 ; i > 0 ; i--) {
             final byte[] data = new byte[(random.nextInt(10000)) + 2];
+            random.nextBytes(data);
+            final char[] encodedChars = Hex.encodeHex(data);
+            byte[] decodedBytes = Hex.decodeHex(encodedChars);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2610,null,2609,java.util.Arrays.equals(data, decodedBytes));
+            final byte[] encodedStringBytes = hex.encode(data);
+            decodedBytes = hex.decode(encodedStringBytes);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2612,null,2611,java.util.Arrays.equals(data, decodedBytes));
+            String dataString = new String(encodedChars);
+            char[] encodedStringChars = ((char[])(hex.encode(dataString)));
+            decodedBytes = ((byte[])(hex.decode(encodedStringChars)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2614,null,2613,java.util.Arrays.equals(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(dataString), decodedBytes));
+            dataString = new String(encodedChars);
+            encodedStringChars = ((char[])(hex.encode(dataString)));
+            decodedBytes = ((byte[])(hex.decode(new String(encodedStringChars))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2616,null,2615,java.util.Arrays.equals(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(dataString), decodedBytes));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeRandom_literalMutation4428() throws DecoderException, EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation4428");
+        final Random random = new Random();
+        final Hex hex = new Hex();
+        for (int i = 5 ; i > 0 ; i--) {
+            final byte[] data = new byte[(random.nextInt(10000)) + 0];
+            random.nextBytes(data);
+            final char[] encodedChars = Hex.encodeHex(data);
+            byte[] decodedBytes = Hex.decodeHex(encodedChars);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2610,null,2609,java.util.Arrays.equals(data, decodedBytes));
+            final byte[] encodedStringBytes = hex.encode(data);
+            decodedBytes = hex.decode(encodedStringBytes);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2612,null,2611,java.util.Arrays.equals(data, decodedBytes));
+            String dataString = new String(encodedChars);
+            char[] encodedStringChars = ((char[])(hex.encode(dataString)));
+            decodedBytes = ((byte[])(hex.decode(encodedStringChars)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2614,null,2613,java.util.Arrays.equals(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(dataString), decodedBytes));
+            dataString = new String(encodedChars);
+            encodedStringChars = ((char[])(hex.encode(dataString)));
+            decodedBytes = ((byte[])(hex.decode(new String(encodedStringChars))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2616,null,2615,java.util.Arrays.equals(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(dataString), decodedBytes));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeRandom_literalMutation4429() throws DecoderException, EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation4429");
+        final Random random = new Random();
+        final Hex hex = new Hex();
+        for (int i = 5 ; i > 0 ; i--) {
+            final byte[] data = new byte[(random.nextInt(10000)) + 0];
             random.nextBytes(data);
             final char[] encodedChars = Hex.encodeHex(data);
             byte[] decodedBytes = Hex.decodeHex(encodedChars);
@@ -714,6 +1056,30 @@ private void testCustomCharset_literalMutation2559(final String name, final Stri
     }
 
     @Test
+    public void testEncodeZeroes_literalMutation4431() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeZeroes_literalMutation4431");
+        final char[] c = Hex.encodeHex(new byte[37]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2623,new java.lang.String(c));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeZeroes_literalMutation4432() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeZeroes_literalMutation4432");
+        final char[] c = Hex.encodeHex(new byte[18]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2623,new java.lang.String(c));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeZeroes_literalMutation4433() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeZeroes_literalMutation4433");
+        final char[] c = Hex.encodeHex(new byte[72]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2623,new java.lang.String(c));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
     public void testHelloWorldLowerCaseHex() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHelloWorldLowerCaseHex");
         final byte[] b = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("foo");
@@ -731,8 +1097,8 @@ private void testCustomCharset_literalMutation2559(final String name, final Stri
     }
 
     @Test
-    public void testHelloWorldLowerCaseHex_literalMutation2581() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHelloWorldLowerCaseHex_literalMutation2581");
+    public void testHelloWorldLowerCaseHex_literalMutation4435() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHelloWorldLowerCaseHex_literalMutation4435");
         final byte[] b = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("Hello World");
         final String expected = "foo";
         char[] actual;
@@ -748,8 +1114,8 @@ private void testCustomCharset_literalMutation2559(final String name, final Stri
     }
 
     @Test
-    public void testHelloWorldLowerCaseHex_literalMutation2582() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHelloWorldLowerCaseHex_literalMutation2582");
+    public void testHelloWorldLowerCaseHex_literalMutation4436() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHelloWorldLowerCaseHex_literalMutation4436");
         final byte[] b = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("Hello World");
         final String expected = "48656c6c6f20576f726c64";
         char[] actual;
@@ -765,8 +1131,8 @@ private void testCustomCharset_literalMutation2559(final String name, final Stri
     }
 
     @Test
-    public void testHelloWorldLowerCaseHex_literalMutation2583() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHelloWorldLowerCaseHex_literalMutation2583");
+    public void testHelloWorldLowerCaseHex_literalMutation4437() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHelloWorldLowerCaseHex_literalMutation4437");
         final byte[] b = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("Hello World");
         final String expected = "48656c6c6f20576f726c64";
         char[] actual;
@@ -776,7 +1142,7 @@ private void testCustomCharset_literalMutation2559(final String name, final Stri
         actual = Hex.encodeHex(b, true);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2625,expected);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2626,new java.lang.String(actual));
-        actual = Hex.encodeHex(b, false);
+        actual = Hex.encodeHex(b, true);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2628,expected,2627,expected.equals(new java.lang.String(actual)));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -784,7 +1150,7 @@ private void testCustomCharset_literalMutation2559(final String name, final Stri
     @Test
     public void testHelloWorldUpperCaseHex() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHelloWorldUpperCaseHex");
-        final byte[] b = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("foo");
+        final byte[] b = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("bar");
         final String expected = "48656C6C6F20576F726C64";
         char[] actual;
         actual = Hex.encodeHex(b);
@@ -797,10 +1163,10 @@ private void testCustomCharset_literalMutation2559(final String name, final Stri
     }
 
     @Test
-    public void testHelloWorldUpperCaseHex_literalMutation2585() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHelloWorldUpperCaseHex_literalMutation2585");
+    public void testHelloWorldUpperCaseHex_literalMutation4439() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHelloWorldUpperCaseHex_literalMutation4439");
         final byte[] b = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("Hello World");
-        final String expected = "foo";
+        final String expected = "bar";
         char[] actual;
         actual = Hex.encodeHex(b);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2630,expected,2629,expected.equals(new java.lang.String(actual)));
@@ -812,8 +1178,8 @@ private void testCustomCharset_literalMutation2559(final String name, final Stri
     }
 
     @Test
-    public void testHelloWorldUpperCaseHex_literalMutation2586() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHelloWorldUpperCaseHex_literalMutation2586");
+    public void testHelloWorldUpperCaseHex_literalMutation4440() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHelloWorldUpperCaseHex_literalMutation4440");
         final byte[] b = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("Hello World");
         final String expected = "48656C6C6F20576F726C64";
         char[] actual;
@@ -827,8 +1193,8 @@ private void testCustomCharset_literalMutation2559(final String name, final Stri
     }
 
     @Test
-    public void testHelloWorldUpperCaseHex_literalMutation2587() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHelloWorldUpperCaseHex_literalMutation2587");
+    public void testHelloWorldUpperCaseHex_literalMutation4441() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHelloWorldUpperCaseHex_literalMutation4441");
         final byte[] b = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("Hello World");
         final String expected = "48656C6C6F20576F726C64";
         char[] actual;
@@ -836,7 +1202,7 @@ private void testCustomCharset_literalMutation2559(final String name, final Stri
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2630,expected,2629,expected.equals(new java.lang.String(actual)));
         actual = Hex.encodeHex(b, true);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2632,expected,2631,expected.equals(new java.lang.String(actual)));
-        actual = Hex.encodeHex(b, false);
+        actual = Hex.encodeHex(b, true);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2634,expected,2633,expected.equals(new java.lang.String(actual)));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -922,138 +1288,138 @@ private void testCustomCharset_literalMutation2559(final String name, final Stri
     @Test
     public void testRequiredCharset() throws UnsupportedEncodingException, DecoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset");
+        testCustomCharset("bar", "testRequiredCharset");
+        testCustomCharset("UTF-16", "testRequiredCharset");
+        testCustomCharset("UTF-16BE", "testRequiredCharset");
+        testCustomCharset("UTF-16LE", "testRequiredCharset");
+        testCustomCharset("US-ASCII", "testRequiredCharset");
+        testCustomCharset("ISO8859_1", "testRequiredCharset");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testRequiredCharset_literalMutation4443() throws UnsupportedEncodingException, DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation4443");
+        testCustomCharset("UTF-8", "bar");
+        testCustomCharset("UTF-16", "testRequiredCharset");
+        testCustomCharset("UTF-16BE", "testRequiredCharset");
+        testCustomCharset("UTF-16LE", "testRequiredCharset");
+        testCustomCharset("US-ASCII", "testRequiredCharset");
+        testCustomCharset("ISO8859_1", "testRequiredCharset");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testRequiredCharset_literalMutation4444() throws UnsupportedEncodingException, DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation4444");
+        testCustomCharset("UTF-8", "testRequiredCharset");
+        testCustomCharset("bar", "testRequiredCharset");
+        testCustomCharset("UTF-16BE", "testRequiredCharset");
+        testCustomCharset("UTF-16LE", "testRequiredCharset");
+        testCustomCharset("US-ASCII", "testRequiredCharset");
+        testCustomCharset("ISO8859_1", "testRequiredCharset");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testRequiredCharset_literalMutation4445() throws UnsupportedEncodingException, DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation4445");
+        testCustomCharset("UTF-8", "testRequiredCharset");
+        testCustomCharset("UTF-16", "bar");
+        testCustomCharset("UTF-16BE", "testRequiredCharset");
+        testCustomCharset("UTF-16LE", "testRequiredCharset");
+        testCustomCharset("US-ASCII", "testRequiredCharset");
+        testCustomCharset("ISO8859_1", "testRequiredCharset");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testRequiredCharset_literalMutation4446() throws UnsupportedEncodingException, DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation4446");
+        testCustomCharset("UTF-8", "testRequiredCharset");
+        testCustomCharset("UTF-16", "testRequiredCharset");
+        testCustomCharset("bar", "testRequiredCharset");
+        testCustomCharset("UTF-16LE", "testRequiredCharset");
+        testCustomCharset("US-ASCII", "testRequiredCharset");
+        testCustomCharset("ISO8859_1", "testRequiredCharset");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testRequiredCharset_literalMutation4447() throws UnsupportedEncodingException, DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation4447");
+        testCustomCharset("UTF-8", "testRequiredCharset");
+        testCustomCharset("UTF-16", "testRequiredCharset");
+        testCustomCharset("UTF-16BE", "bar");
+        testCustomCharset("UTF-16LE", "testRequiredCharset");
+        testCustomCharset("US-ASCII", "testRequiredCharset");
+        testCustomCharset("ISO8859_1", "testRequiredCharset");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testRequiredCharset_literalMutation4448() throws UnsupportedEncodingException, DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation4448");
+        testCustomCharset("UTF-8", "testRequiredCharset");
+        testCustomCharset("UTF-16", "testRequiredCharset");
+        testCustomCharset("UTF-16BE", "testRequiredCharset");
+        testCustomCharset("bar", "testRequiredCharset");
+        testCustomCharset("US-ASCII", "testRequiredCharset");
+        testCustomCharset("ISO8859_1", "testRequiredCharset");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testRequiredCharset_literalMutation4449() throws UnsupportedEncodingException, DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation4449");
+        testCustomCharset("UTF-8", "testRequiredCharset");
+        testCustomCharset("UTF-16", "testRequiredCharset");
+        testCustomCharset("UTF-16BE", "testRequiredCharset");
+        testCustomCharset("UTF-16LE", "bar");
+        testCustomCharset("US-ASCII", "testRequiredCharset");
+        testCustomCharset("ISO8859_1", "testRequiredCharset");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testRequiredCharset_literalMutation4450() throws UnsupportedEncodingException, DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation4450");
+        testCustomCharset("UTF-8", "testRequiredCharset");
+        testCustomCharset("UTF-16", "testRequiredCharset");
+        testCustomCharset("UTF-16BE", "testRequiredCharset");
+        testCustomCharset("UTF-16LE", "testRequiredCharset");
+        testCustomCharset("bar", "testRequiredCharset");
+        testCustomCharset("ISO8859_1", "testRequiredCharset");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testRequiredCharset_literalMutation4451() throws UnsupportedEncodingException, DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation4451");
+        testCustomCharset("UTF-8", "testRequiredCharset");
+        testCustomCharset("UTF-16", "testRequiredCharset");
+        testCustomCharset("UTF-16BE", "testRequiredCharset");
+        testCustomCharset("UTF-16LE", "testRequiredCharset");
+        testCustomCharset("US-ASCII", "bar");
+        testCustomCharset("ISO8859_1", "testRequiredCharset");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testRequiredCharset_literalMutation4452() throws UnsupportedEncodingException, DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation4452");
+        testCustomCharset("UTF-8", "testRequiredCharset");
+        testCustomCharset("UTF-16", "testRequiredCharset");
+        testCustomCharset("UTF-16BE", "testRequiredCharset");
+        testCustomCharset("UTF-16LE", "testRequiredCharset");
+        testCustomCharset("US-ASCII", "testRequiredCharset");
         testCustomCharset("foo", "testRequiredCharset");
-        testCustomCharset("UTF-16", "testRequiredCharset");
-        testCustomCharset("UTF-16BE", "testRequiredCharset");
-        testCustomCharset("UTF-16LE", "testRequiredCharset");
-        testCustomCharset("US-ASCII", "testRequiredCharset");
-        testCustomCharset("ISO8859_1", "testRequiredCharset");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testRequiredCharset_literalMutation2589() throws UnsupportedEncodingException, DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation2589");
-        testCustomCharset("UTF-8", "foo");
-        testCustomCharset("UTF-16", "testRequiredCharset");
-        testCustomCharset("UTF-16BE", "testRequiredCharset");
-        testCustomCharset("UTF-16LE", "testRequiredCharset");
-        testCustomCharset("US-ASCII", "testRequiredCharset");
-        testCustomCharset("ISO8859_1", "testRequiredCharset");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testRequiredCharset_literalMutation2590() throws UnsupportedEncodingException, DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation2590");
-        testCustomCharset("UTF-8", "testRequiredCharset");
-        testCustomCharset("foo", "testRequiredCharset");
-        testCustomCharset("UTF-16BE", "testRequiredCharset");
-        testCustomCharset("UTF-16LE", "testRequiredCharset");
-        testCustomCharset("US-ASCII", "testRequiredCharset");
-        testCustomCharset("ISO8859_1", "testRequiredCharset");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testRequiredCharset_literalMutation2591() throws UnsupportedEncodingException, DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation2591");
-        testCustomCharset("UTF-8", "testRequiredCharset");
-        testCustomCharset("UTF-16", "foo");
-        testCustomCharset("UTF-16BE", "testRequiredCharset");
-        testCustomCharset("UTF-16LE", "testRequiredCharset");
-        testCustomCharset("US-ASCII", "testRequiredCharset");
-        testCustomCharset("ISO8859_1", "testRequiredCharset");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testRequiredCharset_literalMutation2592() throws UnsupportedEncodingException, DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation2592");
-        testCustomCharset("UTF-8", "testRequiredCharset");
-        testCustomCharset("UTF-16", "testRequiredCharset");
-        testCustomCharset("foo", "testRequiredCharset");
-        testCustomCharset("UTF-16LE", "testRequiredCharset");
-        testCustomCharset("US-ASCII", "testRequiredCharset");
-        testCustomCharset("ISO8859_1", "testRequiredCharset");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testRequiredCharset_literalMutation2593() throws UnsupportedEncodingException, DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation2593");
-        testCustomCharset("UTF-8", "testRequiredCharset");
-        testCustomCharset("UTF-16", "testRequiredCharset");
-        testCustomCharset("UTF-16BE", "foo");
-        testCustomCharset("UTF-16LE", "testRequiredCharset");
-        testCustomCharset("US-ASCII", "testRequiredCharset");
-        testCustomCharset("ISO8859_1", "testRequiredCharset");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testRequiredCharset_literalMutation2594() throws UnsupportedEncodingException, DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation2594");
-        testCustomCharset("UTF-8", "testRequiredCharset");
-        testCustomCharset("UTF-16", "testRequiredCharset");
-        testCustomCharset("UTF-16BE", "testRequiredCharset");
-        testCustomCharset("foo", "testRequiredCharset");
-        testCustomCharset("US-ASCII", "testRequiredCharset");
-        testCustomCharset("ISO8859_1", "testRequiredCharset");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testRequiredCharset_literalMutation2595() throws UnsupportedEncodingException, DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation2595");
-        testCustomCharset("UTF-8", "testRequiredCharset");
-        testCustomCharset("UTF-16", "testRequiredCharset");
-        testCustomCharset("UTF-16BE", "testRequiredCharset");
-        testCustomCharset("UTF-16LE", "foo");
-        testCustomCharset("US-ASCII", "testRequiredCharset");
-        testCustomCharset("ISO8859_1", "testRequiredCharset");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testRequiredCharset_literalMutation2596() throws UnsupportedEncodingException, DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation2596");
-        testCustomCharset("UTF-8", "testRequiredCharset");
-        testCustomCharset("UTF-16", "testRequiredCharset");
-        testCustomCharset("UTF-16BE", "testRequiredCharset");
-        testCustomCharset("UTF-16LE", "testRequiredCharset");
-        testCustomCharset("foo", "testRequiredCharset");
-        testCustomCharset("ISO8859_1", "testRequiredCharset");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testRequiredCharset_literalMutation2597() throws UnsupportedEncodingException, DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation2597");
-        testCustomCharset("UTF-8", "testRequiredCharset");
-        testCustomCharset("UTF-16", "testRequiredCharset");
-        testCustomCharset("UTF-16BE", "testRequiredCharset");
-        testCustomCharset("UTF-16LE", "testRequiredCharset");
-        testCustomCharset("US-ASCII", "foo");
-        testCustomCharset("ISO8859_1", "testRequiredCharset");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testRequiredCharset_literalMutation2598() throws UnsupportedEncodingException, DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation2598");
-        testCustomCharset("UTF-8", "testRequiredCharset");
-        testCustomCharset("UTF-16", "testRequiredCharset");
-        testCustomCharset("UTF-16BE", "testRequiredCharset");
-        testCustomCharset("UTF-16LE", "testRequiredCharset");
-        testCustomCharset("US-ASCII", "testRequiredCharset");
-        testCustomCharset("foo", "testRequiredCharset");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testRequiredCharset_literalMutation2599() throws UnsupportedEncodingException, DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation2599");
+    public void testRequiredCharset_literalMutation4453() throws UnsupportedEncodingException, DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRequiredCharset_literalMutation4453");
         testCustomCharset("UTF-8", "testRequiredCharset");
         testCustomCharset("UTF-16", "testRequiredCharset");
         testCustomCharset("UTF-16BE", "testRequiredCharset");

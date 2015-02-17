@@ -71,14 +71,14 @@ public class Md5CryptTest {
     @Test(expected = IllegalArgumentException.class)
     public void testMd5CryptWithEmptySalt() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMd5CryptWithEmptySalt");
-        org.apache.commons.codec.digest.Md5Crypt.md5Crypt("foo".getBytes(), "");
+        org.apache.commons.codec.digest.Md5Crypt.md5Crypt("bar".getBytes(), "");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testMd5CryptWithEmptySalt_literalMutation1412() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMd5CryptWithEmptySalt_literalMutation1412");
-        org.apache.commons.codec.digest.Md5Crypt.md5Crypt("secret".getBytes(), "foo");
+    public void testMd5CryptWithEmptySalt_literalMutation1532() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMd5CryptWithEmptySalt_literalMutation1532");
+        org.apache.commons.codec.digest.Md5Crypt.md5Crypt("secret".getBytes(), "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

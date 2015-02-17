@@ -129,7 +129,7 @@ public class HmacUtilsTest {
         org.apache.commons.codec.digest.HmacUtils.updateHmac(mac, STANDARD_PHRASE_BYTES);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1296,org.apache.commons.codec.digest.HmacUtilsTest.STANDARD_SHA1_RESULT_STRING);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1298,null,1297,org.apache.commons.codec.binary.Hex.encodeHexString(mac.doFinal()));
-        org.apache.commons.codec.digest.HmacUtils.updateHmac(mac, "foo".getBytes());
+        org.apache.commons.codec.digest.HmacUtils.updateHmac(mac, "bar".getBytes());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1300,null,1299,org.apache.commons.codec.binary.Hex.encodeHexString(mac.doFinal()));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -189,7 +189,7 @@ public class HmacUtilsTest {
         org.apache.commons.codec.digest.HmacUtils.updateHmac(mac, new java.io.ByteArrayInputStream(STANDARD_PHRASE_BYTES));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1301,org.apache.commons.codec.digest.HmacUtilsTest.STANDARD_SHA1_RESULT_STRING);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1303,null,1302,org.apache.commons.codec.binary.Hex.encodeHexString(mac.doFinal()));
-        org.apache.commons.codec.digest.HmacUtils.updateHmac(mac, new java.io.ByteArrayInputStream("foo".getBytes()));
+        org.apache.commons.codec.digest.HmacUtils.updateHmac(mac, new java.io.ByteArrayInputStream("bar".getBytes()));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1305,null,1304,org.apache.commons.codec.binary.Hex.encodeHexString(mac.doFinal()));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -249,7 +249,7 @@ public class HmacUtilsTest {
         org.apache.commons.codec.digest.HmacUtils.updateHmac(mac, STANDARD_PHRASE_STRING);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1306,org.apache.commons.codec.digest.HmacUtilsTest.STANDARD_SHA1_RESULT_STRING);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1308,null,1307,org.apache.commons.codec.binary.Hex.encodeHexString(mac.doFinal()));
-        org.apache.commons.codec.digest.HmacUtils.updateHmac(mac, "foo");
+        org.apache.commons.codec.digest.HmacUtils.updateHmac(mac, "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1310,null,1309,org.apache.commons.codec.binary.Hex.encodeHexString(mac.doFinal()));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -280,7 +280,7 @@ public class HmacUtilsTest {
     public void testInitializedMac() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testInitializedMac");
         final Mac md5Mac = org.apache.commons.codec.digest.HmacUtils.getInitializedMac(org.apache.commons.codec.digest.HmacAlgorithms.HMAC_MD5, STANDARD_KEY_BYTES);
-        final Mac md5Mac2 = org.apache.commons.codec.digest.HmacUtils.getInitializedMac("foo", STANDARD_KEY_BYTES);
+        final Mac md5Mac2 = org.apache.commons.codec.digest.HmacUtils.getInitializedMac("bar", STANDARD_KEY_BYTES);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1311,org.apache.commons.codec.digest.HmacUtilsTest.STANDARD_MD5_RESULT_BYTES);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1313,org.apache.commons.codec.digest.HmacUtils.updateHmac(md5Mac, org.apache.commons.codec.digest.HmacUtilsTest.STANDARD_PHRASE_STRING),1312,org.apache.commons.codec.digest.HmacUtils.updateHmac(md5Mac, org.apache.commons.codec.digest.HmacUtilsTest.STANDARD_PHRASE_STRING).doFinal());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1314,org.apache.commons.codec.digest.HmacUtilsTest.STANDARD_MD5_RESULT_BYTES);
@@ -332,15 +332,15 @@ public class HmacUtilsTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testInternalNoSuchAlgorithmException_literalMutation1401() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testInternalNoSuchAlgorithmException_literalMutation1401");
-        org.apache.commons.codec.digest.HmacUtils.getInitializedMac("foo", org.apache.commons.codec.binary.StringUtils.getBytesUtf8("akey"));
+    public void testInternalNoSuchAlgorithmException_literalMutation1521() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testInternalNoSuchAlgorithmException_literalMutation1521");
+        org.apache.commons.codec.digest.HmacUtils.getInitializedMac("bar", org.apache.commons.codec.binary.StringUtils.getBytesUtf8("akey"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testInternalNoSuchAlgorithmException_literalMutation1402() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testInternalNoSuchAlgorithmException_literalMutation1402");
+    public void testInternalNoSuchAlgorithmException_literalMutation1522() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testInternalNoSuchAlgorithmException_literalMutation1522");
         org.apache.commons.codec.digest.HmacUtils.getInitializedMac("Bogus Bogus", org.apache.commons.codec.binary.StringUtils.getBytesUtf8("foo"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }

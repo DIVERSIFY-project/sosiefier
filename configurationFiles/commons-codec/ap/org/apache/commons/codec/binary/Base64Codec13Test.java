@@ -353,6 +353,50 @@ public class Base64Codec13Test {
     }
 
     /** 
+     * Tests to make sure Base64's implementation of the org.apache.commons.codec.Encoder
+     * interface is behaving identical to commons-codec-1.3.jar.
+     * 
+     * @throws EncoderException problem
+     */
+@Test
+    public void testEncoder_literalMutation1957() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncoder_literalMutation1957");
+        final Encoder enc = new Base64();
+        for (int i = -1 ; i < (STRINGS.length) ; i++) {
+            if ((STRINGS[i]) != null) {
+                final byte[] base64 = Base64Codec13Test.utf8(STRINGS[i]);
+                final byte[] binary = BYTES[i];
+                final boolean b = java.util.Arrays.equals(base64, ((byte[])(enc.encode(binary))));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1568,("Encoder test-" + i));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1569,b);
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests to make sure Base64's implementation of the org.apache.commons.codec.Encoder
+     * interface is behaving identical to commons-codec-1.3.jar.
+     * 
+     * @throws EncoderException problem
+     */
+@Test
+    public void testEncoder_literalMutation1958() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncoder_literalMutation1958");
+        final Encoder enc = new Base64();
+        for (int i = 0 ; i < (STRINGS.length) ; i++) {
+            if ((STRINGS[i]) != null) {
+                final byte[] base64 = Base64Codec13Test.utf8(STRINGS[i]);
+                final byte[] binary = BYTES[i];
+                final boolean b = java.util.Arrays.equals(base64, ((byte[])(enc.encode(binary))));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1568,("Encoder test-" + i));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1569,b);
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
      * Tests to make sure Base64's implementation of the org.apache.commons.codec.Decoder
      * interface is behaving identical to commons-codec-1.3.jar.
      * 
@@ -375,6 +419,50 @@ public class Base64Codec13Test {
     }
 
     /** 
+     * Tests to make sure Base64's implementation of the org.apache.commons.codec.Decoder
+     * interface is behaving identical to commons-codec-1.3.jar.
+     * 
+     * @throws DecoderException problem
+     */
+@Test
+    public void testDecoder_literalMutation1953() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecoder_literalMutation1953");
+        final Decoder dec = new Base64();
+        for (int i = -1 ; i < (STRINGS.length) ; i++) {
+            if ((STRINGS[i]) != null) {
+                final byte[] base64 = Base64Codec13Test.utf8(STRINGS[i]);
+                final byte[] binary = BYTES[i];
+                final boolean b = java.util.Arrays.equals(binary, ((byte[])(dec.decode(base64))));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1566,("Decoder test-" + i));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1567,b);
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests to make sure Base64's implementation of the org.apache.commons.codec.Decoder
+     * interface is behaving identical to commons-codec-1.3.jar.
+     * 
+     * @throws DecoderException problem
+     */
+@Test
+    public void testDecoder_literalMutation1954() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecoder_literalMutation1954");
+        final Decoder dec = new Base64();
+        for (int i = 0 ; i < (STRINGS.length) ; i++) {
+            if ((STRINGS[i]) != null) {
+                final byte[] base64 = Base64Codec13Test.utf8(STRINGS[i]);
+                final byte[] binary = BYTES[i];
+                final boolean b = java.util.Arrays.equals(binary, ((byte[])(dec.decode(base64))));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1566,("Decoder test-" + i));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1567,b);
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
      * Tests to make sure Base64's implementation of the org.apache.commons.codec.BinaryEncoder
      * interface is behaving identical to commons-codec-1.3.jar.
      * 
@@ -384,7 +472,51 @@ public class Base64Codec13Test {
     public void testBinaryEncoder() throws EncoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBinaryEncoder");
         final BinaryEncoder enc = new Base64();
+        for (int i = 1 ; i < (STRINGS.length) ; i++) {
+            if ((STRINGS[i]) != null) {
+                final byte[] base64 = Base64Codec13Test.utf8(STRINGS[i]);
+                final byte[] binary = BYTES[i];
+                final boolean b = java.util.Arrays.equals(base64, enc.encode(binary));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1564,("BinaryEncoder test-" + i));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1565,b);
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests to make sure Base64's implementation of the org.apache.commons.codec.BinaryEncoder
+     * interface is behaving identical to commons-codec-1.3.jar.
+     * 
+     * @throws EncoderException problem
+     */
+@Test
+    public void testBinaryEncoder_literalMutation1949() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBinaryEncoder_literalMutation1949");
+        final BinaryEncoder enc = new Base64();
         for (int i = -1 ; i < (STRINGS.length) ; i++) {
+            if ((STRINGS[i]) != null) {
+                final byte[] base64 = Base64Codec13Test.utf8(STRINGS[i]);
+                final byte[] binary = BYTES[i];
+                final boolean b = java.util.Arrays.equals(base64, enc.encode(binary));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1564,("BinaryEncoder test-" + i));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1565,b);
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests to make sure Base64's implementation of the org.apache.commons.codec.BinaryEncoder
+     * interface is behaving identical to commons-codec-1.3.jar.
+     * 
+     * @throws EncoderException problem
+     */
+@Test
+    public void testBinaryEncoder_literalMutation1950() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBinaryEncoder_literalMutation1950");
+        final BinaryEncoder enc = new Base64();
+        for (int i = 0 ; i < (STRINGS.length) ; i++) {
             if ((STRINGS[i]) != null) {
                 final byte[] base64 = Base64Codec13Test.utf8(STRINGS[i]);
                 final byte[] binary = BYTES[i];
@@ -406,7 +538,51 @@ public class Base64Codec13Test {
     public void testBinaryDecoder() throws DecoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBinaryDecoder");
         final BinaryDecoder dec = new Base64();
+        for (int i = 1 ; i < (STRINGS.length) ; i++) {
+            if ((STRINGS[i]) != null) {
+                final byte[] base64 = Base64Codec13Test.utf8(STRINGS[i]);
+                final byte[] binary = BYTES[i];
+                final boolean b = java.util.Arrays.equals(binary, dec.decode(base64));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1562,("BinaryDecoder test-" + i));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1563,b);
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests to make sure Base64's implementation of the org.apache.commons.codec.BinaryDecoder
+     * interface is behaving identical to commons-codec-1.3.jar.
+     * 
+     * @throws DecoderException problem
+     */
+@Test
+    public void testBinaryDecoder_literalMutation1945() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBinaryDecoder_literalMutation1945");
+        final BinaryDecoder dec = new Base64();
         for (int i = -1 ; i < (STRINGS.length) ; i++) {
+            if ((STRINGS[i]) != null) {
+                final byte[] base64 = Base64Codec13Test.utf8(STRINGS[i]);
+                final byte[] binary = BYTES[i];
+                final boolean b = java.util.Arrays.equals(binary, dec.decode(base64));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1562,("BinaryDecoder test-" + i));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1563,b);
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests to make sure Base64's implementation of the org.apache.commons.codec.BinaryDecoder
+     * interface is behaving identical to commons-codec-1.3.jar.
+     * 
+     * @throws DecoderException problem
+     */
+@Test
+    public void testBinaryDecoder_literalMutation1946() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBinaryDecoder_literalMutation1946");
+        final BinaryDecoder dec = new Base64();
+        for (int i = 0 ; i < (STRINGS.length) ; i++) {
             if ((STRINGS[i]) != null) {
                 final byte[] base64 = Base64Codec13Test.utf8(STRINGS[i]);
                 final byte[] binary = BYTES[i];
@@ -427,7 +603,49 @@ public class Base64Codec13Test {
 @Test
     public void testStaticEncode() throws EncoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticEncode");
+        for (int i = 1 ; i < (STRINGS.length) ; i++) {
+            if ((STRINGS[i]) != null) {
+                final byte[] base64 = Base64Codec13Test.utf8(STRINGS[i]);
+                final byte[] binary = BYTES[i];
+                final boolean b = java.util.Arrays.equals(base64, Base64.encodeBase64(binary));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1576,("static Base64.encodeBase64() test-" + i));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1577,b);
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests to make sure Base64's implementation of Base64.encodeBase64()
+     * static method is behaving identical to commons-codec-1.3.jar.
+     * 
+     * @throws EncoderException problem
+     */
+@Test
+    public void testStaticEncode_literalMutation1969() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticEncode_literalMutation1969");
         for (int i = -1 ; i < (STRINGS.length) ; i++) {
+            if ((STRINGS[i]) != null) {
+                final byte[] base64 = Base64Codec13Test.utf8(STRINGS[i]);
+                final byte[] binary = BYTES[i];
+                final boolean b = java.util.Arrays.equals(base64, Base64.encodeBase64(binary));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1576,("static Base64.encodeBase64() test-" + i));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1577,b);
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests to make sure Base64's implementation of Base64.encodeBase64()
+     * static method is behaving identical to commons-codec-1.3.jar.
+     * 
+     * @throws EncoderException problem
+     */
+@Test
+    public void testStaticEncode_literalMutation1970() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticEncode_literalMutation1970");
+        for (int i = 0 ; i < (STRINGS.length) ; i++) {
             if ((STRINGS[i]) != null) {
                 final byte[] base64 = Base64Codec13Test.utf8(STRINGS[i]);
                 final byte[] binary = BYTES[i];
@@ -448,7 +666,49 @@ public class Base64Codec13Test {
 @Test
     public void testStaticDecode() throws DecoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticDecode");
+        for (int i = 1 ; i < (STRINGS.length) ; i++) {
+            if ((STRINGS[i]) != null) {
+                final byte[] base64 = Base64Codec13Test.utf8(STRINGS[i]);
+                final byte[] binary = BYTES[i];
+                final boolean b = java.util.Arrays.equals(binary, Base64.decodeBase64(base64));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1572,("static Base64.decodeBase64() test-" + i));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1573,b);
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests to make sure Base64's implementation of Base64.decodeBase64()
+     * static method is behaving identical to commons-codec-1.3.jar.
+     * 
+     * @throws DecoderException problem
+     */
+@Test
+    public void testStaticDecode_literalMutation1961() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticDecode_literalMutation1961");
         for (int i = -1 ; i < (STRINGS.length) ; i++) {
+            if ((STRINGS[i]) != null) {
+                final byte[] base64 = Base64Codec13Test.utf8(STRINGS[i]);
+                final byte[] binary = BYTES[i];
+                final boolean b = java.util.Arrays.equals(binary, Base64.decodeBase64(base64));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1572,("static Base64.decodeBase64() test-" + i));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1573,b);
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests to make sure Base64's implementation of Base64.decodeBase64()
+     * static method is behaving identical to commons-codec-1.3.jar.
+     * 
+     * @throws DecoderException problem
+     */
+@Test
+    public void testStaticDecode_literalMutation1962() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticDecode_literalMutation1962");
+        for (int i = 0 ; i < (STRINGS.length) ; i++) {
             if ((STRINGS[i]) != null) {
                 final byte[] base64 = Base64Codec13Test.utf8(STRINGS[i]);
                 final byte[] binary = BYTES[i];
@@ -469,7 +729,49 @@ public class Base64Codec13Test {
 @Test
     public void testStaticEncodeChunked() throws EncoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticEncodeChunked");
+        for (int i = 1 ; i < (STRINGS.length) ; i++) {
+            if ((STRINGS[i]) != null) {
+                final byte[] base64Chunked = Base64Codec13Test.utf8(CHUNKED_STRINGS[i]);
+                final byte[] binary = BYTES[i];
+                final boolean b = java.util.Arrays.equals(base64Chunked, Base64.encodeBase64Chunked(binary));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1574,("static Base64.encodeBase64Chunked() test-" + i));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1575,b);
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests to make sure Base64's implementation of Base64.encodeBase64Chunked()
+     * static method is behaving identical to commons-codec-1.3.jar.
+     * 
+     * @throws EncoderException problem
+     */
+@Test
+    public void testStaticEncodeChunked_literalMutation1973() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticEncodeChunked_literalMutation1973");
         for (int i = -1 ; i < (STRINGS.length) ; i++) {
+            if ((STRINGS[i]) != null) {
+                final byte[] base64Chunked = Base64Codec13Test.utf8(CHUNKED_STRINGS[i]);
+                final byte[] binary = BYTES[i];
+                final boolean b = java.util.Arrays.equals(base64Chunked, Base64.encodeBase64Chunked(binary));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1574,("static Base64.encodeBase64Chunked() test-" + i));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1575,b);
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests to make sure Base64's implementation of Base64.encodeBase64Chunked()
+     * static method is behaving identical to commons-codec-1.3.jar.
+     * 
+     * @throws EncoderException problem
+     */
+@Test
+    public void testStaticEncodeChunked_literalMutation1974() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticEncodeChunked_literalMutation1974");
+        for (int i = 0 ; i < (STRINGS.length) ; i++) {
             if ((STRINGS[i]) != null) {
                 final byte[] base64Chunked = Base64Codec13Test.utf8(CHUNKED_STRINGS[i]);
                 final byte[] binary = BYTES[i];
@@ -492,6 +794,50 @@ public class Base64Codec13Test {
     public void testStaticDecodeChunked() throws DecoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticDecodeChunked");
         for (int i = 1 ; i < (STRINGS.length) ; i++) {
+            if ((STRINGS[i]) != null) {
+                final byte[] base64Chunked = Base64Codec13Test.utf8(CHUNKED_STRINGS[i]);
+                final byte[] binary = BYTES[i];
+                final boolean b = java.util.Arrays.equals(binary, Base64.decodeBase64(base64Chunked));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1570,("static Base64.decodeBase64Chunked() test-" + i));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1571,b);
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests to make sure Base64's implementation of Base64.decodeBase64()
+     * static method is behaving identical to commons-codec-1.3.jar when
+     * supplied with chunked input.
+     * 
+     * @throws DecoderException problem
+     */
+@Test
+    public void testStaticDecodeChunked_literalMutation1965() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticDecodeChunked_literalMutation1965");
+        for (int i = -1 ; i < (STRINGS.length) ; i++) {
+            if ((STRINGS[i]) != null) {
+                final byte[] base64Chunked = Base64Codec13Test.utf8(CHUNKED_STRINGS[i]);
+                final byte[] binary = BYTES[i];
+                final boolean b = java.util.Arrays.equals(binary, Base64.decodeBase64(base64Chunked));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1570,("static Base64.decodeBase64Chunked() test-" + i));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1571,b);
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests to make sure Base64's implementation of Base64.decodeBase64()
+     * static method is behaving identical to commons-codec-1.3.jar when
+     * supplied with chunked input.
+     * 
+     * @throws DecoderException problem
+     */
+@Test
+    public void testStaticDecodeChunked_literalMutation1966() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticDecodeChunked_literalMutation1966");
+        for (int i = 0 ; i < (STRINGS.length) ; i++) {
             if ((STRINGS[i]) != null) {
                 final byte[] base64Chunked = Base64Codec13Test.utf8(CHUNKED_STRINGS[i]);
                 final byte[] binary = BYTES[i];

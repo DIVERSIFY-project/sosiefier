@@ -290,12 +290,12 @@ public class RFC1522CodecTest {
     }
 
     @Test
-    public void testDecodeInvalid_literalMutation79() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation79");
-        assertExpectedDecoderException("foo");
+    public void testDecodeInvalid_literalMutation100() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation100");
+        assertExpectedDecoderException("whatever");
         assertExpectedDecoderException("=?");
         assertExpectedDecoderException("?=");
-        assertExpectedDecoderException("==");
+        assertExpectedDecoderException("bar");
         assertExpectedDecoderException("=??=");
         assertExpectedDecoderException("=?stuff?=");
         assertExpectedDecoderException("=?UTF-8??=");
@@ -308,13 +308,13 @@ public class RFC1522CodecTest {
     }
 
     @Test
-    public void testDecodeInvalid_literalMutation80() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation80");
+    public void testDecodeInvalid_literalMutation101() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation101");
         assertExpectedDecoderException("whatever");
-        assertExpectedDecoderException("foo");
+        assertExpectedDecoderException("=?");
         assertExpectedDecoderException("?=");
         assertExpectedDecoderException("==");
-        assertExpectedDecoderException("=??=");
+        assertExpectedDecoderException("bar");
         assertExpectedDecoderException("=?stuff?=");
         assertExpectedDecoderException("=?UTF-8??=");
         assertExpectedDecoderException("=?UTF-8?stuff?=");
@@ -326,68 +326,14 @@ public class RFC1522CodecTest {
     }
 
     @Test
-    public void testDecodeInvalid_literalMutation81() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation81");
-        assertExpectedDecoderException("whatever");
-        assertExpectedDecoderException("=?");
-        assertExpectedDecoderException("foo");
-        assertExpectedDecoderException("==");
-        assertExpectedDecoderException("=??=");
-        assertExpectedDecoderException("=?stuff?=");
-        assertExpectedDecoderException("=?UTF-8??=");
-        assertExpectedDecoderException("=?UTF-8?stuff?=");
-        assertExpectedDecoderException("=?UTF-8?T?stuff");
-        assertExpectedDecoderException("=??T?stuff?=");
-        assertExpectedDecoderException("=?UTF-8??stuff?=");
-        assertExpectedDecoderException("=?UTF-8?W?stuff?=");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testDecodeInvalid_literalMutation82() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation82");
-        assertExpectedDecoderException("whatever");
-        assertExpectedDecoderException("=?");
-        assertExpectedDecoderException("?=");
-        assertExpectedDecoderException("foo");
-        assertExpectedDecoderException("=??=");
-        assertExpectedDecoderException("=?stuff?=");
-        assertExpectedDecoderException("=?UTF-8??=");
-        assertExpectedDecoderException("=?UTF-8?stuff?=");
-        assertExpectedDecoderException("=?UTF-8?T?stuff");
-        assertExpectedDecoderException("=??T?stuff?=");
-        assertExpectedDecoderException("=?UTF-8??stuff?=");
-        assertExpectedDecoderException("=?UTF-8?W?stuff?=");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testDecodeInvalid_literalMutation83() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation83");
-        assertExpectedDecoderException("whatever");
-        assertExpectedDecoderException("=?");
-        assertExpectedDecoderException("?=");
-        assertExpectedDecoderException("==");
-        assertExpectedDecoderException("foo");
-        assertExpectedDecoderException("=?stuff?=");
-        assertExpectedDecoderException("=?UTF-8??=");
-        assertExpectedDecoderException("=?UTF-8?stuff?=");
-        assertExpectedDecoderException("=?UTF-8?T?stuff");
-        assertExpectedDecoderException("=??T?stuff?=");
-        assertExpectedDecoderException("=?UTF-8??stuff?=");
-        assertExpectedDecoderException("=?UTF-8?W?stuff?=");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testDecodeInvalid_literalMutation84() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation84");
+    public void testDecodeInvalid_literalMutation102() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation102");
         assertExpectedDecoderException("whatever");
         assertExpectedDecoderException("=?");
         assertExpectedDecoderException("?=");
         assertExpectedDecoderException("==");
         assertExpectedDecoderException("=??=");
-        assertExpectedDecoderException("foo");
+        assertExpectedDecoderException("bar");
         assertExpectedDecoderException("=?UTF-8??=");
         assertExpectedDecoderException("=?UTF-8?stuff?=");
         assertExpectedDecoderException("=?UTF-8?T?stuff");
@@ -398,8 +344,8 @@ public class RFC1522CodecTest {
     }
 
     @Test
-    public void testDecodeInvalid_literalMutation85() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation85");
+    public void testDecodeInvalid_literalMutation103() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation103");
         assertExpectedDecoderException("whatever");
         assertExpectedDecoderException("=?");
         assertExpectedDecoderException("?=");
@@ -416,8 +362,8 @@ public class RFC1522CodecTest {
     }
 
     @Test
-    public void testDecodeInvalid_literalMutation86() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation86");
+    public void testDecodeInvalid_literalMutation104() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation104");
         assertExpectedDecoderException("whatever");
         assertExpectedDecoderException("=?");
         assertExpectedDecoderException("?=");
@@ -425,7 +371,7 @@ public class RFC1522CodecTest {
         assertExpectedDecoderException("=??=");
         assertExpectedDecoderException("=?stuff?=");
         assertExpectedDecoderException("=?UTF-8??=");
-        assertExpectedDecoderException("foo");
+        assertExpectedDecoderException("bar");
         assertExpectedDecoderException("=?UTF-8?T?stuff");
         assertExpectedDecoderException("=??T?stuff?=");
         assertExpectedDecoderException("=?UTF-8??stuff?=");
@@ -434,8 +380,8 @@ public class RFC1522CodecTest {
     }
 
     @Test
-    public void testDecodeInvalid_literalMutation87() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation87");
+    public void testDecodeInvalid_literalMutation105() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation105");
         assertExpectedDecoderException("whatever");
         assertExpectedDecoderException("=?");
         assertExpectedDecoderException("?=");
@@ -452,8 +398,8 @@ public class RFC1522CodecTest {
     }
 
     @Test
-    public void testDecodeInvalid_literalMutation88() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation88");
+    public void testDecodeInvalid_literalMutation106() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation106");
         assertExpectedDecoderException("whatever");
         assertExpectedDecoderException("=?");
         assertExpectedDecoderException("?=");
@@ -463,15 +409,15 @@ public class RFC1522CodecTest {
         assertExpectedDecoderException("=?UTF-8??=");
         assertExpectedDecoderException("=?UTF-8?stuff?=");
         assertExpectedDecoderException("=?UTF-8?T?stuff");
-        assertExpectedDecoderException("foo");
+        assertExpectedDecoderException("bar");
         assertExpectedDecoderException("=?UTF-8??stuff?=");
         assertExpectedDecoderException("=?UTF-8?W?stuff?=");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testDecodeInvalid_literalMutation89() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation89");
+    public void testDecodeInvalid_literalMutation107() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation107");
         assertExpectedDecoderException("whatever");
         assertExpectedDecoderException("=?");
         assertExpectedDecoderException("?=");
@@ -482,14 +428,14 @@ public class RFC1522CodecTest {
         assertExpectedDecoderException("=?UTF-8?stuff?=");
         assertExpectedDecoderException("=?UTF-8?T?stuff");
         assertExpectedDecoderException("=??T?stuff?=");
-        assertExpectedDecoderException("foo");
+        assertExpectedDecoderException("bar");
         assertExpectedDecoderException("=?UTF-8?W?stuff?=");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testDecodeInvalid_literalMutation90() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation90");
+    public void testDecodeInvalid_literalMutation108() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation108");
         assertExpectedDecoderException("whatever");
         assertExpectedDecoderException("=?");
         assertExpectedDecoderException("?=");
@@ -501,7 +447,61 @@ public class RFC1522CodecTest {
         assertExpectedDecoderException("=?UTF-8?T?stuff");
         assertExpectedDecoderException("=??T?stuff?=");
         assertExpectedDecoderException("=?UTF-8??stuff?=");
-        assertExpectedDecoderException("foo");
+        assertExpectedDecoderException("bar");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeInvalid_literalMutation97() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation97");
+        assertExpectedDecoderException("bar");
+        assertExpectedDecoderException("=?");
+        assertExpectedDecoderException("?=");
+        assertExpectedDecoderException("==");
+        assertExpectedDecoderException("=??=");
+        assertExpectedDecoderException("=?stuff?=");
+        assertExpectedDecoderException("=?UTF-8??=");
+        assertExpectedDecoderException("=?UTF-8?stuff?=");
+        assertExpectedDecoderException("=?UTF-8?T?stuff");
+        assertExpectedDecoderException("=??T?stuff?=");
+        assertExpectedDecoderException("=?UTF-8??stuff?=");
+        assertExpectedDecoderException("=?UTF-8?W?stuff?=");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeInvalid_literalMutation98() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation98");
+        assertExpectedDecoderException("whatever");
+        assertExpectedDecoderException("bar");
+        assertExpectedDecoderException("?=");
+        assertExpectedDecoderException("==");
+        assertExpectedDecoderException("=??=");
+        assertExpectedDecoderException("=?stuff?=");
+        assertExpectedDecoderException("=?UTF-8??=");
+        assertExpectedDecoderException("=?UTF-8?stuff?=");
+        assertExpectedDecoderException("=?UTF-8?T?stuff");
+        assertExpectedDecoderException("=??T?stuff?=");
+        assertExpectedDecoderException("=?UTF-8??stuff?=");
+        assertExpectedDecoderException("=?UTF-8?W?stuff?=");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeInvalid_literalMutation99() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation99");
+        assertExpectedDecoderException("whatever");
+        assertExpectedDecoderException("=?");
+        assertExpectedDecoderException("bar");
+        assertExpectedDecoderException("==");
+        assertExpectedDecoderException("=??=");
+        assertExpectedDecoderException("=?stuff?=");
+        assertExpectedDecoderException("=?UTF-8??=");
+        assertExpectedDecoderException("=?UTF-8?stuff?=");
+        assertExpectedDecoderException("=?UTF-8?T?stuff");
+        assertExpectedDecoderException("=??T?stuff?=");
+        assertExpectedDecoderException("=?UTF-8??stuff?=");
+        assertExpectedDecoderException("=?UTF-8?W?stuff?=");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

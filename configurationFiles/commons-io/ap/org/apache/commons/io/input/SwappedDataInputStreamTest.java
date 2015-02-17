@@ -43,8 +43,30 @@ public class SwappedDataInputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testReadBoolean_literalMutation604() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadBoolean_literalMutation604");
+    public void testReadBoolean_literalMutation1284() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadBoolean_literalMutation1284");
+        bytes = new byte[]{ -1 , 1 , 2 };
+        ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+        SwappedDataInputStream sdis = new SwappedDataInputStream(bais);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),839,sdis,838,sdis.readBoolean());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),841,sdis,840,sdis.readBoolean());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),843,sdis,842,sdis.readBoolean());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadBoolean_literalMutation1285() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadBoolean_literalMutation1285");
+        bytes = new byte[]{ 0 , 1 , 2 };
+        ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+        SwappedDataInputStream sdis = new SwappedDataInputStream(bais);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),839,sdis,838,sdis.readBoolean());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),841,sdis,840,sdis.readBoolean());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),843,sdis,842,sdis.readBoolean());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadBoolean_literalMutation1286() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadBoolean_literalMutation1286");
         bytes = new byte[]{ 0 , 2 , 2 };
         ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
         SwappedDataInputStream sdis = new SwappedDataInputStream(bais);
@@ -54,9 +76,53 @@ public class SwappedDataInputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testReadBoolean_literalMutation605() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadBoolean_literalMutation605");
+    public void testReadBoolean_literalMutation1287() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadBoolean_literalMutation1287");
+        bytes = new byte[]{ 0 , 0 , 2 };
+        ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+        SwappedDataInputStream sdis = new SwappedDataInputStream(bais);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),839,sdis,838,sdis.readBoolean());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),841,sdis,840,sdis.readBoolean());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),843,sdis,842,sdis.readBoolean());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadBoolean_literalMutation1288() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadBoolean_literalMutation1288");
+        bytes = new byte[]{ 0 , 0 , 2 };
+        ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+        SwappedDataInputStream sdis = new SwappedDataInputStream(bais);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),839,sdis,838,sdis.readBoolean());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),841,sdis,840,sdis.readBoolean());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),843,sdis,842,sdis.readBoolean());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadBoolean_literalMutation1289() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadBoolean_literalMutation1289");
         bytes = new byte[]{ 0 , 1 , 1 };
+        ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+        SwappedDataInputStream sdis = new SwappedDataInputStream(bais);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),839,sdis,838,sdis.readBoolean());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),841,sdis,840,sdis.readBoolean());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),843,sdis,842,sdis.readBoolean());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadBoolean_literalMutation1290() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadBoolean_literalMutation1290");
+        bytes = new byte[]{ 0 , 1 , 4 };
+        ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+        SwappedDataInputStream sdis = new SwappedDataInputStream(bais);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),839,sdis,838,sdis.readBoolean());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),841,sdis,840,sdis.readBoolean());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),843,sdis,842,sdis.readBoolean());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadBoolean_literalMutation1291() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadBoolean_literalMutation1291");
+        bytes = new byte[]{ 0 , 1 , 3 };
         ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
         SwappedDataInputStream sdis = new SwappedDataInputStream(bais);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),839,sdis,838,sdis.readBoolean());
@@ -106,6 +172,39 @@ public class SwappedDataInputStreamTest extends TestCase {
 
     public void testReadFully() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadFully");
+        byte[] bytesIn = new byte[4];
+        this.sdis.readFully(bytesIn);
+        for (int i = 0 ; i < 8 ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),707,bytes[i]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),856,bytesIn[i]);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadFully_literalMutation1293() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadFully_literalMutation1293");
+        byte[] bytesIn = new byte[16];
+        this.sdis.readFully(bytesIn);
+        for (int i = 0 ; i < 8 ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),707,bytes[i]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),856,bytesIn[i]);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadFully_literalMutation1294() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadFully_literalMutation1294");
+        byte[] bytesIn = new byte[9];
+        this.sdis.readFully(bytesIn);
+        for (int i = 0 ; i < 8 ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),707,bytes[i]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),856,bytesIn[i]);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadFully_literalMutation1295() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadFully_literalMutation1295");
         byte[] bytesIn = new byte[7];
         this.sdis.readFully(bytesIn);
         for (int i = 0 ; i < 8 ; i++) {
@@ -115,8 +214,8 @@ public class SwappedDataInputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testReadFully_literalMutation607() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadFully_literalMutation607");
+    public void testReadFully_literalMutation1296() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadFully_literalMutation1296");
         byte[] bytesIn = new byte[8];
         this.sdis.readFully(bytesIn);
         for (int i = 1 ; i < 8 ; i++) {
@@ -126,11 +225,66 @@ public class SwappedDataInputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testReadFully_literalMutation608() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadFully_literalMutation608");
+    public void testReadFully_literalMutation1297() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadFully_literalMutation1297");
+        byte[] bytesIn = new byte[8];
+        this.sdis.readFully(bytesIn);
+        for (int i = -1 ; i < 8 ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),707,bytes[i]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),856,bytesIn[i]);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadFully_literalMutation1298() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadFully_literalMutation1298");
+        byte[] bytesIn = new byte[8];
+        this.sdis.readFully(bytesIn);
+        for (int i = 0 ; i < 8 ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),707,bytes[i]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),856,bytesIn[i]);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadFully_literalMutation1299() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadFully_literalMutation1299");
+        byte[] bytesIn = new byte[8];
+        this.sdis.readFully(bytesIn);
+        for (int i = 0 ; i < 4 ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),707,bytes[i]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),856,bytesIn[i]);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadFully_literalMutation1300() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadFully_literalMutation1300");
+        byte[] bytesIn = new byte[8];
+        this.sdis.readFully(bytesIn);
+        for (int i = 0 ; i < 16 ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),707,bytes[i]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),856,bytesIn[i]);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadFully_literalMutation1301() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadFully_literalMutation1301");
         byte[] bytesIn = new byte[8];
         this.sdis.readFully(bytesIn);
         for (int i = 0 ; i < 9 ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),707,bytes[i]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),856,bytesIn[i]);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadFully_literalMutation1302() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadFully_literalMutation1302");
+        byte[] bytesIn = new byte[8];
+        this.sdis.readFully(bytesIn);
+        for (int i = 0 ; i < 7 ; i++) {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),707,bytes[i]);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),856,bytesIn[i]);
         }
@@ -211,7 +365,28 @@ public class SwappedDataInputStreamTest extends TestCase {
 
     public void testSkipBytes() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkipBytes");
+        this.sdis.skipBytes(2);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),868,this.sdis,867,this.sdis.readInt());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSkipBytes_literalMutation1304() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkipBytes_literalMutation1304");
+        this.sdis.skipBytes(8);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),868,this.sdis,867,this.sdis.readInt());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSkipBytes_literalMutation1305() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkipBytes_literalMutation1305");
         this.sdis.skipBytes(5);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),868,this.sdis,867,this.sdis.readInt());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSkipBytes_literalMutation1306() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkipBytes_literalMutation1306");
+        this.sdis.skipBytes(3);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),868,this.sdis,867,this.sdis.readInt());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }

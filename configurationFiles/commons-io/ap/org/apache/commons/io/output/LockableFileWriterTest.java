@@ -234,8 +234,8 @@ public class LockableFileWriterTest extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testAlternateLockDir_literalMutation2377() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAlternateLockDir_literalMutation2377");
+    public void testAlternateLockDir_literalMutation3489() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAlternateLockDir_literalMutation3489");
         LockableFileWriter lfw1 = null;
         LockableFileWriter lfw2 = null;
         try {
@@ -243,7 +243,7 @@ public class LockableFileWriterTest extends FileBasedTestCase {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1517,file,1516,file.exists());
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1519,altLockFile,1518,altLockFile.exists());
             try {
-                lfw2 = new LockableFileWriter(file , true , altLockDir.getAbsolutePath());
+                lfw2 = new LockableFileWriter(file , false , altLockDir.getAbsolutePath());
             } catch (IOException ioe) {
                 String msg = ioe.getMessage();
                 fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1521,msg,1520,msg.startsWith("Can\'t write file, lock "));
@@ -347,11 +347,11 @@ public class LockableFileWriterTest extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testConstructor_File_encoding_badEncoding_literalMutation2380() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructor_File_encoding_badEncoding_literalMutation2380");
+    public void testConstructor_File_encoding_badEncoding_literalMutation3492() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructor_File_encoding_badEncoding_literalMutation3492");
         Writer writer = null;
         try {
-            writer = new LockableFileWriter(file , "foo");
+            writer = new LockableFileWriter(file , "bar");
         } catch (UnsupportedCharsetException ex) {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1539,file,1538,file.exists());
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1541,lockFile,1540,lockFile.exists());

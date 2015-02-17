@@ -5,6 +5,7 @@ import java.io.*;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
@@ -23,6 +24,7 @@ public class AssertLogWriter extends LogWriter {
 
     private Map<Class, String[]> previousValues;
     private Map<Class, Method[]> getters;
+    private Map<Class, Field[]> fields;
     private Map<Class, String> classToId;
 
     private static int count = 0;
@@ -32,6 +34,7 @@ public class AssertLogWriter extends LogWriter {
         super();
         previousValues = new HashMap<Class, String[]>();
         getters = new HashMap<Class, Method[]>();
+        fields = new HashMap<Class, Field[]>();
         classToId = new HashMap<Class, String>();
         fileWriters = new HashMap<Thread, PrintWriter>();
     }
@@ -92,11 +95,21 @@ public class AssertLogWriter extends LogWriter {
             objectClass = object.getClass();
         }
         Method[] classGetters = getGetters(thread, objectClass);
-        String[] results = new String[classGetters.length];
+        Field[] classPublicFields = getPublicFields(thread, objectClass);
+        String[] results = new String[classGetters.length + classPublicFields.length];
 
-        for(int i = 0; i < classGetters.length ; i++) {
+        int i = 0;
+        for(; i < classGetters.length ; i++) {
             try {
                 results[i] = formatVar(classGetters[i].invoke(object));
+            } catch (Exception e) {
+                results[i] = "null";
+            }
+        }
+
+        for(; i < results.length ; i++) {
+            try {
+                results[i] = formatVar(classPublicFields[i].get(object));
             } catch (Exception e) {
                 results[i] = "null";
             }
@@ -107,7 +120,7 @@ public class AssertLogWriter extends LogWriter {
         boolean sameValues = true;
         if(previousValues.containsKey(objectClass)) {
             String[] pValues = previousValues.get(objectClass);
-            for (int i = 0; i < classGetters.length; i++) {
+            for (i = 0; i < classGetters.length; i++) {
                 if (pValues[i].equals(results[i])) {
                     sameValue.append("0");
                 } else {
@@ -120,7 +133,7 @@ public class AssertLogWriter extends LogWriter {
         } else {
             sameValues = false;
             String[] pValues = new String[classGetters.length];
-            for (int i = 0; i < classGetters.length; i++) {
+            for (i = 0; i < classGetters.length; i++) {
                 sameValue.append("1");
                 result.add(results[i]);
                 pValues[i] = results[i];
@@ -254,15 +267,35 @@ public class AssertLogWriter extends LogWriter {
             semaphores.get(id).release();
     }
 
+    protected Field[] getPublicFields(Thread thread, Class aClass) throws IOException, InterruptedException {
+        if(!fields.containsKey(aClass)) {
+            intGettersAndFields(thread, aClass);
+        }
+        return fields.get(aClass);
+    }
+
     protected Method[] getGetters(Thread thread, Class aClass) throws IOException, InterruptedException {
         if(!getters.containsKey(aClass)) {
+            intGettersAndFields(thread,aClass);
+        }
+        return getters.get(aClass);
+    }
+
+
+    protected void intGettersAndFields(Thread thread, Class aClass) throws IOException, InterruptedException {
             Method[] methods;
+        Field[] publicFields;
             if(aClass == null) {
                 methods = new Method[0];
+                publicFields = new Field[0];
             } else {
                 methods = findGetters(aClass);
+                publicFields = findPublicFields(aClass);
             }
+            fields.put(aClass,publicFields);
             getters.put(aClass, methods);
+
+
 
             String classId = getClassId(thread, aClass);
 
@@ -273,12 +306,27 @@ public class AssertLogWriter extends LogWriter {
             for(Method method : methods) {
                 fileWriter.append(simpleSeparator + method.getName());
             }
-
-            releaseFileWriter(semaphore);
+        for(Field field : publicFields) {
+            fileWriter.append(simpleSeparator + field.getName());
         }
 
-        return getters.get(aClass);
+            releaseFileWriter(semaphore);
     }
+
+    protected Field[] findPublicFields(Class aClass) {
+        List<Field> publicFields = new ArrayList<Field>();
+        for(Field field : aClass.getFields()) {
+            if(Modifier.isPublic(field.getModifiers())) {
+                publicFields.add(field);
+            }
+        }
+        Field[] ret = new Field[publicFields.size()];
+        for(int i = 0; i < publicFields.size(); i++) {
+            ret[i] = publicFields.get(i);
+        }
+        return ret;
+    }
+
 
     protected Method[] findGetters(Class aClass){
 //        System.out.println("getter for " + aClass);

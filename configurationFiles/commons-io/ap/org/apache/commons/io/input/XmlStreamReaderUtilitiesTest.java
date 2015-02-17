@@ -417,7 +417,7 @@ public class XmlStreamReaderUtilitiesTest {
     public void testContentTypeEncoding() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding");
         checkContentTypeEncoding(null, null);
-        checkContentTypeEncoding(null, "foo");
+        checkContentTypeEncoding(null, "bar");
         checkContentTypeEncoding(null, "application/xml");
         checkContentTypeEncoding(null, "application/xml;");
         checkContentTypeEncoding(null, "multipart/mixed;boundary=frontier");
@@ -438,8 +438,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeEncoding_literalMutation1479() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1479");
+    public void testContentTypeEncoding_literalMutation2250() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2250");
         checkContentTypeEncoding(null, null);
         checkContentTypeEncoding(null, "");
         checkContentTypeEncoding(null, "foo");
@@ -462,12 +462,12 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeEncoding_literalMutation1481() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1481");
+    public void testContentTypeEncoding_literalMutation2252() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2252");
         checkContentTypeEncoding(null, null);
         checkContentTypeEncoding(null, "");
         checkContentTypeEncoding(null, "application/xml");
-        checkContentTypeEncoding(null, "foo");
+        checkContentTypeEncoding(null, "bar");
         checkContentTypeEncoding(null, "multipart/mixed;boundary=frontier");
         checkContentTypeEncoding(null, "multipart/mixed;boundary=\'frontier\'");
         checkContentTypeEncoding(null, "multipart/mixed;boundary=\"frontier\"");
@@ -486,13 +486,13 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeEncoding_literalMutation1483() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1483");
+    public void testContentTypeEncoding_literalMutation2254() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2254");
         checkContentTypeEncoding(null, null);
         checkContentTypeEncoding(null, "");
         checkContentTypeEncoding(null, "application/xml");
         checkContentTypeEncoding(null, "application/xml;");
-        checkContentTypeEncoding(null, "foo");
+        checkContentTypeEncoding(null, "bar");
         checkContentTypeEncoding(null, "multipart/mixed;boundary=\'frontier\'");
         checkContentTypeEncoding(null, "multipart/mixed;boundary=\"frontier\"");
         checkContentTypeEncoding("UTF-16", "application/xml;charset=utf-16");
@@ -510,14 +510,14 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeEncoding_literalMutation1485() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1485");
+    public void testContentTypeEncoding_literalMutation2256() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2256");
         checkContentTypeEncoding(null, null);
         checkContentTypeEncoding(null, "");
         checkContentTypeEncoding(null, "application/xml");
         checkContentTypeEncoding(null, "application/xml;");
         checkContentTypeEncoding(null, "multipart/mixed;boundary=frontier");
-        checkContentTypeEncoding(null, "foo");
+        checkContentTypeEncoding(null, "bar");
         checkContentTypeEncoding(null, "multipart/mixed;boundary=\"frontier\"");
         checkContentTypeEncoding("UTF-16", "application/xml;charset=utf-16");
         checkContentTypeEncoding("UTF-16", "application/xml;charset=UTF-16");
@@ -534,8 +534,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeEncoding_literalMutation1487() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1487");
+    public void testContentTypeEncoding_literalMutation2258() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2258");
         checkContentTypeEncoding(null, null);
         checkContentTypeEncoding(null, "");
         checkContentTypeEncoding(null, "application/xml");
@@ -558,8 +558,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeEncoding_literalMutation1488() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1488");
+    public void testContentTypeEncoding_literalMutation2259() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2259");
         checkContentTypeEncoding(null, null);
         checkContentTypeEncoding(null, "");
         checkContentTypeEncoding(null, "application/xml");
@@ -567,7 +567,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkContentTypeEncoding(null, "multipart/mixed;boundary=frontier");
         checkContentTypeEncoding(null, "multipart/mixed;boundary=\'frontier\'");
         checkContentTypeEncoding(null, "multipart/mixed;boundary=\"frontier\"");
-        checkContentTypeEncoding("foo", "application/xml;charset=utf-16");
+        checkContentTypeEncoding("bar", "application/xml;charset=utf-16");
         checkContentTypeEncoding("UTF-16", "application/xml;charset=UTF-16");
         checkContentTypeEncoding("UTF-16", "application/xml;charset=\'UTF-16\'");
         checkContentTypeEncoding("UTF-16", "application/xml;charset=\"UTF-16\"");
@@ -582,8 +582,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeEncoding_literalMutation1489() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1489");
+    public void testContentTypeEncoding_literalMutation2260() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2260");
         checkContentTypeEncoding(null, null);
         checkContentTypeEncoding(null, "");
         checkContentTypeEncoding(null, "application/xml");
@@ -606,8 +606,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeEncoding_literalMutation1490() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1490");
+    public void testContentTypeEncoding_literalMutation2261() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2261");
         checkContentTypeEncoding(null, null);
         checkContentTypeEncoding(null, "");
         checkContentTypeEncoding(null, "application/xml");
@@ -630,8 +630,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeEncoding_literalMutation1491() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1491");
+    public void testContentTypeEncoding_literalMutation2262() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2262");
         checkContentTypeEncoding(null, null);
         checkContentTypeEncoding(null, "");
         checkContentTypeEncoding(null, "application/xml");
@@ -654,8 +654,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeEncoding_literalMutation1492() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1492");
+    public void testContentTypeEncoding_literalMutation2263() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2263");
         checkContentTypeEncoding(null, null);
         checkContentTypeEncoding(null, "");
         checkContentTypeEncoding(null, "application/xml");
@@ -678,8 +678,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeEncoding_literalMutation1493() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1493");
+    public void testContentTypeEncoding_literalMutation2264() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2264");
         checkContentTypeEncoding(null, null);
         checkContentTypeEncoding(null, "");
         checkContentTypeEncoding(null, "application/xml");
@@ -689,7 +689,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkContentTypeEncoding(null, "multipart/mixed;boundary=\"frontier\"");
         checkContentTypeEncoding("UTF-16", "application/xml;charset=utf-16");
         checkContentTypeEncoding("UTF-16", "application/xml;charset=UTF-16");
-        checkContentTypeEncoding("UTF-16", "foo");
+        checkContentTypeEncoding("UTF-16", "bar");
         checkContentTypeEncoding("UTF-16", "application/xml;charset=\"UTF-16\"");
         checkContentTypeEncoding("UTF-32", "application/xml;charset=utf-32");
         checkContentTypeEncoding("UTF-32", "application/xml;charset=UTF-32");
@@ -702,8 +702,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeEncoding_literalMutation1494() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1494");
+    public void testContentTypeEncoding_literalMutation2265() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2265");
         checkContentTypeEncoding(null, null);
         checkContentTypeEncoding(null, "");
         checkContentTypeEncoding(null, "application/xml");
@@ -726,8 +726,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeEncoding_literalMutation1495() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1495");
+    public void testContentTypeEncoding_literalMutation2266() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2266");
         checkContentTypeEncoding(null, null);
         checkContentTypeEncoding(null, "");
         checkContentTypeEncoding(null, "application/xml");
@@ -750,8 +750,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeEncoding_literalMutation1496() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1496");
+    public void testContentTypeEncoding_literalMutation2267() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2267");
         checkContentTypeEncoding(null, null);
         checkContentTypeEncoding(null, "");
         checkContentTypeEncoding(null, "application/xml");
@@ -763,7 +763,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkContentTypeEncoding("UTF-16", "application/xml;charset=UTF-16");
         checkContentTypeEncoding("UTF-16", "application/xml;charset=\'UTF-16\'");
         checkContentTypeEncoding("UTF-16", "application/xml;charset=\"UTF-16\"");
-        checkContentTypeEncoding("foo", "application/xml;charset=utf-32");
+        checkContentTypeEncoding("bar", "application/xml;charset=utf-32");
         checkContentTypeEncoding("UTF-32", "application/xml;charset=UTF-32");
         checkContentTypeEncoding("UTF-32", "application/xml;charset=\'UTF-32\'");
         checkContentTypeEncoding("UTF-32", "application/xml;charset=\"UTF-32\"");
@@ -774,8 +774,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeEncoding_literalMutation1497() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1497");
+    public void testContentTypeEncoding_literalMutation2268() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2268");
         checkContentTypeEncoding(null, null);
         checkContentTypeEncoding(null, "");
         checkContentTypeEncoding(null, "application/xml");
@@ -787,7 +787,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkContentTypeEncoding("UTF-16", "application/xml;charset=UTF-16");
         checkContentTypeEncoding("UTF-16", "application/xml;charset=\'UTF-16\'");
         checkContentTypeEncoding("UTF-16", "application/xml;charset=\"UTF-16\"");
-        checkContentTypeEncoding("UTF-32", "foo");
+        checkContentTypeEncoding("UTF-32", "bar");
         checkContentTypeEncoding("UTF-32", "application/xml;charset=UTF-32");
         checkContentTypeEncoding("UTF-32", "application/xml;charset=\'UTF-32\'");
         checkContentTypeEncoding("UTF-32", "application/xml;charset=\"UTF-32\"");
@@ -798,8 +798,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeEncoding_literalMutation1498() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1498");
+    public void testContentTypeEncoding_literalMutation2269() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2269");
         checkContentTypeEncoding(null, null);
         checkContentTypeEncoding(null, "");
         checkContentTypeEncoding(null, "application/xml");
@@ -822,8 +822,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeEncoding_literalMutation1499() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1499");
+    public void testContentTypeEncoding_literalMutation2270() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2270");
         checkContentTypeEncoding(null, null);
         checkContentTypeEncoding(null, "");
         checkContentTypeEncoding(null, "application/xml");
@@ -836,7 +836,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkContentTypeEncoding("UTF-16", "application/xml;charset=\'UTF-16\'");
         checkContentTypeEncoding("UTF-16", "application/xml;charset=\"UTF-16\"");
         checkContentTypeEncoding("UTF-32", "application/xml;charset=utf-32");
-        checkContentTypeEncoding("UTF-32", "foo");
+        checkContentTypeEncoding("UTF-32", "bar");
         checkContentTypeEncoding("UTF-32", "application/xml;charset=\'UTF-32\'");
         checkContentTypeEncoding("UTF-32", "application/xml;charset=\"UTF-32\"");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -846,8 +846,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeEncoding_literalMutation1500() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1500");
+    public void testContentTypeEncoding_literalMutation2271() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2271");
         checkContentTypeEncoding(null, null);
         checkContentTypeEncoding(null, "");
         checkContentTypeEncoding(null, "application/xml");
@@ -861,7 +861,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkContentTypeEncoding("UTF-16", "application/xml;charset=\"UTF-16\"");
         checkContentTypeEncoding("UTF-32", "application/xml;charset=utf-32");
         checkContentTypeEncoding("UTF-32", "application/xml;charset=UTF-32");
-        checkContentTypeEncoding("foo", "application/xml;charset=\'UTF-32\'");
+        checkContentTypeEncoding("bar", "application/xml;charset=\'UTF-32\'");
         checkContentTypeEncoding("UTF-32", "application/xml;charset=\"UTF-32\"");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -870,8 +870,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeEncoding_literalMutation1501() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1501");
+    public void testContentTypeEncoding_literalMutation2272() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2272");
         checkContentTypeEncoding(null, null);
         checkContentTypeEncoding(null, "");
         checkContentTypeEncoding(null, "application/xml");
@@ -894,32 +894,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeEncoding_literalMutation1502() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1502");
-        checkContentTypeEncoding(null, null);
-        checkContentTypeEncoding(null, "");
-        checkContentTypeEncoding(null, "application/xml");
-        checkContentTypeEncoding(null, "application/xml;");
-        checkContentTypeEncoding(null, "multipart/mixed;boundary=frontier");
-        checkContentTypeEncoding(null, "multipart/mixed;boundary=\'frontier\'");
-        checkContentTypeEncoding(null, "multipart/mixed;boundary=\"frontier\"");
-        checkContentTypeEncoding("UTF-16", "application/xml;charset=utf-16");
-        checkContentTypeEncoding("UTF-16", "application/xml;charset=UTF-16");
-        checkContentTypeEncoding("UTF-16", "application/xml;charset=\'UTF-16\'");
-        checkContentTypeEncoding("UTF-16", "application/xml;charset=\"UTF-16\"");
-        checkContentTypeEncoding("UTF-32", "application/xml;charset=utf-32");
-        checkContentTypeEncoding("UTF-32", "application/xml;charset=UTF-32");
-        checkContentTypeEncoding("UTF-32", "application/xml;charset=\'UTF-32\'");
-        checkContentTypeEncoding("foo", "application/xml;charset=\"UTF-32\"");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
-     */
-@Test
-    public void testContentTypeEncoding_literalMutation1503() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation1503");
+    public void testContentTypeEncoding_literalMutation2273() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2273");
         checkContentTypeEncoding(null, null);
         checkContentTypeEncoding(null, "");
         checkContentTypeEncoding(null, "application/xml");
@@ -934,7 +910,31 @@ public class XmlStreamReaderUtilitiesTest {
         checkContentTypeEncoding("UTF-32", "application/xml;charset=utf-32");
         checkContentTypeEncoding("UTF-32", "application/xml;charset=UTF-32");
         checkContentTypeEncoding("UTF-32", "application/xml;charset=\'UTF-32\'");
-        checkContentTypeEncoding("UTF-32", "foo");
+        checkContentTypeEncoding("bar", "application/xml;charset=\"UTF-32\"");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
+     */
+@Test
+    public void testContentTypeEncoding_literalMutation2274() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeEncoding_literalMutation2274");
+        checkContentTypeEncoding(null, null);
+        checkContentTypeEncoding(null, "");
+        checkContentTypeEncoding(null, "application/xml");
+        checkContentTypeEncoding(null, "application/xml;");
+        checkContentTypeEncoding(null, "multipart/mixed;boundary=frontier");
+        checkContentTypeEncoding(null, "multipart/mixed;boundary=\'frontier\'");
+        checkContentTypeEncoding(null, "multipart/mixed;boundary=\"frontier\"");
+        checkContentTypeEncoding("UTF-16", "application/xml;charset=utf-16");
+        checkContentTypeEncoding("UTF-16", "application/xml;charset=UTF-16");
+        checkContentTypeEncoding("UTF-16", "application/xml;charset=\'UTF-16\'");
+        checkContentTypeEncoding("UTF-16", "application/xml;charset=\"UTF-16\"");
+        checkContentTypeEncoding("UTF-32", "application/xml;charset=utf-32");
+        checkContentTypeEncoding("UTF-32", "application/xml;charset=UTF-32");
+        checkContentTypeEncoding("UTF-32", "application/xml;charset=\'UTF-32\'");
+        checkContentTypeEncoding("UTF-32", "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1404,8 +1404,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeMime_literalMutation1507() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeMime_literalMutation1507");
+    public void testContentTypeMime_literalMutation2278() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeMime_literalMutation2278");
         checkContentTypeMime(null, null);
         checkContentTypeMime("", "foo");
         checkContentTypeMime("application/xml", "application/xml");
@@ -1419,11 +1419,11 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeMime_literalMutation1508() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeMime_literalMutation1508");
+    public void testContentTypeMime_literalMutation2279() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeMime_literalMutation2279");
         checkContentTypeMime(null, null);
         checkContentTypeMime("", "");
-        checkContentTypeMime("foo", "application/xml");
+        checkContentTypeMime("bar", "application/xml");
         checkContentTypeMime("application/xml", "application/xml;");
         checkContentTypeMime("application/xml", "application/xml;charset=utf-16");
         checkContentTypeMime("application/xml", "application/xml;charset=utf-32");
@@ -1434,8 +1434,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeMime_literalMutation1509() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeMime_literalMutation1509");
+    public void testContentTypeMime_literalMutation2280() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeMime_literalMutation2280");
         checkContentTypeMime(null, null);
         checkContentTypeMime("", "");
         checkContentTypeMime("application/xml", "foo");
@@ -1449,8 +1449,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeMime_literalMutation1510() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeMime_literalMutation1510");
+    public void testContentTypeMime_literalMutation2281() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeMime_literalMutation2281");
         checkContentTypeMime(null, null);
         checkContentTypeMime("", "");
         checkContentTypeMime("application/xml", "application/xml");
@@ -1464,12 +1464,12 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeMime_literalMutation1511() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeMime_literalMutation1511");
+    public void testContentTypeMime_literalMutation2282() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeMime_literalMutation2282");
         checkContentTypeMime(null, null);
         checkContentTypeMime("", "");
         checkContentTypeMime("application/xml", "application/xml");
-        checkContentTypeMime("application/xml", "foo");
+        checkContentTypeMime("application/xml", "bar");
         checkContentTypeMime("application/xml", "application/xml;charset=utf-16");
         checkContentTypeMime("application/xml", "application/xml;charset=utf-32");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -1479,13 +1479,13 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeMime_literalMutation1512() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeMime_literalMutation1512");
+    public void testContentTypeMime_literalMutation2283() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeMime_literalMutation2283");
         checkContentTypeMime(null, null);
         checkContentTypeMime("", "");
         checkContentTypeMime("application/xml", "application/xml");
         checkContentTypeMime("application/xml", "application/xml;");
-        checkContentTypeMime("foo", "application/xml;charset=utf-16");
+        checkContentTypeMime("bar", "application/xml;charset=utf-16");
         checkContentTypeMime("application/xml", "application/xml;charset=utf-32");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1494,13 +1494,13 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeMime_literalMutation1513() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeMime_literalMutation1513");
+    public void testContentTypeMime_literalMutation2284() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeMime_literalMutation2284");
         checkContentTypeMime(null, null);
         checkContentTypeMime("", "");
         checkContentTypeMime("application/xml", "application/xml");
         checkContentTypeMime("application/xml", "application/xml;");
-        checkContentTypeMime("application/xml", "foo");
+        checkContentTypeMime("application/xml", "bar");
         checkContentTypeMime("application/xml", "application/xml;charset=utf-32");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1509,14 +1509,14 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeMime_literalMutation1514() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeMime_literalMutation1514");
+    public void testContentTypeMime_literalMutation2285() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeMime_literalMutation2285");
         checkContentTypeMime(null, null);
         checkContentTypeMime("", "");
         checkContentTypeMime("application/xml", "application/xml");
         checkContentTypeMime("application/xml", "application/xml;");
         checkContentTypeMime("application/xml", "application/xml;charset=utf-16");
-        checkContentTypeMime("foo", "application/xml;charset=utf-32");
+        checkContentTypeMime("bar", "application/xml;charset=utf-32");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1524,8 +1524,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#getContentTypeEncoding(String)}.
      */
 @Test
-    public void testContentTypeMime_literalMutation1515() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeMime_literalMutation1515");
+    public void testContentTypeMime_literalMutation2286() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testContentTypeMime_literalMutation2286");
         checkContentTypeMime(null, null);
         checkContentTypeMime("", "");
         checkContentTypeMime("application/xml", "application/xml");
@@ -1895,7 +1895,7 @@ public class XmlStreamReaderUtilitiesTest {
 @Test
     public void testAppXml() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml");
-        checkAppXml(false, null);
+        checkAppXml(true, null);
         checkAppXml(false, "");
         checkAppXml(true, "application/xml");
         checkAppXml(true, "application/xml-dtd");
@@ -1914,11 +1914,53 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isAppXml(String)}.
      */
 @Test
-    public void testAppXml_literalMutation1099() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1099");
+    public void testAppXml_literalMutation1870() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1870");
+        checkAppXml(false, null);
+        checkAppXml(true, "");
+        checkAppXml(true, "application/xml");
+        checkAppXml(true, "application/xml-dtd");
+        checkAppXml(true, "application/xml-external-parsed-entity");
+        checkAppXml(true, "application/soap+xml");
+        checkAppXml(true, "application/atom+xml");
+        checkAppXml(false, "application/atomxml");
+        checkAppXml(false, "text/xml");
+        checkAppXml(false, "text/atom+xml");
+        checkAppXml(true, "application/xml-dtd");
+        checkAppXml(true, "application/xml-external-parsed-entity");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test for {@link XmlStreamReader#isAppXml(String)}.
+     */
+@Test
+    public void testAppXml_literalMutation1871() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1871");
+        checkAppXml(false, null);
+        checkAppXml(false, "bar");
+        checkAppXml(true, "application/xml");
+        checkAppXml(true, "application/xml-dtd");
+        checkAppXml(true, "application/xml-external-parsed-entity");
+        checkAppXml(true, "application/soap+xml");
+        checkAppXml(true, "application/atom+xml");
+        checkAppXml(false, "application/atomxml");
+        checkAppXml(false, "text/xml");
+        checkAppXml(false, "text/atom+xml");
+        checkAppXml(true, "application/xml-dtd");
+        checkAppXml(true, "application/xml-external-parsed-entity");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test for {@link XmlStreamReader#isAppXml(String)}.
+     */
+@Test
+    public void testAppXml_literalMutation1872() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1872");
         checkAppXml(false, null);
         checkAppXml(false, "");
-        checkAppXml(true, "application/xml");
+        checkAppXml(false, "application/xml");
         checkAppXml(true, "application/xml-dtd");
         checkAppXml(true, "application/xml-external-parsed-entity");
         checkAppXml(true, "application/soap+xml");
@@ -1935,50 +1977,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isAppXml(String)}.
      */
 @Test
-    public void testAppXml_literalMutation1100() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1100");
-        checkAppXml(false, null);
-        checkAppXml(false, "foo");
-        checkAppXml(true, "application/xml");
-        checkAppXml(true, "application/xml-dtd");
-        checkAppXml(true, "application/xml-external-parsed-entity");
-        checkAppXml(true, "application/soap+xml");
-        checkAppXml(true, "application/atom+xml");
-        checkAppXml(false, "application/atomxml");
-        checkAppXml(false, "text/xml");
-        checkAppXml(false, "text/atom+xml");
-        checkAppXml(true, "application/xml-dtd");
-        checkAppXml(true, "application/xml-external-parsed-entity");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Test for {@link XmlStreamReader#isAppXml(String)}.
-     */
-@Test
-    public void testAppXml_literalMutation1101() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1101");
-        checkAppXml(false, null);
-        checkAppXml(false, "");
-        checkAppXml(true, "application/xml");
-        checkAppXml(true, "application/xml-dtd");
-        checkAppXml(true, "application/xml-external-parsed-entity");
-        checkAppXml(true, "application/soap+xml");
-        checkAppXml(true, "application/atom+xml");
-        checkAppXml(false, "application/atomxml");
-        checkAppXml(false, "text/xml");
-        checkAppXml(false, "text/atom+xml");
-        checkAppXml(true, "application/xml-dtd");
-        checkAppXml(true, "application/xml-external-parsed-entity");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Test for {@link XmlStreamReader#isAppXml(String)}.
-     */
-@Test
-    public void testAppXml_literalMutation1102() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1102");
+    public void testAppXml_literalMutation1873() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1873");
         checkAppXml(false, null);
         checkAppXml(false, "");
         checkAppXml(true, "foo");
@@ -1998,12 +1998,12 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isAppXml(String)}.
      */
 @Test
-    public void testAppXml_literalMutation1103() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1103");
+    public void testAppXml_literalMutation1874() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1874");
         checkAppXml(false, null);
         checkAppXml(false, "");
         checkAppXml(true, "application/xml");
-        checkAppXml(true, "application/xml-dtd");
+        checkAppXml(false, "application/xml-dtd");
         checkAppXml(true, "application/xml-external-parsed-entity");
         checkAppXml(true, "application/soap+xml");
         checkAppXml(true, "application/atom+xml");
@@ -2019,8 +2019,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isAppXml(String)}.
      */
 @Test
-    public void testAppXml_literalMutation1104() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1104");
+    public void testAppXml_literalMutation1875() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1875");
         checkAppXml(false, null);
         checkAppXml(false, "");
         checkAppXml(true, "application/xml");
@@ -2040,13 +2040,13 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isAppXml(String)}.
      */
 @Test
-    public void testAppXml_literalMutation1105() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1105");
+    public void testAppXml_literalMutation1876() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1876");
         checkAppXml(false, null);
         checkAppXml(false, "");
         checkAppXml(true, "application/xml");
         checkAppXml(true, "application/xml-dtd");
-        checkAppXml(true, "application/xml-external-parsed-entity");
+        checkAppXml(false, "application/xml-external-parsed-entity");
         checkAppXml(true, "application/soap+xml");
         checkAppXml(true, "application/atom+xml");
         checkAppXml(false, "application/atomxml");
@@ -2061,13 +2061,13 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isAppXml(String)}.
      */
 @Test
-    public void testAppXml_literalMutation1106() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1106");
+    public void testAppXml_literalMutation1877() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1877");
         checkAppXml(false, null);
         checkAppXml(false, "");
         checkAppXml(true, "application/xml");
         checkAppXml(true, "application/xml-dtd");
-        checkAppXml(true, "foo");
+        checkAppXml(true, "bar");
         checkAppXml(true, "application/soap+xml");
         checkAppXml(true, "application/atom+xml");
         checkAppXml(false, "application/atomxml");
@@ -2082,8 +2082,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isAppXml(String)}.
      */
 @Test
-    public void testAppXml_literalMutation1107() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1107");
+    public void testAppXml_literalMutation1878() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1878");
         checkAppXml(false, null);
         checkAppXml(false, "");
         checkAppXml(true, "application/xml");
@@ -2103,15 +2103,57 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isAppXml(String)}.
      */
 @Test
-    public void testAppXml_literalMutation1108() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1108");
+    public void testAppXml_literalMutation1879() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1879");
         checkAppXml(false, null);
         checkAppXml(false, "");
         checkAppXml(true, "application/xml");
         checkAppXml(true, "application/xml-dtd");
         checkAppXml(true, "application/xml-external-parsed-entity");
+        checkAppXml(true, "bar");
+        checkAppXml(true, "application/atom+xml");
+        checkAppXml(false, "application/atomxml");
+        checkAppXml(false, "text/xml");
+        checkAppXml(false, "text/atom+xml");
+        checkAppXml(true, "application/xml-dtd");
+        checkAppXml(true, "application/xml-external-parsed-entity");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test for {@link XmlStreamReader#isAppXml(String)}.
+     */
+@Test
+    public void testAppXml_literalMutation1880() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1880");
+        checkAppXml(false, null);
+        checkAppXml(false, "");
+        checkAppXml(true, "application/xml");
+        checkAppXml(true, "application/xml-dtd");
+        checkAppXml(true, "application/xml-external-parsed-entity");
+        checkAppXml(true, "application/soap+xml");
+        checkAppXml(false, "application/atom+xml");
+        checkAppXml(false, "application/atomxml");
+        checkAppXml(false, "text/xml");
+        checkAppXml(false, "text/atom+xml");
+        checkAppXml(true, "application/xml-dtd");
+        checkAppXml(true, "application/xml-external-parsed-entity");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test for {@link XmlStreamReader#isAppXml(String)}.
+     */
+@Test
+    public void testAppXml_literalMutation1881() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1881");
+        checkAppXml(false, null);
+        checkAppXml(false, "");
+        checkAppXml(true, "application/xml");
+        checkAppXml(true, "application/xml-dtd");
+        checkAppXml(true, "application/xml-external-parsed-entity");
+        checkAppXml(true, "application/soap+xml");
         checkAppXml(true, "foo");
-        checkAppXml(true, "application/atom+xml");
         checkAppXml(false, "application/atomxml");
         checkAppXml(false, "text/xml");
         checkAppXml(false, "text/atom+xml");
@@ -2124,8 +2166,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isAppXml(String)}.
      */
 @Test
-    public void testAppXml_literalMutation1109() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1109");
+    public void testAppXml_literalMutation1882() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1882");
         checkAppXml(false, null);
         checkAppXml(false, "");
         checkAppXml(true, "application/xml");
@@ -2133,7 +2175,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkAppXml(true, "application/xml-external-parsed-entity");
         checkAppXml(true, "application/soap+xml");
         checkAppXml(true, "application/atom+xml");
-        checkAppXml(false, "application/atomxml");
+        checkAppXml(true, "application/atomxml");
         checkAppXml(false, "text/xml");
         checkAppXml(false, "text/atom+xml");
         checkAppXml(true, "application/xml-dtd");
@@ -2145,16 +2187,16 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isAppXml(String)}.
      */
 @Test
-    public void testAppXml_literalMutation1110() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1110");
+    public void testAppXml_literalMutation1883() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1883");
         checkAppXml(false, null);
         checkAppXml(false, "");
         checkAppXml(true, "application/xml");
         checkAppXml(true, "application/xml-dtd");
         checkAppXml(true, "application/xml-external-parsed-entity");
         checkAppXml(true, "application/soap+xml");
-        checkAppXml(true, "foo");
-        checkAppXml(false, "application/atomxml");
+        checkAppXml(true, "application/atom+xml");
+        checkAppXml(false, "bar");
         checkAppXml(false, "text/xml");
         checkAppXml(false, "text/atom+xml");
         checkAppXml(true, "application/xml-dtd");
@@ -2166,8 +2208,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isAppXml(String)}.
      */
 @Test
-    public void testAppXml_literalMutation1111() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1111");
+    public void testAppXml_literalMutation1884() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1884");
         checkAppXml(false, null);
         checkAppXml(false, "");
         checkAppXml(true, "application/xml");
@@ -2176,7 +2218,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkAppXml(true, "application/soap+xml");
         checkAppXml(true, "application/atom+xml");
         checkAppXml(false, "application/atomxml");
-        checkAppXml(false, "text/xml");
+        checkAppXml(true, "text/xml");
         checkAppXml(false, "text/atom+xml");
         checkAppXml(true, "application/xml-dtd");
         checkAppXml(true, "application/xml-external-parsed-entity");
@@ -2187,29 +2229,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isAppXml(String)}.
      */
 @Test
-    public void testAppXml_literalMutation1112() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1112");
-        checkAppXml(false, null);
-        checkAppXml(false, "");
-        checkAppXml(true, "application/xml");
-        checkAppXml(true, "application/xml-dtd");
-        checkAppXml(true, "application/xml-external-parsed-entity");
-        checkAppXml(true, "application/soap+xml");
-        checkAppXml(true, "application/atom+xml");
-        checkAppXml(false, "foo");
-        checkAppXml(false, "text/xml");
-        checkAppXml(false, "text/atom+xml");
-        checkAppXml(true, "application/xml-dtd");
-        checkAppXml(true, "application/xml-external-parsed-entity");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Test for {@link XmlStreamReader#isAppXml(String)}.
-     */
-@Test
-    public void testAppXml_literalMutation1113() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1113");
+    public void testAppXml_literalMutation1885() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1885");
         checkAppXml(false, null);
         checkAppXml(false, "");
         checkAppXml(true, "application/xml");
@@ -2218,7 +2239,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkAppXml(true, "application/soap+xml");
         checkAppXml(true, "application/atom+xml");
         checkAppXml(false, "application/atomxml");
-        checkAppXml(false, "text/xml");
+        checkAppXml(false, "bar");
         checkAppXml(false, "text/atom+xml");
         checkAppXml(true, "application/xml-dtd");
         checkAppXml(true, "application/xml-external-parsed-entity");
@@ -2229,29 +2250,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isAppXml(String)}.
      */
 @Test
-    public void testAppXml_literalMutation1114() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1114");
-        checkAppXml(false, null);
-        checkAppXml(false, "");
-        checkAppXml(true, "application/xml");
-        checkAppXml(true, "application/xml-dtd");
-        checkAppXml(true, "application/xml-external-parsed-entity");
-        checkAppXml(true, "application/soap+xml");
-        checkAppXml(true, "application/atom+xml");
-        checkAppXml(false, "application/atomxml");
-        checkAppXml(false, "foo");
-        checkAppXml(false, "text/atom+xml");
-        checkAppXml(true, "application/xml-dtd");
-        checkAppXml(true, "application/xml-external-parsed-entity");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Test for {@link XmlStreamReader#isAppXml(String)}.
-     */
-@Test
-    public void testAppXml_literalMutation1115() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1115");
+    public void testAppXml_literalMutation1886() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1886");
         checkAppXml(false, null);
         checkAppXml(false, "");
         checkAppXml(true, "application/xml");
@@ -2271,8 +2271,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isAppXml(String)}.
      */
 @Test
-    public void testAppXml_literalMutation1116() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1116");
+    public void testAppXml_literalMutation1887() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1887");
         checkAppXml(false, null);
         checkAppXml(false, "");
         checkAppXml(true, "application/xml");
@@ -2282,7 +2282,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkAppXml(true, "application/atom+xml");
         checkAppXml(false, "application/atomxml");
         checkAppXml(false, "text/xml");
-        checkAppXml(false, "foo");
+        checkAppXml(false, "bar");
         checkAppXml(true, "application/xml-dtd");
         checkAppXml(true, "application/xml-external-parsed-entity");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -2292,29 +2292,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isAppXml(String)}.
      */
 @Test
-    public void testAppXml_literalMutation1117() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1117");
-        checkAppXml(false, null);
-        checkAppXml(false, "");
-        checkAppXml(true, "application/xml");
-        checkAppXml(true, "application/xml-dtd");
-        checkAppXml(true, "application/xml-external-parsed-entity");
-        checkAppXml(true, "application/soap+xml");
-        checkAppXml(true, "application/atom+xml");
-        checkAppXml(false, "application/atomxml");
-        checkAppXml(false, "text/xml");
-        checkAppXml(false, "text/atom+xml");
-        checkAppXml(true, "application/xml-dtd");
-        checkAppXml(true, "application/xml-external-parsed-entity");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Test for {@link XmlStreamReader#isAppXml(String)}.
-     */
-@Test
-    public void testAppXml_literalMutation1118() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1118");
+    public void testAppXml_literalMutation1888() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1888");
         checkAppXml(false, null);
         checkAppXml(false, "");
         checkAppXml(true, "application/xml");
@@ -2325,7 +2304,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkAppXml(false, "application/atomxml");
         checkAppXml(false, "text/xml");
         checkAppXml(false, "text/atom+xml");
-        checkAppXml(true, "foo");
+        checkAppXml(false, "application/xml-dtd");
         checkAppXml(true, "application/xml-external-parsed-entity");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2334,8 +2313,29 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isAppXml(String)}.
      */
 @Test
-    public void testAppXml_literalMutation1119() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1119");
+    public void testAppXml_literalMutation1889() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1889");
+        checkAppXml(false, null);
+        checkAppXml(false, "");
+        checkAppXml(true, "application/xml");
+        checkAppXml(true, "application/xml-dtd");
+        checkAppXml(true, "application/xml-external-parsed-entity");
+        checkAppXml(true, "application/soap+xml");
+        checkAppXml(true, "application/atom+xml");
+        checkAppXml(false, "application/atomxml");
+        checkAppXml(false, "text/xml");
+        checkAppXml(false, "text/atom+xml");
+        checkAppXml(true, "bar");
+        checkAppXml(true, "application/xml-external-parsed-entity");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test for {@link XmlStreamReader#isAppXml(String)}.
+     */
+@Test
+    public void testAppXml_literalMutation1890() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1890");
         checkAppXml(false, null);
         checkAppXml(false, "");
         checkAppXml(true, "application/xml");
@@ -2355,8 +2355,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isAppXml(String)}.
      */
 @Test
-    public void testAppXml_literalMutation1120() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1120");
+    public void testAppXml_literalMutation1891() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppXml_literalMutation1891");
         checkAppXml(false, null);
         checkAppXml(false, "");
         checkAppXml(true, "application/xml");
@@ -2368,7 +2368,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkAppXml(false, "text/xml");
         checkAppXml(false, "text/atom+xml");
         checkAppXml(true, "application/xml-dtd");
-        checkAppXml(true, "foo");
+        checkAppXml(true, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2811,8 +2811,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isTextXml(String)}.
      */
 @Test
-    public void testTextXml_literalMutation1518() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation1518");
+    public void testTextXml_literalMutation2289() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation2289");
         checkTextXml(false, null);
         checkTextXml(true, "");
         checkTextXml(true, "text/xml");
@@ -2829,8 +2829,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isTextXml(String)}.
      */
 @Test
-    public void testTextXml_literalMutation1519() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation1519");
+    public void testTextXml_literalMutation2290() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation2290");
         checkTextXml(false, null);
         checkTextXml(false, "foo");
         checkTextXml(true, "text/xml");
@@ -2847,8 +2847,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isTextXml(String)}.
      */
 @Test
-    public void testTextXml_literalMutation1520() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation1520");
+    public void testTextXml_literalMutation2291() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation2291");
         checkTextXml(false, null);
         checkTextXml(false, "");
         checkTextXml(false, "text/xml");
@@ -2865,11 +2865,11 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isTextXml(String)}.
      */
 @Test
-    public void testTextXml_literalMutation1521() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation1521");
+    public void testTextXml_literalMutation2292() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation2292");
         checkTextXml(false, null);
         checkTextXml(false, "");
-        checkTextXml(true, "foo");
+        checkTextXml(true, "bar");
         checkTextXml(true, "text/xml-external-parsed-entity");
         checkTextXml(true, "text/soap+xml");
         checkTextXml(true, "text/atom+xml");
@@ -2883,12 +2883,12 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isTextXml(String)}.
      */
 @Test
-    public void testTextXml_literalMutation1522() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation1522");
+    public void testTextXml_literalMutation2293() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation2293");
         checkTextXml(false, null);
         checkTextXml(false, "");
         checkTextXml(true, "text/xml");
-        checkTextXml(true, "text/xml-external-parsed-entity");
+        checkTextXml(false, "text/xml-external-parsed-entity");
         checkTextXml(true, "text/soap+xml");
         checkTextXml(true, "text/atom+xml");
         checkTextXml(false, "text/atomxml");
@@ -2901,8 +2901,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isTextXml(String)}.
      */
 @Test
-    public void testTextXml_literalMutation1523() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation1523");
+    public void testTextXml_literalMutation2294() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation2294");
         checkTextXml(false, null);
         checkTextXml(false, "");
         checkTextXml(true, "text/xml");
@@ -2919,8 +2919,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isTextXml(String)}.
      */
 @Test
-    public void testTextXml_literalMutation1524() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation1524");
+    public void testTextXml_literalMutation2295() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation2295");
         checkTextXml(false, null);
         checkTextXml(false, "");
         checkTextXml(true, "text/xml");
@@ -2937,8 +2937,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isTextXml(String)}.
      */
 @Test
-    public void testTextXml_literalMutation1525() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation1525");
+    public void testTextXml_literalMutation2296() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation2296");
         checkTextXml(false, null);
         checkTextXml(false, "");
         checkTextXml(true, "text/xml");
@@ -2955,14 +2955,14 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isTextXml(String)}.
      */
 @Test
-    public void testTextXml_literalMutation1526() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation1526");
+    public void testTextXml_literalMutation2297() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation2297");
         checkTextXml(false, null);
         checkTextXml(false, "");
         checkTextXml(true, "text/xml");
         checkTextXml(true, "text/xml-external-parsed-entity");
         checkTextXml(true, "text/soap+xml");
-        checkTextXml(true, "text/atom+xml");
+        checkTextXml(false, "text/atom+xml");
         checkTextXml(false, "text/atomxml");
         checkTextXml(false, "application/xml");
         checkTextXml(false, "application/atom+xml");
@@ -2973,14 +2973,14 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isTextXml(String)}.
      */
 @Test
-    public void testTextXml_literalMutation1527() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation1527");
+    public void testTextXml_literalMutation2298() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation2298");
         checkTextXml(false, null);
         checkTextXml(false, "");
         checkTextXml(true, "text/xml");
         checkTextXml(true, "text/xml-external-parsed-entity");
         checkTextXml(true, "text/soap+xml");
-        checkTextXml(true, "foo");
+        checkTextXml(true, "bar");
         checkTextXml(false, "text/atomxml");
         checkTextXml(false, "application/xml");
         checkTextXml(false, "application/atom+xml");
@@ -2991,15 +2991,15 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isTextXml(String)}.
      */
 @Test
-    public void testTextXml_literalMutation1528() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation1528");
+    public void testTextXml_literalMutation2299() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation2299");
         checkTextXml(false, null);
         checkTextXml(false, "");
         checkTextXml(true, "text/xml");
         checkTextXml(true, "text/xml-external-parsed-entity");
         checkTextXml(true, "text/soap+xml");
         checkTextXml(true, "text/atom+xml");
-        checkTextXml(false, "text/atomxml");
+        checkTextXml(true, "text/atomxml");
         checkTextXml(false, "application/xml");
         checkTextXml(false, "application/atom+xml");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -3009,15 +3009,15 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isTextXml(String)}.
      */
 @Test
-    public void testTextXml_literalMutation1529() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation1529");
+    public void testTextXml_literalMutation2300() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation2300");
         checkTextXml(false, null);
         checkTextXml(false, "");
         checkTextXml(true, "text/xml");
         checkTextXml(true, "text/xml-external-parsed-entity");
         checkTextXml(true, "text/soap+xml");
         checkTextXml(true, "text/atom+xml");
-        checkTextXml(false, "foo");
+        checkTextXml(false, "bar");
         checkTextXml(false, "application/xml");
         checkTextXml(false, "application/atom+xml");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -3027,8 +3027,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isTextXml(String)}.
      */
 @Test
-    public void testTextXml_literalMutation1530() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation1530");
+    public void testTextXml_literalMutation2301() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation2301");
         checkTextXml(false, null);
         checkTextXml(false, "");
         checkTextXml(true, "text/xml");
@@ -3045,8 +3045,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isTextXml(String)}.
      */
 @Test
-    public void testTextXml_literalMutation1531() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation1531");
+    public void testTextXml_literalMutation2302() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation2302");
         checkTextXml(false, null);
         checkTextXml(false, "");
         checkTextXml(true, "text/xml");
@@ -3063,8 +3063,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isTextXml(String)}.
      */
 @Test
-    public void testTextXml_literalMutation1532() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation1532");
+    public void testTextXml_literalMutation2303() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation2303");
         checkTextXml(false, null);
         checkTextXml(false, "");
         checkTextXml(true, "text/xml");
@@ -3081,8 +3081,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test for {@link XmlStreamReader#isTextXml(String)}.
      */
 @Test
-    public void testTextXml_literalMutation1533() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation1533");
+    public void testTextXml_literalMutation2304() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTextXml_literalMutation2304");
         checkTextXml(false, null);
         checkTextXml(false, "");
         checkTextXml(true, "text/xml");
@@ -3091,7 +3091,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkTextXml(true, "text/atom+xml");
         checkTextXml(false, "text/atomxml");
         checkTextXml(false, "application/xml");
-        checkTextXml(false, "foo");
+        checkTextXml(false, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -3491,7 +3491,7 @@ public class XmlStreamReaderUtilitiesTest {
 @Test
     public void testCalculateRawEncodingNoBOM() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM");
-        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "foo", null, null, null);
+        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "bar", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
         checkRawEncoding("UTF-8", null, null, "UTF-16BE", null);
@@ -3509,8 +3509,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1400() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1400");
+    public void testCalculateRawEncodingNoBOM_literalMutation2171() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2171");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("foo", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -3529,11 +3529,11 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1405() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1405");
+    public void testCalculateRawEncodingNoBOM_literalMutation2176() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2176");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
-        checkRawEncoding("foo", null, "UTF-16BE", null, null);
+        checkRawEncoding("bar", null, "UTF-16BE", null, null);
         checkRawEncoding("UTF-8", null, null, "UTF-16BE", null);
         checkRawEncoding("UTF-8", null, "UTF-8", "UTF-8", "UTF-16BE");
         checkRawEncoding("UTF-16BE", null, "UTF-16BE", "UTF-16BE", null);
@@ -3549,8 +3549,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1407() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1407");
+    public void testCalculateRawEncodingNoBOM_literalMutation2178() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2178");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "foo", null, null);
@@ -3569,8 +3569,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1410() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1410");
+    public void testCalculateRawEncodingNoBOM_literalMutation2181() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2181");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -3589,8 +3589,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1413() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1413");
+    public void testCalculateRawEncodingNoBOM_literalMutation2184() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2184");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -3609,8 +3609,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1415() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1415");
+    public void testCalculateRawEncodingNoBOM_literalMutation2186() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2186");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -3629,8 +3629,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1417() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1417");
+    public void testCalculateRawEncodingNoBOM_literalMutation2188() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2188");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -3649,8 +3649,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1418() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1418");
+    public void testCalculateRawEncodingNoBOM_literalMutation2189() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2189");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -3669,13 +3669,13 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1419() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1419");
+    public void testCalculateRawEncodingNoBOM_literalMutation2190() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2190");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
         checkRawEncoding("UTF-8", null, null, "UTF-16BE", null);
-        checkRawEncoding("UTF-8", null, "UTF-8", "UTF-8", "foo");
+        checkRawEncoding("UTF-8", null, "UTF-8", "UTF-8", "bar");
         checkRawEncoding("UTF-16BE", null, "UTF-16BE", "UTF-16BE", null);
         checkRawEncoding("UTF-16BE", null, null, null, "UTF-16BE");
         checkRawEncoding("UTF-16BE", null, "UTF-8", null, "UTF-16BE");
@@ -3689,14 +3689,14 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1420() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1420");
+    public void testCalculateRawEncodingNoBOM_literalMutation2191() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2191");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
         checkRawEncoding("UTF-8", null, null, "UTF-16BE", null);
         checkRawEncoding("UTF-8", null, "UTF-8", "UTF-8", "UTF-16BE");
-        checkRawEncoding("foo", null, "UTF-16BE", "UTF-16BE", null);
+        checkRawEncoding("bar", null, "UTF-16BE", "UTF-16BE", null);
         checkRawEncoding("UTF-16BE", null, null, null, "UTF-16BE");
         checkRawEncoding("UTF-16BE", null, "UTF-8", null, "UTF-16BE");
         checkRawEncoding("UTF-16BE", null, null, "UTF-8", "UTF-16BE");
@@ -3709,8 +3709,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1422() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1422");
+    public void testCalculateRawEncodingNoBOM_literalMutation2193() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2193");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -3729,8 +3729,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1423() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1423");
+    public void testCalculateRawEncodingNoBOM_literalMutation2194() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2194");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -3749,8 +3749,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1425() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1425");
+    public void testCalculateRawEncodingNoBOM_literalMutation2196() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2196");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -3769,8 +3769,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1429() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1429");
+    public void testCalculateRawEncodingNoBOM_literalMutation2200() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2200");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -3789,8 +3789,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1430() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1430");
+    public void testCalculateRawEncodingNoBOM_literalMutation2201() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2201");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -3809,8 +3809,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1432() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1432");
+    public void testCalculateRawEncodingNoBOM_literalMutation2203() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2203");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -3829,8 +3829,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1434() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1434");
+    public void testCalculateRawEncodingNoBOM_literalMutation2205() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2205");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -3849,8 +3849,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1435() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1435");
+    public void testCalculateRawEncodingNoBOM_literalMutation2206() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2206");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -3869,8 +3869,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1438() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1438");
+    public void testCalculateRawEncodingNoBOM_literalMutation2209() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2209");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -3889,8 +3889,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1439() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1439");
+    public void testCalculateRawEncodingNoBOM_literalMutation2210() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2210");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -3909,8 +3909,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1440() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1440");
+    public void testCalculateRawEncodingNoBOM_literalMutation2211() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2211");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -3920,7 +3920,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkRawEncoding("UTF-16BE", null, null, null, "UTF-16BE");
         checkRawEncoding("UTF-16BE", null, "UTF-8", null, "UTF-16BE");
         checkRawEncoding("UTF-16BE", null, null, "UTF-8", "UTF-16BE");
-        checkRawEncoding("foo", null, "UTF-16BE", "UTF-16", null);
+        checkRawEncoding("bar", null, "UTF-16BE", "UTF-16", null);
         checkRawEncoding("UTF-16LE", null, "UTF-16LE", "UTF-16", null);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -3929,8 +3929,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1442() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1442");
+    public void testCalculateRawEncodingNoBOM_literalMutation2213() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2213");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -3940,7 +3940,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkRawEncoding("UTF-16BE", null, null, null, "UTF-16BE");
         checkRawEncoding("UTF-16BE", null, "UTF-8", null, "UTF-16BE");
         checkRawEncoding("UTF-16BE", null, null, "UTF-8", "UTF-16BE");
-        checkRawEncoding("UTF-16BE", null, "foo", "UTF-16", null);
+        checkRawEncoding("UTF-16BE", null, "bar", "UTF-16", null);
         checkRawEncoding("UTF-16LE", null, "UTF-16LE", "UTF-16", null);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -3949,8 +3949,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1443() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1443");
+    public void testCalculateRawEncodingNoBOM_literalMutation2214() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2214");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -3960,7 +3960,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkRawEncoding("UTF-16BE", null, null, null, "UTF-16BE");
         checkRawEncoding("UTF-16BE", null, "UTF-8", null, "UTF-16BE");
         checkRawEncoding("UTF-16BE", null, null, "UTF-8", "UTF-16BE");
-        checkRawEncoding("UTF-16BE", null, "UTF-16BE", "foo", null);
+        checkRawEncoding("UTF-16BE", null, "UTF-16BE", "bar", null);
         checkRawEncoding("UTF-16LE", null, "UTF-16LE", "UTF-16", null);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -3969,8 +3969,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1445() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1445");
+    public void testCalculateRawEncodingNoBOM_literalMutation2216() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2216");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -3989,8 +3989,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1447() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1447");
+    public void testCalculateRawEncodingNoBOM_literalMutation2218() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2218");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -4001,7 +4001,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkRawEncoding("UTF-16BE", null, "UTF-8", null, "UTF-16BE");
         checkRawEncoding("UTF-16BE", null, null, "UTF-8", "UTF-16BE");
         checkRawEncoding("UTF-16BE", null, "UTF-16BE", "UTF-16", null);
-        checkRawEncoding("UTF-16LE", null, "foo", "UTF-16", null);
+        checkRawEncoding("UTF-16LE", null, "bar", "UTF-16", null);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -4009,8 +4009,8 @@ public class XmlStreamReaderUtilitiesTest {
      * No BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingNoBOM_literalMutation1448() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation1448");
+    public void testCalculateRawEncodingNoBOM_literalMutation2219() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingNoBOM_literalMutation2219");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS2, "UTF-32", null, null, null);
         checkRawEncoding("UTF-8", null, null, null, null);
         checkRawEncoding("UTF-8", null, "UTF-16BE", null, null);
@@ -4021,7 +4021,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkRawEncoding("UTF-16BE", null, "UTF-8", null, "UTF-16BE");
         checkRawEncoding("UTF-16BE", null, null, "UTF-8", "UTF-16BE");
         checkRawEncoding("UTF-16BE", null, "UTF-16BE", "UTF-16", null);
-        checkRawEncoding("UTF-16LE", null, "UTF-16LE", "foo", null);
+        checkRawEncoding("UTF-16LE", null, "UTF-16LE", "bar", null);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -4279,7 +4279,7 @@ public class XmlStreamReaderUtilitiesTest {
 @Test
     public void testCalculateRawEncodingStandard() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandard");
-        testCalculateRawEncodingStandard("foo", "UTF-16BE", "UTF-16LE");
+        testCalculateRawEncodingStandard("bar", "UTF-16BE", "UTF-16LE");
         testCalculateRawEncodingStandard("UTF-16BE", "UTF-8", "UTF-16LE");
         testCalculateRawEncodingStandard("UTF-16LE", "UTF-8", "UTF-16BE");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -4289,9 +4289,9 @@ public class XmlStreamReaderUtilitiesTest {
      * BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingStandard_literalMutation1451() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandard_literalMutation1451");
-        testCalculateRawEncodingStandard("UTF-8", "foo", "UTF-16LE");
+    public void testCalculateRawEncodingStandard_literalMutation2222() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandard_literalMutation2222");
+        testCalculateRawEncodingStandard("UTF-8", "bar", "UTF-16LE");
         testCalculateRawEncodingStandard("UTF-16BE", "UTF-8", "UTF-16LE");
         testCalculateRawEncodingStandard("UTF-16LE", "UTF-8", "UTF-16BE");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -4301,8 +4301,8 @@ public class XmlStreamReaderUtilitiesTest {
      * BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingStandard_literalMutation1452() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandard_literalMutation1452");
+    public void testCalculateRawEncodingStandard_literalMutation2223() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandard_literalMutation2223");
         testCalculateRawEncodingStandard("UTF-8", "UTF-16BE", "foo");
         testCalculateRawEncodingStandard("UTF-16BE", "UTF-8", "UTF-16LE");
         testCalculateRawEncodingStandard("UTF-16LE", "UTF-8", "UTF-16BE");
@@ -4313,10 +4313,10 @@ public class XmlStreamReaderUtilitiesTest {
      * BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingStandard_literalMutation1453() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandard_literalMutation1453");
+    public void testCalculateRawEncodingStandard_literalMutation2224() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandard_literalMutation2224");
         testCalculateRawEncodingStandard("UTF-8", "UTF-16BE", "UTF-16LE");
-        testCalculateRawEncodingStandard("foo", "UTF-8", "UTF-16LE");
+        testCalculateRawEncodingStandard("bar", "UTF-8", "UTF-16LE");
         testCalculateRawEncodingStandard("UTF-16LE", "UTF-8", "UTF-16BE");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -4325,8 +4325,8 @@ public class XmlStreamReaderUtilitiesTest {
      * BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingStandard_literalMutation1454() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandard_literalMutation1454");
+    public void testCalculateRawEncodingStandard_literalMutation2225() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandard_literalMutation2225");
         testCalculateRawEncodingStandard("UTF-8", "UTF-16BE", "UTF-16LE");
         testCalculateRawEncodingStandard("UTF-16BE", "foo", "UTF-16LE");
         testCalculateRawEncodingStandard("UTF-16LE", "UTF-8", "UTF-16BE");
@@ -4337,10 +4337,10 @@ public class XmlStreamReaderUtilitiesTest {
      * BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingStandard_literalMutation1455() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandard_literalMutation1455");
+    public void testCalculateRawEncodingStandard_literalMutation2226() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandard_literalMutation2226");
         testCalculateRawEncodingStandard("UTF-8", "UTF-16BE", "UTF-16LE");
-        testCalculateRawEncodingStandard("UTF-16BE", "UTF-8", "foo");
+        testCalculateRawEncodingStandard("UTF-16BE", "UTF-8", "bar");
         testCalculateRawEncodingStandard("UTF-16LE", "UTF-8", "UTF-16BE");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -4349,8 +4349,8 @@ public class XmlStreamReaderUtilitiesTest {
      * BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingStandard_literalMutation1456() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandard_literalMutation1456");
+    public void testCalculateRawEncodingStandard_literalMutation2227() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandard_literalMutation2227");
         testCalculateRawEncodingStandard("UTF-8", "UTF-16BE", "UTF-16LE");
         testCalculateRawEncodingStandard("UTF-16BE", "UTF-8", "UTF-16LE");
         testCalculateRawEncodingStandard("foo", "UTF-8", "UTF-16BE");
@@ -4361,8 +4361,8 @@ public class XmlStreamReaderUtilitiesTest {
      * BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingStandard_literalMutation1457() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandard_literalMutation1457");
+    public void testCalculateRawEncodingStandard_literalMutation2228() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandard_literalMutation2228");
         testCalculateRawEncodingStandard("UTF-8", "UTF-16BE", "UTF-16LE");
         testCalculateRawEncodingStandard("UTF-16BE", "UTF-8", "UTF-16LE");
         testCalculateRawEncodingStandard("UTF-16LE", "foo", "UTF-16BE");
@@ -4373,8 +4373,8 @@ public class XmlStreamReaderUtilitiesTest {
      * BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingStandard_literalMutation1458() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandard_literalMutation1458");
+    public void testCalculateRawEncodingStandard_literalMutation2229() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandard_literalMutation2229");
         testCalculateRawEncodingStandard("UTF-8", "UTF-16BE", "UTF-16LE");
         testCalculateRawEncodingStandard("UTF-16BE", "UTF-8", "UTF-16LE");
         testCalculateRawEncodingStandard("UTF-16LE", "UTF-8", "foo");
@@ -4469,8 +4469,8 @@ public class XmlStreamReaderUtilitiesTest {
      * BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingStandardUtf32_literalMutation1466() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandardUtf32_literalMutation1466");
+    public void testCalculateRawEncodingStandardUtf32_literalMutation2237() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandardUtf32_literalMutation2237");
         testCalculateRawEncodingStandard("UTF-8", "foo", "UTF-32LE");
         testCalculateRawEncodingStandard("UTF-32BE", "UTF-8", "UTF-32LE");
         testCalculateRawEncodingStandard("UTF-32LE", "UTF-8", "UTF-32BE");
@@ -4481,8 +4481,8 @@ public class XmlStreamReaderUtilitiesTest {
      * BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingStandardUtf32_literalMutation1467() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandardUtf32_literalMutation1467");
+    public void testCalculateRawEncodingStandardUtf32_literalMutation2238() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandardUtf32_literalMutation2238");
         testCalculateRawEncodingStandard("UTF-8", "UTF-32BE", "foo");
         testCalculateRawEncodingStandard("UTF-32BE", "UTF-8", "UTF-32LE");
         testCalculateRawEncodingStandard("UTF-32LE", "UTF-8", "UTF-32BE");
@@ -4493,8 +4493,8 @@ public class XmlStreamReaderUtilitiesTest {
      * BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingStandardUtf32_literalMutation1468() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandardUtf32_literalMutation1468");
+    public void testCalculateRawEncodingStandardUtf32_literalMutation2239() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandardUtf32_literalMutation2239");
         testCalculateRawEncodingStandard("UTF-8", "UTF-32BE", "UTF-32LE");
         testCalculateRawEncodingStandard("foo", "UTF-8", "UTF-32LE");
         testCalculateRawEncodingStandard("UTF-32LE", "UTF-8", "UTF-32BE");
@@ -4505,10 +4505,10 @@ public class XmlStreamReaderUtilitiesTest {
      * BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingStandardUtf32_literalMutation1469() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandardUtf32_literalMutation1469");
+    public void testCalculateRawEncodingStandardUtf32_literalMutation2240() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandardUtf32_literalMutation2240");
         testCalculateRawEncodingStandard("UTF-8", "UTF-32BE", "UTF-32LE");
-        testCalculateRawEncodingStandard("UTF-32BE", "foo", "UTF-32LE");
+        testCalculateRawEncodingStandard("UTF-32BE", "bar", "UTF-32LE");
         testCalculateRawEncodingStandard("UTF-32LE", "UTF-8", "UTF-32BE");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -4517,8 +4517,8 @@ public class XmlStreamReaderUtilitiesTest {
      * BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingStandardUtf32_literalMutation1470() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandardUtf32_literalMutation1470");
+    public void testCalculateRawEncodingStandardUtf32_literalMutation2241() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandardUtf32_literalMutation2241");
         testCalculateRawEncodingStandard("UTF-8", "UTF-32BE", "UTF-32LE");
         testCalculateRawEncodingStandard("UTF-32BE", "UTF-8", "foo");
         testCalculateRawEncodingStandard("UTF-32LE", "UTF-8", "UTF-32BE");
@@ -4529,11 +4529,11 @@ public class XmlStreamReaderUtilitiesTest {
      * BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingStandardUtf32_literalMutation1471() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandardUtf32_literalMutation1471");
+    public void testCalculateRawEncodingStandardUtf32_literalMutation2242() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandardUtf32_literalMutation2242");
         testCalculateRawEncodingStandard("UTF-8", "UTF-32BE", "UTF-32LE");
         testCalculateRawEncodingStandard("UTF-32BE", "UTF-8", "UTF-32LE");
-        testCalculateRawEncodingStandard("foo", "UTF-8", "UTF-32BE");
+        testCalculateRawEncodingStandard("bar", "UTF-8", "UTF-32BE");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -4541,11 +4541,11 @@ public class XmlStreamReaderUtilitiesTest {
      * BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingStandardUtf32_literalMutation1472() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandardUtf32_literalMutation1472");
+    public void testCalculateRawEncodingStandardUtf32_literalMutation2243() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandardUtf32_literalMutation2243");
         testCalculateRawEncodingStandard("UTF-8", "UTF-32BE", "UTF-32LE");
         testCalculateRawEncodingStandard("UTF-32BE", "UTF-8", "UTF-32LE");
-        testCalculateRawEncodingStandard("UTF-32LE", "foo", "UTF-32BE");
+        testCalculateRawEncodingStandard("UTF-32LE", "bar", "UTF-32BE");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -4553,11 +4553,11 @@ public class XmlStreamReaderUtilitiesTest {
      * BOM calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingStandardUtf32_literalMutation1473() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandardUtf32_literalMutation1473");
+    public void testCalculateRawEncodingStandardUtf32_literalMutation2244() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingStandardUtf32_literalMutation2244");
         testCalculateRawEncodingStandard("UTF-8", "UTF-32BE", "UTF-32LE");
         testCalculateRawEncodingStandard("UTF-32BE", "UTF-8", "UTF-32LE");
-        testCalculateRawEncodingStandard("UTF-32LE", "UTF-8", "foo");
+        testCalculateRawEncodingStandard("UTF-32LE", "UTF-8", "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -5041,9 +5041,9 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1309() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1309");
-        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "foo", null, null);
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2080() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2080");
+        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "bar", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", null, "UTF-16LE", null);
@@ -5060,10 +5060,10 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1312() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1312");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2083() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2083");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
-        checkRawEncoding("foo", "UTF-16BE", null, "UTF-16", null);
+        checkRawEncoding("bar", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", null, "UTF-16LE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16BE", "UTF-16LE", null);
@@ -5079,8 +5079,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1313() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1313");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2084() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2084");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "foo", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
@@ -5098,10 +5098,10 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1315() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1315");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2086() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2086");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
-        checkRawEncoding("UTF-16BE", "UTF-16BE", null, "foo", null);
+        checkRawEncoding("UTF-16BE", "UTF-16BE", null, "bar", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", null, "UTF-16LE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16BE", "UTF-16LE", null);
@@ -5117,8 +5117,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1317() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1317");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2088() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2088");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("foo", "UTF-16BE", "UTF-16BE", "UTF-16", null);
@@ -5136,8 +5136,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1318() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1318");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2089() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2089");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "foo", "UTF-16BE", "UTF-16", null);
@@ -5155,8 +5155,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1319() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1319");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2090() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2090");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "foo", "UTF-16", null);
@@ -5174,8 +5174,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1320() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1320");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2091() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2091");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "foo", null);
@@ -5193,8 +5193,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1322() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1322");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2093() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2093");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
@@ -5212,8 +5212,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1324() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1324");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2095() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2095");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
@@ -5231,8 +5231,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1326() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1326");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2097() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2097");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
@@ -5250,13 +5250,13 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1327() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1327");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2098() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2098");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", null, "UTF-16LE", null);
-        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "foo", "UTF-16LE", null);
+        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "bar", "UTF-16LE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", "UTF-16", null, null);
         checkRawEncoding("UTF-16LE", "UTF-16LE", null, "UTF-16", null);
         checkRawEncoding("UTF-16LE", "UTF-16LE", "UTF-16LE", "UTF-16", null);
@@ -5269,13 +5269,13 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1328() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1328");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2099() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2099");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", null, "UTF-16LE", null);
-        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16BE", "foo", null);
+        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16BE", "bar", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", "UTF-16", null, null);
         checkRawEncoding("UTF-16LE", "UTF-16LE", null, "UTF-16", null);
         checkRawEncoding("UTF-16LE", "UTF-16LE", "UTF-16LE", "UTF-16", null);
@@ -5288,8 +5288,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1330() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1330");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2101() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2101");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
@@ -5307,14 +5307,14 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1331() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1331");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2102() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2102");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", null, "UTF-16LE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16BE", "UTF-16LE", null);
-        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", "foo", null, null);
+        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", "bar", null, null);
         checkRawEncoding("UTF-16LE", "UTF-16LE", null, "UTF-16", null);
         checkRawEncoding("UTF-16LE", "UTF-16LE", "UTF-16LE", "UTF-16", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", null, "UTF-16BE", null);
@@ -5326,15 +5326,15 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1334() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1334");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2105() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2105");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", null, "UTF-16LE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16BE", "UTF-16LE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", "UTF-16", null, null);
-        checkRawEncoding("foo", "UTF-16LE", null, "UTF-16", null);
+        checkRawEncoding("bar", "UTF-16LE", null, "UTF-16", null);
         checkRawEncoding("UTF-16LE", "UTF-16LE", "UTF-16LE", "UTF-16", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", null, "UTF-16BE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", "UTF-16LE", "UTF-16BE", null);
@@ -5345,15 +5345,15 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1335() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1335");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2106() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2106");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", null, "UTF-16LE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16BE", "UTF-16LE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", "UTF-16", null, null);
-        checkRawEncoding("UTF-16LE", "foo", null, "UTF-16", null);
+        checkRawEncoding("UTF-16LE", "bar", null, "UTF-16", null);
         checkRawEncoding("UTF-16LE", "UTF-16LE", "UTF-16LE", "UTF-16", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", null, "UTF-16BE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", "UTF-16LE", "UTF-16BE", null);
@@ -5364,15 +5364,15 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1337() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1337");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2108() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2108");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", null, "UTF-16LE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16BE", "UTF-16LE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", "UTF-16", null, null);
-        checkRawEncoding("UTF-16LE", "UTF-16LE", null, "foo", null);
+        checkRawEncoding("UTF-16LE", "UTF-16LE", null, "bar", null);
         checkRawEncoding("UTF-16LE", "UTF-16LE", "UTF-16LE", "UTF-16", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", null, "UTF-16BE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", "UTF-16LE", "UTF-16BE", null);
@@ -5383,8 +5383,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1339() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1339");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2110() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2110");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
@@ -5402,8 +5402,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1340() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1340");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2111() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2111");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
@@ -5421,8 +5421,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1341() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1341");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2112() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2112");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
@@ -5430,7 +5430,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16BE", "UTF-16LE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", "UTF-16", null, null);
         checkRawEncoding("UTF-16LE", "UTF-16LE", null, "UTF-16", null);
-        checkRawEncoding("UTF-16LE", "UTF-16LE", "foo", "UTF-16", null);
+        checkRawEncoding("UTF-16LE", "UTF-16LE", "bar", "UTF-16", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", null, "UTF-16BE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", "UTF-16LE", "UTF-16BE", null);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -5440,8 +5440,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1342() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1342");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2113() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2113");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
@@ -5459,8 +5459,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1344() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1344");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2115() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2115");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
@@ -5469,7 +5469,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", "UTF-16", null, null);
         checkRawEncoding("UTF-16LE", "UTF-16LE", null, "UTF-16", null);
         checkRawEncoding("UTF-16LE", "UTF-16LE", "UTF-16LE", "UTF-16", null);
-        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "foo", null, "UTF-16BE", null);
+        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "bar", null, "UTF-16BE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", "UTF-16LE", "UTF-16BE", null);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -5478,8 +5478,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1346() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1346");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2117() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2117");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
@@ -5497,8 +5497,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1348() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1348");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2119() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2119");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
@@ -5508,7 +5508,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkRawEncoding("UTF-16LE", "UTF-16LE", null, "UTF-16", null);
         checkRawEncoding("UTF-16LE", "UTF-16LE", "UTF-16LE", "UTF-16", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", null, "UTF-16BE", null);
-        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "foo", "UTF-16LE", "UTF-16BE", null);
+        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "bar", "UTF-16LE", "UTF-16BE", null);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -5516,8 +5516,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1349() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1349");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2120() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2120");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
@@ -5527,7 +5527,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkRawEncoding("UTF-16LE", "UTF-16LE", null, "UTF-16", null);
         checkRawEncoding("UTF-16LE", "UTF-16LE", "UTF-16LE", "UTF-16", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", null, "UTF-16BE", null);
-        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", "foo", "UTF-16BE", null);
+        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", "bar", "UTF-16BE", null);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -5535,8 +5535,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-16 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF16_literalMutation1350() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation1350");
+    public void testCalculateRawEncodingAdditonalUTF16_literalMutation2121() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF16_literalMutation2121");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16BE", "UTF-16", null, null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", null, "UTF-16", null);
         checkRawEncoding("UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16", null);
@@ -5546,7 +5546,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkRawEncoding("UTF-16LE", "UTF-16LE", null, "UTF-16", null);
         checkRawEncoding("UTF-16LE", "UTF-16LE", "UTF-16LE", "UTF-16", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", null, "UTF-16BE", null);
-        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", "UTF-16LE", "foo", null);
+        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-16LE", "UTF-16LE", "bar", null);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -5936,7 +5936,7 @@ public class XmlStreamReaderUtilitiesTest {
 @Test
     public void testCalculateRawEncodingAdditonalUTF32() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32");
-        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "foo", "UTF-32", null, null);
+        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "bar", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", null, "UTF-32LE", null);
@@ -5953,8 +5953,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1353() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1353");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2124() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2124");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "foo", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
@@ -5972,8 +5972,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1356() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1356");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2127() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2127");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("foo", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
@@ -5991,8 +5991,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1357() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1357");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2128() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2128");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "foo", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
@@ -6010,10 +6010,10 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1359() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1359");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2130() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2130");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
-        checkRawEncoding("UTF-32BE", "UTF-32BE", null, "foo", null);
+        checkRawEncoding("UTF-32BE", "UTF-32BE", null, "bar", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", null, "UTF-32LE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32BE", "UTF-32LE", null);
@@ -6029,8 +6029,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1361() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1361");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2132() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2132");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("foo", "UTF-32BE", "UTF-32BE", "UTF-32", null);
@@ -6048,8 +6048,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1362() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1362");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2133() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2133");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "foo", "UTF-32BE", "UTF-32", null);
@@ -6067,8 +6067,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1363() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1363");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2134() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2134");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "foo", "UTF-32", null);
@@ -6086,11 +6086,11 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1364() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1364");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2135() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2135");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
-        checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "foo", null);
+        checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "bar", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", null, "UTF-32LE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32BE", "UTF-32LE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32LE", "UTF-32", null, null);
@@ -6105,12 +6105,12 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1366() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1366");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2137() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2137");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
-        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "foo", null, "UTF-32LE", null);
+        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "bar", null, "UTF-32LE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32BE", "UTF-32LE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32LE", "UTF-32", null, null);
         checkRawEncoding("UTF-32LE", "UTF-32LE", null, "UTF-32", null);
@@ -6124,12 +6124,12 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1368() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1368");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2139() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2139");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
-        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", null, "foo", null);
+        checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", null, "bar", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32BE", "UTF-32LE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32LE", "UTF-32", null, null);
         checkRawEncoding("UTF-32LE", "UTF-32LE", null, "UTF-32", null);
@@ -6143,8 +6143,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1370() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1370");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2141() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2141");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
@@ -6162,8 +6162,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1371() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1371");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2142() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2142");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
@@ -6181,8 +6181,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1372() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1372");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2143() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2143");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
@@ -6200,8 +6200,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1374() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1374");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2145() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2145");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
@@ -6219,8 +6219,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1375() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1375");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2146() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2146");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
@@ -6238,8 +6238,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1378() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1378");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2149() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2149");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
@@ -6257,15 +6257,15 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1379() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1379");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2150() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2150");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", null, "UTF-32LE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32BE", "UTF-32LE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32LE", "UTF-32", null, null);
-        checkRawEncoding("UTF-32LE", "foo", null, "UTF-32", null);
+        checkRawEncoding("UTF-32LE", "bar", null, "UTF-32", null);
         checkRawEncoding("UTF-32LE", "UTF-32LE", "UTF-32LE", "UTF-32", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32LE", null, "UTF-32BE", null);
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32LE", "UTF-32LE", "UTF-32BE", null);
@@ -6276,8 +6276,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1381() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1381");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2152() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2152");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
@@ -6295,8 +6295,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1383() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1383");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2154() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2154");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
@@ -6314,8 +6314,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1384() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1384");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2155() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2155");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
@@ -6333,8 +6333,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1385() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1385");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2156() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2156");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
@@ -6352,8 +6352,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1386() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1386");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2157() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2157");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
@@ -6371,8 +6371,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1388() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1388");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2159() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2159");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
@@ -6390,8 +6390,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1390() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1390");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2161() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2161");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
@@ -6409,8 +6409,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1392() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1392");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2163() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2163");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
@@ -6428,8 +6428,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1393() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1393");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2164() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2164");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
@@ -6447,8 +6447,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Additional UTF-32 calculateRawEncoding() Test
      */
 @Test
-    public void testCalculateRawEncodingAdditonalUTF32_literalMutation1394() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation1394");
+    public void testCalculateRawEncodingAdditonalUTF32_literalMutation2165() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateRawEncodingAdditonalUTF32_literalMutation2165");
         checkRawError(XmlStreamReaderUtilitiesTest.RAWMGS1, "UTF-32BE", "UTF-32", null, null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", null, "UTF-32", null);
         checkRawEncoding("UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32", null);
@@ -7314,10 +7314,10 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1127() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1127");
+    public void testCalculateHttpEncoding_literalMutation1898() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1898");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
-        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
+        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-16LE", true, null, null, null, "UTF-16LE", null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, "text/css", null, null, null, null);
@@ -7343,10 +7343,10 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1131() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1131");
+    public void testCalculateHttpEncoding_literalMutation1902() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1902");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
-        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "foo", null);
+        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "bar", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-16LE", true, null, null, null, "UTF-16LE", null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, "text/css", null, null, null, null);
@@ -7372,11 +7372,11 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1133() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1133");
+    public void testCalculateHttpEncoding_literalMutation1904() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1904");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
-        checkHttpEncoding("foo", true, null, null, null, "UTF-8", null);
+        checkHttpEncoding("bar", true, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-16LE", true, null, null, null, "UTF-16LE", null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, "text/css", null, null, null, null);
         checkHttpEncoding("US-ASCII", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, null);
@@ -7401,8 +7401,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1134() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1134");
+    public void testCalculateHttpEncoding_literalMutation1905() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1905");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", false, null, null, null, "UTF-8", null);
@@ -7430,8 +7430,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1138() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1138");
+    public void testCalculateHttpEncoding_literalMutation1909() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1909");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "foo", null);
@@ -7459,12 +7459,12 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1140() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1140");
+    public void testCalculateHttpEncoding_literalMutation1911() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1911");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
-        checkHttpEncoding("foo", true, null, null, null, "UTF-16LE", null);
+        checkHttpEncoding("bar", true, null, null, null, "UTF-16LE", null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, "text/css", null, null, null, null);
         checkHttpEncoding("US-ASCII", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-16BE");
@@ -7488,8 +7488,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1141() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1141");
+    public void testCalculateHttpEncoding_literalMutation1912() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1912");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -7517,12 +7517,12 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1145() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1145");
+    public void testCalculateHttpEncoding_literalMutation1916() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1916");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
-        checkHttpEncoding("UTF-16LE", true, null, null, null, "foo", null);
+        checkHttpEncoding("UTF-16LE", true, null, null, null, "bar", null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, "text/css", null, null, null, null);
         checkHttpEncoding("US-ASCII", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-16BE");
@@ -7546,13 +7546,13 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1147() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1147");
+    public void testCalculateHttpEncoding_literalMutation1918() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1918");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-16LE", true, null, null, null, "UTF-16LE", null);
-        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, "text/css", null, null, null, null);
+        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, "text/css", null, null, null, null);
         checkHttpEncoding("US-ASCII", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-16BE");
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, null);
@@ -7575,8 +7575,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1148() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1148");
+    public void testCalculateHttpEncoding_literalMutation1919() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1919");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -7604,14 +7604,14 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1153() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1153");
+    public void testCalculateHttpEncoding_literalMutation1924() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1924");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-16LE", true, null, null, null, "UTF-16LE", null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, "text/css", null, null, null, null);
-        checkHttpEncoding("foo", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, null);
+        checkHttpEncoding("bar", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-16BE");
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-16BE");
@@ -7633,14 +7633,14 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1154() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1154");
+    public void testCalculateHttpEncoding_literalMutation1925() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1925");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-16LE", true, null, null, null, "UTF-16LE", null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, "text/css", null, null, null, null);
-        checkHttpEncoding("US-ASCII", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, null);
+        checkHttpEncoding("US-ASCII", true, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-16BE");
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-16BE");
@@ -7662,15 +7662,15 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1159() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1159");
+    public void testCalculateHttpEncoding_literalMutation1930() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1930");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-16LE", true, null, null, null, "UTF-16LE", null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, "text/css", null, null, null, null);
         checkHttpEncoding("US-ASCII", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, null);
-        checkHttpEncoding("foo", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-16BE");
+        checkHttpEncoding("bar", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-16BE");
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-16BE");
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML, "UTF-8", null, null, "UTF-16BE");
@@ -7691,8 +7691,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1160() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1160");
+    public void testCalculateHttpEncoding_literalMutation1931() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1931");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -7720,15 +7720,15 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1164() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1164");
+    public void testCalculateHttpEncoding_literalMutation1935() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1935");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-16LE", true, null, null, null, "UTF-16LE", null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, "text/css", null, null, null, null);
         checkHttpEncoding("US-ASCII", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, null);
-        checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "foo");
+        checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "bar");
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-16BE");
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML, "UTF-8", null, null, "UTF-16BE");
@@ -7749,8 +7749,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1165() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1165");
+    public void testCalculateHttpEncoding_literalMutation1936() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1936");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -7758,7 +7758,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, "text/css", null, null, null, null);
         checkHttpEncoding("US-ASCII", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-16BE");
-        checkHttpEncoding("foo", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, null);
+        checkHttpEncoding("bar", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-16BE");
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML, "UTF-8", null, null, "UTF-16BE");
         checkHttpEncoding("UTF-16LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16LE, null, null, null, null);
@@ -7778,8 +7778,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1166() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1166");
+    public void testCalculateHttpEncoding_literalMutation1937() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1937");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -7807,8 +7807,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1171() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1171");
+    public void testCalculateHttpEncoding_literalMutation1942() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1942");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -7836,8 +7836,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1172() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1172");
+    public void testCalculateHttpEncoding_literalMutation1943() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1943");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -7846,7 +7846,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkHttpEncoding("US-ASCII", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-16BE");
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, null);
-        checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-16BE");
+        checkHttpEncoding("UTF-16BE", true, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-16BE");
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML, "UTF-8", null, null, "UTF-16BE");
         checkHttpEncoding("UTF-16LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16LE, null, null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16BE, null, null, null, null);
@@ -7865,8 +7865,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1176() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1176");
+    public void testCalculateHttpEncoding_literalMutation1947() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1947");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -7875,7 +7875,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkHttpEncoding("US-ASCII", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-16BE");
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, null);
-        checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "foo");
+        checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "bar");
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML, "UTF-8", null, null, "UTF-16BE");
         checkHttpEncoding("UTF-16LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16LE, null, null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16BE, null, null, null, null);
@@ -7894,8 +7894,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1177() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1177");
+    public void testCalculateHttpEncoding_literalMutation1948() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1948");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -7923,8 +7923,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1178() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1178");
+    public void testCalculateHttpEncoding_literalMutation1949() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1949");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -7934,7 +7934,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-16BE");
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-16BE");
-        checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML, "UTF-8", null, null, "UTF-16BE");
+        checkHttpEncoding("UTF-8", true, XmlStreamReaderUtilitiesTest.APPXML, "UTF-8", null, null, "UTF-16BE");
         checkHttpEncoding("UTF-16LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16LE, null, null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16BE, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF16LE, "UTF-16LE", null, null, null);
@@ -7952,8 +7952,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1179() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1179");
+    public void testCalculateHttpEncoding_literalMutation1950() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1950");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -7981,8 +7981,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1182() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1182");
+    public void testCalculateHttpEncoding_literalMutation1953() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1953");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8010,8 +8010,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1183() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1183");
+    public void testCalculateHttpEncoding_literalMutation1954() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1954");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8039,8 +8039,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1184() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1184");
+    public void testCalculateHttpEncoding_literalMutation1955() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1955");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8068,8 +8068,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1189() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1189");
+    public void testCalculateHttpEncoding_literalMutation1960() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1960");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8097,8 +8097,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1190() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1190");
+    public void testCalculateHttpEncoding_literalMutation1961() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1961");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8126,8 +8126,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1195() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1195");
+    public void testCalculateHttpEncoding_literalMutation1966() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1966");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8155,8 +8155,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1196() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1196");
+    public void testCalculateHttpEncoding_literalMutation1967() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1967");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8169,7 +8169,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML, "UTF-8", null, null, "UTF-16BE");
         checkHttpEncoding("UTF-16LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16LE, null, null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16BE, null, null, null, null);
-        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF16LE, "foo", null, null, null);
+        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF16LE, "bar", null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF16BE, "UTF-16BE", null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "UTF-8", null, null, null);
@@ -8184,8 +8184,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1200() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1200");
+    public void testCalculateHttpEncoding_literalMutation1971() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1971");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8213,8 +8213,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1201() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1201");
+    public void testCalculateHttpEncoding_literalMutation1972() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1972");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8242,8 +8242,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1205() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1205");
+    public void testCalculateHttpEncoding_literalMutation1976() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1976");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8271,8 +8271,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1210() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1210");
+    public void testCalculateHttpEncoding_literalMutation1981() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1981");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8300,8 +8300,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1211() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1211");
+    public void testCalculateHttpEncoding_literalMutation1982() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1982");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8329,8 +8329,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1215() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1215");
+    public void testCalculateHttpEncoding_literalMutation1986() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1986");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8347,7 +8347,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF16BE, "UTF-16BE", null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "UTF-8", null, null, null);
-        checkHttpEncoding("foo", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "UTF-16LE", null, null, null);
+        checkHttpEncoding("bar", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "UTF-16LE", null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "UTF-16BE", null, null, null);
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, null, null, null, null);
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16BE");
@@ -8358,8 +8358,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1216() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1216");
+    public void testCalculateHttpEncoding_literalMutation1987() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1987");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8387,8 +8387,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1217() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1217");
+    public void testCalculateHttpEncoding_literalMutation1988() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1988");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8405,7 +8405,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF16BE, "UTF-16BE", null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "UTF-8", null, null, null);
-        checkHttpEncoding("UTF-16LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "foo", null, null, null);
+        checkHttpEncoding("UTF-16LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "bar", null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "UTF-16BE", null, null, null);
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, null, null, null, null);
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16BE");
@@ -8416,8 +8416,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1221() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1221");
+    public void testCalculateHttpEncoding_literalMutation1992() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1992");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8445,8 +8445,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1222() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1222");
+    public void testCalculateHttpEncoding_literalMutation1993() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1993");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8474,8 +8474,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1223() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1223");
+    public void testCalculateHttpEncoding_literalMutation1994() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1994");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8493,7 +8493,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "UTF-8", null, null, null);
         checkHttpEncoding("UTF-16LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "UTF-16LE", null, null, null);
-        checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "foo", null, null, null);
+        checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "bar", null, null, null);
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, null, null, null, null);
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16BE");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -8503,8 +8503,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1227() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1227");
+    public void testCalculateHttpEncoding_literalMutation1998() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1998");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8523,7 +8523,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "UTF-8", null, null, null);
         checkHttpEncoding("UTF-16LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "UTF-16LE", null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "UTF-16BE", null, null, null);
-        checkHttpEncoding("foo", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, null, null, null, null);
+        checkHttpEncoding("bar", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, null, null, null, null);
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16BE");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -8532,8 +8532,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1228() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1228");
+    public void testCalculateHttpEncoding_literalMutation1999() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1999");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8561,8 +8561,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1233() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1233");
+    public void testCalculateHttpEncoding_literalMutation2004() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation2004");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8582,7 +8582,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkHttpEncoding("UTF-16LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "UTF-16LE", null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "UTF-16BE", null, null, null);
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, null, null, null, null);
-        checkHttpEncoding("foo", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16BE");
+        checkHttpEncoding("bar", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-16BE", "UTF-16BE", "UTF-16BE", "UTF-16BE");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -8590,8 +8590,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1234() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1234");
+    public void testCalculateHttpEncoding_literalMutation2005() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation2005");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8619,8 +8619,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1235() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1235");
+    public void testCalculateHttpEncoding_literalMutation2006() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation2006");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8648,8 +8648,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1236() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1236");
+    public void testCalculateHttpEncoding_literalMutation2007() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation2007");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8669,7 +8669,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkHttpEncoding("UTF-16LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "UTF-16LE", null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "UTF-16BE", null, null, null);
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, null, null, null, null);
-        checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-16BE", "foo", "UTF-16BE", "UTF-16BE");
+        checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-16BE", "bar", "UTF-16BE", "UTF-16BE");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -8677,8 +8677,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1237() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1237");
+    public void testCalculateHttpEncoding_literalMutation2008() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation2008");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8698,7 +8698,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkHttpEncoding("UTF-16LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "UTF-16LE", null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "UTF-16BE", null, null, null);
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, null, null, null, null);
-        checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-16BE", "UTF-16BE", "foo", "UTF-16BE");
+        checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-16BE", "UTF-16BE", "bar", "UTF-16BE");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -8706,8 +8706,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncoding_literalMutation1238() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation1238");
+    public void testCalculateHttpEncoding_literalMutation2009() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncoding_literalMutation2009");
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, true, null, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS3, false, null, null, null, "UTF-8", null);
         checkHttpEncoding("UTF-8", true, null, null, null, "UTF-8", null);
@@ -8727,7 +8727,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkHttpEncoding("UTF-16LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "UTF-16LE", null, null, null);
         checkHttpEncoding("UTF-16BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF16, "UTF-16BE", null, null, null);
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, null, null, null, null);
-        checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-16BE", "UTF-16BE", "UTF-16BE", "foo");
+        checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-16BE", "UTF-16BE", "UTF-16BE", "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -9561,7 +9561,7 @@ public class XmlStreamReaderUtilitiesTest {
 @Test
     public void testCalculateHttpEncodingUtf32() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32");
-        checkHttpEncoding("foo", true, null, null, null, "UTF-32LE", null);
+        checkHttpEncoding("bar", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, null, null, null, null);
@@ -9580,8 +9580,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1240() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1240");
+    public void testCalculateHttpEncodingUtf32_literalMutation2011() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2011");
         checkHttpEncoding("UTF-32LE", false, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -9601,9 +9601,9 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1244() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1244");
-        checkHttpEncoding("UTF-32LE", true, null, null, null, "foo", null);
+    public void testCalculateHttpEncodingUtf32_literalMutation2015() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2015");
+        checkHttpEncoding("UTF-32LE", true, null, null, null, "bar", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, null, null, null, null);
@@ -9622,8 +9622,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1246() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1246");
+    public void testCalculateHttpEncodingUtf32_literalMutation2017() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2017");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("foo", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -9643,10 +9643,10 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1247() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1247");
+    public void testCalculateHttpEncodingUtf32_literalMutation2018() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2018");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
-        checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
+        checkHttpEncoding("UTF-32BE", true, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, null, null, null, null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32BE, null, null, null, null);
@@ -9664,8 +9664,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1251() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1251");
+    public void testCalculateHttpEncodingUtf32_literalMutation2022() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2022");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "foo");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -9685,8 +9685,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1252() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1252");
+    public void testCalculateHttpEncodingUtf32_literalMutation2023() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2023");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("foo", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -9706,11 +9706,11 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1253() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1253");
+    public void testCalculateHttpEncodingUtf32_literalMutation2024() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2024");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
-        checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
+        checkHttpEncoding("UTF-32BE", true, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, null, null, null, null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32BE, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, "UTF-32LE", null, null, null);
@@ -9727,8 +9727,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1257() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1257");
+    public void testCalculateHttpEncodingUtf32_literalMutation2028() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2028");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "foo");
@@ -9748,12 +9748,12 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1258() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1258");
+    public void testCalculateHttpEncodingUtf32_literalMutation2029() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2029");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
-        checkHttpEncoding("foo", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, null, null, null, null);
+        checkHttpEncoding("bar", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, null, null, null, null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32BE, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, "UTF-32LE", null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32BE, "UTF-32BE", null, null, null);
@@ -9769,8 +9769,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1259() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1259");
+    public void testCalculateHttpEncodingUtf32_literalMutation2030() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2030");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -9790,8 +9790,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1264() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1264");
+    public void testCalculateHttpEncodingUtf32_literalMutation2035() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2035");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -9811,8 +9811,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1265() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1265");
+    public void testCalculateHttpEncodingUtf32_literalMutation2036() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2036");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -9832,14 +9832,14 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1270() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1270");
+    public void testCalculateHttpEncodingUtf32_literalMutation2041() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2041");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, null, null, null, null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32BE, null, null, null, null);
-        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, "UTF-32LE", null, null, null);
+        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, true, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, "UTF-32LE", null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32BE, "UTF-32BE", null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-8", null, null, null);
@@ -9853,14 +9853,14 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1271() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1271");
+    public void testCalculateHttpEncodingUtf32_literalMutation2042() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2042");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, null, null, null, null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32BE, null, null, null, null);
-        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, "foo", null, null, null);
+        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, "bar", null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32BE, "UTF-32BE", null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-8", null, null, null);
@@ -9874,8 +9874,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1275() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1275");
+    public void testCalculateHttpEncodingUtf32_literalMutation2046() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2046");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -9895,8 +9895,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1276() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1276");
+    public void testCalculateHttpEncodingUtf32_literalMutation2047() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2047");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -9916,8 +9916,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1280() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1280");
+    public void testCalculateHttpEncodingUtf32_literalMutation2051() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2051");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -9925,7 +9925,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32BE, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, "UTF-32LE", null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32BE, "UTF-32BE", null, null, null);
-        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, null, null, null, null);
+        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, true, XmlStreamReaderUtilitiesTest.APPXML_UTF32, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-8", null, null, null);
         checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-32LE", null, null, null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-32BE", null, null, null);
@@ -9937,8 +9937,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1285() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1285");
+    public void testCalculateHttpEncodingUtf32_literalMutation2056() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2056");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -9947,7 +9947,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, "UTF-32LE", null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32BE, "UTF-32BE", null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, null, null, null, null);
-        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-8", null, null, null);
+        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, true, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-8", null, null, null);
         checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-32LE", null, null, null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-32BE", null, null, null);
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32BE");
@@ -9958,8 +9958,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1286() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1286");
+    public void testCalculateHttpEncodingUtf32_literalMutation2057() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2057");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -9979,8 +9979,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1290() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1290");
+    public void testCalculateHttpEncodingUtf32_literalMutation2061() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2061");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -10000,8 +10000,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1291() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1291");
+    public void testCalculateHttpEncodingUtf32_literalMutation2062() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2062");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -10021,8 +10021,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1292() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1292");
+    public void testCalculateHttpEncodingUtf32_literalMutation2063() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2063");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -10032,7 +10032,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32BE, "UTF-32BE", null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-8", null, null, null);
-        checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "foo", null, null, null);
+        checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "bar", null, null, null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-32BE", null, null, null);
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32BE");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -10042,8 +10042,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1296() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1296");
+    public void testCalculateHttpEncodingUtf32_literalMutation2067() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2067");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -10054,7 +10054,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, null, null, null, null);
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-8", null, null, null);
         checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-32LE", null, null, null);
-        checkHttpEncoding("foo", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-32BE", null, null, null);
+        checkHttpEncoding("bar", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-32BE", null, null, null);
         checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32BE");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -10063,8 +10063,50 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1297() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1297");
+    public void testCalculateHttpEncodingUtf32_literalMutation2068() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2068");
+        checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
+        checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
+        checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
+        checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, null, null, null, null);
+        checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32BE, null, null, null, null);
+        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, "UTF-32LE", null, null, null);
+        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32BE, "UTF-32BE", null, null, null);
+        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, null, null, null, null);
+        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-8", null, null, null);
+        checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-32LE", null, null, null);
+        checkHttpEncoding("UTF-32BE", true, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-32BE", null, null, null);
+        checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32BE");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test calculate HTTP Encoding
+     */
+@Test
+    public void testCalculateHttpEncodingUtf32_literalMutation2069() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2069");
+        checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
+        checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
+        checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
+        checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, null, null, null, null);
+        checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32BE, null, null, null, null);
+        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, "UTF-32LE", null, null, null);
+        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32BE, "UTF-32BE", null, null, null);
+        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, null, null, null, null);
+        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-8", null, null, null);
+        checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-32LE", null, null, null);
+        checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "bar", null, null, null);
+        checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32BE");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test calculate HTTP Encoding
+     */
+@Test
+    public void testCalculateHttpEncodingUtf32_literalMutation2073() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2073");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -10076,7 +10118,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-8", null, null, null);
         checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-32LE", null, null, null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-32BE", null, null, null);
-        checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32BE");
+        checkHttpEncoding("bar", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32BE");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -10084,50 +10126,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1298() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1298");
-        checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
-        checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
-        checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
-        checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, null, null, null, null);
-        checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32BE, null, null, null, null);
-        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, "UTF-32LE", null, null, null);
-        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32BE, "UTF-32BE", null, null, null);
-        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, null, null, null, null);
-        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-8", null, null, null);
-        checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-32LE", null, null, null);
-        checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "foo", null, null, null);
-        checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32BE");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Test calculate HTTP Encoding
-     */
-@Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1302() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1302");
-        checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
-        checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
-        checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
-        checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, null, null, null, null);
-        checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32BE, null, null, null, null);
-        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32LE, "UTF-32LE", null, null, null);
-        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS1, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32BE, "UTF-32BE", null, null, null);
-        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, null, null, null, null);
-        checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-8", null, null, null);
-        checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-32LE", null, null, null);
-        checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-32BE", null, null, null);
-        checkHttpEncoding("foo", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-32BE", "UTF-32BE", "UTF-32BE", "UTF-32BE");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Test calculate HTTP Encoding
-     */
-@Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1303() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1303");
+    public void testCalculateHttpEncodingUtf32_literalMutation2074() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2074");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -10147,8 +10147,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1304() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1304");
+    public void testCalculateHttpEncodingUtf32_literalMutation2075() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2075");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -10168,8 +10168,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1305() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1305");
+    public void testCalculateHttpEncodingUtf32_literalMutation2076() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2076");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -10189,8 +10189,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1306() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1306");
+    public void testCalculateHttpEncodingUtf32_literalMutation2077() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2077");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -10210,8 +10210,8 @@ public class XmlStreamReaderUtilitiesTest {
      * Test calculate HTTP Encoding
      */
 @Test
-    public void testCalculateHttpEncodingUtf32_literalMutation1307() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation1307");
+    public void testCalculateHttpEncodingUtf32_literalMutation2078() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCalculateHttpEncodingUtf32_literalMutation2078");
         checkHttpEncoding("UTF-32LE", true, null, null, null, "UTF-32LE", null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.TXTXML, null, null, null, "UTF-32BE");
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML, null, null, null, "UTF-32BE");
@@ -10223,7 +10223,7 @@ public class XmlStreamReaderUtilitiesTest {
         checkHttpError(XmlStreamReaderUtilitiesTest.HTTPMGS2, false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-8", null, null, null);
         checkHttpEncoding("UTF-32LE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-32LE", null, null, null);
         checkHttpEncoding("UTF-32BE", false, XmlStreamReaderUtilitiesTest.APPXML_UTF32, "UTF-32BE", null, null, null);
-        checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-32BE", "UTF-32BE", "UTF-32BE", "foo");
+        checkHttpEncoding("UTF-8", false, XmlStreamReaderUtilitiesTest.APPXML_UTF8, "UTF-32BE", "UTF-32BE", "UTF-32BE", "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

@@ -420,8 +420,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrGENERIC_literalMutation208() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation208");
+    public void testSolrGENERIC_literalMutation270() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation270");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "foo");
@@ -460,8 +460,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrGENERIC_literalMutation209() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation209");
+    public void testSolrGENERIC_literalMutation271() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation271");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "GENERIC");
@@ -500,8 +500,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrGENERIC_literalMutation210() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation210");
+    public void testSolrGENERIC_literalMutation272() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation272");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "GENERIC");
@@ -540,8 +540,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrGENERIC_literalMutation211() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation211");
+    public void testSolrGENERIC_literalMutation273() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation273");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "GENERIC");
@@ -580,8 +580,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrGENERIC_literalMutation212() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation212");
+    public void testSolrGENERIC_literalMutation274() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation274");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "GENERIC");
@@ -620,8 +620,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrGENERIC_literalMutation213() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation213");
+    public void testSolrGENERIC_literalMutation275() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation275");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "GENERIC");
@@ -634,7 +634,7 @@ public class PhoneticEngineRegressionTest {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),274,null,273,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
         args = new TreeMap<java.lang.String, java.lang.String>();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),276,null,275,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("foo", "EXACT");
+        args.put("bar", "EXACT");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),278,null,277,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),280,null,279,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
         args.put("languageSet", "italian,greek,spanish");
@@ -660,8 +660,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrGENERIC_literalMutation214() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation214");
+    public void testSolrGENERIC_literalMutation276() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation276");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "GENERIC");
@@ -700,8 +700,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrGENERIC_literalMutation215() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation215");
+    public void testSolrGENERIC_literalMutation277() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation277");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "GENERIC");
@@ -717,7 +717,7 @@ public class PhoneticEngineRegressionTest {
         args.put("ruleType", "EXACT");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),278,null,277,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),280,null,279,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("foo", "italian,greek,spanish");
+        args.put("bar", "italian,greek,spanish");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),282,null,281,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),284,null,283,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
         args = new TreeMap<java.lang.String, java.lang.String>();
@@ -740,8 +740,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrGENERIC_literalMutation216() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation216");
+    public void testSolrGENERIC_literalMutation278() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation278");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "GENERIC");
@@ -780,8 +780,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrGENERIC_literalMutation217() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation217");
+    public void testSolrGENERIC_literalMutation279() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation279");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "GENERIC");
@@ -802,15 +802,175 @@ public class PhoneticEngineRegressionTest {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),284,null,283,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
         args = new TreeMap<java.lang.String, java.lang.String>();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),286,null,285,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("bar", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),288,null,287,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),290,null,289,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),292,null,291,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),294,null,293,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),296,null,295,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),298,null,297,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),300,null,299,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),302,null,301,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),304,null,303,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSolrGENERIC_literalMutation280() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation280");
+        Map<java.lang.String, java.lang.String> args;
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "GENERIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),266,null,265,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),268,null,267,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),270,null,269,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),272,null,271,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),274,null,273,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),276,null,275,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),278,null,277,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),280,null,279,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),282,null,281,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),284,null,283,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),286,null,285,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "foo");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),288,null,287,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),290,null,289,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),292,null,291,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),294,null,293,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),296,null,295,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),298,null,297,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),300,null,299,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),302,null,301,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),304,null,303,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSolrGENERIC_literalMutation281() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation281");
+        Map<java.lang.String, java.lang.String> args;
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "GENERIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),266,null,265,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),268,null,267,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),270,null,269,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),272,null,271,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),274,null,273,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),276,null,275,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),278,null,277,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),280,null,279,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),282,null,281,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),284,null,283,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),286,null,285,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),288,null,287,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),290,null,289,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("foo", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),292,null,291,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),294,null,293,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),296,null,295,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),298,null,297,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),300,null,299,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),302,null,301,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),304,null,303,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSolrGENERIC_literalMutation282() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation282");
+        Map<java.lang.String, java.lang.String> args;
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "GENERIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),266,null,265,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),268,null,267,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),270,null,269,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),272,null,271,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),274,null,273,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),276,null,275,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),278,null,277,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),280,null,279,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),282,null,281,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),284,null,283,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),286,null,285,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),288,null,287,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),290,null,289,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "bar");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),292,null,291,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),294,null,293,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),296,null,295,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),298,null,297,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),300,null,299,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),302,null,301,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),304,null,303,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSolrGENERIC_literalMutation283() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation283");
+        Map<java.lang.String, java.lang.String> args;
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "GENERIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),266,null,265,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),268,null,267,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),270,null,269,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),272,null,271,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),274,null,273,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),276,null,275,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),278,null,277,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),280,null,279,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),282,null,281,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),284,null,283,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),286,null,285,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),288,null,287,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),290,null,289,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),292,null,291,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),294,null,293,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),296,null,295,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         args.put("foo", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),288,null,287,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),290,null,289,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),292,null,291,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),294,null,293,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),296,null,295,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "APPROX");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),298,null,297,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),300,null,299,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
         args.put("languageSet", "italian,greek,spanish");
@@ -820,128 +980,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrGENERIC_literalMutation218() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation218");
-        Map<java.lang.String, java.lang.String> args;
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "GENERIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),266,null,265,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),268,null,267,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),270,null,269,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),272,null,271,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),274,null,273,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),276,null,275,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),278,null,277,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),280,null,279,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),282,null,281,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),284,null,283,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),286,null,285,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),288,null,287,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),290,null,289,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),292,null,291,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),294,null,293,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),296,null,295,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),298,null,297,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),300,null,299,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),302,null,301,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),304,null,303,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testSolrGENERIC_literalMutation219() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation219");
-        Map<java.lang.String, java.lang.String> args;
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "GENERIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),266,null,265,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),268,null,267,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),270,null,269,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),272,null,271,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),274,null,273,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),276,null,275,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),278,null,277,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),280,null,279,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),282,null,281,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),284,null,283,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),286,null,285,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),288,null,287,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),290,null,289,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("foo", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),292,null,291,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),294,null,293,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),296,null,295,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),298,null,297,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),300,null,299,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),302,null,301,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),304,null,303,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testSolrGENERIC_literalMutation220() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation220");
-        Map<java.lang.String, java.lang.String> args;
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "GENERIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),266,null,265,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),268,null,267,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),270,null,269,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),272,null,271,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),274,null,273,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),276,null,275,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),278,null,277,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),280,null,279,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),282,null,281,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),284,null,283,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),286,null,285,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),288,null,287,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),290,null,289,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),292,null,291,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),294,null,293,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),296,null,295,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),298,null,297,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),300,null,299,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),302,null,301,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),304,null,303,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testSolrGENERIC_literalMutation221() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation221");
+    public void testSolrGENERIC_literalMutation284() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation284");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "GENERIC");
@@ -970,7 +1010,7 @@ public class PhoneticEngineRegressionTest {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),294,null,293,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
         args = new TreeMap<java.lang.String, java.lang.String>();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),296,null,295,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("foo", "APPROX");
+        args.put("ruleType", "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),298,null,297,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),300,null,299,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
         args.put("languageSet", "italian,greek,spanish");
@@ -980,48 +1020,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrGENERIC_literalMutation222() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation222");
-        Map<java.lang.String, java.lang.String> args;
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "GENERIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),266,null,265,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),268,null,267,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),270,null,269,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),272,null,271,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),274,null,273,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),276,null,275,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),278,null,277,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),280,null,279,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),282,null,281,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),284,null,283,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),286,null,285,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),288,null,287,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),290,null,289,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),292,null,291,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),294,null,293,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),296,null,295,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),298,null,297,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),300,null,299,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),302,null,301,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),304,null,303,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testSolrGENERIC_literalMutation223() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation223");
+    public void testSolrGENERIC_literalMutation285() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation285");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "GENERIC");
@@ -1060,8 +1060,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrGENERIC_literalMutation224() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation224");
+    public void testSolrGENERIC_literalMutation286() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrGENERIC_literalMutation286");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "GENERIC");
@@ -1093,7 +1093,7 @@ public class PhoneticEngineRegressionTest {
         args.put("ruleType", "APPROX");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),298,null,297,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),300,null,299,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "foo");
+        args.put("languageSet", "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),302,null,301,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),304,null,303,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -2022,8 +2022,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation184() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation184");
+    public void testSolrASHKENAZI_literalMutation246() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation246");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "foo");
@@ -2065,13 +2065,13 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation185() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation185");
+    public void testSolrASHKENAZI_literalMutation247() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation247");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),226,null,225,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("foo", "EXACT");
+        args.put("bar", "EXACT");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),228,null,227,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),230,null,229,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
         args.put("languageSet", "italian,greek,spanish");
@@ -2108,13 +2108,13 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation186() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation186");
+    public void testSolrASHKENAZI_literalMutation248() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation248");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),226,null,225,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "foo");
+        args.put("ruleType", "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),228,null,227,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),230,null,229,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
         args.put("languageSet", "italian,greek,spanish");
@@ -2151,8 +2151,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation187() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation187");
+    public void testSolrASHKENAZI_literalMutation249() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation249");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
@@ -2160,7 +2160,7 @@ public class PhoneticEngineRegressionTest {
         args.put("ruleType", "EXACT");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),228,null,227,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),230,null,229,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("foo", "italian,greek,spanish");
+        args.put("bar", "italian,greek,spanish");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),232,null,231,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),234,null,233,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
         args = new TreeMap<java.lang.String, java.lang.String>();
@@ -2194,8 +2194,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation188() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation188");
+    public void testSolrASHKENAZI_literalMutation250() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation250");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
@@ -2237,8 +2237,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation189() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation189");
+    public void testSolrASHKENAZI_literalMutation251() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation251");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
@@ -2250,7 +2250,7 @@ public class PhoneticEngineRegressionTest {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),232,null,231,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),234,null,233,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
         args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("foo", "ASHKENAZI");
+        args.put("bar", "ASHKENAZI");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),236,null,235,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         args.put("ruleType", "EXACT");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),238,null,237,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
@@ -2280,8 +2280,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation190() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation190");
+    public void testSolrASHKENAZI_literalMutation252() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation252");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
@@ -2323,8 +2323,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation191() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation191");
+    public void testSolrASHKENAZI_literalMutation253() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation253");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
@@ -2338,7 +2338,7 @@ public class PhoneticEngineRegressionTest {
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),236,null,235,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("foo", "EXACT");
+        args.put("bar", "EXACT");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),238,null,237,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),240,null,239,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
         args.put("languageSet", "italian,greek,spanish");
@@ -2366,8 +2366,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation192() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation192");
+    public void testSolrASHKENAZI_literalMutation254() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation254");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
@@ -2409,8 +2409,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation193() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation193");
+    public void testSolrASHKENAZI_literalMutation255() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation255");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
@@ -2427,7 +2427,7 @@ public class PhoneticEngineRegressionTest {
         args.put("ruleType", "EXACT");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),238,null,237,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),240,null,239,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("foo", "italian,greek,spanish");
+        args.put("bar", "italian,greek,spanish");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),242,null,241,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),244,null,243,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
         args = new TreeMap<java.lang.String, java.lang.String>();
@@ -2452,8 +2452,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation194() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation194");
+    public void testSolrASHKENAZI_literalMutation256() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation256");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
@@ -2470,7 +2470,7 @@ public class PhoneticEngineRegressionTest {
         args.put("ruleType", "EXACT");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),238,null,237,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),240,null,239,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "foo");
+        args.put("languageSet", "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),242,null,241,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),244,null,243,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
         args = new TreeMap<java.lang.String, java.lang.String>();
@@ -2495,8 +2495,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation195() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation195");
+    public void testSolrASHKENAZI_literalMutation257() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation257");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
@@ -2538,8 +2538,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation196() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation196");
+    public void testSolrASHKENAZI_literalMutation258() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation258");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
@@ -2560,7 +2560,7 @@ public class PhoneticEngineRegressionTest {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),242,null,241,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),244,null,243,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
         args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "foo");
+        args.put("nameType", "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),246,null,245,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
         args.put("ruleType", "APPROX");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),248,null,247,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
@@ -2581,8 +2581,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation197() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation197");
+    public void testSolrASHKENAZI_literalMutation259() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation259");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
@@ -2624,8 +2624,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation198() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation198");
+    public void testSolrASHKENAZI_literalMutation260() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation260");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
@@ -2648,7 +2648,7 @@ public class PhoneticEngineRegressionTest {
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),246,null,245,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "foo");
+        args.put("ruleType", "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),248,null,247,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),250,null,249,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
         args.put("languageSet", "italian,greek,spanish");
@@ -2667,8 +2667,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation199() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation199");
+    public void testSolrASHKENAZI_literalMutation261() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation261");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
@@ -2710,8 +2710,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation200() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation200");
+    public void testSolrASHKENAZI_literalMutation262() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation262");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
@@ -2737,7 +2737,7 @@ public class PhoneticEngineRegressionTest {
         args.put("ruleType", "APPROX");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),248,null,247,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),250,null,249,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "foo");
+        args.put("languageSet", "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),252,null,251,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),254,null,253,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
         args = new TreeMap<java.lang.String, java.lang.String>();
@@ -2753,8 +2753,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation201() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation201");
+    public void testSolrASHKENAZI_literalMutation263() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation263");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
@@ -2796,8 +2796,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation202() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation202");
+    public void testSolrASHKENAZI_literalMutation264() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation264");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
@@ -2839,8 +2839,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation203() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation203");
+    public void testSolrASHKENAZI_literalMutation265() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation265");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
@@ -2872,7 +2872,7 @@ public class PhoneticEngineRegressionTest {
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),256,null,255,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("foo", "APPROX");
+        args.put("bar", "APPROX");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),258,null,257,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),260,null,259,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
         args.put("languageSet", "italian,greek,spanish");
@@ -2882,8 +2882,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation204() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation204");
+    public void testSolrASHKENAZI_literalMutation266() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation266");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
@@ -2925,8 +2925,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation205() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation205");
+    public void testSolrASHKENAZI_literalMutation267() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation267");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
@@ -2968,8 +2968,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrASHKENAZI_literalMutation206() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation206");
+    public void testSolrASHKENAZI_literalMutation268() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrASHKENAZI_literalMutation268");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "ASHKENAZI");
@@ -3004,7 +3004,7 @@ public class PhoneticEngineRegressionTest {
         args.put("ruleType", "APPROX");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),258,null,257,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),260,null,259,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "foo");
+        args.put("languageSet", "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),262,null,261,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),264,null,263,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -4086,11 +4086,11 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrSEPHARDIC_literalMutation226() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation226");
+    public void testSolrSEPHARDIC_literalMutation288() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation288");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "foo");
+        args.put("nameType", "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
         args.put("ruleType", "EXACT");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
@@ -4129,8 +4129,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrSEPHARDIC_literalMutation227() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation227");
+    public void testSolrSEPHARDIC_literalMutation289() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation289");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "SEPHARDIC");
@@ -4172,8 +4172,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrSEPHARDIC_literalMutation228() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation228");
+    public void testSolrSEPHARDIC_literalMutation290() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation290");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "SEPHARDIC");
@@ -4215,8 +4215,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrSEPHARDIC_literalMutation229() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation229");
+    public void testSolrSEPHARDIC_literalMutation291() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation291");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "SEPHARDIC");
@@ -4224,7 +4224,7 @@ public class PhoneticEngineRegressionTest {
         args.put("ruleType", "EXACT");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("foo", "italian,greek,spanish");
+        args.put("bar", "italian,greek,spanish");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
         args = new TreeMap<java.lang.String, java.lang.String>();
@@ -4258,8 +4258,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrSEPHARDIC_literalMutation230() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation230");
+    public void testSolrSEPHARDIC_literalMutation292() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation292");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "SEPHARDIC");
@@ -4301,8 +4301,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrSEPHARDIC_literalMutation231() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation231");
+    public void testSolrSEPHARDIC_literalMutation293() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation293");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "SEPHARDIC");
@@ -4313,17 +4313,275 @@ public class PhoneticEngineRegressionTest {
         args.put("languageSet", "italian,greek,spanish");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("bar", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSolrSEPHARDIC_literalMutation294() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation294");
+        Map<java.lang.String, java.lang.String> args;
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "bar");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSolrSEPHARDIC_literalMutation295() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation295");
+        Map<java.lang.String, java.lang.String> args;
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("bar", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSolrSEPHARDIC_literalMutation296() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation296");
+        Map<java.lang.String, java.lang.String> args;
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "foo");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSolrSEPHARDIC_literalMutation297() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation297");
+        Map<java.lang.String, java.lang.String> args;
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("bar", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSolrSEPHARDIC_literalMutation298() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation298");
+        Map<java.lang.String, java.lang.String> args;
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "foo");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSolrSEPHARDIC_literalMutation299() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation299");
+        Map<java.lang.String, java.lang.String> args;
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("foo", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
         args.put("ruleType", "APPROX");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
@@ -4344,266 +4602,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrSEPHARDIC_literalMutation232() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation232");
-        Map<java.lang.String, java.lang.String> args;
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testSolrSEPHARDIC_literalMutation233() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation233");
-        Map<java.lang.String, java.lang.String> args;
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("foo", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testSolrSEPHARDIC_literalMutation234() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation234");
-        Map<java.lang.String, java.lang.String> args;
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testSolrSEPHARDIC_literalMutation235() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation235");
-        Map<java.lang.String, java.lang.String> args;
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("foo", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testSolrSEPHARDIC_literalMutation236() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation236");
-        Map<java.lang.String, java.lang.String> args;
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testSolrSEPHARDIC_literalMutation237() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation237");
-        Map<java.lang.String, java.lang.String> args;
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("foo", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testSolrSEPHARDIC_literalMutation238() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation238");
+    public void testSolrSEPHARDIC_literalMutation300() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation300");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "SEPHARDIC");
@@ -4645,8 +4645,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrSEPHARDIC_literalMutation239() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation239");
+    public void testSolrSEPHARDIC_literalMutation301() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation301");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "SEPHARDIC");
@@ -4669,7 +4669,7 @@ public class PhoneticEngineRegressionTest {
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "SEPHARDIC");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("foo", "APPROX");
+        args.put("bar", "APPROX");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
         args.put("languageSet", "italian,greek,spanish");
@@ -4688,8 +4688,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrSEPHARDIC_literalMutation240() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation240");
+    public void testSolrSEPHARDIC_literalMutation302() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation302");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "SEPHARDIC");
@@ -4712,7 +4712,7 @@ public class PhoneticEngineRegressionTest {
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "SEPHARDIC");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "foo");
+        args.put("ruleType", "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
         args.put("languageSet", "italian,greek,spanish");
@@ -4731,8 +4731,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testSolrSEPHARDIC_literalMutation241() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation241");
+    public void testSolrSEPHARDIC_literalMutation303() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation303");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "SEPHARDIC");
@@ -4758,239 +4758,282 @@ public class PhoneticEngineRegressionTest {
         args.put("ruleType", "APPROX");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("bar", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSolrSEPHARDIC_literalMutation304() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation304");
+        Map<java.lang.String, java.lang.String> args;
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "bar");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSolrSEPHARDIC_literalMutation305() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation305");
+        Map<java.lang.String, java.lang.String> args;
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("bar", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSolrSEPHARDIC_literalMutation306() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation306");
+        Map<java.lang.String, java.lang.String> args;
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "bar");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSolrSEPHARDIC_literalMutation307() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation307");
+        Map<java.lang.String, java.lang.String> args;
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("bar", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSolrSEPHARDIC_literalMutation308() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation308");
+        Map<java.lang.String, java.lang.String> args;
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "bar");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSolrSEPHARDIC_literalMutation309() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation309");
+        Map<java.lang.String, java.lang.String> args;
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "EXACT");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
+        args.put("languageSet", "italian,greek,spanish");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
+        args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "SEPHARDIC");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
         args.put("foo", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testSolrSEPHARDIC_literalMutation242() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation242");
-        Map<java.lang.String, java.lang.String> args;
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testSolrSEPHARDIC_literalMutation243() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation243");
-        Map<java.lang.String, java.lang.String> args;
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("foo", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testSolrSEPHARDIC_literalMutation244() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation244");
-        Map<java.lang.String, java.lang.String> args;
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testSolrSEPHARDIC_literalMutation245() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation245");
-        Map<java.lang.String, java.lang.String> args;
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("foo", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testSolrSEPHARDIC_literalMutation246() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation246");
-        Map<java.lang.String, java.lang.String> args;
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testSolrSEPHARDIC_literalMutation247() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation247");
+    public void testSolrSEPHARDIC_literalMutation310() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation310");
         Map<java.lang.String, java.lang.String> args;
         args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "SEPHARDIC");
@@ -5025,50 +5068,7 @@ public class PhoneticEngineRegressionTest {
         args.put("ruleType", "APPROX");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("foo", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testSolrSEPHARDIC_literalMutation248() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSolrSEPHARDIC_literalMutation248");
-        Map<java.lang.String, java.lang.String> args;
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),306,null,305,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),308,null,307,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),310,null,309,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),312,null,311,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),314,null,313,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),316,null,315,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "EXACT");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),318,null,317,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),320,null,319,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),322,null,321,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),324,null,323,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),326,null,325,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),328,null,327,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),330,null,329,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "D\'Angelo"));
-        args.put("languageSet", "italian,greek,spanish");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),332,null,331,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),334,null,333,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "1234"));
-        args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "SEPHARDIC");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),336,null,335,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),338,null,337,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),340,null,339,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "D\'Angelo"));
-        args.put("languageSet", "foo");
+        args.put("languageSet", "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),342,null,341,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "Angelo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),344,null,343,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, false, "1234"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -5646,7 +5646,7 @@ public class PhoneticEngineRegressionTest {
     public void testCompatibilityWithOriginalVersion() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCompatibilityWithOriginalVersion");
         Map<java.lang.String, java.lang.String> args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("foo", "GENERIC");
+        args.put("bar", "GENERIC");
         args.put("ruleType", "APPROX");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),218,null,217,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "abram"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),220,null,219,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Bendzin"));
@@ -5658,83 +5658,83 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testCompatibilityWithOriginalVersion_literalMutation176() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCompatibilityWithOriginalVersion_literalMutation176");
+    public void testCompatibilityWithOriginalVersion_literalMutation238() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCompatibilityWithOriginalVersion_literalMutation238");
         Map<java.lang.String, java.lang.String> args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "bar");
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),218,null,217,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "abram"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),220,null,219,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Bendzin"));
+        args.put("nameType", "ASHKENAZI");
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),222,null,221,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "abram"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),224,null,223,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Halpern"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testCompatibilityWithOriginalVersion_literalMutation239() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCompatibilityWithOriginalVersion_literalMutation239");
+        Map<java.lang.String, java.lang.String> args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "GENERIC");
+        args.put("bar", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),218,null,217,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "abram"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),220,null,219,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Bendzin"));
+        args.put("nameType", "ASHKENAZI");
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),222,null,221,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "abram"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),224,null,223,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Halpern"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testCompatibilityWithOriginalVersion_literalMutation240() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCompatibilityWithOriginalVersion_literalMutation240");
+        Map<java.lang.String, java.lang.String> args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "GENERIC");
+        args.put("ruleType", "bar");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),218,null,217,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "abram"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),220,null,219,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Bendzin"));
+        args.put("nameType", "ASHKENAZI");
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),222,null,221,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "abram"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),224,null,223,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Halpern"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testCompatibilityWithOriginalVersion_literalMutation241() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCompatibilityWithOriginalVersion_literalMutation241");
+        Map<java.lang.String, java.lang.String> args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "GENERIC");
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),218,null,217,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "abram"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),220,null,219,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Bendzin"));
+        args.put("bar", "ASHKENAZI");
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),222,null,221,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "abram"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),224,null,223,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Halpern"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testCompatibilityWithOriginalVersion_literalMutation242() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCompatibilityWithOriginalVersion_literalMutation242");
+        Map<java.lang.String, java.lang.String> args = new TreeMap<java.lang.String, java.lang.String>();
+        args.put("nameType", "GENERIC");
+        args.put("ruleType", "APPROX");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),218,null,217,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "abram"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),220,null,219,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Bendzin"));
         args.put("nameType", "foo");
         args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),218,null,217,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "abram"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),220,null,219,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Bendzin"));
-        args.put("nameType", "ASHKENAZI");
-        args.put("ruleType", "APPROX");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),222,null,221,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "abram"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),224,null,223,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Halpern"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testCompatibilityWithOriginalVersion_literalMutation177() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCompatibilityWithOriginalVersion_literalMutation177");
-        Map<java.lang.String, java.lang.String> args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "GENERIC");
-        args.put("foo", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),218,null,217,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "abram"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),220,null,219,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Bendzin"));
-        args.put("nameType", "ASHKENAZI");
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),222,null,221,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "abram"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),224,null,223,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Halpern"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testCompatibilityWithOriginalVersion_literalMutation178() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCompatibilityWithOriginalVersion_literalMutation178");
-        Map<java.lang.String, java.lang.String> args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "GENERIC");
-        args.put("ruleType", "foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),218,null,217,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "abram"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),220,null,219,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Bendzin"));
-        args.put("nameType", "ASHKENAZI");
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),222,null,221,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "abram"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),224,null,223,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Halpern"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testCompatibilityWithOriginalVersion_literalMutation179() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCompatibilityWithOriginalVersion_literalMutation179");
-        Map<java.lang.String, java.lang.String> args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "GENERIC");
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),218,null,217,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "abram"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),220,null,219,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Bendzin"));
-        args.put("foo", "ASHKENAZI");
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),222,null,221,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "abram"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),224,null,223,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Halpern"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testCompatibilityWithOriginalVersion_literalMutation180() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCompatibilityWithOriginalVersion_literalMutation180");
-        Map<java.lang.String, java.lang.String> args = new TreeMap<java.lang.String, java.lang.String>();
-        args.put("nameType", "GENERIC");
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),218,null,217,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "abram"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),220,null,219,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Bendzin"));
-        args.put("nameType", "foo");
-        args.put("ruleType", "APPROX");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),222,null,221,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "abram"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),224,null,223,org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest.encode(args, true, "Halpern"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testCompatibilityWithOriginalVersion_literalMutation181() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCompatibilityWithOriginalVersion_literalMutation181");
+    public void testCompatibilityWithOriginalVersion_literalMutation243() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCompatibilityWithOriginalVersion_literalMutation243");
         Map<java.lang.String, java.lang.String> args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "GENERIC");
         args.put("ruleType", "APPROX");
@@ -5748,8 +5748,8 @@ public class PhoneticEngineRegressionTest {
     }
 
     @Test
-    public void testCompatibilityWithOriginalVersion_literalMutation182() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCompatibilityWithOriginalVersion_literalMutation182");
+    public void testCompatibilityWithOriginalVersion_literalMutation244() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCompatibilityWithOriginalVersion_literalMutation244");
         Map<java.lang.String, java.lang.String> args = new TreeMap<java.lang.String, java.lang.String>();
         args.put("nameType", "GENERIC");
         args.put("ruleType", "APPROX");

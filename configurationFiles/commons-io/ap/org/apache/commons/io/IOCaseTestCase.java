@@ -79,7 +79,7 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5308,org.apache.commons.io.IOCase.SYSTEM);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5310,null,5309,org.apache.commons.io.IOCase.forName("System"));
         try {
-            IOCase.forName("foo");
+            IOCase.forName("bar");
         } catch (IllegalArgumentException ex) {
         }
         try {
@@ -209,7 +209,7 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5081,org.apache.commons.io.IOCase.SENSITIVE,5080,org.apache.commons.io.IOCase.SENSITIVE.checkCompareTo("ABC", "ABC"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5083,org.apache.commons.io.IOCase.SENSITIVE,5082,org.apache.commons.io.IOCase.SENSITIVE.checkCompareTo("", ""));
         try {
-            IOCase.SENSITIVE.checkCompareTo("foo", null);
+            IOCase.SENSITIVE.checkCompareTo("bar", null);
         } catch (NullPointerException ex) {
         }
         try {
@@ -223,8 +223,8 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void test_checkCompare_functionality_literalMutation4086() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkCompare_functionality_literalMutation4086");
+    public void test_checkCompare_functionality_literalMutation6175() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkCompare_functionality_literalMutation6175");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5076,((org.apache.commons.io.IOCase.SENSITIVE.checkCompareTo("ABC", "")) > 0));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5077,((org.apache.commons.io.IOCase.SENSITIVE.checkCompareTo("", "ABC")) < 0));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5078,((org.apache.commons.io.IOCase.SENSITIVE.checkCompareTo("ABC", "DEF")) < 0));
@@ -236,7 +236,7 @@ public class IOCaseTestCase extends FileBasedTestCase {
         } catch (NullPointerException ex) {
         }
         try {
-            IOCase.SENSITIVE.checkCompareTo(null, "foo");
+            IOCase.SENSITIVE.checkCompareTo(null, "bar");
         } catch (NullPointerException ex) {
         }
         try {
@@ -358,7 +358,7 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5143,org.apache.commons.io.IOCase.SENSITIVE,5142,org.apache.commons.io.IOCase.SENSITIVE.checkEquals("", "ABC"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5145,org.apache.commons.io.IOCase.SENSITIVE,5144,org.apache.commons.io.IOCase.SENSITIVE.checkEquals("", ""));
         try {
-            IOCase.SENSITIVE.checkEquals("foo", null);
+            IOCase.SENSITIVE.checkEquals("bar", null);
         } catch (NullPointerException ex) {
         }
         try {
@@ -372,8 +372,8 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void test_checkEquals_functionality_literalMutation4098() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkEquals_functionality_literalMutation4098");
+    public void test_checkEquals_functionality_literalMutation6187() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkEquals_functionality_literalMutation6187");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5129,org.apache.commons.io.IOCase.SENSITIVE,5128,org.apache.commons.io.IOCase.SENSITIVE.checkEquals("ABC", ""));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5131,org.apache.commons.io.IOCase.SENSITIVE,5130,org.apache.commons.io.IOCase.SENSITIVE.checkEquals("ABC", "A"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5133,org.apache.commons.io.IOCase.SENSITIVE,5132,org.apache.commons.io.IOCase.SENSITIVE.checkEquals("ABC", "AB"));
@@ -388,7 +388,7 @@ public class IOCaseTestCase extends FileBasedTestCase {
         } catch (NullPointerException ex) {
         }
         try {
-            IOCase.SENSITIVE.checkEquals(null, "foo");
+            IOCase.SENSITIVE.checkEquals(null, "bar");
         } catch (NullPointerException ex) {
         }
         try {
@@ -506,7 +506,7 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5299,org.apache.commons.io.IOCase.SENSITIVE,5298,org.apache.commons.io.IOCase.SENSITIVE.checkStartsWith("", "ABC"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5301,org.apache.commons.io.IOCase.SENSITIVE,5300,org.apache.commons.io.IOCase.SENSITIVE.checkStartsWith("", ""));
         try {
-            IOCase.SENSITIVE.checkStartsWith("foo", null);
+            IOCase.SENSITIVE.checkStartsWith("bar", null);
         } catch (NullPointerException ex) {
         }
         try {
@@ -520,8 +520,8 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void test_checkStartsWith_functionality_literalMutation4131() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkStartsWith_functionality_literalMutation4131");
+    public void test_checkStartsWith_functionality_literalMutation6238() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkStartsWith_functionality_literalMutation6238");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5285,org.apache.commons.io.IOCase.SENSITIVE,5284,org.apache.commons.io.IOCase.SENSITIVE.checkStartsWith("ABC", ""));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5287,org.apache.commons.io.IOCase.SENSITIVE,5286,org.apache.commons.io.IOCase.SENSITIVE.checkStartsWith("ABC", "A"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5289,org.apache.commons.io.IOCase.SENSITIVE,5288,org.apache.commons.io.IOCase.SENSITIVE.checkStartsWith("ABC", "AB"));
@@ -536,7 +536,7 @@ public class IOCaseTestCase extends FileBasedTestCase {
         } catch (NullPointerException ex) {
         }
         try {
-            IOCase.SENSITIVE.checkStartsWith(null, "foo");
+            IOCase.SENSITIVE.checkStartsWith(null, "bar");
         } catch (NullPointerException ex) {
         }
         try {
@@ -654,7 +654,7 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5112,org.apache.commons.io.IOCase.SENSITIVE,5111,org.apache.commons.io.IOCase.SENSITIVE.checkEndsWith("", "ABC"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5114,org.apache.commons.io.IOCase.SENSITIVE,5113,org.apache.commons.io.IOCase.SENSITIVE.checkEndsWith("", ""));
         try {
-            IOCase.SENSITIVE.checkEndsWith("foo", null);
+            IOCase.SENSITIVE.checkEndsWith("bar", null);
         } catch (NullPointerException ex) {
         }
         try {
@@ -668,8 +668,8 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void test_checkEndsWith_functionality_literalMutation4092() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkEndsWith_functionality_literalMutation4092");
+    public void test_checkEndsWith_functionality_literalMutation6181() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkEndsWith_functionality_literalMutation6181");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5098,org.apache.commons.io.IOCase.SENSITIVE,5097,org.apache.commons.io.IOCase.SENSITIVE.checkEndsWith("ABC", ""));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5100,org.apache.commons.io.IOCase.SENSITIVE,5099,org.apache.commons.io.IOCase.SENSITIVE.checkEndsWith("ABC", "A"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5102,org.apache.commons.io.IOCase.SENSITIVE,5101,org.apache.commons.io.IOCase.SENSITIVE.checkEndsWith("ABC", "AB"));
@@ -684,7 +684,7 @@ public class IOCaseTestCase extends FileBasedTestCase {
         } catch (NullPointerException ex) {
         }
         try {
-            IOCase.SENSITIVE.checkEndsWith(null, "foo");
+            IOCase.SENSITIVE.checkEndsWith(null, "bar");
         } catch (NullPointerException ex) {
         }
         try {
@@ -924,8 +924,8 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void test_checkIndexOf_functionality_literalMutation4102() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkIndexOf_functionality_literalMutation4102");
+    public void test_checkIndexOf_functionality_literalMutation6191() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkIndexOf_functionality_literalMutation6191");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5161,org.apache.commons.io.IOCase.SENSITIVE,5160,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "A"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5162,-1);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5164,org.apache.commons.io.IOCase.SENSITIVE,5163,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "A"));
@@ -977,8 +977,167 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void test_checkIndexOf_functionality_literalMutation4105() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkIndexOf_functionality_literalMutation4105");
+    public void test_checkIndexOf_functionality_literalMutation6192() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkIndexOf_functionality_literalMutation6192");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5161,org.apache.commons.io.IOCase.SENSITIVE,5160,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5162,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5164,org.apache.commons.io.IOCase.SENSITIVE,5163,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5166,org.apache.commons.io.IOCase.SENSITIVE,5165,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5167,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5169,org.apache.commons.io.IOCase.SENSITIVE,5168,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5171,org.apache.commons.io.IOCase.SENSITIVE,5170,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5172,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5174,org.apache.commons.io.IOCase.SENSITIVE,5173,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5176,org.apache.commons.io.IOCase.SENSITIVE,5175,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5178,org.apache.commons.io.IOCase.SENSITIVE,5177,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 3, "D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5179,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5181,org.apache.commons.io.IOCase.SENSITIVE,5180,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 4, "D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5183,org.apache.commons.io.IOCase.SENSITIVE,5182,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "DE"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5185,org.apache.commons.io.IOCase.SENSITIVE,5184,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 3, "DE"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5186,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5188,org.apache.commons.io.IOCase.SENSITIVE,5187,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 4, "DE"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5190,org.apache.commons.io.IOCase.SENSITIVE,5189,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "DEF"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5192,org.apache.commons.io.IOCase.SENSITIVE,5191,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 3, "DEF"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5193,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5195,org.apache.commons.io.IOCase.SENSITIVE,5194,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 4, "DEF"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5197,org.apache.commons.io.IOCase.SENSITIVE,5196,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "J"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5199,org.apache.commons.io.IOCase.SENSITIVE,5198,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 8, "J"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5201,org.apache.commons.io.IOCase.SENSITIVE,5200,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 9, "J"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5203,org.apache.commons.io.IOCase.SENSITIVE,5202,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "IJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5205,org.apache.commons.io.IOCase.SENSITIVE,5204,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 8, "IJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5206,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5208,org.apache.commons.io.IOCase.SENSITIVE,5207,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 9, "IJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5210,org.apache.commons.io.IOCase.SENSITIVE,5209,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 6, "HIJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5212,org.apache.commons.io.IOCase.SENSITIVE,5211,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 7, "HIJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5213,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5215,org.apache.commons.io.IOCase.SENSITIVE,5214,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 8, "HIJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5216,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5218,org.apache.commons.io.IOCase.SENSITIVE,5217,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "DED"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5219,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5221,org.apache.commons.io.IOCase.SENSITIVE,5220,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("DEF", 0, "ABCDEFGHIJ"));
+        try {
+            IOCase.SENSITIVE.checkIndexOf("ABC", -1, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkIndexOf(null, 0, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkIndexOf(null, 0, null);
+        } catch (NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void test_checkIndexOf_functionality_literalMutation6193() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkIndexOf_functionality_literalMutation6193");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5161,org.apache.commons.io.IOCase.SENSITIVE,5160,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5162,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5164,org.apache.commons.io.IOCase.SENSITIVE,5163,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5166,org.apache.commons.io.IOCase.SENSITIVE,5165,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5167,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5169,org.apache.commons.io.IOCase.SENSITIVE,5168,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5171,org.apache.commons.io.IOCase.SENSITIVE,5170,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5172,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5174,org.apache.commons.io.IOCase.SENSITIVE,5173,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5176,org.apache.commons.io.IOCase.SENSITIVE,5175,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5178,org.apache.commons.io.IOCase.SENSITIVE,5177,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 3, "D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5179,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5181,org.apache.commons.io.IOCase.SENSITIVE,5180,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 4, "D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5183,org.apache.commons.io.IOCase.SENSITIVE,5182,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "DE"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5185,org.apache.commons.io.IOCase.SENSITIVE,5184,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 3, "DE"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5186,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5188,org.apache.commons.io.IOCase.SENSITIVE,5187,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 4, "DE"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5190,org.apache.commons.io.IOCase.SENSITIVE,5189,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "DEF"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5192,org.apache.commons.io.IOCase.SENSITIVE,5191,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 3, "DEF"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5193,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5195,org.apache.commons.io.IOCase.SENSITIVE,5194,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 4, "DEF"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5197,org.apache.commons.io.IOCase.SENSITIVE,5196,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "J"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5199,org.apache.commons.io.IOCase.SENSITIVE,5198,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 8, "J"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5201,org.apache.commons.io.IOCase.SENSITIVE,5200,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 9, "J"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5203,org.apache.commons.io.IOCase.SENSITIVE,5202,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "IJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5205,org.apache.commons.io.IOCase.SENSITIVE,5204,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 8, "IJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5206,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5208,org.apache.commons.io.IOCase.SENSITIVE,5207,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 9, "IJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5210,org.apache.commons.io.IOCase.SENSITIVE,5209,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 6, "HIJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5212,org.apache.commons.io.IOCase.SENSITIVE,5211,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 7, "HIJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5213,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5215,org.apache.commons.io.IOCase.SENSITIVE,5214,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 8, "HIJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5216,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5218,org.apache.commons.io.IOCase.SENSITIVE,5217,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "DED"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5219,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5221,org.apache.commons.io.IOCase.SENSITIVE,5220,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("DEF", 0, "ABCDEFGHIJ"));
+        try {
+            IOCase.SENSITIVE.checkIndexOf("ABC", 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkIndexOf(null, 0, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkIndexOf(null, 0, null);
+        } catch (NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void test_checkIndexOf_functionality_literalMutation6196() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkIndexOf_functionality_literalMutation6196");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5161,org.apache.commons.io.IOCase.SENSITIVE,5160,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5162,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5164,org.apache.commons.io.IOCase.SENSITIVE,5163,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5166,org.apache.commons.io.IOCase.SENSITIVE,5165,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5167,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5169,org.apache.commons.io.IOCase.SENSITIVE,5168,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5171,org.apache.commons.io.IOCase.SENSITIVE,5170,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5172,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5174,org.apache.commons.io.IOCase.SENSITIVE,5173,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5176,org.apache.commons.io.IOCase.SENSITIVE,5175,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5178,org.apache.commons.io.IOCase.SENSITIVE,5177,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 3, "D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5179,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5181,org.apache.commons.io.IOCase.SENSITIVE,5180,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 4, "D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5183,org.apache.commons.io.IOCase.SENSITIVE,5182,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "DE"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5185,org.apache.commons.io.IOCase.SENSITIVE,5184,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 3, "DE"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5186,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5188,org.apache.commons.io.IOCase.SENSITIVE,5187,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 4, "DE"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5190,org.apache.commons.io.IOCase.SENSITIVE,5189,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "DEF"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5192,org.apache.commons.io.IOCase.SENSITIVE,5191,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 3, "DEF"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5193,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5195,org.apache.commons.io.IOCase.SENSITIVE,5194,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 4, "DEF"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5197,org.apache.commons.io.IOCase.SENSITIVE,5196,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "J"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5199,org.apache.commons.io.IOCase.SENSITIVE,5198,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 8, "J"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5201,org.apache.commons.io.IOCase.SENSITIVE,5200,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 9, "J"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5203,org.apache.commons.io.IOCase.SENSITIVE,5202,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "IJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5205,org.apache.commons.io.IOCase.SENSITIVE,5204,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 8, "IJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5206,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5208,org.apache.commons.io.IOCase.SENSITIVE,5207,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 9, "IJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5210,org.apache.commons.io.IOCase.SENSITIVE,5209,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 6, "HIJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5212,org.apache.commons.io.IOCase.SENSITIVE,5211,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 7, "HIJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5213,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5215,org.apache.commons.io.IOCase.SENSITIVE,5214,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 8, "HIJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5216,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5218,org.apache.commons.io.IOCase.SENSITIVE,5217,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "DED"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5219,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5221,org.apache.commons.io.IOCase.SENSITIVE,5220,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("DEF", 0, "ABCDEFGHIJ"));
+        try {
+            IOCase.SENSITIVE.checkIndexOf("ABC", 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkIndexOf(null, 1, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkIndexOf(null, 0, null);
+        } catch (NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void test_checkIndexOf_functionality_literalMutation6197() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkIndexOf_functionality_literalMutation6197");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5161,org.apache.commons.io.IOCase.SENSITIVE,5160,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "A"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5162,-1);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5164,org.apache.commons.io.IOCase.SENSITIVE,5163,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "A"));
@@ -1030,8 +1189,61 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void test_checkIndexOf_functionality_literalMutation4106() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkIndexOf_functionality_literalMutation4106");
+    public void test_checkIndexOf_functionality_literalMutation6198() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkIndexOf_functionality_literalMutation6198");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5161,org.apache.commons.io.IOCase.SENSITIVE,5160,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5162,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5164,org.apache.commons.io.IOCase.SENSITIVE,5163,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5166,org.apache.commons.io.IOCase.SENSITIVE,5165,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5167,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5169,org.apache.commons.io.IOCase.SENSITIVE,5168,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5171,org.apache.commons.io.IOCase.SENSITIVE,5170,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5172,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5174,org.apache.commons.io.IOCase.SENSITIVE,5173,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5176,org.apache.commons.io.IOCase.SENSITIVE,5175,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5178,org.apache.commons.io.IOCase.SENSITIVE,5177,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 3, "D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5179,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5181,org.apache.commons.io.IOCase.SENSITIVE,5180,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 4, "D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5183,org.apache.commons.io.IOCase.SENSITIVE,5182,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "DE"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5185,org.apache.commons.io.IOCase.SENSITIVE,5184,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 3, "DE"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5186,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5188,org.apache.commons.io.IOCase.SENSITIVE,5187,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 4, "DE"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5190,org.apache.commons.io.IOCase.SENSITIVE,5189,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "DEF"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5192,org.apache.commons.io.IOCase.SENSITIVE,5191,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 3, "DEF"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5193,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5195,org.apache.commons.io.IOCase.SENSITIVE,5194,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 4, "DEF"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5197,org.apache.commons.io.IOCase.SENSITIVE,5196,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "J"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5199,org.apache.commons.io.IOCase.SENSITIVE,5198,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 8, "J"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5201,org.apache.commons.io.IOCase.SENSITIVE,5200,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 9, "J"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5203,org.apache.commons.io.IOCase.SENSITIVE,5202,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "IJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5205,org.apache.commons.io.IOCase.SENSITIVE,5204,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 8, "IJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5206,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5208,org.apache.commons.io.IOCase.SENSITIVE,5207,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 9, "IJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5210,org.apache.commons.io.IOCase.SENSITIVE,5209,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 6, "HIJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5212,org.apache.commons.io.IOCase.SENSITIVE,5211,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 7, "HIJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5213,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5215,org.apache.commons.io.IOCase.SENSITIVE,5214,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 8, "HIJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5216,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5218,org.apache.commons.io.IOCase.SENSITIVE,5217,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "DED"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5219,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5221,org.apache.commons.io.IOCase.SENSITIVE,5220,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("DEF", 0, "ABCDEFGHIJ"));
+        try {
+            IOCase.SENSITIVE.checkIndexOf("ABC", 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkIndexOf(null, 0, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkIndexOf(null, 0, null);
+        } catch (NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void test_checkIndexOf_functionality_literalMutation6199() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkIndexOf_functionality_literalMutation6199");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5161,org.apache.commons.io.IOCase.SENSITIVE,5160,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "A"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5162,-1);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5164,org.apache.commons.io.IOCase.SENSITIVE,5163,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "A"));
@@ -1083,8 +1295,61 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void test_checkIndexOf_functionality_literalMutation4108() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkIndexOf_functionality_literalMutation4108");
+    public void test_checkIndexOf_functionality_literalMutation6201() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkIndexOf_functionality_literalMutation6201");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5161,org.apache.commons.io.IOCase.SENSITIVE,5160,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5162,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5164,org.apache.commons.io.IOCase.SENSITIVE,5163,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5166,org.apache.commons.io.IOCase.SENSITIVE,5165,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5167,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5169,org.apache.commons.io.IOCase.SENSITIVE,5168,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5171,org.apache.commons.io.IOCase.SENSITIVE,5170,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5172,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5174,org.apache.commons.io.IOCase.SENSITIVE,5173,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5176,org.apache.commons.io.IOCase.SENSITIVE,5175,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5178,org.apache.commons.io.IOCase.SENSITIVE,5177,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 3, "D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5179,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5181,org.apache.commons.io.IOCase.SENSITIVE,5180,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 4, "D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5183,org.apache.commons.io.IOCase.SENSITIVE,5182,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "DE"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5185,org.apache.commons.io.IOCase.SENSITIVE,5184,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 3, "DE"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5186,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5188,org.apache.commons.io.IOCase.SENSITIVE,5187,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 4, "DE"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5190,org.apache.commons.io.IOCase.SENSITIVE,5189,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "DEF"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5192,org.apache.commons.io.IOCase.SENSITIVE,5191,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 3, "DEF"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5193,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5195,org.apache.commons.io.IOCase.SENSITIVE,5194,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 4, "DEF"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5197,org.apache.commons.io.IOCase.SENSITIVE,5196,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "J"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5199,org.apache.commons.io.IOCase.SENSITIVE,5198,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 8, "J"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5201,org.apache.commons.io.IOCase.SENSITIVE,5200,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 9, "J"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5203,org.apache.commons.io.IOCase.SENSITIVE,5202,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "IJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5205,org.apache.commons.io.IOCase.SENSITIVE,5204,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 8, "IJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5206,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5208,org.apache.commons.io.IOCase.SENSITIVE,5207,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 9, "IJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5210,org.apache.commons.io.IOCase.SENSITIVE,5209,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 6, "HIJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5212,org.apache.commons.io.IOCase.SENSITIVE,5211,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 7, "HIJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5213,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5215,org.apache.commons.io.IOCase.SENSITIVE,5214,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 8, "HIJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5216,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5218,org.apache.commons.io.IOCase.SENSITIVE,5217,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "DED"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5219,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5221,org.apache.commons.io.IOCase.SENSITIVE,5220,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("DEF", 0, "ABCDEFGHIJ"));
+        try {
+            IOCase.SENSITIVE.checkIndexOf("ABC", 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkIndexOf(null, 0, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkIndexOf(null, 1, null);
+        } catch (NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void test_checkIndexOf_functionality_literalMutation6202() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkIndexOf_functionality_literalMutation6202");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5161,org.apache.commons.io.IOCase.SENSITIVE,5160,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "A"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5162,-1);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5164,org.apache.commons.io.IOCase.SENSITIVE,5163,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "A"));
@@ -1131,6 +1396,59 @@ public class IOCaseTestCase extends FileBasedTestCase {
         }
         try {
             IOCase.SENSITIVE.checkIndexOf(null, -1, null);
+        } catch (NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void test_checkIndexOf_functionality_literalMutation6203() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkIndexOf_functionality_literalMutation6203");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5161,org.apache.commons.io.IOCase.SENSITIVE,5160,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5162,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5164,org.apache.commons.io.IOCase.SENSITIVE,5163,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5166,org.apache.commons.io.IOCase.SENSITIVE,5165,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5167,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5169,org.apache.commons.io.IOCase.SENSITIVE,5168,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5171,org.apache.commons.io.IOCase.SENSITIVE,5170,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5172,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5174,org.apache.commons.io.IOCase.SENSITIVE,5173,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5176,org.apache.commons.io.IOCase.SENSITIVE,5175,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5178,org.apache.commons.io.IOCase.SENSITIVE,5177,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 3, "D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5179,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5181,org.apache.commons.io.IOCase.SENSITIVE,5180,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 4, "D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5183,org.apache.commons.io.IOCase.SENSITIVE,5182,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "DE"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5185,org.apache.commons.io.IOCase.SENSITIVE,5184,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 3, "DE"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5186,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5188,org.apache.commons.io.IOCase.SENSITIVE,5187,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 4, "DE"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5190,org.apache.commons.io.IOCase.SENSITIVE,5189,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "DEF"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5192,org.apache.commons.io.IOCase.SENSITIVE,5191,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 3, "DEF"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5193,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5195,org.apache.commons.io.IOCase.SENSITIVE,5194,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 4, "DEF"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5197,org.apache.commons.io.IOCase.SENSITIVE,5196,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "J"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5199,org.apache.commons.io.IOCase.SENSITIVE,5198,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 8, "J"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5201,org.apache.commons.io.IOCase.SENSITIVE,5200,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 9, "J"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5203,org.apache.commons.io.IOCase.SENSITIVE,5202,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "IJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5205,org.apache.commons.io.IOCase.SENSITIVE,5204,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 8, "IJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5206,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5208,org.apache.commons.io.IOCase.SENSITIVE,5207,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 9, "IJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5210,org.apache.commons.io.IOCase.SENSITIVE,5209,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 6, "HIJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5212,org.apache.commons.io.IOCase.SENSITIVE,5211,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 7, "HIJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5213,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5215,org.apache.commons.io.IOCase.SENSITIVE,5214,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 8, "HIJ"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5216,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5218,org.apache.commons.io.IOCase.SENSITIVE,5217,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("ABCDEFGHIJ", 0, "DED"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5219,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5221,org.apache.commons.io.IOCase.SENSITIVE,5220,org.apache.commons.io.IOCase.SENSITIVE.checkIndexOf("DEF", 0, "ABCDEFGHIJ"));
+        try {
+            IOCase.SENSITIVE.checkIndexOf("ABC", 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkIndexOf(null, 0, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkIndexOf(null, 0, null);
         } catch (NullPointerException ex) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -1464,7 +1782,7 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5268,org.apache.commons.io.IOCase.SENSITIVE,5267,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, "ABC"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5270,org.apache.commons.io.IOCase.SENSITIVE,5269,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, ""));
         try {
-            IOCase.SENSITIVE.checkRegionMatches("foo", 0, null);
+            IOCase.SENSITIVE.checkRegionMatches("bar", 0, null);
         } catch (NullPointerException ex) {
         }
         try {
@@ -1490,8 +1808,8 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void test_checkRegionMatches_functionality_literalMutation4111() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation4111");
+    public void test_checkRegionMatches_functionality_literalMutation6206() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6206");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
@@ -1537,8 +1855,102 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void test_checkRegionMatches_functionality_literalMutation4114() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation4114");
+    public void test_checkRegionMatches_functionality_literalMutation6207() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6207");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5242,org.apache.commons.io.IOCase.SENSITIVE,5241,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5244,org.apache.commons.io.IOCase.SENSITIVE,5243,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5246,org.apache.commons.io.IOCase.SENSITIVE,5245,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5248,org.apache.commons.io.IOCase.SENSITIVE,5247,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5250,org.apache.commons.io.IOCase.SENSITIVE,5249,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5252,org.apache.commons.io.IOCase.SENSITIVE,5251,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5254,org.apache.commons.io.IOCase.SENSITIVE,5253,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5256,org.apache.commons.io.IOCase.SENSITIVE,5255,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5258,org.apache.commons.io.IOCase.SENSITIVE,5257,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5260,org.apache.commons.io.IOCase.SENSITIVE,5259,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5262,org.apache.commons.io.IOCase.SENSITIVE,5261,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5264,org.apache.commons.io.IOCase.SENSITIVE,5263,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5266,org.apache.commons.io.IOCase.SENSITIVE,5265,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5268,org.apache.commons.io.IOCase.SENSITIVE,5267,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5270,org.apache.commons.io.IOCase.SENSITIVE,5269,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, ""));
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", -1, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 1, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, null);
+        } catch (NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void test_checkRegionMatches_functionality_literalMutation6208() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6208");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5242,org.apache.commons.io.IOCase.SENSITIVE,5241,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5244,org.apache.commons.io.IOCase.SENSITIVE,5243,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5246,org.apache.commons.io.IOCase.SENSITIVE,5245,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5248,org.apache.commons.io.IOCase.SENSITIVE,5247,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5250,org.apache.commons.io.IOCase.SENSITIVE,5249,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5252,org.apache.commons.io.IOCase.SENSITIVE,5251,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5254,org.apache.commons.io.IOCase.SENSITIVE,5253,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5256,org.apache.commons.io.IOCase.SENSITIVE,5255,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5258,org.apache.commons.io.IOCase.SENSITIVE,5257,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5260,org.apache.commons.io.IOCase.SENSITIVE,5259,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5262,org.apache.commons.io.IOCase.SENSITIVE,5261,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5264,org.apache.commons.io.IOCase.SENSITIVE,5263,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5266,org.apache.commons.io.IOCase.SENSITIVE,5265,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5268,org.apache.commons.io.IOCase.SENSITIVE,5267,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5270,org.apache.commons.io.IOCase.SENSITIVE,5269,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, ""));
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 1, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, null);
+        } catch (NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void test_checkRegionMatches_functionality_literalMutation6211() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6211");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
@@ -1584,8 +1996,8 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void test_checkRegionMatches_functionality_literalMutation4115() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation4115");
+    public void test_checkRegionMatches_functionality_literalMutation6212() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6212");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
@@ -1609,7 +2021,7 @@ public class IOCaseTestCase extends FileBasedTestCase {
         } catch (NullPointerException ex) {
         }
         try {
-            IOCase.SENSITIVE.checkRegionMatches(null, 0, "foo");
+            IOCase.SENSITIVE.checkRegionMatches(null, -1, "ABC");
         } catch (NullPointerException ex) {
         }
         try {
@@ -1631,8 +2043,149 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void test_checkRegionMatches_functionality_literalMutation4117() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation4117");
+    public void test_checkRegionMatches_functionality_literalMutation6213() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6213");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5242,org.apache.commons.io.IOCase.SENSITIVE,5241,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5244,org.apache.commons.io.IOCase.SENSITIVE,5243,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5246,org.apache.commons.io.IOCase.SENSITIVE,5245,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5248,org.apache.commons.io.IOCase.SENSITIVE,5247,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5250,org.apache.commons.io.IOCase.SENSITIVE,5249,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5252,org.apache.commons.io.IOCase.SENSITIVE,5251,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5254,org.apache.commons.io.IOCase.SENSITIVE,5253,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5256,org.apache.commons.io.IOCase.SENSITIVE,5255,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5258,org.apache.commons.io.IOCase.SENSITIVE,5257,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5260,org.apache.commons.io.IOCase.SENSITIVE,5259,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5262,org.apache.commons.io.IOCase.SENSITIVE,5261,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5264,org.apache.commons.io.IOCase.SENSITIVE,5263,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5266,org.apache.commons.io.IOCase.SENSITIVE,5265,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5268,org.apache.commons.io.IOCase.SENSITIVE,5267,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5270,org.apache.commons.io.IOCase.SENSITIVE,5269,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, ""));
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 1, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, null);
+        } catch (NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void test_checkRegionMatches_functionality_literalMutation6214() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6214");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5242,org.apache.commons.io.IOCase.SENSITIVE,5241,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5244,org.apache.commons.io.IOCase.SENSITIVE,5243,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5246,org.apache.commons.io.IOCase.SENSITIVE,5245,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5248,org.apache.commons.io.IOCase.SENSITIVE,5247,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5250,org.apache.commons.io.IOCase.SENSITIVE,5249,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5252,org.apache.commons.io.IOCase.SENSITIVE,5251,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5254,org.apache.commons.io.IOCase.SENSITIVE,5253,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5256,org.apache.commons.io.IOCase.SENSITIVE,5255,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5258,org.apache.commons.io.IOCase.SENSITIVE,5257,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5260,org.apache.commons.io.IOCase.SENSITIVE,5259,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5262,org.apache.commons.io.IOCase.SENSITIVE,5261,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5264,org.apache.commons.io.IOCase.SENSITIVE,5263,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5266,org.apache.commons.io.IOCase.SENSITIVE,5265,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5268,org.apache.commons.io.IOCase.SENSITIVE,5267,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5270,org.apache.commons.io.IOCase.SENSITIVE,5269,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, ""));
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, "bar");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 1, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, null);
+        } catch (NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void test_checkRegionMatches_functionality_literalMutation6216() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6216");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5242,org.apache.commons.io.IOCase.SENSITIVE,5241,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5244,org.apache.commons.io.IOCase.SENSITIVE,5243,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5246,org.apache.commons.io.IOCase.SENSITIVE,5245,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5248,org.apache.commons.io.IOCase.SENSITIVE,5247,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5250,org.apache.commons.io.IOCase.SENSITIVE,5249,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5252,org.apache.commons.io.IOCase.SENSITIVE,5251,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5254,org.apache.commons.io.IOCase.SENSITIVE,5253,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5256,org.apache.commons.io.IOCase.SENSITIVE,5255,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5258,org.apache.commons.io.IOCase.SENSITIVE,5257,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5260,org.apache.commons.io.IOCase.SENSITIVE,5259,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5262,org.apache.commons.io.IOCase.SENSITIVE,5261,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5264,org.apache.commons.io.IOCase.SENSITIVE,5263,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5266,org.apache.commons.io.IOCase.SENSITIVE,5265,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5268,org.apache.commons.io.IOCase.SENSITIVE,5267,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5270,org.apache.commons.io.IOCase.SENSITIVE,5269,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, ""));
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 1, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, null);
+        } catch (NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void test_checkRegionMatches_functionality_literalMutation6217() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6217");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
@@ -1678,8 +2231,8 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void test_checkRegionMatches_functionality_literalMutation4119() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation4119");
+    public void test_checkRegionMatches_functionality_literalMutation6218() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6218");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
@@ -1711,7 +2264,7 @@ public class IOCaseTestCase extends FileBasedTestCase {
         } catch (NullPointerException ex) {
         }
         try {
-            IOCase.SENSITIVE.checkRegionMatches("foo", 1, null);
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 1, null);
         } catch (NullPointerException ex) {
         }
         try {
@@ -1725,8 +2278,55 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void test_checkRegionMatches_functionality_literalMutation4120() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation4120");
+    public void test_checkRegionMatches_functionality_literalMutation6220() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6220");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5242,org.apache.commons.io.IOCase.SENSITIVE,5241,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5244,org.apache.commons.io.IOCase.SENSITIVE,5243,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5246,org.apache.commons.io.IOCase.SENSITIVE,5245,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5248,org.apache.commons.io.IOCase.SENSITIVE,5247,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5250,org.apache.commons.io.IOCase.SENSITIVE,5249,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5252,org.apache.commons.io.IOCase.SENSITIVE,5251,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5254,org.apache.commons.io.IOCase.SENSITIVE,5253,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5256,org.apache.commons.io.IOCase.SENSITIVE,5255,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5258,org.apache.commons.io.IOCase.SENSITIVE,5257,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5260,org.apache.commons.io.IOCase.SENSITIVE,5259,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5262,org.apache.commons.io.IOCase.SENSITIVE,5261,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5264,org.apache.commons.io.IOCase.SENSITIVE,5263,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5266,org.apache.commons.io.IOCase.SENSITIVE,5265,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5268,org.apache.commons.io.IOCase.SENSITIVE,5267,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5270,org.apache.commons.io.IOCase.SENSITIVE,5269,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, ""));
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("bar", 1, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, null);
+        } catch (NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void test_checkRegionMatches_functionality_literalMutation6221() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6221");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
@@ -1772,8 +2372,102 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void test_checkRegionMatches_functionality_literalMutation4123() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation4123");
+    public void test_checkRegionMatches_functionality_literalMutation6222() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6222");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5242,org.apache.commons.io.IOCase.SENSITIVE,5241,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5244,org.apache.commons.io.IOCase.SENSITIVE,5243,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5246,org.apache.commons.io.IOCase.SENSITIVE,5245,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5248,org.apache.commons.io.IOCase.SENSITIVE,5247,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5250,org.apache.commons.io.IOCase.SENSITIVE,5249,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5252,org.apache.commons.io.IOCase.SENSITIVE,5251,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5254,org.apache.commons.io.IOCase.SENSITIVE,5253,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5256,org.apache.commons.io.IOCase.SENSITIVE,5255,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5258,org.apache.commons.io.IOCase.SENSITIVE,5257,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5260,org.apache.commons.io.IOCase.SENSITIVE,5259,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5262,org.apache.commons.io.IOCase.SENSITIVE,5261,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5264,org.apache.commons.io.IOCase.SENSITIVE,5263,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5266,org.apache.commons.io.IOCase.SENSITIVE,5265,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5268,org.apache.commons.io.IOCase.SENSITIVE,5267,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5270,org.apache.commons.io.IOCase.SENSITIVE,5269,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, ""));
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, null);
+        } catch (NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void test_checkRegionMatches_functionality_literalMutation6223() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6223");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5242,org.apache.commons.io.IOCase.SENSITIVE,5241,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5244,org.apache.commons.io.IOCase.SENSITIVE,5243,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5246,org.apache.commons.io.IOCase.SENSITIVE,5245,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5248,org.apache.commons.io.IOCase.SENSITIVE,5247,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5250,org.apache.commons.io.IOCase.SENSITIVE,5249,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5252,org.apache.commons.io.IOCase.SENSITIVE,5251,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5254,org.apache.commons.io.IOCase.SENSITIVE,5253,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5256,org.apache.commons.io.IOCase.SENSITIVE,5255,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5258,org.apache.commons.io.IOCase.SENSITIVE,5257,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5260,org.apache.commons.io.IOCase.SENSITIVE,5259,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5262,org.apache.commons.io.IOCase.SENSITIVE,5261,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5264,org.apache.commons.io.IOCase.SENSITIVE,5263,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5266,org.apache.commons.io.IOCase.SENSITIVE,5265,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5268,org.apache.commons.io.IOCase.SENSITIVE,5267,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5270,org.apache.commons.io.IOCase.SENSITIVE,5269,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, ""));
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, null);
+        } catch (NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void test_checkRegionMatches_functionality_literalMutation6226() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6226");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
@@ -1819,8 +2513,8 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void test_checkRegionMatches_functionality_literalMutation4124() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation4124");
+    public void test_checkRegionMatches_functionality_literalMutation6227() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6227");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
@@ -1856,7 +2550,7 @@ public class IOCaseTestCase extends FileBasedTestCase {
         } catch (NullPointerException ex) {
         }
         try {
-            IOCase.SENSITIVE.checkRegionMatches(null, 1, "foo");
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, "ABC");
         } catch (NullPointerException ex) {
         }
         try {
@@ -1866,8 +2560,102 @@ public class IOCaseTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void test_checkRegionMatches_functionality_literalMutation4126() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation4126");
+    public void test_checkRegionMatches_functionality_literalMutation6228() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6228");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5242,org.apache.commons.io.IOCase.SENSITIVE,5241,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5244,org.apache.commons.io.IOCase.SENSITIVE,5243,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5246,org.apache.commons.io.IOCase.SENSITIVE,5245,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5248,org.apache.commons.io.IOCase.SENSITIVE,5247,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5250,org.apache.commons.io.IOCase.SENSITIVE,5249,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5252,org.apache.commons.io.IOCase.SENSITIVE,5251,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5254,org.apache.commons.io.IOCase.SENSITIVE,5253,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5256,org.apache.commons.io.IOCase.SENSITIVE,5255,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5258,org.apache.commons.io.IOCase.SENSITIVE,5257,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5260,org.apache.commons.io.IOCase.SENSITIVE,5259,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5262,org.apache.commons.io.IOCase.SENSITIVE,5261,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5264,org.apache.commons.io.IOCase.SENSITIVE,5263,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5266,org.apache.commons.io.IOCase.SENSITIVE,5265,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5268,org.apache.commons.io.IOCase.SENSITIVE,5267,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5270,org.apache.commons.io.IOCase.SENSITIVE,5269,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, ""));
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 1, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, null);
+        } catch (NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void test_checkRegionMatches_functionality_literalMutation6229() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6229");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5242,org.apache.commons.io.IOCase.SENSITIVE,5241,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5244,org.apache.commons.io.IOCase.SENSITIVE,5243,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5246,org.apache.commons.io.IOCase.SENSITIVE,5245,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5248,org.apache.commons.io.IOCase.SENSITIVE,5247,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5250,org.apache.commons.io.IOCase.SENSITIVE,5249,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5252,org.apache.commons.io.IOCase.SENSITIVE,5251,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5254,org.apache.commons.io.IOCase.SENSITIVE,5253,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5256,org.apache.commons.io.IOCase.SENSITIVE,5255,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5258,org.apache.commons.io.IOCase.SENSITIVE,5257,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5260,org.apache.commons.io.IOCase.SENSITIVE,5259,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5262,org.apache.commons.io.IOCase.SENSITIVE,5261,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5264,org.apache.commons.io.IOCase.SENSITIVE,5263,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5266,org.apache.commons.io.IOCase.SENSITIVE,5265,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5268,org.apache.commons.io.IOCase.SENSITIVE,5267,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5270,org.apache.commons.io.IOCase.SENSITIVE,5269,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, ""));
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 1, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, "bar");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, null);
+        } catch (NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void test_checkRegionMatches_functionality_literalMutation6231() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6231");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
@@ -1908,6 +2696,100 @@ public class IOCaseTestCase extends FileBasedTestCase {
         }
         try {
             IOCase.SENSITIVE.checkRegionMatches(null, 2, null);
+        } catch (NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void test_checkRegionMatches_functionality_literalMutation6232() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6232");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5242,org.apache.commons.io.IOCase.SENSITIVE,5241,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5244,org.apache.commons.io.IOCase.SENSITIVE,5243,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5246,org.apache.commons.io.IOCase.SENSITIVE,5245,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5248,org.apache.commons.io.IOCase.SENSITIVE,5247,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5250,org.apache.commons.io.IOCase.SENSITIVE,5249,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5252,org.apache.commons.io.IOCase.SENSITIVE,5251,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5254,org.apache.commons.io.IOCase.SENSITIVE,5253,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5256,org.apache.commons.io.IOCase.SENSITIVE,5255,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5258,org.apache.commons.io.IOCase.SENSITIVE,5257,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5260,org.apache.commons.io.IOCase.SENSITIVE,5259,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5262,org.apache.commons.io.IOCase.SENSITIVE,5261,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5264,org.apache.commons.io.IOCase.SENSITIVE,5263,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5266,org.apache.commons.io.IOCase.SENSITIVE,5265,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5268,org.apache.commons.io.IOCase.SENSITIVE,5267,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5270,org.apache.commons.io.IOCase.SENSITIVE,5269,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, ""));
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 1, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, null);
+        } catch (NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void test_checkRegionMatches_functionality_literalMutation6233() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_checkRegionMatches_functionality_literalMutation6233");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5236,org.apache.commons.io.IOCase.SENSITIVE,5235,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5238,org.apache.commons.io.IOCase.SENSITIVE,5237,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5240,org.apache.commons.io.IOCase.SENSITIVE,5239,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5242,org.apache.commons.io.IOCase.SENSITIVE,5241,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5244,org.apache.commons.io.IOCase.SENSITIVE,5243,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5246,org.apache.commons.io.IOCase.SENSITIVE,5245,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5248,org.apache.commons.io.IOCase.SENSITIVE,5247,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 0, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5250,org.apache.commons.io.IOCase.SENSITIVE,5249,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5252,org.apache.commons.io.IOCase.SENSITIVE,5251,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 0, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5254,org.apache.commons.io.IOCase.SENSITIVE,5253,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, ""));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5256,org.apache.commons.io.IOCase.SENSITIVE,5255,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5258,org.apache.commons.io.IOCase.SENSITIVE,5257,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "AB"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5260,org.apache.commons.io.IOCase.SENSITIVE,5259,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5262,org.apache.commons.io.IOCase.SENSITIVE,5261,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "BC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5264,org.apache.commons.io.IOCase.SENSITIVE,5263,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5266,org.apache.commons.io.IOCase.SENSITIVE,5265,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("ABC", 1, "ABCD"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5268,org.apache.commons.io.IOCase.SENSITIVE,5267,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, "ABC"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5270,org.apache.commons.io.IOCase.SENSITIVE,5269,org.apache.commons.io.IOCase.SENSITIVE.checkRegionMatches("", 1, ""));
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches("ABC", 1, null);
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 1, "ABC");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            IOCase.SENSITIVE.checkRegionMatches(null, 0, null);
         } catch (NullPointerException ex) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());

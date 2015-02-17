@@ -103,8 +103,8 @@ public class FileUtilsListFilesTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testIterateFilesByExtension_literalMutation3152() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIterateFilesByExtension_literalMutation3152");
+    public void testIterateFilesByExtension_literalMutation4862() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIterateFilesByExtension_literalMutation4862");
         String[] extensions = new String[]{ "xml" , "foo" };
         Iterator<java.io.File> files = org.apache.commons.io.FileUtils.iterateFiles(getLocalTestDirectory(), extensions, false);
         Collection<java.lang.String> filenames = filesToFilenames(files);
@@ -126,10 +126,10 @@ public class FileUtilsListFilesTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testIterateFilesByExtension_literalMutation3153() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIterateFilesByExtension_literalMutation3153");
+    public void testIterateFilesByExtension_literalMutation4863() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIterateFilesByExtension_literalMutation4863");
         String[] extensions = new String[]{ "xml" , "txt" };
-        Iterator<java.io.File> files = org.apache.commons.io.FileUtils.iterateFiles(getLocalTestDirectory(), extensions, false);
+        Iterator<java.io.File> files = org.apache.commons.io.FileUtils.iterateFiles(getLocalTestDirectory(), extensions, true);
         Collection<java.lang.String> filenames = filesToFilenames(files);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2634,filenames,2633,filenames.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2636,filenames,2635,filenames.contains("dummy-build.xml"));
@@ -149,8 +149,8 @@ public class FileUtilsListFilesTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testIterateFilesByExtension_literalMutation3154() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIterateFilesByExtension_literalMutation3154");
+    public void testIterateFilesByExtension_literalMutation4864() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIterateFilesByExtension_literalMutation4864");
         String[] extensions = new String[]{ "xml" , "txt" };
         Iterator<java.io.File> files = org.apache.commons.io.FileUtils.iterateFiles(getLocalTestDirectory(), extensions, false);
         Collection<java.lang.String> filenames = filesToFilenames(files);
@@ -158,7 +158,7 @@ public class FileUtilsListFilesTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2636,filenames,2635,filenames.contains("dummy-build.xml"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2638,filenames,2637,filenames.contains("README"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2640,filenames,2639,filenames.contains("dummy-file.txt"));
-        files = org.apache.commons.io.FileUtils.iterateFiles(getLocalTestDirectory(), extensions, true);
+        files = org.apache.commons.io.FileUtils.iterateFiles(getLocalTestDirectory(), extensions, false);
         filenames = filesToFilenames(files);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2642,filenames,2641,filenames.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2644,filenames,2643,filenames.contains("dummy-file.txt"));
@@ -172,8 +172,8 @@ public class FileUtilsListFilesTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testIterateFilesByExtension_literalMutation3156() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIterateFilesByExtension_literalMutation3156");
+    public void testIterateFilesByExtension_literalMutation4866() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIterateFilesByExtension_literalMutation4866");
         String[] extensions = new String[]{ "xml" , "txt" };
         Iterator<java.io.File> files = org.apache.commons.io.FileUtils.iterateFiles(getLocalTestDirectory(), extensions, false);
         Collection<java.lang.String> filenames = filesToFilenames(files);
@@ -186,7 +186,7 @@ public class FileUtilsListFilesTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2642,filenames,2641,filenames.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2644,filenames,2643,filenames.contains("dummy-file.txt"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2646,filenames,2645,filenames.contains("dummy-index.html"));
-        files = org.apache.commons.io.FileUtils.iterateFiles(getLocalTestDirectory(), null, false);
+        files = org.apache.commons.io.FileUtils.iterateFiles(getLocalTestDirectory(), null, true);
         filenames = filesToFilenames(files);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2648,filenames,2647,filenames.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2650,filenames,2649,filenames.contains("dummy-build.xml"));
@@ -197,7 +197,7 @@ public class FileUtilsListFilesTestCase extends FileBasedTestCase {
 
     public void testListFilesByExtension() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testListFilesByExtension");
-        String[] extensions = new String[]{ "foo" , "txt" };
+        String[] extensions = new String[]{ "bar" , "txt" };
         Collection<java.io.File> files = org.apache.commons.io.FileUtils.listFiles(getLocalTestDirectory(), extensions, false);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2656,files,2655,files.size());
         Collection<java.lang.String> filenames = filesToFilenames(files);
@@ -218,9 +218,9 @@ public class FileUtilsListFilesTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testListFilesByExtension_literalMutation3164() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testListFilesByExtension_literalMutation3164");
-        String[] extensions = new String[]{ "xml" , "foo" };
+    public void testListFilesByExtension_literalMutation4874() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testListFilesByExtension_literalMutation4874");
+        String[] extensions = new String[]{ "xml" , "bar" };
         Collection<java.io.File> files = org.apache.commons.io.FileUtils.listFiles(getLocalTestDirectory(), extensions, false);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2656,files,2655,files.size());
         Collection<java.lang.String> filenames = filesToFilenames(files);
@@ -241,8 +241,8 @@ public class FileUtilsListFilesTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testListFilesByExtension_literalMutation3165() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testListFilesByExtension_literalMutation3165");
+    public void testListFilesByExtension_literalMutation4875() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testListFilesByExtension_literalMutation4875");
         String[] extensions = new String[]{ "xml" , "txt" };
         Collection<java.io.File> files = org.apache.commons.io.FileUtils.listFiles(getLocalTestDirectory(), extensions, true);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2656,files,2655,files.size());
@@ -264,8 +264,8 @@ public class FileUtilsListFilesTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testListFilesByExtension_literalMutation3166() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testListFilesByExtension_literalMutation3166");
+    public void testListFilesByExtension_literalMutation4876() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testListFilesByExtension_literalMutation4876");
         String[] extensions = new String[]{ "xml" , "txt" };
         Collection<java.io.File> files = org.apache.commons.io.FileUtils.listFiles(getLocalTestDirectory(), extensions, false);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2656,files,2655,files.size());
@@ -273,7 +273,7 @@ public class FileUtilsListFilesTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2658,filenames,2657,filenames.contains("dummy-build.xml"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2660,filenames,2659,filenames.contains("README"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2662,filenames,2661,filenames.contains("dummy-file.txt"));
-        files = org.apache.commons.io.FileUtils.listFiles(getLocalTestDirectory(), extensions, true);
+        files = org.apache.commons.io.FileUtils.listFiles(getLocalTestDirectory(), extensions, false);
         filenames = filesToFilenames(files);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2664,filenames,2663,filenames.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2666,filenames,2665,filenames.contains("dummy-file.txt"));
@@ -287,8 +287,8 @@ public class FileUtilsListFilesTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testListFilesByExtension_literalMutation3168() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testListFilesByExtension_literalMutation3168");
+    public void testListFilesByExtension_literalMutation4878() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testListFilesByExtension_literalMutation4878");
         String[] extensions = new String[]{ "xml" , "txt" };
         Collection<java.io.File> files = org.apache.commons.io.FileUtils.listFiles(getLocalTestDirectory(), extensions, false);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2656,files,2655,files.size());
@@ -301,7 +301,7 @@ public class FileUtilsListFilesTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2664,filenames,2663,filenames.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2666,filenames,2665,filenames.contains("dummy-file.txt"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2668,filenames,2667,filenames.contains("dummy-index.html"));
-        files = org.apache.commons.io.FileUtils.listFiles(getLocalTestDirectory(), null, false);
+        files = org.apache.commons.io.FileUtils.listFiles(getLocalTestDirectory(), null, true);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2670,files,2669,files.size());
         filenames = filesToFilenames(files);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2672,filenames,2671,filenames.contains("dummy-build.xml"));
@@ -366,7 +366,7 @@ public class FileUtilsListFilesTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2680,filenames,2679,filenames.contains("dummy-index.html"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2682,filenames,2681,filenames.contains("Entries"));
         fileFilter = org.apache.commons.io.filefilter.FileFilterUtils.trueFileFilter();
-        dirFilter = org.apache.commons.io.filefilter.FileFilterUtils.notFileFilter(org.apache.commons.io.filefilter.FileFilterUtils.nameFileFilter("foo"));
+        dirFilter = org.apache.commons.io.filefilter.FileFilterUtils.notFileFilter(org.apache.commons.io.filefilter.FileFilterUtils.nameFileFilter("bar"));
         files = org.apache.commons.io.FileUtils.listFiles(getLocalTestDirectory(), fileFilter, dirFilter);
         filenames = filesToFilenames(files);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2684,filenames,2683,filenames.contains("dummy-build.xml"));
@@ -394,8 +394,8 @@ public class FileUtilsListFilesTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testListFiles_literalMutation3160() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testListFiles_literalMutation3160");
+    public void testListFiles_literalMutation4870() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testListFiles_literalMutation4870");
         Collection<java.io.File> files;
         Collection<java.lang.String> filenames;
         IOFileFilter fileFilter;
@@ -421,7 +421,7 @@ public class FileUtilsListFilesTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2692,filenames,2691,filenames.contains("dummy-index.html"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2694,filenames,2693,filenames.contains("Entries"));
         fileFilter = org.apache.commons.io.filefilter.FileFilterUtils.trueFileFilter();
-        dirFilter = org.apache.commons.io.filefilter.FileFilterUtils.prefixFileFilter("foo");
+        dirFilter = org.apache.commons.io.filefilter.FileFilterUtils.prefixFileFilter("bar");
         dirFilter = org.apache.commons.io.filefilter.FileFilterUtils.makeCVSAware(dirFilter);
         files = org.apache.commons.io.FileUtils.listFiles(getLocalTestDirectory(), fileFilter, dirFilter);
         filenames = filesToFilenames(files);

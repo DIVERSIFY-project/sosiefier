@@ -146,7 +146,7 @@ public class NullOutputStreamTest extends TestCase {
     public void testNull() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull");
         NullOutputStream nos = new NullOutputStream();
-        nos.write("foo".getBytes());
+        nos.write("bar".getBytes());
         nos.write("some string".getBytes(), 3, 5);
         nos.write(1);
         nos.write(15);
@@ -157,8 +157,8 @@ public class NullOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testNull_literalMutation2391() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation2391");
+    public void testNull_literalMutation3503() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3503");
         NullOutputStream nos = new NullOutputStream();
         nos.write("string".getBytes());
         nos.write("foo".getBytes(), 3, 5);
@@ -171,8 +171,8 @@ public class NullOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testNull_literalMutation2392() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation2392");
+    public void testNull_literalMutation3504() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3504");
         NullOutputStream nos = new NullOutputStream();
         nos.write("string".getBytes());
         nos.write("some string".getBytes(), 4, 5);
@@ -185,8 +185,92 @@ public class NullOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testNull_literalMutation2393() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation2393");
+    public void testNull_literalMutation3505() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3505");
+        NullOutputStream nos = new NullOutputStream();
+        nos.write("string".getBytes());
+        nos.write("some string".getBytes(), 2, 5);
+        nos.write(1);
+        nos.write(15);
+        nos.flush();
+        nos.close();
+        nos.write("allowed".getBytes());
+        nos.write(255);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNull_literalMutation3506() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3506");
+        NullOutputStream nos = new NullOutputStream();
+        nos.write("string".getBytes());
+        nos.write("some string".getBytes(), 1, 5);
+        nos.write(1);
+        nos.write(15);
+        nos.flush();
+        nos.close();
+        nos.write("allowed".getBytes());
+        nos.write(255);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNull_literalMutation3507() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3507");
+        NullOutputStream nos = new NullOutputStream();
+        nos.write("string".getBytes());
+        nos.write("some string".getBytes(), 6, 5);
+        nos.write(1);
+        nos.write(15);
+        nos.flush();
+        nos.close();
+        nos.write("allowed".getBytes());
+        nos.write(255);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNull_literalMutation3508() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3508");
+        NullOutputStream nos = new NullOutputStream();
+        nos.write("string".getBytes());
+        nos.write("some string".getBytes(), 3, 4);
+        nos.write(1);
+        nos.write(15);
+        nos.flush();
+        nos.close();
+        nos.write("allowed".getBytes());
+        nos.write(255);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNull_literalMutation3509() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3509");
+        NullOutputStream nos = new NullOutputStream();
+        nos.write("string".getBytes());
+        nos.write("some string".getBytes(), 3, 2);
+        nos.write(1);
+        nos.write(15);
+        nos.flush();
+        nos.close();
+        nos.write("allowed".getBytes());
+        nos.write(255);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNull_literalMutation3510() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3510");
+        NullOutputStream nos = new NullOutputStream();
+        nos.write("string".getBytes());
+        nos.write("some string".getBytes(), 3, 10);
+        nos.write(1);
+        nos.write(15);
+        nos.flush();
+        nos.close();
+        nos.write("allowed".getBytes());
+        nos.write(255);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNull_literalMutation3511() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3511");
         NullOutputStream nos = new NullOutputStream();
         nos.write("string".getBytes());
         nos.write("some string".getBytes(), 3, 6);
@@ -199,8 +283,22 @@ public class NullOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testNull_literalMutation2394() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation2394");
+    public void testNull_literalMutation3512() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3512");
+        NullOutputStream nos = new NullOutputStream();
+        nos.write("string".getBytes());
+        nos.write("some string".getBytes(), 3, 5);
+        nos.write(2);
+        nos.write(15);
+        nos.flush();
+        nos.close();
+        nos.write("allowed".getBytes());
+        nos.write(255);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNull_literalMutation3513() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3513");
         NullOutputStream nos = new NullOutputStream();
         nos.write("string".getBytes());
         nos.write("some string".getBytes(), 3, 5);
@@ -213,8 +311,22 @@ public class NullOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testNull_literalMutation2395() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation2395");
+    public void testNull_literalMutation3514() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3514");
+        NullOutputStream nos = new NullOutputStream();
+        nos.write("string".getBytes());
+        nos.write("some string".getBytes(), 3, 5);
+        nos.write(0);
+        nos.write(15);
+        nos.flush();
+        nos.close();
+        nos.write("allowed".getBytes());
+        nos.write(255);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNull_literalMutation3515() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3515");
         NullOutputStream nos = new NullOutputStream();
         nos.write("string".getBytes());
         nos.write("some string".getBytes(), 3, 5);
@@ -227,8 +339,50 @@ public class NullOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testNull_literalMutation2396() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation2396");
+    public void testNull_literalMutation3516() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3516");
+        NullOutputStream nos = new NullOutputStream();
+        nos.write("string".getBytes());
+        nos.write("some string".getBytes(), 3, 5);
+        nos.write(1);
+        nos.write(14);
+        nos.flush();
+        nos.close();
+        nos.write("allowed".getBytes());
+        nos.write(255);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNull_literalMutation3517() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3517");
+        NullOutputStream nos = new NullOutputStream();
+        nos.write("string".getBytes());
+        nos.write("some string".getBytes(), 3, 5);
+        nos.write(1);
+        nos.write(7);
+        nos.flush();
+        nos.close();
+        nos.write("allowed".getBytes());
+        nos.write(255);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNull_literalMutation3518() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3518");
+        NullOutputStream nos = new NullOutputStream();
+        nos.write("string".getBytes());
+        nos.write("some string".getBytes(), 3, 5);
+        nos.write(1);
+        nos.write(30);
+        nos.flush();
+        nos.close();
+        nos.write("allowed".getBytes());
+        nos.write(255);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNull_literalMutation3519() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3519");
         NullOutputStream nos = new NullOutputStream();
         nos.write("string".getBytes());
         nos.write("some string".getBytes(), 3, 5);
@@ -236,13 +390,27 @@ public class NullOutputStreamTest extends TestCase {
         nos.write(15);
         nos.flush();
         nos.close();
-        nos.write("foo".getBytes());
+        nos.write("bar".getBytes());
         nos.write(255);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testNull_literalMutation2397() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation2397");
+    public void testNull_literalMutation3520() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3520");
+        NullOutputStream nos = new NullOutputStream();
+        nos.write("string".getBytes());
+        nos.write("some string".getBytes(), 3, 5);
+        nos.write(1);
+        nos.write(15);
+        nos.flush();
+        nos.close();
+        nos.write("allowed".getBytes());
+        nos.write(256);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNull_literalMutation3521() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3521");
         NullOutputStream nos = new NullOutputStream();
         nos.write("string".getBytes());
         nos.write("some string".getBytes(), 3, 5);
@@ -252,6 +420,34 @@ public class NullOutputStreamTest extends TestCase {
         nos.close();
         nos.write("allowed".getBytes());
         nos.write(254);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNull_literalMutation3522() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3522");
+        NullOutputStream nos = new NullOutputStream();
+        nos.write("string".getBytes());
+        nos.write("some string".getBytes(), 3, 5);
+        nos.write(1);
+        nos.write(15);
+        nos.flush();
+        nos.close();
+        nos.write("allowed".getBytes());
+        nos.write(127);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNull_literalMutation3523() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNull_literalMutation3523");
+        NullOutputStream nos = new NullOutputStream();
+        nos.write("string".getBytes());
+        nos.write("some string".getBytes(), 3, 5);
+        nos.write(1);
+        nos.write(15);
+        nos.flush();
+        nos.close();
+        nos.write("allowed".getBytes());
+        nos.write(510);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

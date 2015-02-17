@@ -147,8 +147,53 @@ public class CacheSubSequencePerformanceTest {
     }
 
     @Test
-    public void test_literalMutation160() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation160");
+    public void test_literalMutation213() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation213");
+        final int times = 5000000;
+        System.out.print("Test with String : ");
+        test("Angelo", times);
+        System.out.print("Test with StringBuilder : ");
+        test(new java.lang.StringBuilder("Angelo"), times);
+        System.out.print("Test with cached String : ");
+        test(cacheSubSequence("Angelo"), times);
+        System.out.print("Test with cached StringBuilder : ");
+        test(cacheSubSequence(new java.lang.StringBuilder("Angelo")), times);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void test_literalMutation214() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation214");
+        final int times = 20000000;
+        System.out.print("Test with String : ");
+        test("Angelo", times);
+        System.out.print("Test with StringBuilder : ");
+        test(new java.lang.StringBuilder("Angelo"), times);
+        System.out.print("Test with cached String : ");
+        test(cacheSubSequence("Angelo"), times);
+        System.out.print("Test with cached StringBuilder : ");
+        test(cacheSubSequence(new java.lang.StringBuilder("Angelo")), times);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void test_literalMutation215() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation215");
+        final int times = 9999999;
+        System.out.print("Test with String : ");
+        test("Angelo", times);
+        System.out.print("Test with StringBuilder : ");
+        test(new java.lang.StringBuilder("Angelo"), times);
+        System.out.print("Test with cached String : ");
+        test(cacheSubSequence("Angelo"), times);
+        System.out.print("Test with cached StringBuilder : ");
+        test(cacheSubSequence(new java.lang.StringBuilder("Angelo")), times);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void test_literalMutation216() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation216");
         final int times = 10000000;
         System.out.print("foo");
         test("Angelo", times);
@@ -162,8 +207,8 @@ public class CacheSubSequencePerformanceTest {
     }
 
     @Test
-    public void test_literalMutation161() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation161");
+    public void test_literalMutation217() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation217");
         final int times = 10000000;
         System.out.print("Test with String : ");
         test("foo", times);
@@ -177,12 +222,12 @@ public class CacheSubSequencePerformanceTest {
     }
 
     @Test
-    public void test_literalMutation162() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation162");
+    public void test_literalMutation218() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation218");
         final int times = 10000000;
         System.out.print("Test with String : ");
         test("Angelo", times);
-        System.out.print("foo");
+        System.out.print("bar");
         test(new java.lang.StringBuilder("Angelo"), times);
         System.out.print("Test with cached String : ");
         test(cacheSubSequence("Angelo"), times);
@@ -192,8 +237,8 @@ public class CacheSubSequencePerformanceTest {
     }
 
     @Test
-    public void test_literalMutation163() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation163");
+    public void test_literalMutation219() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation219");
         final int times = 10000000;
         System.out.print("Test with String : ");
         test("Angelo", times);
@@ -207,8 +252,8 @@ public class CacheSubSequencePerformanceTest {
     }
 
     @Test
-    public void test_literalMutation164() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation164");
+    public void test_literalMutation220() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation220");
         final int times = 10000000;
         System.out.print("Test with String : ");
         test("Angelo", times);
@@ -222,8 +267,8 @@ public class CacheSubSequencePerformanceTest {
     }
 
     @Test
-    public void test_literalMutation165() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation165");
+    public void test_literalMutation221() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation221");
         final int times = 10000000;
         System.out.print("Test with String : ");
         test("Angelo", times);
@@ -237,8 +282,8 @@ public class CacheSubSequencePerformanceTest {
     }
 
     @Test
-    public void test_literalMutation166() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation166");
+    public void test_literalMutation222() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation222");
         final int times = 10000000;
         System.out.print("Test with String : ");
         test("Angelo", times);
@@ -252,8 +297,8 @@ public class CacheSubSequencePerformanceTest {
     }
 
     @Test
-    public void test_literalMutation167() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation167");
+    public void test_literalMutation223() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation223");
         final int times = 10000000;
         System.out.print("Test with String : ");
         test("Angelo", times);
@@ -378,16 +423,6 @@ public class CacheSubSequencePerformanceTest {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    private void test(final CharSequence input, final int times) {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test");
-        final long beginTime = System.currentTimeMillis();
-        for (int i = 0 ; i < times ; i++) {
-            test(input);
-        }
-        System.out.println((((System.currentTimeMillis()) - beginTime) + " millis"));
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
     @Test(timeout = 1000)
     private void test_add83(final CharSequence input, final int times) {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_add83");
@@ -412,8 +447,8 @@ public class CacheSubSequencePerformanceTest {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    private void test_literalMutation169(final CharSequence input, final int times) {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation169");
+    private void test(final CharSequence input, final int times) {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test");
         final long beginTime = System.currentTimeMillis();
         for (int i = 1 ; i < times ; i++) {
             test(input);
@@ -422,8 +457,28 @@ public class CacheSubSequencePerformanceTest {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    private void test_literalMutation170(final CharSequence input, final int times) {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation170");
+    private void test_literalMutation228(final CharSequence input, final int times) {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation228");
+        final long beginTime = System.currentTimeMillis();
+        for (int i = -1 ; i < times ; i++) {
+            test(input);
+        }
+        System.out.println((((System.currentTimeMillis()) - beginTime) + " millis"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    private void test_literalMutation229(final CharSequence input, final int times) {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation229");
+        final long beginTime = System.currentTimeMillis();
+        for (int i = 0 ; i < times ; i++) {
+            test(input);
+        }
+        System.out.println((((System.currentTimeMillis()) - beginTime) + " millis"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    private void test_literalMutation230(final CharSequence input, final int times) {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation230");
         final long beginTime = System.currentTimeMillis();
         for (int i = 0 ; i < times ; i++) {
             test(input);
@@ -452,16 +507,6 @@ public class CacheSubSequencePerformanceTest {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    private void test(final CharSequence input) {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test");
-        for (int i = 0 ; i < (input.length()) ; i++) {
-            for (int j = i ; j <= (input.length()) ; j++) {
-                input.subSequence(i, j);
-            }
-        }
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
     @Test(timeout = 1000)
     private void test_add82(final CharSequence input) {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_add82");
@@ -474,9 +519,29 @@ public class CacheSubSequencePerformanceTest {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    private void test_literalMutation168(final CharSequence input) {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation168");
+    private void test(final CharSequence input) {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test");
         for (int i = 1 ; i < (input.length()) ; i++) {
+            for (int j = i ; j <= (input.length()) ; j++) {
+                input.subSequence(i, j);
+            }
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    private void test_literalMutation225(final CharSequence input) {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation225");
+        for (int i = -1 ; i < (input.length()) ; i++) {
+            for (int j = i ; j <= (input.length()) ; j++) {
+                input.subSequence(i, j);
+            }
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    private void test_literalMutation226(final CharSequence input) {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation226");
+        for (int i = 0 ; i < (input.length()) ; i++) {
             for (int j = i ; j <= (input.length()) ; j++) {
                 input.subSequence(i, j);
             }

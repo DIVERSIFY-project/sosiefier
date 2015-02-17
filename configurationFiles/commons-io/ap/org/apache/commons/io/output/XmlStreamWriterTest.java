@@ -83,10 +83,10 @@ private static final String TEXT_UNICODE = ((((((TEXT_LATIN1) + ", ") + (TEXT_LA
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testNoXmlHeader_literalMutation2535() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoXmlHeader_literalMutation2535");
+    public void testNoXmlHeader_literalMutation3770() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoXmlHeader_literalMutation3770");
         String xml = "<text>text with no XML header</text>";
-        XmlStreamWriterTest.checkXmlContent(xml, "foo", null);
+        XmlStreamWriterTest.checkXmlContent(xml, "bar", null);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -200,12 +200,12 @@ private static final String TEXT_UNICODE = ((((((TEXT_LATIN1) + ", ") + (TEXT_LA
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testEmpty_literalMutation2529() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmpty_literalMutation2529");
+    public void testEmpty_literalMutation3764() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmpty_literalMutation3764");
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         XmlStreamWriter writer = new XmlStreamWriter(out);
         writer.flush();
-        writer.write("foo");
+        writer.write("bar");
         writer.flush();
         writer.write(".");
         writer.flush();
@@ -213,8 +213,8 @@ private static final String TEXT_UNICODE = ((((((TEXT_LATIN1) + ", ") + (TEXT_LA
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testEmpty_literalMutation2530() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmpty_literalMutation2530");
+    public void testEmpty_literalMutation3765() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmpty_literalMutation3765");
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         XmlStreamWriter writer = new XmlStreamWriter(out);
         writer.flush();
@@ -374,8 +374,8 @@ private static final String TEXT_UNICODE = ((((((TEXT_LATIN1) + ", ") + (TEXT_LA
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testDefaultEncoding_literalMutation2521() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDefaultEncoding_literalMutation2521");
+    public void testDefaultEncoding_literalMutation3756() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDefaultEncoding_literalMutation3756");
         XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, null, null);
         XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, null, "UTF-8");
         XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, null, "foo");
@@ -384,23 +384,23 @@ private static final String TEXT_UNICODE = ((((((TEXT_LATIN1) + ", ") + (TEXT_LA
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testDefaultEncoding_literalMutation2523() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDefaultEncoding_literalMutation2523");
+    public void testDefaultEncoding_literalMutation3758() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDefaultEncoding_literalMutation3758");
         XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, null, null);
         XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, null, "UTF-8");
         XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, null, "UTF-16");
-        XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, null, "foo");
+        XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, null, "bar");
         XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, null, "ISO-8859-1");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testDefaultEncoding_literalMutation2525() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDefaultEncoding_literalMutation2525");
+    public void testDefaultEncoding_literalMutation3760() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDefaultEncoding_literalMutation3760");
         XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, null, null);
         XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, null, "UTF-8");
         XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, null, "UTF-16");
         XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, null, "UTF-16BE");
-        XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, null, "foo");
+        XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, null, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -464,7 +464,7 @@ private static final String TEXT_UNICODE = ((((((TEXT_LATIN1) + ", ") + (TEXT_LA
 
     public void testUTF8Encoding() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUTF8Encoding");
-        XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, "foo");
+        XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -484,7 +484,7 @@ private static final String TEXT_UNICODE = ((((((TEXT_LATIN1) + ", ") + (TEXT_LA
 
     public void testUTF16Encoding() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUTF16Encoding");
-        XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, "foo");
+        XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -504,7 +504,7 @@ private static final String TEXT_UNICODE = ((((((TEXT_LATIN1) + ", ") + (TEXT_LA
 
     public void testUTF16BEEncoding() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUTF16BEEncoding");
-        XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, "foo");
+        XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -524,7 +524,7 @@ private static final String TEXT_UNICODE = ((((((TEXT_LATIN1) + ", ") + (TEXT_LA
 
     public void testUTF16LEEncoding() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUTF16LEEncoding");
-        XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, "foo");
+        XmlStreamWriterTest.checkXmlWriter(TEXT_UNICODE, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -544,7 +544,7 @@ private static final String TEXT_UNICODE = ((((((TEXT_LATIN1) + ", ") + (TEXT_LA
 
     public void testLatin1Encoding() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLatin1Encoding");
-        XmlStreamWriterTest.checkXmlWriter(TEXT_LATIN1, "foo");
+        XmlStreamWriterTest.checkXmlWriter(TEXT_LATIN1, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -604,7 +604,7 @@ private static final String TEXT_UNICODE = ((((((TEXT_LATIN1) + ", ") + (TEXT_LA
 
     public void testEUC_JPEncoding() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEUC_JPEncoding");
-        XmlStreamWriterTest.checkXmlWriter(TEXT_EUC_JP, "foo");
+        XmlStreamWriterTest.checkXmlWriter(TEXT_EUC_JP, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -628,9 +628,9 @@ private static final String TEXT_UNICODE = ((((((TEXT_LATIN1) + ", ") + (TEXT_LA
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testEBCDICEncoding_literalMutation2527() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEBCDICEncoding_literalMutation2527");
-        XmlStreamWriterTest.checkXmlWriter("simple text in EBCDIC", "foo");
+    public void testEBCDICEncoding_literalMutation3762() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEBCDICEncoding_literalMutation3762");
+        XmlStreamWriterTest.checkXmlWriter("simple text in EBCDIC", "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

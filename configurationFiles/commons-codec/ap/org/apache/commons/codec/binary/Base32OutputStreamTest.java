@@ -15,9 +15,22 @@ public class Base32OutputStreamTest {
      * @throws Exception
      * for some failure scenarios.
      */
-@Test(timeout = 1000)
+@Test
     public void testBase32EmptyOutputStreamMimeChunkSize() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32EmptyOutputStreamMimeChunkSize");
+        testBase32EmptyOutputStream(BaseNCodec.MIME_CHUNK_SIZE);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation against empty input.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test(timeout = 1000)
+    public void testBase32EmptyOutputStreamMimeChunkSize_add333() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32EmptyOutputStreamMimeChunkSize_add333");
         testBase32EmptyOutputStream(BaseNCodec.MIME_CHUNK_SIZE);
         testBase32EmptyOutputStream(BaseNCodec.MIME_CHUNK_SIZE);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -41,9 +54,22 @@ public class Base32OutputStreamTest {
      * @throws Exception
      * for some failure scenarios.
      */
-@Test(timeout = 1000)
+@Test
     public void testBase32EmptyOutputStreamPemChunkSize() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32EmptyOutputStreamPemChunkSize");
+        testBase32EmptyOutputStream(BaseNCodec.PEM_CHUNK_SIZE);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation against empty input.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test(timeout = 1000)
+    public void testBase32EmptyOutputStreamPemChunkSize_add334() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32EmptyOutputStreamPemChunkSize_add334");
         testBase32EmptyOutputStream(BaseNCodec.PEM_CHUNK_SIZE);
         testBase32EmptyOutputStream(BaseNCodec.PEM_CHUNK_SIZE);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -85,6 +111,15 @@ public class Base32OutputStreamTest {
 
     private void testBase32EmptyOutputStream(final int chunkSize) throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32EmptyOutputStream");
+        final byte[] emptyEncoded = new byte[1];
+        final byte[] emptyDecoded = new byte[0];
+        testByteByByte(emptyEncoded, emptyDecoded, chunkSize, CRLF);
+        testByChunk(emptyEncoded, emptyDecoded, chunkSize, CRLF);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    private void testBase32EmptyOutputStream_literalMutation1784(final int chunkSize) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32EmptyOutputStream_literalMutation1784");
         final byte[] emptyEncoded = new byte[-1];
         final byte[] emptyDecoded = new byte[0];
         testByteByByte(emptyEncoded, emptyDecoded, chunkSize, CRLF);
@@ -92,10 +127,37 @@ public class Base32OutputStreamTest {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    private void testBase32EmptyOutputStream_literalMutation1514(final int chunkSize) throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32EmptyOutputStream_literalMutation1514");
+    private void testBase32EmptyOutputStream_literalMutation1785(final int chunkSize) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32EmptyOutputStream_literalMutation1785");
+        final byte[] emptyEncoded = new byte[0];
+        final byte[] emptyDecoded = new byte[0];
+        testByteByByte(emptyEncoded, emptyDecoded, chunkSize, CRLF);
+        testByChunk(emptyEncoded, emptyDecoded, chunkSize, CRLF);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    private void testBase32EmptyOutputStream_literalMutation1786(final int chunkSize) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32EmptyOutputStream_literalMutation1786");
         final byte[] emptyEncoded = new byte[0];
         final byte[] emptyDecoded = new byte[1];
+        testByteByByte(emptyEncoded, emptyDecoded, chunkSize, CRLF);
+        testByChunk(emptyEncoded, emptyDecoded, chunkSize, CRLF);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    private void testBase32EmptyOutputStream_literalMutation1787(final int chunkSize) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32EmptyOutputStream_literalMutation1787");
+        final byte[] emptyEncoded = new byte[0];
+        final byte[] emptyDecoded = new byte[-1];
+        testByteByByte(emptyEncoded, emptyDecoded, chunkSize, CRLF);
+        testByChunk(emptyEncoded, emptyDecoded, chunkSize, CRLF);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    private void testBase32EmptyOutputStream_literalMutation1788(final int chunkSize) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32EmptyOutputStream_literalMutation1788");
+        final byte[] emptyEncoded = new byte[0];
+        final byte[] emptyDecoded = new byte[0];
         testByteByByte(emptyEncoded, emptyDecoded, chunkSize, CRLF);
         testByChunk(emptyEncoded, emptyDecoded, chunkSize, CRLF);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -194,8 +256,52 @@ public class Base32OutputStreamTest {
      * for some failure scenarios.
      */
 @Test
-    public void testBase32OutputStreamByChunk_literalMutation1516() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByChunk_literalMutation1516");
+    public void testBase32OutputStreamByChunk_literalMutation1790() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByChunk_literalMutation1790");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByChunk(encoded, decoded, BaseNCodec.MIME_CHUNK_SIZE, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = -1 ; i <= 150 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[0];
+            testByChunk(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByChunk_literalMutation1791() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByChunk_literalMutation1791");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByChunk(encoded, decoded, BaseNCodec.MIME_CHUNK_SIZE, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[0];
+            testByChunk(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByChunk_literalMutation1792() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByChunk_literalMutation1792");
         byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
         byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
         testByChunk(encoded, decoded, BaseNCodec.MIME_CHUNK_SIZE, CRLF);
@@ -216,8 +322,96 @@ public class Base32OutputStreamTest {
      * for some failure scenarios.
      */
 @Test
-    public void testBase32OutputStreamByChunk_literalMutation1517() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByChunk_literalMutation1517");
+    public void testBase32OutputStreamByChunk_literalMutation1793() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByChunk_literalMutation1793");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByChunk(encoded, decoded, BaseNCodec.MIME_CHUNK_SIZE, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 149 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[0];
+            testByChunk(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByChunk_literalMutation1794() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByChunk_literalMutation1794");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByChunk(encoded, decoded, BaseNCodec.MIME_CHUNK_SIZE, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 75 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[0];
+            testByChunk(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByChunk_literalMutation1795() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByChunk_literalMutation1795");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByChunk(encoded, decoded, BaseNCodec.MIME_CHUNK_SIZE, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 300 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[0];
+            testByChunk(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByChunk_literalMutation1796() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByChunk_literalMutation1796");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByChunk(encoded, decoded, BaseNCodec.MIME_CHUNK_SIZE, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[2];
+            decoded = randomData[0];
+            testByChunk(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByChunk_literalMutation1797() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByChunk_literalMutation1797");
         byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
         byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
         testByChunk(encoded, decoded, BaseNCodec.MIME_CHUNK_SIZE, CRLF);
@@ -238,8 +432,52 @@ public class Base32OutputStreamTest {
      * for some failure scenarios.
      */
 @Test
-    public void testBase32OutputStreamByChunk_literalMutation1518() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByChunk_literalMutation1518");
+    public void testBase32OutputStreamByChunk_literalMutation1798() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByChunk_literalMutation1798");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByChunk(encoded, decoded, BaseNCodec.MIME_CHUNK_SIZE, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[0];
+            decoded = randomData[0];
+            testByChunk(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByChunk_literalMutation1799() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByChunk_literalMutation1799");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByChunk(encoded, decoded, BaseNCodec.MIME_CHUNK_SIZE, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[1];
+            testByChunk(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByChunk_literalMutation1800() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByChunk_literalMutation1800");
         byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
         byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
         testByChunk(encoded, decoded, BaseNCodec.MIME_CHUNK_SIZE, CRLF);
@@ -260,8 +498,30 @@ public class Base32OutputStreamTest {
      * for some failure scenarios.
      */
 @Test
-    public void testBase32OutputStreamByChunk_literalMutation1519() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByChunk_literalMutation1519");
+    public void testBase32OutputStreamByChunk_literalMutation1801() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByChunk_literalMutation1801");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByChunk(encoded, decoded, BaseNCodec.MIME_CHUNK_SIZE, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[0];
+            testByChunk(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByChunk_literalMutation1802() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByChunk_literalMutation1802");
         byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
         byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
         testByChunk(encoded, decoded, BaseNCodec.MIME_CHUNK_SIZE, CRLF);
@@ -271,6 +531,50 @@ public class Base32OutputStreamTest {
             encoded = randomData[1];
             decoded = randomData[0];
             testByChunk(encoded, decoded, 1, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByChunk_literalMutation1803() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByChunk_literalMutation1803");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByChunk(encoded, decoded, BaseNCodec.MIME_CHUNK_SIZE, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[0];
+            testByChunk(encoded, decoded, -1, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByChunk_literalMutation1804() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByChunk_literalMutation1804");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByChunk(encoded, decoded, BaseNCodec.MIME_CHUNK_SIZE, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[0];
+            testByChunk(encoded, decoded, 0, LF);
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -374,6 +678,28 @@ public class Base32OutputStreamTest {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte");
         byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
         byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByteByByte(encoded, decoded, 75, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[0];
+            testByteByByte(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByteByByte_literalMutation1806() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1806");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
         testByteByByte(encoded, decoded, 77, CRLF);
         final BaseNCodec codec = new Base32();
         for (int i = 0 ; i <= 150 ; i++) {
@@ -392,8 +718,74 @@ public class Base32OutputStreamTest {
      * for some failure scenarios.
      */
 @Test
-    public void testBase32OutputStreamByteByByte_literalMutation1521() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1521");
+    public void testBase32OutputStreamByteByByte_literalMutation1807() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1807");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByteByByte(encoded, decoded, 38, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[0];
+            testByteByByte(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByteByByte_literalMutation1808() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1808");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByteByByte(encoded, decoded, 152, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[0];
+            testByteByByte(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByteByByte_literalMutation1809() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1809");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByteByByte(encoded, decoded, 76, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 1 ; i <= 150 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[0];
+            testByteByByte(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByteByByte_literalMutation1810() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1810");
         byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
         byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
         testByteByByte(encoded, decoded, 76, CRLF);
@@ -414,8 +806,52 @@ public class Base32OutputStreamTest {
      * for some failure scenarios.
      */
 @Test
-    public void testBase32OutputStreamByteByByte_literalMutation1522() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1522");
+    public void testBase32OutputStreamByteByByte_literalMutation1811() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1811");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByteByByte(encoded, decoded, 76, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[0];
+            testByteByByte(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByteByByte_literalMutation1812() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1812");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByteByByte(encoded, decoded, 76, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 151 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[0];
+            testByteByByte(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByteByByte_literalMutation1813() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1813");
         byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
         byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
         testByteByByte(encoded, decoded, 76, CRLF);
@@ -436,8 +872,74 @@ public class Base32OutputStreamTest {
      * for some failure scenarios.
      */
 @Test
-    public void testBase32OutputStreamByteByByte_literalMutation1523() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1523");
+    public void testBase32OutputStreamByteByByte_literalMutation1814() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1814");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByteByByte(encoded, decoded, 76, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 75 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[0];
+            testByteByByte(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByteByByte_literalMutation1815() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1815");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByteByByte(encoded, decoded, 76, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 300 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[0];
+            testByteByByte(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByteByByte_literalMutation1816() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1816");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByteByByte(encoded, decoded, 76, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[2];
+            decoded = randomData[0];
+            testByteByByte(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByteByByte_literalMutation1817() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1817");
         byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
         byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
         testByteByByte(encoded, decoded, 76, CRLF);
@@ -458,8 +960,30 @@ public class Base32OutputStreamTest {
      * for some failure scenarios.
      */
 @Test
-    public void testBase32OutputStreamByteByByte_literalMutation1524() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1524");
+    public void testBase32OutputStreamByteByByte_literalMutation1818() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1818");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByteByByte(encoded, decoded, 76, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[0];
+            decoded = randomData[0];
+            testByteByByte(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByteByByte_literalMutation1819() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1819");
         byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
         byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
         testByteByByte(encoded, decoded, 76, CRLF);
@@ -480,8 +1004,74 @@ public class Base32OutputStreamTest {
      * for some failure scenarios.
      */
 @Test
-    public void testBase32OutputStreamByteByByte_literalMutation1525() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1525");
+    public void testBase32OutputStreamByteByByte_literalMutation1820() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1820");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByteByByte(encoded, decoded, 76, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[-1];
+            testByteByByte(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByteByByte_literalMutation1821() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1821");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByteByByte(encoded, decoded, 76, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[0];
+            testByteByByte(encoded, decoded, 0, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByteByByte_literalMutation1822() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1822");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByteByByte(encoded, decoded, 76, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[0];
+            testByteByByte(encoded, decoded, 1, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByteByByte_literalMutation1823() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1823");
         byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
         byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
         testByteByByte(encoded, decoded, 76, CRLF);
@@ -491,6 +1081,28 @@ public class Base32OutputStreamTest {
             encoded = randomData[1];
             decoded = randomData[0];
             testByteByByte(encoded, decoded, -1, LF);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base32OutputStream implementation
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testBase32OutputStreamByteByByte_literalMutation1824() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase32OutputStreamByteByByte_literalMutation1824");
+        byte[] encoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.BASE32_FIXTURE);
+        byte[] decoded = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(org.apache.commons.codec.binary.Base32TestData.STRING_FIXTURE);
+        testByteByByte(encoded, decoded, 76, CRLF);
+        final BaseNCodec codec = new Base32();
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = org.apache.commons.codec.binary.Base32TestData.randomData(codec, i);
+            encoded = randomData[1];
+            decoded = randomData[0];
+            testByteByByte(encoded, decoded, 0, LF);
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -882,10 +1494,10 @@ private void testByChunk(final byte[] encoded, final byte[] decoded, final int c
      * @throws Exception
      * Usually signifies a bug in the Base32 commons-codec implementation.
      */
-private void testByChunk_literalMutation1526(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByChunk_literalMutation1526");
+private void testByChunk_literalMutation1825(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByChunk_literalMutation1825");
         ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
-        OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
+        OutputStream out = new Base32OutputStream(byteOut , false , chunkSize , separator);
         out.write(decoded);
         out.close();
         byte[] output = byteOut.toByteArray();
@@ -927,8 +1539,8 @@ private void testByChunk_literalMutation1526(final byte[] encoded, final byte[] 
      * @throws Exception
      * Usually signifies a bug in the Base32 commons-codec implementation.
      */
-private void testByChunk_literalMutation1527(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByChunk_literalMutation1527");
+private void testByChunk_literalMutation1826(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByChunk_literalMutation1826");
         ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
         OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
         out.write(decoded);
@@ -972,8 +1584,8 @@ private void testByChunk_literalMutation1527(final byte[] encoded, final byte[] 
      * @throws Exception
      * Usually signifies a bug in the Base32 commons-codec implementation.
      */
-private void testByChunk_literalMutation1528(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByChunk_literalMutation1528");
+private void testByChunk_literalMutation1827(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByChunk_literalMutation1827");
         ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
         OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
         out.write(decoded);
@@ -1017,8 +1629,233 @@ private void testByChunk_literalMutation1528(final byte[] encoded, final byte[] 
      * @throws Exception
      * Usually signifies a bug in the Base32 commons-codec implementation.
      */
-private void testByChunk_literalMutation1529(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByChunk_literalMutation1529");
+private void testByChunk_literalMutation1828(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByChunk_literalMutation1828");
+        ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+        OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
+        out.write(decoded);
+        out.close();
+        byte[] output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1528,null,1527,java.util.Arrays.equals(output, encoded));
+        byteOut = new ByteArrayOutputStream();
+        out = new Base32OutputStream(byteOut , false);
+        out.write(encoded);
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1530,null,1529,java.util.Arrays.equals(output, decoded));
+        byteOut = new ByteArrayOutputStream();
+        out = byteOut;
+        for (int i = -1 ; i < 10 ; i++) {
+            out = new Base32OutputStream(out , false);
+            out = new Base32OutputStream(out , true , chunkSize , separator);
+        }
+        out.write(decoded);
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1532,null,1531,java.util.Arrays.equals(output, decoded));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test method does three tests on the supplied data: 1. encoded ---[DECODE]--> decoded 2. decoded ---[ENCODE]-->
+     * encoded 3. decoded ---[WRAP-WRAP-WRAP-etc...] --> decoded
+     * <p/>
+     * By "[WRAP-WRAP-WRAP-etc...]" we mean situation where the Base32OutputStream wraps itself in encode and decode
+     * mode over and over again.
+     * 
+     * @param encoded
+     * Base32 encoded data
+     * @param decoded
+     * the data from above, but decoded
+     * @param chunkSize
+     * chunk size (line-length) of the Base32 encoded data.
+     * @param separator
+     * Line separator in the Base32 encoded data.
+     * @throws Exception
+     * Usually signifies a bug in the Base32 commons-codec implementation.
+     */
+private void testByChunk_literalMutation1829(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByChunk_literalMutation1829");
+        ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+        OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
+        out.write(decoded);
+        out.close();
+        byte[] output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1528,null,1527,java.util.Arrays.equals(output, encoded));
+        byteOut = new ByteArrayOutputStream();
+        out = new Base32OutputStream(byteOut , false);
+        out.write(encoded);
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1530,null,1529,java.util.Arrays.equals(output, decoded));
+        byteOut = new ByteArrayOutputStream();
+        out = byteOut;
+        for (int i = 0 ; i < 10 ; i++) {
+            out = new Base32OutputStream(out , false);
+            out = new Base32OutputStream(out , true , chunkSize , separator);
+        }
+        out.write(decoded);
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1532,null,1531,java.util.Arrays.equals(output, decoded));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test method does three tests on the supplied data: 1. encoded ---[DECODE]--> decoded 2. decoded ---[ENCODE]-->
+     * encoded 3. decoded ---[WRAP-WRAP-WRAP-etc...] --> decoded
+     * <p/>
+     * By "[WRAP-WRAP-WRAP-etc...]" we mean situation where the Base32OutputStream wraps itself in encode and decode
+     * mode over and over again.
+     * 
+     * @param encoded
+     * Base32 encoded data
+     * @param decoded
+     * the data from above, but decoded
+     * @param chunkSize
+     * chunk size (line-length) of the Base32 encoded data.
+     * @param separator
+     * Line separator in the Base32 encoded data.
+     * @throws Exception
+     * Usually signifies a bug in the Base32 commons-codec implementation.
+     */
+private void testByChunk_literalMutation1830(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByChunk_literalMutation1830");
+        ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+        OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
+        out.write(decoded);
+        out.close();
+        byte[] output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1528,null,1527,java.util.Arrays.equals(output, encoded));
+        byteOut = new ByteArrayOutputStream();
+        out = new Base32OutputStream(byteOut , false);
+        out.write(encoded);
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1530,null,1529,java.util.Arrays.equals(output, decoded));
+        byteOut = new ByteArrayOutputStream();
+        out = byteOut;
+        for (int i = 0 ; i < 9 ; i++) {
+            out = new Base32OutputStream(out , false);
+            out = new Base32OutputStream(out , true , chunkSize , separator);
+        }
+        out.write(decoded);
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1532,null,1531,java.util.Arrays.equals(output, decoded));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test method does three tests on the supplied data: 1. encoded ---[DECODE]--> decoded 2. decoded ---[ENCODE]-->
+     * encoded 3. decoded ---[WRAP-WRAP-WRAP-etc...] --> decoded
+     * <p/>
+     * By "[WRAP-WRAP-WRAP-etc...]" we mean situation where the Base32OutputStream wraps itself in encode and decode
+     * mode over and over again.
+     * 
+     * @param encoded
+     * Base32 encoded data
+     * @param decoded
+     * the data from above, but decoded
+     * @param chunkSize
+     * chunk size (line-length) of the Base32 encoded data.
+     * @param separator
+     * Line separator in the Base32 encoded data.
+     * @throws Exception
+     * Usually signifies a bug in the Base32 commons-codec implementation.
+     */
+private void testByChunk_literalMutation1831(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByChunk_literalMutation1831");
+        ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+        OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
+        out.write(decoded);
+        out.close();
+        byte[] output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1528,null,1527,java.util.Arrays.equals(output, encoded));
+        byteOut = new ByteArrayOutputStream();
+        out = new Base32OutputStream(byteOut , false);
+        out.write(encoded);
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1530,null,1529,java.util.Arrays.equals(output, decoded));
+        byteOut = new ByteArrayOutputStream();
+        out = byteOut;
+        for (int i = 0 ; i < 5 ; i++) {
+            out = new Base32OutputStream(out , false);
+            out = new Base32OutputStream(out , true , chunkSize , separator);
+        }
+        out.write(decoded);
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1532,null,1531,java.util.Arrays.equals(output, decoded));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test method does three tests on the supplied data: 1. encoded ---[DECODE]--> decoded 2. decoded ---[ENCODE]-->
+     * encoded 3. decoded ---[WRAP-WRAP-WRAP-etc...] --> decoded
+     * <p/>
+     * By "[WRAP-WRAP-WRAP-etc...]" we mean situation where the Base32OutputStream wraps itself in encode and decode
+     * mode over and over again.
+     * 
+     * @param encoded
+     * Base32 encoded data
+     * @param decoded
+     * the data from above, but decoded
+     * @param chunkSize
+     * chunk size (line-length) of the Base32 encoded data.
+     * @param separator
+     * Line separator in the Base32 encoded data.
+     * @throws Exception
+     * Usually signifies a bug in the Base32 commons-codec implementation.
+     */
+private void testByChunk_literalMutation1832(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByChunk_literalMutation1832");
+        ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+        OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
+        out.write(decoded);
+        out.close();
+        byte[] output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1528,null,1527,java.util.Arrays.equals(output, encoded));
+        byteOut = new ByteArrayOutputStream();
+        out = new Base32OutputStream(byteOut , false);
+        out.write(encoded);
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1530,null,1529,java.util.Arrays.equals(output, decoded));
+        byteOut = new ByteArrayOutputStream();
+        out = byteOut;
+        for (int i = 0 ; i < 20 ; i++) {
+            out = new Base32OutputStream(out , false);
+            out = new Base32OutputStream(out , true , chunkSize , separator);
+        }
+        out.write(decoded);
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1532,null,1531,java.util.Arrays.equals(output, decoded));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test method does three tests on the supplied data: 1. encoded ---[DECODE]--> decoded 2. decoded ---[ENCODE]-->
+     * encoded 3. decoded ---[WRAP-WRAP-WRAP-etc...] --> decoded
+     * <p/>
+     * By "[WRAP-WRAP-WRAP-etc...]" we mean situation where the Base32OutputStream wraps itself in encode and decode
+     * mode over and over again.
+     * 
+     * @param encoded
+     * Base32 encoded data
+     * @param decoded
+     * the data from above, but decoded
+     * @param chunkSize
+     * chunk size (line-length) of the Base32 encoded data.
+     * @param separator
+     * Line separator in the Base32 encoded data.
+     * @throws Exception
+     * Usually signifies a bug in the Base32 commons-codec implementation.
+     */
+private void testByChunk_literalMutation1833(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByChunk_literalMutation1833");
         ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
         OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
         out.write(decoded);
@@ -1062,8 +1899,8 @@ private void testByChunk_literalMutation1529(final byte[] encoded, final byte[] 
      * @throws Exception
      * Usually signifies a bug in the Base32 commons-codec implementation.
      */
-private void testByChunk_literalMutation1530(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByChunk_literalMutation1530");
+private void testByChunk_literalMutation1834(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByChunk_literalMutation1834");
         ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
         OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
         out.write(decoded);
@@ -1107,8 +1944,8 @@ private void testByChunk_literalMutation1530(final byte[] encoded, final byte[] 
      * @throws Exception
      * Usually signifies a bug in the Base32 commons-codec implementation.
      */
-private void testByChunk_literalMutation1531(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByChunk_literalMutation1531");
+private void testByChunk_literalMutation1835(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByChunk_literalMutation1835");
         ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
         OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
         out.write(decoded);
@@ -2040,8 +2877,8 @@ private void testByteByByte(final byte[] encoded, final byte[] decoded, final in
      * @throws Exception
      * Usually signifies a bug in the Base32 commons-codec implementation.
      */
-private void testByteByByte_literalMutation1532(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteByByte_literalMutation1532");
+private void testByteByByte_literalMutation1836(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteByByte_literalMutation1836");
         ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
         OutputStream out = new Base32OutputStream(byteOut , false , chunkSize , separator);
         for (final byte element : decoded) {
@@ -2100,8 +2937,8 @@ private void testByteByByte_literalMutation1532(final byte[] encoded, final byte
      * @throws Exception
      * Usually signifies a bug in the Base32 commons-codec implementation.
      */
-private void testByteByByte_literalMutation1533(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteByByte_literalMutation1533");
+private void testByteByByte_literalMutation1837(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteByByte_literalMutation1837");
         ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
         OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
         for (final byte element : decoded) {
@@ -2160,8 +2997,8 @@ private void testByteByByte_literalMutation1533(final byte[] encoded, final byte
      * @throws Exception
      * Usually signifies a bug in the Base32 commons-codec implementation.
      */
-private void testByteByByte_literalMutation1534(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteByByte_literalMutation1534");
+private void testByteByByte_literalMutation1838(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteByByte_literalMutation1838");
         ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
         OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
         for (final byte element : decoded) {
@@ -2179,7 +3016,7 @@ private void testByteByByte_literalMutation1534(final byte[] encoded, final byte
         output = byteOut.toByteArray();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1536,null,1535,java.util.Arrays.equals(output, decoded));
         byteOut = new ByteArrayOutputStream();
-        out = new Base32OutputStream(byteOut , false);
+        out = new Base32OutputStream(byteOut , true);
         for (final byte element : encoded) {
             out.write(element);
             out.flush();
@@ -2220,8 +3057,68 @@ private void testByteByByte_literalMutation1534(final byte[] encoded, final byte
      * @throws Exception
      * Usually signifies a bug in the Base32 commons-codec implementation.
      */
-private void testByteByByte_literalMutation1535(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteByByte_literalMutation1535");
+private void testByteByByte_literalMutation1839(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteByByte_literalMutation1839");
+        ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+        OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
+        for (final byte element : decoded) {
+            out.write(element);
+        }
+        out.close();
+        byte[] output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1534,null,1533,java.util.Arrays.equals(output, encoded));
+        byteOut = new ByteArrayOutputStream();
+        out = new Base32OutputStream(byteOut , false);
+        for (final byte element : encoded) {
+            out.write(element);
+        }
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1536,null,1535,java.util.Arrays.equals(output, decoded));
+        byteOut = new ByteArrayOutputStream();
+        out = new Base32OutputStream(byteOut , false);
+        for (final byte element : encoded) {
+            out.write(element);
+            out.flush();
+        }
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1538,null,1537,java.util.Arrays.equals(output, decoded));
+        byteOut = new ByteArrayOutputStream();
+        out = byteOut;
+        for (int i = 1 ; i < 10 ; i++) {
+            out = new Base32OutputStream(out , false);
+            out = new Base32OutputStream(out , true , chunkSize , separator);
+        }
+        for (final byte element : decoded) {
+            out.write(element);
+        }
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1540,null,1539,java.util.Arrays.equals(output, decoded));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test method does three tests on the supplied data: 1. encoded ---[DECODE]--> decoded 2. decoded ---[ENCODE]-->
+     * encoded 3. decoded ---[WRAP-WRAP-WRAP-etc...] --> decoded
+     * <p/>
+     * By "[WRAP-WRAP-WRAP-etc...]" we mean situation where the Base32OutputStream wraps itself in encode and decode
+     * mode over and over again.
+     * 
+     * @param encoded
+     * Base32 encoded data
+     * @param decoded
+     * the data from above, but decoded
+     * @param chunkSize
+     * chunk size (line-length) of the Base32 encoded data.
+     * @param separator
+     * Line separator in the Base32 encoded data.
+     * @throws Exception
+     * Usually signifies a bug in the Base32 commons-codec implementation.
+     */
+private void testByteByByte_literalMutation1840(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteByByte_literalMutation1840");
         ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
         OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
         for (final byte element : decoded) {
@@ -2280,8 +3177,248 @@ private void testByteByByte_literalMutation1535(final byte[] encoded, final byte
      * @throws Exception
      * Usually signifies a bug in the Base32 commons-codec implementation.
      */
-private void testByteByByte_literalMutation1536(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteByByte_literalMutation1536");
+private void testByteByByte_literalMutation1841(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteByByte_literalMutation1841");
+        ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+        OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
+        for (final byte element : decoded) {
+            out.write(element);
+        }
+        out.close();
+        byte[] output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1534,null,1533,java.util.Arrays.equals(output, encoded));
+        byteOut = new ByteArrayOutputStream();
+        out = new Base32OutputStream(byteOut , false);
+        for (final byte element : encoded) {
+            out.write(element);
+        }
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1536,null,1535,java.util.Arrays.equals(output, decoded));
+        byteOut = new ByteArrayOutputStream();
+        out = new Base32OutputStream(byteOut , false);
+        for (final byte element : encoded) {
+            out.write(element);
+            out.flush();
+        }
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1538,null,1537,java.util.Arrays.equals(output, decoded));
+        byteOut = new ByteArrayOutputStream();
+        out = byteOut;
+        for (int i = 0 ; i < 10 ; i++) {
+            out = new Base32OutputStream(out , false);
+            out = new Base32OutputStream(out , true , chunkSize , separator);
+        }
+        for (final byte element : decoded) {
+            out.write(element);
+        }
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1540,null,1539,java.util.Arrays.equals(output, decoded));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test method does three tests on the supplied data: 1. encoded ---[DECODE]--> decoded 2. decoded ---[ENCODE]-->
+     * encoded 3. decoded ---[WRAP-WRAP-WRAP-etc...] --> decoded
+     * <p/>
+     * By "[WRAP-WRAP-WRAP-etc...]" we mean situation where the Base32OutputStream wraps itself in encode and decode
+     * mode over and over again.
+     * 
+     * @param encoded
+     * Base32 encoded data
+     * @param decoded
+     * the data from above, but decoded
+     * @param chunkSize
+     * chunk size (line-length) of the Base32 encoded data.
+     * @param separator
+     * Line separator in the Base32 encoded data.
+     * @throws Exception
+     * Usually signifies a bug in the Base32 commons-codec implementation.
+     */
+private void testByteByByte_literalMutation1842(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteByByte_literalMutation1842");
+        ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+        OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
+        for (final byte element : decoded) {
+            out.write(element);
+        }
+        out.close();
+        byte[] output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1534,null,1533,java.util.Arrays.equals(output, encoded));
+        byteOut = new ByteArrayOutputStream();
+        out = new Base32OutputStream(byteOut , false);
+        for (final byte element : encoded) {
+            out.write(element);
+        }
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1536,null,1535,java.util.Arrays.equals(output, decoded));
+        byteOut = new ByteArrayOutputStream();
+        out = new Base32OutputStream(byteOut , false);
+        for (final byte element : encoded) {
+            out.write(element);
+            out.flush();
+        }
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1538,null,1537,java.util.Arrays.equals(output, decoded));
+        byteOut = new ByteArrayOutputStream();
+        out = byteOut;
+        for (int i = 0 ; i < 9 ; i++) {
+            out = new Base32OutputStream(out , false);
+            out = new Base32OutputStream(out , true , chunkSize , separator);
+        }
+        for (final byte element : decoded) {
+            out.write(element);
+        }
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1540,null,1539,java.util.Arrays.equals(output, decoded));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test method does three tests on the supplied data: 1. encoded ---[DECODE]--> decoded 2. decoded ---[ENCODE]-->
+     * encoded 3. decoded ---[WRAP-WRAP-WRAP-etc...] --> decoded
+     * <p/>
+     * By "[WRAP-WRAP-WRAP-etc...]" we mean situation where the Base32OutputStream wraps itself in encode and decode
+     * mode over and over again.
+     * 
+     * @param encoded
+     * Base32 encoded data
+     * @param decoded
+     * the data from above, but decoded
+     * @param chunkSize
+     * chunk size (line-length) of the Base32 encoded data.
+     * @param separator
+     * Line separator in the Base32 encoded data.
+     * @throws Exception
+     * Usually signifies a bug in the Base32 commons-codec implementation.
+     */
+private void testByteByByte_literalMutation1843(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteByByte_literalMutation1843");
+        ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+        OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
+        for (final byte element : decoded) {
+            out.write(element);
+        }
+        out.close();
+        byte[] output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1534,null,1533,java.util.Arrays.equals(output, encoded));
+        byteOut = new ByteArrayOutputStream();
+        out = new Base32OutputStream(byteOut , false);
+        for (final byte element : encoded) {
+            out.write(element);
+        }
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1536,null,1535,java.util.Arrays.equals(output, decoded));
+        byteOut = new ByteArrayOutputStream();
+        out = new Base32OutputStream(byteOut , false);
+        for (final byte element : encoded) {
+            out.write(element);
+            out.flush();
+        }
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1538,null,1537,java.util.Arrays.equals(output, decoded));
+        byteOut = new ByteArrayOutputStream();
+        out = byteOut;
+        for (int i = 0 ; i < 5 ; i++) {
+            out = new Base32OutputStream(out , false);
+            out = new Base32OutputStream(out , true , chunkSize , separator);
+        }
+        for (final byte element : decoded) {
+            out.write(element);
+        }
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1540,null,1539,java.util.Arrays.equals(output, decoded));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test method does three tests on the supplied data: 1. encoded ---[DECODE]--> decoded 2. decoded ---[ENCODE]-->
+     * encoded 3. decoded ---[WRAP-WRAP-WRAP-etc...] --> decoded
+     * <p/>
+     * By "[WRAP-WRAP-WRAP-etc...]" we mean situation where the Base32OutputStream wraps itself in encode and decode
+     * mode over and over again.
+     * 
+     * @param encoded
+     * Base32 encoded data
+     * @param decoded
+     * the data from above, but decoded
+     * @param chunkSize
+     * chunk size (line-length) of the Base32 encoded data.
+     * @param separator
+     * Line separator in the Base32 encoded data.
+     * @throws Exception
+     * Usually signifies a bug in the Base32 commons-codec implementation.
+     */
+private void testByteByByte_literalMutation1844(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteByByte_literalMutation1844");
+        ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+        OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
+        for (final byte element : decoded) {
+            out.write(element);
+        }
+        out.close();
+        byte[] output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1534,null,1533,java.util.Arrays.equals(output, encoded));
+        byteOut = new ByteArrayOutputStream();
+        out = new Base32OutputStream(byteOut , false);
+        for (final byte element : encoded) {
+            out.write(element);
+        }
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1536,null,1535,java.util.Arrays.equals(output, decoded));
+        byteOut = new ByteArrayOutputStream();
+        out = new Base32OutputStream(byteOut , false);
+        for (final byte element : encoded) {
+            out.write(element);
+            out.flush();
+        }
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1538,null,1537,java.util.Arrays.equals(output, decoded));
+        byteOut = new ByteArrayOutputStream();
+        out = byteOut;
+        for (int i = 0 ; i < 20 ; i++) {
+            out = new Base32OutputStream(out , false);
+            out = new Base32OutputStream(out , true , chunkSize , separator);
+        }
+        for (final byte element : decoded) {
+            out.write(element);
+        }
+        out.close();
+        output = byteOut.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1540,null,1539,java.util.Arrays.equals(output, decoded));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test method does three tests on the supplied data: 1. encoded ---[DECODE]--> decoded 2. decoded ---[ENCODE]-->
+     * encoded 3. decoded ---[WRAP-WRAP-WRAP-etc...] --> decoded
+     * <p/>
+     * By "[WRAP-WRAP-WRAP-etc...]" we mean situation where the Base32OutputStream wraps itself in encode and decode
+     * mode over and over again.
+     * 
+     * @param encoded
+     * Base32 encoded data
+     * @param decoded
+     * the data from above, but decoded
+     * @param chunkSize
+     * chunk size (line-length) of the Base32 encoded data.
+     * @param separator
+     * Line separator in the Base32 encoded data.
+     * @throws Exception
+     * Usually signifies a bug in the Base32 commons-codec implementation.
+     */
+private void testByteByByte_literalMutation1845(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteByByte_literalMutation1845");
         ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
         OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
         for (final byte element : decoded) {
@@ -2340,8 +3477,8 @@ private void testByteByByte_literalMutation1536(final byte[] encoded, final byte
      * @throws Exception
      * Usually signifies a bug in the Base32 commons-codec implementation.
      */
-private void testByteByByte_literalMutation1537(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteByByte_literalMutation1537");
+private void testByteByByte_literalMutation1846(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteByByte_literalMutation1846");
         ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
         OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
         for (final byte element : decoded) {
@@ -2370,7 +3507,7 @@ private void testByteByByte_literalMutation1537(final byte[] encoded, final byte
         byteOut = new ByteArrayOutputStream();
         out = byteOut;
         for (int i = 0 ; i < 10 ; i++) {
-            out = new Base32OutputStream(out , false);
+            out = new Base32OutputStream(out , true);
             out = new Base32OutputStream(out , true , chunkSize , separator);
         }
         for (final byte element : decoded) {
@@ -2400,8 +3537,8 @@ private void testByteByByte_literalMutation1537(final byte[] encoded, final byte
      * @throws Exception
      * Usually signifies a bug in the Base32 commons-codec implementation.
      */
-private void testByteByByte_literalMutation1538(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteByByte_literalMutation1538");
+private void testByteByByte_literalMutation1847(final byte[] encoded, final byte[] decoded, final int chunkSize, final byte[] separator) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteByByte_literalMutation1847");
         ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
         OutputStream out = new Base32OutputStream(byteOut , true , chunkSize , separator);
         for (final byte element : decoded) {
@@ -2431,7 +3568,7 @@ private void testByteByByte_literalMutation1538(final byte[] encoded, final byte
         out = byteOut;
         for (int i = 0 ; i < 10 ; i++) {
             out = new Base32OutputStream(out , false);
-            out = new Base32OutputStream(out , true , chunkSize , separator);
+            out = new Base32OutputStream(out , false , chunkSize , separator);
         }
         for (final byte element : decoded) {
             out.write(element);
@@ -2995,12 +4132,12 @@ private void testByteByByte_literalMutation1538(final byte[] encoded, final byte
         final ByteArrayOutputStream bout = new ByteArrayOutputStream();
         final Base32OutputStream out = new Base32OutputStream(bout);
         try {
-            out.write(buf, -1, 1);
-            out.write(buf, -1, 1);
+            out.write(buf, 2, 1);
+            out.write(buf, 2, 1);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
-            out.write(buf, 1, -1);
+            out.write(buf, 1, 2);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
@@ -3028,12 +4165,12 @@ private void testByteByByte_literalMutation1538(final byte[] encoded, final byte
         final ByteArrayOutputStream bout = new ByteArrayOutputStream();
         final Base32OutputStream out = new Base32OutputStream(bout);
         try {
-            out.write(buf, -1, 1);
+            out.write(buf, 2, 1);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
-            out.write(buf, 1, -1);
-            out.write(buf, 1, -1);
+            out.write(buf, 1, 2);
+            out.write(buf, 1, 2);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
@@ -3061,11 +4198,11 @@ private void testByteByByte_literalMutation1538(final byte[] encoded, final byte
         final ByteArrayOutputStream bout = new ByteArrayOutputStream();
         final Base32OutputStream out = new Base32OutputStream(bout);
         try {
-            out.write(buf, -1, 1);
+            out.write(buf, 2, 1);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
-            out.write(buf, 1, -1);
+            out.write(buf, 1, 2);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
@@ -3094,11 +4231,11 @@ private void testByteByByte_literalMutation1538(final byte[] encoded, final byte
         final ByteArrayOutputStream bout = new ByteArrayOutputStream();
         final Base32OutputStream out = new Base32OutputStream(bout);
         try {
-            out.write(buf, -1, 1);
+            out.write(buf, 2, 1);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
-            out.write(buf, 1, -1);
+            out.write(buf, 1, 2);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
@@ -3127,11 +4264,11 @@ private void testByteByByte_literalMutation1538(final byte[] encoded, final byte
         final ByteArrayOutputStream bout = new ByteArrayOutputStream();
         final Base32OutputStream out = new Base32OutputStream(bout);
         try {
-            out.write(buf, -1, 1);
+            out.write(buf, 2, 1);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
-            out.write(buf, 1, -1);
+            out.write(buf, 1, 2);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
@@ -3186,77 +4323,301 @@ private void testByteByByte_literalMutation1538(final byte[] encoded, final byte
      * for some failure scenarios.
      */
 @Test
-    public void testWriteOutOfBounds_literalMutation1540() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1540");
+    public void testWriteOutOfBounds_literalMutation1849() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1849");
+        final byte[] buf = new byte[512];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, -1, 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 1, -1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 1), 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1850() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1850");
+        final byte[] buf = new byte[2048];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, -1, 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 1, -1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 1), 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1851() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1851");
+        final byte[] buf = new byte[1023];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, -1, 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 1, -1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 1), 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1852() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1852");
+        final byte[] buf = new byte[1024];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, -2, 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 1, -1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 1), 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1853() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1853");
+        final byte[] buf = new byte[1024];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, 0, 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 1, -1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 1), 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1854() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1854");
+        final byte[] buf = new byte[1024];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, 0, 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 1, -1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 1), 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1855() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1855");
+        final byte[] buf = new byte[1024];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, 2, 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 1, -1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 1), 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1856() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1856");
+        final byte[] buf = new byte[1024];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, 2, 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 1, -1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 1), 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1857() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1857");
+        final byte[] buf = new byte[1024];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, 2, 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 1, -1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 1), 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1858() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1858");
         final byte[] buf = new byte[1024];
         final ByteArrayOutputStream bout = new ByteArrayOutputStream();
         final Base32OutputStream out = new Base32OutputStream(bout);
         try {
             out.write(buf, 2, 1);
-        } catch (final IndexOutOfBoundsException ioobe) {
-        }
-        try {
-            out.write(buf, 1, -1);
-        } catch (final IndexOutOfBoundsException ioobe) {
-        }
-        try {
-            out.write(buf, ((buf.length) + 1), 0);
-        } catch (final IndexOutOfBoundsException ioobe) {
-        }
-        try {
-            out.write(buf, ((buf.length) - 1), 2);
-        } catch (final IndexOutOfBoundsException ioobe) {
-        }
-        out.close();
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
-     * 
-     * @throws Exception
-     * for some failure scenarios.
-     */
-@Test
-    public void testWriteOutOfBounds_literalMutation1541() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1541");
-        final byte[] buf = new byte[1024];
-        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
-        final Base32OutputStream out = new Base32OutputStream(bout);
-        try {
-            out.write(buf, -1, 2);
-        } catch (final IndexOutOfBoundsException ioobe) {
-        }
-        try {
-            out.write(buf, 1, -1);
-        } catch (final IndexOutOfBoundsException ioobe) {
-        }
-        try {
-            out.write(buf, ((buf.length) + 1), 0);
-        } catch (final IndexOutOfBoundsException ioobe) {
-        }
-        try {
-            out.write(buf, ((buf.length) - 1), 2);
-        } catch (final IndexOutOfBoundsException ioobe) {
-        }
-        out.close();
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
-     * 
-     * @throws Exception
-     * for some failure scenarios.
-     */
-@Test
-    public void testWriteOutOfBounds_literalMutation1542() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1542");
-        final byte[] buf = new byte[1024];
-        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
-        final Base32OutputStream out = new Base32OutputStream(bout);
-        try {
-            out.write(buf, -1, 1);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
@@ -3282,13 +4643,333 @@ private void testByteByByte_literalMutation1538(final byte[] encoded, final byte
      * for some failure scenarios.
      */
 @Test
-    public void testWriteOutOfBounds_literalMutation1543() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1543");
+    public void testWriteOutOfBounds_literalMutation1859() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1859");
         final byte[] buf = new byte[1024];
         final ByteArrayOutputStream bout = new ByteArrayOutputStream();
         final Base32OutputStream out = new Base32OutputStream(bout);
         try {
-            out.write(buf, -1, 1);
+            out.write(buf, 2, 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 0, -1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 1), 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1860() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1860");
+        final byte[] buf = new byte[1024];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, 2, 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 0, -1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 1), 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1861() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1861");
+        final byte[] buf = new byte[1024];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, 2, 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 1, -2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 1), 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1862() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1862");
+        final byte[] buf = new byte[1024];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, 2, 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 1, 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 1), 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1863() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1863");
+        final byte[] buf = new byte[1024];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, 2, 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 1, 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 1), 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1864() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1864");
+        final byte[] buf = new byte[1024];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, 2, 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 1, 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 2), 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1865() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1865");
+        final byte[] buf = new byte[1024];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, 2, 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 1, 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 0), 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1866() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1866");
+        final byte[] buf = new byte[1024];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, 2, 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 1, 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 0), 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1867() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1867");
+        final byte[] buf = new byte[1024];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, 2, 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 1, 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 1), 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1868() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1868");
+        final byte[] buf = new byte[1024];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, 2, 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 1, 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 1), -1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1869() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1869");
+        final byte[] buf = new byte[1024];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, 2, 1);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
@@ -3314,25 +4995,25 @@ private void testByteByByte_literalMutation1538(final byte[] encoded, final byte
      * for some failure scenarios.
      */
 @Test
-    public void testWriteOutOfBounds_literalMutation1544() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1544");
+    public void testWriteOutOfBounds_literalMutation1870() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1870");
         final byte[] buf = new byte[1024];
         final ByteArrayOutputStream bout = new ByteArrayOutputStream();
         final Base32OutputStream out = new Base32OutputStream(bout);
         try {
-            out.write(buf, -1, 1);
+            out.write(buf, 2, 1);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
-            out.write(buf, 1, -1);
+            out.write(buf, 1, 2);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
-            out.write(buf, ((buf.length) + 0), 0);
+            out.write(buf, ((buf.length) + 1), 0);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
-            out.write(buf, ((buf.length) - 1), 2);
+            out.write(buf, ((buf.length) - 2), 2);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         out.close();
@@ -3346,49 +5027,17 @@ private void testByteByByte_literalMutation1538(final byte[] encoded, final byte
      * for some failure scenarios.
      */
 @Test
-    public void testWriteOutOfBounds_literalMutation1545() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1545");
+    public void testWriteOutOfBounds_literalMutation1871() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1871");
         final byte[] buf = new byte[1024];
         final ByteArrayOutputStream bout = new ByteArrayOutputStream();
         final Base32OutputStream out = new Base32OutputStream(bout);
         try {
-            out.write(buf, -1, 1);
+            out.write(buf, 2, 1);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
-            out.write(buf, 1, -1);
-        } catch (final IndexOutOfBoundsException ioobe) {
-        }
-        try {
-            out.write(buf, ((buf.length) + 1), -1);
-        } catch (final IndexOutOfBoundsException ioobe) {
-        }
-        try {
-            out.write(buf, ((buf.length) - 1), 2);
-        } catch (final IndexOutOfBoundsException ioobe) {
-        }
-        out.close();
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
-     * 
-     * @throws Exception
-     * for some failure scenarios.
-     */
-@Test
-    public void testWriteOutOfBounds_literalMutation1546() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1546");
-        final byte[] buf = new byte[1024];
-        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
-        final Base32OutputStream out = new Base32OutputStream(bout);
-        try {
-            out.write(buf, -1, 1);
-        } catch (final IndexOutOfBoundsException ioobe) {
-        }
-        try {
-            out.write(buf, 1, -1);
+            out.write(buf, 1, 2);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
@@ -3410,17 +5059,113 @@ private void testByteByByte_literalMutation1538(final byte[] encoded, final byte
      * for some failure scenarios.
      */
 @Test
-    public void testWriteOutOfBounds_literalMutation1547() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1547");
+    public void testWriteOutOfBounds_literalMutation1872() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1872");
         final byte[] buf = new byte[1024];
         final ByteArrayOutputStream bout = new ByteArrayOutputStream();
         final Base32OutputStream out = new Base32OutputStream(bout);
         try {
-            out.write(buf, -1, 1);
+            out.write(buf, 2, 1);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
-            out.write(buf, 1, -1);
+            out.write(buf, 1, 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 1), 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 0), 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1873() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1873");
+        final byte[] buf = new byte[1024];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, 2, 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 1, 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 1), 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1874() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1874");
+        final byte[] buf = new byte[1024];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, 2, 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 1, 2);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) + 1), 0);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, ((buf.length) - 1), 4);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write for expected IndexOutOfBoundsException conditions.
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteOutOfBounds_literalMutation1875() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteOutOfBounds_literalMutation1875");
+        final byte[] buf = new byte[1024];
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(buf, 2, 1);
+        } catch (final IndexOutOfBoundsException ioobe) {
+        }
+        try {
+            out.write(buf, 1, 2);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
@@ -3448,11 +5193,11 @@ private void testByteByByte_literalMutation1538(final byte[] encoded, final byte
         final ByteArrayOutputStream bout = new ByteArrayOutputStream();
         final Base32OutputStream out = new Base32OutputStream(bout);
         try {
-            out.write(buf, -1, 1);
+            out.write(buf, 2, 1);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
-            out.write(buf, 1, -1);
+            out.write(buf, 1, 2);
         } catch (final IndexOutOfBoundsException ioobe) {
         }
         try {
@@ -3518,6 +5263,25 @@ private void testByteByByte_literalMutation1538(final byte[] encoded, final byte
         final ByteArrayOutputStream bout = new ByteArrayOutputStream();
         final Base32OutputStream out = new Base32OutputStream(bout);
         try {
+            out.write(null, 1, 0);
+        } catch (final NullPointerException e) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write(null).
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteToNullCoverage_literalMutation1878() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteToNullCoverage_literalMutation1878");
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
             out.write(null, -1, 0);
         } catch (final NullPointerException e) {
         }
@@ -3532,12 +5296,69 @@ private void testByteByByte_literalMutation1538(final byte[] encoded, final byte
      * for some failure scenarios.
      */
 @Test
-    public void testWriteToNullCoverage_literalMutation1550() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteToNullCoverage_literalMutation1550");
+    public void testWriteToNullCoverage_literalMutation1879() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteToNullCoverage_literalMutation1879");
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(null, 0, 0);
+        } catch (final NullPointerException e) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write(null).
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteToNullCoverage_literalMutation1880() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteToNullCoverage_literalMutation1880");
         final ByteArrayOutputStream bout = new ByteArrayOutputStream();
         final Base32OutputStream out = new Base32OutputStream(bout);
         try {
             out.write(null, 0, 1);
+        } catch (final NullPointerException e) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write(null).
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteToNullCoverage_literalMutation1881() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteToNullCoverage_literalMutation1881");
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(null, 0, -1);
+        } catch (final NullPointerException e) {
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests Base32OutputStream.write(null).
+     * 
+     * @throws Exception
+     * for some failure scenarios.
+     */
+@Test
+    public void testWriteToNullCoverage_literalMutation1882() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteToNullCoverage_literalMutation1882");
+        final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        final Base32OutputStream out = new Base32OutputStream(bout);
+        try {
+            out.write(null, 0, 0);
         } catch (final NullPointerException e) {
         }
         out.close();

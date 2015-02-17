@@ -49,7 +49,46 @@ public class TeeInputStreamTest extends TestCase {
 
     public void testReadToArray() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadToArray");
+        byte[] buffer = new byte[4];
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),999,tee,998,tee.read(buffer));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,buffer[0]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1001,buffer[1]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,buffer[2]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1003,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1005,tee,1004,tee.read(buffer));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,new java.lang.String(output.toString(ASCII)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadToArray_literalMutation1449() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadToArray_literalMutation1449");
+        byte[] buffer = new byte[16];
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),999,tee,998,tee.read(buffer));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,buffer[0]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1001,buffer[1]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,buffer[2]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1003,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1005,tee,1004,tee.read(buffer));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,new java.lang.String(output.toString(ASCII)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadToArray_literalMutation1450() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadToArray_literalMutation1450");
         byte[] buffer = new byte[9];
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),999,tee,998,tee.read(buffer));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,buffer[0]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1001,buffer[1]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,buffer[2]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1003,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1005,tee,1004,tee.read(buffer));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,new java.lang.String(output.toString(ASCII)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadToArray_literalMutation1451() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadToArray_literalMutation1451");
+        byte[] buffer = new byte[7];
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),999,tee,998,tee.read(buffer));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,buffer[0]);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1001,buffer[1]);
@@ -62,6 +101,58 @@ public class TeeInputStreamTest extends TestCase {
 
     public void testReadToArrayWithOffset() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadToArrayWithOffset");
+        byte[] buffer = new byte[8];
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),991,tee,990,tee.read(buffer, 4, 4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),992,buffer[4]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),993,buffer[5]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,buffer[6]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),569,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,tee,995,tee.read(buffer, 4, 4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),997,new java.lang.String(output.toString(ASCII)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadToArrayWithOffset_literalMutation1452() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadToArrayWithOffset_literalMutation1452");
+        byte[] buffer = new byte[4];
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),991,tee,990,tee.read(buffer, 4, 4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),992,buffer[4]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),993,buffer[5]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,buffer[6]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),569,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,tee,995,tee.read(buffer, 4, 4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),997,new java.lang.String(output.toString(ASCII)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadToArrayWithOffset_literalMutation1453() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadToArrayWithOffset_literalMutation1453");
+        byte[] buffer = new byte[16];
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),991,tee,990,tee.read(buffer, 4, 4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),992,buffer[4]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),993,buffer[5]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,buffer[6]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),569,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,tee,995,tee.read(buffer, 4, 4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),997,new java.lang.String(output.toString(ASCII)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadToArrayWithOffset_literalMutation1454() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadToArrayWithOffset_literalMutation1454");
+        byte[] buffer = new byte[9];
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),991,tee,990,tee.read(buffer, 4, 4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),992,buffer[4]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),993,buffer[5]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,buffer[6]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),569,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,tee,995,tee.read(buffer, 4, 4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),997,new java.lang.String(output.toString(ASCII)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testReadToArrayWithOffset_literalMutation1455() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReadToArrayWithOffset_literalMutation1455");
         byte[] buffer = new byte[7];
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),991,tee,990,tee.read(buffer, 4, 4));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),992,buffer[4]);
@@ -130,8 +221,36 @@ public class TeeInputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMarkReset_literalMutation682() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkReset_literalMutation682");
+    public void testMarkReset_literalMutation1445() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkReset_literalMutation1445");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),966,tee,965,tee.read());
+        tee.mark(2);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),968,tee,967,tee.read());
+        tee.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),970,tee,969,tee.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),972,tee,971,tee.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),973,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),975,tee,974,tee.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),976,new java.lang.String(output.toString(ASCII)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testMarkReset_literalMutation1446() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkReset_literalMutation1446");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),966,tee,965,tee.read());
+        tee.mark(0);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),968,tee,967,tee.read());
+        tee.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),970,tee,969,tee.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),972,tee,971,tee.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),973,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),975,tee,974,tee.read());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),976,new java.lang.String(output.toString(ASCII)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testMarkReset_literalMutation1447() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMarkReset_literalMutation1447");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),966,tee,965,tee.read());
         tee.mark(0);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),968,tee,967,tee.read());

@@ -57,8 +57,44 @@ public class ReversedLinesFileReaderTestSimple {
     }
 
     @Test
-    public void testFileSizeIsExactMultipleOfBlockSize_literalMutation593() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFileSizeIsExactMultipleOfBlockSize_literalMutation593");
+    public void testFileSizeIsExactMultipleOfBlockSize_literalMutation1264() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFileSizeIsExactMultipleOfBlockSize_literalMutation1264");
+        int blockSize = 9;
+        File testFile20Bytes = new File(getClass().getResource("/test-file-20byteslength.bin").toURI());
+        reversedLinesFileReader = new ReversedLinesFileReader(testFile20Bytes , blockSize , "ISO-8859-1");
+        String testLine = "123456789";
+        org.apache.commons.io.input.ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(testLine, reversedLinesFileReader.readLine());
+        org.apache.commons.io.input.ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(testLine, reversedLinesFileReader.readLine());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testFileSizeIsExactMultipleOfBlockSize_literalMutation1265() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFileSizeIsExactMultipleOfBlockSize_literalMutation1265");
+        int blockSize = 5;
+        File testFile20Bytes = new File(getClass().getResource("/test-file-20byteslength.bin").toURI());
+        reversedLinesFileReader = new ReversedLinesFileReader(testFile20Bytes , blockSize , "ISO-8859-1");
+        String testLine = "123456789";
+        org.apache.commons.io.input.ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(testLine, reversedLinesFileReader.readLine());
+        org.apache.commons.io.input.ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(testLine, reversedLinesFileReader.readLine());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testFileSizeIsExactMultipleOfBlockSize_literalMutation1266() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFileSizeIsExactMultipleOfBlockSize_literalMutation1266");
+        int blockSize = 20;
+        File testFile20Bytes = new File(getClass().getResource("/test-file-20byteslength.bin").toURI());
+        reversedLinesFileReader = new ReversedLinesFileReader(testFile20Bytes , blockSize , "ISO-8859-1");
+        String testLine = "123456789";
+        org.apache.commons.io.input.ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(testLine, reversedLinesFileReader.readLine());
+        org.apache.commons.io.input.ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(testLine, reversedLinesFileReader.readLine());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testFileSizeIsExactMultipleOfBlockSize_literalMutation1267() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFileSizeIsExactMultipleOfBlockSize_literalMutation1267");
         int blockSize = 11;
         File testFile20Bytes = new File(getClass().getResource("/test-file-20byteslength.bin").toURI());
         reversedLinesFileReader = new ReversedLinesFileReader(testFile20Bytes , blockSize , "ISO-8859-1");
@@ -69,10 +105,10 @@ public class ReversedLinesFileReaderTestSimple {
     }
 
     @Test
-    public void testFileSizeIsExactMultipleOfBlockSize_literalMutation594() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFileSizeIsExactMultipleOfBlockSize_literalMutation594");
+    public void testFileSizeIsExactMultipleOfBlockSize_literalMutation1268() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFileSizeIsExactMultipleOfBlockSize_literalMutation1268");
         int blockSize = 10;
-        File testFile20Bytes = new File(getClass().getResource("foo").toURI());
+        File testFile20Bytes = new File(getClass().getResource("bar").toURI());
         reversedLinesFileReader = new ReversedLinesFileReader(testFile20Bytes , blockSize , "ISO-8859-1");
         String testLine = "123456789";
         org.apache.commons.io.input.ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(testLine, reversedLinesFileReader.readLine());
@@ -81,8 +117,8 @@ public class ReversedLinesFileReaderTestSimple {
     }
 
     @Test
-    public void testFileSizeIsExactMultipleOfBlockSize_literalMutation595() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFileSizeIsExactMultipleOfBlockSize_literalMutation595");
+    public void testFileSizeIsExactMultipleOfBlockSize_literalMutation1269() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFileSizeIsExactMultipleOfBlockSize_literalMutation1269");
         int blockSize = 10;
         File testFile20Bytes = new File(getClass().getResource("/test-file-20byteslength.bin").toURI());
         reversedLinesFileReader = new ReversedLinesFileReader(testFile20Bytes , blockSize , "foo");
@@ -93,12 +129,12 @@ public class ReversedLinesFileReaderTestSimple {
     }
 
     @Test
-    public void testFileSizeIsExactMultipleOfBlockSize_literalMutation596() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFileSizeIsExactMultipleOfBlockSize_literalMutation596");
+    public void testFileSizeIsExactMultipleOfBlockSize_literalMutation1270() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFileSizeIsExactMultipleOfBlockSize_literalMutation1270");
         int blockSize = 10;
         File testFile20Bytes = new File(getClass().getResource("/test-file-20byteslength.bin").toURI());
         reversedLinesFileReader = new ReversedLinesFileReader(testFile20Bytes , blockSize , "ISO-8859-1");
-        String testLine = "foo";
+        String testLine = "bar";
         org.apache.commons.io.input.ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(testLine, reversedLinesFileReader.readLine());
         org.apache.commons.io.input.ReversedLinesFileReaderTestParamBlockSize.assertEqualsAndNoLineBreaks(testLine, reversedLinesFileReader.readLine());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -135,26 +171,50 @@ public class ReversedLinesFileReaderTestSimple {
     }
 
     @Test(expected = UnsupportedEncodingException.class)
-    public void testUnsupportedEncodingUTF16_literalMutation600() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingUTF16_literalMutation600");
+    public void testUnsupportedEncodingUTF16_literalMutation1277() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingUTF16_literalMutation1277");
         File testFileEmpty = new File(getClass().getResource("foo").toURI());
         new ReversedLinesFileReader(testFileEmpty , 4096 , "UTF-16");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test(expected = UnsupportedEncodingException.class)
-    public void testUnsupportedEncodingUTF16_literalMutation601() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingUTF16_literalMutation601");
+    public void testUnsupportedEncodingUTF16_literalMutation1278() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingUTF16_literalMutation1278");
+        File testFileEmpty = new File(getClass().getResource("/test-file-empty.bin").toURI());
+        new ReversedLinesFileReader(testFileEmpty , 4097 , "UTF-16");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(expected = UnsupportedEncodingException.class)
+    public void testUnsupportedEncodingUTF16_literalMutation1279() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingUTF16_literalMutation1279");
+        File testFileEmpty = new File(getClass().getResource("/test-file-empty.bin").toURI());
+        new ReversedLinesFileReader(testFileEmpty , 2048 , "UTF-16");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(expected = UnsupportedEncodingException.class)
+    public void testUnsupportedEncodingUTF16_literalMutation1280() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingUTF16_literalMutation1280");
+        File testFileEmpty = new File(getClass().getResource("/test-file-empty.bin").toURI());
+        new ReversedLinesFileReader(testFileEmpty , 8192 , "UTF-16");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(expected = UnsupportedEncodingException.class)
+    public void testUnsupportedEncodingUTF16_literalMutation1281() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingUTF16_literalMutation1281");
         File testFileEmpty = new File(getClass().getResource("/test-file-empty.bin").toURI());
         new ReversedLinesFileReader(testFileEmpty , 4095 , "UTF-16");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test(expected = UnsupportedEncodingException.class)
-    public void testUnsupportedEncodingUTF16_literalMutation602() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingUTF16_literalMutation602");
+    public void testUnsupportedEncodingUTF16_literalMutation1282() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingUTF16_literalMutation1282");
         File testFileEmpty = new File(getClass().getResource("/test-file-empty.bin").toURI());
-        new ReversedLinesFileReader(testFileEmpty , 4096 , "foo");
+        new ReversedLinesFileReader(testFileEmpty , 4096 , "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -167,26 +227,50 @@ public class ReversedLinesFileReaderTestSimple {
     }
 
     @Test(expected = UnsupportedEncodingException.class)
-    public void testUnsupportedEncodingBig5_literalMutation597() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingBig5_literalMutation597");
+    public void testUnsupportedEncodingBig5_literalMutation1271() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingBig5_literalMutation1271");
         File testFileEncodingBig5 = new File(getClass().getResource("foo").toURI());
         new ReversedLinesFileReader(testFileEncodingBig5 , 4096 , "Big5");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test(expected = UnsupportedEncodingException.class)
-    public void testUnsupportedEncodingBig5_literalMutation598() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingBig5_literalMutation598");
+    public void testUnsupportedEncodingBig5_literalMutation1272() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingBig5_literalMutation1272");
         File testFileEncodingBig5 = new File(getClass().getResource("/test-file-empty.bin").toURI());
         new ReversedLinesFileReader(testFileEncodingBig5 , 4097 , "Big5");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test(expected = UnsupportedEncodingException.class)
-    public void testUnsupportedEncodingBig5_literalMutation599() throws IOException, URISyntaxException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingBig5_literalMutation599");
+    public void testUnsupportedEncodingBig5_literalMutation1273() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingBig5_literalMutation1273");
         File testFileEncodingBig5 = new File(getClass().getResource("/test-file-empty.bin").toURI());
-        new ReversedLinesFileReader(testFileEncodingBig5 , 4096 , "foo");
+        new ReversedLinesFileReader(testFileEncodingBig5 , 2048 , "Big5");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(expected = UnsupportedEncodingException.class)
+    public void testUnsupportedEncodingBig5_literalMutation1274() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingBig5_literalMutation1274");
+        File testFileEncodingBig5 = new File(getClass().getResource("/test-file-empty.bin").toURI());
+        new ReversedLinesFileReader(testFileEncodingBig5 , 8192 , "Big5");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(expected = UnsupportedEncodingException.class)
+    public void testUnsupportedEncodingBig5_literalMutation1275() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingBig5_literalMutation1275");
+        File testFileEncodingBig5 = new File(getClass().getResource("/test-file-empty.bin").toURI());
+        new ReversedLinesFileReader(testFileEncodingBig5 , 4095 , "Big5");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(expected = UnsupportedEncodingException.class)
+    public void testUnsupportedEncodingBig5_literalMutation1276() throws IOException, URISyntaxException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsupportedEncodingBig5_literalMutation1276");
+        File testFileEncodingBig5 = new File(getClass().getResource("/test-file-empty.bin").toURI());
+        new ReversedLinesFileReader(testFileEncodingBig5 , 4096 , "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 }

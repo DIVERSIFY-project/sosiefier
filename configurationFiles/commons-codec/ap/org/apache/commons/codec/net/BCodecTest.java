@@ -76,7 +76,7 @@ public class BCodecTest {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeStringWithNull");
         final BCodec bcodec = new BCodec();
         final String test = null;
-        final String result = bcodec.encode(test, "foo");
+        final String result = bcodec.encode(test, "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),13,result);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -110,6 +110,74 @@ public class BCodecTest {
     }
 
     @Test
+    public void testEncodeObjects_literalMutation11() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation11");
+        final BCodec bcodec = new BCodec();
+        final String plain = "what not";
+        final String encoded = ((String)(bcodec.encode(((Object)(plain)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),11,encoded);
+        final Object result = bcodec.encode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),12,result);
+        try {
+            final Object dObj = new Double(4.0);
+            bcodec.encode(dObj);
+        } catch (final EncoderException ee) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeObjects_literalMutation12() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation12");
+        final BCodec bcodec = new BCodec();
+        final String plain = "what not";
+        final String encoded = ((String)(bcodec.encode(((Object)(plain)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),11,encoded);
+        final Object result = bcodec.encode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),12,result);
+        try {
+            final Object dObj = new Double(2.0);
+            bcodec.encode(dObj);
+        } catch (final EncoderException ee) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeObjects_literalMutation13() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation13");
+        final BCodec bcodec = new BCodec();
+        final String plain = "what not";
+        final String encoded = ((String)(bcodec.encode(((Object)(plain)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),11,encoded);
+        final Object result = bcodec.encode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),12,result);
+        try {
+            final Object dObj = new Double(1.5);
+            bcodec.encode(dObj);
+        } catch (final EncoderException ee) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeObjects_literalMutation14() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation14");
+        final BCodec bcodec = new BCodec();
+        final String plain = "what not";
+        final String encoded = ((String)(bcodec.encode(((Object)(plain)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),11,encoded);
+        final Object result = bcodec.encode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),12,result);
+        try {
+            final Object dObj = new Double(6.0);
+            bcodec.encode(dObj);
+        } catch (final EncoderException ee) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
     public void testEncodeObjects() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects");
         final BCodec bcodec = new BCodec();
@@ -126,27 +194,10 @@ public class BCodecTest {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    @Test
-    public void testEncodeObjects_literalMutation8() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation8");
-        final BCodec bcodec = new BCodec();
-        final String plain = "what not";
-        final String encoded = ((String)(bcodec.encode(((Object)(plain)))));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),11,encoded);
-        final Object result = bcodec.encode(((Object)(null)));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),12,result);
-        try {
-            final Object dObj = new Double(2.0);
-            bcodec.encode(dObj);
-        } catch (final EncoderException ee) {
-        }
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
     @Test(expected = UnsupportedCharsetException.class)
     public void testInvalidEncoding() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testInvalidEncoding");
-        new BCodec("foo");
+        new BCodec("bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -172,7 +223,7 @@ public class BCodecTest {
     public void testDecodeObjects() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects");
         final BCodec bcodec = new BCodec();
-        final String decoded = "foo";
+        final String decoded = "bar";
         final String plain = ((String)(bcodec.decode(((Object)(decoded)))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4,plain);
         final Object result = bcodec.decode(((Object)(null)));
@@ -195,7 +246,58 @@ public class BCodecTest {
         final Object result = bcodec.decode(((Object)(null)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5,result);
         try {
+            final Object dObj = new Double(4.0);
+            bcodec.decode(dObj);
+        } catch (final DecoderException ee) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeObjects_literalMutation5() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation5");
+        final BCodec bcodec = new BCodec();
+        final String decoded = "=?UTF-8?B?d2hhdCBub3Q=?=";
+        final String plain = ((String)(bcodec.decode(((Object)(decoded)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4,plain);
+        final Object result = bcodec.decode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5,result);
+        try {
             final Object dObj = new Double(2.0);
+            bcodec.decode(dObj);
+        } catch (final DecoderException ee) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeObjects_literalMutation6() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation6");
+        final BCodec bcodec = new BCodec();
+        final String decoded = "=?UTF-8?B?d2hhdCBub3Q=?=";
+        final String plain = ((String)(bcodec.decode(((Object)(decoded)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4,plain);
+        final Object result = bcodec.decode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5,result);
+        try {
+            final Object dObj = new Double(1.5);
+            bcodec.decode(dObj);
+        } catch (final DecoderException ee) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeObjects_literalMutation7() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation7");
+        final BCodec bcodec = new BCodec();
+        final String decoded = "=?UTF-8?B?d2hhdCBub3Q=?=";
+        final String plain = ((String)(bcodec.decode(((Object)(decoded)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4,plain);
+        final Object result = bcodec.decode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5,result);
+        try {
+            final Object dObj = new Double(6.0);
             bcodec.decode(dObj);
         } catch (final DecoderException ee) {
         }

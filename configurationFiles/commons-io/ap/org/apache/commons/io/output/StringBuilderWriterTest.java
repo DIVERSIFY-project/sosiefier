@@ -48,8 +48,41 @@ public void testAppendConstructCapacity() throws IOException {
     /** 
      * Test {@link StringBuilderWriter} constructor.
      */
-public void testAppendConstructCapacity_literalMutation2444() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendConstructCapacity_literalMutation2444");
+public void testAppendConstructCapacity_literalMutation3607() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendConstructCapacity_literalMutation3607");
+        Writer writer = new StringBuilderWriter(101);
+        writer.append("Foo");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1626,writer,1625,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link StringBuilderWriter} constructor.
+     */
+public void testAppendConstructCapacity_literalMutation3608() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendConstructCapacity_literalMutation3608");
+        Writer writer = new StringBuilderWriter(50);
+        writer.append("Foo");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1626,writer,1625,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link StringBuilderWriter} constructor.
+     */
+public void testAppendConstructCapacity_literalMutation3609() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendConstructCapacity_literalMutation3609");
+        Writer writer = new StringBuilderWriter(200);
+        writer.append("Foo");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1626,writer,1625,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link StringBuilderWriter} constructor.
+     */
+public void testAppendConstructCapacity_literalMutation3610() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendConstructCapacity_literalMutation3610");
         Writer writer = new StringBuilderWriter(100);
         writer.append("foo");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1626,writer,1625,writer.toString());
@@ -88,7 +121,7 @@ public void testAppendConstructCapacity_literalMutation2444() throws IOException
      */
 public void testAppendConstructStringBuilder() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendConstructStringBuilder");
-        StringBuilder builder = new StringBuilder("foo");
+        StringBuilder builder = new StringBuilder("bar");
         StringBuilderWriter writer = new StringBuilderWriter(builder);
         writer.append("Bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1630,writer,1629,writer.toString());
@@ -100,8 +133,8 @@ public void testAppendConstructStringBuilder() {
     /** 
      * Test {@link StringBuilderWriter} constructor.
      */
-public void testAppendConstructStringBuilder_literalMutation2448() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendConstructStringBuilder_literalMutation2448");
+public void testAppendConstructStringBuilder_literalMutation3614() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendConstructStringBuilder_literalMutation3614");
         StringBuilder builder = new StringBuilder("Foo");
         StringBuilderWriter writer = new StringBuilderWriter(builder);
         writer.append("foo");
@@ -222,8 +255,8 @@ public void testAppendChar() throws IOException {
     /** 
      * Test {@link Writer#append(CharSequence)}.
      */
-public void testAppendCharSequence_literalMutation2436() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequence_literalMutation2436");
+public void testAppendCharSequence_literalMutation3588() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequence_literalMutation3588");
         Writer writer = new StringBuilderWriter();
         writer.append("Foo").append("foo");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1622,writer,1621,writer.toString());
@@ -268,8 +301,8 @@ public void testAppendCharSequencePortion() throws IOException {
     /** 
      * Test {@link Writer#append(CharSequence, int, int)}.
      */
-public void testAppendCharSequencePortion_literalMutation2438() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation2438");
+public void testAppendCharSequencePortion_literalMutation3590() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation3590");
         Writer writer = new StringBuilderWriter();
         writer.append("FooBar", 4, 6).append(new java.lang.StringBuffer("FooBar"), 0, 3);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1624,writer,1623,writer.toString());
@@ -279,8 +312,74 @@ public void testAppendCharSequencePortion_literalMutation2438() throws IOExcepti
     /** 
      * Test {@link Writer#append(CharSequence, int, int)}.
      */
-public void testAppendCharSequencePortion_literalMutation2439() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation2439");
+public void testAppendCharSequencePortion_literalMutation3591() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation3591");
+        Writer writer = new StringBuilderWriter();
+        writer.append("FooBar", 2, 6).append(new java.lang.StringBuffer("FooBar"), 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1624,writer,1623,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#append(CharSequence, int, int)}.
+     */
+public void testAppendCharSequencePortion_literalMutation3592() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation3592");
+        Writer writer = new StringBuilderWriter();
+        writer.append("FooBar", 1, 6).append(new java.lang.StringBuffer("FooBar"), 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1624,writer,1623,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#append(CharSequence, int, int)}.
+     */
+public void testAppendCharSequencePortion_literalMutation3593() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation3593");
+        Writer writer = new StringBuilderWriter();
+        writer.append("FooBar", 6, 6).append(new java.lang.StringBuffer("FooBar"), 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1624,writer,1623,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#append(CharSequence, int, int)}.
+     */
+public void testAppendCharSequencePortion_literalMutation3594() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation3594");
+        Writer writer = new StringBuilderWriter();
+        writer.append("FooBar", 3, 5).append(new java.lang.StringBuffer("FooBar"), 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1624,writer,1623,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#append(CharSequence, int, int)}.
+     */
+public void testAppendCharSequencePortion_literalMutation3595() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation3595");
+        Writer writer = new StringBuilderWriter();
+        writer.append("FooBar", 3, 3).append(new java.lang.StringBuffer("FooBar"), 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1624,writer,1623,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#append(CharSequence, int, int)}.
+     */
+public void testAppendCharSequencePortion_literalMutation3596() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation3596");
+        Writer writer = new StringBuilderWriter();
+        writer.append("FooBar", 3, 12).append(new java.lang.StringBuffer("FooBar"), 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1624,writer,1623,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#append(CharSequence, int, int)}.
+     */
+public void testAppendCharSequencePortion_literalMutation3597() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation3597");
         Writer writer = new StringBuilderWriter();
         writer.append("FooBar", 3, 7).append(new java.lang.StringBuffer("FooBar"), 0, 3);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1624,writer,1623,writer.toString());
@@ -290,10 +389,10 @@ public void testAppendCharSequencePortion_literalMutation2439() throws IOExcepti
     /** 
      * Test {@link Writer#append(CharSequence, int, int)}.
      */
-public void testAppendCharSequencePortion_literalMutation2440() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation2440");
+public void testAppendCharSequencePortion_literalMutation3598() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation3598");
         Writer writer = new StringBuilderWriter();
-        writer.append("FooBar", 3, 6).append(new java.lang.StringBuffer("foo"), 0, 3);
+        writer.append("FooBar", 3, 6).append(new java.lang.StringBuffer("bar"), 0, 3);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1624,writer,1623,writer.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -301,8 +400,19 @@ public void testAppendCharSequencePortion_literalMutation2440() throws IOExcepti
     /** 
      * Test {@link Writer#append(CharSequence, int, int)}.
      */
-public void testAppendCharSequencePortion_literalMutation2441() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation2441");
+public void testAppendCharSequencePortion_literalMutation3599() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation3599");
+        Writer writer = new StringBuilderWriter();
+        writer.append("FooBar", 3, 6).append(new java.lang.StringBuffer("FooBar"), 1, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1624,writer,1623,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#append(CharSequence, int, int)}.
+     */
+public void testAppendCharSequencePortion_literalMutation3600() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation3600");
         Writer writer = new StringBuilderWriter();
         writer.append("FooBar", 3, 6).append(new java.lang.StringBuffer("FooBar"), -1, 3);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1624,writer,1623,writer.toString());
@@ -312,10 +422,54 @@ public void testAppendCharSequencePortion_literalMutation2441() throws IOExcepti
     /** 
      * Test {@link Writer#append(CharSequence, int, int)}.
      */
-public void testAppendCharSequencePortion_literalMutation2442() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation2442");
+public void testAppendCharSequencePortion_literalMutation3601() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation3601");
+        Writer writer = new StringBuilderWriter();
+        writer.append("FooBar", 3, 6).append(new java.lang.StringBuffer("FooBar"), 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1624,writer,1623,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#append(CharSequence, int, int)}.
+     */
+public void testAppendCharSequencePortion_literalMutation3602() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation3602");
+        Writer writer = new StringBuilderWriter();
+        writer.append("FooBar", 3, 6).append(new java.lang.StringBuffer("FooBar"), 0, 4);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1624,writer,1623,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#append(CharSequence, int, int)}.
+     */
+public void testAppendCharSequencePortion_literalMutation3603() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation3603");
         Writer writer = new StringBuilderWriter();
         writer.append("FooBar", 3, 6).append(new java.lang.StringBuffer("FooBar"), 0, 2);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1624,writer,1623,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#append(CharSequence, int, int)}.
+     */
+public void testAppendCharSequencePortion_literalMutation3604() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation3604");
+        Writer writer = new StringBuilderWriter();
+        writer.append("FooBar", 3, 6).append(new java.lang.StringBuffer("FooBar"), 0, 1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1624,writer,1623,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#append(CharSequence, int, int)}.
+     */
+public void testAppendCharSequencePortion_literalMutation3605() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAppendCharSequencePortion_literalMutation3605");
+        Writer writer = new StringBuilderWriter();
+        writer.append("FooBar", 3, 6).append(new java.lang.StringBuffer("FooBar"), 0, 6);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1624,writer,1623,writer.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -408,8 +562,8 @@ public void testClose() {
     /** 
      * Test {@link Writer#close()}.
      */
-public void testClose_literalMutation2449() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testClose_literalMutation2449");
+public void testClose_literalMutation3615() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testClose_literalMutation3615");
         Writer writer = new StringBuilderWriter();
         try {
             writer.append("foo");
@@ -425,13 +579,13 @@ public void testClose_literalMutation2449() {
     /** 
      * Test {@link Writer#close()}.
      */
-public void testClose_literalMutation2450() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testClose_literalMutation2450");
+public void testClose_literalMutation3616() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testClose_literalMutation3616");
         Writer writer = new StringBuilderWriter();
         try {
             writer.append("Foo");
             writer.close();
-            writer.append("foo");
+            writer.append("bar");
         } catch (Throwable t) {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1634,("Threw: " + t));
         }
@@ -653,6 +807,19 @@ public void testWriteCharArrayPortion() throws IOException {
 public void testWriteChar() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteChar");
         Writer writer = new StringBuilderWriter();
+        writer.write(FOOBAR_CHARS, 4, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1642,writer,1641,writer.toString());
+        writer.write(FOOBAR_CHARS, 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1644,writer,1643,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(char[], int, int)}.
+     */
+public void testWriteCharArrayPortion_literalMutation3627() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPortion_literalMutation3627");
+        Writer writer = new StringBuilderWriter();
         writer.write(FOOBAR_CHARS, 2, 3);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1642,writer,1641,writer.toString());
         writer.write(FOOBAR_CHARS, 0, 3);
@@ -663,8 +830,34 @@ public void testWriteChar() throws IOException {
     /** 
      * Test {@link Writer#write(char[], int, int)}.
      */
-public void testWriteCharArrayPortion_literalMutation2461() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPortion_literalMutation2461");
+public void testWriteCharArrayPortion_literalMutation3628() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPortion_literalMutation3628");
+        Writer writer = new StringBuilderWriter();
+        writer.write(FOOBAR_CHARS, 1, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1642,writer,1641,writer.toString());
+        writer.write(FOOBAR_CHARS, 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1644,writer,1643,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(char[], int, int)}.
+     */
+public void testWriteCharArrayPortion_literalMutation3629() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPortion_literalMutation3629");
+        Writer writer = new StringBuilderWriter();
+        writer.write(FOOBAR_CHARS, 6, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1642,writer,1641,writer.toString());
+        writer.write(FOOBAR_CHARS, 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1644,writer,1643,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(char[], int, int)}.
+     */
+public void testWriteCharArrayPortion_literalMutation3630() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPortion_literalMutation3630");
         Writer writer = new StringBuilderWriter();
         writer.write(FOOBAR_CHARS, 3, 4);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1642,writer,1641,writer.toString());
@@ -676,8 +869,47 @@ public void testWriteCharArrayPortion_literalMutation2461() throws IOException {
     /** 
      * Test {@link Writer#write(char[], int, int)}.
      */
-public void testWriteCharArrayPortion_literalMutation2462() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPortion_literalMutation2462");
+public void testWriteCharArrayPortion_literalMutation3631() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPortion_literalMutation3631");
+        Writer writer = new StringBuilderWriter();
+        writer.write(FOOBAR_CHARS, 3, 2);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1642,writer,1641,writer.toString());
+        writer.write(FOOBAR_CHARS, 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1644,writer,1643,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(char[], int, int)}.
+     */
+public void testWriteCharArrayPortion_literalMutation3632() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPortion_literalMutation3632");
+        Writer writer = new StringBuilderWriter();
+        writer.write(FOOBAR_CHARS, 3, 1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1642,writer,1641,writer.toString());
+        writer.write(FOOBAR_CHARS, 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1644,writer,1643,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(char[], int, int)}.
+     */
+public void testWriteCharArrayPortion_literalMutation3633() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPortion_literalMutation3633");
+        Writer writer = new StringBuilderWriter();
+        writer.write(FOOBAR_CHARS, 3, 6);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1642,writer,1641,writer.toString());
+        writer.write(FOOBAR_CHARS, 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1644,writer,1643,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(char[], int, int)}.
+     */
+public void testWriteCharArrayPortion_literalMutation3634() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPortion_literalMutation3634");
         Writer writer = new StringBuilderWriter();
         writer.write(FOOBAR_CHARS, 3, 3);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1642,writer,1641,writer.toString());
@@ -689,12 +921,77 @@ public void testWriteCharArrayPortion_literalMutation2462() throws IOException {
     /** 
      * Test {@link Writer#write(char[], int, int)}.
      */
-public void testWriteCharArrayPortion_literalMutation2463() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPortion_literalMutation2463");
+public void testWriteCharArrayPortion_literalMutation3635() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPortion_literalMutation3635");
+        Writer writer = new StringBuilderWriter();
+        writer.write(FOOBAR_CHARS, 3, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1642,writer,1641,writer.toString());
+        writer.write(FOOBAR_CHARS, -1, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1644,writer,1643,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(char[], int, int)}.
+     */
+public void testWriteCharArrayPortion_literalMutation3636() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPortion_literalMutation3636");
+        Writer writer = new StringBuilderWriter();
+        writer.write(FOOBAR_CHARS, 3, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1642,writer,1641,writer.toString());
+        writer.write(FOOBAR_CHARS, 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1644,writer,1643,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(char[], int, int)}.
+     */
+public void testWriteCharArrayPortion_literalMutation3637() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPortion_literalMutation3637");
         Writer writer = new StringBuilderWriter();
         writer.write(FOOBAR_CHARS, 3, 3);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1642,writer,1641,writer.toString());
         writer.write(FOOBAR_CHARS, 0, 4);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1644,writer,1643,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(char[], int, int)}.
+     */
+public void testWriteCharArrayPortion_literalMutation3638() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPortion_literalMutation3638");
+        Writer writer = new StringBuilderWriter();
+        writer.write(FOOBAR_CHARS, 3, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1642,writer,1641,writer.toString());
+        writer.write(FOOBAR_CHARS, 0, 2);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1644,writer,1643,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(char[], int, int)}.
+     */
+public void testWriteCharArrayPortion_literalMutation3639() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPortion_literalMutation3639");
+        Writer writer = new StringBuilderWriter();
+        writer.write(FOOBAR_CHARS, 3, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1642,writer,1641,writer.toString());
+        writer.write(FOOBAR_CHARS, 0, 1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1644,writer,1643,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(char[], int, int)}.
+     */
+public void testWriteCharArrayPortion_literalMutation3640() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPortion_literalMutation3640");
+        Writer writer = new StringBuilderWriter();
+        writer.write(FOOBAR_CHARS, 3, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1642,writer,1641,writer.toString());
+        writer.write(FOOBAR_CHARS, 0, 6);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1644,writer,1643,writer.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -771,8 +1068,8 @@ public void testWriteString() throws IOException {
     /** 
      * Test {@link Writer#write(String)}.
      */
-public void testWriteString_literalMutation2464() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteString_literalMutation2464");
+public void testWriteString_literalMutation3641() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteString_literalMutation3641");
         Writer writer = new StringBuilderWriter();
         writer.write("foo");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1652,writer,1651,writer.toString());
@@ -784,12 +1081,12 @@ public void testWriteString_literalMutation2464() throws IOException {
     /** 
      * Test {@link Writer#write(String)}.
      */
-public void testWriteString_literalMutation2465() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteString_literalMutation2465");
+public void testWriteString_literalMutation3642() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteString_literalMutation3642");
         Writer writer = new StringBuilderWriter();
         writer.write("Foo");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1652,writer,1651,writer.toString());
-        writer.write("foo");
+        writer.write("bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1654,writer,1653,writer.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -856,7 +1153,7 @@ public void testWriteString_literalMutation2465() throws IOException {
 public void testWriteStringPortion() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion");
         Writer writer = new StringBuilderWriter();
-        writer.write("foo", 3, 3);
+        writer.write("bar", 3, 3);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1656,writer,1655,writer.toString());
         writer.write("FooBar", 0, 3);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1658,writer,1657,writer.toString());
@@ -866,8 +1163,8 @@ public void testWriteStringPortion() throws IOException {
     /** 
      * Test {@link Writer#write(String, int, int)}.
      */
-public void testWriteStringPortion_literalMutation2467() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation2467");
+public void testWriteStringPortion_literalMutation3644() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation3644");
         Writer writer = new StringBuilderWriter();
         writer.write("FooBar", 4, 3);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1656,writer,1655,writer.toString());
@@ -879,8 +1176,47 @@ public void testWriteStringPortion_literalMutation2467() throws IOException {
     /** 
      * Test {@link Writer#write(String, int, int)}.
      */
-public void testWriteStringPortion_literalMutation2468() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation2468");
+public void testWriteStringPortion_literalMutation3645() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation3645");
+        Writer writer = new StringBuilderWriter();
+        writer.write("FooBar", 2, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1656,writer,1655,writer.toString());
+        writer.write("FooBar", 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1658,writer,1657,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(String, int, int)}.
+     */
+public void testWriteStringPortion_literalMutation3646() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation3646");
+        Writer writer = new StringBuilderWriter();
+        writer.write("FooBar", 1, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1656,writer,1655,writer.toString());
+        writer.write("FooBar", 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1658,writer,1657,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(String, int, int)}.
+     */
+public void testWriteStringPortion_literalMutation3647() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation3647");
+        Writer writer = new StringBuilderWriter();
+        writer.write("FooBar", 6, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1656,writer,1655,writer.toString());
+        writer.write("FooBar", 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1658,writer,1657,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(String, int, int)}.
+     */
+public void testWriteStringPortion_literalMutation3648() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation3648");
         Writer writer = new StringBuilderWriter();
         writer.write("FooBar", 3, 4);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1656,writer,1655,writer.toString());
@@ -892,12 +1228,12 @@ public void testWriteStringPortion_literalMutation2468() throws IOException {
     /** 
      * Test {@link Writer#write(String, int, int)}.
      */
-public void testWriteStringPortion_literalMutation2469() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation2469");
+public void testWriteStringPortion_literalMutation3649() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation3649");
         Writer writer = new StringBuilderWriter();
-        writer.write("FooBar", 3, 3);
+        writer.write("FooBar", 3, 2);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1656,writer,1655,writer.toString());
-        writer.write("foo", 0, 3);
+        writer.write("FooBar", 0, 3);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1658,writer,1657,writer.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -905,8 +1241,60 @@ public void testWriteStringPortion_literalMutation2469() throws IOException {
     /** 
      * Test {@link Writer#write(String, int, int)}.
      */
-public void testWriteStringPortion_literalMutation2470() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation2470");
+public void testWriteStringPortion_literalMutation3650() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation3650");
+        Writer writer = new StringBuilderWriter();
+        writer.write("FooBar", 3, 1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1656,writer,1655,writer.toString());
+        writer.write("FooBar", 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1658,writer,1657,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(String, int, int)}.
+     */
+public void testWriteStringPortion_literalMutation3651() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation3651");
+        Writer writer = new StringBuilderWriter();
+        writer.write("FooBar", 3, 6);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1656,writer,1655,writer.toString());
+        writer.write("FooBar", 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1658,writer,1657,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(String, int, int)}.
+     */
+public void testWriteStringPortion_literalMutation3652() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation3652");
+        Writer writer = new StringBuilderWriter();
+        writer.write("FooBar", 3, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1656,writer,1655,writer.toString());
+        writer.write("bar", 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1658,writer,1657,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(String, int, int)}.
+     */
+public void testWriteStringPortion_literalMutation3653() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation3653");
+        Writer writer = new StringBuilderWriter();
+        writer.write("FooBar", 3, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1656,writer,1655,writer.toString());
+        writer.write("FooBar", 1, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1658,writer,1657,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(String, int, int)}.
+     */
+public void testWriteStringPortion_literalMutation3654() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation3654");
         Writer writer = new StringBuilderWriter();
         writer.write("FooBar", 3, 3);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1656,writer,1655,writer.toString());
@@ -918,12 +1306,64 @@ public void testWriteStringPortion_literalMutation2470() throws IOException {
     /** 
      * Test {@link Writer#write(String, int, int)}.
      */
-public void testWriteStringPortion_literalMutation2471() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation2471");
+public void testWriteStringPortion_literalMutation3655() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation3655");
+        Writer writer = new StringBuilderWriter();
+        writer.write("FooBar", 3, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1656,writer,1655,writer.toString());
+        writer.write("FooBar", 0, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1658,writer,1657,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(String, int, int)}.
+     */
+public void testWriteStringPortion_literalMutation3656() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation3656");
         Writer writer = new StringBuilderWriter();
         writer.write("FooBar", 3, 3);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1656,writer,1655,writer.toString());
         writer.write("FooBar", 0, 4);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1658,writer,1657,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(String, int, int)}.
+     */
+public void testWriteStringPortion_literalMutation3657() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation3657");
+        Writer writer = new StringBuilderWriter();
+        writer.write("FooBar", 3, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1656,writer,1655,writer.toString());
+        writer.write("FooBar", 0, 2);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1658,writer,1657,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(String, int, int)}.
+     */
+public void testWriteStringPortion_literalMutation3658() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation3658");
+        Writer writer = new StringBuilderWriter();
+        writer.write("FooBar", 3, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1656,writer,1655,writer.toString());
+        writer.write("FooBar", 0, 1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1658,writer,1657,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test {@link Writer#write(String, int, int)}.
+     */
+public void testWriteStringPortion_literalMutation3659() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPortion_literalMutation3659");
+        Writer writer = new StringBuilderWriter();
+        writer.write("FooBar", 3, 3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1656,writer,1655,writer.toString());
+        writer.write("FooBar", 0, 6);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1658,writer,1657,writer.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }

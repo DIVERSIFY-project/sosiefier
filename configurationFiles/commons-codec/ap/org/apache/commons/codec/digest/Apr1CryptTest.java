@@ -75,8 +75,8 @@ public class Apr1CryptTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testApr1CryptWithEmptySalt_literalMutation1355() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testApr1CryptWithEmptySalt_literalMutation1355");
+    public void testApr1CryptWithEmptySalt_literalMutation1450() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testApr1CryptWithEmptySalt_literalMutation1450");
         org.apache.commons.codec.digest.Md5Crypt.apr1Crypt("secret".getBytes(), "foo");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -99,11 +99,11 @@ public class Apr1CryptTest {
     }
 
     @Test
-    public void testApr1CryptWithoutSalt_literalMutation1359() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testApr1CryptWithoutSalt_literalMutation1359");
+    public void testApr1CryptWithoutSalt_literalMutation1456() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testApr1CryptWithoutSalt_literalMutation1456");
         final String hash = org.apache.commons.codec.digest.Md5Crypt.apr1Crypt("secret");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1171,hash,1170,hash.matches("^\\$apr1\\$[a-zA-Z0-9\\./]{8}\\$[a-zA-Z0-9\\./]{22}$"));
-        final String hash2 = org.apache.commons.codec.digest.Md5Crypt.apr1Crypt("foo");
+        final String hash2 = org.apache.commons.codec.digest.Md5Crypt.apr1Crypt("bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1172,hash);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1173,hash2);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -120,14 +120,28 @@ public class Apr1CryptTest {
     @Test(expected = IllegalArgumentException.class)
     public void testApr1CryptWithInvalidSalt() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testApr1CryptWithInvalidSalt");
+        org.apache.commons.codec.digest.Md5Crypt.apr1Crypt(new byte[1], "!");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testApr1CryptWithInvalidSalt_literalMutation1452() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testApr1CryptWithInvalidSalt_literalMutation1452");
         org.apache.commons.codec.digest.Md5Crypt.apr1Crypt(new byte[-1], "!");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testApr1CryptWithInvalidSalt_literalMutation1357() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testApr1CryptWithInvalidSalt_literalMutation1357");
-        org.apache.commons.codec.digest.Md5Crypt.apr1Crypt(new byte[0], "foo");
+    public void testApr1CryptWithInvalidSalt_literalMutation1453() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testApr1CryptWithInvalidSalt_literalMutation1453");
+        org.apache.commons.codec.digest.Md5Crypt.apr1Crypt(new byte[0], "!");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testApr1CryptWithInvalidSalt_literalMutation1454() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testApr1CryptWithInvalidSalt_literalMutation1454");
+        org.apache.commons.codec.digest.Md5Crypt.apr1Crypt(new byte[0], "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

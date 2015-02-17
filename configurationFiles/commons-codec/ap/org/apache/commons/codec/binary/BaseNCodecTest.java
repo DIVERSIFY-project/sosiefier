@@ -110,6 +110,28 @@ public class BaseNCodecTest {
     @Test
     public void testProvidePaddingByte() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testProvidePaddingByte");
+        codec = new BaseNCodec(1, 0, 0, 0, ((byte)(37))) {
+            @Override
+            protected boolean isInAlphabet(final byte b) {
+                return (b == 'O') || (b == 'K');
+            }
+
+            @Override
+            void encode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+
+            @Override
+            void decode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+        };
+        byte actualPaddingByte = codec.pad;
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2299,actualPaddingByte);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testProvidePaddingByte_literalMutation2757() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testProvidePaddingByte_literalMutation2757");
         codec = new BaseNCodec(-1, 0, 0, 0, ((byte)(37))) {
             @Override
             protected boolean isInAlphabet(final byte b) {
@@ -130,8 +152,30 @@ public class BaseNCodecTest {
     }
 
     @Test
-    public void testProvidePaddingByte_literalMutation1950() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testProvidePaddingByte_literalMutation1950");
+    public void testProvidePaddingByte_literalMutation2758() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testProvidePaddingByte_literalMutation2758");
+        codec = new BaseNCodec(0, 0, 0, 0, ((byte)(37))) {
+            @Override
+            protected boolean isInAlphabet(final byte b) {
+                return (b == 'O') || (b == 'K');
+            }
+
+            @Override
+            void encode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+
+            @Override
+            void decode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+        };
+        byte actualPaddingByte = codec.pad;
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2299,actualPaddingByte);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testProvidePaddingByte_literalMutation2759() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testProvidePaddingByte_literalMutation2759");
         codec = new BaseNCodec(0, 1, 0, 0, ((byte)(37))) {
             @Override
             protected boolean isInAlphabet(final byte b) {
@@ -152,8 +196,52 @@ public class BaseNCodecTest {
     }
 
     @Test
-    public void testProvidePaddingByte_literalMutation1951() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testProvidePaddingByte_literalMutation1951");
+    public void testProvidePaddingByte_literalMutation2760() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testProvidePaddingByte_literalMutation2760");
+        codec = new BaseNCodec(0, -1, 0, 0, ((byte)(37))) {
+            @Override
+            protected boolean isInAlphabet(final byte b) {
+                return (b == 'O') || (b == 'K');
+            }
+
+            @Override
+            void encode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+
+            @Override
+            void decode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+        };
+        byte actualPaddingByte = codec.pad;
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2299,actualPaddingByte);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testProvidePaddingByte_literalMutation2761() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testProvidePaddingByte_literalMutation2761");
+        codec = new BaseNCodec(0, 0, 0, 0, ((byte)(37))) {
+            @Override
+            protected boolean isInAlphabet(final byte b) {
+                return (b == 'O') || (b == 'K');
+            }
+
+            @Override
+            void encode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+
+            @Override
+            void decode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+        };
+        byte actualPaddingByte = codec.pad;
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2299,actualPaddingByte);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testProvidePaddingByte_literalMutation2762() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testProvidePaddingByte_literalMutation2762");
         codec = new BaseNCodec(0, 0, 1, 0, ((byte)(37))) {
             @Override
             protected boolean isInAlphabet(final byte b) {
@@ -174,8 +262,74 @@ public class BaseNCodecTest {
     }
 
     @Test
-    public void testProvidePaddingByte_literalMutation1952() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testProvidePaddingByte_literalMutation1952");
+    public void testProvidePaddingByte_literalMutation2763() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testProvidePaddingByte_literalMutation2763");
+        codec = new BaseNCodec(0, 0, -1, 0, ((byte)(37))) {
+            @Override
+            protected boolean isInAlphabet(final byte b) {
+                return (b == 'O') || (b == 'K');
+            }
+
+            @Override
+            void encode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+
+            @Override
+            void decode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+        };
+        byte actualPaddingByte = codec.pad;
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2299,actualPaddingByte);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testProvidePaddingByte_literalMutation2764() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testProvidePaddingByte_literalMutation2764");
+        codec = new BaseNCodec(0, 0, 0, 0, ((byte)(37))) {
+            @Override
+            protected boolean isInAlphabet(final byte b) {
+                return (b == 'O') || (b == 'K');
+            }
+
+            @Override
+            void encode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+
+            @Override
+            void decode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+        };
+        byte actualPaddingByte = codec.pad;
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2299,actualPaddingByte);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testProvidePaddingByte_literalMutation2765() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testProvidePaddingByte_literalMutation2765");
+        codec = new BaseNCodec(0, 0, 0, 1, ((byte)(37))) {
+            @Override
+            protected boolean isInAlphabet(final byte b) {
+                return (b == 'O') || (b == 'K');
+            }
+
+            @Override
+            void encode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+
+            @Override
+            void decode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+        };
+        byte actualPaddingByte = codec.pad;
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2299,actualPaddingByte);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testProvidePaddingByte_literalMutation2766() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testProvidePaddingByte_literalMutation2766");
         codec = new BaseNCodec(0, 0, 0, -1, ((byte)(37))) {
             @Override
             protected boolean isInAlphabet(final byte b) {
@@ -196,9 +350,97 @@ public class BaseNCodecTest {
     }
 
     @Test
-    public void testProvidePaddingByte_literalMutation1953() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testProvidePaddingByte_literalMutation1953");
+    public void testProvidePaddingByte_literalMutation2767() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testProvidePaddingByte_literalMutation2767");
+        codec = new BaseNCodec(0, 0, 0, 0, ((byte)(37))) {
+            @Override
+            protected boolean isInAlphabet(final byte b) {
+                return (b == 'O') || (b == 'K');
+            }
+
+            @Override
+            void encode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+
+            @Override
+            void decode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+        };
+        byte actualPaddingByte = codec.pad;
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2299,actualPaddingByte);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testProvidePaddingByte_literalMutation2768() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testProvidePaddingByte_literalMutation2768");
         codec = new BaseNCodec(0, 0, 0, 0, ((byte)(36))) {
+            @Override
+            protected boolean isInAlphabet(final byte b) {
+                return (b == 'O') || (b == 'K');
+            }
+
+            @Override
+            void encode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+
+            @Override
+            void decode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+        };
+        byte actualPaddingByte = codec.pad;
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2299,actualPaddingByte);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testProvidePaddingByte_literalMutation2769() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testProvidePaddingByte_literalMutation2769");
+        codec = new BaseNCodec(0, 0, 0, 0, ((byte)(18))) {
+            @Override
+            protected boolean isInAlphabet(final byte b) {
+                return (b == 'O') || (b == 'K');
+            }
+
+            @Override
+            void encode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+
+            @Override
+            void decode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+        };
+        byte actualPaddingByte = codec.pad;
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2299,actualPaddingByte);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testProvidePaddingByte_literalMutation2770() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testProvidePaddingByte_literalMutation2770");
+        codec = new BaseNCodec(0, 0, 0, 0, ((byte)(74))) {
+            @Override
+            protected boolean isInAlphabet(final byte b) {
+                return (b == 'O') || (b == 'K');
+            }
+
+            @Override
+            void encode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+
+            @Override
+            void decode(final byte[] pArray, final int i, final int length, final Context context) {
+            }
+        };
+        byte actualPaddingByte = codec.pad;
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2299,actualPaddingByte);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testProvidePaddingByte_literalMutation2771() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testProvidePaddingByte_literalMutation2771");
+        codec = new BaseNCodec(0, 0, 0, 0, ((byte)(38))) {
             @Override
             protected boolean isInAlphabet(final byte b) {
                 return (b == 'O') || (b == 'K');

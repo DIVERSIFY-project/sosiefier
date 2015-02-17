@@ -56,12 +56,12 @@ public class IOUtilsCopyTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_inputStreamToOutputStream_literalMutation4141() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToOutputStream_literalMutation4141");
+    public void testCopy_inputStreamToOutputStream_literalMutation6248() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToOutputStream_literalMutation6248");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        OutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
+        OutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         int count = org.apache.commons.io.IOUtils.copy(in, out);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5349,in,5348,in.available());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5350,inData.length);
@@ -72,8 +72,8 @@ public class IOUtilsCopyTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_inputStreamToOutputStream_literalMutation4142() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToOutputStream_literalMutation4142");
+    public void testCopy_inputStreamToOutputStream_literalMutation6249() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToOutputStream_literalMutation6249");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -136,6 +136,38 @@ public class IOUtilsCopyTestCase extends FileBasedTestCase {
 public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToOutputStream_IO84");
         long size = ((long)(Integer.MAX_VALUE)) + ((long)(2));
+        InputStream in = new NullInputStream(size);
+        OutputStream out = new NullOutputStream();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5357,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5359,null,5358,org.apache.commons.io.IOUtils.copy(in, out));
+        in.close();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5360,size);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5362,null,5361,org.apache.commons.io.IOUtils.copyLarge(in, out));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Copying file > 2GB  - see issue# IO-84
+     */
+public void testCopy_inputStreamToOutputStream_IO84_literalMutation6251() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToOutputStream_IO84_literalMutation6251");
+        long size = ((long)(Integer.MAX_VALUE)) + ((long)(0));
+        InputStream in = new NullInputStream(size);
+        OutputStream out = new NullOutputStream();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5357,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5359,null,5358,org.apache.commons.io.IOUtils.copy(in, out));
+        in.close();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5360,size);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5362,null,5361,org.apache.commons.io.IOUtils.copyLarge(in, out));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Copying file > 2GB  - see issue# IO-84
+     */
+public void testCopy_inputStreamToOutputStream_IO84_literalMutation6252() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToOutputStream_IO84_literalMutation6252");
+        long size = ((long)(Integer.MAX_VALUE)) + ((long)(0));
         InputStream in = new NullInputStream(size);
         OutputStream out = new NullOutputStream();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5357,-1);
@@ -236,8 +268,8 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_inputStreamToWriter_literalMutation4146() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_literalMutation4146");
+    public void testCopy_inputStreamToWriter_literalMutation6255() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_literalMutation6255");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -253,8 +285,8 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_inputStreamToWriter_literalMutation4147() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_literalMutation4147");
+    public void testCopy_inputStreamToWriter_literalMutation6256() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_literalMutation6256");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -270,13 +302,13 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_inputStreamToWriter_literalMutation4148() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_literalMutation4148");
+    public void testCopy_inputStreamToWriter_literalMutation6257() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_literalMutation6257");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
-        Writer writer = new OutputStreamWriter(baout , "foo");
+        Writer writer = new OutputStreamWriter(baout , "bar");
         org.apache.commons.io.IOUtils.copy(in, writer);
         out.off();
         writer.flush();
@@ -364,8 +396,8 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_inputStreamToWriter_nullIn_literalMutation4167() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_nullIn_literalMutation4167");
+    public void testCopy_inputStreamToWriter_nullIn_literalMutation6276() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_nullIn_literalMutation6276");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         OutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         Writer writer = new OutputStreamWriter(out , "US-ASCII");
@@ -376,8 +408,8 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_inputStreamToWriter_nullIn_literalMutation4168() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_nullIn_literalMutation4168");
+    public void testCopy_inputStreamToWriter_nullIn_literalMutation6277() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_nullIn_literalMutation6277");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         OutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         Writer writer = new OutputStreamWriter(out , "foo");
@@ -462,7 +494,7 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         org.apache.commons.io.IOUtils.copy(in, writer, "UTF8");
         out.off();
@@ -474,8 +506,8 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_inputStreamToWriter_Encoding_literalMutation4150() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_literalMutation4150");
+    public void testCopy_inputStreamToWriter_Encoding_literalMutation6259() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_literalMutation6259");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -491,8 +523,8 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_inputStreamToWriter_Encoding_literalMutation4151() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_literalMutation4151");
+    public void testCopy_inputStreamToWriter_Encoding_literalMutation6260() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_literalMutation6260");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -508,14 +540,14 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_inputStreamToWriter_Encoding_literalMutation4152() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_literalMutation4152");
+    public void testCopy_inputStreamToWriter_Encoding_literalMutation6261() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_literalMutation6261");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
-        org.apache.commons.io.IOUtils.copy(in, writer, "foo");
+        org.apache.commons.io.IOUtils.copy(in, writer, "bar");
         out.off();
         writer.flush();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5371,in,5370,in.available());
@@ -525,8 +557,8 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_inputStreamToWriter_Encoding_literalMutation4153() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_literalMutation4153");
+    public void testCopy_inputStreamToWriter_Encoding_literalMutation6262() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_literalMutation6262");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -542,8 +574,8 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_inputStreamToWriter_Encoding_literalMutation4154() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_literalMutation4154");
+    public void testCopy_inputStreamToWriter_Encoding_literalMutation6263() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_literalMutation6263");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -554,7 +586,7 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         writer.flush();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5371,in,5370,in.available());
         byte[] bytes = baout.toByteArray();
-        bytes = new String(bytes , "UTF8").getBytes("foo");
+        bytes = new String(bytes , "UTF8").getBytes("bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5373,null,5372,java.util.Arrays.equals(inData, bytes));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -627,7 +659,7 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
     public void testCopy_inputStreamToWriter_Encoding_nullIn() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_nullIn");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        OutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        OutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         Writer writer = new OutputStreamWriter(out , "US-ASCII");
         try {
             org.apache.commons.io.IOUtils.copy(((InputStream)(null)), writer, "UTF8");
@@ -636,8 +668,8 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_inputStreamToWriter_Encoding_nullIn_literalMutation4160() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_nullIn_literalMutation4160");
+    public void testCopy_inputStreamToWriter_Encoding_nullIn_literalMutation6269() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_nullIn_literalMutation6269");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         OutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         Writer writer = new OutputStreamWriter(out , "US-ASCII");
@@ -648,11 +680,11 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_inputStreamToWriter_Encoding_nullIn_literalMutation4161() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_nullIn_literalMutation4161");
+    public void testCopy_inputStreamToWriter_Encoding_nullIn_literalMutation6270() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_nullIn_literalMutation6270");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         OutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
-        Writer writer = new OutputStreamWriter(out , "foo");
+        Writer writer = new OutputStreamWriter(out , "bar");
         try {
             org.apache.commons.io.IOUtils.copy(((InputStream)(null)), writer, "UTF8");
         } catch (NullPointerException ex) {
@@ -660,8 +692,8 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_inputStreamToWriter_Encoding_nullIn_literalMutation4163() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_nullIn_literalMutation4163");
+    public void testCopy_inputStreamToWriter_Encoding_nullIn_literalMutation6272() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_nullIn_literalMutation6272");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         OutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         Writer writer = new OutputStreamWriter(out , "US-ASCII");
@@ -756,7 +788,7 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         org.apache.commons.io.IOUtils.copy(in, writer, ((String)(null)));
         out.off();
@@ -768,12 +800,12 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_inputStreamToWriter_Encoding_nullEncoding_literalMutation4156() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_nullEncoding_literalMutation4156");
+    public void testCopy_inputStreamToWriter_Encoding_nullEncoding_literalMutation6265() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_nullEncoding_literalMutation6265");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         org.apache.commons.io.IOUtils.copy(in, writer, ((String)(null)));
         out.off();
@@ -785,8 +817,8 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_inputStreamToWriter_Encoding_nullEncoding_literalMutation4157() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_nullEncoding_literalMutation4157");
+    public void testCopy_inputStreamToWriter_Encoding_nullEncoding_literalMutation6266() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_inputStreamToWriter_Encoding_nullEncoding_literalMutation6266");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
@@ -883,11 +915,11 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_readerToOutputStream_literalMutation4171() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_literalMutation4171");
+    public void testCopy_readerToOutputStream_literalMutation6280() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_literalMutation6280");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
-        Reader reader = new InputStreamReader(in , "foo");
+        Reader reader = new InputStreamReader(in , "bar");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         OutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         org.apache.commons.io.IOUtils.copy(reader, out);
@@ -897,8 +929,8 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_readerToOutputStream_literalMutation4172() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_literalMutation4172");
+    public void testCopy_readerToOutputStream_literalMutation6281() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_literalMutation6281");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         Reader reader = new InputStreamReader(in , "US-ASCII");
@@ -911,13 +943,13 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_readerToOutputStream_literalMutation4173() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_literalMutation4173");
+    public void testCopy_readerToOutputStream_literalMutation6282() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_literalMutation6282");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         Reader reader = new InputStreamReader(in , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        OutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
+        OutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , false);
         org.apache.commons.io.IOUtils.copy(reader, out);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5381,inData.length);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5383,baout,5382,baout.size());
@@ -955,7 +987,7 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
     public void testCopy_readerToOutputStream_nullIn() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_nullIn");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        OutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        OutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         try {
             org.apache.commons.io.IOUtils.copy(((Reader)(null)), out);
         } catch (NullPointerException ex) {
@@ -963,10 +995,10 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_readerToOutputStream_nullIn_literalMutation4192() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_nullIn_literalMutation4192");
+    public void testCopy_readerToOutputStream_nullIn_literalMutation6301() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_nullIn_literalMutation6301");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        OutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        OutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         try {
             org.apache.commons.io.IOUtils.copy(((Reader)(null)), out);
         } catch (NullPointerException ex) {
@@ -1020,7 +1052,7 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
-        Reader reader = new InputStreamReader(in , "foo");
+        Reader reader = new InputStreamReader(in , "bar");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         OutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         org.apache.commons.io.IOUtils.copy(reader, out, "UTF16");
@@ -1030,8 +1062,8 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_readerToOutputStream_Encoding_literalMutation4175() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_literalMutation4175");
+    public void testCopy_readerToOutputStream_Encoding_literalMutation6284() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_literalMutation6284");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         Reader reader = new InputStreamReader(in , "US-ASCII");
@@ -1044,13 +1076,13 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_readerToOutputStream_Encoding_literalMutation4176() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_literalMutation4176");
+    public void testCopy_readerToOutputStream_Encoding_literalMutation6285() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_literalMutation6285");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         Reader reader = new InputStreamReader(in , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        OutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
+        OutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , false);
         org.apache.commons.io.IOUtils.copy(reader, out, "UTF16");
         byte[] bytes = baout.toByteArray();
         bytes = new String(bytes , "UTF16").getBytes("US-ASCII");
@@ -1058,22 +1090,22 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_readerToOutputStream_Encoding_literalMutation4177() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_literalMutation4177");
+    public void testCopy_readerToOutputStream_Encoding_literalMutation6286() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_literalMutation6286");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         Reader reader = new InputStreamReader(in , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         OutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
-        org.apache.commons.io.IOUtils.copy(reader, out, "foo");
+        org.apache.commons.io.IOUtils.copy(reader, out, "bar");
         byte[] bytes = baout.toByteArray();
         bytes = new String(bytes , "UTF16").getBytes("US-ASCII");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5387,null,5386,java.util.Arrays.equals(inData, bytes));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_readerToOutputStream_Encoding_literalMutation4178() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_literalMutation4178");
+    public void testCopy_readerToOutputStream_Encoding_literalMutation6287() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_literalMutation6287");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         Reader reader = new InputStreamReader(in , "US-ASCII");
@@ -1086,8 +1118,8 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_readerToOutputStream_Encoding_literalMutation4179() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_literalMutation4179");
+    public void testCopy_readerToOutputStream_Encoding_literalMutation6288() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_literalMutation6288");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         Reader reader = new InputStreamReader(in , "US-ASCII");
@@ -1130,7 +1162,7 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
     public void testCopy_readerToOutputStream_Encoding_nullIn() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_nullIn");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        OutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        OutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         try {
             org.apache.commons.io.IOUtils.copy(((Reader)(null)), out, "UTF16");
         } catch (NullPointerException ex) {
@@ -1138,8 +1170,8 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_readerToOutputStream_Encoding_nullIn_literalMutation4185() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_nullIn_literalMutation4185");
+    public void testCopy_readerToOutputStream_Encoding_nullIn_literalMutation6294() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_nullIn_literalMutation6294");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         OutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         try {
@@ -1149,8 +1181,8 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_readerToOutputStream_Encoding_nullIn_literalMutation4187() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_nullIn_literalMutation4187");
+    public void testCopy_readerToOutputStream_Encoding_nullIn_literalMutation6296() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_nullIn_literalMutation6296");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         OutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         try {
@@ -1186,13 +1218,13 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_readerToOutputStream_Encoding_nullOut_literalMutation4190() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_nullOut_literalMutation4190");
+    public void testCopy_readerToOutputStream_Encoding_nullOut_literalMutation6299() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_nullOut_literalMutation6299");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         Reader reader = new InputStreamReader(in , "US-ASCII");
         try {
-            org.apache.commons.io.IOUtils.copy(reader, ((OutputStream)(null)), "foo");
+            org.apache.commons.io.IOUtils.copy(reader, ((OutputStream)(null)), "bar");
         } catch (NullPointerException ex) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -1228,13 +1260,13 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_readerToOutputStream_Encoding_nullEncoding_literalMutation4181() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_nullEncoding_literalMutation4181");
+    public void testCopy_readerToOutputStream_Encoding_nullEncoding_literalMutation6290() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_nullEncoding_literalMutation6290");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         Reader reader = new InputStreamReader(in , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        OutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
+        OutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
         org.apache.commons.io.IOUtils.copy(reader, out, ((String)(null)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5388,inData.length);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5390,baout,5389,baout.size());
@@ -1242,13 +1274,13 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_readerToOutputStream_Encoding_nullEncoding_literalMutation4182() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_nullEncoding_literalMutation4182");
+    public void testCopy_readerToOutputStream_Encoding_nullEncoding_literalMutation6291() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToOutputStream_Encoding_nullEncoding_literalMutation6291");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         Reader reader = new InputStreamReader(in , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        OutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
+        OutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , false);
         org.apache.commons.io.IOUtils.copy(reader, out, ((String)(null)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5388,inData.length);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5390,baout,5389,baout.size());
@@ -1331,8 +1363,8 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_readerToWriter_literalMutation4196() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToWriter_literalMutation4196");
+    public void testCopy_readerToWriter_literalMutation6305() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToWriter_literalMutation6305");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         Reader reader = new InputStreamReader(in , "foo");
@@ -1350,13 +1382,13 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_readerToWriter_literalMutation4197() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToWriter_literalMutation4197");
+    public void testCopy_readerToWriter_literalMutation6306() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToWriter_literalMutation6306");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         Reader reader = new InputStreamReader(in , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , false , true);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         int count = org.apache.commons.io.IOUtils.copy(reader, writer);
         out.off();
@@ -1369,13 +1401,13 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_readerToWriter_literalMutation4198() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToWriter_literalMutation4198");
+    public void testCopy_readerToWriter_literalMutation6307() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToWriter_literalMutation6307");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         Reader reader = new InputStreamReader(in , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
+        YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         Writer writer = new OutputStreamWriter(baout , "US-ASCII");
         int count = org.apache.commons.io.IOUtils.copy(reader, writer);
         out.off();
@@ -1388,14 +1420,14 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_readerToWriter_literalMutation4199() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToWriter_literalMutation4199");
+    public void testCopy_readerToWriter_literalMutation6308() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToWriter_literalMutation6308");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
         Reader reader = new InputStreamReader(in , "US-ASCII");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         YellOnFlushAndCloseOutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
-        Writer writer = new OutputStreamWriter(baout , "foo");
+        Writer writer = new OutputStreamWriter(baout , "bar");
         int count = org.apache.commons.io.IOUtils.copy(reader, writer);
         out.off();
         writer.flush();
@@ -1471,8 +1503,8 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_readerToWriter_nullIn_literalMutation4202() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToWriter_nullIn_literalMutation4202");
+    public void testCopy_readerToWriter_nullIn_literalMutation6313() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToWriter_nullIn_literalMutation6313");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         OutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , false);
         Writer writer = new OutputStreamWriter(out , "US-ASCII");
@@ -1483,11 +1515,11 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCopy_readerToWriter_nullIn_literalMutation4203() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToWriter_nullIn_literalMutation4203");
+    public void testCopy_readerToWriter_nullIn_literalMutation6314() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToWriter_nullIn_literalMutation6314");
         ByteArrayOutputStream baout = new ByteArrayOutputStream();
         OutputStream out = new YellOnFlushAndCloseOutputStream(baout , true , true);
-        Writer writer = new OutputStreamWriter(out , "foo");
+        Writer writer = new OutputStreamWriter(out , "bar");
         try {
             org.apache.commons.io.IOUtils.copy(((Reader)(null)), writer);
         } catch (NullPointerException ex) {
@@ -1513,7 +1545,7 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToWriter_nullOut");
         InputStream in = new ByteArrayInputStream(inData);
         in = new YellOnCloseInputStream(in);
-        Reader reader = new InputStreamReader(in , "foo");
+        Reader reader = new InputStreamReader(in , "bar");
         try {
             org.apache.commons.io.IOUtils.copy(reader, ((Writer)(null)));
         } catch (NullPointerException ex) {
@@ -1545,6 +1577,38 @@ public void testCopy_inputStreamToOutputStream_IO84() throws Exception {
 public void testCopy_readerToWriter_IO84() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToWriter_IO84");
         long size = ((long)(Integer.MAX_VALUE)) + ((long)(2));
+        Reader reader = new NullReader(size);
+        Writer writer = new NullWriter();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5400,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5402,null,5401,org.apache.commons.io.IOUtils.copy(reader, writer));
+        reader.close();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5403,size);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5405,null,5404,org.apache.commons.io.IOUtils.copyLarge(reader, writer));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Copying file > 2GB  - see issue# IO-84
+     */
+public void testCopy_readerToWriter_IO84_literalMutation6310() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToWriter_IO84_literalMutation6310");
+        long size = ((long)(Integer.MAX_VALUE)) + ((long)(0));
+        Reader reader = new NullReader(size);
+        Writer writer = new NullWriter();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5400,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5402,null,5401,org.apache.commons.io.IOUtils.copy(reader, writer));
+        reader.close();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5403,size);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5405,null,5404,org.apache.commons.io.IOUtils.copyLarge(reader, writer));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Copying file > 2GB  - see issue# IO-84
+     */
+public void testCopy_readerToWriter_IO84_literalMutation6311() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCopy_readerToWriter_IO84_literalMutation6311");
+        long size = ((long)(Integer.MAX_VALUE)) + ((long)(0));
         Reader reader = new NullReader(size);
         Writer writer = new NullWriter();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5400,-1);

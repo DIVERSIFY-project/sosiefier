@@ -48,55 +48,55 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
     @Test
     public void testIsMetaphoneEqual1() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual1");
-        assertMetaphoneEqual(new String[][]{ new String[]{ "foo" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "quick" , "cookie" } });
+        assertMetaphoneEqual(new String[][]{ new String[]{ "bar" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "quick" , "cookie" } });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsMetaphoneEqual1_literalMutation871() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual1_literalMutation871");
-        assertMetaphoneEqual(new String[][]{ new String[]{ "Case" , "foo" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "quick" , "cookie" } });
+    public void testIsMetaphoneEqual1_literalMutation963() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual1_literalMutation963");
+        assertMetaphoneEqual(new String[][]{ new String[]{ "Case" , "bar" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "quick" , "cookie" } });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsMetaphoneEqual1_literalMutation872() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual1_literalMutation872");
-        assertMetaphoneEqual(new String[][]{ new String[]{ "Case" , "case" } , new String[]{ "foo" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "quick" , "cookie" } });
+    public void testIsMetaphoneEqual1_literalMutation964() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual1_literalMutation964");
+        assertMetaphoneEqual(new String[][]{ new String[]{ "Case" , "case" } , new String[]{ "bar" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "quick" , "cookie" } });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsMetaphoneEqual1_literalMutation873() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual1_literalMutation873");
-        assertMetaphoneEqual(new String[][]{ new String[]{ "Case" , "case" } , new String[]{ "CASE" , "foo" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "quick" , "cookie" } });
+    public void testIsMetaphoneEqual1_literalMutation965() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual1_literalMutation965");
+        assertMetaphoneEqual(new String[][]{ new String[]{ "Case" , "case" } , new String[]{ "CASE" , "bar" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "quick" , "cookie" } });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsMetaphoneEqual1_literalMutation874() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual1_literalMutation874");
-        assertMetaphoneEqual(new String[][]{ new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "foo" , "cAsE" } , new String[]{ "quick" , "cookie" } });
+    public void testIsMetaphoneEqual1_literalMutation966() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual1_literalMutation966");
+        assertMetaphoneEqual(new String[][]{ new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "bar" , "cAsE" } , new String[]{ "quick" , "cookie" } });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsMetaphoneEqual1_literalMutation875() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual1_literalMutation875");
+    public void testIsMetaphoneEqual1_literalMutation967() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual1_literalMutation967");
         assertMetaphoneEqual(new String[][]{ new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "foo" } , new String[]{ "quick" , "cookie" } });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsMetaphoneEqual1_literalMutation876() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual1_literalMutation876");
-        assertMetaphoneEqual(new String[][]{ new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "foo" , "cookie" } });
+    public void testIsMetaphoneEqual1_literalMutation968() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual1_literalMutation968");
+        assertMetaphoneEqual(new String[][]{ new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "bar" , "cookie" } });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsMetaphoneEqual1_literalMutation877() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual1_literalMutation877");
+    public void testIsMetaphoneEqual1_literalMutation969() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual1_literalMutation969");
         assertMetaphoneEqual(new String[][]{ new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "quick" , "foo" } });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -124,7 +124,7 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
 @Test
     public void testIsMetaphoneEqual2() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual2");
-        assertMetaphoneEqual(new String[][]{ new String[]{ "foo" , "Lorenza" } , new String[]{ "Gary" , "Cahra" } });
+        assertMetaphoneEqual(new String[][]{ new String[]{ "bar" , "Lorenza" } , new String[]{ "Gary" , "Cahra" } });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -132,8 +132,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Matches computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqual2_literalMutation879() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual2_literalMutation879");
+    public void testIsMetaphoneEqual2_literalMutation971() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual2_literalMutation971");
         assertMetaphoneEqual(new String[][]{ new String[]{ "Lawrence" , "foo" } , new String[]{ "Gary" , "Cahra" } });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -142,9 +142,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Matches computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqual2_literalMutation880() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual2_literalMutation880");
-        assertMetaphoneEqual(new String[][]{ new String[]{ "Lawrence" , "Lorenza" } , new String[]{ "foo" , "Cahra" } });
+    public void testIsMetaphoneEqual2_literalMutation972() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual2_literalMutation972");
+        assertMetaphoneEqual(new String[][]{ new String[]{ "Lawrence" , "Lorenza" } , new String[]{ "bar" , "Cahra" } });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -152,8 +152,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Matches computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqual2_literalMutation881() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual2_literalMutation881");
+    public void testIsMetaphoneEqual2_literalMutation973() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqual2_literalMutation973");
         assertMetaphoneEqual(new String[][]{ new String[]{ "Lawrence" , "Lorenza" } , new String[]{ "Gary" , "foo" } });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -188,7 +188,7 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
 @Test
     public void testIsMetaphoneEqualAero() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualAero");
-        assertIsMetaphoneEqual("foo", new String[]{ "Eure" });
+        assertIsMetaphoneEqual("bar", new String[]{ "Eure" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -198,9 +198,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualAero_literalMutation883() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualAero_literalMutation883");
-        assertIsMetaphoneEqual("Aero", new String[]{ "foo" });
+    public void testIsMetaphoneEqualAero_literalMutation975() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualAero_literalMutation975");
+        assertIsMetaphoneEqual("Aero", new String[]{ "bar" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -236,7 +236,7 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
 @Test
     public void testIsMetaphoneEqualWhite() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite");
-        assertIsMetaphoneEqual("foo", new String[]{ "Wade" , "Wait" , "Waite" , "Wat" , "Whit" , "Wiatt" , "Wit" , "Wittie" , "Witty" , "Wood" , "Woodie" , "Woody" });
+        assertIsMetaphoneEqual("bar", new String[]{ "Wade" , "Wait" , "Waite" , "Wat" , "Whit" , "Wiatt" , "Wit" , "Wittie" , "Witty" , "Wood" , "Woodie" , "Woody" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -246,8 +246,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualWhite_literalMutation1070() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1070");
+    public void testIsMetaphoneEqualWhite_literalMutation1162() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1162");
         assertIsMetaphoneEqual("White", new String[]{ "foo" , "Wait" , "Waite" , "Wat" , "Whit" , "Wiatt" , "Wit" , "Wittie" , "Witty" , "Wood" , "Woodie" , "Woody" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -258,9 +258,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualWhite_literalMutation1071() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1071");
-        assertIsMetaphoneEqual("White", new String[]{ "Wade" , "foo" , "Waite" , "Wat" , "Whit" , "Wiatt" , "Wit" , "Wittie" , "Witty" , "Wood" , "Woodie" , "Woody" });
+    public void testIsMetaphoneEqualWhite_literalMutation1163() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1163");
+        assertIsMetaphoneEqual("White", new String[]{ "Wade" , "bar" , "Waite" , "Wat" , "Whit" , "Wiatt" , "Wit" , "Wittie" , "Witty" , "Wood" , "Woodie" , "Woody" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -270,8 +270,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualWhite_literalMutation1072() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1072");
+    public void testIsMetaphoneEqualWhite_literalMutation1164() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1164");
         assertIsMetaphoneEqual("White", new String[]{ "Wade" , "Wait" , "foo" , "Wat" , "Whit" , "Wiatt" , "Wit" , "Wittie" , "Witty" , "Wood" , "Woodie" , "Woody" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -282,9 +282,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualWhite_literalMutation1073() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1073");
-        assertIsMetaphoneEqual("White", new String[]{ "Wade" , "Wait" , "Waite" , "foo" , "Whit" , "Wiatt" , "Wit" , "Wittie" , "Witty" , "Wood" , "Woodie" , "Woody" });
+    public void testIsMetaphoneEqualWhite_literalMutation1165() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1165");
+        assertIsMetaphoneEqual("White", new String[]{ "Wade" , "Wait" , "Waite" , "bar" , "Whit" , "Wiatt" , "Wit" , "Wittie" , "Witty" , "Wood" , "Woodie" , "Woody" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -294,9 +294,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualWhite_literalMutation1074() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1074");
-        assertIsMetaphoneEqual("White", new String[]{ "Wade" , "Wait" , "Waite" , "Wat" , "foo" , "Wiatt" , "Wit" , "Wittie" , "Witty" , "Wood" , "Woodie" , "Woody" });
+    public void testIsMetaphoneEqualWhite_literalMutation1166() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1166");
+        assertIsMetaphoneEqual("White", new String[]{ "Wade" , "Wait" , "Waite" , "Wat" , "bar" , "Wiatt" , "Wit" , "Wittie" , "Witty" , "Wood" , "Woodie" , "Woody" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -306,9 +306,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualWhite_literalMutation1075() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1075");
-        assertIsMetaphoneEqual("White", new String[]{ "Wade" , "Wait" , "Waite" , "Wat" , "Whit" , "foo" , "Wit" , "Wittie" , "Witty" , "Wood" , "Woodie" , "Woody" });
+    public void testIsMetaphoneEqualWhite_literalMutation1167() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1167");
+        assertIsMetaphoneEqual("White", new String[]{ "Wade" , "Wait" , "Waite" , "Wat" , "Whit" , "bar" , "Wit" , "Wittie" , "Witty" , "Wood" , "Woodie" , "Woody" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -318,8 +318,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualWhite_literalMutation1076() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1076");
+    public void testIsMetaphoneEqualWhite_literalMutation1168() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1168");
         assertIsMetaphoneEqual("White", new String[]{ "Wade" , "Wait" , "Waite" , "Wat" , "Whit" , "Wiatt" , "foo" , "Wittie" , "Witty" , "Wood" , "Woodie" , "Woody" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -330,8 +330,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualWhite_literalMutation1077() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1077");
+    public void testIsMetaphoneEqualWhite_literalMutation1169() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1169");
         assertIsMetaphoneEqual("White", new String[]{ "Wade" , "Wait" , "Waite" , "Wat" , "Whit" , "Wiatt" , "Wit" , "foo" , "Witty" , "Wood" , "Woodie" , "Woody" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -342,9 +342,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualWhite_literalMutation1078() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1078");
-        assertIsMetaphoneEqual("White", new String[]{ "Wade" , "Wait" , "Waite" , "Wat" , "Whit" , "Wiatt" , "Wit" , "Wittie" , "foo" , "Wood" , "Woodie" , "Woody" });
+    public void testIsMetaphoneEqualWhite_literalMutation1170() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1170");
+        assertIsMetaphoneEqual("White", new String[]{ "Wade" , "Wait" , "Waite" , "Wat" , "Whit" , "Wiatt" , "Wit" , "Wittie" , "bar" , "Wood" , "Woodie" , "Woody" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -354,9 +354,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualWhite_literalMutation1079() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1079");
-        assertIsMetaphoneEqual("White", new String[]{ "Wade" , "Wait" , "Waite" , "Wat" , "Whit" , "Wiatt" , "Wit" , "Wittie" , "Witty" , "foo" , "Woodie" , "Woody" });
+    public void testIsMetaphoneEqualWhite_literalMutation1171() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1171");
+        assertIsMetaphoneEqual("White", new String[]{ "Wade" , "Wait" , "Waite" , "Wat" , "Whit" , "Wiatt" , "Wit" , "Wittie" , "Witty" , "bar" , "Woodie" , "Woody" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -366,8 +366,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualWhite_literalMutation1080() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1080");
+    public void testIsMetaphoneEqualWhite_literalMutation1172() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1172");
         assertIsMetaphoneEqual("White", new String[]{ "Wade" , "Wait" , "Waite" , "Wat" , "Whit" , "Wiatt" , "Wit" , "Wittie" , "Witty" , "Wood" , "foo" , "Woody" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -378,8 +378,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualWhite_literalMutation1081() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1081");
+    public void testIsMetaphoneEqualWhite_literalMutation1173() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWhite_literalMutation1173");
         assertIsMetaphoneEqual("White", new String[]{ "Wade" , "Wait" , "Waite" , "Wat" , "Whit" , "Wiatt" , "Wit" , "Wittie" , "Witty" , "Wood" , "Woodie" , "foo" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -416,7 +416,7 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
 @Test
     public void testIsMetaphoneEqualAlbert() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualAlbert");
-        assertIsMetaphoneEqual("foo", new String[]{ "Ailbert" , "Alberik" , "Albert" , "Alberto" , "Albrecht" });
+        assertIsMetaphoneEqual("bar", new String[]{ "Ailbert" , "Alberik" , "Albert" , "Alberto" , "Albrecht" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -426,9 +426,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualAlbert_literalMutation885() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualAlbert_literalMutation885");
-        assertIsMetaphoneEqual("Albert", new String[]{ "foo" , "Alberik" , "Albert" , "Alberto" , "Albrecht" });
+    public void testIsMetaphoneEqualAlbert_literalMutation977() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualAlbert_literalMutation977");
+        assertIsMetaphoneEqual("Albert", new String[]{ "bar" , "Alberik" , "Albert" , "Alberto" , "Albrecht" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -438,9 +438,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualAlbert_literalMutation886() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualAlbert_literalMutation886");
-        assertIsMetaphoneEqual("Albert", new String[]{ "Ailbert" , "foo" , "Albert" , "Alberto" , "Albrecht" });
+    public void testIsMetaphoneEqualAlbert_literalMutation978() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualAlbert_literalMutation978");
+        assertIsMetaphoneEqual("Albert", new String[]{ "Ailbert" , "bar" , "Albert" , "Alberto" , "Albrecht" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -450,9 +450,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualAlbert_literalMutation887() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualAlbert_literalMutation887");
-        assertIsMetaphoneEqual("Albert", new String[]{ "Ailbert" , "Alberik" , "foo" , "Alberto" , "Albrecht" });
+    public void testIsMetaphoneEqualAlbert_literalMutation979() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualAlbert_literalMutation979");
+        assertIsMetaphoneEqual("Albert", new String[]{ "Ailbert" , "Alberik" , "bar" , "Alberto" , "Albrecht" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -462,9 +462,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualAlbert_literalMutation888() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualAlbert_literalMutation888");
-        assertIsMetaphoneEqual("Albert", new String[]{ "Ailbert" , "Alberik" , "Albert" , "foo" , "Albrecht" });
+    public void testIsMetaphoneEqualAlbert_literalMutation980() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualAlbert_literalMutation980");
+        assertIsMetaphoneEqual("Albert", new String[]{ "Ailbert" , "Alberik" , "Albert" , "bar" , "Albrecht" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -474,8 +474,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualAlbert_literalMutation889() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualAlbert_literalMutation889");
+    public void testIsMetaphoneEqualAlbert_literalMutation981() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualAlbert_literalMutation981");
         assertIsMetaphoneEqual("Albert", new String[]{ "Ailbert" , "Alberik" , "Albert" , "Alberto" , "foo" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -506,6 +506,276 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
+    public void testIsMetaphoneEqualGary_literalMutation1000() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1000");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "foo" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1001() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1001");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "foo" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1002() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1002");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "bar" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1003() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1003");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "bar" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1004() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1004");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "foo" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1005() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1005");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "foo" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1006() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1006");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "bar" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1007() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1007");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "foo" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1008() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1008");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "foo" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1009() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1009");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "foo" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1010() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1010");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "bar" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1011() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1011");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "bar" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1012() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1012");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "bar" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1013() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1013");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "foo" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1014() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1014");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "foo" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1015() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1015");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "foo" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1016() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1016");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "bar" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1017() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1017");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "bar" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1018() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1018");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "foo" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1019() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1019");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "bar" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1020() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1020");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "foo" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1021() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1021");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "foo" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1022() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1022");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "foo" , "Kori" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1023() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1023");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "bar" , "Korie" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1024() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1024");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "foo" , "Korrie" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1025() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1025");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "bar" , "Korry" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualGary_literalMutation1026() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation1026");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "bar" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
     public void testIsMetaphoneEqualGary() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary");
         assertIsMetaphoneEqual("foo", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
@@ -516,9 +786,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualGary_literalMutation891() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation891");
-        assertIsMetaphoneEqual("Gary", new String[]{ "foo" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+    public void testIsMetaphoneEqualGary_literalMutation983() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation983");
+        assertIsMetaphoneEqual("Gary", new String[]{ "bar" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -526,8 +796,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualGary_literalMutation892() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation892");
+    public void testIsMetaphoneEqualGary_literalMutation984() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation984");
         assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "foo" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -536,9 +806,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualGary_literalMutation893() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation893");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "foo" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+    public void testIsMetaphoneEqualGary_literalMutation985() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation985");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "bar" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -546,9 +816,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualGary_literalMutation894() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation894");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "foo" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+    public void testIsMetaphoneEqualGary_literalMutation986() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation986");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "bar" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -556,9 +826,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualGary_literalMutation895() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation895");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "foo" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+    public void testIsMetaphoneEqualGary_literalMutation987() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation987");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "bar" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -566,9 +836,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualGary_literalMutation896() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation896");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "foo" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+    public void testIsMetaphoneEqualGary_literalMutation988() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation988");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "bar" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -576,9 +846,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualGary_literalMutation897() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation897");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "foo" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+    public void testIsMetaphoneEqualGary_literalMutation989() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation989");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "bar" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -586,9 +856,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualGary_literalMutation898() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation898");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "foo" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+    public void testIsMetaphoneEqualGary_literalMutation990() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation990");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "bar" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -596,8 +866,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualGary_literalMutation899() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation899");
+    public void testIsMetaphoneEqualGary_literalMutation991() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation991");
         assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "foo" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -606,8 +876,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualGary_literalMutation900() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation900");
+    public void testIsMetaphoneEqualGary_literalMutation992() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation992");
         assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "foo" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -616,8 +886,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualGary_literalMutation901() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation901");
+    public void testIsMetaphoneEqualGary_literalMutation993() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation993");
         assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "foo" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -626,9 +896,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualGary_literalMutation902() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation902");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "foo" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
+    public void testIsMetaphoneEqualGary_literalMutation994() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation994");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "bar" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -636,8 +906,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualGary_literalMutation903() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation903");
+    public void testIsMetaphoneEqualGary_literalMutation995() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation995");
         assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "foo" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -646,8 +916,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualGary_literalMutation904() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation904");
+    public void testIsMetaphoneEqualGary_literalMutation996() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation996");
         assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "foo" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -656,8 +926,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualGary_literalMutation905() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation905");
+    public void testIsMetaphoneEqualGary_literalMutation997() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation997");
         assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "foo" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -666,8 +936,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualGary_literalMutation906() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation906");
+    public void testIsMetaphoneEqualGary_literalMutation998() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation998");
         assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "foo" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -676,279 +946,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualGary_literalMutation907() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation907");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "foo" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation908() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation908");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "foo" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation909() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation909");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "foo" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation910() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation910");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "foo" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation911() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation911");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "foo" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation912() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation912");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "foo" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation913() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation913");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "foo" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation914() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation914");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "foo" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation915() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation915");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "foo" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation916() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation916");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "foo" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation917() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation917");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "foo" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation918() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation918");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "foo" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation919() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation919");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "foo" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation920() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation920");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "foo" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation921() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation921");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "foo" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation922() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation922");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "foo" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation923() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation923");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "foo" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation924() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation924");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "foo" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation925() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation925");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "foo" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation926() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation926");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "foo" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation927() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation927");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "foo" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation928() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation928");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "foo" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation929() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation929");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "foo" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation930() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation930");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "foo" , "Kori" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation931() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation931");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "foo" , "Korie" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation932() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation932");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "foo" , "Korrie" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation933() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation933");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "foo" , "Korry" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualGary_literalMutation934() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation934");
-        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "Correy" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "foo" });
+    public void testIsMetaphoneEqualGary_literalMutation999() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualGary_literalMutation999");
+        assertIsMetaphoneEqual("Gary", new String[]{ "Cahra" , "Cara" , "Carey" , "Cari" , "Caria" , "Carie" , "Caro" , "Carree" , "Carri" , "Carrie" , "Carry" , "Cary" , "Cora" , "Corey" , "Cori" , "Corie" , "bar" , "Corri" , "Corrie" , "Corry" , "Cory" , "Gray" , "Kara" , "Kare" , "Karee" , "Kari" , "Karia" , "Karie" , "Karrah" , "Karrie" , "Karry" , "Kary" , "Keri" , "Kerri" , "Kerrie" , "Kerry" , "Kira" , "Kiri" , "Kora" , "Kore" , "Kori" , "Korie" , "Korrie" , "Korry" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -986,8 +986,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation936() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation936");
+    public void testIsMetaphoneEqualJohn_literalMutation1028() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1028");
         assertIsMetaphoneEqual("John", new String[]{ "foo" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -996,9 +996,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation937() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation937");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "foo" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1029() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1029");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "bar" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1006,8 +1006,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation938() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation938");
+    public void testIsMetaphoneEqualJohn_literalMutation1030() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1030");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "foo" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1016,9 +1016,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation939() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation939");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "foo" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1031() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1031");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "bar" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1026,9 +1026,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation940() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation940");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "foo" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1032() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1032");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "bar" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1036,8 +1036,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation941() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation941");
+    public void testIsMetaphoneEqualJohn_literalMutation1033() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1033");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "foo" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1046,9 +1046,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation942() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation942");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "foo" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1034() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1034");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "bar" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1056,8 +1056,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation943() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation943");
+    public void testIsMetaphoneEqualJohn_literalMutation1035() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1035");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "foo" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1066,9 +1066,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation944() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation944");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "foo" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1036() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1036");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "bar" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1076,8 +1076,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation945() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation945");
+    public void testIsMetaphoneEqualJohn_literalMutation1037() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1037");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "foo" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1086,9 +1086,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation946() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation946");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "foo" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1038() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1038");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "bar" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1096,9 +1096,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation947() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation947");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "foo" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1039() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1039");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "bar" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1106,9 +1106,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation948() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation948");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "foo" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1040() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1040");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "bar" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1116,8 +1116,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation949() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation949");
+    public void testIsMetaphoneEqualJohn_literalMutation1041() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1041");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "foo" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1126,9 +1126,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation950() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation950");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "foo" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1042() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1042");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "bar" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1136,9 +1136,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation951() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation951");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "foo" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1043() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1043");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "bar" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1146,8 +1146,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation952() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation952");
+    public void testIsMetaphoneEqualJohn_literalMutation1044() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1044");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "foo" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1156,9 +1156,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation953() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation953");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "foo" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1045() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1045");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "bar" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1166,8 +1166,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation954() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation954");
+    public void testIsMetaphoneEqualJohn_literalMutation1046() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1046");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "foo" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1176,8 +1176,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation955() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation955");
+    public void testIsMetaphoneEqualJohn_literalMutation1047() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1047");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "foo" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1186,8 +1186,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation956() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation956");
+    public void testIsMetaphoneEqualJohn_literalMutation1048() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1048");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "foo" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1196,8 +1196,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation957() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation957");
+    public void testIsMetaphoneEqualJohn_literalMutation1049() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1049");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "foo" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1206,8 +1206,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation958() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation958");
+    public void testIsMetaphoneEqualJohn_literalMutation1050() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1050");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "foo" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1216,9 +1216,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation959() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation959");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "foo" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1051() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1051");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "bar" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1226,8 +1226,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation960() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation960");
+    public void testIsMetaphoneEqualJohn_literalMutation1052() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1052");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "foo" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1236,9 +1236,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation961() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation961");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "foo" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1053() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1053");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "bar" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1246,9 +1246,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation962() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation962");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "foo" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1054() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1054");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "bar" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1256,9 +1256,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation963() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation963");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "foo" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1055() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1055");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "bar" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1266,8 +1266,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation964() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation964");
+    public void testIsMetaphoneEqualJohn_literalMutation1056() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1056");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "foo" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1276,8 +1276,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation965() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation965");
+    public void testIsMetaphoneEqualJohn_literalMutation1057() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1057");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "foo" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1286,9 +1286,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation966() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation966");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "foo" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1058() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1058");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "bar" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1296,9 +1296,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation967() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation967");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "foo" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1059() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1059");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "bar" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1306,9 +1306,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation968() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation968");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "foo" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1060() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1060");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "bar" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1316,9 +1316,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation969() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation969");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "foo" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1061() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1061");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "bar" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1326,8 +1326,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation970() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation970");
+    public void testIsMetaphoneEqualJohn_literalMutation1062() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1062");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "foo" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1336,8 +1336,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation971() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation971");
+    public void testIsMetaphoneEqualJohn_literalMutation1063() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1063");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "foo" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1346,9 +1346,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation972() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation972");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "foo" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1064() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1064");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "bar" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1356,9 +1356,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation973() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation973");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "foo" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1065() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1065");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "bar" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1366,9 +1366,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation974() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation974");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "foo" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1066() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1066");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "bar" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1376,8 +1376,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation975() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation975");
+    public void testIsMetaphoneEqualJohn_literalMutation1067() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1067");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "foo" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1386,9 +1386,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation976() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation976");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "foo" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1068() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1068");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "bar" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1396,9 +1396,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation977() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation977");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "foo" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1069() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1069");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "bar" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1406,9 +1406,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation978() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation978");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "foo" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1070() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1070");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "bar" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1416,9 +1416,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation979() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation979");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "foo" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1071() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1071");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "bar" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1426,9 +1426,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation980() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation980");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "foo" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1072() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1072");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "bar" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1436,9 +1436,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation981() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation981");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "foo" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1073() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1073");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "bar" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1446,8 +1446,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation982() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation982");
+    public void testIsMetaphoneEqualJohn_literalMutation1074() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1074");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "foo" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1456,9 +1456,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation983() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation983");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "foo" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1075() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1075");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "bar" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1466,8 +1466,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation984() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation984");
+    public void testIsMetaphoneEqualJohn_literalMutation1076() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1076");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "foo" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1476,8 +1476,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation985() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation985");
+    public void testIsMetaphoneEqualJohn_literalMutation1077() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1077");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "foo" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1486,9 +1486,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation986() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation986");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "foo" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1078() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1078");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "bar" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1496,9 +1496,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation987() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation987");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "foo" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1079() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1079");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "bar" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1506,9 +1506,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation988() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation988");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "foo" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1080() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1080");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "bar" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1516,9 +1516,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation989() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation989");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "foo" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1081() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1081");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "bar" , "Jonie" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1526,8 +1526,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation990() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation990");
+    public void testIsMetaphoneEqualJohn_literalMutation1082() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1082");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "foo" , "Juana" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1536,8 +1536,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation991() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation991");
+    public void testIsMetaphoneEqualJohn_literalMutation1083() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1083");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "foo" , "June" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1546,8 +1546,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation992() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation992");
+    public void testIsMetaphoneEqualJohn_literalMutation1084() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1084");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "foo" , "Junia" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1556,9 +1556,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation993() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation993");
-        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "foo" , "Junie" });
+    public void testIsMetaphoneEqualJohn_literalMutation1085() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1085");
+        assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "bar" , "Junie" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1566,8 +1566,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualJohn_literalMutation994() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation994");
+    public void testIsMetaphoneEqualJohn_literalMutation1086() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualJohn_literalMutation1086");
         assertIsMetaphoneEqual("John", new String[]{ "Gena" , "Gene" , "Genia" , "Genna" , "Genni" , "Gennie" , "Genny" , "Giana" , "Gianna" , "Gina" , "Ginni" , "Ginnie" , "Ginny" , "Jaine" , "Jan" , "Jana" , "Jane" , "Janey" , "Jania" , "Janie" , "Janna" , "Jany" , "Jayne" , "Jean" , "Jeana" , "Jeane" , "Jeanie" , "Jeanna" , "Jeanne" , "Jeannie" , "Jen" , "Jena" , "Jeni" , "Jenn" , "Jenna" , "Jennee" , "Jenni" , "Jennie" , "Jenny" , "Jinny" , "Jo Ann" , "Jo-Ann" , "Jo-Anne" , "Joan" , "Joana" , "Joane" , "Joanie" , "Joann" , "Joanna" , "Joanne" , "Joeann" , "Johna" , "Johnna" , "Joni" , "Jonie" , "Juana" , "June" , "Junia" , "foo" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1600,153 +1600,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualKnight_literalMutation1000() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1000");
-        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "foo" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Initial KN case.
-     * 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualKnight_literalMutation1001() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1001");
-        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "foo" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Initial KN case.
-     * 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualKnight_literalMutation1002() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1002");
-        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "foo" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Initial KN case.
-     * 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualKnight_literalMutation1003() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1003");
-        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "foo" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Initial KN case.
-     * 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualKnight_literalMutation1004() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1004");
-        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "foo" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Initial KN case.
-     * 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualKnight_literalMutation1005() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1005");
-        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "foo" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Initial KN case.
-     * 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualKnight_literalMutation1006() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1006");
-        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "foo" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Initial KN case.
-     * 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualKnight_literalMutation1007() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1007");
-        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "foo" , "Nettie" , "Netty" , "Nita" , "Nydia" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Initial KN case.
-     * 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualKnight_literalMutation1008() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1008");
-        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "foo" , "Netty" , "Nita" , "Nydia" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Initial KN case.
-     * 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualKnight_literalMutation1009() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1009");
-        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "foo" , "Nita" , "Nydia" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Initial KN case.
-     * 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualKnight_literalMutation1010() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1010");
-        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "foo" , "Nydia" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Initial KN case.
-     * 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
-    public void testIsMetaphoneEqualKnight_literalMutation1011() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1011");
-        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "foo" });
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Initial KN case.
-     * 
-     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
-     */
-@Test
     public void testIsMetaphoneEqualKnight() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight");
-        assertIsMetaphoneEqual("foo", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
+        assertIsMetaphoneEqual("bar", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1756,8 +1612,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualKnight_literalMutation996() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation996");
+    public void testIsMetaphoneEqualKnight_literalMutation1088() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1088");
         assertIsMetaphoneEqual("Knight", new String[]{ "foo" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1768,8 +1624,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualKnight_literalMutation997() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation997");
+    public void testIsMetaphoneEqualKnight_literalMutation1089() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1089");
         assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "foo" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1780,9 +1636,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualKnight_literalMutation998() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation998");
-        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "foo" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
+    public void testIsMetaphoneEqualKnight_literalMutation1090() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1090");
+        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "bar" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1792,9 +1648,153 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualKnight_literalMutation999() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation999");
+    public void testIsMetaphoneEqualKnight_literalMutation1091() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1091");
         assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "foo" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Initial KN case.
+     * 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualKnight_literalMutation1092() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1092");
+        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "foo" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Initial KN case.
+     * 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualKnight_literalMutation1093() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1093");
+        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "bar" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Initial KN case.
+     * 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualKnight_literalMutation1094() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1094");
+        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "bar" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Initial KN case.
+     * 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualKnight_literalMutation1095() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1095");
+        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "foo" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Initial KN case.
+     * 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualKnight_literalMutation1096() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1096");
+        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "bar" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Initial KN case.
+     * 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualKnight_literalMutation1097() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1097");
+        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "bar" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Initial KN case.
+     * 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualKnight_literalMutation1098() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1098");
+        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "bar" , "Netti" , "Nettie" , "Netty" , "Nita" , "Nydia" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Initial KN case.
+     * 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualKnight_literalMutation1099() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1099");
+        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "foo" , "Nettie" , "Netty" , "Nita" , "Nydia" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Initial KN case.
+     * 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualKnight_literalMutation1100() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1100");
+        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "bar" , "Netty" , "Nita" , "Nydia" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Initial KN case.
+     * 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualKnight_literalMutation1101() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1101");
+        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "foo" , "Nita" , "Nydia" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Initial KN case.
+     * 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualKnight_literalMutation1102() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1102");
+        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "foo" , "Nydia" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Initial KN case.
+     * 
+     * Match data computed from http://www.lanw.com/java/phonetic/default.htm
+     */
+@Test
+    public void testIsMetaphoneEqualKnight_literalMutation1103() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualKnight_literalMutation1103");
+        assertIsMetaphoneEqual("Knight", new String[]{ "Hynda" , "Nada" , "Nadia" , "Nady" , "Nat" , "Nata" , "Natty" , "Neda" , "Nedda" , "Nedi" , "Netta" , "Netti" , "Nettie" , "Netty" , "Nita" , "bar" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1826,7 +1826,7 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
 @Test
     public void testIsMetaphoneEqualMary() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary");
-        assertIsMetaphoneEqual("foo", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
+        assertIsMetaphoneEqual("bar", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1834,8 +1834,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1013() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1013");
+    public void testIsMetaphoneEqualMary_literalMutation1105() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1105");
         assertIsMetaphoneEqual("Mary", new String[]{ "foo" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1844,8 +1844,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1014() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1014");
+    public void testIsMetaphoneEqualMary_literalMutation1106() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1106");
         assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "foo" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1854,8 +1854,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1015() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1015");
+    public void testIsMetaphoneEqualMary_literalMutation1107() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1107");
         assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "foo" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1864,9 +1864,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1016() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1016");
-        assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "foo" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
+    public void testIsMetaphoneEqualMary_literalMutation1108() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1108");
+        assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "bar" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1874,8 +1874,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1017() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1017");
+    public void testIsMetaphoneEqualMary_literalMutation1109() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1109");
         assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "foo" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1884,9 +1884,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1018() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1018");
-        assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "foo" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
+    public void testIsMetaphoneEqualMary_literalMutation1110() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1110");
+        assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "bar" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1894,9 +1894,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1019() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1019");
-        assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "foo" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
+    public void testIsMetaphoneEqualMary_literalMutation1111() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1111");
+        assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "bar" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1904,9 +1904,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1020() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1020");
-        assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "foo" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
+    public void testIsMetaphoneEqualMary_literalMutation1112() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1112");
+        assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "bar" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1914,8 +1914,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1021() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1021");
+    public void testIsMetaphoneEqualMary_literalMutation1113() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1113");
         assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "foo" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1924,8 +1924,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1022() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1022");
+    public void testIsMetaphoneEqualMary_literalMutation1114() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1114");
         assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "foo" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1934,9 +1934,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1023() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1023");
-        assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "foo" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
+    public void testIsMetaphoneEqualMary_literalMutation1115() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1115");
+        assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "bar" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1944,9 +1944,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1024() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1024");
-        assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "foo" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
+    public void testIsMetaphoneEqualMary_literalMutation1116() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1116");
+        assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "bar" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1954,9 +1954,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1025() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1025");
-        assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "foo" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
+    public void testIsMetaphoneEqualMary_literalMutation1117() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1117");
+        assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "bar" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1964,9 +1964,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1026() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1026");
-        assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "foo" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
+    public void testIsMetaphoneEqualMary_literalMutation1118() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1118");
+        assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "bar" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1974,8 +1974,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1027() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1027");
+    public void testIsMetaphoneEqualMary_literalMutation1119() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1119");
         assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "foo" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1984,9 +1984,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1028() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1028");
-        assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "foo" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
+    public void testIsMetaphoneEqualMary_literalMutation1120() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1120");
+        assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "bar" , "Moria" , "Moyra" , "Muire" , "Myra" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1994,8 +1994,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1029() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1029");
+    public void testIsMetaphoneEqualMary_literalMutation1121() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1121");
         assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "foo" , "Moyra" , "Muire" , "Myra" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2004,8 +2004,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1030() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1030");
+    public void testIsMetaphoneEqualMary_literalMutation1122() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1122");
         assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "foo" , "Muire" , "Myra" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2014,9 +2014,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1031() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1031");
-        assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "foo" , "Myra" , "Myrah" });
+    public void testIsMetaphoneEqualMary_literalMutation1123() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1123");
+        assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "bar" , "Myra" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2024,8 +2024,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1032() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1032");
+    public void testIsMetaphoneEqualMary_literalMutation1124() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1124");
         assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "foo" , "Myrah" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2034,8 +2034,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualMary_literalMutation1033() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1033");
+    public void testIsMetaphoneEqualMary_literalMutation1125() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualMary_literalMutation1125");
         assertIsMetaphoneEqual("Mary", new String[]{ "Mair" , "Maire" , "Mara" , "Mareah" , "Mari" , "Maria" , "Marie" , "Mary" , "Maura" , "Maure" , "Meara" , "Merrie" , "Merry" , "Mira" , "Moira" , "Mora" , "Moria" , "Moyra" , "Muire" , "Myra" , "foo" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2074,8 +2074,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualParis_literalMutation1035() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualParis_literalMutation1035");
+    public void testIsMetaphoneEqualParis_literalMutation1127() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualParis_literalMutation1127");
         assertIsMetaphoneEqual("Paris", new String[]{ "foo" , "Perris" , "Piercy" , "Pierz" , "Pryse" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2084,8 +2084,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualParis_literalMutation1036() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualParis_literalMutation1036");
+    public void testIsMetaphoneEqualParis_literalMutation1128() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualParis_literalMutation1128");
         assertIsMetaphoneEqual("Paris", new String[]{ "Pearcy" , "foo" , "Piercy" , "Pierz" , "Pryse" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2094,8 +2094,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualParis_literalMutation1037() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualParis_literalMutation1037");
+    public void testIsMetaphoneEqualParis_literalMutation1129() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualParis_literalMutation1129");
         assertIsMetaphoneEqual("Paris", new String[]{ "Pearcy" , "Perris" , "foo" , "Pierz" , "Pryse" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2104,9 +2104,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualParis_literalMutation1038() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualParis_literalMutation1038");
-        assertIsMetaphoneEqual("Paris", new String[]{ "Pearcy" , "Perris" , "Piercy" , "foo" , "Pryse" });
+    public void testIsMetaphoneEqualParis_literalMutation1130() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualParis_literalMutation1130");
+        assertIsMetaphoneEqual("Paris", new String[]{ "Pearcy" , "Perris" , "Piercy" , "bar" , "Pryse" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2114,9 +2114,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualParis_literalMutation1039() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualParis_literalMutation1039");
-        assertIsMetaphoneEqual("Paris", new String[]{ "Pearcy" , "Perris" , "Piercy" , "Pierz" , "foo" });
+    public void testIsMetaphoneEqualParis_literalMutation1131() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualParis_literalMutation1131");
+        assertIsMetaphoneEqual("Paris", new String[]{ "Pearcy" , "Perris" , "Piercy" , "Pierz" , "bar" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2154,9 +2154,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualPeter_literalMutation1041() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualPeter_literalMutation1041");
-        assertIsMetaphoneEqual("Peter", new String[]{ "foo" , "Peder" , "Pedro" , "Peter" , "Petr" , "Peyter" , "Pieter" , "Pietro" , "Piotr" });
+    public void testIsMetaphoneEqualPeter_literalMutation1133() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualPeter_literalMutation1133");
+        assertIsMetaphoneEqual("Peter", new String[]{ "bar" , "Peder" , "Pedro" , "Peter" , "Petr" , "Peyter" , "Pieter" , "Pietro" , "Piotr" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2164,9 +2164,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualPeter_literalMutation1042() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualPeter_literalMutation1042");
-        assertIsMetaphoneEqual("Peter", new String[]{ "Peadar" , "foo" , "Pedro" , "Peter" , "Petr" , "Peyter" , "Pieter" , "Pietro" , "Piotr" });
+    public void testIsMetaphoneEqualPeter_literalMutation1134() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualPeter_literalMutation1134");
+        assertIsMetaphoneEqual("Peter", new String[]{ "Peadar" , "bar" , "Pedro" , "Peter" , "Petr" , "Peyter" , "Pieter" , "Pietro" , "Piotr" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2174,8 +2174,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualPeter_literalMutation1043() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualPeter_literalMutation1043");
+    public void testIsMetaphoneEqualPeter_literalMutation1135() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualPeter_literalMutation1135");
         assertIsMetaphoneEqual("Peter", new String[]{ "Peadar" , "Peder" , "foo" , "Peter" , "Petr" , "Peyter" , "Pieter" , "Pietro" , "Piotr" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2184,8 +2184,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualPeter_literalMutation1044() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualPeter_literalMutation1044");
+    public void testIsMetaphoneEqualPeter_literalMutation1136() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualPeter_literalMutation1136");
         assertIsMetaphoneEqual("Peter", new String[]{ "Peadar" , "Peder" , "Pedro" , "foo" , "Petr" , "Peyter" , "Pieter" , "Pietro" , "Piotr" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2194,8 +2194,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualPeter_literalMutation1045() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualPeter_literalMutation1045");
+    public void testIsMetaphoneEqualPeter_literalMutation1137() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualPeter_literalMutation1137");
         assertIsMetaphoneEqual("Peter", new String[]{ "Peadar" , "Peder" , "Pedro" , "Peter" , "foo" , "Peyter" , "Pieter" , "Pietro" , "Piotr" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2204,9 +2204,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualPeter_literalMutation1046() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualPeter_literalMutation1046");
-        assertIsMetaphoneEqual("Peter", new String[]{ "Peadar" , "Peder" , "Pedro" , "Peter" , "Petr" , "foo" , "Pieter" , "Pietro" , "Piotr" });
+    public void testIsMetaphoneEqualPeter_literalMutation1138() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualPeter_literalMutation1138");
+        assertIsMetaphoneEqual("Peter", new String[]{ "Peadar" , "Peder" , "Pedro" , "Peter" , "Petr" , "bar" , "Pieter" , "Pietro" , "Piotr" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2214,9 +2214,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualPeter_literalMutation1047() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualPeter_literalMutation1047");
-        assertIsMetaphoneEqual("Peter", new String[]{ "Peadar" , "Peder" , "Pedro" , "Peter" , "Petr" , "Peyter" , "foo" , "Pietro" , "Piotr" });
+    public void testIsMetaphoneEqualPeter_literalMutation1139() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualPeter_literalMutation1139");
+        assertIsMetaphoneEqual("Peter", new String[]{ "Peadar" , "Peder" , "Pedro" , "Peter" , "Petr" , "Peyter" , "bar" , "Pietro" , "Piotr" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2224,8 +2224,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualPeter_literalMutation1048() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualPeter_literalMutation1048");
+    public void testIsMetaphoneEqualPeter_literalMutation1140() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualPeter_literalMutation1140");
         assertIsMetaphoneEqual("Peter", new String[]{ "Peadar" , "Peder" , "Pedro" , "Peter" , "Petr" , "Peyter" , "Pieter" , "foo" , "Piotr" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2234,9 +2234,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualPeter_literalMutation1049() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualPeter_literalMutation1049");
-        assertIsMetaphoneEqual("Peter", new String[]{ "Peadar" , "Peder" , "Pedro" , "Peter" , "Petr" , "Peyter" , "Pieter" , "Pietro" , "foo" });
+    public void testIsMetaphoneEqualPeter_literalMutation1141() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualPeter_literalMutation1141");
+        assertIsMetaphoneEqual("Peter", new String[]{ "Peadar" , "Peder" , "Pedro" , "Peter" , "Petr" , "Peyter" , "Pieter" , "Pietro" , "bar" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2274,8 +2274,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualRay_literalMutation1051() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualRay_literalMutation1051");
+    public void testIsMetaphoneEqualRay_literalMutation1143() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualRay_literalMutation1143");
         assertIsMetaphoneEqual("Ray", new String[]{ "foo" , "Rey" , "Roi" , "Roy" , "Ruy" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2284,8 +2284,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualRay_literalMutation1052() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualRay_literalMutation1052");
+    public void testIsMetaphoneEqualRay_literalMutation1144() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualRay_literalMutation1144");
         assertIsMetaphoneEqual("Ray", new String[]{ "Ray" , "foo" , "Roi" , "Roy" , "Ruy" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2294,8 +2294,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualRay_literalMutation1053() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualRay_literalMutation1053");
+    public void testIsMetaphoneEqualRay_literalMutation1145() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualRay_literalMutation1145");
         assertIsMetaphoneEqual("Ray", new String[]{ "Ray" , "Rey" , "foo" , "Roy" , "Ruy" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2304,9 +2304,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualRay_literalMutation1054() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualRay_literalMutation1054");
-        assertIsMetaphoneEqual("Ray", new String[]{ "Ray" , "Rey" , "Roi" , "foo" , "Ruy" });
+    public void testIsMetaphoneEqualRay_literalMutation1146() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualRay_literalMutation1146");
+        assertIsMetaphoneEqual("Ray", new String[]{ "Ray" , "Rey" , "Roi" , "bar" , "Ruy" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2314,9 +2314,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualRay_literalMutation1055() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualRay_literalMutation1055");
-        assertIsMetaphoneEqual("Ray", new String[]{ "Ray" , "Rey" , "Roi" , "Roy" , "foo" });
+    public void testIsMetaphoneEqualRay_literalMutation1147() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualRay_literalMutation1147");
+        assertIsMetaphoneEqual("Ray", new String[]{ "Ray" , "Rey" , "Roi" , "Roy" , "bar" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2354,8 +2354,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualSusan_literalMutation1057() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1057");
+    public void testIsMetaphoneEqualSusan_literalMutation1149() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1149");
         assertIsMetaphoneEqual("Susan", new String[]{ "foo" , "Sosanna" , "Susan" , "Susana" , "Susann" , "Susanna" , "Susannah" , "Susanne" , "Suzann" , "Suzanna" , "Suzanne" , "Zuzana" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2364,8 +2364,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualSusan_literalMutation1058() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1058");
+    public void testIsMetaphoneEqualSusan_literalMutation1150() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1150");
         assertIsMetaphoneEqual("Susan", new String[]{ "Siusan" , "foo" , "Susan" , "Susana" , "Susann" , "Susanna" , "Susannah" , "Susanne" , "Suzann" , "Suzanna" , "Suzanne" , "Zuzana" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2374,8 +2374,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualSusan_literalMutation1059() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1059");
+    public void testIsMetaphoneEqualSusan_literalMutation1151() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1151");
         assertIsMetaphoneEqual("Susan", new String[]{ "Siusan" , "Sosanna" , "foo" , "Susana" , "Susann" , "Susanna" , "Susannah" , "Susanne" , "Suzann" , "Suzanna" , "Suzanne" , "Zuzana" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2384,8 +2384,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualSusan_literalMutation1060() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1060");
+    public void testIsMetaphoneEqualSusan_literalMutation1152() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1152");
         assertIsMetaphoneEqual("Susan", new String[]{ "Siusan" , "Sosanna" , "Susan" , "foo" , "Susann" , "Susanna" , "Susannah" , "Susanne" , "Suzann" , "Suzanna" , "Suzanne" , "Zuzana" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2394,8 +2394,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualSusan_literalMutation1061() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1061");
+    public void testIsMetaphoneEqualSusan_literalMutation1153() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1153");
         assertIsMetaphoneEqual("Susan", new String[]{ "Siusan" , "Sosanna" , "Susan" , "Susana" , "foo" , "Susanna" , "Susannah" , "Susanne" , "Suzann" , "Suzanna" , "Suzanne" , "Zuzana" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2404,8 +2404,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualSusan_literalMutation1062() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1062");
+    public void testIsMetaphoneEqualSusan_literalMutation1154() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1154");
         assertIsMetaphoneEqual("Susan", new String[]{ "Siusan" , "Sosanna" , "Susan" , "Susana" , "Susann" , "foo" , "Susannah" , "Susanne" , "Suzann" , "Suzanna" , "Suzanne" , "Zuzana" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2414,9 +2414,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualSusan_literalMutation1063() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1063");
-        assertIsMetaphoneEqual("Susan", new String[]{ "Siusan" , "Sosanna" , "Susan" , "Susana" , "Susann" , "Susanna" , "foo" , "Susanne" , "Suzann" , "Suzanna" , "Suzanne" , "Zuzana" });
+    public void testIsMetaphoneEqualSusan_literalMutation1155() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1155");
+        assertIsMetaphoneEqual("Susan", new String[]{ "Siusan" , "Sosanna" , "Susan" , "Susana" , "Susann" , "Susanna" , "bar" , "Susanne" , "Suzann" , "Suzanna" , "Suzanne" , "Zuzana" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2424,8 +2424,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualSusan_literalMutation1064() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1064");
+    public void testIsMetaphoneEqualSusan_literalMutation1156() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1156");
         assertIsMetaphoneEqual("Susan", new String[]{ "Siusan" , "Sosanna" , "Susan" , "Susana" , "Susann" , "Susanna" , "Susannah" , "foo" , "Suzann" , "Suzanna" , "Suzanne" , "Zuzana" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2434,8 +2434,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualSusan_literalMutation1065() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1065");
+    public void testIsMetaphoneEqualSusan_literalMutation1157() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1157");
         assertIsMetaphoneEqual("Susan", new String[]{ "Siusan" , "Sosanna" , "Susan" , "Susana" , "Susann" , "Susanna" , "Susannah" , "Susanne" , "foo" , "Suzanna" , "Suzanne" , "Zuzana" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2444,9 +2444,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualSusan_literalMutation1066() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1066");
-        assertIsMetaphoneEqual("Susan", new String[]{ "Siusan" , "Sosanna" , "Susan" , "Susana" , "Susann" , "Susanna" , "Susannah" , "Susanne" , "Suzann" , "foo" , "Suzanne" , "Zuzana" });
+    public void testIsMetaphoneEqualSusan_literalMutation1158() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1158");
+        assertIsMetaphoneEqual("Susan", new String[]{ "Siusan" , "Sosanna" , "Susan" , "Susana" , "Susann" , "Susanna" , "Susannah" , "Susanne" , "Suzann" , "bar" , "Suzanne" , "Zuzana" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2454,9 +2454,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualSusan_literalMutation1067() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1067");
-        assertIsMetaphoneEqual("Susan", new String[]{ "Siusan" , "Sosanna" , "Susan" , "Susana" , "Susann" , "Susanna" , "Susannah" , "Susanne" , "Suzann" , "Suzanna" , "foo" , "Zuzana" });
+    public void testIsMetaphoneEqualSusan_literalMutation1159() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1159");
+        assertIsMetaphoneEqual("Susan", new String[]{ "Siusan" , "Sosanna" , "Susan" , "Susana" , "Susann" , "Susanna" , "Susannah" , "Susanne" , "Suzann" , "Suzanna" , "bar" , "Zuzana" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2464,9 +2464,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualSusan_literalMutation1068() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1068");
-        assertIsMetaphoneEqual("Susan", new String[]{ "Siusan" , "Sosanna" , "Susan" , "Susana" , "Susann" , "Susanna" , "Susannah" , "Susanne" , "Suzann" , "Suzanna" , "Suzanne" , "foo" });
+    public void testIsMetaphoneEqualSusan_literalMutation1160() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualSusan_literalMutation1160");
+        assertIsMetaphoneEqual("Susan", new String[]{ "Siusan" , "Sosanna" , "Susan" , "Susana" , "Susann" , "Susanna" , "Susannah" , "Susanne" , "Suzann" , "Suzanna" , "Suzanne" , "bar" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2500,7 +2500,7 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
 @Test
     public void testIsMetaphoneEqualWright() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWright");
-        assertIsMetaphoneEqual("foo", new String[]{ "Rota" , "Rudd" , "Ryde" });
+        assertIsMetaphoneEqual("bar", new String[]{ "Rota" , "Rudd" , "Ryde" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2510,8 +2510,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualWright_literalMutation1083() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWright_literalMutation1083");
+    public void testIsMetaphoneEqualWright_literalMutation1175() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWright_literalMutation1175");
         assertIsMetaphoneEqual("Wright", new String[]{ "foo" , "Rudd" , "Ryde" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2522,8 +2522,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualWright_literalMutation1084() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWright_literalMutation1084");
+    public void testIsMetaphoneEqualWright_literalMutation1176() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWright_literalMutation1176");
         assertIsMetaphoneEqual("Wright", new String[]{ "Rota" , "foo" , "Ryde" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2534,8 +2534,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualWright_literalMutation1085() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWright_literalMutation1085");
+    public void testIsMetaphoneEqualWright_literalMutation1177() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualWright_literalMutation1177");
         assertIsMetaphoneEqual("Wright", new String[]{ "Rota" , "Rudd" , "foo" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2568,7 +2568,7 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
 @Test
     public void testIsMetaphoneEqualXalan() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualXalan");
-        assertIsMetaphoneEqual("foo", new String[]{ "Celene" , "Celina" , "Celine" , "Selena" , "Selene" , "Selina" , "Seline" , "Suellen" , "Xylina" });
+        assertIsMetaphoneEqual("bar", new String[]{ "Celene" , "Celina" , "Celine" , "Selena" , "Selene" , "Selina" , "Seline" , "Suellen" , "Xylina" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2576,9 +2576,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualXalan_literalMutation1087() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualXalan_literalMutation1087");
-        assertIsMetaphoneEqual("Xalan", new String[]{ "foo" , "Celina" , "Celine" , "Selena" , "Selene" , "Selina" , "Seline" , "Suellen" , "Xylina" });
+    public void testIsMetaphoneEqualXalan_literalMutation1179() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualXalan_literalMutation1179");
+        assertIsMetaphoneEqual("Xalan", new String[]{ "bar" , "Celina" , "Celine" , "Selena" , "Selene" , "Selina" , "Seline" , "Suellen" , "Xylina" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2586,8 +2586,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualXalan_literalMutation1088() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualXalan_literalMutation1088");
+    public void testIsMetaphoneEqualXalan_literalMutation1180() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualXalan_literalMutation1180");
         assertIsMetaphoneEqual("Xalan", new String[]{ "Celene" , "foo" , "Celine" , "Selena" , "Selene" , "Selina" , "Seline" , "Suellen" , "Xylina" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2596,9 +2596,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualXalan_literalMutation1089() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualXalan_literalMutation1089");
-        assertIsMetaphoneEqual("Xalan", new String[]{ "Celene" , "Celina" , "foo" , "Selena" , "Selene" , "Selina" , "Seline" , "Suellen" , "Xylina" });
+    public void testIsMetaphoneEqualXalan_literalMutation1181() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualXalan_literalMutation1181");
+        assertIsMetaphoneEqual("Xalan", new String[]{ "Celene" , "Celina" , "bar" , "Selena" , "Selene" , "Selina" , "Seline" , "Suellen" , "Xylina" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2606,8 +2606,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualXalan_literalMutation1090() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualXalan_literalMutation1090");
+    public void testIsMetaphoneEqualXalan_literalMutation1182() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualXalan_literalMutation1182");
         assertIsMetaphoneEqual("Xalan", new String[]{ "Celene" , "Celina" , "Celine" , "foo" , "Selene" , "Selina" , "Seline" , "Suellen" , "Xylina" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2616,9 +2616,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualXalan_literalMutation1091() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualXalan_literalMutation1091");
-        assertIsMetaphoneEqual("Xalan", new String[]{ "Celene" , "Celina" , "Celine" , "Selena" , "foo" , "Selina" , "Seline" , "Suellen" , "Xylina" });
+    public void testIsMetaphoneEqualXalan_literalMutation1183() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualXalan_literalMutation1183");
+        assertIsMetaphoneEqual("Xalan", new String[]{ "Celene" , "Celina" , "Celine" , "Selena" , "bar" , "Selina" , "Seline" , "Suellen" , "Xylina" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2626,9 +2626,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualXalan_literalMutation1092() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualXalan_literalMutation1092");
-        assertIsMetaphoneEqual("Xalan", new String[]{ "Celene" , "Celina" , "Celine" , "Selena" , "Selene" , "foo" , "Seline" , "Suellen" , "Xylina" });
+    public void testIsMetaphoneEqualXalan_literalMutation1184() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualXalan_literalMutation1184");
+        assertIsMetaphoneEqual("Xalan", new String[]{ "Celene" , "Celina" , "Celine" , "Selena" , "Selene" , "bar" , "Seline" , "Suellen" , "Xylina" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2636,9 +2636,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualXalan_literalMutation1093() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualXalan_literalMutation1093");
-        assertIsMetaphoneEqual("Xalan", new String[]{ "Celene" , "Celina" , "Celine" , "Selena" , "Selene" , "Selina" , "foo" , "Suellen" , "Xylina" });
+    public void testIsMetaphoneEqualXalan_literalMutation1185() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualXalan_literalMutation1185");
+        assertIsMetaphoneEqual("Xalan", new String[]{ "Celene" , "Celina" , "Celine" , "Selena" , "Selene" , "Selina" , "bar" , "Suellen" , "Xylina" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2646,8 +2646,8 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualXalan_literalMutation1094() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualXalan_literalMutation1094");
+    public void testIsMetaphoneEqualXalan_literalMutation1186() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualXalan_literalMutation1186");
         assertIsMetaphoneEqual("Xalan", new String[]{ "Celene" , "Celina" , "Celine" , "Selena" , "Selene" , "Selina" , "Seline" , "foo" , "Xylina" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2656,9 +2656,9 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
      * Match data computed from http://www.lanw.com/java/phonetic/default.htm
      */
 @Test
-    public void testIsMetaphoneEqualXalan_literalMutation1095() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualXalan_literalMutation1095");
-        assertIsMetaphoneEqual("Xalan", new String[]{ "Celene" , "Celina" , "Celine" , "Selena" , "Selene" , "Selina" , "Seline" , "Suellen" , "foo" });
+    public void testIsMetaphoneEqualXalan_literalMutation1187() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsMetaphoneEqualXalan_literalMutation1187");
+        assertIsMetaphoneEqual("Xalan", new String[]{ "Celene" , "Celina" , "Celine" , "Selena" , "Selene" , "Selina" , "Seline" , "Suellen" , "bar" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2810,6 +2810,30 @@ public class MetaphoneTest extends StringEncoderAbstractTest<org.apache.commons.
     public void testSetMaxLengthWithTruncation() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetMaxLengthWithTruncation");
         getStringEncoder().setMaxCodeLen(5);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),872,getStringEncoder(),871,getStringEncoder().metaphone("AXEAXEAXE"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSetMaxLengthWithTruncation_literalMutation1189() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetMaxLengthWithTruncation_literalMutation1189");
+        getStringEncoder().setMaxCodeLen(3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),872,getStringEncoder(),871,getStringEncoder().metaphone("AXEAXEAXE"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSetMaxLengthWithTruncation_literalMutation1190() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetMaxLengthWithTruncation_literalMutation1190");
+        getStringEncoder().setMaxCodeLen(12);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),872,getStringEncoder(),871,getStringEncoder().metaphone("AXEAXEAXE"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSetMaxLengthWithTruncation_literalMutation1191() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetMaxLengthWithTruncation_literalMutation1191");
+        getStringEncoder().setMaxCodeLen(7);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),872,getStringEncoder(),871,getStringEncoder().metaphone("AXEAXEAXE"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }

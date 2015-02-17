@@ -28,286 +28,286 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
     @Test
     public void testB650() throws EncoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650");
-        checkEncodingVariations("foo", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
+        checkEncodingVariations("bar", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1262() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1262");
+    public void testB650_literalMutation1357() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1357");
         checkEncodingVariations("B650", new java.lang.String[]{ "foo" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1263() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1263");
+    public void testB650_literalMutation1358() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1358");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "foo" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1264() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1264");
-        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "foo" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
+    public void testB650_literalMutation1359() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1359");
+        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "bar" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1265() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1265");
+    public void testB650_literalMutation1360() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1360");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "foo" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1266() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1266");
-        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "foo" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
+    public void testB650_literalMutation1361() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1361");
+        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "bar" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1267() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1267");
+    public void testB650_literalMutation1362() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1362");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "foo" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1268() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1268");
+    public void testB650_literalMutation1363() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1363");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "foo" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1269() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1269");
+    public void testB650_literalMutation1364() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1364");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "foo" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1270() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1270");
+    public void testB650_literalMutation1365() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1365");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "foo" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1271() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1271");
+    public void testB650_literalMutation1366() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1366");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "foo" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1272() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1272");
+    public void testB650_literalMutation1367() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1367");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "foo" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1273() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1273");
+    public void testB650_literalMutation1368() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1368");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "foo" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1274() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1274");
-        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "foo" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
+    public void testB650_literalMutation1369() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1369");
+        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "bar" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1275() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1275");
-        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "foo" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
+    public void testB650_literalMutation1370() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1370");
+        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "bar" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1276() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1276");
-        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "foo" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
+    public void testB650_literalMutation1371() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1371");
+        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "bar" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1277() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1277");
-        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "foo" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
+    public void testB650_literalMutation1372() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1372");
+        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "bar" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1278() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1278");
-        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "foo" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
+    public void testB650_literalMutation1373() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1373");
+        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "bar" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1279() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1279");
+    public void testB650_literalMutation1374() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1374");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "foo" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1280() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1280");
-        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "foo" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
+    public void testB650_literalMutation1375() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1375");
+        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "bar" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1281() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1281");
+    public void testB650_literalMutation1376() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1376");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "foo" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1282() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1282");
+    public void testB650_literalMutation1377() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1377");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "foo" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1283() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1283");
+    public void testB650_literalMutation1378() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1378");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "foo" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1284() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1284");
+    public void testB650_literalMutation1379() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1379");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "foo" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1285() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1285");
+    public void testB650_literalMutation1380() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1380");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "foo" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1286() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1286");
+    public void testB650_literalMutation1381() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1381");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "foo" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1287() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1287");
+    public void testB650_literalMutation1382() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1382");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "foo" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1288() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1288");
+    public void testB650_literalMutation1383() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1383");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "foo" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1289() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1289");
-        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "foo" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
+    public void testB650_literalMutation1384() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1384");
+        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "bar" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1290() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1290");
-        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "foo" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
+    public void testB650_literalMutation1385() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1385");
+        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "bar" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1291() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1291");
-        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "foo" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
+    public void testB650_literalMutation1386() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1386");
+        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "bar" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1292() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1292");
+    public void testB650_literalMutation1387() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1387");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "foo" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1293() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1293");
-        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "foo" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
+    public void testB650_literalMutation1388() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1388");
+        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "bar" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1294() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1294");
-        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "foo" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
+    public void testB650_literalMutation1389() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1389");
+        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "bar" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1295() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1295");
+    public void testB650_literalMutation1390() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1390");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "foo" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1296() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1296");
-        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "foo" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
+    public void testB650_literalMutation1391() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1391");
+        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "bar" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1297() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1297");
-        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "foo" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
+    public void testB650_literalMutation1392() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1392");
+        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "bar" , "BYRAM" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1298() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1298");
+    public void testB650_literalMutation1393() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1393");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "foo" , "BYRNE" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1299() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1299");
+    public void testB650_literalMutation1394() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1394");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "foo" , "BYRON" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1300() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1300");
-        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "foo" , "BYRUM" });
+    public void testB650_literalMutation1395() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1395");
+        checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "bar" , "BYRUM" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testB650_literalMutation1301() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1301");
+    public void testB650_literalMutation1396() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testB650_literalMutation1396");
         checkEncodingVariations("B650", new java.lang.String[]{ "BARHAM" , "BARONE" , "BARRON" , "BERNA" , "BIRNEY" , "BIRNIE" , "BOOROM" , "BOREN" , "BORN" , "BOURN" , "BOURNE" , "BOWRON" , "BRAIN" , "BRAME" , "BRANN" , "BRAUN" , "BREEN" , "BRIEN" , "BRIM" , "BRIMM" , "BRINN" , "BRION" , "BROOM" , "BROOME" , "BROWN" , "BROWNE" , "BRUEN" , "BRUHN" , "BRUIN" , "BRUMM" , "BRUN" , "BRUNO" , "BRYAN" , "BURIAN" , "BURN" , "BURNEY" , "BYRAM" , "BYRNE" , "BYRON" , "foo" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -433,65 +433,65 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
     }
 
     @Test
-    public void testEncodeIgnoreApostrophes_literalMutation1302() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation1302");
+    public void testEncodeIgnoreApostrophes_literalMutation1397() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation1397");
         checkEncodingVariations("foo", new java.lang.String[]{ "OBrien" , "\'OBrien" , "O\'Brien" , "OB\'rien" , "OBr\'ien" , "OBri\'en" , "OBrie\'n" , "OBrien\'" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testEncodeIgnoreApostrophes_literalMutation1303() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation1303");
-        checkEncodingVariations("O165", new java.lang.String[]{ "foo" , "\'OBrien" , "O\'Brien" , "OB\'rien" , "OBr\'ien" , "OBri\'en" , "OBrie\'n" , "OBrien\'" });
+    public void testEncodeIgnoreApostrophes_literalMutation1398() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation1398");
+        checkEncodingVariations("O165", new java.lang.String[]{ "bar" , "\'OBrien" , "O\'Brien" , "OB\'rien" , "OBr\'ien" , "OBri\'en" , "OBrie\'n" , "OBrien\'" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testEncodeIgnoreApostrophes_literalMutation1304() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation1304");
+    public void testEncodeIgnoreApostrophes_literalMutation1399() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation1399");
         checkEncodingVariations("O165", new java.lang.String[]{ "OBrien" , "foo" , "O\'Brien" , "OB\'rien" , "OBr\'ien" , "OBri\'en" , "OBrie\'n" , "OBrien\'" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testEncodeIgnoreApostrophes_literalMutation1305() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation1305");
-        checkEncodingVariations("O165", new java.lang.String[]{ "OBrien" , "\'OBrien" , "foo" , "OB\'rien" , "OBr\'ien" , "OBri\'en" , "OBrie\'n" , "OBrien\'" });
+    public void testEncodeIgnoreApostrophes_literalMutation1400() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation1400");
+        checkEncodingVariations("O165", new java.lang.String[]{ "OBrien" , "\'OBrien" , "bar" , "OB\'rien" , "OBr\'ien" , "OBri\'en" , "OBrie\'n" , "OBrien\'" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testEncodeIgnoreApostrophes_literalMutation1306() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation1306");
-        checkEncodingVariations("O165", new java.lang.String[]{ "OBrien" , "\'OBrien" , "O\'Brien" , "foo" , "OBr\'ien" , "OBri\'en" , "OBrie\'n" , "OBrien\'" });
+    public void testEncodeIgnoreApostrophes_literalMutation1401() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation1401");
+        checkEncodingVariations("O165", new java.lang.String[]{ "OBrien" , "\'OBrien" , "O\'Brien" , "bar" , "OBr\'ien" , "OBri\'en" , "OBrie\'n" , "OBrien\'" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testEncodeIgnoreApostrophes_literalMutation1307() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation1307");
+    public void testEncodeIgnoreApostrophes_literalMutation1402() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation1402");
         checkEncodingVariations("O165", new java.lang.String[]{ "OBrien" , "\'OBrien" , "O\'Brien" , "OB\'rien" , "foo" , "OBri\'en" , "OBrie\'n" , "OBrien\'" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testEncodeIgnoreApostrophes_literalMutation1308() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation1308");
-        checkEncodingVariations("O165", new java.lang.String[]{ "OBrien" , "\'OBrien" , "O\'Brien" , "OB\'rien" , "OBr\'ien" , "foo" , "OBrie\'n" , "OBrien\'" });
+    public void testEncodeIgnoreApostrophes_literalMutation1403() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation1403");
+        checkEncodingVariations("O165", new java.lang.String[]{ "OBrien" , "\'OBrien" , "O\'Brien" , "OB\'rien" , "OBr\'ien" , "bar" , "OBrie\'n" , "OBrien\'" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testEncodeIgnoreApostrophes_literalMutation1309() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation1309");
+    public void testEncodeIgnoreApostrophes_literalMutation1404() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation1404");
         checkEncodingVariations("O165", new java.lang.String[]{ "OBrien" , "\'OBrien" , "O\'Brien" , "OB\'rien" , "OBr\'ien" , "OBri\'en" , "foo" , "OBrien\'" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testEncodeIgnoreApostrophes_literalMutation1310() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation1310");
-        checkEncodingVariations("O165", new java.lang.String[]{ "OBrien" , "\'OBrien" , "O\'Brien" , "OB\'rien" , "OBr\'ien" , "OBri\'en" , "OBrie\'n" , "foo" });
+    public void testEncodeIgnoreApostrophes_literalMutation1405() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreApostrophes_literalMutation1405");
+        checkEncodingVariations("O165", new java.lang.String[]{ "OBrien" , "\'OBrien" , "O\'Brien" , "OB\'rien" , "OBr\'ien" , "OBri\'en" , "OBrie\'n" , "bar" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -532,8 +532,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation1311() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1311");
+    public void testEncodeIgnoreHyphens_literalMutation1406() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1406");
         checkEncodingVariations("foo", new java.lang.String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -544,9 +544,9 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation1312() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1312");
-        checkEncodingVariations("K525", new java.lang.String[]{ "foo" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
+    public void testEncodeIgnoreHyphens_literalMutation1407() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1407");
+        checkEncodingVariations("K525", new java.lang.String[]{ "bar" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -556,8 +556,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation1313() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1313");
+    public void testEncodeIgnoreHyphens_literalMutation1408() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1408");
         checkEncodingVariations("K525", new java.lang.String[]{ "KINGSMITH" , "foo" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -568,8 +568,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation1314() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1314");
+    public void testEncodeIgnoreHyphens_literalMutation1409() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1409");
         checkEncodingVariations("K525", new java.lang.String[]{ "KINGSMITH" , "-KINGSMITH" , "foo" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -580,8 +580,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation1315() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1315");
+    public void testEncodeIgnoreHyphens_literalMutation1410() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1410");
         checkEncodingVariations("K525", new java.lang.String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "foo" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -592,8 +592,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation1316() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1316");
+    public void testEncodeIgnoreHyphens_literalMutation1411() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1411");
         checkEncodingVariations("K525", new java.lang.String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "foo" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -604,9 +604,9 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation1317() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1317");
-        checkEncodingVariations("K525", new java.lang.String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "foo" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
+    public void testEncodeIgnoreHyphens_literalMutation1412() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1412");
+        checkEncodingVariations("K525", new java.lang.String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "bar" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -616,9 +616,9 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation1318() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1318");
-        checkEncodingVariations("K525", new java.lang.String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "foo" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
+    public void testEncodeIgnoreHyphens_literalMutation1413() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1413");
+        checkEncodingVariations("K525", new java.lang.String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "bar" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -628,8 +628,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation1319() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1319");
+    public void testEncodeIgnoreHyphens_literalMutation1414() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1414");
         checkEncodingVariations("K525", new java.lang.String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "foo" , "KINGSMI-TH" , "KINGSMIT-H" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -640,8 +640,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation1320() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1320");
+    public void testEncodeIgnoreHyphens_literalMutation1415() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1415");
         checkEncodingVariations("K525", new java.lang.String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "foo" , "KINGSMIT-H" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -652,8 +652,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation1321() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1321");
+    public void testEncodeIgnoreHyphens_literalMutation1416() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1416");
         checkEncodingVariations("K525", new java.lang.String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "foo" , "KINGSMITH-" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -664,8 +664,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testEncodeIgnoreHyphens_literalMutation1322() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1322");
+    public void testEncodeIgnoreHyphens_literalMutation1417() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeIgnoreHyphens_literalMutation1417");
         checkEncodingVariations("K525", new java.lang.String[]{ "KINGSMITH" , "-KINGSMITH" , "K-INGSMITH" , "KI-NGSMITH" , "KIN-GSMITH" , "KING-SMITH" , "KINGS-MITH" , "KINGSM-ITH" , "KINGSMI-TH" , "KINGSMIT-H" , "foo" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -736,7 +736,7 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,getStringEncoder(),1087,getStringEncoder().encode("Sgler"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,getStringEncoder(),1089,getStringEncoder().encode("Swhgler"));
-        checkEncodingVariations("foo", new java.lang.String[]{ "SAILOR" , "SALYER" , "SAYLOR" , "SCHALLER" , "SCHELLER" , "SCHILLER" , "SCHOOLER" , "SCHULER" , "SCHUYLER" , "SEILER" , "SEYLER" , "SHOLAR" , "SHULER" , "SILAR" , "SILER" , "SILLER" });
+        checkEncodingVariations("bar", new java.lang.String[]{ "SAILOR" , "SALYER" , "SAYLOR" , "SCHALLER" , "SCHELLER" , "SCHILLER" , "SCHOOLER" , "SCHULER" , "SCHUYLER" , "SEILER" , "SEYLER" , "SHOLAR" , "SHULER" , "SILAR" , "SILER" , "SILLER" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -746,8 +746,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testHWRuleEx3_literalMutation1324() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1324");
+    public void testHWRuleEx3_literalMutation1419() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1419");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,getStringEncoder(),1087,getStringEncoder().encode("Sgler"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,getStringEncoder(),1089,getStringEncoder().encode("Swhgler"));
         checkEncodingVariations("S460", new java.lang.String[]{ "foo" , "SALYER" , "SAYLOR" , "SCHALLER" , "SCHELLER" , "SCHILLER" , "SCHOOLER" , "SCHULER" , "SCHUYLER" , "SEILER" , "SEYLER" , "SHOLAR" , "SHULER" , "SILAR" , "SILER" , "SILLER" });
@@ -760,11 +760,11 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testHWRuleEx3_literalMutation1325() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1325");
+    public void testHWRuleEx3_literalMutation1420() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1420");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,getStringEncoder(),1087,getStringEncoder().encode("Sgler"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,getStringEncoder(),1089,getStringEncoder().encode("Swhgler"));
-        checkEncodingVariations("S460", new java.lang.String[]{ "SAILOR" , "foo" , "SAYLOR" , "SCHALLER" , "SCHELLER" , "SCHILLER" , "SCHOOLER" , "SCHULER" , "SCHUYLER" , "SEILER" , "SEYLER" , "SHOLAR" , "SHULER" , "SILAR" , "SILER" , "SILLER" });
+        checkEncodingVariations("S460", new java.lang.String[]{ "SAILOR" , "bar" , "SAYLOR" , "SCHALLER" , "SCHELLER" , "SCHILLER" , "SCHOOLER" , "SCHULER" , "SCHUYLER" , "SEILER" , "SEYLER" , "SHOLAR" , "SHULER" , "SILAR" , "SILER" , "SILLER" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -774,8 +774,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testHWRuleEx3_literalMutation1326() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1326");
+    public void testHWRuleEx3_literalMutation1421() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1421");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,getStringEncoder(),1087,getStringEncoder().encode("Sgler"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,getStringEncoder(),1089,getStringEncoder().encode("Swhgler"));
         checkEncodingVariations("S460", new java.lang.String[]{ "SAILOR" , "SALYER" , "foo" , "SCHALLER" , "SCHELLER" , "SCHILLER" , "SCHOOLER" , "SCHULER" , "SCHUYLER" , "SEILER" , "SEYLER" , "SHOLAR" , "SHULER" , "SILAR" , "SILER" , "SILLER" });
@@ -788,8 +788,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testHWRuleEx3_literalMutation1327() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1327");
+    public void testHWRuleEx3_literalMutation1422() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1422");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,getStringEncoder(),1087,getStringEncoder().encode("Sgler"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,getStringEncoder(),1089,getStringEncoder().encode("Swhgler"));
         checkEncodingVariations("S460", new java.lang.String[]{ "SAILOR" , "SALYER" , "SAYLOR" , "foo" , "SCHELLER" , "SCHILLER" , "SCHOOLER" , "SCHULER" , "SCHUYLER" , "SEILER" , "SEYLER" , "SHOLAR" , "SHULER" , "SILAR" , "SILER" , "SILLER" });
@@ -802,8 +802,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testHWRuleEx3_literalMutation1328() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1328");
+    public void testHWRuleEx3_literalMutation1423() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1423");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,getStringEncoder(),1087,getStringEncoder().encode("Sgler"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,getStringEncoder(),1089,getStringEncoder().encode("Swhgler"));
         checkEncodingVariations("S460", new java.lang.String[]{ "SAILOR" , "SALYER" , "SAYLOR" , "SCHALLER" , "foo" , "SCHILLER" , "SCHOOLER" , "SCHULER" , "SCHUYLER" , "SEILER" , "SEYLER" , "SHOLAR" , "SHULER" , "SILAR" , "SILER" , "SILLER" });
@@ -816,8 +816,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testHWRuleEx3_literalMutation1329() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1329");
+    public void testHWRuleEx3_literalMutation1424() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1424");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,getStringEncoder(),1087,getStringEncoder().encode("Sgler"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,getStringEncoder(),1089,getStringEncoder().encode("Swhgler"));
         checkEncodingVariations("S460", new java.lang.String[]{ "SAILOR" , "SALYER" , "SAYLOR" , "SCHALLER" , "SCHELLER" , "foo" , "SCHOOLER" , "SCHULER" , "SCHUYLER" , "SEILER" , "SEYLER" , "SHOLAR" , "SHULER" , "SILAR" , "SILER" , "SILLER" });
@@ -830,8 +830,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testHWRuleEx3_literalMutation1330() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1330");
+    public void testHWRuleEx3_literalMutation1425() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1425");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,getStringEncoder(),1087,getStringEncoder().encode("Sgler"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,getStringEncoder(),1089,getStringEncoder().encode("Swhgler"));
         checkEncodingVariations("S460", new java.lang.String[]{ "SAILOR" , "SALYER" , "SAYLOR" , "SCHALLER" , "SCHELLER" , "SCHILLER" , "foo" , "SCHULER" , "SCHUYLER" , "SEILER" , "SEYLER" , "SHOLAR" , "SHULER" , "SILAR" , "SILER" , "SILLER" });
@@ -844,11 +844,11 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testHWRuleEx3_literalMutation1331() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1331");
+    public void testHWRuleEx3_literalMutation1426() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1426");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,getStringEncoder(),1087,getStringEncoder().encode("Sgler"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,getStringEncoder(),1089,getStringEncoder().encode("Swhgler"));
-        checkEncodingVariations("S460", new java.lang.String[]{ "SAILOR" , "SALYER" , "SAYLOR" , "SCHALLER" , "SCHELLER" , "SCHILLER" , "SCHOOLER" , "foo" , "SCHUYLER" , "SEILER" , "SEYLER" , "SHOLAR" , "SHULER" , "SILAR" , "SILER" , "SILLER" });
+        checkEncodingVariations("S460", new java.lang.String[]{ "SAILOR" , "SALYER" , "SAYLOR" , "SCHALLER" , "SCHELLER" , "SCHILLER" , "SCHOOLER" , "bar" , "SCHUYLER" , "SEILER" , "SEYLER" , "SHOLAR" , "SHULER" , "SILAR" , "SILER" , "SILLER" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -858,8 +858,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testHWRuleEx3_literalMutation1332() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1332");
+    public void testHWRuleEx3_literalMutation1427() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1427");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,getStringEncoder(),1087,getStringEncoder().encode("Sgler"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,getStringEncoder(),1089,getStringEncoder().encode("Swhgler"));
         checkEncodingVariations("S460", new java.lang.String[]{ "SAILOR" , "SALYER" , "SAYLOR" , "SCHALLER" , "SCHELLER" , "SCHILLER" , "SCHOOLER" , "SCHULER" , "foo" , "SEILER" , "SEYLER" , "SHOLAR" , "SHULER" , "SILAR" , "SILER" , "SILLER" });
@@ -872,8 +872,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testHWRuleEx3_literalMutation1333() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1333");
+    public void testHWRuleEx3_literalMutation1428() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1428");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,getStringEncoder(),1087,getStringEncoder().encode("Sgler"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,getStringEncoder(),1089,getStringEncoder().encode("Swhgler"));
         checkEncodingVariations("S460", new java.lang.String[]{ "SAILOR" , "SALYER" , "SAYLOR" , "SCHALLER" , "SCHELLER" , "SCHILLER" , "SCHOOLER" , "SCHULER" , "SCHUYLER" , "foo" , "SEYLER" , "SHOLAR" , "SHULER" , "SILAR" , "SILER" , "SILLER" });
@@ -886,11 +886,11 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testHWRuleEx3_literalMutation1334() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1334");
+    public void testHWRuleEx3_literalMutation1429() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1429");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,getStringEncoder(),1087,getStringEncoder().encode("Sgler"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,getStringEncoder(),1089,getStringEncoder().encode("Swhgler"));
-        checkEncodingVariations("S460", new java.lang.String[]{ "SAILOR" , "SALYER" , "SAYLOR" , "SCHALLER" , "SCHELLER" , "SCHILLER" , "SCHOOLER" , "SCHULER" , "SCHUYLER" , "SEILER" , "foo" , "SHOLAR" , "SHULER" , "SILAR" , "SILER" , "SILLER" });
+        checkEncodingVariations("S460", new java.lang.String[]{ "SAILOR" , "SALYER" , "SAYLOR" , "SCHALLER" , "SCHELLER" , "SCHILLER" , "SCHOOLER" , "SCHULER" , "SCHUYLER" , "SEILER" , "bar" , "SHOLAR" , "SHULER" , "SILAR" , "SILER" , "SILLER" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -900,8 +900,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testHWRuleEx3_literalMutation1335() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1335");
+    public void testHWRuleEx3_literalMutation1430() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1430");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,getStringEncoder(),1087,getStringEncoder().encode("Sgler"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,getStringEncoder(),1089,getStringEncoder().encode("Swhgler"));
         checkEncodingVariations("S460", new java.lang.String[]{ "SAILOR" , "SALYER" , "SAYLOR" , "SCHALLER" , "SCHELLER" , "SCHILLER" , "SCHOOLER" , "SCHULER" , "SCHUYLER" , "SEILER" , "SEYLER" , "foo" , "SHULER" , "SILAR" , "SILER" , "SILLER" });
@@ -914,11 +914,11 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testHWRuleEx3_literalMutation1336() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1336");
+    public void testHWRuleEx3_literalMutation1431() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1431");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,getStringEncoder(),1087,getStringEncoder().encode("Sgler"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,getStringEncoder(),1089,getStringEncoder().encode("Swhgler"));
-        checkEncodingVariations("S460", new java.lang.String[]{ "SAILOR" , "SALYER" , "SAYLOR" , "SCHALLER" , "SCHELLER" , "SCHILLER" , "SCHOOLER" , "SCHULER" , "SCHUYLER" , "SEILER" , "SEYLER" , "SHOLAR" , "foo" , "SILAR" , "SILER" , "SILLER" });
+        checkEncodingVariations("S460", new java.lang.String[]{ "SAILOR" , "SALYER" , "SAYLOR" , "SCHALLER" , "SCHELLER" , "SCHILLER" , "SCHOOLER" , "SCHULER" , "SCHUYLER" , "SEILER" , "SEYLER" , "SHOLAR" , "bar" , "SILAR" , "SILER" , "SILLER" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -928,8 +928,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testHWRuleEx3_literalMutation1337() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1337");
+    public void testHWRuleEx3_literalMutation1432() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1432");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,getStringEncoder(),1087,getStringEncoder().encode("Sgler"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,getStringEncoder(),1089,getStringEncoder().encode("Swhgler"));
         checkEncodingVariations("S460", new java.lang.String[]{ "SAILOR" , "SALYER" , "SAYLOR" , "SCHALLER" , "SCHELLER" , "SCHILLER" , "SCHOOLER" , "SCHULER" , "SCHUYLER" , "SEILER" , "SEYLER" , "SHOLAR" , "SHULER" , "foo" , "SILER" , "SILLER" });
@@ -942,11 +942,11 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testHWRuleEx3_literalMutation1338() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1338");
+    public void testHWRuleEx3_literalMutation1433() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1433");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,getStringEncoder(),1087,getStringEncoder().encode("Sgler"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,getStringEncoder(),1089,getStringEncoder().encode("Swhgler"));
-        checkEncodingVariations("S460", new java.lang.String[]{ "SAILOR" , "SALYER" , "SAYLOR" , "SCHALLER" , "SCHELLER" , "SCHILLER" , "SCHOOLER" , "SCHULER" , "SCHUYLER" , "SEILER" , "SEYLER" , "SHOLAR" , "SHULER" , "SILAR" , "foo" , "SILLER" });
+        checkEncodingVariations("S460", new java.lang.String[]{ "SAILOR" , "SALYER" , "SAYLOR" , "SCHALLER" , "SCHELLER" , "SCHILLER" , "SCHOOLER" , "SCHULER" , "SCHUYLER" , "SEILER" , "SEYLER" , "SHOLAR" , "SHULER" , "SILAR" , "bar" , "SILLER" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -956,8 +956,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testHWRuleEx3_literalMutation1339() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1339");
+    public void testHWRuleEx3_literalMutation1434() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHWRuleEx3_literalMutation1434");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,getStringEncoder(),1087,getStringEncoder().encode("Sgler"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,getStringEncoder(),1089,getStringEncoder().encode("Swhgler"));
         checkEncodingVariations("S460", new java.lang.String[]{ "SAILOR" , "SALYER" , "SAYLOR" , "SCHALLER" , "SCHELLER" , "SCHILLER" , "SCHOOLER" , "SCHULER" , "SCHUYLER" , "SEILER" , "SEYLER" , "SHOLAR" , "SHULER" , "SILAR" , "SILER" , "foo" });
@@ -1014,7 +1014,7 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
 @Test
     public void testMsSqlServer2() throws EncoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMsSqlServer2");
-        checkEncodingVariations("foo", new java.lang.String[]{ "Erickson" , "Erickson" , "Erikson" , "Ericson" , "Ericksen" , "Ericsen" });
+        checkEncodingVariations("bar", new java.lang.String[]{ "Erickson" , "Erickson" , "Erikson" , "Ericson" , "Ericksen" , "Ericsen" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1026,8 +1026,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testMsSqlServer2_literalMutation1341() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMsSqlServer2_literalMutation1341");
+    public void testMsSqlServer2_literalMutation1436() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMsSqlServer2_literalMutation1436");
         checkEncodingVariations("E625", new java.lang.String[]{ "foo" , "Erickson" , "Erikson" , "Ericson" , "Ericksen" , "Ericsen" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1040,9 +1040,9 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testMsSqlServer2_literalMutation1342() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMsSqlServer2_literalMutation1342");
-        checkEncodingVariations("E625", new java.lang.String[]{ "Erickson" , "foo" , "Erikson" , "Ericson" , "Ericksen" , "Ericsen" });
+    public void testMsSqlServer2_literalMutation1437() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMsSqlServer2_literalMutation1437");
+        checkEncodingVariations("E625", new java.lang.String[]{ "Erickson" , "bar" , "Erikson" , "Ericson" , "Ericksen" , "Ericsen" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1054,9 +1054,9 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testMsSqlServer2_literalMutation1343() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMsSqlServer2_literalMutation1343");
-        checkEncodingVariations("E625", new java.lang.String[]{ "Erickson" , "Erickson" , "foo" , "Ericson" , "Ericksen" , "Ericsen" });
+    public void testMsSqlServer2_literalMutation1438() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMsSqlServer2_literalMutation1438");
+        checkEncodingVariations("E625", new java.lang.String[]{ "Erickson" , "Erickson" , "bar" , "Ericson" , "Ericksen" , "Ericsen" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1068,8 +1068,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testMsSqlServer2_literalMutation1344() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMsSqlServer2_literalMutation1344");
+    public void testMsSqlServer2_literalMutation1439() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMsSqlServer2_literalMutation1439");
         checkEncodingVariations("E625", new java.lang.String[]{ "Erickson" , "Erickson" , "Erikson" , "foo" , "Ericksen" , "Ericsen" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1082,8 +1082,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testMsSqlServer2_literalMutation1345() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMsSqlServer2_literalMutation1345");
+    public void testMsSqlServer2_literalMutation1440() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMsSqlServer2_literalMutation1440");
         checkEncodingVariations("E625", new java.lang.String[]{ "Erickson" , "Erickson" , "Erikson" , "Ericson" , "foo" , "Ericsen" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1096,8 +1096,8 @@ public class SoundexTest extends StringEncoderAbstractTest<org.apache.commons.co
      * @throws EncoderException
      */
 @Test
-    public void testMsSqlServer2_literalMutation1346() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMsSqlServer2_literalMutation1346");
+    public void testMsSqlServer2_literalMutation1441() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMsSqlServer2_literalMutation1441");
         checkEncodingVariations("E625", new java.lang.String[]{ "Erickson" , "Erickson" , "Erikson" , "Ericson" , "Ericksen" , "foo" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }

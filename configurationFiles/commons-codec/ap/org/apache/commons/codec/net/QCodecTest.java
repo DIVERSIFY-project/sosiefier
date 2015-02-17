@@ -63,8 +63,8 @@ public class QCodecTest {
     }
 
     @Test
-    public void testBasicEncodeDecode_literalMutation12() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBasicEncodeDecode_literalMutation12");
+    public void testBasicEncodeDecode_literalMutation18() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBasicEncodeDecode_literalMutation18");
         final QCodec qcodec = new QCodec();
         final String plain = "foo";
         final String encoded = qcodec.encode(plain);
@@ -78,7 +78,7 @@ public class QCodecTest {
     public void testUnsafeEncodeDecode() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsafeEncodeDecode");
         final QCodec qcodec = new QCodec();
-        final String plain = "foo";
+        final String plain = "bar";
         final String encoded = qcodec.encode(plain);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),68,encoded);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),69,plain);
@@ -106,11 +106,11 @@ public class QCodecTest {
     }
 
     @Test
-    public void testEncodeStringWithNull_literalMutation26() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeStringWithNull_literalMutation26");
+    public void testEncodeStringWithNull_literalMutation38() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeStringWithNull_literalMutation38");
         final QCodec qcodec = new QCodec();
         final String test = null;
-        final String result = qcodec.encode(test, "foo");
+        final String result = qcodec.encode(test, "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),49,result);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -161,8 +161,8 @@ public class QCodecTest {
     }
 
     @Test
-    public void testEncodeObjects_literalMutation22() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation22");
+    public void testEncodeObjects_literalMutation31() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation31");
         final QCodec qcodec = new QCodec();
         final String plain = "foo";
         final String encoded = ((String)(qcodec.encode(((Object)(plain)))));
@@ -178,8 +178,25 @@ public class QCodecTest {
     }
 
     @Test
-    public void testEncodeObjects_literalMutation24() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation24");
+    public void testEncodeObjects_literalMutation33() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation33");
+        final QCodec qcodec = new QCodec();
+        final String plain = "1+1 = 2";
+        final String encoded = ((String)(qcodec.encode(((Object)(plain)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),47,encoded);
+        final Object result = qcodec.encode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),48,result);
+        try {
+            final Object dObj = new Double(4.0);
+            qcodec.encode(dObj);
+        } catch (final EncoderException ee) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeObjects_literalMutation34() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation34");
         final QCodec qcodec = new QCodec();
         final String plain = "1+1 = 2";
         final String encoded = ((String)(qcodec.encode(((Object)(plain)))));
@@ -194,6 +211,40 @@ public class QCodecTest {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test
+    public void testEncodeObjects_literalMutation35() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation35");
+        final QCodec qcodec = new QCodec();
+        final String plain = "1+1 = 2";
+        final String encoded = ((String)(qcodec.encode(((Object)(plain)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),47,encoded);
+        final Object result = qcodec.encode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),48,result);
+        try {
+            final Object dObj = new Double(1.5);
+            qcodec.encode(dObj);
+        } catch (final EncoderException ee) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeObjects_literalMutation36() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation36");
+        final QCodec qcodec = new QCodec();
+        final String plain = "1+1 = 2";
+        final String encoded = ((String)(qcodec.encode(((Object)(plain)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),47,encoded);
+        final Object result = qcodec.encode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),48,result);
+        try {
+            final Object dObj = new Double(6.0);
+            qcodec.encode(dObj);
+        } catch (final EncoderException ee) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     @Test(expected = UnsupportedCharsetException.class)
     public void testInvalidEncoding() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testInvalidEncoding");
@@ -202,8 +253,8 @@ public class QCodecTest {
     }
 
     @Test(expected = UnsupportedCharsetException.class)
-    public void testInvalidEncoding_literalMutation27() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testInvalidEncoding_literalMutation27");
+    public void testInvalidEncoding_literalMutation39() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testInvalidEncoding_literalMutation39");
         new QCodec("foo");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -244,10 +295,10 @@ public class QCodecTest {
     }
 
     @Test
-    public void testDecodeObjects_literalMutation13() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation13");
+    public void testDecodeObjects_literalMutation19() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation19");
         final QCodec qcodec = new QCodec();
-        final String decoded = "foo";
+        final String decoded = "bar";
         final String plain = ((String)(qcodec.decode(((Object)(decoded)))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),32,plain);
         final Object result = qcodec.decode(((Object)(null)));
@@ -261,8 +312,25 @@ public class QCodecTest {
     }
 
     @Test
-    public void testDecodeObjects_literalMutation15() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation15");
+    public void testDecodeObjects_literalMutation21() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation21");
+        final QCodec qcodec = new QCodec();
+        final String decoded = "=?UTF-8?Q?1+1 =3D 2?=";
+        final String plain = ((String)(qcodec.decode(((Object)(decoded)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),32,plain);
+        final Object result = qcodec.decode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),33,result);
+        try {
+            final Object dObj = new Double(4.0);
+            qcodec.decode(dObj);
+        } catch (final DecoderException ee) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeObjects_literalMutation22() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation22");
         final QCodec qcodec = new QCodec();
         final String decoded = "=?UTF-8?Q?1+1 =3D 2?=";
         final String plain = ((String)(qcodec.decode(((Object)(decoded)))));
@@ -271,6 +339,40 @@ public class QCodecTest {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),33,result);
         try {
             final Object dObj = new Double(2.0);
+            qcodec.decode(dObj);
+        } catch (final DecoderException ee) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeObjects_literalMutation23() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation23");
+        final QCodec qcodec = new QCodec();
+        final String decoded = "=?UTF-8?Q?1+1 =3D 2?=";
+        final String plain = ((String)(qcodec.decode(((Object)(decoded)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),32,plain);
+        final Object result = qcodec.decode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),33,result);
+        try {
+            final Object dObj = new Double(1.5);
+            qcodec.decode(dObj);
+        } catch (final DecoderException ee) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeObjects_literalMutation24() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation24");
+        final QCodec qcodec = new QCodec();
+        final String decoded = "=?UTF-8?Q?1+1 =3D 2?=";
+        final String plain = ((String)(qcodec.decode(((Object)(decoded)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),32,plain);
+        final Object result = qcodec.decode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),33,result);
+        try {
+            final Object dObj = new Double(6.0);
             qcodec.decode(dObj);
         } catch (final DecoderException ee) {
         }
@@ -330,7 +432,7 @@ public class QCodecTest {
     @Test
     public void testEncodeDecodeBlanks() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeBlanks");
-        final String plain = "foo";
+        final String plain = "bar";
         final String encoded1 = "=?UTF-8?Q?Mind those pesky blanks?=";
         final String encoded2 = "=?UTF-8?Q?Mind_those_pesky_blanks?=";
         final QCodec qcodec = new QCodec();
@@ -352,10 +454,10 @@ public class QCodecTest {
     }
 
     @Test
-    public void testEncodeDecodeBlanks_literalMutation18() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeBlanks_literalMutation18");
+    public void testEncodeDecodeBlanks_literalMutation27() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeBlanks_literalMutation27");
         final String plain = "Mind those pesky blanks";
-        final String encoded1 = "foo";
+        final String encoded1 = "bar";
         final String encoded2 = "=?UTF-8?Q?Mind_those_pesky_blanks?=";
         final QCodec qcodec = new QCodec();
         qcodec.setEncodeBlanks(false);
@@ -376,8 +478,8 @@ public class QCodecTest {
     }
 
     @Test
-    public void testEncodeDecodeBlanks_literalMutation19() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeBlanks_literalMutation19");
+    public void testEncodeDecodeBlanks_literalMutation28() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeBlanks_literalMutation28");
         final String plain = "Mind those pesky blanks";
         final String encoded1 = "=?UTF-8?Q?Mind those pesky blanks?=";
         final String encoded2 = "foo";
@@ -400,8 +502,8 @@ public class QCodecTest {
     }
 
     @Test
-    public void testEncodeDecodeBlanks_literalMutation20() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeBlanks_literalMutation20");
+    public void testEncodeDecodeBlanks_literalMutation29() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeBlanks_literalMutation29");
         final String plain = "Mind those pesky blanks";
         final String encoded1 = "=?UTF-8?Q?Mind those pesky blanks?=";
         final String encoded2 = "=?UTF-8?Q?Mind_those_pesky_blanks?=";
@@ -424,8 +526,8 @@ public class QCodecTest {
     }
 
     @Test
-    public void testEncodeDecodeBlanks_literalMutation21() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeBlanks_literalMutation21");
+    public void testEncodeDecodeBlanks_literalMutation30() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeBlanks_literalMutation30");
         final String plain = "Mind those pesky blanks";
         final String encoded1 = "=?UTF-8?Q?Mind those pesky blanks?=";
         final String encoded2 = "=?UTF-8?Q?Mind_those_pesky_blanks?=";
@@ -521,7 +623,7 @@ public class QCodecTest {
     public void testLetUsMakeCloverHappy() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLetUsMakeCloverHappy");
         final QCodec qcodec = new QCodec();
-        qcodec.setEncodeBlanks(true);
+        qcodec.setEncodeBlanks(false);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),51,qcodec,50,qcodec.isEncodeBlanks());
         qcodec.setEncodeBlanks(false);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),53,qcodec,52,qcodec.isEncodeBlanks());
@@ -529,12 +631,12 @@ public class QCodecTest {
     }
 
     @Test
-    public void testLetUsMakeCloverHappy_literalMutation29() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLetUsMakeCloverHappy_literalMutation29");
+    public void testLetUsMakeCloverHappy_literalMutation41() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLetUsMakeCloverHappy_literalMutation41");
         final QCodec qcodec = new QCodec();
         qcodec.setEncodeBlanks(true);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),51,qcodec,50,qcodec.isEncodeBlanks());
-        qcodec.setEncodeBlanks(false);
+        qcodec.setEncodeBlanks(true);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),53,qcodec,52,qcodec.isEncodeBlanks());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }

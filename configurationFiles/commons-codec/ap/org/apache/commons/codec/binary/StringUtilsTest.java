@@ -183,7 +183,7 @@ public class StringUtilsTest {
     @Test
     public void testGetBytesUtf16Le() throws UnsupportedEncodingException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetBytesUtf16Le");
-        final String charsetName = "foo";
+        final String charsetName = "bar";
         testGetBytesUnchecked(charsetName);
         final byte[] expected = STRING_FIXTURE.getBytes(charsetName);
         final byte[] actual = StringUtils.getBytesUtf16Le(STRING_FIXTURE);
@@ -216,7 +216,7 @@ public class StringUtilsTest {
     @Test
     public void testGetBytesUtf8() throws UnsupportedEncodingException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetBytesUtf8");
-        final String charsetName = "foo";
+        final String charsetName = "bar";
         testGetBytesUnchecked(charsetName);
         final byte[] expected = STRING_FIXTURE.getBytes(charsetName);
         final byte[] actual = StringUtils.getBytesUtf8(STRING_FIXTURE);
@@ -250,7 +250,7 @@ public class StringUtilsTest {
     public void testGetBytesUncheckedBadName() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetBytesUncheckedBadName");
         try {
-            StringUtils.getBytesUnchecked(STRING_FIXTURE, "foo");
+            StringUtils.getBytesUnchecked(STRING_FIXTURE, "bar");
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2639,("Expected " + (java.lang.IllegalStateException.class.getName())));
         } catch (final IllegalStateException e) {
         }
@@ -319,7 +319,7 @@ public class StringUtilsTest {
     @Test
     public void testNewStringIso8859_1() throws UnsupportedEncodingException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNewStringIso8859_1");
-        final String charsetName = "foo";
+        final String charsetName = "bar";
         testNewString(charsetName);
         final String expected = new String(BYTES_FIXTURE , charsetName);
         final String actual = StringUtils.newStringIso8859_1(BYTES_FIXTURE);
@@ -355,7 +355,7 @@ public class StringUtilsTest {
     @Test
     public void testNewStringUsAscii() throws UnsupportedEncodingException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNewStringUsAscii");
-        final String charsetName = "foo";
+        final String charsetName = "bar";
         testNewString(charsetName);
         final String expected = new String(BYTES_FIXTURE , charsetName);
         final String actual = StringUtils.newStringUsAscii(BYTES_FIXTURE);
@@ -391,7 +391,7 @@ public class StringUtilsTest {
     @Test
     public void testNewStringUtf16() throws UnsupportedEncodingException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNewStringUtf16");
-        final String charsetName = "foo";
+        final String charsetName = "bar";
         testNewString(charsetName);
         final String expected = new String(BYTES_FIXTURE , charsetName);
         final String actual = StringUtils.newStringUtf16(BYTES_FIXTURE);

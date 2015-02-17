@@ -63,9 +63,9 @@ public void testNonexistantFile() {
     /** 
      * Test a file which doesn't exist.
      */
-public void testNonexistantFile_literalMutation2269() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNonexistantFile_literalMutation2269");
-        File nonexistantFile = new File(new File(".") , "foo");
+public void testNonexistantFile_literalMutation3226() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNonexistantFile_literalMutation3226");
+        File nonexistantFile = new File(new File(".") , "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1357,nonexistantFile,1356,nonexistantFile.exists());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1358,((comparator.compare(nonexistantFile, moreFile)) < 0));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());

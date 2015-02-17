@@ -117,8 +117,31 @@ public class BrokenInputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRead_literalMutation367() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRead_literalMutation367");
+    public void testRead_literalMutation724() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRead_literalMutation724");
+        try {
+            stream.read();
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),471,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),472,e);
+        }
+        try {
+            stream.read(new byte[2]);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),473,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),474,e);
+        }
+        try {
+            stream.read(new byte[1], 0, 1);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),475,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),476,e);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testRead_literalMutation725() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRead_literalMutation725");
         try {
             stream.read();
         } catch (IOException e) {
@@ -140,8 +163,31 @@ public class BrokenInputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRead_literalMutation368() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRead_literalMutation368");
+    public void testRead_literalMutation726() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRead_literalMutation726");
+        try {
+            stream.read();
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),471,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),472,e);
+        }
+        try {
+            stream.read(new byte[0]);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),473,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),474,e);
+        }
+        try {
+            stream.read(new byte[1], 0, 1);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),475,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),476,e);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testRead_literalMutation727() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRead_literalMutation727");
         try {
             stream.read();
         } catch (IOException e) {
@@ -163,8 +209,54 @@ public class BrokenInputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRead_literalMutation369() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRead_literalMutation369");
+    public void testRead_literalMutation728() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRead_literalMutation728");
+        try {
+            stream.read();
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),471,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),472,e);
+        }
+        try {
+            stream.read(new byte[1]);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),473,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),474,e);
+        }
+        try {
+            stream.read(new byte[0], 0, 1);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),475,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),476,e);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testRead_literalMutation729() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRead_literalMutation729");
+        try {
+            stream.read();
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),471,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),472,e);
+        }
+        try {
+            stream.read(new byte[1]);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),473,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),474,e);
+        }
+        try {
+            stream.read(new byte[0], 0, 1);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),475,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),476,e);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testRead_literalMutation730() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRead_literalMutation730");
         try {
             stream.read();
         } catch (IOException e) {
@@ -186,8 +278,54 @@ public class BrokenInputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRead_literalMutation370() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRead_literalMutation370");
+    public void testRead_literalMutation731() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRead_literalMutation731");
+        try {
+            stream.read();
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),471,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),472,e);
+        }
+        try {
+            stream.read(new byte[1]);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),473,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),474,e);
+        }
+        try {
+            stream.read(new byte[1], -1, 1);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),475,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),476,e);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testRead_literalMutation732() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRead_literalMutation732");
+        try {
+            stream.read();
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),471,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),472,e);
+        }
+        try {
+            stream.read(new byte[1]);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),473,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),474,e);
+        }
+        try {
+            stream.read(new byte[1], 0, 1);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),475,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),476,e);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testRead_literalMutation733() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRead_literalMutation733");
         try {
             stream.read();
         } catch (IOException e) {
@@ -202,6 +340,52 @@ public class BrokenInputStreamTest extends TestCase {
         }
         try {
             stream.read(new byte[1], 0, 2);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),475,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),476,e);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testRead_literalMutation734() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRead_literalMutation734");
+        try {
+            stream.read();
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),471,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),472,e);
+        }
+        try {
+            stream.read(new byte[1]);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),473,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),474,e);
+        }
+        try {
+            stream.read(new byte[1], 0, 0);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),475,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),476,e);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testRead_literalMutation735() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRead_literalMutation735");
+        try {
+            stream.read();
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),471,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),472,e);
+        }
+        try {
+            stream.read(new byte[1]);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),473,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),474,e);
+        }
+        try {
+            stream.read(new byte[1], 0, 0);
         } catch (IOException e) {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),475,exception);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),476,e);
@@ -237,6 +421,28 @@ public class BrokenInputStreamTest extends TestCase {
 
     public void testSkip() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkip");
+        try {
+            stream.skip(2);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),479,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),480,e);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSkip_literalMutation737() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkip_literalMutation737");
+        try {
+            stream.skip(0);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),479,exception);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),480,e);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testSkip_literalMutation738() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkip_literalMutation738");
         try {
             stream.skip(0);
         } catch (IOException e) {

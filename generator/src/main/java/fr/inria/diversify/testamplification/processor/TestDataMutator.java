@@ -1,16 +1,16 @@
 package fr.inria.diversify.testamplification.processor;
 
 import spoon.reflect.code.*;
-import spoon.reflect.declaration.CtAnnotation;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
-import spoon.support.reflect.code.CtUnaryOperatorImpl;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 /* This processor is meant to replace all literal values in test cases by other literal values
  * This first version replaces all integer literals by 0
@@ -34,20 +34,25 @@ public class TestDataMutator extends TestProcessor {
 			int lit_index = 0;
 			for(CtLiteral lit : l) {
 				if (!literalInAssert(lit) && !isCase(lit)) {
-					//clone the method
-					CtMethod cloned_method = cloneMethod(method, "_literalMutation");
-					//add the cloned method in the same class as the original method
-					((CtClass) method.getDeclaringType()).addMethod(cloned_method);
-					//get the lit_indexth literal of the cloned method
-					CtLiteral literal = Query.getElements(cloned_method, new TypeFilter<CtLiteral>(CtLiteral.class)).get(lit_index);
-					//set the value of the selected literal
-					if (!replaceByRandom(literal)) {
-						((CtClass) method.getDeclaringType()).removeMethod(cloned_method);
-						mutatedMethod.remove(cloned_method);
-					} else {
-						count++;
-					}
-				}
+                    if (lit.getValue() instanceof Number) {
+                        createNumberMutant(method, lit, lit_index);
+                    } else {
+                        //clone the method
+                        CtMethod cloned_method = cloneMethod(method, "_literalMutation");
+                        //add the cloned method in the same class as the original method
+                        ((CtClass) method.getDeclaringType()).addMethod(cloned_method);
+                        //get the lit_indexth literal of the cloned method
+                        CtLiteral literal = Query.getElements(cloned_method, new TypeFilter<CtLiteral>(CtLiteral.class))
+                                                 .get(lit_index);
+                        //set the value of the selected literal
+                        if (!replaceByRandom(literal)) {
+                            ((CtClass) method.getDeclaringType()).removeMethod(cloned_method);
+                            mutatedMethod.remove(cloned_method);
+                        } else {
+                            count++;
+                        }
+                    }
+                }
 				lit_index++;
 			}
 		}
@@ -56,7 +61,58 @@ public class TestDataMutator extends TestProcessor {
 		}
 	}
 
-	private boolean literalInAssert(CtLiteral lit) {
+    protected void createNumberMutant(CtMethod method, CtLiteral literal, int lit_index) {
+        for(Number literalMutated : literalMutated(literal)) {
+            //clone the method
+            CtMethod cloned_method = cloneMethod(method, "_literalMutation");
+            //add the cloned method in the same class as the original method
+            ((CtClass) method.getDeclaringType()).addMethod(cloned_method);
+            //get the lit_indexth literal of the cloned method
+            CtLiteral newLiteral = Query.getElements(cloned_method, new TypeFilter<CtLiteral>(CtLiteral.class))
+                                     .get(lit_index);
+            CtElement toReplace = newLiteral;
+
+
+            if(literal.getValue() instanceof Integer) {
+                newLiteral.setValue(literalMutated.intValue());
+            } else if(literal.getValue() instanceof Long) {
+                newLiteral.setValue(literalMutated.longValue());
+            } else if(literal.getValue() instanceof Double) {
+                newLiteral.setValue(literalMutated.doubleValue());
+            } else if(literal.getValue() instanceof Short) {
+                newLiteral.setValue(literalMutated.shortValue());
+            } else if(literal.getValue() instanceof Float) {
+                newLiteral.setValue(literalMutated.floatValue());
+            } else if(literal.getValue() instanceof Byte) {
+                newLiteral.setValue(literalMutated.byteValue());
+            }
+            if(literal.getParent() instanceof CtUnaryOperator) {
+                CtUnaryOperator parent = (CtUnaryOperator)literal.getParent();
+                if(parent.getKind().equals(UnaryOperatorKind.NEG)) {
+                    toReplace = parent;
+                }
+            }
+            toReplace.replace(newLiteral);
+
+            count++;
+        }
+    }
+
+    protected Set<? extends Number> literalMutated(CtLiteral literal) {
+        Set<Number> values = new HashSet<>();
+        Double value = ((Number) literal.getValue()).doubleValue();
+        values.add(value + 1);
+        values.add(value - 1);
+
+        values.add(value / 2);
+        values.add(value * 2);
+
+//        values.add(value + 2);
+//        values.add(value - 2);
+        return values;
+    }
+
+    protected boolean literalInAssert(CtLiteral lit) {
 
 		CtInvocation invocation = lit.getParent(CtInvocation.class);
 		while (invocation != null && !(invocation.getParent() instanceof CtBlock)) {
@@ -75,29 +131,14 @@ public class TestDataMutator extends TestProcessor {
 		newLiteral.setTypeCasts(literal.getTypeCasts());
 
 		if(value instanceof String) {
-			newLiteral.setValue("foo");
+			newLiteral.setValue(stringList[r.nextInt(2)]);
 		} else if(value instanceof Boolean) {
-			newLiteral.setValue(r.nextBoolean());
-		} else {
-			if(value instanceof Integer) {
-				newLiteral.setValue((int)value + modif());
-			} else  if(value instanceof Long) {
-				newLiteral.setValue((long)value + (long)modif());
-			} else if(value instanceof Double) {
-				newLiteral.setValue((double)value + (double)modif());
-			} else if(value instanceof Short) {
-				newLiteral.setValue((short)value + (short)modif());
-			} else if(value instanceof Float) {
-				newLiteral.setValue((float)value + (float)modif());
-			} else if(value instanceof Byte) {
-				newLiteral.setValue((byte)value + (byte)modif());
-			}
-			if(literal.getParent() instanceof CtUnaryOperator) {
-				CtUnaryOperator parent = (CtUnaryOperator)literal.getParent();
-				if(parent.getKind().equals(UnaryOperatorKind.NEG)) {
-					toReplace = parent;
-				}
-			}
+            Boolean b = (Boolean) value;
+            if(b) {
+                newLiteral.setValue(false);
+            } else {
+                newLiteral.setValue(true);
+            }
 		}
 		if(newLiteral.getValue() == null) {
 			return false;
@@ -106,15 +147,6 @@ public class TestDataMutator extends TestProcessor {
 		toReplace.replace(newLiteral);
 
 		return true;
-	}
-
-	protected int modif() {
-		Random r = new Random();
-		if(r.nextBoolean()) {
-			return 1;
-		} else {
-			return -1;
-		}
 	}
 
 	protected boolean isCase(CtLiteral literal) {

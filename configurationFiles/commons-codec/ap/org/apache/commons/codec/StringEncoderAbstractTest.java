@@ -77,8 +77,8 @@ public abstract class StringEncoderAbstractTest<T extends org.apache.commons.cod
     }
 
     @Test
-    public void testEncodeEmpty_literalMutation2616() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeEmpty_literalMutation2616");
+    public void testEncodeEmpty_literalMutation4472() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeEmpty_literalMutation4472");
         final Encoder encoder = getStringEncoder();
         encoder.encode("foo");
         encoder.encode(" ");
@@ -87,22 +87,22 @@ public abstract class StringEncoderAbstractTest<T extends org.apache.commons.cod
     }
 
     @Test
-    public void testEncodeEmpty_literalMutation2617() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeEmpty_literalMutation2617");
+    public void testEncodeEmpty_literalMutation4473() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeEmpty_literalMutation4473");
         final Encoder encoder = getStringEncoder();
         encoder.encode("");
-        encoder.encode("foo");
+        encoder.encode("bar");
         encoder.encode("\t");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testEncodeEmpty_literalMutation2618() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeEmpty_literalMutation2618");
+    public void testEncodeEmpty_literalMutation4474() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeEmpty_literalMutation4474");
         final Encoder encoder = getStringEncoder();
         encoder.encode("");
         encoder.encode(" ");
-        encoder.encode("foo");
+        encoder.encode("bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -175,7 +175,7 @@ public abstract class StringEncoderAbstractTest<T extends org.apache.commons.cod
     @Test
     public void testEncodeWithInvalidObject() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeWithInvalidObject");
-        boolean exceptionThrown = false;
+        boolean exceptionThrown = true;
         try {
             final StringEncoder encoder = getStringEncoder();
             encoder.encode(new java.lang.Float(3.4));
@@ -188,8 +188,8 @@ public abstract class StringEncoderAbstractTest<T extends org.apache.commons.cod
     }
 
     @Test
-    public void testEncodeWithInvalidObject_literalMutation2621() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeWithInvalidObject_literalMutation2621");
+    public void testEncodeWithInvalidObject_literalMutation4477() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeWithInvalidObject_literalMutation4477");
         boolean exceptionThrown = false;
         try {
             final StringEncoder encoder = getStringEncoder();
@@ -203,14 +203,59 @@ public abstract class StringEncoderAbstractTest<T extends org.apache.commons.cod
     }
 
     @Test
-    public void testEncodeWithInvalidObject_literalMutation2622() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeWithInvalidObject_literalMutation2622");
+    public void testEncodeWithInvalidObject_literalMutation4478() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeWithInvalidObject_literalMutation4478");
+        boolean exceptionThrown = false;
+        try {
+            final StringEncoder encoder = getStringEncoder();
+            encoder.encode(new java.lang.Float(1.7));
+        } catch (final Exception e) {
+            exceptionThrown = true;
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2735,("An exception was not thrown when we tried to encode " + "a Float object"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2736,exceptionThrown);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeWithInvalidObject_literalMutation4479() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeWithInvalidObject_literalMutation4479");
+        boolean exceptionThrown = false;
+        try {
+            final StringEncoder encoder = getStringEncoder();
+            encoder.encode(new java.lang.Float(6.8));
+        } catch (final Exception e) {
+            exceptionThrown = true;
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2735,("An exception was not thrown when we tried to encode " + "a Float object"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2736,exceptionThrown);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeWithInvalidObject_literalMutation4480() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeWithInvalidObject_literalMutation4480");
+        boolean exceptionThrown = false;
+        try {
+            final StringEncoder encoder = getStringEncoder();
+            encoder.encode(new java.lang.Float(4.4));
+        } catch (final Exception e) {
+            exceptionThrown = true;
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2735,("An exception was not thrown when we tried to encode " + "a Float object"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2736,exceptionThrown);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeWithInvalidObject_literalMutation4481() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeWithInvalidObject_literalMutation4481");
         boolean exceptionThrown = false;
         try {
             final StringEncoder encoder = getStringEncoder();
             encoder.encode(new java.lang.Float(3.4));
         } catch (final Exception e) {
-            exceptionThrown = true;
+            exceptionThrown = false;
         }
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2735,("An exception was not thrown when we tried to encode " + "a Float object"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2736,exceptionThrown);
@@ -319,8 +364,8 @@ public abstract class StringEncoderAbstractTest<T extends org.apache.commons.cod
     }
 
     @Test
-    public void testLocaleIndependence_literalMutation2624() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation2624");
+    public void testLocaleIndependence_literalMutation4483() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation4483");
         final StringEncoder encoder = getStringEncoder();
         final String[] data = new String[]{ "I" , "foo" };
         final Locale orig = Locale.getDefault();
@@ -352,8 +397,8 @@ public abstract class StringEncoderAbstractTest<T extends org.apache.commons.cod
     }
 
     @Test
-    public void testLocaleIndependence_literalMutation2625() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation2625");
+    public void testLocaleIndependence_literalMutation4484() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation4484");
         final StringEncoder encoder = getStringEncoder();
         final String[] data = new String[]{ "I" , "i" };
         final Locale orig = Locale.getDefault();
@@ -385,8 +430,41 @@ public abstract class StringEncoderAbstractTest<T extends org.apache.commons.cod
     }
 
     @Test
-    public void testLocaleIndependence_literalMutation2627() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation2627");
+    public void testLocaleIndependence_literalMutation4486() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation4486");
+        final StringEncoder encoder = getStringEncoder();
+        final String[] data = new String[]{ "I" , "i" };
+        final Locale orig = Locale.getDefault();
+        final Locale[] locales = new Locale[]{ Locale.ENGLISH , new Locale("tr") , Locale.getDefault() };
+        try {
+            for (final String element : data) {
+                String ref = null;
+                for (int j = 1 ; j < (locales.length) ; j++) {
+                    Locale.setDefault(locales[j]);
+                    if (j <= 0) {
+                        ref = encoder.encode(element);
+                    } else {
+                        String cur = null;
+                        try {
+                            cur = encoder.encode(element);
+                        } catch (final Exception e) {
+                            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2737,(((java.util.Locale.getDefault().toString()) + ": ") + (e.getMessage())));
+                        }
+                        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2738,((java.util.Locale.getDefault().toString()) + ": "));
+                        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2739,ref);
+                        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2740,cur);
+                    }
+                }
+            }
+        } finally {
+            Locale.setDefault(orig);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testLocaleIndependence_literalMutation4487() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation4487");
         final StringEncoder encoder = getStringEncoder();
         final String[] data = new String[]{ "I" , "i" };
         final Locale orig = Locale.getDefault();
@@ -418,8 +496,41 @@ public abstract class StringEncoderAbstractTest<T extends org.apache.commons.cod
     }
 
     @Test
-    public void testLocaleIndependence_literalMutation2628() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation2628");
+    public void testLocaleIndependence_literalMutation4488() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation4488");
+        final StringEncoder encoder = getStringEncoder();
+        final String[] data = new String[]{ "I" , "i" };
+        final Locale orig = Locale.getDefault();
+        final Locale[] locales = new Locale[]{ Locale.ENGLISH , new Locale("tr") , Locale.getDefault() };
+        try {
+            for (final String element : data) {
+                String ref = null;
+                for (int j = 0 ; j < (locales.length) ; j++) {
+                    Locale.setDefault(locales[j]);
+                    if (j <= 0) {
+                        ref = encoder.encode(element);
+                    } else {
+                        String cur = null;
+                        try {
+                            cur = encoder.encode(element);
+                        } catch (final Exception e) {
+                            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2737,(((java.util.Locale.getDefault().toString()) + ": ") + (e.getMessage())));
+                        }
+                        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2738,((java.util.Locale.getDefault().toString()) + ": "));
+                        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2739,ref);
+                        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2740,cur);
+                    }
+                }
+            }
+        } finally {
+            Locale.setDefault(orig);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testLocaleIndependence_literalMutation4489() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation4489");
         final StringEncoder encoder = getStringEncoder();
         final String[] data = new String[]{ "I" , "i" };
         final Locale orig = Locale.getDefault();
@@ -430,6 +541,72 @@ public abstract class StringEncoderAbstractTest<T extends org.apache.commons.cod
                 for (int j = 0 ; j < (locales.length) ; j++) {
                     Locale.setDefault(locales[j]);
                     if (j <= 1) {
+                        ref = encoder.encode(element);
+                    } else {
+                        String cur = null;
+                        try {
+                            cur = encoder.encode(element);
+                        } catch (final Exception e) {
+                            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2737,(((java.util.Locale.getDefault().toString()) + ": ") + (e.getMessage())));
+                        }
+                        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2738,((java.util.Locale.getDefault().toString()) + ": "));
+                        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2739,ref);
+                        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2740,cur);
+                    }
+                }
+            }
+        } finally {
+            Locale.setDefault(orig);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testLocaleIndependence_literalMutation4490() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation4490");
+        final StringEncoder encoder = getStringEncoder();
+        final String[] data = new String[]{ "I" , "i" };
+        final Locale orig = Locale.getDefault();
+        final Locale[] locales = new Locale[]{ Locale.ENGLISH , new Locale("tr") , Locale.getDefault() };
+        try {
+            for (final String element : data) {
+                String ref = null;
+                for (int j = 0 ; j < (locales.length) ; j++) {
+                    Locale.setDefault(locales[j]);
+                    if (j <= -1) {
+                        ref = encoder.encode(element);
+                    } else {
+                        String cur = null;
+                        try {
+                            cur = encoder.encode(element);
+                        } catch (final Exception e) {
+                            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2737,(((java.util.Locale.getDefault().toString()) + ": ") + (e.getMessage())));
+                        }
+                        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2738,((java.util.Locale.getDefault().toString()) + ": "));
+                        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2739,ref);
+                        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2740,cur);
+                    }
+                }
+            }
+        } finally {
+            Locale.setDefault(orig);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testLocaleIndependence_literalMutation4491() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation4491");
+        final StringEncoder encoder = getStringEncoder();
+        final String[] data = new String[]{ "I" , "i" };
+        final Locale orig = Locale.getDefault();
+        final Locale[] locales = new Locale[]{ Locale.ENGLISH , new Locale("tr") , Locale.getDefault() };
+        try {
+            for (final String element : data) {
+                String ref = null;
+                for (int j = 0 ; j < (locales.length) ; j++) {
+                    Locale.setDefault(locales[j]);
+                    if (j <= 0) {
                         ref = encoder.encode(element);
                     } else {
                         String cur = null;

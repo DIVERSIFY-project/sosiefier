@@ -1116,8 +1116,8 @@ public void testEqualsNormalized() {
     /** 
      * Test for https://issues.apache.org/jira/browse/IO-128
      */
-public void testEqualsNormalizedError_IO_128_literalMutation3781() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEqualsNormalizedError_IO_128_literalMutation3781");
+public void testEqualsNormalizedError_IO_128_literalMutation5676() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEqualsNormalizedError_IO_128_literalMutation5676");
         try {
             org.apache.commons.io.FilenameUtils.equalsNormalizedOnSystem("//file.txt", "file.txt");
         } catch (NullPointerException e) {
@@ -1136,14 +1136,14 @@ public void testEqualsNormalizedError_IO_128_literalMutation3781() {
     /** 
      * Test for https://issues.apache.org/jira/browse/IO-128
      */
-public void testEqualsNormalizedError_IO_128_literalMutation3782() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEqualsNormalizedError_IO_128_literalMutation3782");
+public void testEqualsNormalizedError_IO_128_literalMutation5677() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEqualsNormalizedError_IO_128_literalMutation5677");
         try {
             org.apache.commons.io.FilenameUtils.equalsNormalizedOnSystem("//file.txt", "file.txt");
         } catch (NullPointerException e) {
         }
         try {
-            org.apache.commons.io.FilenameUtils.equalsNormalizedOnSystem("file.txt", "foo");
+            org.apache.commons.io.FilenameUtils.equalsNormalizedOnSystem("file.txt", "bar");
         } catch (NullPointerException e) {
         }
         try {
@@ -1156,8 +1156,8 @@ public void testEqualsNormalizedError_IO_128_literalMutation3782() {
     /** 
      * Test for https://issues.apache.org/jira/browse/IO-128
      */
-public void testEqualsNormalizedError_IO_128_literalMutation3783() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEqualsNormalizedError_IO_128_literalMutation3783");
+public void testEqualsNormalizedError_IO_128_literalMutation5678() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEqualsNormalizedError_IO_128_literalMutation5678");
         try {
             org.apache.commons.io.FilenameUtils.equalsNormalizedOnSystem("//file.txt", "file.txt");
         } catch (NullPointerException e) {
@@ -1176,8 +1176,8 @@ public void testEqualsNormalizedError_IO_128_literalMutation3783() {
     /** 
      * Test for https://issues.apache.org/jira/browse/IO-128
      */
-public void testEqualsNormalizedError_IO_128_literalMutation3784() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEqualsNormalizedError_IO_128_literalMutation3784");
+public void testEqualsNormalizedError_IO_128_literalMutation5679() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEqualsNormalizedError_IO_128_literalMutation5679");
         try {
             org.apache.commons.io.FilenameUtils.equalsNormalizedOnSystem("//file.txt", "file.txt");
         } catch (NullPointerException e) {

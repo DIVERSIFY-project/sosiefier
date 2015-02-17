@@ -59,23 +59,23 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
     }
 
     @Test
-    public void testBran_literalMutation1098() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBran_literalMutation1098");
-        encodeAll(new String[]{ "Brian" , "foo" , "Brun" }, "BRAN");
+    public void testBran_literalMutation1193() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBran_literalMutation1193");
+        encodeAll(new String[]{ "Brian" , "bar" , "Brun" }, "BRAN");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testBran_literalMutation1099() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBran_literalMutation1099");
-        encodeAll(new String[]{ "Brian" , "Brown" , "foo" }, "BRAN");
+    public void testBran_literalMutation1194() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBran_literalMutation1194");
+        encodeAll(new String[]{ "Brian" , "Brown" , "bar" }, "BRAN");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testBran_literalMutation1100() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBran_literalMutation1100");
-        encodeAll(new String[]{ "Brian" , "Brown" , "Brun" }, "foo");
+    public void testBran_literalMutation1195() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBran_literalMutation1195");
+        encodeAll(new String[]{ "Brian" , "Brown" , "Brun" }, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -96,34 +96,34 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
     @Test
     public void testCap() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCap");
-        encodeAll(new String[]{ "foo" , "Cope" , "Copp" , "Kipp" }, "CAP");
+        encodeAll(new String[]{ "bar" , "Cope" , "Copp" , "Kipp" }, "CAP");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testCap_literalMutation1102() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCap_literalMutation1102");
-        encodeAll(new String[]{ "Capp" , "foo" , "Copp" , "Kipp" }, "CAP");
+    public void testCap_literalMutation1197() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCap_literalMutation1197");
+        encodeAll(new String[]{ "Capp" , "bar" , "Copp" , "Kipp" }, "CAP");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testCap_literalMutation1103() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCap_literalMutation1103");
+    public void testCap_literalMutation1198() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCap_literalMutation1198");
         encodeAll(new String[]{ "Capp" , "Cope" , "foo" , "Kipp" }, "CAP");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testCap_literalMutation1104() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCap_literalMutation1104");
-        encodeAll(new String[]{ "Capp" , "Cope" , "Copp" , "foo" }, "CAP");
+    public void testCap_literalMutation1199() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCap_literalMutation1199");
+        encodeAll(new String[]{ "Capp" , "Cope" , "Copp" , "bar" }, "CAP");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testCap_literalMutation1105() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCap_literalMutation1105");
+    public void testCap_literalMutation1200() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCap_literalMutation1200");
         encodeAll(new String[]{ "Capp" , "Cope" , "Copp" , "Kipp" }, "foo");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -150,8 +150,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
     }
 
     @Test
-    public void testDad_literalMutation1107() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDad_literalMutation1107");
+    public void testDad_literalMutation1202() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDad_literalMutation1202");
         encodeAll(new String[]{ "Dent" }, "foo");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -173,28 +173,28 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
     @Test
     public void testDan() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDan");
-        encodeAll(new String[]{ "foo" , "Dean" , "Dionne" }, "DAN");
+        encodeAll(new String[]{ "bar" , "Dean" , "Dionne" }, "DAN");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testDan_literalMutation1109() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDan_literalMutation1109");
-        encodeAll(new String[]{ "Dane" , "foo" , "Dionne" }, "DAN");
+    public void testDan_literalMutation1204() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDan_literalMutation1204");
+        encodeAll(new String[]{ "Dane" , "bar" , "Dionne" }, "DAN");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testDan_literalMutation1110() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDan_literalMutation1110");
-        encodeAll(new String[]{ "Dane" , "Dean" , "foo" }, "DAN");
+    public void testDan_literalMutation1205() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDan_literalMutation1205");
+        encodeAll(new String[]{ "Dane" , "Dean" , "bar" }, "DAN");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testDan_literalMutation1111() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDan_literalMutation1111");
-        encodeAll(new String[]{ "Dane" , "Dean" , "Dionne" }, "foo");
+    public void testDan_literalMutation1206() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDan_literalMutation1206");
+        encodeAll(new String[]{ "Dane" , "Dean" , "Dionne" }, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -227,7 +227,7 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
 @Test
     public void testDropBy() throws EncoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy");
-        assertEncodings(new String[]{ "foo" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+        assertEncodings(new String[]{ "bar" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -238,9 +238,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1113() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1113");
-        assertEncodings(new String[]{ "MACINTOSH" , "foo" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1208() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1208");
+        assertEncodings(new String[]{ "MACINTOSH" , "bar" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -251,8 +251,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1114() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1114");
+    public void testDropBy_literalMutation1209() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1209");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "foo" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -264,8 +264,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1115() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1115");
+    public void testDropBy_literalMutation1210() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1210");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "foo" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -277,8 +277,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1116() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1116");
+    public void testDropBy_literalMutation1211() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1211");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "foo" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -290,8 +290,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1117() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1117");
+    public void testDropBy_literalMutation1212() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1212");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "foo" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -303,8 +303,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1118() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1118");
+    public void testDropBy_literalMutation1213() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1213");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "foo" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -316,8 +316,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1119() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1119");
+    public void testDropBy_literalMutation1214() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1214");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "foo" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -329,8 +329,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1120() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1120");
+    public void testDropBy_literalMutation1215() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1215");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "foo" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -342,9 +342,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1121() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1121");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "foo" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1216() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1216");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "bar" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -355,8 +355,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1122() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1122");
+    public void testDropBy_literalMutation1217() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1217");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "foo" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -368,9 +368,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1123() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1123");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "foo" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1218() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1218");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "bar" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -381,9 +381,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1124() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1124");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "foo" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1219() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1219");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "bar" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -394,8 +394,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1125() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1125");
+    public void testDropBy_literalMutation1220() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1220");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "foo" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -407,9 +407,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1126() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1126");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "foo" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1221() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1221");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "bar" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -420,8 +420,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1127() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1127");
+    public void testDropBy_literalMutation1222() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1222");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "foo" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -433,9 +433,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1128() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1128");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "foo" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1223() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1223");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "bar" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -446,9 +446,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1129() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1129");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "foo" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1224() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1224");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "bar" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -459,9 +459,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1130() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1130");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "foo" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1225() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1225");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "bar" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -472,9 +472,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1131() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1131");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "foo" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1226() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1226");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "bar" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -485,8 +485,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1132() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1132");
+    public void testDropBy_literalMutation1227() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1227");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "foo" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -498,9 +498,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1133() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1133");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "foo" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1228() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1228");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "bar" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -511,8 +511,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1134() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1134");
+    public void testDropBy_literalMutation1229() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1229");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "foo" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -524,9 +524,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1135() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1135");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "foo" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1230() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1230");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "bar" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -537,8 +537,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1136() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1136");
+    public void testDropBy_literalMutation1231() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1231");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "foo" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -550,8 +550,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1137() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1137");
+    public void testDropBy_literalMutation1232() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1232");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "foo" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -563,8 +563,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1138() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1138");
+    public void testDropBy_literalMutation1233() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1233");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "foo" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -576,8 +576,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1139() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1139");
+    public void testDropBy_literalMutation1234() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1234");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "foo" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -589,9 +589,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1140() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1140");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "foo" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1235() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1235");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "bar" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -602,8 +602,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1141() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1141");
+    public void testDropBy_literalMutation1236() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1236");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "foo" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -615,8 +615,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1142() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1142");
+    public void testDropBy_literalMutation1237() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1237");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "foo" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -628,8 +628,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1143() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1143");
+    public void testDropBy_literalMutation1238() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1238");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "foo" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -641,8 +641,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1144() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1144");
+    public void testDropBy_literalMutation1239() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1239");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "foo" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -654,9 +654,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1145() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1145");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "foo" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1240() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1240");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "bar" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -667,8 +667,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1146() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1146");
+    public void testDropBy_literalMutation1241() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1241");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "foo" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -680,8 +680,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1147() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1147");
+    public void testDropBy_literalMutation1242() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1242");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "foo" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -693,8 +693,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1148() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1148");
+    public void testDropBy_literalMutation1243() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1243");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "foo" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -706,8 +706,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1149() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1149");
+    public void testDropBy_literalMutation1244() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1244");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "foo" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -719,9 +719,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1150() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1150");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "foo" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1245() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1245");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "bar" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -732,9 +732,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1151() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1151");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "foo" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1246() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1246");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "bar" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -745,8 +745,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1152() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1152");
+    public void testDropBy_literalMutation1247() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1247");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "foo" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -758,9 +758,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1153() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1153");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "foo" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1248() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1248");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "bar" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -771,9 +771,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1154() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1154");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "foo" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1249() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1249");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "bar" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -784,9 +784,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1155() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1155");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "foo" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1250() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1250");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "bar" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -797,9 +797,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1156() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1156");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "foo" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1251() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1251");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "bar" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -810,9 +810,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1157() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1157");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "foo" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1252() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1252");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "bar" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -823,8 +823,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1158() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1158");
+    public void testDropBy_literalMutation1253() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1253");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "foo" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -836,8 +836,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1159() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1159");
+    public void testDropBy_literalMutation1254() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1254");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "foo" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -849,9 +849,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1160() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1160");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "foo" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1255() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1255");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "bar" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -862,9 +862,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1161() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1161");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "foo" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1256() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1256");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "bar" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -875,9 +875,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1162() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1162");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "foo" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
+    public void testDropBy_literalMutation1257() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1257");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "bar" , "CARY" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -888,8 +888,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1163() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1163");
+    public void testDropBy_literalMutation1258() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1258");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "foo" }, new String[]{ "YAMADA" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -901,8 +901,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1164() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1164");
+    public void testDropBy_literalMutation1259() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1259");
         assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "foo" , "YANAD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -914,9 +914,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testDropBy_literalMutation1165() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1165");
-        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "foo" });
+    public void testDropBy_literalMutation1260() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDropBy_literalMutation1260");
+        assertEncodings(new String[]{ "MACINTOSH" , "MCANT" }, new String[]{ "KNUTH" , "NAT" }, new String[]{ "KOEHN" , "CAN" }, new String[]{ "PHILLIPSON" , "FALAPSAN" }, new String[]{ "PFEISTER" , "FASTAR" }, new String[]{ "SCHOENHOEFT" , "SANAFT" }, new String[]{ "MCKEE" , "MCY" }, new String[]{ "MACKIE" , "MCY" }, new String[]{ "HEITSCHMIDT" , "HATSNAD" }, new String[]{ "BART" , "BAD" }, new String[]{ "HURD" , "HAD" }, new String[]{ "HUNT" , "HAD" }, new String[]{ "WESTERLUND" , "WASTARLAD" }, new String[]{ "CASSTEVENS" , "CASTAFAN" }, new String[]{ "VASQUEZ" , "VASG" }, new String[]{ "FRAZIER" , "FRASAR" }, new String[]{ "BOWMAN" , "BANAN" }, new String[]{ "MCKNIGHT" , "MCNAGT" }, new String[]{ "RICKERT" , "RACAD" }, new String[]{ "DEUTSCH" , "DAT" }, new String[]{ "WESTPHAL" , "WASTFAL" }, new String[]{ "SHRIVER" , "SRAVAR" }, new String[]{ "KUHL" , "CAL" }, new String[]{ "RAWSON" , "RASAN" }, new String[]{ "JILES" , "JAL" }, new String[]{ "CARRAWAY" , "CARY" }, new String[]{ "YAMADA" , "bar" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -943,14 +943,14 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
     @Test
     public void testFal() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFal");
-        encodeAll(new String[]{ "foo" }, "FAL");
+        encodeAll(new String[]{ "bar" }, "FAL");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testFal_literalMutation1167() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFal_literalMutation1167");
-        encodeAll(new String[]{ "Phil" }, "foo");
+    public void testFal_literalMutation1262() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFal_literalMutation1262");
+        encodeAll(new String[]{ "Phil" }, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -981,7 +981,7 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
 @Test
     public void testOthers() throws EncoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers");
-        assertEncodings(new String[]{ "foo" , "ODANAL" }, new String[]{ "O\'Donnel" , "ODANAL" }, new String[]{ "Cory" , "CARY" }, new String[]{ "Corey" , "CARY" }, new String[]{ "Kory" , "CARY" }, new String[]{ "FUZZY" , "FASY" });
+        assertEncodings(new String[]{ "bar" , "ODANAL" }, new String[]{ "O\'Donnel" , "ODANAL" }, new String[]{ "Cory" , "CARY" }, new String[]{ "Corey" , "CARY" }, new String[]{ "Kory" , "CARY" }, new String[]{ "FUZZY" , "FASY" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -991,9 +991,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testOthers_literalMutation1169() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1169");
-        assertEncodings(new String[]{ "O\'Daniel" , "foo" }, new String[]{ "O\'Donnel" , "ODANAL" }, new String[]{ "Cory" , "CARY" }, new String[]{ "Corey" , "CARY" }, new String[]{ "Kory" , "CARY" }, new String[]{ "FUZZY" , "FASY" });
+    public void testOthers_literalMutation1264() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1264");
+        assertEncodings(new String[]{ "O\'Daniel" , "bar" }, new String[]{ "O\'Donnel" , "ODANAL" }, new String[]{ "Cory" , "CARY" }, new String[]{ "Corey" , "CARY" }, new String[]{ "Kory" , "CARY" }, new String[]{ "FUZZY" , "FASY" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1003,8 +1003,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testOthers_literalMutation1170() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1170");
+    public void testOthers_literalMutation1265() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1265");
         assertEncodings(new String[]{ "O\'Daniel" , "ODANAL" }, new String[]{ "foo" , "ODANAL" }, new String[]{ "Cory" , "CARY" }, new String[]{ "Corey" , "CARY" }, new String[]{ "Kory" , "CARY" }, new String[]{ "FUZZY" , "FASY" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1015,9 +1015,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testOthers_literalMutation1171() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1171");
-        assertEncodings(new String[]{ "O\'Daniel" , "ODANAL" }, new String[]{ "O\'Donnel" , "foo" }, new String[]{ "Cory" , "CARY" }, new String[]{ "Corey" , "CARY" }, new String[]{ "Kory" , "CARY" }, new String[]{ "FUZZY" , "FASY" });
+    public void testOthers_literalMutation1266() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1266");
+        assertEncodings(new String[]{ "O\'Daniel" , "ODANAL" }, new String[]{ "O\'Donnel" , "bar" }, new String[]{ "Cory" , "CARY" }, new String[]{ "Corey" , "CARY" }, new String[]{ "Kory" , "CARY" }, new String[]{ "FUZZY" , "FASY" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1027,8 +1027,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testOthers_literalMutation1172() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1172");
+    public void testOthers_literalMutation1267() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1267");
         assertEncodings(new String[]{ "O\'Daniel" , "ODANAL" }, new String[]{ "O\'Donnel" , "ODANAL" }, new String[]{ "foo" , "CARY" }, new String[]{ "Corey" , "CARY" }, new String[]{ "Kory" , "CARY" }, new String[]{ "FUZZY" , "FASY" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1039,9 +1039,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testOthers_literalMutation1173() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1173");
-        assertEncodings(new String[]{ "O\'Daniel" , "ODANAL" }, new String[]{ "O\'Donnel" , "ODANAL" }, new String[]{ "Cory" , "foo" }, new String[]{ "Corey" , "CARY" }, new String[]{ "Kory" , "CARY" }, new String[]{ "FUZZY" , "FASY" });
+    public void testOthers_literalMutation1268() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1268");
+        assertEncodings(new String[]{ "O\'Daniel" , "ODANAL" }, new String[]{ "O\'Donnel" , "ODANAL" }, new String[]{ "Cory" , "bar" }, new String[]{ "Corey" , "CARY" }, new String[]{ "Kory" , "CARY" }, new String[]{ "FUZZY" , "FASY" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1051,9 +1051,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testOthers_literalMutation1174() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1174");
-        assertEncodings(new String[]{ "O\'Daniel" , "ODANAL" }, new String[]{ "O\'Donnel" , "ODANAL" }, new String[]{ "Cory" , "CARY" }, new String[]{ "foo" , "CARY" }, new String[]{ "Kory" , "CARY" }, new String[]{ "FUZZY" , "FASY" });
+    public void testOthers_literalMutation1269() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1269");
+        assertEncodings(new String[]{ "O\'Daniel" , "ODANAL" }, new String[]{ "O\'Donnel" , "ODANAL" }, new String[]{ "Cory" , "CARY" }, new String[]{ "bar" , "CARY" }, new String[]{ "Kory" , "CARY" }, new String[]{ "FUZZY" , "FASY" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1063,9 +1063,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testOthers_literalMutation1175() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1175");
-        assertEncodings(new String[]{ "O\'Daniel" , "ODANAL" }, new String[]{ "O\'Donnel" , "ODANAL" }, new String[]{ "Cory" , "CARY" }, new String[]{ "Corey" , "foo" }, new String[]{ "Kory" , "CARY" }, new String[]{ "FUZZY" , "FASY" });
+    public void testOthers_literalMutation1270() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1270");
+        assertEncodings(new String[]{ "O\'Daniel" , "ODANAL" }, new String[]{ "O\'Donnel" , "ODANAL" }, new String[]{ "Cory" , "CARY" }, new String[]{ "Corey" , "bar" }, new String[]{ "Kory" , "CARY" }, new String[]{ "FUZZY" , "FASY" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1075,8 +1075,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testOthers_literalMutation1176() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1176");
+    public void testOthers_literalMutation1271() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1271");
         assertEncodings(new String[]{ "O\'Daniel" , "ODANAL" }, new String[]{ "O\'Donnel" , "ODANAL" }, new String[]{ "Cory" , "CARY" }, new String[]{ "Corey" , "CARY" }, new String[]{ "foo" , "CARY" }, new String[]{ "FUZZY" , "FASY" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1087,9 +1087,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testOthers_literalMutation1177() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1177");
-        assertEncodings(new String[]{ "O\'Daniel" , "ODANAL" }, new String[]{ "O\'Donnel" , "ODANAL" }, new String[]{ "Cory" , "CARY" }, new String[]{ "Corey" , "CARY" }, new String[]{ "Kory" , "foo" }, new String[]{ "FUZZY" , "FASY" });
+    public void testOthers_literalMutation1272() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1272");
+        assertEncodings(new String[]{ "O\'Daniel" , "ODANAL" }, new String[]{ "O\'Donnel" , "ODANAL" }, new String[]{ "Cory" , "CARY" }, new String[]{ "Corey" , "CARY" }, new String[]{ "Kory" , "bar" }, new String[]{ "FUZZY" , "FASY" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1099,8 +1099,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testOthers_literalMutation1178() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1178");
+    public void testOthers_literalMutation1273() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1273");
         assertEncodings(new String[]{ "O\'Daniel" , "ODANAL" }, new String[]{ "O\'Donnel" , "ODANAL" }, new String[]{ "Cory" , "CARY" }, new String[]{ "Corey" , "CARY" }, new String[]{ "Kory" , "CARY" }, new String[]{ "foo" , "FASY" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1111,9 +1111,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testOthers_literalMutation1179() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1179");
-        assertEncodings(new String[]{ "O\'Daniel" , "ODANAL" }, new String[]{ "O\'Donnel" , "ODANAL" }, new String[]{ "Cory" , "CARY" }, new String[]{ "Corey" , "CARY" }, new String[]{ "Kory" , "CARY" }, new String[]{ "FUZZY" , "foo" });
+    public void testOthers_literalMutation1274() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOthers_literalMutation1274");
+        assertEncodings(new String[]{ "O\'Daniel" , "ODANAL" }, new String[]{ "O\'Donnel" , "ODANAL" }, new String[]{ "Cory" , "CARY" }, new String[]{ "Corey" , "CARY" }, new String[]{ "Kory" , "CARY" }, new String[]{ "FUZZY" , "bar" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1149,7 +1149,7 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
 @Test
     public void testRule1() throws EncoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1");
-        assertEncodings(new String[]{ "foo" , "MCX" }, new String[]{ "KNX" , "NX" }, new String[]{ "KX" , "CX" }, new String[]{ "PHX" , "FX" }, new String[]{ "PFX" , "FX" }, new String[]{ "SCHX" , "SX" });
+        assertEncodings(new String[]{ "bar" , "MCX" }, new String[]{ "KNX" , "NX" }, new String[]{ "KX" , "CX" }, new String[]{ "PHX" , "FX" }, new String[]{ "PFX" , "FX" }, new String[]{ "SCHX" , "SX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1159,9 +1159,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule1_literalMutation1181() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1181");
-        assertEncodings(new String[]{ "MACX" , "foo" }, new String[]{ "KNX" , "NX" }, new String[]{ "KX" , "CX" }, new String[]{ "PHX" , "FX" }, new String[]{ "PFX" , "FX" }, new String[]{ "SCHX" , "SX" });
+    public void testRule1_literalMutation1276() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1276");
+        assertEncodings(new String[]{ "MACX" , "bar" }, new String[]{ "KNX" , "NX" }, new String[]{ "KX" , "CX" }, new String[]{ "PHX" , "FX" }, new String[]{ "PFX" , "FX" }, new String[]{ "SCHX" , "SX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1171,9 +1171,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule1_literalMutation1182() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1182");
-        assertEncodings(new String[]{ "MACX" , "MCX" }, new String[]{ "foo" , "NX" }, new String[]{ "KX" , "CX" }, new String[]{ "PHX" , "FX" }, new String[]{ "PFX" , "FX" }, new String[]{ "SCHX" , "SX" });
+    public void testRule1_literalMutation1277() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1277");
+        assertEncodings(new String[]{ "MACX" , "MCX" }, new String[]{ "bar" , "NX" }, new String[]{ "KX" , "CX" }, new String[]{ "PHX" , "FX" }, new String[]{ "PFX" , "FX" }, new String[]{ "SCHX" , "SX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1183,8 +1183,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule1_literalMutation1183() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1183");
+    public void testRule1_literalMutation1278() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1278");
         assertEncodings(new String[]{ "MACX" , "MCX" }, new String[]{ "KNX" , "foo" }, new String[]{ "KX" , "CX" }, new String[]{ "PHX" , "FX" }, new String[]{ "PFX" , "FX" }, new String[]{ "SCHX" , "SX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1195,9 +1195,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule1_literalMutation1184() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1184");
-        assertEncodings(new String[]{ "MACX" , "MCX" }, new String[]{ "KNX" , "NX" }, new String[]{ "foo" , "CX" }, new String[]{ "PHX" , "FX" }, new String[]{ "PFX" , "FX" }, new String[]{ "SCHX" , "SX" });
+    public void testRule1_literalMutation1279() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1279");
+        assertEncodings(new String[]{ "MACX" , "MCX" }, new String[]{ "KNX" , "NX" }, new String[]{ "bar" , "CX" }, new String[]{ "PHX" , "FX" }, new String[]{ "PFX" , "FX" }, new String[]{ "SCHX" , "SX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1207,9 +1207,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule1_literalMutation1185() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1185");
-        assertEncodings(new String[]{ "MACX" , "MCX" }, new String[]{ "KNX" , "NX" }, new String[]{ "KX" , "foo" }, new String[]{ "PHX" , "FX" }, new String[]{ "PFX" , "FX" }, new String[]{ "SCHX" , "SX" });
+    public void testRule1_literalMutation1280() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1280");
+        assertEncodings(new String[]{ "MACX" , "MCX" }, new String[]{ "KNX" , "NX" }, new String[]{ "KX" , "bar" }, new String[]{ "PHX" , "FX" }, new String[]{ "PFX" , "FX" }, new String[]{ "SCHX" , "SX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1219,8 +1219,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule1_literalMutation1186() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1186");
+    public void testRule1_literalMutation1281() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1281");
         assertEncodings(new String[]{ "MACX" , "MCX" }, new String[]{ "KNX" , "NX" }, new String[]{ "KX" , "CX" }, new String[]{ "foo" , "FX" }, new String[]{ "PFX" , "FX" }, new String[]{ "SCHX" , "SX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1231,9 +1231,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule1_literalMutation1187() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1187");
-        assertEncodings(new String[]{ "MACX" , "MCX" }, new String[]{ "KNX" , "NX" }, new String[]{ "KX" , "CX" }, new String[]{ "PHX" , "foo" }, new String[]{ "PFX" , "FX" }, new String[]{ "SCHX" , "SX" });
+    public void testRule1_literalMutation1282() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1282");
+        assertEncodings(new String[]{ "MACX" , "MCX" }, new String[]{ "KNX" , "NX" }, new String[]{ "KX" , "CX" }, new String[]{ "PHX" , "bar" }, new String[]{ "PFX" , "FX" }, new String[]{ "SCHX" , "SX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1243,9 +1243,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule1_literalMutation1188() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1188");
-        assertEncodings(new String[]{ "MACX" , "MCX" }, new String[]{ "KNX" , "NX" }, new String[]{ "KX" , "CX" }, new String[]{ "PHX" , "FX" }, new String[]{ "foo" , "FX" }, new String[]{ "SCHX" , "SX" });
+    public void testRule1_literalMutation1283() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1283");
+        assertEncodings(new String[]{ "MACX" , "MCX" }, new String[]{ "KNX" , "NX" }, new String[]{ "KX" , "CX" }, new String[]{ "PHX" , "FX" }, new String[]{ "bar" , "FX" }, new String[]{ "SCHX" , "SX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1255,9 +1255,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule1_literalMutation1189() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1189");
-        assertEncodings(new String[]{ "MACX" , "MCX" }, new String[]{ "KNX" , "NX" }, new String[]{ "KX" , "CX" }, new String[]{ "PHX" , "FX" }, new String[]{ "PFX" , "foo" }, new String[]{ "SCHX" , "SX" });
+    public void testRule1_literalMutation1284() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1284");
+        assertEncodings(new String[]{ "MACX" , "MCX" }, new String[]{ "KNX" , "NX" }, new String[]{ "KX" , "CX" }, new String[]{ "PHX" , "FX" }, new String[]{ "PFX" , "bar" }, new String[]{ "SCHX" , "SX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1267,8 +1267,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule1_literalMutation1190() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1190");
+    public void testRule1_literalMutation1285() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1285");
         assertEncodings(new String[]{ "MACX" , "MCX" }, new String[]{ "KNX" , "NX" }, new String[]{ "KX" , "CX" }, new String[]{ "PHX" , "FX" }, new String[]{ "PFX" , "FX" }, new String[]{ "foo" , "SX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1279,8 +1279,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule1_literalMutation1191() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1191");
+    public void testRule1_literalMutation1286() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule1_literalMutation1286");
         assertEncodings(new String[]{ "MACX" , "MCX" }, new String[]{ "KNX" , "NX" }, new String[]{ "KX" , "CX" }, new String[]{ "PHX" , "FX" }, new String[]{ "PFX" , "FX" }, new String[]{ "SCHX" , "foo" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1317,7 +1317,7 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
 @Test
     public void testRule2() throws EncoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2");
-        assertEncodings(new String[]{ "foo" , "XY" }, new String[]{ "XIE" , "XY" }, new String[]{ "XDT" , "XD" }, new String[]{ "XRT" , "XD" }, new String[]{ "XRD" , "XD" }, new String[]{ "XNT" , "XD" }, new String[]{ "XND" , "XD" });
+        assertEncodings(new String[]{ "bar" , "XY" }, new String[]{ "XIE" , "XY" }, new String[]{ "XDT" , "XD" }, new String[]{ "XRT" , "XD" }, new String[]{ "XRD" , "XD" }, new String[]{ "XNT" , "XD" }, new String[]{ "XND" , "XD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1327,8 +1327,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule2_literalMutation1193() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1193");
+    public void testRule2_literalMutation1288() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1288");
         assertEncodings(new String[]{ "XEE" , "foo" }, new String[]{ "XIE" , "XY" }, new String[]{ "XDT" , "XD" }, new String[]{ "XRT" , "XD" }, new String[]{ "XRD" , "XD" }, new String[]{ "XNT" , "XD" }, new String[]{ "XND" , "XD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1339,8 +1339,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule2_literalMutation1194() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1194");
+    public void testRule2_literalMutation1289() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1289");
         assertEncodings(new String[]{ "XEE" , "XY" }, new String[]{ "foo" , "XY" }, new String[]{ "XDT" , "XD" }, new String[]{ "XRT" , "XD" }, new String[]{ "XRD" , "XD" }, new String[]{ "XNT" , "XD" }, new String[]{ "XND" , "XD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1351,8 +1351,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule2_literalMutation1195() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1195");
+    public void testRule2_literalMutation1290() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1290");
         assertEncodings(new String[]{ "XEE" , "XY" }, new String[]{ "XIE" , "foo" }, new String[]{ "XDT" , "XD" }, new String[]{ "XRT" , "XD" }, new String[]{ "XRD" , "XD" }, new String[]{ "XNT" , "XD" }, new String[]{ "XND" , "XD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1363,8 +1363,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule2_literalMutation1196() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1196");
+    public void testRule2_literalMutation1291() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1291");
         assertEncodings(new String[]{ "XEE" , "XY" }, new String[]{ "XIE" , "XY" }, new String[]{ "foo" , "XD" }, new String[]{ "XRT" , "XD" }, new String[]{ "XRD" , "XD" }, new String[]{ "XNT" , "XD" }, new String[]{ "XND" , "XD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1375,8 +1375,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule2_literalMutation1197() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1197");
+    public void testRule2_literalMutation1292() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1292");
         assertEncodings(new String[]{ "XEE" , "XY" }, new String[]{ "XIE" , "XY" }, new String[]{ "XDT" , "foo" }, new String[]{ "XRT" , "XD" }, new String[]{ "XRD" , "XD" }, new String[]{ "XNT" , "XD" }, new String[]{ "XND" , "XD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1387,9 +1387,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule2_literalMutation1198() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1198");
-        assertEncodings(new String[]{ "XEE" , "XY" }, new String[]{ "XIE" , "XY" }, new String[]{ "XDT" , "XD" }, new String[]{ "foo" , "XD" }, new String[]{ "XRD" , "XD" }, new String[]{ "XNT" , "XD" }, new String[]{ "XND" , "XD" });
+    public void testRule2_literalMutation1293() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1293");
+        assertEncodings(new String[]{ "XEE" , "XY" }, new String[]{ "XIE" , "XY" }, new String[]{ "XDT" , "XD" }, new String[]{ "bar" , "XD" }, new String[]{ "XRD" , "XD" }, new String[]{ "XNT" , "XD" }, new String[]{ "XND" , "XD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1399,9 +1399,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule2_literalMutation1199() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1199");
-        assertEncodings(new String[]{ "XEE" , "XY" }, new String[]{ "XIE" , "XY" }, new String[]{ "XDT" , "XD" }, new String[]{ "XRT" , "foo" }, new String[]{ "XRD" , "XD" }, new String[]{ "XNT" , "XD" }, new String[]{ "XND" , "XD" });
+    public void testRule2_literalMutation1294() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1294");
+        assertEncodings(new String[]{ "XEE" , "XY" }, new String[]{ "XIE" , "XY" }, new String[]{ "XDT" , "XD" }, new String[]{ "XRT" , "bar" }, new String[]{ "XRD" , "XD" }, new String[]{ "XNT" , "XD" }, new String[]{ "XND" , "XD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1411,9 +1411,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule2_literalMutation1200() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1200");
-        assertEncodings(new String[]{ "XEE" , "XY" }, new String[]{ "XIE" , "XY" }, new String[]{ "XDT" , "XD" }, new String[]{ "XRT" , "XD" }, new String[]{ "foo" , "XD" }, new String[]{ "XNT" , "XD" }, new String[]{ "XND" , "XD" });
+    public void testRule2_literalMutation1295() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1295");
+        assertEncodings(new String[]{ "XEE" , "XY" }, new String[]{ "XIE" , "XY" }, new String[]{ "XDT" , "XD" }, new String[]{ "XRT" , "XD" }, new String[]{ "bar" , "XD" }, new String[]{ "XNT" , "XD" }, new String[]{ "XND" , "XD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1423,9 +1423,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule2_literalMutation1201() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1201");
-        assertEncodings(new String[]{ "XEE" , "XY" }, new String[]{ "XIE" , "XY" }, new String[]{ "XDT" , "XD" }, new String[]{ "XRT" , "XD" }, new String[]{ "XRD" , "foo" }, new String[]{ "XNT" , "XD" }, new String[]{ "XND" , "XD" });
+    public void testRule2_literalMutation1296() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1296");
+        assertEncodings(new String[]{ "XEE" , "XY" }, new String[]{ "XIE" , "XY" }, new String[]{ "XDT" , "XD" }, new String[]{ "XRT" , "XD" }, new String[]{ "XRD" , "bar" }, new String[]{ "XNT" , "XD" }, new String[]{ "XND" , "XD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1435,8 +1435,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule2_literalMutation1202() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1202");
+    public void testRule2_literalMutation1297() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1297");
         assertEncodings(new String[]{ "XEE" , "XY" }, new String[]{ "XIE" , "XY" }, new String[]{ "XDT" , "XD" }, new String[]{ "XRT" , "XD" }, new String[]{ "XRD" , "XD" }, new String[]{ "foo" , "XD" }, new String[]{ "XND" , "XD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1447,8 +1447,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule2_literalMutation1203() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1203");
+    public void testRule2_literalMutation1298() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1298");
         assertEncodings(new String[]{ "XEE" , "XY" }, new String[]{ "XIE" , "XY" }, new String[]{ "XDT" , "XD" }, new String[]{ "XRT" , "XD" }, new String[]{ "XRD" , "XD" }, new String[]{ "XNT" , "foo" }, new String[]{ "XND" , "XD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1459,8 +1459,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule2_literalMutation1204() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1204");
+    public void testRule2_literalMutation1299() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1299");
         assertEncodings(new String[]{ "XEE" , "XY" }, new String[]{ "XIE" , "XY" }, new String[]{ "XDT" , "XD" }, new String[]{ "XRT" , "XD" }, new String[]{ "XRD" , "XD" }, new String[]{ "XNT" , "XD" }, new String[]{ "foo" , "XD" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1471,9 +1471,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule2_literalMutation1205() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1205");
-        assertEncodings(new String[]{ "XEE" , "XY" }, new String[]{ "XIE" , "XY" }, new String[]{ "XDT" , "XD" }, new String[]{ "XRT" , "XD" }, new String[]{ "XRD" , "XD" }, new String[]{ "XNT" , "XD" }, new String[]{ "XND" , "foo" });
+    public void testRule2_literalMutation1300() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule2_literalMutation1300");
+        assertEncodings(new String[]{ "XEE" , "XY" }, new String[]{ "XIE" , "XY" }, new String[]{ "XDT" , "XD" }, new String[]{ "XRT" , "XD" }, new String[]{ "XRD" , "XD" }, new String[]{ "XNT" , "XD" }, new String[]{ "XND" , "bar" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1509,7 +1509,7 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
 @Test
     public void testRule4Dot1() throws EncoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1");
-        assertEncodings(new String[]{ "foo" , "XAF" }, new String[]{ "XAX" , "XAX" }, new String[]{ "XEX" , "XAX" }, new String[]{ "XIX" , "XAX" }, new String[]{ "XOX" , "XAX" }, new String[]{ "XUX" , "XAX" });
+        assertEncodings(new String[]{ "bar" , "XAF" }, new String[]{ "XAX" , "XAX" }, new String[]{ "XEX" , "XAX" }, new String[]{ "XIX" , "XAX" }, new String[]{ "XOX" , "XAX" }, new String[]{ "XUX" , "XAX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1519,8 +1519,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule4Dot1_literalMutation1207() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1207");
+    public void testRule4Dot1_literalMutation1302() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1302");
         assertEncodings(new String[]{ "XEV" , "foo" }, new String[]{ "XAX" , "XAX" }, new String[]{ "XEX" , "XAX" }, new String[]{ "XIX" , "XAX" }, new String[]{ "XOX" , "XAX" }, new String[]{ "XUX" , "XAX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1531,9 +1531,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule4Dot1_literalMutation1208() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1208");
-        assertEncodings(new String[]{ "XEV" , "XAF" }, new String[]{ "foo" , "XAX" }, new String[]{ "XEX" , "XAX" }, new String[]{ "XIX" , "XAX" }, new String[]{ "XOX" , "XAX" }, new String[]{ "XUX" , "XAX" });
+    public void testRule4Dot1_literalMutation1303() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1303");
+        assertEncodings(new String[]{ "XEV" , "XAF" }, new String[]{ "bar" , "XAX" }, new String[]{ "XEX" , "XAX" }, new String[]{ "XIX" , "XAX" }, new String[]{ "XOX" , "XAX" }, new String[]{ "XUX" , "XAX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1543,8 +1543,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule4Dot1_literalMutation1209() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1209");
+    public void testRule4Dot1_literalMutation1304() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1304");
         assertEncodings(new String[]{ "XEV" , "XAF" }, new String[]{ "XAX" , "foo" }, new String[]{ "XEX" , "XAX" }, new String[]{ "XIX" , "XAX" }, new String[]{ "XOX" , "XAX" }, new String[]{ "XUX" , "XAX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1555,8 +1555,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule4Dot1_literalMutation1210() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1210");
+    public void testRule4Dot1_literalMutation1305() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1305");
         assertEncodings(new String[]{ "XEV" , "XAF" }, new String[]{ "XAX" , "XAX" }, new String[]{ "foo" , "XAX" }, new String[]{ "XIX" , "XAX" }, new String[]{ "XOX" , "XAX" }, new String[]{ "XUX" , "XAX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1567,9 +1567,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule4Dot1_literalMutation1211() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1211");
-        assertEncodings(new String[]{ "XEV" , "XAF" }, new String[]{ "XAX" , "XAX" }, new String[]{ "XEX" , "foo" }, new String[]{ "XIX" , "XAX" }, new String[]{ "XOX" , "XAX" }, new String[]{ "XUX" , "XAX" });
+    public void testRule4Dot1_literalMutation1306() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1306");
+        assertEncodings(new String[]{ "XEV" , "XAF" }, new String[]{ "XAX" , "XAX" }, new String[]{ "XEX" , "bar" }, new String[]{ "XIX" , "XAX" }, new String[]{ "XOX" , "XAX" }, new String[]{ "XUX" , "XAX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1579,9 +1579,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule4Dot1_literalMutation1212() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1212");
-        assertEncodings(new String[]{ "XEV" , "XAF" }, new String[]{ "XAX" , "XAX" }, new String[]{ "XEX" , "XAX" }, new String[]{ "foo" , "XAX" }, new String[]{ "XOX" , "XAX" }, new String[]{ "XUX" , "XAX" });
+    public void testRule4Dot1_literalMutation1307() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1307");
+        assertEncodings(new String[]{ "XEV" , "XAF" }, new String[]{ "XAX" , "XAX" }, new String[]{ "XEX" , "XAX" }, new String[]{ "bar" , "XAX" }, new String[]{ "XOX" , "XAX" }, new String[]{ "XUX" , "XAX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1591,8 +1591,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule4Dot1_literalMutation1213() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1213");
+    public void testRule4Dot1_literalMutation1308() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1308");
         assertEncodings(new String[]{ "XEV" , "XAF" }, new String[]{ "XAX" , "XAX" }, new String[]{ "XEX" , "XAX" }, new String[]{ "XIX" , "foo" }, new String[]{ "XOX" , "XAX" }, new String[]{ "XUX" , "XAX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1603,8 +1603,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule4Dot1_literalMutation1214() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1214");
+    public void testRule4Dot1_literalMutation1309() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1309");
         assertEncodings(new String[]{ "XEV" , "XAF" }, new String[]{ "XAX" , "XAX" }, new String[]{ "XEX" , "XAX" }, new String[]{ "XIX" , "XAX" }, new String[]{ "foo" , "XAX" }, new String[]{ "XUX" , "XAX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1615,8 +1615,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule4Dot1_literalMutation1215() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1215");
+    public void testRule4Dot1_literalMutation1310() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1310");
         assertEncodings(new String[]{ "XEV" , "XAF" }, new String[]{ "XAX" , "XAX" }, new String[]{ "XEX" , "XAX" }, new String[]{ "XIX" , "XAX" }, new String[]{ "XOX" , "foo" }, new String[]{ "XUX" , "XAX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1627,9 +1627,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule4Dot1_literalMutation1216() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1216");
-        assertEncodings(new String[]{ "XEV" , "XAF" }, new String[]{ "XAX" , "XAX" }, new String[]{ "XEX" , "XAX" }, new String[]{ "XIX" , "XAX" }, new String[]{ "XOX" , "XAX" }, new String[]{ "foo" , "XAX" });
+    public void testRule4Dot1_literalMutation1311() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1311");
+        assertEncodings(new String[]{ "XEV" , "XAF" }, new String[]{ "XAX" , "XAX" }, new String[]{ "XEX" , "XAX" }, new String[]{ "XIX" , "XAX" }, new String[]{ "XOX" , "XAX" }, new String[]{ "bar" , "XAX" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1639,8 +1639,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule4Dot1_literalMutation1217() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1217");
+    public void testRule4Dot1_literalMutation1312() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot1_literalMutation1312");
         assertEncodings(new String[]{ "XEV" , "XAF" }, new String[]{ "XAX" , "XAX" }, new String[]{ "XEX" , "XAX" }, new String[]{ "XIX" , "XAX" }, new String[]{ "XOX" , "XAX" }, new String[]{ "XUX" , "foo" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1677,7 +1677,7 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
 @Test
     public void testRule4Dot2() throws EncoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot2");
-        assertEncodings(new String[]{ "foo" , "XG" }, new String[]{ "XZ" , "X" }, new String[]{ "XM" , "XN" });
+        assertEncodings(new String[]{ "bar" , "XG" }, new String[]{ "XZ" , "X" }, new String[]{ "XM" , "XN" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1687,8 +1687,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule4Dot2_literalMutation1219() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot2_literalMutation1219");
+    public void testRule4Dot2_literalMutation1314() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot2_literalMutation1314");
         assertEncodings(new String[]{ "XQ" , "foo" }, new String[]{ "XZ" , "X" }, new String[]{ "XM" , "XN" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1699,9 +1699,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule4Dot2_literalMutation1220() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot2_literalMutation1220");
-        assertEncodings(new String[]{ "XQ" , "XG" }, new String[]{ "foo" , "X" }, new String[]{ "XM" , "XN" });
+    public void testRule4Dot2_literalMutation1315() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot2_literalMutation1315");
+        assertEncodings(new String[]{ "XQ" , "XG" }, new String[]{ "bar" , "X" }, new String[]{ "XM" , "XN" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1711,9 +1711,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule4Dot2_literalMutation1221() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot2_literalMutation1221");
-        assertEncodings(new String[]{ "XQ" , "XG" }, new String[]{ "XZ" , "foo" }, new String[]{ "XM" , "XN" });
+    public void testRule4Dot2_literalMutation1316() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot2_literalMutation1316");
+        assertEncodings(new String[]{ "XQ" , "XG" }, new String[]{ "XZ" , "bar" }, new String[]{ "XM" , "XN" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1723,9 +1723,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule4Dot2_literalMutation1222() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot2_literalMutation1222");
-        assertEncodings(new String[]{ "XQ" , "XG" }, new String[]{ "XZ" , "X" }, new String[]{ "foo" , "XN" });
+    public void testRule4Dot2_literalMutation1317() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot2_literalMutation1317");
+        assertEncodings(new String[]{ "XQ" , "XG" }, new String[]{ "XZ" , "X" }, new String[]{ "bar" , "XN" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1735,9 +1735,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule4Dot2_literalMutation1223() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot2_literalMutation1223");
-        assertEncodings(new String[]{ "XQ" , "XG" }, new String[]{ "XZ" , "X" }, new String[]{ "XM" , "foo" });
+    public void testRule4Dot2_literalMutation1318() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule4Dot2_literalMutation1318");
+        assertEncodings(new String[]{ "XQ" , "XG" }, new String[]{ "XZ" , "X" }, new String[]{ "XM" , "bar" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1773,7 +1773,7 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
 @Test
     public void testRule5() throws EncoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule5");
-        assertEncodings(new String[]{ "foo" , "X" }, new String[]{ "XSS" , "X" });
+        assertEncodings(new String[]{ "bar" , "X" }, new String[]{ "XSS" , "X" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1783,8 +1783,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule5_literalMutation1225() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule5_literalMutation1225");
+    public void testRule5_literalMutation1320() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule5_literalMutation1320");
         assertEncodings(new String[]{ "XS" , "foo" }, new String[]{ "XSS" , "X" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1795,8 +1795,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule5_literalMutation1226() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule5_literalMutation1226");
+    public void testRule5_literalMutation1321() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule5_literalMutation1321");
         assertEncodings(new String[]{ "XS" , "X" }, new String[]{ "foo" , "X" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1807,9 +1807,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule5_literalMutation1227() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule5_literalMutation1227");
-        assertEncodings(new String[]{ "XS" , "X" }, new String[]{ "XSS" , "foo" });
+    public void testRule5_literalMutation1322() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule5_literalMutation1322");
+        assertEncodings(new String[]{ "XS" , "X" }, new String[]{ "XSS" , "bar" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1845,7 +1845,7 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
 @Test
     public void testRule6() throws EncoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule6");
-        assertEncodings(new String[]{ "foo" , "XY" }, new String[]{ "XAYS" , "XY" });
+        assertEncodings(new String[]{ "bar" , "XY" }, new String[]{ "XAYS" , "XY" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1855,8 +1855,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule6_literalMutation1229() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule6_literalMutation1229");
+    public void testRule6_literalMutation1324() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule6_literalMutation1324");
         assertEncodings(new String[]{ "XAY" , "foo" }, new String[]{ "XAYS" , "XY" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1867,8 +1867,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule6_literalMutation1230() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule6_literalMutation1230");
+    public void testRule6_literalMutation1325() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule6_literalMutation1325");
         assertEncodings(new String[]{ "XAY" , "XY" }, new String[]{ "foo" , "XY" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1879,8 +1879,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule6_literalMutation1231() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule6_literalMutation1231");
+    public void testRule6_literalMutation1326() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule6_literalMutation1326");
         assertEncodings(new String[]{ "XAY" , "XY" }, new String[]{ "XAYS" , "foo" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1927,8 +1927,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule7_literalMutation1233() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule7_literalMutation1233");
+    public void testRule7_literalMutation1328() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule7_literalMutation1328");
         assertEncodings(new String[]{ "XA" , "foo" }, new String[]{ "XAS" , "X" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1939,8 +1939,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule7_literalMutation1234() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule7_literalMutation1234");
+    public void testRule7_literalMutation1329() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule7_literalMutation1329");
         assertEncodings(new String[]{ "XA" , "X" }, new String[]{ "foo" , "X" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1951,9 +1951,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
      * @throws EncoderException
      */
 @Test
-    public void testRule7_literalMutation1235() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule7_literalMutation1235");
-        assertEncodings(new String[]{ "XA" , "X" }, new String[]{ "XAS" , "foo" });
+    public void testRule7_literalMutation1330() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRule7_literalMutation1330");
+        assertEncodings(new String[]{ "XA" , "X" }, new String[]{ "XAS" , "bar" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1984,9 +1984,9 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
     }
 
     @Test
-    public void testSnad_literalMutation1237() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSnad_literalMutation1237");
-        encodeAll(new String[]{ "Schmidt" }, "foo");
+    public void testSnad_literalMutation1332() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSnad_literalMutation1332");
+        encodeAll(new String[]{ "Schmidt" }, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2007,21 +2007,21 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
     @Test
     public void testSnat() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSnat");
-        encodeAll(new String[]{ "foo" , "Schmit" }, "SNAT");
+        encodeAll(new String[]{ "bar" , "Schmit" }, "SNAT");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testSnat_literalMutation1239() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSnat_literalMutation1239");
+    public void testSnat_literalMutation1334() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSnat_literalMutation1334");
         encodeAll(new String[]{ "Smith" , "foo" }, "SNAT");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testSnat_literalMutation1240() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSnat_literalMutation1240");
-        encodeAll(new String[]{ "Smith" , "Schmit" }, "foo");
+    public void testSnat_literalMutation1335() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSnat_literalMutation1335");
+        encodeAll(new String[]{ "Smith" , "Schmit" }, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2143,8 +2143,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
     }
 
     @Test
-    public void testSpecialBranches_literalMutation1242() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1242");
+    public void testSpecialBranches_literalMutation1337() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1337");
         encodeAll(new String[]{ "Kobwick" }, "foo");
         encodeAll(new String[]{ "Kocher" }, "CACAR");
         encodeAll(new String[]{ "Fesca" }, "FASC");
@@ -2156,8 +2156,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
     }
 
     @Test
-    public void testSpecialBranches_literalMutation1243() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1243");
+    public void testSpecialBranches_literalMutation1338() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1338");
         encodeAll(new String[]{ "Kobwick" }, "CABWAC");
         encodeAll(new String[]{ "foo" }, "CACAR");
         encodeAll(new String[]{ "Fesca" }, "FASC");
@@ -2169,10 +2169,10 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
     }
 
     @Test
-    public void testSpecialBranches_literalMutation1244() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1244");
+    public void testSpecialBranches_literalMutation1339() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1339");
         encodeAll(new String[]{ "Kobwick" }, "CABWAC");
-        encodeAll(new String[]{ "Kocher" }, "foo");
+        encodeAll(new String[]{ "Kocher" }, "bar");
         encodeAll(new String[]{ "Fesca" }, "FASC");
         encodeAll(new String[]{ "Shom" }, "SAN");
         encodeAll(new String[]{ "Ohlo" }, "OL");
@@ -2182,11 +2182,11 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
     }
 
     @Test
-    public void testSpecialBranches_literalMutation1245() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1245");
+    public void testSpecialBranches_literalMutation1340() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1340");
         encodeAll(new String[]{ "Kobwick" }, "CABWAC");
         encodeAll(new String[]{ "Kocher" }, "CACAR");
-        encodeAll(new String[]{ "foo" }, "FASC");
+        encodeAll(new String[]{ "bar" }, "FASC");
         encodeAll(new String[]{ "Shom" }, "SAN");
         encodeAll(new String[]{ "Ohlo" }, "OL");
         encodeAll(new String[]{ "Uhu" }, "UH");
@@ -2195,11 +2195,11 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
     }
 
     @Test
-    public void testSpecialBranches_literalMutation1246() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1246");
+    public void testSpecialBranches_literalMutation1341() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1341");
         encodeAll(new String[]{ "Kobwick" }, "CABWAC");
         encodeAll(new String[]{ "Kocher" }, "CACAR");
-        encodeAll(new String[]{ "Fesca" }, "foo");
+        encodeAll(new String[]{ "Fesca" }, "bar");
         encodeAll(new String[]{ "Shom" }, "SAN");
         encodeAll(new String[]{ "Ohlo" }, "OL");
         encodeAll(new String[]{ "Uhu" }, "UH");
@@ -2208,8 +2208,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
     }
 
     @Test
-    public void testSpecialBranches_literalMutation1247() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1247");
+    public void testSpecialBranches_literalMutation1342() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1342");
         encodeAll(new String[]{ "Kobwick" }, "CABWAC");
         encodeAll(new String[]{ "Kocher" }, "CACAR");
         encodeAll(new String[]{ "Fesca" }, "FASC");
@@ -2221,12 +2221,12 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
     }
 
     @Test
-    public void testSpecialBranches_literalMutation1248() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1248");
+    public void testSpecialBranches_literalMutation1343() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1343");
         encodeAll(new String[]{ "Kobwick" }, "CABWAC");
         encodeAll(new String[]{ "Kocher" }, "CACAR");
         encodeAll(new String[]{ "Fesca" }, "FASC");
-        encodeAll(new String[]{ "Shom" }, "foo");
+        encodeAll(new String[]{ "Shom" }, "bar");
         encodeAll(new String[]{ "Ohlo" }, "OL");
         encodeAll(new String[]{ "Uhu" }, "UH");
         encodeAll(new String[]{ "Um" }, "UN");
@@ -2234,47 +2234,47 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
     }
 
     @Test
-    public void testSpecialBranches_literalMutation1249() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1249");
+    public void testSpecialBranches_literalMutation1344() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1344");
         encodeAll(new String[]{ "Kobwick" }, "CABWAC");
         encodeAll(new String[]{ "Kocher" }, "CACAR");
         encodeAll(new String[]{ "Fesca" }, "FASC");
         encodeAll(new String[]{ "Shom" }, "SAN");
-        encodeAll(new String[]{ "foo" }, "OL");
+        encodeAll(new String[]{ "bar" }, "OL");
         encodeAll(new String[]{ "Uhu" }, "UH");
         encodeAll(new String[]{ "Um" }, "UN");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testSpecialBranches_literalMutation1250() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1250");
+    public void testSpecialBranches_literalMutation1345() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1345");
         encodeAll(new String[]{ "Kobwick" }, "CABWAC");
         encodeAll(new String[]{ "Kocher" }, "CACAR");
         encodeAll(new String[]{ "Fesca" }, "FASC");
         encodeAll(new String[]{ "Shom" }, "SAN");
-        encodeAll(new String[]{ "Ohlo" }, "foo");
+        encodeAll(new String[]{ "Ohlo" }, "bar");
         encodeAll(new String[]{ "Uhu" }, "UH");
         encodeAll(new String[]{ "Um" }, "UN");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testSpecialBranches_literalMutation1251() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1251");
+    public void testSpecialBranches_literalMutation1346() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1346");
         encodeAll(new String[]{ "Kobwick" }, "CABWAC");
         encodeAll(new String[]{ "Kocher" }, "CACAR");
         encodeAll(new String[]{ "Fesca" }, "FASC");
         encodeAll(new String[]{ "Shom" }, "SAN");
         encodeAll(new String[]{ "Ohlo" }, "OL");
-        encodeAll(new String[]{ "foo" }, "UH");
+        encodeAll(new String[]{ "bar" }, "UH");
         encodeAll(new String[]{ "Um" }, "UN");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testSpecialBranches_literalMutation1252() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1252");
+    public void testSpecialBranches_literalMutation1347() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1347");
         encodeAll(new String[]{ "Kobwick" }, "CABWAC");
         encodeAll(new String[]{ "Kocher" }, "CACAR");
         encodeAll(new String[]{ "Fesca" }, "FASC");
@@ -2286,8 +2286,8 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
     }
 
     @Test
-    public void testSpecialBranches_literalMutation1253() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1253");
+    public void testSpecialBranches_literalMutation1348() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1348");
         encodeAll(new String[]{ "Kobwick" }, "CABWAC");
         encodeAll(new String[]{ "Kocher" }, "CACAR");
         encodeAll(new String[]{ "Fesca" }, "FASC");
@@ -2299,15 +2299,15 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
     }
 
     @Test
-    public void testSpecialBranches_literalMutation1254() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1254");
+    public void testSpecialBranches_literalMutation1349() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpecialBranches_literalMutation1349");
         encodeAll(new String[]{ "Kobwick" }, "CABWAC");
         encodeAll(new String[]{ "Kocher" }, "CACAR");
         encodeAll(new String[]{ "Fesca" }, "FASC");
         encodeAll(new String[]{ "Shom" }, "SAN");
         encodeAll(new String[]{ "Ohlo" }, "OL");
         encodeAll(new String[]{ "Uhu" }, "UH");
-        encodeAll(new String[]{ "Um" }, "foo");
+        encodeAll(new String[]{ "Um" }, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2406,21 +2406,21 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
     @Test
     public void testTranan() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTranan");
-        encodeAll(new String[]{ "foo" , "Truman" }, "TRANAN");
+        encodeAll(new String[]{ "bar" , "Truman" }, "TRANAN");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testTranan_literalMutation1256() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTranan_literalMutation1256");
+    public void testTranan_literalMutation1351() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTranan_literalMutation1351");
         encodeAll(new String[]{ "Trueman" , "foo" }, "TRANAN");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testTranan_literalMutation1257() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTranan_literalMutation1257");
-        encodeAll(new String[]{ "Trueman" , "Truman" }, "foo");
+    public void testTranan_literalMutation1352() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTranan_literalMutation1352");
+        encodeAll(new String[]{ "Trueman" , "Truman" }, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2441,10 +2441,10 @@ private void assertEncodings(final String[]... testValues) throws EncoderExcepti
     }
 
     @Test
-    public void testTrueVariant_literalMutation1259() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTrueVariant_literalMutation1259");
+    public void testTrueVariant_literalMutation1354() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTrueVariant_literalMutation1354");
         final Nysiis encoder = new Nysiis(true);
-        final String encoded = encoder.encode("foo");
+        final String encoded = encoder.encode("bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),914,((encoded.length()) <= 6));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),915,encoded);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());

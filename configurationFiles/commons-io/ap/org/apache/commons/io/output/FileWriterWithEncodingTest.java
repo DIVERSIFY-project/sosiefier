@@ -1024,8 +1024,8 @@ public class FileWriterWithEncodingTest extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testDifferentEncoding_literalMutation2367() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDifferentEncoding_literalMutation2367");
+    public void testDifferentEncoding_literalMutation3479() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDifferentEncoding_literalMutation3479");
         if (java.nio.charset.Charset.isSupported("UTF-16BE")) {
             FileWriter fw1 = null;
             FileWriterWithEncoding fw2 = null;
@@ -1049,7 +1049,7 @@ public class FileWriterWithEncodingTest extends FileBasedTestCase {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1497,file1,1496,file1.exists());
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1499,file2,1498,file2.exists());
         } 
-        if (java.nio.charset.Charset.isSupported("foo")) {
+        if (java.nio.charset.Charset.isSupported("bar")) {
             FileWriter fw1 = null;
             FileWriterWithEncoding fw2 = null;
             try {

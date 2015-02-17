@@ -71,8 +71,8 @@ public class Sha256CryptTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testSha256CryptWithEmptySalt_literalMutation1415() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSha256CryptWithEmptySalt_literalMutation1415");
+    public void testSha256CryptWithEmptySalt_literalMutation1535() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSha256CryptWithEmptySalt_literalMutation1535");
         org.apache.commons.codec.digest.Sha2Crypt.sha256Crypt("secret".getBytes(), "foo");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -96,6 +96,15 @@ public class Sha256CryptTest {
     @Test
     public void testSha256LargetThanBlocksize() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSha256LargetThanBlocksize");
+        final byte[] buffer = new byte[199];
+        java.util.Arrays.fill(buffer, 0, 200, ((byte)('A')));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1365,null,1364,org.apache.commons.codec.digest.Sha2Crypt.sha256Crypt(buffer, "$5$abc"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSha256LargetThanBlocksize_literalMutation1537() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSha256LargetThanBlocksize_literalMutation1537");
         final byte[] buffer = new byte[201];
         java.util.Arrays.fill(buffer, 0, 200, ((byte)('A')));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1365,null,1364,org.apache.commons.codec.digest.Sha2Crypt.sha256Crypt(buffer, "$5$abc"));
@@ -103,8 +112,26 @@ public class Sha256CryptTest {
     }
 
     @Test
-    public void testSha256LargetThanBlocksize_literalMutation1417() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSha256LargetThanBlocksize_literalMutation1417");
+    public void testSha256LargetThanBlocksize_literalMutation1538() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSha256LargetThanBlocksize_literalMutation1538");
+        final byte[] buffer = new byte[100];
+        java.util.Arrays.fill(buffer, 0, 200, ((byte)('A')));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1365,null,1364,org.apache.commons.codec.digest.Sha2Crypt.sha256Crypt(buffer, "$5$abc"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSha256LargetThanBlocksize_literalMutation1539() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSha256LargetThanBlocksize_literalMutation1539");
+        final byte[] buffer = new byte[400];
+        java.util.Arrays.fill(buffer, 0, 200, ((byte)('A')));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1365,null,1364,org.apache.commons.codec.digest.Sha2Crypt.sha256Crypt(buffer, "$5$abc"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSha256LargetThanBlocksize_literalMutation1540() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSha256LargetThanBlocksize_literalMutation1540");
         final byte[] buffer = new byte[200];
         java.util.Arrays.fill(buffer, 1, 200, ((byte)('A')));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1365,null,1364,org.apache.commons.codec.digest.Sha2Crypt.sha256Crypt(buffer, "$5$abc"));
@@ -112,10 +139,55 @@ public class Sha256CryptTest {
     }
 
     @Test
-    public void testSha256LargetThanBlocksize_literalMutation1418() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSha256LargetThanBlocksize_literalMutation1418");
+    public void testSha256LargetThanBlocksize_literalMutation1541() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSha256LargetThanBlocksize_literalMutation1541");
+        final byte[] buffer = new byte[200];
+        java.util.Arrays.fill(buffer, -1, 200, ((byte)('A')));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1365,null,1364,org.apache.commons.codec.digest.Sha2Crypt.sha256Crypt(buffer, "$5$abc"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSha256LargetThanBlocksize_literalMutation1542() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSha256LargetThanBlocksize_literalMutation1542");
+        final byte[] buffer = new byte[200];
+        java.util.Arrays.fill(buffer, 0, 200, ((byte)('A')));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1365,null,1364,org.apache.commons.codec.digest.Sha2Crypt.sha256Crypt(buffer, "$5$abc"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSha256LargetThanBlocksize_literalMutation1543() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSha256LargetThanBlocksize_literalMutation1543");
         final byte[] buffer = new byte[200];
         java.util.Arrays.fill(buffer, 0, 199, ((byte)('A')));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1365,null,1364,org.apache.commons.codec.digest.Sha2Crypt.sha256Crypt(buffer, "$5$abc"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSha256LargetThanBlocksize_literalMutation1544() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSha256LargetThanBlocksize_literalMutation1544");
+        final byte[] buffer = new byte[200];
+        java.util.Arrays.fill(buffer, 0, 201, ((byte)('A')));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1365,null,1364,org.apache.commons.codec.digest.Sha2Crypt.sha256Crypt(buffer, "$5$abc"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSha256LargetThanBlocksize_literalMutation1545() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSha256LargetThanBlocksize_literalMutation1545");
+        final byte[] buffer = new byte[200];
+        java.util.Arrays.fill(buffer, 0, 100, ((byte)('A')));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1365,null,1364,org.apache.commons.codec.digest.Sha2Crypt.sha256Crypt(buffer, "$5$abc"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSha256LargetThanBlocksize_literalMutation1546() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSha256LargetThanBlocksize_literalMutation1546");
+        final byte[] buffer = new byte[200];
+        java.util.Arrays.fill(buffer, 0, 400, ((byte)('A')));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1365,null,1364,org.apache.commons.codec.digest.Sha2Crypt.sha256Crypt(buffer, "$5$abc"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }

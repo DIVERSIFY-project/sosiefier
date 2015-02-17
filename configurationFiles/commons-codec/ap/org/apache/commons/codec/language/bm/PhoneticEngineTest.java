@@ -40,7 +40,7 @@ public class PhoneticEngineTest {
         this.maxPhonemes = maxPhonemes;
     }
 
-    @Test(timeout = 10000L)
+    @Test(timeout = 10001L)
     public void testEncode() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncode");
         final PhoneticEngine engine = new PhoneticEngine(this.nameType , this.ruleType , this.concat , this.maxPhonemes);
@@ -60,9 +60,69 @@ public class PhoneticEngineTest {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 9999L)
+    public void testEncode_literalMutation312() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncode_literalMutation312");
+        final PhoneticEngine engine = new PhoneticEngine(this.nameType , this.ruleType , this.concat , this.maxPhonemes);
+        final String phoneticActual = engine.encode(this.name);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),345,this.phoneticExpected);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),346,phoneticActual);
+        if (this.concat) {
+            final String[] split = phoneticActual.split("\\|");
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),347,((split.length) <= (this.maxPhonemes)));
+        } else {
+            final String[] words = phoneticActual.split("-");
+            for (final String word : words) {
+                final String[] split = word.split("\\|");
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),348,((split.length) <= (this.maxPhonemes)));
+            }
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 5000L)
+    public void testEncode_literalMutation313() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncode_literalMutation313");
+        final PhoneticEngine engine = new PhoneticEngine(this.nameType , this.ruleType , this.concat , this.maxPhonemes);
+        final String phoneticActual = engine.encode(this.name);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),345,this.phoneticExpected);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),346,phoneticActual);
+        if (this.concat) {
+            final String[] split = phoneticActual.split("\\|");
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),347,((split.length) <= (this.maxPhonemes)));
+        } else {
+            final String[] words = phoneticActual.split("-");
+            for (final String word : words) {
+                final String[] split = word.split("\\|");
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),348,((split.length) <= (this.maxPhonemes)));
+            }
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 20000L)
+    public void testEncode_literalMutation314() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncode_literalMutation314");
+        final PhoneticEngine engine = new PhoneticEngine(this.nameType , this.ruleType , this.concat , this.maxPhonemes);
+        final String phoneticActual = engine.encode(this.name);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),345,this.phoneticExpected);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),346,phoneticActual);
+        if (this.concat) {
+            final String[] split = phoneticActual.split("\\|");
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),347,((split.length) <= (this.maxPhonemes)));
+        } else {
+            final String[] words = phoneticActual.split("-");
+            for (final String word : words) {
+                final String[] split = word.split("\\|");
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),348,((split.length) <= (this.maxPhonemes)));
+            }
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     @Test(timeout = 10000L)
-    public void testEncode_literalMutation250() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncode_literalMutation250");
+    public void testEncode_literalMutation315() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncode_literalMutation315");
         final PhoneticEngine engine = new PhoneticEngine(this.nameType , this.ruleType , this.concat , this.maxPhonemes);
         final String phoneticActual = engine.encode(this.name);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),345,this.phoneticExpected);
@@ -81,8 +141,8 @@ public class PhoneticEngineTest {
     }
 
     @Test(timeout = 10000L)
-    public void testEncode_literalMutation251() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncode_literalMutation251");
+    public void testEncode_literalMutation316() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncode_literalMutation316");
         final PhoneticEngine engine = new PhoneticEngine(this.nameType , this.ruleType , this.concat , this.maxPhonemes);
         final String phoneticActual = engine.encode(this.name);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),345,this.phoneticExpected);
@@ -101,8 +161,8 @@ public class PhoneticEngineTest {
     }
 
     @Test(timeout = 10000L)
-    public void testEncode_literalMutation252() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncode_literalMutation252");
+    public void testEncode_literalMutation317() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncode_literalMutation317");
         final PhoneticEngine engine = new PhoneticEngine(this.nameType , this.ruleType , this.concat , this.maxPhonemes);
         final String phoneticActual = engine.encode(this.name);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),345,this.phoneticExpected);
@@ -113,7 +173,7 @@ public class PhoneticEngineTest {
         } else {
             final String[] words = phoneticActual.split("-");
             for (final String word : words) {
-                final String[] split = word.split("foo");
+                final String[] split = word.split("bar");
                 fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),348,((split.length) <= (this.maxPhonemes)));
             }
         }

@@ -150,8 +150,8 @@ public class PhoneticEnginePerformanceTest {
     }
 
     @Test
-    public void test_literalMutation171() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation171");
+    public void test_literalMutation231() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation231");
         final PhoneticEngine engine = new PhoneticEngine(NameType.GENERIC , RuleType.APPROX , false);
         final String input = "Angelo";
         final long startMillis = System.currentTimeMillis();
@@ -164,10 +164,10 @@ public class PhoneticEnginePerformanceTest {
     }
 
     @Test
-    public void test_literalMutation172() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation172");
+    public void test_literalMutation232() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation232");
         final PhoneticEngine engine = new PhoneticEngine(NameType.GENERIC , RuleType.APPROX , true);
-        final String input = "foo";
+        final String input = "bar";
         final long startMillis = System.currentTimeMillis();
         for (int i = 0 ; i < (LOOP) ; i++) {
             engine.encode(input);
@@ -178,8 +178,8 @@ public class PhoneticEnginePerformanceTest {
     }
 
     @Test
-    public void test_literalMutation173() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation173");
+    public void test_literalMutation233() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation233");
         final PhoneticEngine engine = new PhoneticEngine(NameType.GENERIC , RuleType.APPROX , true);
         final String input = "Angelo";
         final long startMillis = System.currentTimeMillis();
@@ -192,8 +192,36 @@ public class PhoneticEnginePerformanceTest {
     }
 
     @Test
-    public void test_literalMutation174() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation174");
+    public void test_literalMutation234() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation234");
+        final PhoneticEngine engine = new PhoneticEngine(NameType.GENERIC , RuleType.APPROX , true);
+        final String input = "Angelo";
+        final long startMillis = System.currentTimeMillis();
+        for (int i = -1 ; i < (LOOP) ; i++) {
+            engine.encode(input);
+        }
+        final long totalMillis = (System.currentTimeMillis()) - startMillis;
+        System.out.println(String.format("Time for encoding %,d times the input \'%s\': %,d millis.", LOOP, input, totalMillis));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void test_literalMutation235() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation235");
+        final PhoneticEngine engine = new PhoneticEngine(NameType.GENERIC , RuleType.APPROX , true);
+        final String input = "Angelo";
+        final long startMillis = System.currentTimeMillis();
+        for (int i = 0 ; i < (LOOP) ; i++) {
+            engine.encode(input);
+        }
+        final long totalMillis = (System.currentTimeMillis()) - startMillis;
+        System.out.println(String.format("Time for encoding %,d times the input \'%s\': %,d millis.", LOOP, input, totalMillis));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void test_literalMutation236() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_literalMutation236");
         final PhoneticEngine engine = new PhoneticEngine(NameType.GENERIC , RuleType.APPROX , true);
         final String input = "Angelo";
         final long startMillis = System.currentTimeMillis();

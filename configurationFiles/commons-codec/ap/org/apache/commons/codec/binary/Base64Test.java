@@ -52,7 +52,7 @@ public Random getRandom() {
     public void testIsStringBase64() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsStringBase64");
         final String nullString = null;
-        final String emptyString = "foo";
+        final String emptyString = "bar";
         final String validString = "abc===defg\n\r123456\r789\r\rABC\n\nDEF==GHI\r\nJKL==============";
         final String invalidString = validString + ((char)(0));
         try {
@@ -70,11 +70,11 @@ public Random getRandom() {
      * Test the isStringBase64 method.
      */
 @Test
-    public void testIsStringBase64_literalMutation1845() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsStringBase64_literalMutation1845");
+    public void testIsStringBase64_literalMutation2561() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsStringBase64_literalMutation2561");
         final String nullString = null;
         final String emptyString = "";
-        final String validString = "foo";
+        final String validString = "bar";
         final String invalidString = validString + ((char)(0));
         try {
             Base64.isBase64(nullString);
@@ -91,12 +91,54 @@ public Random getRandom() {
      * Test the isStringBase64 method.
      */
 @Test
-    public void testIsStringBase64_literalMutation1846() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsStringBase64_literalMutation1846");
+    public void testIsStringBase64_literalMutation2562() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsStringBase64_literalMutation2562");
         final String nullString = null;
         final String emptyString = "";
         final String validString = "abc===defg\n\r123456\r789\r\rABC\n\nDEF==GHI\r\nJKL==============";
         final String invalidString = validString + ((char)(1));
+        try {
+            Base64.isBase64(nullString);
+        } catch (final NullPointerException npe) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1809,npe);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1811,null,1810,org.apache.commons.codec.binary.Base64.isBase64(emptyString));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1813,null,1812,org.apache.commons.codec.binary.Base64.isBase64(validString));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1815,null,1814,org.apache.commons.codec.binary.Base64.isBase64(invalidString));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the isStringBase64 method.
+     */
+@Test
+    public void testIsStringBase64_literalMutation2563() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsStringBase64_literalMutation2563");
+        final String nullString = null;
+        final String emptyString = "";
+        final String validString = "abc===defg\n\r123456\r789\r\rABC\n\nDEF==GHI\r\nJKL==============";
+        final String invalidString = validString + ((char)(-1));
+        try {
+            Base64.isBase64(nullString);
+        } catch (final NullPointerException npe) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1809,npe);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1811,null,1810,org.apache.commons.codec.binary.Base64.isBase64(emptyString));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1813,null,1812,org.apache.commons.codec.binary.Base64.isBase64(validString));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1815,null,1814,org.apache.commons.codec.binary.Base64.isBase64(invalidString));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the isStringBase64 method.
+     */
+@Test
+    public void testIsStringBase64_literalMutation2564() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsStringBase64_literalMutation2564");
+        final String nullString = null;
+        final String emptyString = "";
+        final String validString = "abc===defg\n\r123456\r789\r\rABC\n\nDEF==GHI\r\nJKL==============";
+        final String invalidString = validString + ((char)(0));
         try {
             Base64.isBase64(nullString);
         } catch (final NullPointerException npe) {
@@ -114,7 +156,7 @@ public Random getRandom() {
 @Test
     public void testBase64() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase64");
-        final String content = "foo";
+        final String content = "bar";
         String encodedContent;
         byte[] encodedBytes = Base64.encodeBase64(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(content));
         encodedContent = org.apache.commons.codec.binary.StringUtils.newStringUtf8(encodedBytes);
@@ -137,8 +179,33 @@ public Random getRandom() {
      * Test the Base64 implementation
      */
 @Test
-    public void testBase64_literalMutation1736() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase64_literalMutation1736");
+    public void testBase64_literalMutation2361() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase64_literalMutation2361");
+        final String content = "Hello World";
+        String encodedContent;
+        byte[] encodedBytes = Base64.encodeBase64(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(content));
+        encodedContent = org.apache.commons.codec.binary.StringUtils.newStringUtf8(encodedBytes);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1695,encodedContent);
+        Base64 b64 = new Base64(BaseNCodec.MIME_CHUNK_SIZE , null);
+        encodedBytes = b64.encode(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(content));
+        encodedContent = org.apache.commons.codec.binary.StringUtils.newStringUtf8(encodedBytes);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1696,encodedContent);
+        b64 = new Base64(1 , null);
+        encodedBytes = b64.encode(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(content));
+        encodedContent = org.apache.commons.codec.binary.StringUtils.newStringUtf8(encodedBytes);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1697,encodedContent);
+        final byte[] decode = b64.decode("SGVsbG{éééééé}8gV29ybGQ=");
+        final String decodeString = org.apache.commons.codec.binary.StringUtils.newStringUtf8(decode);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1698,decodeString);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base64 implementation
+     */
+@Test
+    public void testBase64_literalMutation2362() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase64_literalMutation2362");
         final String content = "Hello World";
         String encodedContent;
         byte[] encodedBytes = Base64.encodeBase64(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(content));
@@ -162,8 +229,33 @@ public Random getRandom() {
      * Test the Base64 implementation
      */
 @Test
-    public void testBase64_literalMutation1738() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase64_literalMutation1738");
+    public void testBase64_literalMutation2363() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase64_literalMutation2363");
+        final String content = "Hello World";
+        String encodedContent;
+        byte[] encodedBytes = Base64.encodeBase64(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(content));
+        encodedContent = org.apache.commons.codec.binary.StringUtils.newStringUtf8(encodedBytes);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1695,encodedContent);
+        Base64 b64 = new Base64(BaseNCodec.MIME_CHUNK_SIZE , null);
+        encodedBytes = b64.encode(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(content));
+        encodedContent = org.apache.commons.codec.binary.StringUtils.newStringUtf8(encodedBytes);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1696,encodedContent);
+        b64 = new Base64(0 , null);
+        encodedBytes = b64.encode(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(content));
+        encodedContent = org.apache.commons.codec.binary.StringUtils.newStringUtf8(encodedBytes);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1697,encodedContent);
+        final byte[] decode = b64.decode("SGVsbG{éééééé}8gV29ybGQ=");
+        final String decodeString = org.apache.commons.codec.binary.StringUtils.newStringUtf8(decode);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1698,decodeString);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test the Base64 implementation
+     */
+@Test
+    public void testBase64_literalMutation2365() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBase64_literalMutation2365");
         final String content = "Hello World";
         String encodedContent;
         byte[] encodedBytes = Base64.encodeBase64(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(content));
@@ -198,7 +290,7 @@ public Random getRandom() {
 @Test
     public void testDecodeWithInnerPad() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithInnerPad");
-        final String content = "foo";
+        final String content = "bar";
         final byte[] result = Base64.decodeBase64(content);
         final byte[] shouldBe = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("Hello World");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1762,null,1761,java.util.Arrays.equals(result, shouldBe));
@@ -218,11 +310,11 @@ public Random getRandom() {
      * and 1.4 unwittingly changed it to current logic.
      */
 @Test
-    public void testDecodeWithInnerPad_literalMutation1814() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithInnerPad_literalMutation1814");
+    public void testDecodeWithInnerPad_literalMutation2480() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithInnerPad_literalMutation2480");
         final String content = "SGVsbG8gV29ybGQ=SGVsbG8gV29ybGQ=";
         final byte[] result = Base64.decodeBase64(content);
-        final byte[] shouldBe = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("foo");
+        final byte[] shouldBe = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1762,null,1761,java.util.Arrays.equals(result, shouldBe));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -244,8 +336,8 @@ public Random getRandom() {
      * Tests Base64.encodeBase64().
      */
 @Test
-    public void testChunkedEncodeMultipleOf76_literalMutation1745() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testChunkedEncodeMultipleOf76_literalMutation1745");
+    public void testChunkedEncodeMultipleOf76_literalMutation2376() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testChunkedEncodeMultipleOf76_literalMutation2376");
         final byte[] expectedEncode = Base64.encodeBase64(Base64TestData.DECODED, true);
         final String actualResult = Base64TestData.ENCODED_76_CHARS_PER_LINE.replaceAll("foo", "\r\n");
         final byte[] actualEncode = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(actualResult);
@@ -257,8 +349,8 @@ public Random getRandom() {
      * Tests Base64.encodeBase64().
      */
 @Test
-    public void testChunkedEncodeMultipleOf76_literalMutation1746() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testChunkedEncodeMultipleOf76_literalMutation1746");
+    public void testChunkedEncodeMultipleOf76_literalMutation2377() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testChunkedEncodeMultipleOf76_literalMutation2377");
         final byte[] expectedEncode = Base64.encodeBase64(Base64TestData.DECODED, true);
         final String actualResult = Base64TestData.ENCODED_76_CHARS_PER_LINE.replaceAll("\n", "foo");
         final byte[] actualEncode = org.apache.commons.codec.binary.StringUtils.getBytesUtf8(actualResult);
@@ -284,7 +376,40 @@ public Random getRandom() {
 @Test
     public void testCodec68() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodec68");
+        final byte[] x = new byte[]{ 'n' , 'A' , '=' , '=' , ((byte)(157)) };
+        Base64.decodeBase64(x);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * CODEC-68: isBase64 throws ArrayIndexOutOfBoundsException on some non-BASE64 bytes
+     */
+@Test
+    public void testCodec68_literalMutation2410() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodec68_literalMutation2410");
         final byte[] x = new byte[]{ 'n' , 'A' , '=' , '=' , ((byte)(155)) };
+        Base64.decodeBase64(x);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * CODEC-68: isBase64 throws ArrayIndexOutOfBoundsException on some non-BASE64 bytes
+     */
+@Test
+    public void testCodec68_literalMutation2411() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodec68_literalMutation2411");
+        final byte[] x = new byte[]{ 'n' , 'A' , '=' , '=' , ((byte)(78)) };
+        Base64.decodeBase64(x);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * CODEC-68: isBase64 throws ArrayIndexOutOfBoundsException on some non-BASE64 bytes
+     */
+@Test
+    public void testCodec68_literalMutation2412() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodec68_literalMutation2412");
+        final byte[] x = new byte[]{ 'n' , 'A' , '=' , '=' , ((byte)(312)) };
         Base64.decodeBase64(x);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -312,10 +437,10 @@ public Random getRandom() {
     }
 
     @Test
-    public void testCodeInteger1_literalMutation1748() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger1_literalMutation1748");
+    public void testCodeInteger1_literalMutation2379() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger1_literalMutation2379");
         final String encodedInt1 = "li7dzDacuo67Jg7mtqEm2TRuOMU=";
-        final BigInteger bigInt1 = new BigInteger(("foo" + "0318636601332086981"));
+        final BigInteger bigInt1 = new BigInteger(("bar" + "0318636601332086981"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1719,encodedInt1);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1720,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeInteger(bigInt1)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1721,bigInt1);
@@ -324,8 +449,8 @@ public Random getRandom() {
     }
 
     @Test
-    public void testCodeInteger1_literalMutation1749() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger1_literalMutation1749");
+    public void testCodeInteger1_literalMutation2380() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger1_literalMutation2380");
         final String encodedInt1 = "li7dzDacuo67Jg7mtqEm2TRuOMU=";
         final BigInteger bigInt1 = new BigInteger(("85739377120809420210425962799" + "foo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1719,encodedInt1);
@@ -348,10 +473,10 @@ public Random getRandom() {
     }
 
     @Test
-    public void testCodeInteger2_literalMutation1751() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger2_literalMutation1751");
+    public void testCodeInteger2_literalMutation2382() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger2_literalMutation2382");
         final String encodedInt2 = "9B5ypLY9pMOmtxCeTDHgwdNFeGs=";
-        final BigInteger bigInt2 = new BigInteger(("foo" + "91466679477132949611"));
+        final BigInteger bigInt2 = new BigInteger(("bar" + "91466679477132949611"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1724,encodedInt2);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1725,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeInteger(bigInt2)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1726,bigInt2);
@@ -360,8 +485,8 @@ public Random getRandom() {
     }
 
     @Test
-    public void testCodeInteger2_literalMutation1752() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger2_literalMutation1752");
+    public void testCodeInteger2_literalMutation2383() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger2_literalMutation2383");
         final String encodedInt2 = "9B5ypLY9pMOmtxCeTDHgwdNFeGs=";
         final BigInteger bigInt2 = new BigInteger(("13936727572861167254666467268" + "foo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1724,encodedInt2);
@@ -374,7 +499,7 @@ public Random getRandom() {
     @Test
     public void testCodeInteger3() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger3");
-        final String encodedInt3 = "foo" + "rY+1LFWTK6D44AyiC1n8uWz1itkYMZF0/aKDK0Yjg==";
+        final String encodedInt3 = "bar" + "rY+1LFWTK6D44AyiC1n8uWz1itkYMZF0/aKDK0Yjg==";
         final BigInteger bigInt3 = new BigInteger(("10806548154093873461951748545" + ("1196989136416448805819079363524309897749044958112417136240557" + "4495062430572478766856090958495998158114332651671116876320938126")));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1729,encodedInt3);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1730,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeInteger(bigInt3)));
@@ -384,8 +509,8 @@ public Random getRandom() {
     }
 
     @Test
-    public void testCodeInteger3_literalMutation1754() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger3_literalMutation1754");
+    public void testCodeInteger3_literalMutation2385() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger3_literalMutation2385");
         final String encodedInt3 = "FKIhdgaG5LGKiEtF1vHy4f3y700zaD6QwDS3IrNVGzNp2" + "foo";
         final BigInteger bigInt3 = new BigInteger(("10806548154093873461951748545" + ("1196989136416448805819079363524309897749044958112417136240557" + "4495062430572478766856090958495998158114332651671116876320938126")));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1729,encodedInt3);
@@ -396,10 +521,10 @@ public Random getRandom() {
     }
 
     @Test
-    public void testCodeInteger3_literalMutation1755() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger3_literalMutation1755");
+    public void testCodeInteger3_literalMutation2386() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger3_literalMutation2386");
         final String encodedInt3 = "FKIhdgaG5LGKiEtF1vHy4f3y700zaD6QwDS3IrNVGzNp2" + "rY+1LFWTK6D44AyiC1n8uWz1itkYMZF0/aKDK0Yjg==";
-        final BigInteger bigInt3 = new BigInteger(("foo" + ("1196989136416448805819079363524309897749044958112417136240557" + "4495062430572478766856090958495998158114332651671116876320938126")));
+        final BigInteger bigInt3 = new BigInteger(("bar" + ("1196989136416448805819079363524309897749044958112417136240557" + "4495062430572478766856090958495998158114332651671116876320938126")));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1729,encodedInt3);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1730,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeInteger(bigInt3)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1731,bigInt3);
@@ -408,8 +533,8 @@ public Random getRandom() {
     }
 
     @Test
-    public void testCodeInteger3_literalMutation1756() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger3_literalMutation1756");
+    public void testCodeInteger3_literalMutation2387() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger3_literalMutation2387");
         final String encodedInt3 = "FKIhdgaG5LGKiEtF1vHy4f3y700zaD6QwDS3IrNVGzNp2" + "rY+1LFWTK6D44AyiC1n8uWz1itkYMZF0/aKDK0Yjg==";
         final BigInteger bigInt3 = new BigInteger(("10806548154093873461951748545" + ("foo" + "4495062430572478766856090958495998158114332651671116876320938126")));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1729,encodedInt3);
@@ -420,10 +545,10 @@ public Random getRandom() {
     }
 
     @Test
-    public void testCodeInteger3_literalMutation1757() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger3_literalMutation1757");
+    public void testCodeInteger3_literalMutation2388() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger3_literalMutation2388");
         final String encodedInt3 = "FKIhdgaG5LGKiEtF1vHy4f3y700zaD6QwDS3IrNVGzNp2" + "rY+1LFWTK6D44AyiC1n8uWz1itkYMZF0/aKDK0Yjg==";
-        final BigInteger bigInt3 = new BigInteger(("10806548154093873461951748545" + ("1196989136416448805819079363524309897749044958112417136240557" + "foo")));
+        final BigInteger bigInt3 = new BigInteger(("10806548154093873461951748545" + ("1196989136416448805819079363524309897749044958112417136240557" + "bar")));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1729,encodedInt3);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1730,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeInteger(bigInt3)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1731,bigInt3);
@@ -434,7 +559,7 @@ public Random getRandom() {
     @Test
     public void testCodeInteger4() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger4");
-        final String encodedInt4 = "foo" + ("4iDm68fnp4Mi3RrJ6bZAygFrUIQLxLjV+OJtgJAEto0xAs+Mehuq1DkSFEpP3o" + ("DzCTOsrOiS1DwQe4oIb7zVk/9l7aPtJMHW0LVlMdwZNFNNJoqMcT2ZfCPrfvYv" + "Q0="));
+        final String encodedInt4 = "bar" + ("4iDm68fnp4Mi3RrJ6bZAygFrUIQLxLjV+OJtgJAEto0xAs+Mehuq1DkSFEpP3o" + ("DzCTOsrOiS1DwQe4oIb7zVk/9l7aPtJMHW0LVlMdwZNFNNJoqMcT2ZfCPrfvYv" + "Q0="));
         final BigInteger bigInt4 = new BigInteger(("80624726256040348115552042320" + ("6968135001872753709424419772586693950232350200555646471175944" + ("519297087885987040810778908507262272892702303774422853675597" + ("748008534040890923814202286633163248086055216976551456088015" + ("338880713818192088877057717530169381044092839402438015097654" + "53542091716518238707344493641683483917"))))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1734,encodedInt4);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1735,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeInteger(bigInt4)));
@@ -444,8 +569,8 @@ public Random getRandom() {
     }
 
     @Test
-    public void testCodeInteger4_literalMutation1759() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger4_literalMutation1759");
+    public void testCodeInteger4_literalMutation2390() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger4_literalMutation2390");
         final String encodedInt4 = "ctA8YGxrtngg/zKVvqEOefnwmViFztcnPBYPlJsvh6yKI" + ("foo" + ("DzCTOsrOiS1DwQe4oIb7zVk/9l7aPtJMHW0LVlMdwZNFNNJoqMcT2ZfCPrfvYv" + "Q0="));
         final BigInteger bigInt4 = new BigInteger(("80624726256040348115552042320" + ("6968135001872753709424419772586693950232350200555646471175944" + ("519297087885987040810778908507262272892702303774422853675597" + ("748008534040890923814202286633163248086055216976551456088015" + ("338880713818192088877057717530169381044092839402438015097654" + "53542091716518238707344493641683483917"))))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1734,encodedInt4);
@@ -456,8 +581,8 @@ public Random getRandom() {
     }
 
     @Test
-    public void testCodeInteger4_literalMutation1760() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger4_literalMutation1760");
+    public void testCodeInteger4_literalMutation2391() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger4_literalMutation2391");
         final String encodedInt4 = "ctA8YGxrtngg/zKVvqEOefnwmViFztcnPBYPlJsvh6yKI" + ("4iDm68fnp4Mi3RrJ6bZAygFrUIQLxLjV+OJtgJAEto0xAs+Mehuq1DkSFEpP3o" + ("foo" + "Q0="));
         final BigInteger bigInt4 = new BigInteger(("80624726256040348115552042320" + ("6968135001872753709424419772586693950232350200555646471175944" + ("519297087885987040810778908507262272892702303774422853675597" + ("748008534040890923814202286633163248086055216976551456088015" + ("338880713818192088877057717530169381044092839402438015097654" + "53542091716518238707344493641683483917"))))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1734,encodedInt4);
@@ -468,8 +593,8 @@ public Random getRandom() {
     }
 
     @Test
-    public void testCodeInteger4_literalMutation1761() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger4_literalMutation1761");
+    public void testCodeInteger4_literalMutation2392() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger4_literalMutation2392");
         final String encodedInt4 = "ctA8YGxrtngg/zKVvqEOefnwmViFztcnPBYPlJsvh6yKI" + ("4iDm68fnp4Mi3RrJ6bZAygFrUIQLxLjV+OJtgJAEto0xAs+Mehuq1DkSFEpP3o" + ("DzCTOsrOiS1DwQe4oIb7zVk/9l7aPtJMHW0LVlMdwZNFNNJoqMcT2ZfCPrfvYv" + "foo"));
         final BigInteger bigInt4 = new BigInteger(("80624726256040348115552042320" + ("6968135001872753709424419772586693950232350200555646471175944" + ("519297087885987040810778908507262272892702303774422853675597" + ("748008534040890923814202286633163248086055216976551456088015" + ("338880713818192088877057717530169381044092839402438015097654" + "53542091716518238707344493641683483917"))))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1734,encodedInt4);
@@ -480,8 +605,8 @@ public Random getRandom() {
     }
 
     @Test
-    public void testCodeInteger4_literalMutation1762() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger4_literalMutation1762");
+    public void testCodeInteger4_literalMutation2393() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger4_literalMutation2393");
         final String encodedInt4 = "ctA8YGxrtngg/zKVvqEOefnwmViFztcnPBYPlJsvh6yKI" + ("4iDm68fnp4Mi3RrJ6bZAygFrUIQLxLjV+OJtgJAEto0xAs+Mehuq1DkSFEpP3o" + ("DzCTOsrOiS1DwQe4oIb7zVk/9l7aPtJMHW0LVlMdwZNFNNJoqMcT2ZfCPrfvYv" + "Q0="));
         final BigInteger bigInt4 = new BigInteger(("foo" + ("6968135001872753709424419772586693950232350200555646471175944" + ("519297087885987040810778908507262272892702303774422853675597" + ("748008534040890923814202286633163248086055216976551456088015" + ("338880713818192088877057717530169381044092839402438015097654" + "53542091716518238707344493641683483917"))))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1734,encodedInt4);
@@ -492,10 +617,10 @@ public Random getRandom() {
     }
 
     @Test
-    public void testCodeInteger4_literalMutation1763() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger4_literalMutation1763");
+    public void testCodeInteger4_literalMutation2394() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger4_literalMutation2394");
         final String encodedInt4 = "ctA8YGxrtngg/zKVvqEOefnwmViFztcnPBYPlJsvh6yKI" + ("4iDm68fnp4Mi3RrJ6bZAygFrUIQLxLjV+OJtgJAEto0xAs+Mehuq1DkSFEpP3o" + ("DzCTOsrOiS1DwQe4oIb7zVk/9l7aPtJMHW0LVlMdwZNFNNJoqMcT2ZfCPrfvYv" + "Q0="));
-        final BigInteger bigInt4 = new BigInteger(("80624726256040348115552042320" + ("foo" + ("519297087885987040810778908507262272892702303774422853675597" + ("748008534040890923814202286633163248086055216976551456088015" + ("338880713818192088877057717530169381044092839402438015097654" + "53542091716518238707344493641683483917"))))));
+        final BigInteger bigInt4 = new BigInteger(("80624726256040348115552042320" + ("bar" + ("519297087885987040810778908507262272892702303774422853675597" + ("748008534040890923814202286633163248086055216976551456088015" + ("338880713818192088877057717530169381044092839402438015097654" + "53542091716518238707344493641683483917"))))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1734,encodedInt4);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1735,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeInteger(bigInt4)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1736,bigInt4);
@@ -504,10 +629,10 @@ public Random getRandom() {
     }
 
     @Test
-    public void testCodeInteger4_literalMutation1764() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger4_literalMutation1764");
+    public void testCodeInteger4_literalMutation2395() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger4_literalMutation2395");
         final String encodedInt4 = "ctA8YGxrtngg/zKVvqEOefnwmViFztcnPBYPlJsvh6yKI" + ("4iDm68fnp4Mi3RrJ6bZAygFrUIQLxLjV+OJtgJAEto0xAs+Mehuq1DkSFEpP3o" + ("DzCTOsrOiS1DwQe4oIb7zVk/9l7aPtJMHW0LVlMdwZNFNNJoqMcT2ZfCPrfvYv" + "Q0="));
-        final BigInteger bigInt4 = new BigInteger(("80624726256040348115552042320" + ("6968135001872753709424419772586693950232350200555646471175944" + ("foo" + ("748008534040890923814202286633163248086055216976551456088015" + ("338880713818192088877057717530169381044092839402438015097654" + "53542091716518238707344493641683483917"))))));
+        final BigInteger bigInt4 = new BigInteger(("80624726256040348115552042320" + ("6968135001872753709424419772586693950232350200555646471175944" + ("bar" + ("748008534040890923814202286633163248086055216976551456088015" + ("338880713818192088877057717530169381044092839402438015097654" + "53542091716518238707344493641683483917"))))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1734,encodedInt4);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1735,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeInteger(bigInt4)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1736,bigInt4);
@@ -516,10 +641,10 @@ public Random getRandom() {
     }
 
     @Test
-    public void testCodeInteger4_literalMutation1765() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger4_literalMutation1765");
+    public void testCodeInteger4_literalMutation2396() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger4_literalMutation2396");
         final String encodedInt4 = "ctA8YGxrtngg/zKVvqEOefnwmViFztcnPBYPlJsvh6yKI" + ("4iDm68fnp4Mi3RrJ6bZAygFrUIQLxLjV+OJtgJAEto0xAs+Mehuq1DkSFEpP3o" + ("DzCTOsrOiS1DwQe4oIb7zVk/9l7aPtJMHW0LVlMdwZNFNNJoqMcT2ZfCPrfvYv" + "Q0="));
-        final BigInteger bigInt4 = new BigInteger(("80624726256040348115552042320" + ("6968135001872753709424419772586693950232350200555646471175944" + ("519297087885987040810778908507262272892702303774422853675597" + ("foo" + ("338880713818192088877057717530169381044092839402438015097654" + "53542091716518238707344493641683483917"))))));
+        final BigInteger bigInt4 = new BigInteger(("80624726256040348115552042320" + ("6968135001872753709424419772586693950232350200555646471175944" + ("519297087885987040810778908507262272892702303774422853675597" + ("bar" + ("338880713818192088877057717530169381044092839402438015097654" + "53542091716518238707344493641683483917"))))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1734,encodedInt4);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1735,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeInteger(bigInt4)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1736,bigInt4);
@@ -528,10 +653,10 @@ public Random getRandom() {
     }
 
     @Test
-    public void testCodeInteger4_literalMutation1766() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger4_literalMutation1766");
+    public void testCodeInteger4_literalMutation2397() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger4_literalMutation2397");
         final String encodedInt4 = "ctA8YGxrtngg/zKVvqEOefnwmViFztcnPBYPlJsvh6yKI" + ("4iDm68fnp4Mi3RrJ6bZAygFrUIQLxLjV+OJtgJAEto0xAs+Mehuq1DkSFEpP3o" + ("DzCTOsrOiS1DwQe4oIb7zVk/9l7aPtJMHW0LVlMdwZNFNNJoqMcT2ZfCPrfvYv" + "Q0="));
-        final BigInteger bigInt4 = new BigInteger(("80624726256040348115552042320" + ("6968135001872753709424419772586693950232350200555646471175944" + ("519297087885987040810778908507262272892702303774422853675597" + ("748008534040890923814202286633163248086055216976551456088015" + ("foo" + "53542091716518238707344493641683483917"))))));
+        final BigInteger bigInt4 = new BigInteger(("80624726256040348115552042320" + ("6968135001872753709424419772586693950232350200555646471175944" + ("519297087885987040810778908507262272892702303774422853675597" + ("748008534040890923814202286633163248086055216976551456088015" + ("bar" + "53542091716518238707344493641683483917"))))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1734,encodedInt4);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1735,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeInteger(bigInt4)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1736,bigInt4);
@@ -540,10 +665,10 @@ public Random getRandom() {
     }
 
     @Test
-    public void testCodeInteger4_literalMutation1767() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger4_literalMutation1767");
+    public void testCodeInteger4_literalMutation2398() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodeInteger4_literalMutation2398");
         final String encodedInt4 = "ctA8YGxrtngg/zKVvqEOefnwmViFztcnPBYPlJsvh6yKI" + ("4iDm68fnp4Mi3RrJ6bZAygFrUIQLxLjV+OJtgJAEto0xAs+Mehuq1DkSFEpP3o" + ("DzCTOsrOiS1DwQe4oIb7zVk/9l7aPtJMHW0LVlMdwZNFNNJoqMcT2ZfCPrfvYv" + "Q0="));
-        final BigInteger bigInt4 = new BigInteger(("80624726256040348115552042320" + ("6968135001872753709424419772586693950232350200555646471175944" + ("519297087885987040810778908507262272892702303774422853675597" + ("748008534040890923814202286633163248086055216976551456088015" + ("338880713818192088877057717530169381044092839402438015097654" + "foo"))))));
+        final BigInteger bigInt4 = new BigInteger(("80624726256040348115552042320" + ("6968135001872753709424419772586693950232350200555646471175944" + ("519297087885987040810778908507262272892702303774422853675597" + ("748008534040890923814202286633163248086055216976551456088015" + ("338880713818192088877057717530169381044092839402438015097654" + "bar"))))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1734,encodedInt4);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1735,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeInteger(bigInt4)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1736,bigInt4);
@@ -574,6 +699,36 @@ public Random getRandom() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors");
         Base64 base64;
         base64 = new Base64();
+        base64 = new Base64(-2);
+        base64 = new Base64(-1 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(-1 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2436() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2436");
+        Base64 base64;
+        base64 = new Base64();
         base64 = new Base64(0);
         base64 = new Base64(-1 , new byte[]{  });
         base64 = new Base64(64 , new byte[]{  });
@@ -600,12 +755,12 @@ public Random getRandom() {
     }
 
     @Test
-    public void testConstructors_literalMutation1794() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation1794");
+    public void testConstructors_literalMutation2437() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2437");
         Base64 base64;
         base64 = new Base64();
-        base64 = new Base64(-1);
-        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(0);
+        base64 = new Base64(-1 , new byte[]{  });
         base64 = new Base64(64 , new byte[]{  });
         try {
             base64 = new Base64(-1 , new byte[]{ 'A' });
@@ -630,12 +785,192 @@ public Random getRandom() {
     }
 
     @Test
-    public void testConstructors_literalMutation1795() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation1795");
+    public void testConstructors_literalMutation2438() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2438");
         Base64 base64;
         base64 = new Base64();
-        base64 = new Base64(-1);
-        base64 = new Base64(-1 , new byte[]{  });
+        base64 = new Base64(2);
+        base64 = new Base64(-2 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(-1 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2439() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2439");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(0 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(-1 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2440() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2440");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(0 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(-1 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2441() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2441");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(65 , new byte[]{  });
+        try {
+            base64 = new Base64(-1 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2442() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2442");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(32 , new byte[]{  });
+        try {
+            base64 = new Base64(-1 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2443() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2443");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(128 , new byte[]{  });
+        try {
+            base64 = new Base64(-1 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2444() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2444");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
         base64 = new Base64(63 , new byte[]{  });
         try {
             base64 = new Base64(-1 , new byte[]{ 'A' });
@@ -660,15 +995,15 @@ public Random getRandom() {
     }
 
     @Test
-    public void testConstructors_literalMutation1796() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation1796");
+    public void testConstructors_literalMutation2445() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2445");
         Base64 base64;
         base64 = new Base64();
-        base64 = new Base64(-1);
-        base64 = new Base64(-1 , new byte[]{  });
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
         base64 = new Base64(64 , new byte[]{  });
         try {
-            base64 = new Base64(2 , new byte[]{ 'A' });
+            base64 = new Base64(-2 , new byte[]{ 'A' });
         } catch (final IllegalArgumentException ignored) {
         }
         try {
@@ -690,15 +1025,75 @@ public Random getRandom() {
     }
 
     @Test
-    public void testConstructors_literalMutation1798() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation1798");
+    public void testConstructors_literalMutation2446() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2446");
         Base64 base64;
         base64 = new Base64();
-        base64 = new Base64(-1);
-        base64 = new Base64(-1 , new byte[]{  });
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
         base64 = new Base64(64 , new byte[]{  });
         try {
-            base64 = new Base64(-1 , new byte[]{ 'A' });
+            base64 = new Base64(0 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2447() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2447");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(0 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2449() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2449");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(2 , new byte[]{ 'A' });
         } catch (final IllegalArgumentException ignored) {
         }
         try {
@@ -720,15 +1115,195 @@ public Random getRandom() {
     }
 
     @Test
-    public void testConstructors_literalMutation1800() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation1800");
+    public void testConstructors_literalMutation2450() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2450");
         Base64 base64;
         base64 = new Base64();
-        base64 = new Base64(-1);
-        base64 = new Base64(-1 , new byte[]{  });
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
         base64 = new Base64(64 , new byte[]{  });
         try {
-            base64 = new Base64(-1 , new byte[]{ 'A' });
+            base64 = new Base64(2 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(32 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2451() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2451");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(2 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(128 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2452() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2452");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(2 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(63 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2454() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2454");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(2 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(65 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2455() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2455");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(2 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(32 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2456() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2456");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(2 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(128 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2457() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2457");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(2 , new byte[]{ 'A' });
         } catch (final IllegalArgumentException ignored) {
         }
         try {
@@ -750,15 +1325,15 @@ public Random getRandom() {
     }
 
     @Test
-    public void testConstructors_literalMutation1802() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation1802");
+    public void testConstructors_literalMutation2459() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2459");
         Base64 base64;
         base64 = new Base64();
-        base64 = new Base64(-1);
-        base64 = new Base64(-1 , new byte[]{  });
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
         base64 = new Base64(64 , new byte[]{  });
         try {
-            base64 = new Base64(-1 , new byte[]{ 'A' });
+            base64 = new Base64(2 , new byte[]{ 'A' });
         } catch (final IllegalArgumentException ignored) {
         }
         try {
@@ -780,15 +1355,195 @@ public Random getRandom() {
     }
 
     @Test
-    public void testConstructors_literalMutation1804() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation1804");
+    public void testConstructors_literalMutation2460() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2460");
         Base64 base64;
         base64 = new Base64();
-        base64 = new Base64(-1);
-        base64 = new Base64(-1 , new byte[]{  });
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
         base64 = new Base64(64 , new byte[]{  });
         try {
-            base64 = new Base64(-1 , new byte[]{ 'A' });
+            base64 = new Base64(2 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(32 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2461() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2461");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(2 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(128 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2462() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2462");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(2 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(63 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2464() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2464");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(2 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(65 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2465() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2465");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(2 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(32 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2466() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2466");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(2 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(128 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2467() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2467");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(2 , new byte[]{ 'A' });
         } catch (final IllegalArgumentException ignored) {
         }
         try {
@@ -810,15 +1565,105 @@ public Random getRandom() {
     }
 
     @Test
-    public void testConstructors_literalMutation1807() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation1807");
+    public void testConstructors_literalMutation2470() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2470");
         Base64 base64;
         base64 = new Base64();
-        base64 = new Base64(-1);
-        base64 = new Base64(-1 , new byte[]{  });
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
         base64 = new Base64(64 , new byte[]{  });
         try {
-            base64 = new Base64(-1 , new byte[]{ 'A' });
+            base64 = new Base64(2 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(65 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2471() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2471");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(2 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(32 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2472() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2472");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(2 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        try {
+            base64 = new Base64(64 , new byte[]{ '=' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(64 , new byte[]{ '$' });
+        try {
+            base64 = new Base64(64 , new byte[]{ 'A' , '$' });
+        } catch (final IllegalArgumentException ignored) {
+        }
+        base64 = new Base64(128 , new byte[]{ ' ' , '$' , '\n' , '\r' , '\t' });
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1743,base64);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructors_literalMutation2473() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation2473");
+        Base64 base64;
+        base64 = new Base64();
+        base64 = new Base64(2);
+        base64 = new Base64(2 , new byte[]{  });
+        base64 = new Base64(64 , new byte[]{  });
+        try {
+            base64 = new Base64(2 , new byte[]{ 'A' });
         } catch (final IllegalArgumentException ignored) {
         }
         try {
@@ -842,6 +1687,19 @@ public Random getRandom() {
     @Test
     public void testConstructor_Int_ByteArray_Boolean() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructor_Int_ByteArray_Boolean");
+        final Base64 base64 = new Base64(66 , new byte[]{ '\t' } , false);
+        final byte[] encoded = base64.encode(Base64TestData.DECODED);
+        String expectedResult = Base64TestData.ENCODED_64_CHARS_PER_LINE;
+        expectedResult = expectedResult.replace('\n', '\t');
+        final String result = org.apache.commons.codec.binary.StringUtils.newStringUtf8(encoded);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1741,expectedResult);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1742,result);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructor_Int_ByteArray_Boolean_literalMutation2414() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructor_Int_ByteArray_Boolean_literalMutation2414");
         final Base64 base64 = new Base64(64 , new byte[]{ '\t' } , false);
         final byte[] encoded = base64.encode(Base64TestData.DECODED);
         String expectedResult = Base64TestData.ENCODED_64_CHARS_PER_LINE;
@@ -853,8 +1711,34 @@ public Random getRandom() {
     }
 
     @Test
-    public void testConstructor_Int_ByteArray_Boolean_literalMutation1779() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructor_Int_ByteArray_Boolean_literalMutation1779");
+    public void testConstructor_Int_ByteArray_Boolean_literalMutation2415() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructor_Int_ByteArray_Boolean_literalMutation2415");
+        final Base64 base64 = new Base64(32 , new byte[]{ '\t' } , false);
+        final byte[] encoded = base64.encode(Base64TestData.DECODED);
+        String expectedResult = Base64TestData.ENCODED_64_CHARS_PER_LINE;
+        expectedResult = expectedResult.replace('\n', '\t');
+        final String result = org.apache.commons.codec.binary.StringUtils.newStringUtf8(encoded);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1741,expectedResult);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1742,result);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructor_Int_ByteArray_Boolean_literalMutation2416() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructor_Int_ByteArray_Boolean_literalMutation2416");
+        final Base64 base64 = new Base64(130 , new byte[]{ '\t' } , false);
+        final byte[] encoded = base64.encode(Base64TestData.DECODED);
+        String expectedResult = Base64TestData.ENCODED_64_CHARS_PER_LINE;
+        expectedResult = expectedResult.replace('\n', '\t');
+        final String result = org.apache.commons.codec.binary.StringUtils.newStringUtf8(encoded);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1741,expectedResult);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1742,result);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructor_Int_ByteArray_Boolean_literalMutation2418() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructor_Int_ByteArray_Boolean_literalMutation2418");
         final Base64 base64 = new Base64(65 , new byte[]{ '\t' } , true);
         final byte[] encoded = base64.encode(Base64TestData.DECODED);
         String expectedResult = Base64TestData.ENCODED_64_CHARS_PER_LINE;
@@ -868,6 +1752,54 @@ public Random getRandom() {
     @Test
     public void testConstructor_Int_ByteArray_Boolean_UrlSafe() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructor_Int_ByteArray_Boolean_UrlSafe");
+        final Base64 base64 = new Base64(65 , new byte[]{ '\t' } , true);
+        final byte[] encoded = base64.encode(Base64TestData.DECODED);
+        String expectedResult = Base64TestData.ENCODED_64_CHARS_PER_LINE;
+        expectedResult = expectedResult.replaceAll("=", "");
+        expectedResult = expectedResult.replace('\n', '\t');
+        expectedResult = expectedResult.replace('+', '-');
+        expectedResult = expectedResult.replace('/', '_');
+        final String result = org.apache.commons.codec.binary.StringUtils.newStringUtf8(encoded);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1739,result);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1740,expectedResult);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructor_Int_ByteArray_Boolean_UrlSafe_literalMutation2422() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructor_Int_ByteArray_Boolean_UrlSafe_literalMutation2422");
+        final Base64 base64 = new Base64(32 , new byte[]{ '\t' } , true);
+        final byte[] encoded = base64.encode(Base64TestData.DECODED);
+        String expectedResult = Base64TestData.ENCODED_64_CHARS_PER_LINE;
+        expectedResult = expectedResult.replaceAll("=", "");
+        expectedResult = expectedResult.replace('\n', '\t');
+        expectedResult = expectedResult.replace('+', '-');
+        expectedResult = expectedResult.replace('/', '_');
+        final String result = org.apache.commons.codec.binary.StringUtils.newStringUtf8(encoded);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1739,result);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1740,expectedResult);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructor_Int_ByteArray_Boolean_UrlSafe_literalMutation2423() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructor_Int_ByteArray_Boolean_UrlSafe_literalMutation2423");
+        final Base64 base64 = new Base64(128 , new byte[]{ '\t' } , true);
+        final byte[] encoded = base64.encode(Base64TestData.DECODED);
+        String expectedResult = Base64TestData.ENCODED_64_CHARS_PER_LINE;
+        expectedResult = expectedResult.replaceAll("=", "");
+        expectedResult = expectedResult.replace('\n', '\t');
+        expectedResult = expectedResult.replace('+', '-');
+        expectedResult = expectedResult.replace('/', '_');
+        final String result = org.apache.commons.codec.binary.StringUtils.newStringUtf8(encoded);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1739,result);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1740,expectedResult);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testConstructor_Int_ByteArray_Boolean_UrlSafe_literalMutation2424() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructor_Int_ByteArray_Boolean_UrlSafe_literalMutation2424");
         final Base64 base64 = new Base64(63 , new byte[]{ '\t' } , true);
         final byte[] encoded = base64.encode(Base64TestData.DECODED);
         String expectedResult = Base64TestData.ENCODED_64_CHARS_PER_LINE;
@@ -882,9 +1814,9 @@ public Random getRandom() {
     }
 
     @Test
-    public void testConstructor_Int_ByteArray_Boolean_UrlSafe_literalMutation1784() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructor_Int_ByteArray_Boolean_UrlSafe_literalMutation1784");
-        final Base64 base64 = new Base64(64 , new byte[]{ '\t' } , true);
+    public void testConstructor_Int_ByteArray_Boolean_UrlSafe_literalMutation2426() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructor_Int_ByteArray_Boolean_UrlSafe_literalMutation2426");
+        final Base64 base64 = new Base64(64 , new byte[]{ '\t' } , false);
         final byte[] encoded = base64.encode(Base64TestData.DECODED);
         String expectedResult = Base64TestData.ENCODED_64_CHARS_PER_LINE;
         expectedResult = expectedResult.replaceAll("=", "");
@@ -898,8 +1830,8 @@ public Random getRandom() {
     }
 
     @Test
-    public void testConstructor_Int_ByteArray_Boolean_UrlSafe_literalMutation1785() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructor_Int_ByteArray_Boolean_UrlSafe_literalMutation1785");
+    public void testConstructor_Int_ByteArray_Boolean_UrlSafe_literalMutation2427() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructor_Int_ByteArray_Boolean_UrlSafe_literalMutation2427");
         final Base64 base64 = new Base64(64 , new byte[]{ '\t' } , true);
         final byte[] encoded = base64.encode(Base64TestData.DECODED);
         String expectedResult = Base64TestData.ENCODED_64_CHARS_PER_LINE;
@@ -914,8 +1846,8 @@ public Random getRandom() {
     }
 
     @Test
-    public void testConstructor_Int_ByteArray_Boolean_UrlSafe_literalMutation1786() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructor_Int_ByteArray_Boolean_UrlSafe_literalMutation1786");
+    public void testConstructor_Int_ByteArray_Boolean_UrlSafe_literalMutation2428() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructor_Int_ByteArray_Boolean_UrlSafe_literalMutation2428");
         final Base64 base64 = new Base64(64 , new byte[]{ '\t' } , true);
         final byte[] encoded = base64.encode(Base64TestData.DECODED);
         String expectedResult = Base64TestData.ENCODED_64_CHARS_PER_LINE;
@@ -1053,7 +1985,7 @@ public Random getRandom() {
     @Test
     public void testDecodeWithWhitespace() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithWhitespace");
-        final String orig = "foo";
+        final String orig = "bar";
         final byte[] encodedArray = Base64.encodeBase64(orig.getBytes(org.apache.commons.codec.Charsets.UTF_8));
         final StringBuilder intermediate = new StringBuilder(new String(encodedArray));
         intermediate.insert(2, ' ');
@@ -1069,8 +2001,44 @@ public Random getRandom() {
     }
 
     @Test
-    public void testDecodeWithWhitespace_literalMutation1816() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithWhitespace_literalMutation1816");
+    public void testDecodeWithWhitespace_literalMutation2482() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithWhitespace_literalMutation2482");
+        final String orig = "I am a late night coder.";
+        final byte[] encodedArray = Base64.encodeBase64(orig.getBytes(org.apache.commons.codec.Charsets.UTF_8));
+        final StringBuilder intermediate = new StringBuilder(new String(encodedArray));
+        intermediate.insert(1, ' ');
+        intermediate.insert(5, '\t');
+        intermediate.insert(10, '\r');
+        intermediate.insert(15, '\n');
+        final byte[] encodedWithWS = intermediate.toString().getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] decodedWithWS = Base64.decodeBase64(encodedWithWS);
+        final String dest = new String(decodedWithWS);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1763,orig);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1764,dest);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeWithWhitespace_literalMutation2483() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithWhitespace_literalMutation2483");
+        final String orig = "I am a late night coder.";
+        final byte[] encodedArray = Base64.encodeBase64(orig.getBytes(org.apache.commons.codec.Charsets.UTF_8));
+        final StringBuilder intermediate = new StringBuilder(new String(encodedArray));
+        intermediate.insert(4, ' ');
+        intermediate.insert(5, '\t');
+        intermediate.insert(10, '\r');
+        intermediate.insert(15, '\n');
+        final byte[] encodedWithWS = intermediate.toString().getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] decodedWithWS = Base64.decodeBase64(encodedWithWS);
+        final String dest = new String(decodedWithWS);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1763,orig);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1764,dest);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeWithWhitespace_literalMutation2484() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithWhitespace_literalMutation2484");
         final String orig = "I am a late night coder.";
         final byte[] encodedArray = Base64.encodeBase64(orig.getBytes(org.apache.commons.codec.Charsets.UTF_8));
         final StringBuilder intermediate = new StringBuilder(new String(encodedArray));
@@ -1087,8 +2055,8 @@ public Random getRandom() {
     }
 
     @Test
-    public void testDecodeWithWhitespace_literalMutation1818() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithWhitespace_literalMutation1818");
+    public void testDecodeWithWhitespace_literalMutation2486() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithWhitespace_literalMutation2486");
         final String orig = "I am a late night coder.";
         final byte[] encodedArray = Base64.encodeBase64(orig.getBytes(org.apache.commons.codec.Charsets.UTF_8));
         final StringBuilder intermediate = new StringBuilder(new String(encodedArray));
@@ -1105,8 +2073,62 @@ public Random getRandom() {
     }
 
     @Test
-    public void testDecodeWithWhitespace_literalMutation1820() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithWhitespace_literalMutation1820");
+    public void testDecodeWithWhitespace_literalMutation2487() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithWhitespace_literalMutation2487");
+        final String orig = "I am a late night coder.";
+        final byte[] encodedArray = Base64.encodeBase64(orig.getBytes(org.apache.commons.codec.Charsets.UTF_8));
+        final StringBuilder intermediate = new StringBuilder(new String(encodedArray));
+        intermediate.insert(2, ' ');
+        intermediate.insert(2, '\t');
+        intermediate.insert(10, '\r');
+        intermediate.insert(15, '\n');
+        final byte[] encodedWithWS = intermediate.toString().getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] decodedWithWS = Base64.decodeBase64(encodedWithWS);
+        final String dest = new String(decodedWithWS);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1763,orig);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1764,dest);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeWithWhitespace_literalMutation2488() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithWhitespace_literalMutation2488");
+        final String orig = "I am a late night coder.";
+        final byte[] encodedArray = Base64.encodeBase64(orig.getBytes(org.apache.commons.codec.Charsets.UTF_8));
+        final StringBuilder intermediate = new StringBuilder(new String(encodedArray));
+        intermediate.insert(2, ' ');
+        intermediate.insert(10, '\t');
+        intermediate.insert(10, '\r');
+        intermediate.insert(15, '\n');
+        final byte[] encodedWithWS = intermediate.toString().getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] decodedWithWS = Base64.decodeBase64(encodedWithWS);
+        final String dest = new String(decodedWithWS);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1763,orig);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1764,dest);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeWithWhitespace_literalMutation2489() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithWhitespace_literalMutation2489");
+        final String orig = "I am a late night coder.";
+        final byte[] encodedArray = Base64.encodeBase64(orig.getBytes(org.apache.commons.codec.Charsets.UTF_8));
+        final StringBuilder intermediate = new StringBuilder(new String(encodedArray));
+        intermediate.insert(2, ' ');
+        intermediate.insert(6, '\t');
+        intermediate.insert(10, '\r');
+        intermediate.insert(15, '\n');
+        final byte[] encodedWithWS = intermediate.toString().getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] decodedWithWS = Base64.decodeBase64(encodedWithWS);
+        final String dest = new String(decodedWithWS);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1763,orig);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1764,dest);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeWithWhitespace_literalMutation2491() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithWhitespace_literalMutation2491");
         final String orig = "I am a late night coder.";
         final byte[] encodedArray = Base64.encodeBase64(orig.getBytes(org.apache.commons.codec.Charsets.UTF_8));
         final StringBuilder intermediate = new StringBuilder(new String(encodedArray));
@@ -1123,8 +2145,62 @@ public Random getRandom() {
     }
 
     @Test
-    public void testDecodeWithWhitespace_literalMutation1822() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithWhitespace_literalMutation1822");
+    public void testDecodeWithWhitespace_literalMutation2492() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithWhitespace_literalMutation2492");
+        final String orig = "I am a late night coder.";
+        final byte[] encodedArray = Base64.encodeBase64(orig.getBytes(org.apache.commons.codec.Charsets.UTF_8));
+        final StringBuilder intermediate = new StringBuilder(new String(encodedArray));
+        intermediate.insert(2, ' ');
+        intermediate.insert(5, '\t');
+        intermediate.insert(5, '\r');
+        intermediate.insert(15, '\n');
+        final byte[] encodedWithWS = intermediate.toString().getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] decodedWithWS = Base64.decodeBase64(encodedWithWS);
+        final String dest = new String(decodedWithWS);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1763,orig);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1764,dest);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeWithWhitespace_literalMutation2493() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithWhitespace_literalMutation2493");
+        final String orig = "I am a late night coder.";
+        final byte[] encodedArray = Base64.encodeBase64(orig.getBytes(org.apache.commons.codec.Charsets.UTF_8));
+        final StringBuilder intermediate = new StringBuilder(new String(encodedArray));
+        intermediate.insert(2, ' ');
+        intermediate.insert(5, '\t');
+        intermediate.insert(20, '\r');
+        intermediate.insert(15, '\n');
+        final byte[] encodedWithWS = intermediate.toString().getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] decodedWithWS = Base64.decodeBase64(encodedWithWS);
+        final String dest = new String(decodedWithWS);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1763,orig);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1764,dest);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeWithWhitespace_literalMutation2494() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithWhitespace_literalMutation2494");
+        final String orig = "I am a late night coder.";
+        final byte[] encodedArray = Base64.encodeBase64(orig.getBytes(org.apache.commons.codec.Charsets.UTF_8));
+        final StringBuilder intermediate = new StringBuilder(new String(encodedArray));
+        intermediate.insert(2, ' ');
+        intermediate.insert(5, '\t');
+        intermediate.insert(11, '\r');
+        intermediate.insert(15, '\n');
+        final byte[] encodedWithWS = intermediate.toString().getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] decodedWithWS = Base64.decodeBase64(encodedWithWS);
+        final String dest = new String(decodedWithWS);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1763,orig);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1764,dest);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeWithWhitespace_literalMutation2496() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithWhitespace_literalMutation2496");
         final String orig = "I am a late night coder.";
         final byte[] encodedArray = Base64.encodeBase64(orig.getBytes(org.apache.commons.codec.Charsets.UTF_8));
         final StringBuilder intermediate = new StringBuilder(new String(encodedArray));
@@ -1132,6 +2208,60 @@ public Random getRandom() {
         intermediate.insert(5, '\t');
         intermediate.insert(10, '\r');
         intermediate.insert(16, '\n');
+        final byte[] encodedWithWS = intermediate.toString().getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] decodedWithWS = Base64.decodeBase64(encodedWithWS);
+        final String dest = new String(decodedWithWS);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1763,orig);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1764,dest);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeWithWhitespace_literalMutation2497() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithWhitespace_literalMutation2497");
+        final String orig = "I am a late night coder.";
+        final byte[] encodedArray = Base64.encodeBase64(orig.getBytes(org.apache.commons.codec.Charsets.UTF_8));
+        final StringBuilder intermediate = new StringBuilder(new String(encodedArray));
+        intermediate.insert(2, ' ');
+        intermediate.insert(5, '\t');
+        intermediate.insert(10, '\r');
+        intermediate.insert(14, '\n');
+        final byte[] encodedWithWS = intermediate.toString().getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] decodedWithWS = Base64.decodeBase64(encodedWithWS);
+        final String dest = new String(decodedWithWS);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1763,orig);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1764,dest);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeWithWhitespace_literalMutation2498() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithWhitespace_literalMutation2498");
+        final String orig = "I am a late night coder.";
+        final byte[] encodedArray = Base64.encodeBase64(orig.getBytes(org.apache.commons.codec.Charsets.UTF_8));
+        final StringBuilder intermediate = new StringBuilder(new String(encodedArray));
+        intermediate.insert(2, ' ');
+        intermediate.insert(5, '\t');
+        intermediate.insert(10, '\r');
+        intermediate.insert(7, '\n');
+        final byte[] encodedWithWS = intermediate.toString().getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] decodedWithWS = Base64.decodeBase64(encodedWithWS);
+        final String dest = new String(decodedWithWS);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1763,orig);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1764,dest);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeWithWhitespace_literalMutation2499() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeWithWhitespace_literalMutation2499");
+        final String orig = "I am a late night coder.";
+        final byte[] encodedArray = Base64.encodeBase64(orig.getBytes(org.apache.commons.codec.Charsets.UTF_8));
+        final StringBuilder intermediate = new StringBuilder(new String(encodedArray));
+        intermediate.insert(2, ' ');
+        intermediate.insert(5, '\t');
+        intermediate.insert(10, '\r');
+        intermediate.insert(30, '\n');
         final byte[] encodedWithWS = intermediate.toString().getBytes(org.apache.commons.codec.Charsets.UTF_8);
         final byte[] decodedWithWS = Base64.decodeBase64(encodedWithWS);
         final String dest = new String(decodedWithWS);
@@ -1214,6 +2344,23 @@ public Random getRandom() {
 @Test
     public void testEmptyBase64() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyBase64");
+        byte[] empty = new byte[1];
+        byte[] result = Base64.encodeBase64(empty);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1765,result.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1767,null,1766,org.apache.commons.codec.binary.Base64.encodeBase64(null));
+        empty = new byte[0];
+        result = Base64.decodeBase64(empty);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1768,result.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,null,1769,org.apache.commons.codec.binary.Base64.decodeBase64(((byte[])(null))));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test encode and decode of empty byte array.
+     */
+@Test
+    public void testEmptyBase64_literalMutation2502() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyBase64_literalMutation2502");
         byte[] empty = new byte[-1];
         byte[] result = Base64.encodeBase64(empty);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1765,result.length);
@@ -1229,13 +2376,64 @@ public Random getRandom() {
      * Test encode and decode of empty byte array.
      */
 @Test
-    public void testEmptyBase64_literalMutation1825() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyBase64_literalMutation1825");
+    public void testEmptyBase64_literalMutation2503() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyBase64_literalMutation2503");
+        byte[] empty = new byte[0];
+        byte[] result = Base64.encodeBase64(empty);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1765,result.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1767,null,1766,org.apache.commons.codec.binary.Base64.encodeBase64(null));
+        empty = new byte[0];
+        result = Base64.decodeBase64(empty);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1768,result.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,null,1769,org.apache.commons.codec.binary.Base64.decodeBase64(((byte[])(null))));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test encode and decode of empty byte array.
+     */
+@Test
+    public void testEmptyBase64_literalMutation2504() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyBase64_literalMutation2504");
         byte[] empty = new byte[0];
         byte[] result = Base64.encodeBase64(empty);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1765,result.length);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1767,null,1766,org.apache.commons.codec.binary.Base64.encodeBase64(null));
         empty = new byte[1];
+        result = Base64.decodeBase64(empty);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1768,result.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,null,1769,org.apache.commons.codec.binary.Base64.decodeBase64(((byte[])(null))));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test encode and decode of empty byte array.
+     */
+@Test
+    public void testEmptyBase64_literalMutation2505() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyBase64_literalMutation2505");
+        byte[] empty = new byte[0];
+        byte[] result = Base64.encodeBase64(empty);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1765,result.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1767,null,1766,org.apache.commons.codec.binary.Base64.encodeBase64(null));
+        empty = new byte[-1];
+        result = Base64.decodeBase64(empty);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1768,result.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,null,1769,org.apache.commons.codec.binary.Base64.decodeBase64(((byte[])(null))));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test encode and decode of empty byte array.
+     */
+@Test
+    public void testEmptyBase64_literalMutation2506() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyBase64_literalMutation2506");
+        byte[] empty = new byte[0];
+        byte[] result = Base64.encodeBase64(empty);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1765,result.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1767,null,1766,org.apache.commons.codec.binary.Base64.encodeBase64(null));
+        empty = new byte[0];
         result = Base64.decodeBase64(empty);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1768,result.length);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,null,1769,org.apache.commons.codec.binary.Base64.decodeBase64(((byte[])(null))));
@@ -1272,8 +2470,36 @@ public Random getRandom() {
     }
 
     @Test
-    public void testEncodeDecodeRandom_literalMutation1827() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation1827");
+    public void testEncodeDecodeRandom_literalMutation2508() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation2508");
+        for (int i = 0 ; i < 5 ; i++) {
+            final byte[] data = new byte[(getRandom().nextInt(10000)) + 1];
+            getRandom().nextBytes(data);
+            final byte[] enc = Base64.encodeBase64(data);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1774,null,1773,org.apache.commons.codec.binary.Base64.isBase64(enc));
+            final byte[] data2 = Base64.decodeBase64(enc);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1776,null,1775,java.util.Arrays.equals(data, data2));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeRandom_literalMutation2509() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation2509");
+        for (int i = 0 ; i < 5 ; i++) {
+            final byte[] data = new byte[(getRandom().nextInt(10000)) + 1];
+            getRandom().nextBytes(data);
+            final byte[] enc = Base64.encodeBase64(data);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1774,null,1773,org.apache.commons.codec.binary.Base64.isBase64(enc));
+            final byte[] data2 = Base64.decodeBase64(enc);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1776,null,1775,java.util.Arrays.equals(data, data2));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeRandom_literalMutation2510() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation2510");
         for (int i = 1 ; i < 4 ; i++) {
             final byte[] data = new byte[(getRandom().nextInt(10000)) + 1];
             getRandom().nextBytes(data);
@@ -1286,8 +2512,64 @@ public Random getRandom() {
     }
 
     @Test
-    public void testEncodeDecodeRandom_literalMutation1828() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation1828");
+    public void testEncodeDecodeRandom_literalMutation2511() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation2511");
+        for (int i = 1 ; i < 2 ; i++) {
+            final byte[] data = new byte[(getRandom().nextInt(10000)) + 1];
+            getRandom().nextBytes(data);
+            final byte[] enc = Base64.encodeBase64(data);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1774,null,1773,org.apache.commons.codec.binary.Base64.isBase64(enc));
+            final byte[] data2 = Base64.decodeBase64(enc);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1776,null,1775,java.util.Arrays.equals(data, data2));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeRandom_literalMutation2512() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation2512");
+        for (int i = 1 ; i < 10 ; i++) {
+            final byte[] data = new byte[(getRandom().nextInt(10000)) + 1];
+            getRandom().nextBytes(data);
+            final byte[] enc = Base64.encodeBase64(data);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1774,null,1773,org.apache.commons.codec.binary.Base64.isBase64(enc));
+            final byte[] data2 = Base64.decodeBase64(enc);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1776,null,1775,java.util.Arrays.equals(data, data2));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeRandom_literalMutation2513() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation2513");
+        for (int i = 1 ; i < 6 ; i++) {
+            final byte[] data = new byte[(getRandom().nextInt(10000)) + 1];
+            getRandom().nextBytes(data);
+            final byte[] enc = Base64.encodeBase64(data);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1774,null,1773,org.apache.commons.codec.binary.Base64.isBase64(enc));
+            final byte[] data2 = Base64.decodeBase64(enc);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1776,null,1775,java.util.Arrays.equals(data, data2));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeRandom_literalMutation2514() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation2514");
+        for (int i = 1 ; i < 5 ; i++) {
+            final byte[] data = new byte[(getRandom().nextInt(10001)) + 1];
+            getRandom().nextBytes(data);
+            final byte[] enc = Base64.encodeBase64(data);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1774,null,1773,org.apache.commons.codec.binary.Base64.isBase64(enc));
+            final byte[] data2 = Base64.decodeBase64(enc);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1776,null,1775,java.util.Arrays.equals(data, data2));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeRandom_literalMutation2515() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation2515");
         for (int i = 1 ; i < 5 ; i++) {
             final byte[] data = new byte[(getRandom().nextInt(9999)) + 1];
             getRandom().nextBytes(data);
@@ -1300,10 +2582,66 @@ public Random getRandom() {
     }
 
     @Test
-    public void testEncodeDecodeRandom_literalMutation1829() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation1829");
+    public void testEncodeDecodeRandom_literalMutation2516() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation2516");
+        for (int i = 1 ; i < 5 ; i++) {
+            final byte[] data = new byte[(getRandom().nextInt(5000)) + 1];
+            getRandom().nextBytes(data);
+            final byte[] enc = Base64.encodeBase64(data);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1774,null,1773,org.apache.commons.codec.binary.Base64.isBase64(enc));
+            final byte[] data2 = Base64.decodeBase64(enc);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1776,null,1775,java.util.Arrays.equals(data, data2));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeRandom_literalMutation2517() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation2517");
+        for (int i = 1 ; i < 5 ; i++) {
+            final byte[] data = new byte[(getRandom().nextInt(20000)) + 1];
+            getRandom().nextBytes(data);
+            final byte[] enc = Base64.encodeBase64(data);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1774,null,1773,org.apache.commons.codec.binary.Base64.isBase64(enc));
+            final byte[] data2 = Base64.decodeBase64(enc);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1776,null,1775,java.util.Arrays.equals(data, data2));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeRandom_literalMutation2518() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation2518");
         for (int i = 1 ; i < 5 ; i++) {
             final byte[] data = new byte[(getRandom().nextInt(10000)) + 2];
+            getRandom().nextBytes(data);
+            final byte[] enc = Base64.encodeBase64(data);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1774,null,1773,org.apache.commons.codec.binary.Base64.isBase64(enc));
+            final byte[] data2 = Base64.decodeBase64(enc);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1776,null,1775,java.util.Arrays.equals(data, data2));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeRandom_literalMutation2519() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation2519");
+        for (int i = 1 ; i < 5 ; i++) {
+            final byte[] data = new byte[(getRandom().nextInt(10000)) + 0];
+            getRandom().nextBytes(data);
+            final byte[] enc = Base64.encodeBase64(data);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1774,null,1773,org.apache.commons.codec.binary.Base64.isBase64(enc));
+            final byte[] data2 = Base64.decodeBase64(enc);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1776,null,1775,java.util.Arrays.equals(data, data2));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeRandom_literalMutation2520() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeRandom_literalMutation2520");
+        for (int i = 1 ; i < 5 ; i++) {
+            final byte[] data = new byte[(getRandom().nextInt(10000)) + 0];
             getRandom().nextBytes(data);
             final byte[] enc = Base64.encodeBase64(data);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1774,null,1773,org.apache.commons.codec.binary.Base64.isBase64(enc));
@@ -1346,6 +2684,22 @@ public Random getRandom() {
     @Test
     public void testEncodeDecodeSmall() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeSmall");
+        for (int i = 1 ; i < 12 ; i++) {
+            final byte[] data = new byte[i];
+            getRandom().nextBytes(data);
+            final byte[] enc = Base64.encodeBase64(data);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1777,(("\"" + (new java.lang.String(enc))) + "\" is Base64 data."));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1779,null,1778,org.apache.commons.codec.binary.Base64.isBase64(enc));
+            final byte[] data2 = Base64.decodeBase64(enc);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1780,(((toString(data)) + " equals ") + (toString(data2))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1782,null,1781,java.util.Arrays.equals(data, data2));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeSmall_literalMutation2522() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeSmall_literalMutation2522");
         for (int i = -1 ; i < 12 ; i++) {
             final byte[] data = new byte[i];
             getRandom().nextBytes(data);
@@ -1360,9 +2714,73 @@ public Random getRandom() {
     }
 
     @Test
-    public void testEncodeDecodeSmall_literalMutation1831() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeSmall_literalMutation1831");
+    public void testEncodeDecodeSmall_literalMutation2523() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeSmall_literalMutation2523");
+        for (int i = 0 ; i < 12 ; i++) {
+            final byte[] data = new byte[i];
+            getRandom().nextBytes(data);
+            final byte[] enc = Base64.encodeBase64(data);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1777,(("\"" + (new java.lang.String(enc))) + "\" is Base64 data."));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1779,null,1778,org.apache.commons.codec.binary.Base64.isBase64(enc));
+            final byte[] data2 = Base64.decodeBase64(enc);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1780,(((toString(data)) + " equals ") + (toString(data2))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1782,null,1781,java.util.Arrays.equals(data, data2));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeSmall_literalMutation2524() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeSmall_literalMutation2524");
         for (int i = 0 ; i < 11 ; i++) {
+            final byte[] data = new byte[i];
+            getRandom().nextBytes(data);
+            final byte[] enc = Base64.encodeBase64(data);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1777,(("\"" + (new java.lang.String(enc))) + "\" is Base64 data."));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1779,null,1778,org.apache.commons.codec.binary.Base64.isBase64(enc));
+            final byte[] data2 = Base64.decodeBase64(enc);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1780,(((toString(data)) + " equals ") + (toString(data2))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1782,null,1781,java.util.Arrays.equals(data, data2));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeSmall_literalMutation2525() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeSmall_literalMutation2525");
+        for (int i = 0 ; i < 6 ; i++) {
+            final byte[] data = new byte[i];
+            getRandom().nextBytes(data);
+            final byte[] enc = Base64.encodeBase64(data);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1777,(("\"" + (new java.lang.String(enc))) + "\" is Base64 data."));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1779,null,1778,org.apache.commons.codec.binary.Base64.isBase64(enc));
+            final byte[] data2 = Base64.decodeBase64(enc);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1780,(((toString(data)) + " equals ") + (toString(data2))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1782,null,1781,java.util.Arrays.equals(data, data2));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeSmall_literalMutation2526() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeSmall_literalMutation2526");
+        for (int i = 0 ; i < 24 ; i++) {
+            final byte[] data = new byte[i];
+            getRandom().nextBytes(data);
+            final byte[] enc = Base64.encodeBase64(data);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1777,(("\"" + (new java.lang.String(enc))) + "\" is Base64 data."));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1779,null,1778,org.apache.commons.codec.binary.Base64.isBase64(enc));
+            final byte[] data2 = Base64.decodeBase64(enc);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1780,(((toString(data)) + " equals ") + (toString(data2))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1782,null,1781,java.util.Arrays.equals(data, data2));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeDecodeSmall_literalMutation2527() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeDecodeSmall_literalMutation2527");
+        for (int i = 0 ; i < 13 ; i++) {
             final byte[] data = new byte[i];
             getRandom().nextBytes(data);
             final byte[] enc = Base64.encodeBase64(data);
@@ -1393,8 +2811,8 @@ public Random getRandom() {
     @Test(timeout = 1000)
     public void testEncodeOverMaxSize_add455() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize_add455");
-        testEncodeOverMaxSize(-1);
-        testEncodeOverMaxSize(-1);
+        testEncodeOverMaxSize(2);
+        testEncodeOverMaxSize(2);
         testEncodeOverMaxSize(0);
         testEncodeOverMaxSize(1);
         testEncodeOverMaxSize(2);
@@ -1404,7 +2822,7 @@ public Random getRandom() {
     @Test(timeout = 1000)
     public void testEncodeOverMaxSize_add456() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize_add456");
-        testEncodeOverMaxSize(-1);
+        testEncodeOverMaxSize(2);
         testEncodeOverMaxSize(0);
         testEncodeOverMaxSize(0);
         testEncodeOverMaxSize(1);
@@ -1415,7 +2833,7 @@ public Random getRandom() {
     @Test(timeout = 1000)
     public void testEncodeOverMaxSize_add457() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize_add457");
-        testEncodeOverMaxSize(-1);
+        testEncodeOverMaxSize(2);
         testEncodeOverMaxSize(0);
         testEncodeOverMaxSize(1);
         testEncodeOverMaxSize(1);
@@ -1426,7 +2844,7 @@ public Random getRandom() {
     @Test(timeout = 1000)
     public void testEncodeOverMaxSize_add458() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize_add458");
-        testEncodeOverMaxSize(-1);
+        testEncodeOverMaxSize(2);
         testEncodeOverMaxSize(0);
         testEncodeOverMaxSize(1);
         testEncodeOverMaxSize(2);
@@ -1437,6 +2855,56 @@ public Random getRandom() {
     @Test
     public void testEncodeOverMaxSize() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize");
+        testEncodeOverMaxSize(-2);
+        testEncodeOverMaxSize(0);
+        testEncodeOverMaxSize(1);
+        testEncodeOverMaxSize(2);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeOverMaxSize_literalMutation2529() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize_literalMutation2529");
+        testEncodeOverMaxSize(0);
+        testEncodeOverMaxSize(0);
+        testEncodeOverMaxSize(1);
+        testEncodeOverMaxSize(2);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeOverMaxSize_literalMutation2530() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize_literalMutation2530");
+        testEncodeOverMaxSize(0);
+        testEncodeOverMaxSize(0);
+        testEncodeOverMaxSize(1);
+        testEncodeOverMaxSize(2);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeOverMaxSize_literalMutation2531() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize_literalMutation2531");
+        testEncodeOverMaxSize(2);
+        testEncodeOverMaxSize(1);
+        testEncodeOverMaxSize(1);
+        testEncodeOverMaxSize(2);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeOverMaxSize_literalMutation2532() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize_literalMutation2532");
+        testEncodeOverMaxSize(2);
+        testEncodeOverMaxSize(-1);
+        testEncodeOverMaxSize(1);
+        testEncodeOverMaxSize(2);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeOverMaxSize_literalMutation2533() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize_literalMutation2533");
         testEncodeOverMaxSize(2);
         testEncodeOverMaxSize(0);
         testEncodeOverMaxSize(1);
@@ -1445,29 +2913,59 @@ public Random getRandom() {
     }
 
     @Test
-    public void testEncodeOverMaxSize_literalMutation1833() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize_literalMutation1833");
-        testEncodeOverMaxSize(-1);
-        testEncodeOverMaxSize(-1);
+    public void testEncodeOverMaxSize_literalMutation2534() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize_literalMutation2534");
+        testEncodeOverMaxSize(2);
+        testEncodeOverMaxSize(0);
+        testEncodeOverMaxSize(2);
+        testEncodeOverMaxSize(2);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeOverMaxSize_literalMutation2535() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize_literalMutation2535");
+        testEncodeOverMaxSize(2);
+        testEncodeOverMaxSize(0);
+        testEncodeOverMaxSize(0);
+        testEncodeOverMaxSize(2);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeOverMaxSize_literalMutation2536() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize_literalMutation2536");
+        testEncodeOverMaxSize(2);
+        testEncodeOverMaxSize(0);
+        testEncodeOverMaxSize(0);
+        testEncodeOverMaxSize(2);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeOverMaxSize_literalMutation2537() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize_literalMutation2537");
+        testEncodeOverMaxSize(2);
+        testEncodeOverMaxSize(0);
         testEncodeOverMaxSize(1);
-        testEncodeOverMaxSize(2);
+        testEncodeOverMaxSize(1);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testEncodeOverMaxSize_literalMutation1834() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize_literalMutation1834");
-        testEncodeOverMaxSize(-1);
-        testEncodeOverMaxSize(0);
-        testEncodeOverMaxSize(0);
+    public void testEncodeOverMaxSize_literalMutation2538() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize_literalMutation2538");
         testEncodeOverMaxSize(2);
+        testEncodeOverMaxSize(0);
+        testEncodeOverMaxSize(1);
+        testEncodeOverMaxSize(4);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testEncodeOverMaxSize_literalMutation1835() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize_literalMutation1835");
-        testEncodeOverMaxSize(-1);
+    public void testEncodeOverMaxSize_literalMutation2539() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize_literalMutation2539");
+        testEncodeOverMaxSize(2);
         testEncodeOverMaxSize(0);
         testEncodeOverMaxSize(1);
         testEncodeOverMaxSize(3);
@@ -1530,8 +3028,17 @@ public Random getRandom() {
     }
 
     @Test
-    public void testCodec112_literalMutation1770() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodec112_literalMutation1770");
+    public void testCodec112_literalMutation2401() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodec112_literalMutation2401");
+        final byte[] in = new byte[]{ -1 };
+        final byte[] out = Base64.encodeBase64(in);
+        Base64.encodeBase64(in, false, false, out.length);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testCodec112_literalMutation2402() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodec112_literalMutation2402");
         final byte[] in = new byte[]{ 0 };
         final byte[] out = Base64.encodeBase64(in);
         Base64.encodeBase64(in, false, false, out.length);
@@ -1539,8 +3046,17 @@ public Random getRandom() {
     }
 
     @Test
-    public void testCodec112_literalMutation1771() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodec112_literalMutation1771");
+    public void testCodec112_literalMutation2403() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodec112_literalMutation2403");
+        final byte[] in = new byte[]{ 0 };
+        final byte[] out = Base64.encodeBase64(in);
+        Base64.encodeBase64(in, true, false, out.length);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testCodec112_literalMutation2404() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCodec112_literalMutation2404");
         final byte[] in = new byte[]{ 0 };
         final byte[] out = Base64.encodeBase64(in);
         Base64.encodeBase64(in, false, true, out.length);
@@ -1577,8 +3093,8 @@ public Random getRandom() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    private void testEncodeOverMaxSize_literalMutation1837(final int maxSize) throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize_literalMutation1837");
+    private void testEncodeOverMaxSize_literalMutation2541(final int maxSize) throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeOverMaxSize_literalMutation2541");
         try {
             Base64.encodeBase64(Base64TestData.DECODED, true, true, maxSize);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1783,("Expected " + (java.lang.IllegalArgumentException.class.getName())));
@@ -1617,7 +3133,7 @@ public Random getRandom() {
 @Test
     public void testIsUrlSafe() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsUrlSafe");
-        final Base64 base64Standard = new Base64(false);
+        final Base64 base64Standard = new Base64(true);
         final Base64 base64URLSafe = new Base64(true);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1817,base64Standard,1816,base64Standard.isUrlSafe());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1819,base64URLSafe,1818,base64URLSafe.isUrlSafe());
@@ -1630,10 +3146,10 @@ public Random getRandom() {
      * Tests isUrlSafe.
      */
 @Test
-    public void testIsUrlSafe_literalMutation1848() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsUrlSafe_literalMutation1848");
+    public void testIsUrlSafe_literalMutation2566() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsUrlSafe_literalMutation2566");
         final Base64 base64Standard = new Base64(false);
-        final Base64 base64URLSafe = new Base64(true);
+        final Base64 base64URLSafe = new Base64(false);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1817,base64Standard,1816,base64Standard.isUrlSafe());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1819,base64URLSafe,1818,base64URLSafe.isUrlSafe());
         final byte[] whiteSpace = new byte[]{ ' ' , '\n' , '\r' , '\t' };
@@ -1700,6 +3216,39 @@ public Random getRandom() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testObjectDecodeWithInvalidParameter");
         final Base64 b64 = new Base64();
         try {
+            b64.decode(java.lang.Integer.valueOf(4));
+        } catch (final DecoderException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testObjectDecodeWithInvalidParameter_literalMutation2573() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testObjectDecodeWithInvalidParameter_literalMutation2573");
+        final Base64 b64 = new Base64();
+        try {
+            b64.decode(java.lang.Integer.valueOf(2));
+        } catch (final DecoderException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testObjectDecodeWithInvalidParameter_literalMutation2574() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testObjectDecodeWithInvalidParameter_literalMutation2574");
+        final Base64 b64 = new Base64();
+        try {
+            b64.decode(java.lang.Integer.valueOf(10));
+        } catch (final DecoderException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testObjectDecodeWithInvalidParameter_literalMutation2575() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testObjectDecodeWithInvalidParameter_literalMutation2575");
+        final Base64 b64 = new Base64();
+        try {
             b64.decode(java.lang.Integer.valueOf(6));
         } catch (final DecoderException e) {
         }
@@ -1709,7 +3258,7 @@ public Random getRandom() {
     @Test
     public void testObjectDecodeWithValidParameter() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testObjectDecodeWithValidParameter");
-        final String original = "foo";
+        final String original = "bar";
         final Object o = Base64.encodeBase64(original.getBytes(org.apache.commons.codec.Charsets.UTF_8));
         final Base64 b64 = new Base64();
         final Object oDecoded = b64.decode(o);
@@ -1737,7 +3286,7 @@ public Random getRandom() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testObjectEncode");
         final Base64 b64 = new Base64();
         try {
-            b64.encode("foo");
+            b64.encode("bar");
         } catch (final EncoderException e) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -1746,7 +3295,7 @@ public Random getRandom() {
     @Test
     public void testObjectEncodeWithValidParameter() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testObjectEncodeWithValidParameter");
-        final String original = "foo";
+        final String original = "bar";
         final Object origObj = original.getBytes(org.apache.commons.codec.Charsets.UTF_8);
         final Base64 b64 = new Base64();
         final Object oEncoded = b64.encode(origObj);
@@ -1761,7 +3310,7 @@ public Random getRandom() {
     public void testPairs() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPairs");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1845,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ 0 , 0 })));
-        for (int i = 129 ; i <= 127 ; i++) {
+        for (int i = -129 ; i <= 127 ; i++) {
             final byte[] test = new byte[]{ ((byte)(i)) , ((byte)(i)) };
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1847,null,1846,java.util.Arrays.equals(test, org.apache.commons.codec.binary.Base64.decodeBase64(org.apache.commons.codec.binary.Base64.encodeBase64(test))));
         }
@@ -1769,10 +3318,76 @@ public Random getRandom() {
     }
 
     @Test
-    public void testPairs_literalMutation1859() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPairs_literalMutation1859");
+    public void testPairs_literalMutation2580() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPairs_literalMutation2580");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1845,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ 0 , 0 })));
-        for (int i = -128 ; i <= 128 ; i++) {
+        for (int i = 64 ; i <= 127 ; i++) {
+            final byte[] test = new byte[]{ ((byte)(i)) , ((byte)(i)) };
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1847,null,1846,java.util.Arrays.equals(test, org.apache.commons.codec.binary.Base64.decodeBase64(org.apache.commons.codec.binary.Base64.encodeBase64(test))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testPairs_literalMutation2581() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPairs_literalMutation2581");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1845,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ 0 , 0 })));
+        for (int i = 256 ; i <= 127 ; i++) {
+            final byte[] test = new byte[]{ ((byte)(i)) , ((byte)(i)) };
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1847,null,1846,java.util.Arrays.equals(test, org.apache.commons.codec.binary.Base64.decodeBase64(org.apache.commons.codec.binary.Base64.encodeBase64(test))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testPairs_literalMutation2582() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPairs_literalMutation2582");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1845,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ 0 , 0 })));
+        for (int i = 127 ; i <= 127 ; i++) {
+            final byte[] test = new byte[]{ ((byte)(i)) , ((byte)(i)) };
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1847,null,1846,java.util.Arrays.equals(test, org.apache.commons.codec.binary.Base64.decodeBase64(org.apache.commons.codec.binary.Base64.encodeBase64(test))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testPairs_literalMutation2583() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPairs_literalMutation2583");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1845,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ 0 , 0 })));
+        for (int i = 129 ; i <= 128 ; i++) {
+            final byte[] test = new byte[]{ ((byte)(i)) , ((byte)(i)) };
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1847,null,1846,java.util.Arrays.equals(test, org.apache.commons.codec.binary.Base64.decodeBase64(org.apache.commons.codec.binary.Base64.encodeBase64(test))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testPairs_literalMutation2584() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPairs_literalMutation2584");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1845,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ 0 , 0 })));
+        for (int i = 129 ; i <= 126 ; i++) {
+            final byte[] test = new byte[]{ ((byte)(i)) , ((byte)(i)) };
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1847,null,1846,java.util.Arrays.equals(test, org.apache.commons.codec.binary.Base64.decodeBase64(org.apache.commons.codec.binary.Base64.encodeBase64(test))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testPairs_literalMutation2585() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPairs_literalMutation2585");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1845,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ 0 , 0 })));
+        for (int i = 129 ; i <= 63 ; i++) {
+            final byte[] test = new byte[]{ ((byte)(i)) , ((byte)(i)) };
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1847,null,1846,java.util.Arrays.equals(test, org.apache.commons.codec.binary.Base64.decodeBase64(org.apache.commons.codec.binary.Base64.encodeBase64(test))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testPairs_literalMutation2586() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPairs_literalMutation2586");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1845,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ 0 , 0 })));
+        for (int i = 129 ; i <= 254 ; i++) {
             final byte[] test = new byte[]{ ((byte)(i)) , ((byte)(i)) };
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1847,null,1846,java.util.Arrays.equals(test, org.apache.commons.codec.binary.Base64.decodeBase64(org.apache.commons.codec.binary.Base64.encodeBase64(test))));
         }
@@ -2077,7 +3692,7 @@ public Random getRandom() {
 @Test
     public void testRfc4648Section10Decode() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10Decode");
-        testDecodeEncode("foo");
+        testDecodeEncode("bar");
         testDecodeEncode("Zg==");
         testDecodeEncode("Zm8=");
         testDecodeEncode("Zm9v");
@@ -2102,10 +3717,10 @@ public Random getRandom() {
      * @see <a href="http://tools.ietf.org/html/rfc4648">http://tools.ietf.org/html/rfc4648</a>
      */
 @Test
-    public void testRfc4648Section10DecodeEncode_literalMutation1861() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10DecodeEncode_literalMutation1861");
+    public void testRfc4648Section10DecodeEncode_literalMutation2588() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10DecodeEncode_literalMutation2588");
         testDecodeEncode("");
-        testDecodeEncode("foo");
+        testDecodeEncode("bar");
         testDecodeEncode("Zm8=");
         testDecodeEncode("Zm9v");
         testDecodeEncode("Zm9vYg==");
@@ -2129,11 +3744,11 @@ public Random getRandom() {
      * @see <a href="http://tools.ietf.org/html/rfc4648">http://tools.ietf.org/html/rfc4648</a>
      */
 @Test
-    public void testRfc4648Section10DecodeEncode_literalMutation1862() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10DecodeEncode_literalMutation1862");
+    public void testRfc4648Section10DecodeEncode_literalMutation2589() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10DecodeEncode_literalMutation2589");
         testDecodeEncode("");
         testDecodeEncode("Zg==");
-        testDecodeEncode("foo");
+        testDecodeEncode("bar");
         testDecodeEncode("Zm9v");
         testDecodeEncode("Zm9vYg==");
         testDecodeEncode("Zm9vYmE=");
@@ -2156,8 +3771,8 @@ public Random getRandom() {
      * @see <a href="http://tools.ietf.org/html/rfc4648">http://tools.ietf.org/html/rfc4648</a>
      */
 @Test
-    public void testRfc4648Section10DecodeEncode_literalMutation1863() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10DecodeEncode_literalMutation1863");
+    public void testRfc4648Section10DecodeEncode_literalMutation2590() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10DecodeEncode_literalMutation2590");
         testDecodeEncode("");
         testDecodeEncode("Zg==");
         testDecodeEncode("Zm8=");
@@ -2183,8 +3798,8 @@ public Random getRandom() {
      * @see <a href="http://tools.ietf.org/html/rfc4648">http://tools.ietf.org/html/rfc4648</a>
      */
 @Test
-    public void testRfc4648Section10DecodeEncode_literalMutation1864() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10DecodeEncode_literalMutation1864");
+    public void testRfc4648Section10DecodeEncode_literalMutation2591() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10DecodeEncode_literalMutation2591");
         testDecodeEncode("");
         testDecodeEncode("Zg==");
         testDecodeEncode("Zm8=");
@@ -2210,14 +3825,14 @@ public Random getRandom() {
      * @see <a href="http://tools.ietf.org/html/rfc4648">http://tools.ietf.org/html/rfc4648</a>
      */
 @Test
-    public void testRfc4648Section10DecodeEncode_literalMutation1865() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10DecodeEncode_literalMutation1865");
+    public void testRfc4648Section10DecodeEncode_literalMutation2592() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10DecodeEncode_literalMutation2592");
         testDecodeEncode("");
         testDecodeEncode("Zg==");
         testDecodeEncode("Zm8=");
         testDecodeEncode("Zm9v");
         testDecodeEncode("Zm9vYg==");
-        testDecodeEncode("foo");
+        testDecodeEncode("bar");
         testDecodeEncode("Zm9vYmFy");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2237,15 +3852,15 @@ public Random getRandom() {
      * @see <a href="http://tools.ietf.org/html/rfc4648">http://tools.ietf.org/html/rfc4648</a>
      */
 @Test
-    public void testRfc4648Section10DecodeEncode_literalMutation1866() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10DecodeEncode_literalMutation1866");
+    public void testRfc4648Section10DecodeEncode_literalMutation2593() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10DecodeEncode_literalMutation2593");
         testDecodeEncode("");
         testDecodeEncode("Zg==");
         testDecodeEncode("Zm8=");
         testDecodeEncode("Zm9v");
         testDecodeEncode("Zm9vYg==");
         testDecodeEncode("Zm9vYmE=");
-        testDecodeEncode("foo");
+        testDecodeEncode("bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2705,11 +4320,11 @@ public Random getRandom() {
      * @see <a href="http://tools.ietf.org/html/rfc4648">http://tools.ietf.org/html/rfc4648</a>
      */
 @Test
-    public void testRfc4648Section10EncodeDecode_literalMutation1869() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10EncodeDecode_literalMutation1869");
+    public void testRfc4648Section10EncodeDecode_literalMutation2596() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10EncodeDecode_literalMutation2596");
         testEncodeDecode("");
         testEncodeDecode("f");
-        testEncodeDecode("foo");
+        testEncodeDecode("bar");
         testEncodeDecode("foo");
         testEncodeDecode("foob");
         testEncodeDecode("fooba");
@@ -2732,12 +4347,12 @@ public Random getRandom() {
      * @see <a href="http://tools.ietf.org/html/rfc4648">http://tools.ietf.org/html/rfc4648</a>
      */
 @Test
-    public void testRfc4648Section10EncodeDecode_literalMutation1870() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10EncodeDecode_literalMutation1870");
+    public void testRfc4648Section10EncodeDecode_literalMutation2597() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10EncodeDecode_literalMutation2597");
         testEncodeDecode("");
         testEncodeDecode("f");
         testEncodeDecode("fo");
-        testEncodeDecode("foo");
+        testEncodeDecode("bar");
         testEncodeDecode("foob");
         testEncodeDecode("fooba");
         testEncodeDecode("foobar");
@@ -2759,8 +4374,8 @@ public Random getRandom() {
      * @see <a href="http://tools.ietf.org/html/rfc4648">http://tools.ietf.org/html/rfc4648</a>
      */
 @Test
-    public void testRfc4648Section10EncodeDecode_literalMutation1871() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10EncodeDecode_literalMutation1871");
+    public void testRfc4648Section10EncodeDecode_literalMutation2598() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10EncodeDecode_literalMutation2598");
         testEncodeDecode("");
         testEncodeDecode("f");
         testEncodeDecode("fo");
@@ -2786,8 +4401,8 @@ public Random getRandom() {
      * @see <a href="http://tools.ietf.org/html/rfc4648">http://tools.ietf.org/html/rfc4648</a>
      */
 @Test
-    public void testRfc4648Section10EncodeDecode_literalMutation1872() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10EncodeDecode_literalMutation1872");
+    public void testRfc4648Section10EncodeDecode_literalMutation2599() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10EncodeDecode_literalMutation2599");
         testEncodeDecode("");
         testEncodeDecode("f");
         testEncodeDecode("fo");
@@ -2813,8 +4428,8 @@ public Random getRandom() {
      * @see <a href="http://tools.ietf.org/html/rfc4648">http://tools.ietf.org/html/rfc4648</a>
      */
 @Test
-    public void testRfc4648Section10EncodeDecode_literalMutation1873() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10EncodeDecode_literalMutation1873");
+    public void testRfc4648Section10EncodeDecode_literalMutation2600() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRfc4648Section10EncodeDecode_literalMutation2600");
         testEncodeDecode("");
         testEncodeDecode("f");
         testEncodeDecode("fo");
@@ -3124,7 +4739,7 @@ public Random getRandom() {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2073,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(102)) })));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2074,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(103)) })));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2075,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(104)) })));
-        for (int i = 127 ; i <= 127 ; i++) {
+        for (int i = -129 ; i <= 127 ; i++) {
             final byte[] test = new byte[]{ ((byte)(i)) };
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2077,null,2076,java.util.Arrays.equals(test, org.apache.commons.codec.binary.Base64.decodeBase64(org.apache.commons.codec.binary.Base64.encodeBase64(test))));
         }
@@ -3132,8 +4747,8 @@ public Random getRandom() {
     }
 
     @Test
-    public void testSingletons_literalMutation1875() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSingletons_literalMutation1875");
+    public void testSingletons_literalMutation2602() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSingletons_literalMutation2602");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1971,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(0)) })));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1972,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(1)) })));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1973,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(2)) })));
@@ -3239,7 +4854,697 @@ public Random getRandom() {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2073,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(102)) })));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2074,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(103)) })));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2075,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(104)) })));
-        for (int i = -128 ; i <= 126 ; i++) {
+        for (int i = 64 ; i <= 127 ; i++) {
+            final byte[] test = new byte[]{ ((byte)(i)) };
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2077,null,2076,java.util.Arrays.equals(test, org.apache.commons.codec.binary.Base64.decodeBase64(org.apache.commons.codec.binary.Base64.encodeBase64(test))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSingletons_literalMutation2603() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSingletons_literalMutation2603");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1971,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(0)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1972,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(1)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1973,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(2)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1974,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(3)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1975,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(4)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1976,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(5)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1977,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(6)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1978,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(7)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1979,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(8)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1980,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(9)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1981,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(10)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1982,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(11)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1983,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(12)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1984,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(13)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1985,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(14)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1986,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(15)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1987,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(16)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1988,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(17)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1989,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(18)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1990,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(19)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1991,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(20)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1992,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(21)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1993,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(22)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1994,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(23)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1995,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(24)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1996,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(25)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1997,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(26)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1998,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(27)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1999,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(28)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2000,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(29)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2001,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(30)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2002,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(31)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2003,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(32)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2004,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(33)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2005,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(34)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2006,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(35)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2007,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(36)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2008,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(37)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2009,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(38)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2010,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(39)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2011,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(40)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2012,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(41)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2013,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(42)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2014,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(43)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2015,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(44)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2016,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(45)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2017,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(46)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2018,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(47)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2019,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(48)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2020,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(49)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2021,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(50)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2022,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(51)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2023,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(52)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2024,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(53)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2025,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(54)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2026,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(55)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2027,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(56)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2028,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(57)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2029,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(58)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2030,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(59)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2031,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(60)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2032,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(61)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2033,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(62)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2034,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(63)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2035,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(64)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2036,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(65)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2037,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(66)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2038,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(67)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2039,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(68)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2040,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(69)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2041,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(70)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2042,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(71)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2043,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(72)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2044,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(73)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2045,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(74)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2046,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(75)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2047,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(76)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2048,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(77)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2049,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(78)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2050,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(79)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2051,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(80)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2052,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(81)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2053,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(82)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2054,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(83)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2055,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(84)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2056,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(85)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2057,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(86)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2058,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(87)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2059,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(88)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2060,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(89)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2061,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(90)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2062,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(91)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2063,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(92)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2064,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(93)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2065,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(94)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2066,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(95)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2067,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(96)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2068,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(97)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2069,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(98)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2070,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(99)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2071,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(100)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2072,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(101)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2073,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(102)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2074,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(103)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2075,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(104)) })));
+        for (int i = 256 ; i <= 127 ; i++) {
+            final byte[] test = new byte[]{ ((byte)(i)) };
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2077,null,2076,java.util.Arrays.equals(test, org.apache.commons.codec.binary.Base64.decodeBase64(org.apache.commons.codec.binary.Base64.encodeBase64(test))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSingletons_literalMutation2604() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSingletons_literalMutation2604");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1971,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(0)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1972,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(1)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1973,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(2)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1974,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(3)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1975,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(4)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1976,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(5)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1977,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(6)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1978,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(7)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1979,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(8)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1980,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(9)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1981,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(10)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1982,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(11)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1983,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(12)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1984,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(13)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1985,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(14)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1986,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(15)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1987,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(16)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1988,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(17)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1989,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(18)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1990,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(19)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1991,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(20)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1992,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(21)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1993,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(22)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1994,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(23)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1995,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(24)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1996,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(25)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1997,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(26)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1998,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(27)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1999,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(28)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2000,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(29)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2001,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(30)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2002,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(31)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2003,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(32)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2004,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(33)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2005,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(34)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2006,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(35)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2007,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(36)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2008,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(37)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2009,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(38)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2010,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(39)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2011,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(40)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2012,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(41)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2013,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(42)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2014,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(43)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2015,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(44)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2016,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(45)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2017,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(46)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2018,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(47)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2019,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(48)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2020,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(49)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2021,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(50)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2022,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(51)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2023,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(52)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2024,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(53)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2025,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(54)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2026,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(55)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2027,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(56)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2028,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(57)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2029,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(58)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2030,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(59)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2031,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(60)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2032,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(61)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2033,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(62)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2034,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(63)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2035,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(64)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2036,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(65)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2037,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(66)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2038,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(67)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2039,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(68)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2040,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(69)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2041,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(70)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2042,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(71)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2043,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(72)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2044,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(73)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2045,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(74)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2046,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(75)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2047,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(76)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2048,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(77)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2049,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(78)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2050,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(79)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2051,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(80)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2052,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(81)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2053,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(82)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2054,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(83)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2055,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(84)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2056,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(85)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2057,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(86)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2058,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(87)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2059,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(88)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2060,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(89)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2061,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(90)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2062,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(91)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2063,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(92)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2064,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(93)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2065,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(94)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2066,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(95)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2067,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(96)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2068,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(97)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2069,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(98)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2070,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(99)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2071,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(100)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2072,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(101)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2073,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(102)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2074,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(103)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2075,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(104)) })));
+        for (int i = 127 ; i <= 127 ; i++) {
+            final byte[] test = new byte[]{ ((byte)(i)) };
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2077,null,2076,java.util.Arrays.equals(test, org.apache.commons.codec.binary.Base64.decodeBase64(org.apache.commons.codec.binary.Base64.encodeBase64(test))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSingletons_literalMutation2605() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSingletons_literalMutation2605");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1971,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(0)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1972,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(1)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1973,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(2)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1974,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(3)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1975,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(4)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1976,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(5)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1977,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(6)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1978,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(7)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1979,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(8)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1980,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(9)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1981,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(10)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1982,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(11)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1983,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(12)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1984,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(13)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1985,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(14)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1986,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(15)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1987,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(16)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1988,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(17)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1989,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(18)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1990,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(19)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1991,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(20)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1992,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(21)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1993,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(22)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1994,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(23)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1995,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(24)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1996,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(25)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1997,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(26)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1998,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(27)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1999,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(28)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2000,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(29)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2001,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(30)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2002,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(31)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2003,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(32)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2004,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(33)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2005,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(34)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2006,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(35)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2007,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(36)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2008,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(37)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2009,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(38)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2010,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(39)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2011,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(40)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2012,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(41)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2013,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(42)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2014,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(43)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2015,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(44)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2016,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(45)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2017,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(46)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2018,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(47)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2019,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(48)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2020,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(49)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2021,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(50)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2022,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(51)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2023,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(52)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2024,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(53)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2025,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(54)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2026,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(55)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2027,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(56)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2028,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(57)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2029,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(58)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2030,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(59)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2031,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(60)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2032,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(61)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2033,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(62)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2034,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(63)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2035,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(64)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2036,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(65)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2037,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(66)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2038,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(67)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2039,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(68)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2040,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(69)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2041,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(70)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2042,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(71)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2043,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(72)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2044,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(73)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2045,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(74)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2046,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(75)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2047,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(76)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2048,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(77)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2049,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(78)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2050,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(79)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2051,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(80)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2052,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(81)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2053,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(82)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2054,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(83)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2055,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(84)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2056,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(85)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2057,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(86)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2058,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(87)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2059,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(88)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2060,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(89)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2061,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(90)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2062,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(91)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2063,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(92)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2064,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(93)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2065,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(94)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2066,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(95)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2067,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(96)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2068,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(97)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2069,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(98)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2070,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(99)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2071,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(100)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2072,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(101)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2073,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(102)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2074,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(103)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2075,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(104)) })));
+        for (int i = 129 ; i <= 128 ; i++) {
+            final byte[] test = new byte[]{ ((byte)(i)) };
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2077,null,2076,java.util.Arrays.equals(test, org.apache.commons.codec.binary.Base64.decodeBase64(org.apache.commons.codec.binary.Base64.encodeBase64(test))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSingletons_literalMutation2606() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSingletons_literalMutation2606");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1971,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(0)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1972,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(1)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1973,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(2)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1974,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(3)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1975,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(4)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1976,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(5)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1977,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(6)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1978,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(7)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1979,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(8)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1980,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(9)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1981,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(10)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1982,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(11)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1983,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(12)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1984,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(13)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1985,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(14)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1986,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(15)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1987,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(16)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1988,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(17)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1989,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(18)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1990,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(19)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1991,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(20)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1992,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(21)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1993,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(22)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1994,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(23)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1995,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(24)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1996,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(25)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1997,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(26)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1998,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(27)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1999,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(28)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2000,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(29)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2001,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(30)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2002,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(31)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2003,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(32)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2004,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(33)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2005,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(34)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2006,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(35)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2007,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(36)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2008,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(37)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2009,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(38)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2010,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(39)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2011,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(40)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2012,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(41)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2013,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(42)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2014,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(43)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2015,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(44)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2016,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(45)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2017,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(46)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2018,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(47)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2019,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(48)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2020,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(49)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2021,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(50)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2022,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(51)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2023,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(52)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2024,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(53)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2025,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(54)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2026,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(55)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2027,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(56)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2028,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(57)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2029,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(58)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2030,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(59)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2031,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(60)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2032,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(61)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2033,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(62)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2034,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(63)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2035,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(64)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2036,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(65)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2037,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(66)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2038,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(67)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2039,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(68)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2040,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(69)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2041,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(70)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2042,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(71)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2043,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(72)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2044,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(73)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2045,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(74)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2046,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(75)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2047,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(76)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2048,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(77)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2049,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(78)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2050,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(79)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2051,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(80)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2052,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(81)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2053,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(82)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2054,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(83)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2055,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(84)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2056,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(85)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2057,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(86)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2058,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(87)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2059,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(88)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2060,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(89)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2061,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(90)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2062,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(91)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2063,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(92)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2064,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(93)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2065,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(94)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2066,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(95)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2067,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(96)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2068,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(97)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2069,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(98)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2070,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(99)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2071,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(100)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2072,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(101)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2073,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(102)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2074,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(103)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2075,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(104)) })));
+        for (int i = 129 ; i <= 126 ; i++) {
+            final byte[] test = new byte[]{ ((byte)(i)) };
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2077,null,2076,java.util.Arrays.equals(test, org.apache.commons.codec.binary.Base64.decodeBase64(org.apache.commons.codec.binary.Base64.encodeBase64(test))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSingletons_literalMutation2607() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSingletons_literalMutation2607");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1971,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(0)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1972,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(1)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1973,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(2)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1974,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(3)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1975,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(4)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1976,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(5)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1977,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(6)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1978,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(7)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1979,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(8)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1980,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(9)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1981,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(10)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1982,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(11)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1983,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(12)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1984,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(13)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1985,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(14)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1986,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(15)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1987,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(16)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1988,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(17)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1989,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(18)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1990,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(19)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1991,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(20)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1992,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(21)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1993,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(22)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1994,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(23)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1995,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(24)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1996,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(25)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1997,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(26)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1998,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(27)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1999,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(28)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2000,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(29)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2001,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(30)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2002,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(31)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2003,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(32)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2004,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(33)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2005,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(34)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2006,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(35)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2007,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(36)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2008,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(37)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2009,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(38)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2010,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(39)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2011,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(40)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2012,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(41)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2013,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(42)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2014,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(43)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2015,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(44)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2016,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(45)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2017,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(46)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2018,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(47)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2019,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(48)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2020,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(49)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2021,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(50)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2022,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(51)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2023,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(52)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2024,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(53)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2025,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(54)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2026,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(55)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2027,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(56)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2028,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(57)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2029,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(58)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2030,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(59)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2031,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(60)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2032,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(61)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2033,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(62)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2034,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(63)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2035,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(64)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2036,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(65)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2037,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(66)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2038,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(67)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2039,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(68)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2040,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(69)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2041,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(70)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2042,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(71)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2043,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(72)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2044,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(73)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2045,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(74)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2046,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(75)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2047,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(76)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2048,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(77)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2049,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(78)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2050,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(79)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2051,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(80)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2052,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(81)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2053,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(82)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2054,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(83)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2055,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(84)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2056,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(85)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2057,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(86)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2058,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(87)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2059,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(88)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2060,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(89)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2061,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(90)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2062,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(91)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2063,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(92)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2064,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(93)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2065,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(94)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2066,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(95)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2067,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(96)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2068,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(97)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2069,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(98)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2070,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(99)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2071,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(100)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2072,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(101)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2073,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(102)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2074,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(103)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2075,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(104)) })));
+        for (int i = 129 ; i <= 63 ; i++) {
+            final byte[] test = new byte[]{ ((byte)(i)) };
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2077,null,2076,java.util.Arrays.equals(test, org.apache.commons.codec.binary.Base64.decodeBase64(org.apache.commons.codec.binary.Base64.encodeBase64(test))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSingletons_literalMutation2608() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSingletons_literalMutation2608");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1971,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(0)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1972,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(1)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1973,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(2)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1974,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(3)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1975,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(4)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1976,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(5)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1977,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(6)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1978,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(7)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1979,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(8)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1980,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(9)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1981,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(10)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1982,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(11)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1983,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(12)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1984,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(13)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1985,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(14)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1986,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(15)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1987,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(16)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1988,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(17)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1989,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(18)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1990,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(19)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1991,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(20)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1992,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(21)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1993,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(22)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1994,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(23)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1995,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(24)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1996,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(25)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1997,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(26)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1998,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(27)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1999,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(28)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2000,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(29)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2001,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(30)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2002,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(31)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2003,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(32)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2004,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(33)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2005,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(34)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2006,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(35)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2007,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(36)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2008,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(37)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2009,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(38)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2010,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(39)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2011,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(40)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2012,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(41)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2013,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(42)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2014,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(43)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2015,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(44)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2016,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(45)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2017,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(46)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2018,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(47)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2019,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(48)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2020,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(49)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2021,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(50)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2022,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(51)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2023,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(52)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2024,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(53)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2025,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(54)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2026,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(55)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2027,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(56)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2028,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(57)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2029,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(58)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2030,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(59)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2031,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(60)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2032,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(61)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2033,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(62)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2034,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(63)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2035,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(64)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2036,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(65)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2037,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(66)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2038,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(67)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2039,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(68)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2040,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(69)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2041,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(70)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2042,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(71)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2043,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(72)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2044,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(73)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2045,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(74)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2046,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(75)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2047,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(76)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2048,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(77)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2049,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(78)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2050,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(79)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2051,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(80)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2052,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(81)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2053,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(82)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2054,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(83)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2055,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(84)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2056,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(85)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2057,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(86)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2058,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(87)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2059,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(88)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2060,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(89)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2061,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(90)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2062,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(91)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2063,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(92)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2064,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(93)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2065,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(94)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2066,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(95)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2067,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(96)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2068,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(97)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2069,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(98)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2070,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(99)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2071,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(100)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2072,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(101)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2073,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(102)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2074,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(103)) })));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2075,new java.lang.String(org.apache.commons.codec.binary.Base64.encodeBase64(new byte[]{ ((byte)(104)) })));
+        for (int i = 129 ; i <= 254 ; i++) {
             final byte[] test = new byte[]{ ((byte)(i)) };
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2077,null,2076,java.util.Arrays.equals(test, org.apache.commons.codec.binary.Base64.decodeBase64(org.apache.commons.codec.binary.Base64.encodeBase64(test))));
         }
@@ -3503,6 +5808,29 @@ public Random getRandom() {
 @Test
     public void testUrlSafe() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUrlSafe");
+        for (int i = 1 ; i <= 150 ; i++) {
+            final byte[][] randomData = Base64TestData.randomData(i, true);
+            final byte[] encoded = randomData[1];
+            final byte[] decoded = randomData[0];
+            final byte[] result = Base64.decodeBase64(encoded);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2238,("url-safe i=" + i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2240,null,2239,java.util.Arrays.equals(decoded, result));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2241,(("url-safe i=" + i) + " no \'=\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2243,null,2242,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('='))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2244,(("url-safe i=" + i) + " no \'\\\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2246,null,2245,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('\\'))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2247,(("url-safe i=" + i) + " no \'+\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2249,null,2248,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('+'))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests url-safe Base64 against random data, sizes 0 to 150.
+     */
+@Test
+    public void testUrlSafe_literalMutation2743() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUrlSafe_literalMutation2743");
         for (int i = -1 ; i <= 150 ; i++) {
             final byte[][] randomData = Base64TestData.randomData(i, true);
             final byte[] encoded = randomData[1];
@@ -3524,8 +5852,31 @@ public Random getRandom() {
      * Tests url-safe Base64 against random data, sizes 0 to 150.
      */
 @Test
-    public void testUrlSafe_literalMutation1945() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUrlSafe_literalMutation1945");
+    public void testUrlSafe_literalMutation2744() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUrlSafe_literalMutation2744");
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = Base64TestData.randomData(i, true);
+            final byte[] encoded = randomData[1];
+            final byte[] decoded = randomData[0];
+            final byte[] result = Base64.decodeBase64(encoded);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2238,("url-safe i=" + i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2240,null,2239,java.util.Arrays.equals(decoded, result));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2241,(("url-safe i=" + i) + " no \'=\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2243,null,2242,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('='))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2244,(("url-safe i=" + i) + " no \'\\\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2246,null,2245,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('\\'))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2247,(("url-safe i=" + i) + " no \'+\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2249,null,2248,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('+'))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests url-safe Base64 against random data, sizes 0 to 150.
+     */
+@Test
+    public void testUrlSafe_literalMutation2745() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUrlSafe_literalMutation2745");
         for (int i = 0 ; i <= 151 ; i++) {
             final byte[][] randomData = Base64TestData.randomData(i, true);
             final byte[] encoded = randomData[1];
@@ -3547,8 +5898,77 @@ public Random getRandom() {
      * Tests url-safe Base64 against random data, sizes 0 to 150.
      */
 @Test
-    public void testUrlSafe_literalMutation1946() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUrlSafe_literalMutation1946");
+    public void testUrlSafe_literalMutation2746() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUrlSafe_literalMutation2746");
+        for (int i = 0 ; i <= 149 ; i++) {
+            final byte[][] randomData = Base64TestData.randomData(i, true);
+            final byte[] encoded = randomData[1];
+            final byte[] decoded = randomData[0];
+            final byte[] result = Base64.decodeBase64(encoded);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2238,("url-safe i=" + i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2240,null,2239,java.util.Arrays.equals(decoded, result));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2241,(("url-safe i=" + i) + " no \'=\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2243,null,2242,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('='))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2244,(("url-safe i=" + i) + " no \'\\\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2246,null,2245,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('\\'))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2247,(("url-safe i=" + i) + " no \'+\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2249,null,2248,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('+'))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests url-safe Base64 against random data, sizes 0 to 150.
+     */
+@Test
+    public void testUrlSafe_literalMutation2747() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUrlSafe_literalMutation2747");
+        for (int i = 0 ; i <= 75 ; i++) {
+            final byte[][] randomData = Base64TestData.randomData(i, true);
+            final byte[] encoded = randomData[1];
+            final byte[] decoded = randomData[0];
+            final byte[] result = Base64.decodeBase64(encoded);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2238,("url-safe i=" + i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2240,null,2239,java.util.Arrays.equals(decoded, result));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2241,(("url-safe i=" + i) + " no \'=\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2243,null,2242,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('='))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2244,(("url-safe i=" + i) + " no \'\\\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2246,null,2245,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('\\'))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2247,(("url-safe i=" + i) + " no \'+\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2249,null,2248,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('+'))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests url-safe Base64 against random data, sizes 0 to 150.
+     */
+@Test
+    public void testUrlSafe_literalMutation2748() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUrlSafe_literalMutation2748");
+        for (int i = 0 ; i <= 300 ; i++) {
+            final byte[][] randomData = Base64TestData.randomData(i, true);
+            final byte[] encoded = randomData[1];
+            final byte[] decoded = randomData[0];
+            final byte[] result = Base64.decodeBase64(encoded);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2238,("url-safe i=" + i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2240,null,2239,java.util.Arrays.equals(decoded, result));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2241,(("url-safe i=" + i) + " no \'=\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2243,null,2242,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('='))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2244,(("url-safe i=" + i) + " no \'\\\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2246,null,2245,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('\\'))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2247,(("url-safe i=" + i) + " no \'+\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2249,null,2248,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('+'))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests url-safe Base64 against random data, sizes 0 to 150.
+     */
+@Test
+    public void testUrlSafe_literalMutation2749() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUrlSafe_literalMutation2749");
         for (int i = 0 ; i <= 150 ; i++) {
             final byte[][] randomData = Base64TestData.randomData(i, false);
             final byte[] encoded = randomData[1];
@@ -3570,8 +5990,31 @@ public Random getRandom() {
      * Tests url-safe Base64 against random data, sizes 0 to 150.
      */
 @Test
-    public void testUrlSafe_literalMutation1947() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUrlSafe_literalMutation1947");
+    public void testUrlSafe_literalMutation2750() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUrlSafe_literalMutation2750");
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = Base64TestData.randomData(i, true);
+            final byte[] encoded = randomData[2];
+            final byte[] decoded = randomData[0];
+            final byte[] result = Base64.decodeBase64(encoded);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2238,("url-safe i=" + i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2240,null,2239,java.util.Arrays.equals(decoded, result));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2241,(("url-safe i=" + i) + " no \'=\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2243,null,2242,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('='))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2244,(("url-safe i=" + i) + " no \'\\\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2246,null,2245,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('\\'))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2247,(("url-safe i=" + i) + " no \'+\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2249,null,2248,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('+'))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests url-safe Base64 against random data, sizes 0 to 150.
+     */
+@Test
+    public void testUrlSafe_literalMutation2751() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUrlSafe_literalMutation2751");
         for (int i = 0 ; i <= 150 ; i++) {
             final byte[][] randomData = Base64TestData.randomData(i, true);
             final byte[] encoded = randomData[0];
@@ -3593,12 +6036,81 @@ public Random getRandom() {
      * Tests url-safe Base64 against random data, sizes 0 to 150.
      */
 @Test
-    public void testUrlSafe_literalMutation1948() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUrlSafe_literalMutation1948");
+    public void testUrlSafe_literalMutation2752() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUrlSafe_literalMutation2752");
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = Base64TestData.randomData(i, true);
+            final byte[] encoded = randomData[0];
+            final byte[] decoded = randomData[0];
+            final byte[] result = Base64.decodeBase64(encoded);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2238,("url-safe i=" + i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2240,null,2239,java.util.Arrays.equals(decoded, result));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2241,(("url-safe i=" + i) + " no \'=\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2243,null,2242,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('='))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2244,(("url-safe i=" + i) + " no \'\\\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2246,null,2245,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('\\'))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2247,(("url-safe i=" + i) + " no \'+\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2249,null,2248,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('+'))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests url-safe Base64 against random data, sizes 0 to 150.
+     */
+@Test
+    public void testUrlSafe_literalMutation2753() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUrlSafe_literalMutation2753");
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = Base64TestData.randomData(i, true);
+            final byte[] encoded = randomData[1];
+            final byte[] decoded = randomData[1];
+            final byte[] result = Base64.decodeBase64(encoded);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2238,("url-safe i=" + i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2240,null,2239,java.util.Arrays.equals(decoded, result));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2241,(("url-safe i=" + i) + " no \'=\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2243,null,2242,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('='))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2244,(("url-safe i=" + i) + " no \'\\\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2246,null,2245,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('\\'))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2247,(("url-safe i=" + i) + " no \'+\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2249,null,2248,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('+'))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests url-safe Base64 against random data, sizes 0 to 150.
+     */
+@Test
+    public void testUrlSafe_literalMutation2754() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUrlSafe_literalMutation2754");
         for (int i = 0 ; i <= 150 ; i++) {
             final byte[][] randomData = Base64TestData.randomData(i, true);
             final byte[] encoded = randomData[1];
             final byte[] decoded = randomData[-1];
+            final byte[] result = Base64.decodeBase64(encoded);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2238,("url-safe i=" + i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2240,null,2239,java.util.Arrays.equals(decoded, result));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2241,(("url-safe i=" + i) + " no \'=\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2243,null,2242,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('='))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2244,(("url-safe i=" + i) + " no \'\\\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2246,null,2245,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('\\'))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2247,(("url-safe i=" + i) + " no \'+\'"));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2249,null,2248,org.apache.commons.codec.binary.Base64TestData.bytesContain(encoded, ((byte)('+'))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests url-safe Base64 against random data, sizes 0 to 150.
+     */
+@Test
+    public void testUrlSafe_literalMutation2755() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUrlSafe_literalMutation2755");
+        for (int i = 0 ; i <= 150 ; i++) {
+            final byte[][] randomData = Base64TestData.randomData(i, true);
+            final byte[] encoded = randomData[1];
+            final byte[] decoded = randomData[0];
             final byte[] result = Base64.decodeBase64(encoded);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2238,("url-safe i=" + i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2240,null,2239,java.util.Arrays.equals(decoded, result));
@@ -3922,6 +6434,183 @@ public Random getRandom() {
 @Test
     public void testUUID() throws DecoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID");
+        final byte[][] ids = new byte[2][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2616() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2616");
+        final byte[][] ids = new byte[8][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2617() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2617");
+        final byte[][] ids = new byte[5][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2618() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2618");
         final byte[][] ids = new byte[3][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -3979,8 +6668,67 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1883() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1883");
+    public void testUUID_literalMutation2619() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2619");
+        final byte[][] ids = new byte[4][];
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2620() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2620");
         final byte[][] ids = new byte[4][];
         ids[-1] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -4038,8 +6786,67 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1884() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1884");
+    public void testUUID_literalMutation2621() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2621");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2622() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2622");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("foo".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -4097,8 +6904,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1885() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1885");
+    public void testUUID_literalMutation2623() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2623");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -4156,11 +6963,11 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1886() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1886");
+    public void testUUID_literalMutation2624() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2624");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
-        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("foo".toCharArray());
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
         ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
         ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
         final byte[][] standard = new byte[4][];
@@ -4215,8 +7022,244 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1887() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1887");
+    public void testUUID_literalMutation2625() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2625");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2626() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2626");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("bar".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2627() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2627");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2628() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2628");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[4] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2629() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2629");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -4274,8 +7317,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1888() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1888");
+    public void testUUID_literalMutation2630() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2630");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -4333,8 +7376,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1889() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1889");
+    public void testUUID_literalMutation2631() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2631");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -4392,13 +7435,13 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1890() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1890");
+    public void testUUID_literalMutation2632() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2632");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
         ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
-        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("foo".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
         final byte[][] standard = new byte[4][];
         standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
         standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
@@ -4451,8 +7494,303 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1891() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1891");
+    public void testUUID_literalMutation2633() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2633");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2634() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2634");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[6] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2635() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2635");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("bar".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2636() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2636");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[2][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2637() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2637");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[8][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2638() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2638");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -4510,8 +7848,67 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1892() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1892");
+    public void testUUID_literalMutation2639() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2639");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[3][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2640() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2640");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -4569,15 +7966,15 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1893() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1893");
+    public void testUUID_literalMutation2641() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2641");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
         ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
         ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
         final byte[][] standard = new byte[4][];
-        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("foo");
+        standard[-1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
         standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
         standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
         standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
@@ -4628,8 +8025,185 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1894() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1894");
+    public void testUUID_literalMutation2642() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2642");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2643() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2643");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("bar");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2644() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2644");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2645() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2645");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -4687,8 +8261,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1895() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1895");
+    public void testUUID_literalMutation2646() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2646");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -4696,7 +8270,7 @@ public Random getRandom() {
         ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
         final byte[][] standard = new byte[4][];
         standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
-        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("foo");
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
         standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
         standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
         final byte[][] urlSafe1 = new byte[4][];
@@ -4746,8 +8320,185 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1896() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1896");
+    public void testUUID_literalMutation2647() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2647");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("bar");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2648() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2648");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2649() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2649");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[4] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2650() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2650");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -4805,8 +8556,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1897() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1897");
+    public void testUUID_literalMutation2651() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2651");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -4815,7 +8566,7 @@ public Random getRandom() {
         final byte[][] standard = new byte[4][];
         standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
         standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
-        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("foo");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("bar");
         standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
         final byte[][] urlSafe1 = new byte[4][];
         urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
@@ -4864,8 +8615,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1898() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1898");
+    public void testUUID_literalMutation2652() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2652");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -4923,8 +8674,185 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1899() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1899");
+    public void testUUID_literalMutation2653() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2653");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2654() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2654");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2655() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2655");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[6] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2656() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2656");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -4982,8 +8910,185 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1900() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1900");
+    public void testUUID_literalMutation2657() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2657");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[2][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2658() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2658");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[8][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2659() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2659");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[5][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2660() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2660");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -5041,8 +9146,67 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1901() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1901");
+    public void testUUID_literalMutation2661() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2661");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2662() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2662");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -5100,8 +9264,67 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1902() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1902");
+    public void testUUID_literalMutation2663() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2663");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2664() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2664");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -5159,8 +9382,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1903() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1903");
+    public void testUUID_literalMutation2665() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2665");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -5218,8 +9441,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1904() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1904");
+    public void testUUID_literalMutation2666() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2666");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -5232,7 +9455,7 @@ public Random getRandom() {
         standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
         final byte[][] urlSafe1 = new byte[4][];
         urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
-        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("foo");
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
         urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
         urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
         final byte[][] urlSafe2 = new byte[4][];
@@ -5277,8 +9500,244 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1905() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1905");
+    public void testUUID_literalMutation2667() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2667");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2668() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2668");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("bar");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2669() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2669");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2670() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2670");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[4] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2671() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2671");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -5336,8 +9795,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1906() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1906");
+    public void testUUID_literalMutation2672() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2672");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -5395,8 +9854,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1907() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1907");
+    public void testUUID_literalMutation2673() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2673");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -5454,8 +9913,185 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1908() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1908");
+    public void testUUID_literalMutation2674() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2674");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2675() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2675");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2676() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2676");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[6] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2677() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2677");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -5513,8 +10149,126 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1909() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1909");
+    public void testUUID_literalMutation2678() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2678");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[2][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2679() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2679");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[8][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2680() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2680");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -5572,8 +10326,126 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1910() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1910");
+    public void testUUID_literalMutation2681() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2681");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[3][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2682() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2682");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2683() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2683");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -5631,8 +10503,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1911() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1911");
+    public void testUUID_literalMutation2684() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2684");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -5649,7 +10521,7 @@ public Random getRandom() {
         urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
         urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
         final byte[][] urlSafe2 = new byte[4][];
-        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("foo");
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
         urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
         urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
         urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
@@ -5690,8 +10562,67 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1912() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1912");
+    public void testUUID_literalMutation2685() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2685");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("bar");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2686() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2686");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -5749,8 +10680,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1913() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1913");
+    public void testUUID_literalMutation2687() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2687");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -5768,7 +10699,7 @@ public Random getRandom() {
         urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
         final byte[][] urlSafe2 = new byte[4][];
         urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
-        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("foo");
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
         urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
         urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
         final byte[][] urlSafe3 = new byte[4][];
@@ -5808,8 +10739,126 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1914() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1914");
+    public void testUUID_literalMutation2688() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2688");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2689() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2689");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("bar");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2690() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2690");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -5867,8 +10916,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1915() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1915");
+    public void testUUID_literalMutation2691() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2691");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -5887,7 +10936,7 @@ public Random getRandom() {
         final byte[][] urlSafe2 = new byte[4][];
         urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
         urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
-        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("foo");
+        urlSafe2[4] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
         urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
         final byte[][] urlSafe3 = new byte[4][];
         urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
@@ -5926,8 +10975,185 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1916() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1916");
+    public void testUUID_literalMutation2692() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2692");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2693() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2693");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("bar");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2694() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2694");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[4] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2695() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2695");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -5985,8 +11211,126 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1917() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1917");
+    public void testUUID_literalMutation2696() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2696");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2697() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2697");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[6] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2698() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2698");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -6044,8 +11388,185 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1918() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1918");
+    public void testUUID_literalMutation2699() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2699");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[2][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2700() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2700");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[8][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2701() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2701");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[5][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2702() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2702");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -6103,8 +11624,67 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1919() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1919");
+    public void testUUID_literalMutation2703() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2703");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2704() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2704");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -6162,8 +11742,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1920() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1920");
+    public void testUUID_literalMutation2705() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2705");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -6185,7 +11765,7 @@ public Random getRandom() {
         urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
         urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
         final byte[][] urlSafe3 = new byte[4][];
-        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("foo");
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
         urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
         urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
         urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
@@ -6221,8 +11801,126 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1921() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1921");
+    public void testUUID_literalMutation2706() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2706");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("bar");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2707() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2707");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2708() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2708");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -6280,8 +11978,67 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1922() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1922");
+    public void testUUID_literalMutation2709() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2709");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2710() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2710");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -6339,8 +12096,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1923() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1923");
+    public void testUUID_literalMutation2711() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2711");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -6398,8 +12155,126 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1924() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1924");
+    public void testUUID_literalMutation2712() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2712");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[4] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2713() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2713");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2714() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2714");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -6457,8 +12332,67 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1925() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1925");
+    public void testUUID_literalMutation2715() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2715");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[4] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2716() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2716");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -6516,8 +12450,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1926() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1926");
+    public void testUUID_literalMutation2717() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2717");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -6542,7 +12476,7 @@ public Random getRandom() {
         urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
         urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
         urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
-        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("foo");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
         for (int i = 0 ; i < 4 ; i++) {
             final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
             final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
@@ -6575,8 +12509,126 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1927() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1927");
+    public void testUUID_literalMutation2718() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2718");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[6] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2719() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2719");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("bar");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2720() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2720");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -6634,8 +12686,303 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1928() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1928");
+    public void testUUID_literalMutation2721() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2721");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = -1 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2722() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2722");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 4 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2723() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2723");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 2 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2724() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2724");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 8 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2725() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2725");
+        final byte[][] ids = new byte[4][];
+        ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
+        ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        ids[2] = org.apache.commons.codec.binary.Hex.decodeHex("64be154b6ffa40258d1a01288e7c31ca".toCharArray());
+        ids[3] = org.apache.commons.codec.binary.Hex.decodeHex("ff7f8fc01cdb471a8c8b5a9306183fe8".toCharArray());
+        final byte[][] standard = new byte[4][];
+        standard[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg+2dATTcA==");
+        standard[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K/fMJwH+Q5e0nr7tWsxwkA==");
+        standard[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2/6QCWNGgEojnwxyg==");
+        standard[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("/3+PwBzbRxqMi1qTBhg/6A==");
+        final byte[][] urlSafe1 = new byte[4][];
+        urlSafe1[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA==");
+        urlSafe1[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA==");
+        urlSafe1[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg==");
+        urlSafe1[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A==");
+        final byte[][] urlSafe2 = new byte[4][];
+        urlSafe2[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA=");
+        urlSafe2[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA=");
+        urlSafe2[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg=");
+        urlSafe2[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A=");
+        final byte[][] urlSafe3 = new byte[4][];
+        urlSafe3[0] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("lO2NAxnkSTOZVg-2dATTcA");
+        urlSafe3[1] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("K_fMJwH-Q5e0nr7tWsxwkA");
+        urlSafe3[2] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("ZL4VS2_6QCWNGgEojnwxyg");
+        urlSafe3[3] = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("_3-PwBzbRxqMi1qTBhg_6A");
+        for (int i = 0 ; i < 5 ; i++) {
+            final byte[] encodedStandard = Base64.encodeBase64(ids[i]);
+            final byte[] encodedUrlSafe = Base64.encodeBase64URLSafe(ids[i]);
+            final byte[] decodedStandard = Base64.decodeBase64(standard[i]);
+            final byte[] decodedUrlSafe1 = Base64.decodeBase64(urlSafe1[i]);
+            final byte[] decodedUrlSafe2 = Base64.decodeBase64(urlSafe2[i]);
+            final byte[] decodedUrlSafe3 = Base64.decodeBase64(urlSafe3[i]);
+            if (false) {
+                System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
+                System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
+                System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
+            } 
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2229,null,2228,java.util.Arrays.equals(encodedUrlSafe, urlSafe3[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2231,null,2230,java.util.Arrays.equals(decodedStandard, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2233,null,2232,java.util.Arrays.equals(decodedUrlSafe1, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2235,null,2234,java.util.Arrays.equals(decodedUrlSafe2, ids[i]));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2237,null,2236,java.util.Arrays.equals(decodedUrlSafe3, ids[i]));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Base64 encoding of UUID's is a common use-case, especially in URL-SAFE mode. This test case ends up being the
+     * "URL-SAFE" JUnit's.
+     * 
+     * @throws DecoderException
+     * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
+     */
+@Test
+    public void testUUID_literalMutation2726() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2726");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -6693,8 +13040,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1929() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1929");
+    public void testUUID_literalMutation2727() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2727");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -6752,8 +13099,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1930() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1930");
+    public void testUUID_literalMutation2728() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2728");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -6811,8 +13158,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1931() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1931");
+    public void testUUID_literalMutation2729() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2729");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -6870,8 +13217,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1932() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1932");
+    public void testUUID_literalMutation2730() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2730");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -6929,8 +13276,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1933() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1933");
+    public void testUUID_literalMutation2731() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2731");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -6988,8 +13335,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1934() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1934");
+    public void testUUID_literalMutation2732() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2732");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -7047,8 +13394,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1935() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1935");
+    public void testUUID_literalMutation2733() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2733");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -7106,8 +13453,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1936() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1936");
+    public void testUUID_literalMutation2734() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2734");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -7165,8 +13512,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1937() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1937");
+    public void testUUID_literalMutation2735() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2735");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -7224,8 +13571,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1938() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1938");
+    public void testUUID_literalMutation2736() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2736");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -7262,7 +13609,7 @@ public Random getRandom() {
                 System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
                 System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
                 System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
-                System.out.println((((("foo" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("bar" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
                 System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
             } 
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
@@ -7283,8 +13630,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1939() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1939");
+    public void testUUID_literalMutation2737() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2737");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -7321,7 +13668,7 @@ public Random getRandom() {
                 System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
                 System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
                 System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
-                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "foo") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "bar") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "]"));
                 System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
             } 
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
@@ -7342,8 +13689,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1940() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1940");
+    public void testUUID_literalMutation2738() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2738");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -7380,7 +13727,7 @@ public Random getRandom() {
                 System.out.println((("reference: [" + (org.apache.commons.codec.binary.Hex.encodeHexString(ids[i]))) + "]"));
                 System.out.println((((("standard:  [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedStandard))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(standard[i]))) + "]"));
                 System.out.println((((("safe1:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe1))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe1[i]))) + "]"));
-                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "foo"));
+                System.out.println((((("safe2:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe2))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe2[i]))) + "bar"));
                 System.out.println((((("safe3:     [" + (org.apache.commons.codec.binary.Hex.encodeHexString(decodedUrlSafe3))) + "] From: [") + (org.apache.commons.codec.binary.StringUtils.newStringUtf8(urlSafe3[i]))) + "]"));
             } 
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2227,null,2226,java.util.Arrays.equals(encodedStandard, standard[i]));
@@ -7401,8 +13748,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1941() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1941");
+    public void testUUID_literalMutation2739() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2739");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -7460,8 +13807,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1942() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1942");
+    public void testUUID_literalMutation2740() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2740");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -7519,8 +13866,8 @@ public Random getRandom() {
      * if Hex.decode() fails - a serious problem since Hex comes from our own commons-codec!
      */
 @Test
-    public void testUUID_literalMutation1943() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation1943");
+    public void testUUID_literalMutation2741() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUUID_literalMutation2741");
         final byte[][] ids = new byte[4][];
         ids[0] = org.apache.commons.codec.binary.Hex.decodeHex("94ed8d0319e4493399560fb67404d370".toCharArray());
         ids[1] = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
@@ -7881,8 +14228,48 @@ public Random getRandom() {
     }
 
     @Test
-    public void testByteToStringVariations_literalMutation1740() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteToStringVariations_literalMutation1740");
+    public void testByteToStringVariations_literalMutation2367() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteToStringVariations_literalMutation2367");
+        final Base64 base64 = new Base64(-1);
+        final byte[] b1 = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("Hello World");
+        final byte[] b2 = new byte[0];
+        final byte[] b3 = null;
+        final byte[] b4 = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1700,base64,1699,base64.encodeToString(b1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1702,null,1701,org.apache.commons.codec.binary.Base64.encodeBase64String(b1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1704,base64,1703,base64.encodeToString(b2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1706,null,1705,org.apache.commons.codec.binary.Base64.encodeBase64String(b2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1708,base64,1707,base64.encodeToString(b3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1710,null,1709,org.apache.commons.codec.binary.Base64.encodeBase64String(b3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1712,base64,1711,base64.encodeToString(b4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1714,null,1713,org.apache.commons.codec.binary.Base64.encodeBase64String(b4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1716,null,1715,org.apache.commons.codec.binary.Base64.encodeBase64URLSafeString(b4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testByteToStringVariations_literalMutation2368() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteToStringVariations_literalMutation2368");
+        final Base64 base64 = new Base64(0);
+        final byte[] b1 = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("Hello World");
+        final byte[] b2 = new byte[0];
+        final byte[] b3 = null;
+        final byte[] b4 = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1700,base64,1699,base64.encodeToString(b1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1702,null,1701,org.apache.commons.codec.binary.Base64.encodeBase64String(b1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1704,base64,1703,base64.encodeToString(b2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1706,null,1705,org.apache.commons.codec.binary.Base64.encodeBase64String(b2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1708,base64,1707,base64.encodeToString(b3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1710,null,1709,org.apache.commons.codec.binary.Base64.encodeBase64String(b3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1712,base64,1711,base64.encodeToString(b4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1714,null,1713,org.apache.commons.codec.binary.Base64.encodeBase64String(b4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1716,null,1715,org.apache.commons.codec.binary.Base64.encodeBase64URLSafeString(b4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testByteToStringVariations_literalMutation2369() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteToStringVariations_literalMutation2369");
         final Base64 base64 = new Base64(0);
         final byte[] b1 = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("foo");
         final byte[] b2 = new byte[0];
@@ -7901,8 +14288,8 @@ public Random getRandom() {
     }
 
     @Test
-    public void testByteToStringVariations_literalMutation1741() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteToStringVariations_literalMutation1741");
+    public void testByteToStringVariations_literalMutation2370() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteToStringVariations_literalMutation2370");
         final Base64 base64 = new Base64(0);
         final byte[] b1 = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("Hello World");
         final byte[] b2 = new byte[1];
@@ -7921,8 +14308,48 @@ public Random getRandom() {
     }
 
     @Test
-    public void testByteToStringVariations_literalMutation1743() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteToStringVariations_literalMutation1743");
+    public void testByteToStringVariations_literalMutation2371() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteToStringVariations_literalMutation2371");
+        final Base64 base64 = new Base64(0);
+        final byte[] b1 = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("Hello World");
+        final byte[] b2 = new byte[-1];
+        final byte[] b3 = null;
+        final byte[] b4 = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1700,base64,1699,base64.encodeToString(b1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1702,null,1701,org.apache.commons.codec.binary.Base64.encodeBase64String(b1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1704,base64,1703,base64.encodeToString(b2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1706,null,1705,org.apache.commons.codec.binary.Base64.encodeBase64String(b2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1708,base64,1707,base64.encodeToString(b3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1710,null,1709,org.apache.commons.codec.binary.Base64.encodeBase64String(b3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1712,base64,1711,base64.encodeToString(b4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1714,null,1713,org.apache.commons.codec.binary.Base64.encodeBase64String(b4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1716,null,1715,org.apache.commons.codec.binary.Base64.encodeBase64URLSafeString(b4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testByteToStringVariations_literalMutation2372() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteToStringVariations_literalMutation2372");
+        final Base64 base64 = new Base64(0);
+        final byte[] b1 = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("Hello World");
+        final byte[] b2 = new byte[0];
+        final byte[] b3 = null;
+        final byte[] b4 = org.apache.commons.codec.binary.Hex.decodeHex("2bf7cc2701fe4397b49ebeed5acc7090".toCharArray());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1700,base64,1699,base64.encodeToString(b1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1702,null,1701,org.apache.commons.codec.binary.Base64.encodeBase64String(b1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1704,base64,1703,base64.encodeToString(b2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1706,null,1705,org.apache.commons.codec.binary.Base64.encodeBase64String(b2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1708,base64,1707,base64.encodeToString(b3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1710,null,1709,org.apache.commons.codec.binary.Base64.encodeBase64String(b3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1712,base64,1711,base64.encodeToString(b4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1714,null,1713,org.apache.commons.codec.binary.Base64.encodeBase64String(b4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1716,null,1715,org.apache.commons.codec.binary.Base64.encodeBase64URLSafeString(b4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testByteToStringVariations_literalMutation2374() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testByteToStringVariations_literalMutation2374");
         final Base64 base64 = new Base64(0);
         final byte[] b1 = org.apache.commons.codec.binary.StringUtils.getBytesUtf8("Hello World");
         final byte[] b2 = new byte[0];
@@ -7944,7 +14371,7 @@ public Random getRandom() {
     public void testStringToByteVariations() throws DecoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStringToByteVariations");
         final Base64 base64 = new Base64();
-        final String s1 = "foo";
+        final String s1 = "bar";
         final String s2 = "";
         final String s3 = null;
         final String s4a = "K/fMJwH+Q5e0nr7tWsxwkA==\r\n";
@@ -7964,8 +14391,8 @@ public Random getRandom() {
     }
 
     @Test
-    public void testStringToByteVariations_literalMutation1877() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStringToByteVariations_literalMutation1877");
+    public void testStringToByteVariations_literalMutation2610() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStringToByteVariations_literalMutation2610");
         final Base64 base64 = new Base64();
         final String s1 = "SGVsbG8gV29ybGQ=\r\n";
         final String s2 = "foo";
@@ -7987,8 +14414,8 @@ public Random getRandom() {
     }
 
     @Test
-    public void testStringToByteVariations_literalMutation1879() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStringToByteVariations_literalMutation1879");
+    public void testStringToByteVariations_literalMutation2612() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStringToByteVariations_literalMutation2612");
         final Base64 base64 = new Base64();
         final String s1 = "SGVsbG8gV29ybGQ=\r\n";
         final String s2 = "";
@@ -8010,8 +14437,8 @@ public Random getRandom() {
     }
 
     @Test
-    public void testStringToByteVariations_literalMutation1880() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStringToByteVariations_literalMutation1880");
+    public void testStringToByteVariations_literalMutation2613() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStringToByteVariations_literalMutation2613");
         final Base64 base64 = new Base64();
         final String s1 = "SGVsbG8gV29ybGQ=\r\n";
         final String s2 = "";
@@ -8033,15 +14460,15 @@ public Random getRandom() {
     }
 
     @Test
-    public void testStringToByteVariations_literalMutation1881() throws DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStringToByteVariations_literalMutation1881");
+    public void testStringToByteVariations_literalMutation2614() throws DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStringToByteVariations_literalMutation2614");
         final Base64 base64 = new Base64();
         final String s1 = "SGVsbG8gV29ybGQ=\r\n";
         final String s2 = "";
         final String s3 = null;
         final String s4a = "K/fMJwH+Q5e0nr7tWsxwkA==\r\n";
         final String s4b = "K_fMJwH-Q5e0nr7tWsxwkA";
-        final byte[] b4 = org.apache.commons.codec.binary.Hex.decodeHex("foo".toCharArray());
+        final byte[] b4 = org.apache.commons.codec.binary.Hex.decodeHex("bar".toCharArray());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2079,null,2078,org.apache.commons.codec.binary.StringUtils.newStringUtf8(base64.decode(s1)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2081,null,2080,org.apache.commons.codec.binary.StringUtils.newStringUtf8(((byte[])(base64.decode(((java.lang.Object)(s1)))))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2083,null,2082,org.apache.commons.codec.binary.StringUtils.newStringUtf8(org.apache.commons.codec.binary.Base64.decodeBase64(s1)));
@@ -8093,8 +14520,128 @@ public Random getRandom() {
      */
 @Test
     @Ignore
-    public void testHugeLineSeparator_literalMutation1839() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHugeLineSeparator_literalMutation1839");
+    public void testHugeLineSeparator_literalMutation2543() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHugeLineSeparator_literalMutation2543");
+        final int BaseNCodec_DEFAULT_BUFFER_SIZE = 4096;
+        final int Base64_BYTES_PER_ENCODED_BLOCK = 4;
+        final byte[] baLineSeparator = new byte[(BaseNCodec_DEFAULT_BUFFER_SIZE * 4) - 3];
+        final Base64 b64 = new Base64(Base64_BYTES_PER_ENCODED_BLOCK , baLineSeparator);
+        final String strOriginal = "Hello World";
+        final String strDecoded = new String(b64.decode(b64.encode(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(strOriginal))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1784,strOriginal);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1785,strDecoded);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests a lineSeparator much bigger than DEFAULT_BUFFER_SIZE.
+     * 
+     * @see "<a href='http://mail-archives.apache.org/mod_mbox/commons-dev/201202.mbox/%3C4F3C85D7.5060706@snafu.de%3E'>dev@commons.apache.org</a>"
+     */
+@Test
+    @Ignore
+    public void testHugeLineSeparator_literalMutation2544() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHugeLineSeparator_literalMutation2544");
+        final int BaseNCodec_DEFAULT_BUFFER_SIZE = 16384;
+        final int Base64_BYTES_PER_ENCODED_BLOCK = 4;
+        final byte[] baLineSeparator = new byte[(BaseNCodec_DEFAULT_BUFFER_SIZE * 4) - 3];
+        final Base64 b64 = new Base64(Base64_BYTES_PER_ENCODED_BLOCK , baLineSeparator);
+        final String strOriginal = "Hello World";
+        final String strDecoded = new String(b64.decode(b64.encode(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(strOriginal))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1784,strOriginal);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1785,strDecoded);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests a lineSeparator much bigger than DEFAULT_BUFFER_SIZE.
+     * 
+     * @see "<a href='http://mail-archives.apache.org/mod_mbox/commons-dev/201202.mbox/%3C4F3C85D7.5060706@snafu.de%3E'>dev@commons.apache.org</a>"
+     */
+@Test
+    @Ignore
+    public void testHugeLineSeparator_literalMutation2545() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHugeLineSeparator_literalMutation2545");
+        final int BaseNCodec_DEFAULT_BUFFER_SIZE = 8191;
+        final int Base64_BYTES_PER_ENCODED_BLOCK = 4;
+        final byte[] baLineSeparator = new byte[(BaseNCodec_DEFAULT_BUFFER_SIZE * 4) - 3];
+        final Base64 b64 = new Base64(Base64_BYTES_PER_ENCODED_BLOCK , baLineSeparator);
+        final String strOriginal = "Hello World";
+        final String strDecoded = new String(b64.decode(b64.encode(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(strOriginal))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1784,strOriginal);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1785,strDecoded);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests a lineSeparator much bigger than DEFAULT_BUFFER_SIZE.
+     * 
+     * @see "<a href='http://mail-archives.apache.org/mod_mbox/commons-dev/201202.mbox/%3C4F3C85D7.5060706@snafu.de%3E'>dev@commons.apache.org</a>"
+     */
+@Test
+    @Ignore
+    public void testHugeLineSeparator_literalMutation2546() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHugeLineSeparator_literalMutation2546");
+        final int BaseNCodec_DEFAULT_BUFFER_SIZE = 8192;
+        final int Base64_BYTES_PER_ENCODED_BLOCK = 2;
+        final byte[] baLineSeparator = new byte[(BaseNCodec_DEFAULT_BUFFER_SIZE * 4) - 3];
+        final Base64 b64 = new Base64(Base64_BYTES_PER_ENCODED_BLOCK , baLineSeparator);
+        final String strOriginal = "Hello World";
+        final String strDecoded = new String(b64.decode(b64.encode(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(strOriginal))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1784,strOriginal);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1785,strDecoded);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests a lineSeparator much bigger than DEFAULT_BUFFER_SIZE.
+     * 
+     * @see "<a href='http://mail-archives.apache.org/mod_mbox/commons-dev/201202.mbox/%3C4F3C85D7.5060706@snafu.de%3E'>dev@commons.apache.org</a>"
+     */
+@Test
+    @Ignore
+    public void testHugeLineSeparator_literalMutation2547() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHugeLineSeparator_literalMutation2547");
+        final int BaseNCodec_DEFAULT_BUFFER_SIZE = 8192;
+        final int Base64_BYTES_PER_ENCODED_BLOCK = 8;
+        final byte[] baLineSeparator = new byte[(BaseNCodec_DEFAULT_BUFFER_SIZE * 4) - 3];
+        final Base64 b64 = new Base64(Base64_BYTES_PER_ENCODED_BLOCK , baLineSeparator);
+        final String strOriginal = "Hello World";
+        final String strDecoded = new String(b64.decode(b64.encode(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(strOriginal))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1784,strOriginal);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1785,strDecoded);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests a lineSeparator much bigger than DEFAULT_BUFFER_SIZE.
+     * 
+     * @see "<a href='http://mail-archives.apache.org/mod_mbox/commons-dev/201202.mbox/%3C4F3C85D7.5060706@snafu.de%3E'>dev@commons.apache.org</a>"
+     */
+@Test
+    @Ignore
+    public void testHugeLineSeparator_literalMutation2548() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHugeLineSeparator_literalMutation2548");
+        final int BaseNCodec_DEFAULT_BUFFER_SIZE = 8192;
+        final int Base64_BYTES_PER_ENCODED_BLOCK = 5;
+        final byte[] baLineSeparator = new byte[(BaseNCodec_DEFAULT_BUFFER_SIZE * 4) - 3];
+        final Base64 b64 = new Base64(Base64_BYTES_PER_ENCODED_BLOCK , baLineSeparator);
+        final String strOriginal = "Hello World";
+        final String strDecoded = new String(b64.decode(b64.encode(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(strOriginal))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1784,strOriginal);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1785,strDecoded);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests a lineSeparator much bigger than DEFAULT_BUFFER_SIZE.
+     * 
+     * @see "<a href='http://mail-archives.apache.org/mod_mbox/commons-dev/201202.mbox/%3C4F3C85D7.5060706@snafu.de%3E'>dev@commons.apache.org</a>"
+     */
+@Test
+    @Ignore
+    public void testHugeLineSeparator_literalMutation2549() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHugeLineSeparator_literalMutation2549");
         final int BaseNCodec_DEFAULT_BUFFER_SIZE = 8192;
         final int Base64_BYTES_PER_ENCODED_BLOCK = 3;
         final byte[] baLineSeparator = new byte[(BaseNCodec_DEFAULT_BUFFER_SIZE * 4) - 3];
@@ -8113,8 +14660,68 @@ public Random getRandom() {
      */
 @Test
     @Ignore
-    public void testHugeLineSeparator_literalMutation1840() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHugeLineSeparator_literalMutation1840");
+    public void testHugeLineSeparator_literalMutation2550() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHugeLineSeparator_literalMutation2550");
+        final int BaseNCodec_DEFAULT_BUFFER_SIZE = 8192;
+        final int Base64_BYTES_PER_ENCODED_BLOCK = 4;
+        final byte[] baLineSeparator = new byte[(BaseNCodec_DEFAULT_BUFFER_SIZE * 2) - 3];
+        final Base64 b64 = new Base64(Base64_BYTES_PER_ENCODED_BLOCK , baLineSeparator);
+        final String strOriginal = "Hello World";
+        final String strDecoded = new String(b64.decode(b64.encode(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(strOriginal))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1784,strOriginal);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1785,strDecoded);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests a lineSeparator much bigger than DEFAULT_BUFFER_SIZE.
+     * 
+     * @see "<a href='http://mail-archives.apache.org/mod_mbox/commons-dev/201202.mbox/%3C4F3C85D7.5060706@snafu.de%3E'>dev@commons.apache.org</a>"
+     */
+@Test
+    @Ignore
+    public void testHugeLineSeparator_literalMutation2551() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHugeLineSeparator_literalMutation2551");
+        final int BaseNCodec_DEFAULT_BUFFER_SIZE = 8192;
+        final int Base64_BYTES_PER_ENCODED_BLOCK = 4;
+        final byte[] baLineSeparator = new byte[(BaseNCodec_DEFAULT_BUFFER_SIZE * 8) - 3];
+        final Base64 b64 = new Base64(Base64_BYTES_PER_ENCODED_BLOCK , baLineSeparator);
+        final String strOriginal = "Hello World";
+        final String strDecoded = new String(b64.decode(b64.encode(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(strOriginal))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1784,strOriginal);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1785,strDecoded);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests a lineSeparator much bigger than DEFAULT_BUFFER_SIZE.
+     * 
+     * @see "<a href='http://mail-archives.apache.org/mod_mbox/commons-dev/201202.mbox/%3C4F3C85D7.5060706@snafu.de%3E'>dev@commons.apache.org</a>"
+     */
+@Test
+    @Ignore
+    public void testHugeLineSeparator_literalMutation2552() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHugeLineSeparator_literalMutation2552");
+        final int BaseNCodec_DEFAULT_BUFFER_SIZE = 8192;
+        final int Base64_BYTES_PER_ENCODED_BLOCK = 4;
+        final byte[] baLineSeparator = new byte[(BaseNCodec_DEFAULT_BUFFER_SIZE * 5) - 3];
+        final Base64 b64 = new Base64(Base64_BYTES_PER_ENCODED_BLOCK , baLineSeparator);
+        final String strOriginal = "Hello World";
+        final String strDecoded = new String(b64.decode(b64.encode(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(strOriginal))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1784,strOriginal);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1785,strDecoded);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests a lineSeparator much bigger than DEFAULT_BUFFER_SIZE.
+     * 
+     * @see "<a href='http://mail-archives.apache.org/mod_mbox/commons-dev/201202.mbox/%3C4F3C85D7.5060706@snafu.de%3E'>dev@commons.apache.org</a>"
+     */
+@Test
+    @Ignore
+    public void testHugeLineSeparator_literalMutation2553() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHugeLineSeparator_literalMutation2553");
         final int BaseNCodec_DEFAULT_BUFFER_SIZE = 8192;
         final int Base64_BYTES_PER_ENCODED_BLOCK = 4;
         final byte[] baLineSeparator = new byte[(BaseNCodec_DEFAULT_BUFFER_SIZE * 3) - 3];
@@ -8133,8 +14740,8 @@ public Random getRandom() {
      */
 @Test
     @Ignore
-    public void testHugeLineSeparator_literalMutation1841() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHugeLineSeparator_literalMutation1841");
+    public void testHugeLineSeparator_literalMutation2554() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHugeLineSeparator_literalMutation2554");
         final int BaseNCodec_DEFAULT_BUFFER_SIZE = 8192;
         final int Base64_BYTES_PER_ENCODED_BLOCK = 4;
         final byte[] baLineSeparator = new byte[(BaseNCodec_DEFAULT_BUFFER_SIZE * 4) - 4];
@@ -8153,13 +14760,73 @@ public Random getRandom() {
      */
 @Test
     @Ignore
-    public void testHugeLineSeparator_literalMutation1842() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHugeLineSeparator_literalMutation1842");
+    public void testHugeLineSeparator_literalMutation2555() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHugeLineSeparator_literalMutation2555");
+        final int BaseNCodec_DEFAULT_BUFFER_SIZE = 8192;
+        final int Base64_BYTES_PER_ENCODED_BLOCK = 4;
+        final byte[] baLineSeparator = new byte[(BaseNCodec_DEFAULT_BUFFER_SIZE * 4) - 2];
+        final Base64 b64 = new Base64(Base64_BYTES_PER_ENCODED_BLOCK , baLineSeparator);
+        final String strOriginal = "Hello World";
+        final String strDecoded = new String(b64.decode(b64.encode(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(strOriginal))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1784,strOriginal);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1785,strDecoded);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests a lineSeparator much bigger than DEFAULT_BUFFER_SIZE.
+     * 
+     * @see "<a href='http://mail-archives.apache.org/mod_mbox/commons-dev/201202.mbox/%3C4F3C85D7.5060706@snafu.de%3E'>dev@commons.apache.org</a>"
+     */
+@Test
+    @Ignore
+    public void testHugeLineSeparator_literalMutation2556() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHugeLineSeparator_literalMutation2556");
+        final int BaseNCodec_DEFAULT_BUFFER_SIZE = 8192;
+        final int Base64_BYTES_PER_ENCODED_BLOCK = 4;
+        final byte[] baLineSeparator = new byte[(BaseNCodec_DEFAULT_BUFFER_SIZE * 4) - 1];
+        final Base64 b64 = new Base64(Base64_BYTES_PER_ENCODED_BLOCK , baLineSeparator);
+        final String strOriginal = "Hello World";
+        final String strDecoded = new String(b64.decode(b64.encode(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(strOriginal))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1784,strOriginal);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1785,strDecoded);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests a lineSeparator much bigger than DEFAULT_BUFFER_SIZE.
+     * 
+     * @see "<a href='http://mail-archives.apache.org/mod_mbox/commons-dev/201202.mbox/%3C4F3C85D7.5060706@snafu.de%3E'>dev@commons.apache.org</a>"
+     */
+@Test
+    @Ignore
+    public void testHugeLineSeparator_literalMutation2557() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHugeLineSeparator_literalMutation2557");
+        final int BaseNCodec_DEFAULT_BUFFER_SIZE = 8192;
+        final int Base64_BYTES_PER_ENCODED_BLOCK = 4;
+        final byte[] baLineSeparator = new byte[(BaseNCodec_DEFAULT_BUFFER_SIZE * 4) - 6];
+        final Base64 b64 = new Base64(Base64_BYTES_PER_ENCODED_BLOCK , baLineSeparator);
+        final String strOriginal = "Hello World";
+        final String strDecoded = new String(b64.decode(b64.encode(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(strOriginal))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1784,strOriginal);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1785,strDecoded);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests a lineSeparator much bigger than DEFAULT_BUFFER_SIZE.
+     * 
+     * @see "<a href='http://mail-archives.apache.org/mod_mbox/commons-dev/201202.mbox/%3C4F3C85D7.5060706@snafu.de%3E'>dev@commons.apache.org</a>"
+     */
+@Test
+    @Ignore
+    public void testHugeLineSeparator_literalMutation2558() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHugeLineSeparator_literalMutation2558");
         final int BaseNCodec_DEFAULT_BUFFER_SIZE = 8192;
         final int Base64_BYTES_PER_ENCODED_BLOCK = 4;
         final byte[] baLineSeparator = new byte[(BaseNCodec_DEFAULT_BUFFER_SIZE * 4) - 3];
         final Base64 b64 = new Base64(Base64_BYTES_PER_ENCODED_BLOCK , baLineSeparator);
-        final String strOriginal = "foo";
+        final String strOriginal = "bar";
         final String strDecoded = new String(b64.decode(b64.encode(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(strOriginal))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1784,strOriginal);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1785,strDecoded);

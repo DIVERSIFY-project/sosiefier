@@ -62,7 +62,7 @@ public class UnixCryptTest {
 @Test(expected = IllegalArgumentException.class)
     public void testUnixCryptWithHalfSalt() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnixCryptWithHalfSalt");
-        org.apache.commons.codec.digest.UnixCrypt.crypt("foo", "x");
+        org.apache.commons.codec.digest.UnixCrypt.crypt("bar", "x");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -72,9 +72,9 @@ public class UnixCryptTest {
      * crypt("secret", "xx") = "xxWAum7tHdIUw" which makes it unverifyable.
      */
 @Test(expected = IllegalArgumentException.class)
-    public void testUnixCryptWithHalfSalt_literalMutation1435() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnixCryptWithHalfSalt_literalMutation1435");
-        org.apache.commons.codec.digest.UnixCrypt.crypt("secret", "foo");
+    public void testUnixCryptWithHalfSalt_literalMutation1571() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnixCryptWithHalfSalt_literalMutation1571");
+        org.apache.commons.codec.digest.UnixCrypt.crypt("secret", "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -114,9 +114,9 @@ public class UnixCryptTest {
      * Unimplemented "$foo$" salt prefixes would be threated as UnixCrypt salt.
      */
 @Test(expected = IllegalArgumentException.class)
-    public void testUnicCryptInvalidSalt_literalMutation1430() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnicCryptInvalidSalt_literalMutation1430");
-        org.apache.commons.codec.digest.UnixCrypt.crypt("secret", "foo");
+    public void testUnicCryptInvalidSalt_literalMutation1566() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnicCryptInvalidSalt_literalMutation1566");
+        org.apache.commons.codec.digest.UnixCrypt.crypt("secret", "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -159,9 +159,9 @@ public class UnixCryptTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testUnixCryptWithEmptySalt_literalMutation1433() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnixCryptWithEmptySalt_literalMutation1433");
-        org.apache.commons.codec.digest.UnixCrypt.crypt("secret", "foo");
+    public void testUnixCryptWithEmptySalt_literalMutation1569() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnixCryptWithEmptySalt_literalMutation1569");
+        org.apache.commons.codec.digest.UnixCrypt.crypt("secret", "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -183,11 +183,11 @@ public class UnixCryptTest {
     }
 
     @Test
-    public void testUnixCryptWithoutSalt_literalMutation1437() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnixCryptWithoutSalt_literalMutation1437");
+    public void testUnixCryptWithoutSalt_literalMutation1573() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnixCryptWithoutSalt_literalMutation1573");
         final String hash = org.apache.commons.codec.digest.UnixCrypt.crypt("foo");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1425,hash,1424,hash.matches("^[a-zA-Z0-9./]{13}$"));
-        final String hash2 = org.apache.commons.codec.digest.UnixCrypt.crypt("foo");
+        final String hash2 = org.apache.commons.codec.digest.UnixCrypt.crypt("bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1426,hash);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1427,hash2);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());

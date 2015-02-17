@@ -53,8 +53,8 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testBasicEncodeDecode_literalMutation31() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBasicEncodeDecode_literalMutation31");
+    public void testBasicEncodeDecode_literalMutation43() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBasicEncodeDecode_literalMutation43");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec();
         final String plain = "foo";
         final String encoded = qpcodec.encode(plain);
@@ -68,7 +68,7 @@ public class QuotedPrintableCodecTest {
     public void testSafeCharEncodeDecode() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSafeCharEncodeDecode");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec();
-        final String plain = "foo";
+        final String plain = "bar";
         final String encoded = qpcodec.encode(plain);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),98,plain);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),99,encoded);
@@ -90,10 +90,10 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testUnsafeEncodeDecode_literalMutation78() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsafeEncodeDecode_literalMutation78");
+    public void testUnsafeEncodeDecode_literalMutation96() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsafeEncodeDecode_literalMutation96");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec();
-        final String plain = "foo";
+        final String plain = "bar";
         final String encoded = qpcodec.encode(plain);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),68,encoded);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),69,plain);
@@ -190,8 +190,8 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testDecodeInvalid_literalMutation33() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation33");
+    public void testDecodeInvalid_literalMutation45() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation45");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec();
         try {
             qpcodec.decode("=");
@@ -209,8 +209,8 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testDecodeInvalid_literalMutation34() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation34");
+    public void testDecodeInvalid_literalMutation46() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation46");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec();
         try {
             qpcodec.decode("=");
@@ -241,7 +241,7 @@ public class QuotedPrintableCodecTest {
     public void testEncodeUrlWithNullBitSet() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeUrlWithNullBitSet");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec();
-        final String plain = "foo";
+        final String plain = "bar";
         final String encoded = new String(QuotedPrintableCodec.encodeQuotedPrintable(null, plain.getBytes(org.apache.commons.codec.Charsets.UTF_8)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),91,encoded);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),92,plain);
@@ -269,8 +269,8 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testEncodeStringWithNull_literalMutation49() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeStringWithNull_literalMutation49");
+    public void testEncodeStringWithNull_literalMutation67() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeStringWithNull_literalMutation67");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec();
         final String test = null;
         final String result = qpcodec.encode(test, "foo");
@@ -283,7 +283,7 @@ public class QuotedPrintableCodecTest {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeStringWithNull");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec();
         final String test = null;
-        final String result = qpcodec.decode(test, "foo");
+        final String result = qpcodec.decode(test, "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),78,result);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -332,8 +332,8 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testEncodeObjects_literalMutation45() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation45");
+    public void testEncodeObjects_literalMutation60() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation60");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec();
         final String plain = "foo";
         String encoded = ((String)(qpcodec.encode(((Object)(plain)))));
@@ -353,8 +353,29 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testEncodeObjects_literalMutation47() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation47");
+    public void testEncodeObjects_literalMutation62() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation62");
+        final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec();
+        final String plain = "1+1 = 2";
+        String encoded = ((String)(qpcodec.encode(((Object)(plain)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),87,encoded);
+        final byte[] plainBA = plain.getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] encodedBA = ((byte[])(qpcodec.encode(((Object)(plainBA)))));
+        encoded = new String(encodedBA);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),88,encoded);
+        final Object result = qpcodec.encode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),89,result);
+        try {
+            final Object dObj = new Double(4.0);
+            qpcodec.encode(dObj);
+        } catch (final EncoderException ee) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeObjects_literalMutation63() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation63");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec();
         final String plain = "1+1 = 2";
         String encoded = ((String)(qpcodec.encode(((Object)(plain)))));
@@ -373,6 +394,48 @@ public class QuotedPrintableCodecTest {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test
+    public void testEncodeObjects_literalMutation64() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation64");
+        final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec();
+        final String plain = "1+1 = 2";
+        String encoded = ((String)(qpcodec.encode(((Object)(plain)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),87,encoded);
+        final byte[] plainBA = plain.getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] encodedBA = ((byte[])(qpcodec.encode(((Object)(plainBA)))));
+        encoded = new String(encodedBA);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),88,encoded);
+        final Object result = qpcodec.encode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),89,result);
+        try {
+            final Object dObj = new Double(1.5);
+            qpcodec.encode(dObj);
+        } catch (final EncoderException ee) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeObjects_literalMutation65() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation65");
+        final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec();
+        final String plain = "1+1 = 2";
+        String encoded = ((String)(qpcodec.encode(((Object)(plain)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),87,encoded);
+        final byte[] plainBA = plain.getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] encodedBA = ((byte[])(qpcodec.encode(((Object)(plainBA)))));
+        encoded = new String(encodedBA);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),88,encoded);
+        final Object result = qpcodec.encode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),89,result);
+        try {
+            final Object dObj = new Double(6.0);
+            qpcodec.encode(dObj);
+        } catch (final EncoderException ee) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     @Test(expected = UnsupportedCharsetException.class)
     public void testInvalidEncoding() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testInvalidEncoding");
@@ -381,8 +444,8 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test(expected = UnsupportedCharsetException.class)
-    public void testInvalidEncoding_literalMutation54() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testInvalidEncoding_literalMutation54");
+    public void testInvalidEncoding_literalMutation72() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testInvalidEncoding_literalMutation72");
         new QuotedPrintableCodec("foo");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -431,10 +494,10 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testDecodeObjects_literalMutation35() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation35");
+    public void testDecodeObjects_literalMutation47() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation47");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec();
-        final String plain = "foo";
+        final String plain = "bar";
         String decoded = ((String)(qpcodec.decode(((Object)(plain)))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),75,decoded);
         final byte[] plainBA = plain.getBytes(org.apache.commons.codec.Charsets.UTF_8);
@@ -452,8 +515,29 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testDecodeObjects_literalMutation37() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation37");
+    public void testDecodeObjects_literalMutation49() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation49");
+        final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec();
+        final String plain = "1+1 =3D 2";
+        String decoded = ((String)(qpcodec.decode(((Object)(plain)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),75,decoded);
+        final byte[] plainBA = plain.getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] decodedBA = ((byte[])(qpcodec.decode(((Object)(plainBA)))));
+        decoded = new String(decodedBA);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),76,decoded);
+        final Object result = qpcodec.decode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),77,result);
+        try {
+            final Object dObj = new Double(4.0);
+            qpcodec.decode(dObj);
+        } catch (final DecoderException ee) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeObjects_literalMutation50() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation50");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec();
         final String plain = "1+1 =3D 2";
         String decoded = ((String)(qpcodec.decode(((Object)(plain)))));
@@ -466,6 +550,48 @@ public class QuotedPrintableCodecTest {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),77,result);
         try {
             final Object dObj = new Double(2.0);
+            qpcodec.decode(dObj);
+        } catch (final DecoderException ee) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeObjects_literalMutation51() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation51");
+        final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec();
+        final String plain = "1+1 =3D 2";
+        String decoded = ((String)(qpcodec.decode(((Object)(plain)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),75,decoded);
+        final byte[] plainBA = plain.getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] decodedBA = ((byte[])(qpcodec.decode(((Object)(plainBA)))));
+        decoded = new String(decodedBA);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),76,decoded);
+        final Object result = qpcodec.decode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),77,result);
+        try {
+            final Object dObj = new Double(1.5);
+            qpcodec.decode(dObj);
+        } catch (final DecoderException ee) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeObjects_literalMutation52() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation52");
+        final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec();
+        final String plain = "1+1 =3D 2";
+        String decoded = ((String)(qpcodec.decode(((Object)(plain)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),75,decoded);
+        final byte[] plainBA = plain.getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] decodedBA = ((byte[])(qpcodec.decode(((Object)(plainBA)))));
+        decoded = new String(decodedBA);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),76,decoded);
+        final Object result = qpcodec.decode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),77,result);
+        try {
+            final Object dObj = new Double(6.0);
             qpcodec.decode(dObj);
         } catch (final DecoderException ee) {
         }
@@ -489,7 +615,7 @@ public class QuotedPrintableCodecTest {
     @Test
     public void testDefaultEncoding() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDefaultEncoding");
-        final String plain = "foo";
+        final String plain = "bar";
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec("UnicodeBig");
         qpcodec.encode(plain);
         final String encoded1 = qpcodec.encode(plain, "UnicodeBig");
@@ -500,8 +626,8 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testDefaultEncoding_literalMutation42() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDefaultEncoding_literalMutation42");
+    public void testDefaultEncoding_literalMutation57() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDefaultEncoding_literalMutation57");
         final String plain = "Hello there!";
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec("foo");
         qpcodec.encode(plain);
@@ -513,8 +639,8 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testDefaultEncoding_literalMutation43() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDefaultEncoding_literalMutation43");
+    public void testDefaultEncoding_literalMutation58() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDefaultEncoding_literalMutation58");
         final String plain = "Hello there!";
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec("UnicodeBig");
         qpcodec.encode(plain);
@@ -552,10 +678,10 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testSoftLineBreakDecode_literalMutation60() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSoftLineBreakDecode_literalMutation60");
+    public void testSoftLineBreakDecode_literalMutation78() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSoftLineBreakDecode_literalMutation78");
         final String qpdata = "If you believe that truth=3Dbeauty, then surely=20=\r\nmathematics is the most beautiful branch of philosophy.";
-        final String expected = "foo";
+        final String expected = "bar";
         QuotedPrintableCodec qpcodec = new QuotedPrintableCodec();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),109,expected);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),111,qpcodec,110,qpcodec.decode(qpdata));
@@ -580,10 +706,10 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testSoftLineBreakEncode_literalMutation62() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSoftLineBreakEncode_literalMutation62");
+    public void testSoftLineBreakEncode_literalMutation80() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSoftLineBreakEncode_literalMutation80");
         final String qpdata = "If you believe that truth=3Dbeauty, then surely mathematics is the most b=\r\neautiful branch of philosophy.";
-        final String expected = "foo";
+        final String expected = "bar";
         QuotedPrintableCodec qpcodec = new QuotedPrintableCodec(true);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),115,qpdata);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),117,qpcodec,116,qpcodec.encode(expected));
@@ -594,8 +720,8 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testSoftLineBreakEncode_literalMutation63() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSoftLineBreakEncode_literalMutation63");
+    public void testSoftLineBreakEncode_literalMutation81() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSoftLineBreakEncode_literalMutation81");
         final String qpdata = "If you believe that truth=3Dbeauty, then surely mathematics is the most b=\r\neautiful branch of philosophy.";
         final String expected = "If you believe that truth=beauty, then surely mathematics is the most beautiful branch of philosophy.";
         QuotedPrintableCodec qpcodec = new QuotedPrintableCodec(false);
@@ -610,7 +736,7 @@ public class QuotedPrintableCodecTest {
     @Test
     public void testSkipNotEncodedCRLF() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkipNotEncodedCRLF");
-        String qpdata = "foo";
+        String qpdata = "bar";
         String expected = "CRLF in an encoded text should be skipped in the decoding.";
         QuotedPrintableCodec qpcodec = new QuotedPrintableCodec(true);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),103,expected);
@@ -622,8 +748,8 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testSkipNotEncodedCRLF_literalMutation57() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkipNotEncodedCRLF_literalMutation57");
+    public void testSkipNotEncodedCRLF_literalMutation75() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkipNotEncodedCRLF_literalMutation75");
         String qpdata = "CRLF in an\n encoded text should be=20=\r\n\rskipped in the\r decoding.";
         String expected = "foo";
         QuotedPrintableCodec qpcodec = new QuotedPrintableCodec(true);
@@ -636,11 +762,11 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testSkipNotEncodedCRLF_literalMutation58() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkipNotEncodedCRLF_literalMutation58");
+    public void testSkipNotEncodedCRLF_literalMutation76() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSkipNotEncodedCRLF_literalMutation76");
         String qpdata = "CRLF in an\n encoded text should be=20=\r\n\rskipped in the\r decoding.";
         String expected = "CRLF in an encoded text should be skipped in the decoding.";
-        QuotedPrintableCodec qpcodec = new QuotedPrintableCodec(true);
+        QuotedPrintableCodec qpcodec = new QuotedPrintableCodec(false);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),103,expected);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),105,qpcodec,104,qpcodec.decode(qpdata));
         String encoded = qpcodec.encode(expected);
@@ -665,10 +791,10 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testTrailingSpecial_literalMutation65() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTrailingSpecial_literalMutation65");
+    public void testTrailingSpecial_literalMutation83() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTrailingSpecial_literalMutation83");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec(true);
-        String plain = "foo";
+        String plain = "bar";
         String expected = "This is a example of a quoted-printable text file. This might contain sp=3D=\r\ncial chars.";
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),121,expected);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),123,qpcodec,122,qpcodec.encode(plain));
@@ -680,11 +806,11 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testTrailingSpecial_literalMutation66() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTrailingSpecial_literalMutation66");
+    public void testTrailingSpecial_literalMutation84() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTrailingSpecial_literalMutation84");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec(true);
         String plain = "This is a example of a quoted-printable text file. This might contain sp=cial chars.";
-        String expected = "foo";
+        String expected = "bar";
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),121,expected);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),123,qpcodec,122,qpcodec.encode(plain));
         plain = "This is a example of a quoted-printable text file. This might contain ta\tbs as well.";
@@ -695,8 +821,8 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testTrailingSpecial_literalMutation67() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTrailingSpecial_literalMutation67");
+    public void testTrailingSpecial_literalMutation85() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTrailingSpecial_literalMutation85");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec(true);
         String plain = "This is a example of a quoted-printable text file. This might contain sp=cial chars.";
         String expected = "This is a example of a quoted-printable text file. This might contain sp=3D=\r\ncial chars.";
@@ -710,15 +836,15 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testTrailingSpecial_literalMutation68() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTrailingSpecial_literalMutation68");
+    public void testTrailingSpecial_literalMutation86() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTrailingSpecial_literalMutation86");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec(true);
         String plain = "This is a example of a quoted-printable text file. This might contain sp=cial chars.";
         String expected = "This is a example of a quoted-printable text file. This might contain sp=3D=\r\ncial chars.";
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),121,expected);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),123,qpcodec,122,qpcodec.encode(plain));
         plain = "This is a example of a quoted-printable text file. This might contain ta\tbs as well.";
-        expected = "foo";
+        expected = "bar";
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),124,expected);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),126,qpcodec,125,qpcodec.encode(plain));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -727,7 +853,7 @@ public class QuotedPrintableCodecTest {
     @Test
     public void testUltimateSoftBreak() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUltimateSoftBreak");
-        final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec(true);
+        final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec(false);
         String plain = "This is a example of a quoted-printable text file. There is no end to it\t";
         String expected = "This is a example of a quoted-printable text file. There is no end to i=\r\nt=09";
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),137,expected);
@@ -748,8 +874,8 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testUltimateSoftBreak_literalMutation70() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUltimateSoftBreak_literalMutation70");
+    public void testUltimateSoftBreak_literalMutation88() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUltimateSoftBreak_literalMutation88");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec(true);
         String plain = "foo";
         String expected = "This is a example of a quoted-printable text file. There is no end to i=\r\nt=09";
@@ -771,8 +897,8 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testUltimateSoftBreak_literalMutation71() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUltimateSoftBreak_literalMutation71");
+    public void testUltimateSoftBreak_literalMutation89() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUltimateSoftBreak_literalMutation89");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec(true);
         String plain = "This is a example of a quoted-printable text file. There is no end to it\t";
         String expected = "foo";
@@ -794,14 +920,14 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testUltimateSoftBreak_literalMutation72() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUltimateSoftBreak_literalMutation72");
+    public void testUltimateSoftBreak_literalMutation90() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUltimateSoftBreak_literalMutation90");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec(true);
         String plain = "This is a example of a quoted-printable text file. There is no end to it\t";
         String expected = "This is a example of a quoted-printable text file. There is no end to i=\r\nt=09";
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),137,expected);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),139,qpcodec,138,qpcodec.encode(plain));
-        plain = "foo";
+        plain = "bar";
         expected = "This is a example of a quoted-printable text file. There is no end to i=\r\nt=20";
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),140,expected);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),142,qpcodec,141,qpcodec.encode(plain));
@@ -817,8 +943,8 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testUltimateSoftBreak_literalMutation73() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUltimateSoftBreak_literalMutation73");
+    public void testUltimateSoftBreak_literalMutation91() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUltimateSoftBreak_literalMutation91");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec(true);
         String plain = "This is a example of a quoted-printable text file. There is no end to it\t";
         String expected = "This is a example of a quoted-printable text file. There is no end to i=\r\nt=09";
@@ -840,8 +966,8 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testUltimateSoftBreak_literalMutation74() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUltimateSoftBreak_literalMutation74");
+    public void testUltimateSoftBreak_literalMutation92() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUltimateSoftBreak_literalMutation92");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec(true);
         String plain = "This is a example of a quoted-printable text file. There is no end to it\t";
         String expected = "This is a example of a quoted-printable text file. There is no end to i=\r\nt=09";
@@ -863,8 +989,8 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testUltimateSoftBreak_literalMutation75() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUltimateSoftBreak_literalMutation75");
+    public void testUltimateSoftBreak_literalMutation93() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUltimateSoftBreak_literalMutation93");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec(true);
         String plain = "This is a example of a quoted-printable text file. There is no end to it\t";
         String expected = "This is a example of a quoted-printable text file. There is no end to i=\r\nt=09";
@@ -886,8 +1012,8 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testUltimateSoftBreak_literalMutation76() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUltimateSoftBreak_literalMutation76");
+    public void testUltimateSoftBreak_literalMutation94() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUltimateSoftBreak_literalMutation94");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec(true);
         String plain = "This is a example of a quoted-printable text file. There is no end to it\t";
         String expected = "This is a example of a quoted-printable text file. There is no end to i=\r\nt=09";
@@ -901,7 +1027,7 @@ public class QuotedPrintableCodecTest {
         expected = "This is a example of a quoted-printable text file. There is no end to=20=\r\n =20";
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),143,expected);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),145,qpcodec,144,qpcodec.encode(plain));
-        plain = "foo";
+        plain = "bar";
         expected = "This is a example of a quoted-printable text file. There is no end to=3D=\r\n =20";
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),146,expected);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),148,qpcodec,147,qpcodec.encode(plain));
@@ -909,8 +1035,8 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testUltimateSoftBreak_literalMutation77() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUltimateSoftBreak_literalMutation77");
+    public void testUltimateSoftBreak_literalMutation95() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUltimateSoftBreak_literalMutation95");
         final QuotedPrintableCodec qpcodec = new QuotedPrintableCodec(true);
         String plain = "This is a example of a quoted-printable text file. There is no end to it\t";
         String expected = "This is a example of a quoted-printable text file. There is no end to i=\r\nt=09";
@@ -925,7 +1051,7 @@ public class QuotedPrintableCodecTest {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),143,expected);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),145,qpcodec,144,qpcodec.encode(plain));
         plain = "This is a example of a quoted-printable text file. There is no end to=  ";
-        expected = "foo";
+        expected = "bar";
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),146,expected);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),148,qpcodec,147,qpcodec.encode(plain));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -942,10 +1068,10 @@ public class QuotedPrintableCodecTest {
     }
 
     @Test
-    public void testFinalBytes_literalMutation53() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFinalBytes_literalMutation53");
+    public void testFinalBytes_literalMutation71() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFinalBytes_literalMutation71");
         final String plain = "This is a example of a quoted=printable text file. There is no tt";
-        final String expected = "foo";
+        final String expected = "bar";
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),95,expected);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),97,new org.apache.commons.codec.net.QuotedPrintableCodec(true),96,new org.apache.commons.codec.net.QuotedPrintableCodec(true).encode(plain));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());

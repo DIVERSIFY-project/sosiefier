@@ -124,6 +124,23 @@ public class WriterOutputStreamTest extends TestCase {
         byte[] expected = testString.getBytes(charsetName);
         StringWriter writer = new StringWriter();
         WriterOutputStream out = new WriterOutputStream(writer , charsetName);
+        int offset = 1;
+        while (offset < (expected.length)) {
+            int length = java.lang.Math.min(random.nextInt(128), ((expected.length) - offset));
+            out.write(expected, offset, length);
+            offset += length;
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1686,testString);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1688,writer,1687,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    private void testWithBufferedWrite_literalMutation3737(String testString, String charsetName) throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWithBufferedWrite_literalMutation3737");
+        byte[] expected = testString.getBytes(charsetName);
+        StringWriter writer = new StringWriter();
+        WriterOutputStream out = new WriterOutputStream(writer , charsetName);
         int offset = -1;
         while (offset < (expected.length)) {
             int length = java.lang.Math.min(random.nextInt(128), ((expected.length) - offset));
@@ -136,8 +153,76 @@ public class WriterOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    private void testWithBufferedWrite_literalMutation2510(String testString, String charsetName) throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWithBufferedWrite_literalMutation2510");
+    private void testWithBufferedWrite_literalMutation3738(String testString, String charsetName) throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWithBufferedWrite_literalMutation3738");
+        byte[] expected = testString.getBytes(charsetName);
+        StringWriter writer = new StringWriter();
+        WriterOutputStream out = new WriterOutputStream(writer , charsetName);
+        int offset = 0;
+        while (offset < (expected.length)) {
+            int length = java.lang.Math.min(random.nextInt(128), ((expected.length) - offset));
+            out.write(expected, offset, length);
+            offset += length;
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1686,testString);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1688,writer,1687,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    private void testWithBufferedWrite_literalMutation3739(String testString, String charsetName) throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWithBufferedWrite_literalMutation3739");
+        byte[] expected = testString.getBytes(charsetName);
+        StringWriter writer = new StringWriter();
+        WriterOutputStream out = new WriterOutputStream(writer , charsetName);
+        int offset = 0;
+        while (offset < (expected.length)) {
+            int length = java.lang.Math.min(random.nextInt(129), ((expected.length) - offset));
+            out.write(expected, offset, length);
+            offset += length;
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1686,testString);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1688,writer,1687,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    private void testWithBufferedWrite_literalMutation3740(String testString, String charsetName) throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWithBufferedWrite_literalMutation3740");
+        byte[] expected = testString.getBytes(charsetName);
+        StringWriter writer = new StringWriter();
+        WriterOutputStream out = new WriterOutputStream(writer , charsetName);
+        int offset = 0;
+        while (offset < (expected.length)) {
+            int length = java.lang.Math.min(random.nextInt(64), ((expected.length) - offset));
+            out.write(expected, offset, length);
+            offset += length;
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1686,testString);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1688,writer,1687,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    private void testWithBufferedWrite_literalMutation3741(String testString, String charsetName) throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWithBufferedWrite_literalMutation3741");
+        byte[] expected = testString.getBytes(charsetName);
+        StringWriter writer = new StringWriter();
+        WriterOutputStream out = new WriterOutputStream(writer , charsetName);
+        int offset = 0;
+        while (offset < (expected.length)) {
+            int length = java.lang.Math.min(random.nextInt(256), ((expected.length) - offset));
+            out.write(expected, offset, length);
+            offset += length;
+        }
+        out.close();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1686,testString);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1688,writer,1687,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    private void testWithBufferedWrite_literalMutation3742(String testString, String charsetName) throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWithBufferedWrite_literalMutation3742");
         byte[] expected = testString.getBytes(charsetName);
         StringWriter writer = new StringWriter();
         WriterOutputStream out = new WriterOutputStream(writer , charsetName);
@@ -180,7 +265,7 @@ public class WriterOutputStreamTest extends TestCase {
 
     public void testUTF8WithSingleByteWrite() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUTF8WithSingleByteWrite");
-        testWithSingleByteWrite(TEST_STRING, "foo");
+        testWithSingleByteWrite(TEST_STRING, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -220,7 +305,7 @@ public class WriterOutputStreamTest extends TestCase {
 
     public void testUTF8WithBufferedWrite() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUTF8WithBufferedWrite");
-        testWithBufferedWrite(TEST_STRING, "foo");
+        testWithBufferedWrite(TEST_STRING, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -240,7 +325,7 @@ public class WriterOutputStreamTest extends TestCase {
 
     public void testLargeUTF8WithBufferedWrite() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLargeUTF8WithBufferedWrite");
-        testWithBufferedWrite(LARGE_TEST_STRING, "foo");
+        testWithBufferedWrite(LARGE_TEST_STRING, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -340,7 +425,7 @@ public class WriterOutputStreamTest extends TestCase {
 
     public void testUTF16LEWithSingleByteWrite() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUTF16LEWithSingleByteWrite");
-        testWithSingleByteWrite(TEST_STRING, "foo");
+        testWithSingleByteWrite(TEST_STRING, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -360,7 +445,7 @@ public class WriterOutputStreamTest extends TestCase {
 
     public void testUTF16LEWithBufferedWrite() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUTF16LEWithBufferedWrite");
-        testWithBufferedWrite(TEST_STRING, "foo");
+        testWithBufferedWrite(TEST_STRING, "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -407,10 +492,10 @@ public class WriterOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testFlush_literalMutation2494() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFlush_literalMutation2494");
+    public void testFlush_literalMutation3718() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFlush_literalMutation3718");
         StringWriter writer = new StringWriter();
-        WriterOutputStream out = new WriterOutputStream(writer , "foo" , 1024 , false);
+        WriterOutputStream out = new WriterOutputStream(writer , "bar" , 1024 , false);
         out.write("abc".getBytes("us-ascii"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1683,writer.getBuffer(),1682,writer.getBuffer().length());
         out.flush();
@@ -418,8 +503,41 @@ public class WriterOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testFlush_literalMutation2495() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFlush_literalMutation2495");
+    public void testFlush_literalMutation3719() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFlush_literalMutation3719");
+        StringWriter writer = new StringWriter();
+        WriterOutputStream out = new WriterOutputStream(writer , "us-ascii" , 1025 , false);
+        out.write("abc".getBytes("us-ascii"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1683,writer.getBuffer(),1682,writer.getBuffer().length());
+        out.flush();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1685,writer,1684,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testFlush_literalMutation3720() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFlush_literalMutation3720");
+        StringWriter writer = new StringWriter();
+        WriterOutputStream out = new WriterOutputStream(writer , "us-ascii" , 512 , false);
+        out.write("abc".getBytes("us-ascii"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1683,writer.getBuffer(),1682,writer.getBuffer().length());
+        out.flush();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1685,writer,1684,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testFlush_literalMutation3721() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFlush_literalMutation3721");
+        StringWriter writer = new StringWriter();
+        WriterOutputStream out = new WriterOutputStream(writer , "us-ascii" , 2048 , false);
+        out.write("abc".getBytes("us-ascii"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1683,writer.getBuffer(),1682,writer.getBuffer().length());
+        out.flush();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1685,writer,1684,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testFlush_literalMutation3722() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFlush_literalMutation3722");
         StringWriter writer = new StringWriter();
         WriterOutputStream out = new WriterOutputStream(writer , "us-ascii" , 1023 , false);
         out.write("abc".getBytes("us-ascii"));
@@ -429,8 +547,8 @@ public class WriterOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testFlush_literalMutation2496() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFlush_literalMutation2496");
+    public void testFlush_literalMutation3723() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFlush_literalMutation3723");
         StringWriter writer = new StringWriter();
         WriterOutputStream out = new WriterOutputStream(writer , "us-ascii" , 1024 , true);
         out.write("abc".getBytes("us-ascii"));
@@ -440,8 +558,8 @@ public class WriterOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testFlush_literalMutation2497() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFlush_literalMutation2497");
+    public void testFlush_literalMutation3724() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFlush_literalMutation3724");
         StringWriter writer = new StringWriter();
         WriterOutputStream out = new WriterOutputStream(writer , "us-ascii" , 1024 , false);
         out.write("foo".getBytes("us-ascii"));
@@ -451,11 +569,11 @@ public class WriterOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testFlush_literalMutation2498() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFlush_literalMutation2498");
+    public void testFlush_literalMutation3725() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFlush_literalMutation3725");
         StringWriter writer = new StringWriter();
         WriterOutputStream out = new WriterOutputStream(writer , "us-ascii" , 1024 , false);
-        out.write("abc".getBytes("foo"));
+        out.write("abc".getBytes("bar"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1683,writer.getBuffer(),1682,writer.getBuffer().length());
         out.flush();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1685,writer,1684,writer.toString());
@@ -498,14 +616,41 @@ public class WriterOutputStreamTest extends TestCase {
     public void testWriteImmediately() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteImmediately");
         StringWriter writer = new StringWriter();
-        WriterOutputStream out = new WriterOutputStream(writer , "foo" , 1024 , true);
+        WriterOutputStream out = new WriterOutputStream(writer , "bar" , 1024 , true);
         out.write("abc".getBytes("us-ascii"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1693,writer,1692,writer.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteImmediately_literalMutation2512() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteImmediately_literalMutation2512");
+    public void testWriteImmediately_literalMutation3744() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteImmediately_literalMutation3744");
+        StringWriter writer = new StringWriter();
+        WriterOutputStream out = new WriterOutputStream(writer , "us-ascii" , 1025 , true);
+        out.write("abc".getBytes("us-ascii"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1693,writer,1692,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testWriteImmediately_literalMutation3745() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteImmediately_literalMutation3745");
+        StringWriter writer = new StringWriter();
+        WriterOutputStream out = new WriterOutputStream(writer , "us-ascii" , 512 , true);
+        out.write("abc".getBytes("us-ascii"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1693,writer,1692,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testWriteImmediately_literalMutation3746() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteImmediately_literalMutation3746");
+        StringWriter writer = new StringWriter();
+        WriterOutputStream out = new WriterOutputStream(writer , "us-ascii" , 2048 , true);
+        out.write("abc".getBytes("us-ascii"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1693,writer,1692,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testWriteImmediately_literalMutation3747() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteImmediately_literalMutation3747");
         StringWriter writer = new StringWriter();
         WriterOutputStream out = new WriterOutputStream(writer , "us-ascii" , 1023 , true);
         out.write("abc".getBytes("us-ascii"));
@@ -513,8 +658,8 @@ public class WriterOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteImmediately_literalMutation2513() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteImmediately_literalMutation2513");
+    public void testWriteImmediately_literalMutation3748() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteImmediately_literalMutation3748");
         StringWriter writer = new StringWriter();
         WriterOutputStream out = new WriterOutputStream(writer , "us-ascii" , 1024 , false);
         out.write("abc".getBytes("us-ascii"));
@@ -522,8 +667,8 @@ public class WriterOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteImmediately_literalMutation2514() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteImmediately_literalMutation2514");
+    public void testWriteImmediately_literalMutation3749() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteImmediately_literalMutation3749");
         StringWriter writer = new StringWriter();
         WriterOutputStream out = new WriterOutputStream(writer , "us-ascii" , 1024 , true);
         out.write("foo".getBytes("us-ascii"));
@@ -531,11 +676,11 @@ public class WriterOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testWriteImmediately_literalMutation2515() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteImmediately_literalMutation2515");
+    public void testWriteImmediately_literalMutation3750() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteImmediately_literalMutation3750");
         StringWriter writer = new StringWriter();
         WriterOutputStream out = new WriterOutputStream(writer , "us-ascii" , 1024 , true);
-        out.write("abc".getBytes("foo"));
+        out.write("abc".getBytes("bar"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1693,writer,1692,writer.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }

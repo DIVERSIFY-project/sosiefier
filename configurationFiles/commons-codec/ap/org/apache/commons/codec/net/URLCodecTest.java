@@ -124,8 +124,8 @@ public class URLCodecTest {
     }
 
     @Test
-    public void testBasicEncodeDecode_literalMutation91() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBasicEncodeDecode_literalMutation91");
+    public void testBasicEncodeDecode_literalMutation109() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBasicEncodeDecode_literalMutation109");
         final URLCodec urlCodec = new URLCodec();
         final String plain = "foo";
         final String encoded = urlCodec.encode(plain);
@@ -178,10 +178,10 @@ public class URLCodecTest {
     }
 
     @Test
-    public void testSafeCharEncodeDecode_literalMutation117() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSafeCharEncodeDecode_literalMutation117");
+    public void testSafeCharEncodeDecode_literalMutation143() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSafeCharEncodeDecode_literalMutation143");
         final URLCodec urlCodec = new URLCodec();
-        final String plain = "foo";
+        final String plain = "bar";
         final String encoded = urlCodec.encode(plain);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),183,plain);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),184,encoded);
@@ -232,10 +232,10 @@ public class URLCodecTest {
     }
 
     @Test
-    public void testUnsafeEncodeDecode_literalMutation118() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsafeEncodeDecode_literalMutation118");
+    public void testUnsafeEncodeDecode_literalMutation144() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnsafeEncodeDecode_literalMutation144");
         final URLCodec urlCodec = new URLCodec();
-        final String plain = "foo";
+        final String plain = "bar";
         final String encoded = urlCodec.encode(plain);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),11,encoded);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),198,plain);
@@ -426,8 +426,8 @@ public class URLCodecTest {
     }
 
     @Test
-    public void testDecodeInvalid_literalMutation92() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation92");
+    public void testDecodeInvalid_literalMutation110() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation110");
         final URLCodec urlCodec = new URLCodec();
         try {
             urlCodec.decode("foo");
@@ -450,8 +450,8 @@ public class URLCodecTest {
     }
 
     @Test
-    public void testDecodeInvalid_literalMutation93() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation93");
+    public void testDecodeInvalid_literalMutation111() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation111");
         final URLCodec urlCodec = new URLCodec();
         try {
             urlCodec.decode("%");
@@ -474,8 +474,8 @@ public class URLCodecTest {
     }
 
     @Test
-    public void testDecodeInvalid_literalMutation94() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation94");
+    public void testDecodeInvalid_literalMutation112() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation112");
         final URLCodec urlCodec = new URLCodec();
         try {
             urlCodec.decode("%");
@@ -486,7 +486,7 @@ public class URLCodecTest {
         } catch (final DecoderException e) {
         }
         try {
-            urlCodec.decode("foo");
+            urlCodec.decode("bar");
         } catch (final DecoderException e) {
         }
         try {
@@ -498,8 +498,8 @@ public class URLCodecTest {
     }
 
     @Test
-    public void testDecodeInvalid_literalMutation95() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation95");
+    public void testDecodeInvalid_literalMutation113() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalid_literalMutation113");
         final URLCodec urlCodec = new URLCodec();
         try {
             urlCodec.decode("%");
@@ -514,7 +514,7 @@ public class URLCodecTest {
         } catch (final DecoderException e) {
         }
         try {
-            urlCodec.decode("foo");
+            urlCodec.decode("bar");
         } catch (final DecoderException e) {
         }
         validateState(urlCodec);
@@ -567,7 +567,7 @@ public class URLCodecTest {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalidContent");
         final String ch_msg = constructString(SWISS_GERMAN_STUFF_UNICODE);
         final URLCodec urlCodec = new URLCodec();
-        final byte[] input = ch_msg.getBytes("foo");
+        final byte[] input = ch_msg.getBytes("bar");
         final byte[] output = urlCodec.decode(input);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),159,input.length);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),160,output.length);
@@ -580,8 +580,25 @@ public class URLCodecTest {
     }
 
     @Test
-    public void testDecodeInvalidContent_literalMutation97() throws UnsupportedEncodingException, DecoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalidContent_literalMutation97");
+    public void testDecodeInvalidContent_literalMutation115() throws UnsupportedEncodingException, DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalidContent_literalMutation115");
+        final String ch_msg = constructString(SWISS_GERMAN_STUFF_UNICODE);
+        final URLCodec urlCodec = new URLCodec();
+        final byte[] input = ch_msg.getBytes("ISO-8859-1");
+        final byte[] output = urlCodec.decode(input);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),159,input.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),160,output.length);
+        for (int i = 1 ; i < (input.length) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),161,input[i]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),162,output[i]);
+        }
+        validateState(urlCodec);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeInvalidContent_literalMutation116() throws UnsupportedEncodingException, DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalidContent_literalMutation116");
         final String ch_msg = constructString(SWISS_GERMAN_STUFF_UNICODE);
         final URLCodec urlCodec = new URLCodec();
         final byte[] input = ch_msg.getBytes("ISO-8859-1");
@@ -589,6 +606,23 @@ public class URLCodecTest {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),159,input.length);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),160,output.length);
         for (int i = -1 ; i < (input.length) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),161,input[i]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),162,output[i]);
+        }
+        validateState(urlCodec);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeInvalidContent_literalMutation117() throws UnsupportedEncodingException, DecoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeInvalidContent_literalMutation117");
+        final String ch_msg = constructString(SWISS_GERMAN_STUFF_UNICODE);
+        final URLCodec urlCodec = new URLCodec();
+        final byte[] input = ch_msg.getBytes("ISO-8859-1");
+        final byte[] output = urlCodec.decode(input);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),159,input.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),160,output.length);
+        for (int i = 0 ; i < (input.length) ; i++) {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),161,input[i]);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),162,output[i]);
         }
@@ -662,8 +696,8 @@ public class URLCodecTest {
     }
 
     @Test
-    public void testEncodeUrlWithNullBitSet_literalMutation113() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeUrlWithNullBitSet_literalMutation113");
+    public void testEncodeUrlWithNullBitSet_literalMutation139() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeUrlWithNullBitSet_literalMutation139");
         final URLCodec urlCodec = new URLCodec();
         final String plain = "foo";
         final String encoded = new String(URLCodec.encodeUrl(null, plain.getBytes(org.apache.commons.codec.Charsets.UTF_8)));
@@ -706,11 +740,11 @@ public class URLCodecTest {
     }
 
     @Test
-    public void testEncodeStringWithNull_literalMutation112() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeStringWithNull_literalMutation112");
+    public void testEncodeStringWithNull_literalMutation138() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeStringWithNull_literalMutation138");
         final URLCodec urlCodec = new URLCodec();
         final String test = null;
-        final String result = urlCodec.encode(test, "foo");
+        final String result = urlCodec.encode(test, "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),178,result);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -726,8 +760,8 @@ public class URLCodecTest {
     }
 
     @Test
-    public void testDecodeStringWithNull_literalMutation102() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeStringWithNull_literalMutation102");
+    public void testDecodeStringWithNull_literalMutation125() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeStringWithNull_literalMutation125");
         final URLCodec urlCodec = new URLCodec();
         final String test = null;
         final String result = urlCodec.decode(test, "foo");
@@ -804,8 +838,8 @@ public class URLCodecTest {
     }
 
     @Test
-    public void testEncodeObjects_literalMutation108() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation108");
+    public void testEncodeObjects_literalMutation131() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation131");
         final URLCodec urlCodec = new URLCodec();
         final String plain = "foo";
         String encoded = ((String)(urlCodec.encode(((Object)(plain)))));
@@ -826,8 +860,8 @@ public class URLCodecTest {
     }
 
     @Test
-    public void testEncodeObjects_literalMutation110() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation110");
+    public void testEncodeObjects_literalMutation133() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation133");
         final URLCodec urlCodec = new URLCodec();
         final String plain = "Hello there!";
         String encoded = ((String)(urlCodec.encode(((Object)(plain)))));
@@ -840,6 +874,72 @@ public class URLCodecTest {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),177,result);
         try {
             final Object dObj = new Double(4.0);
+            urlCodec.encode(dObj);
+        } catch (final EncoderException ee) {
+        }
+        validateState(urlCodec);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeObjects_literalMutation134() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation134");
+        final URLCodec urlCodec = new URLCodec();
+        final String plain = "Hello there!";
+        String encoded = ((String)(urlCodec.encode(((Object)(plain)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),175,encoded);
+        final byte[] plainBA = plain.getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] encodedBA = ((byte[])(urlCodec.encode(((Object)(plainBA)))));
+        encoded = new String(encodedBA);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),176,encoded);
+        final Object result = urlCodec.encode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),177,result);
+        try {
+            final Object dObj = new Double(2.0);
+            urlCodec.encode(dObj);
+        } catch (final EncoderException ee) {
+        }
+        validateState(urlCodec);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeObjects_literalMutation135() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation135");
+        final URLCodec urlCodec = new URLCodec();
+        final String plain = "Hello there!";
+        String encoded = ((String)(urlCodec.encode(((Object)(plain)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),175,encoded);
+        final byte[] plainBA = plain.getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] encodedBA = ((byte[])(urlCodec.encode(((Object)(plainBA)))));
+        encoded = new String(encodedBA);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),176,encoded);
+        final Object result = urlCodec.encode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),177,result);
+        try {
+            final Object dObj = new Double(1.5);
+            urlCodec.encode(dObj);
+        } catch (final EncoderException ee) {
+        }
+        validateState(urlCodec);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testEncodeObjects_literalMutation136() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeObjects_literalMutation136");
+        final URLCodec urlCodec = new URLCodec();
+        final String plain = "Hello there!";
+        String encoded = ((String)(urlCodec.encode(((Object)(plain)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),175,encoded);
+        final byte[] plainBA = plain.getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] encodedBA = ((byte[])(urlCodec.encode(((Object)(plainBA)))));
+        encoded = new String(encodedBA);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),176,encoded);
+        final Object result = urlCodec.encode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),177,result);
+        try {
+            final Object dObj = new Double(6.0);
             urlCodec.encode(dObj);
         } catch (final EncoderException ee) {
         }
@@ -940,9 +1040,9 @@ public class URLCodecTest {
     }
 
     @Test
-    public void testInvalidEncoding_literalMutation115() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testInvalidEncoding_literalMutation115");
-        final URLCodec urlCodec = new URLCodec("foo");
+    public void testInvalidEncoding_literalMutation141() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testInvalidEncoding_literalMutation141");
+        final URLCodec urlCodec = new URLCodec("bar");
         final String plain = "Hello there!";
         try {
             urlCodec.encode(plain);
@@ -957,10 +1057,10 @@ public class URLCodecTest {
     }
 
     @Test
-    public void testInvalidEncoding_literalMutation116() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testInvalidEncoding_literalMutation116");
+    public void testInvalidEncoding_literalMutation142() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testInvalidEncoding_literalMutation142");
         final URLCodec urlCodec = new URLCodec("NONSENSE");
-        final String plain = "foo";
+        final String plain = "bar";
         try {
             urlCodec.encode(plain);
         } catch (final EncoderException ee) {
@@ -1058,8 +1158,30 @@ public class URLCodecTest {
     }
 
     @Test
-    public void testDecodeObjects_literalMutation100() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation100");
+    public void testDecodeObjects_literalMutation118() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation118");
+        final URLCodec urlCodec = new URLCodec();
+        final String plain = "foo";
+        String decoded = ((String)(urlCodec.decode(((Object)(plain)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),163,decoded);
+        final byte[] plainBA = plain.getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] decodedBA = ((byte[])(urlCodec.decode(((Object)(plainBA)))));
+        decoded = new String(decodedBA);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),164,decoded);
+        final Object result = urlCodec.decode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),165,result);
+        try {
+            final Object dObj = new Double(3.0);
+            urlCodec.decode(dObj);
+        } catch (final DecoderException ee) {
+        }
+        validateState(urlCodec);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeObjects_literalMutation120() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation120");
         final URLCodec urlCodec = new URLCodec();
         final String plain = "Hello+there%21";
         String decoded = ((String)(urlCodec.decode(((Object)(plain)))));
@@ -1080,10 +1202,10 @@ public class URLCodecTest {
     }
 
     @Test
-    public void testDecodeObjects_literalMutation98() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation98");
+    public void testDecodeObjects_literalMutation121() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation121");
         final URLCodec urlCodec = new URLCodec();
-        final String plain = "foo";
+        final String plain = "Hello+there%21";
         String decoded = ((String)(urlCodec.decode(((Object)(plain)))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),163,decoded);
         final byte[] plainBA = plain.getBytes(org.apache.commons.codec.Charsets.UTF_8);
@@ -1093,7 +1215,51 @@ public class URLCodecTest {
         final Object result = urlCodec.decode(((Object)(null)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),165,result);
         try {
-            final Object dObj = new Double(3.0);
+            final Object dObj = new Double(2.0);
+            urlCodec.decode(dObj);
+        } catch (final DecoderException ee) {
+        }
+        validateState(urlCodec);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeObjects_literalMutation122() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation122");
+        final URLCodec urlCodec = new URLCodec();
+        final String plain = "Hello+there%21";
+        String decoded = ((String)(urlCodec.decode(((Object)(plain)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),163,decoded);
+        final byte[] plainBA = plain.getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] decodedBA = ((byte[])(urlCodec.decode(((Object)(plainBA)))));
+        decoded = new String(decodedBA);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),164,decoded);
+        final Object result = urlCodec.decode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),165,result);
+        try {
+            final Object dObj = new Double(1.5);
+            urlCodec.decode(dObj);
+        } catch (final DecoderException ee) {
+        }
+        validateState(urlCodec);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDecodeObjects_literalMutation123() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecodeObjects_literalMutation123");
+        final URLCodec urlCodec = new URLCodec();
+        final String plain = "Hello+there%21";
+        String decoded = ((String)(urlCodec.decode(((Object)(plain)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),163,decoded);
+        final byte[] plainBA = plain.getBytes(org.apache.commons.codec.Charsets.UTF_8);
+        final byte[] decodedBA = ((byte[])(urlCodec.decode(((Object)(plainBA)))));
+        decoded = new String(decodedBA);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),164,decoded);
+        final Object result = urlCodec.decode(((Object)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),165,result);
+        try {
+            final Object dObj = new Double(6.0);
             urlCodec.decode(dObj);
         } catch (final DecoderException ee) {
         }
@@ -1167,8 +1333,8 @@ public class URLCodecTest {
     }
 
     @Test
-    public void testDefaultEncoding_literalMutation104() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDefaultEncoding_literalMutation104");
+    public void testDefaultEncoding_literalMutation127() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDefaultEncoding_literalMutation127");
         final String plain = "foo";
         final URLCodec urlCodec = new URLCodec("UnicodeBig");
         urlCodec.encode(plain);
@@ -1181,8 +1347,8 @@ public class URLCodecTest {
     }
 
     @Test
-    public void testDefaultEncoding_literalMutation105() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDefaultEncoding_literalMutation105");
+    public void testDefaultEncoding_literalMutation128() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDefaultEncoding_literalMutation128");
         final String plain = "Hello there!";
         final URLCodec urlCodec = new URLCodec("foo");
         urlCodec.encode(plain);
@@ -1195,8 +1361,8 @@ public class URLCodecTest {
     }
 
     @Test
-    public void testDefaultEncoding_literalMutation106() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDefaultEncoding_literalMutation106");
+    public void testDefaultEncoding_literalMutation129() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDefaultEncoding_literalMutation129");
         final String plain = "Hello there!";
         final URLCodec urlCodec = new URLCodec("UnicodeBig");
         urlCodec.encode(plain);

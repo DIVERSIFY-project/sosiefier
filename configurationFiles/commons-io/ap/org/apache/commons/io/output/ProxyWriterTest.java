@@ -118,8 +118,24 @@ public void testWriteStringPartial() {
     /** 
      * Test Writing a Partial String
      */
-public void testWriteStringPartial_literalMutation2430() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPartial_literalMutation2430");
+public void testWriteStringPartial_literalMutation3578() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPartial_literalMutation3578");
+        StringBuilderWriter writer = new StringBuilderWriter();
+        ProxyWriter proxy = new ProxyWriter(writer);
+        try {
+            proxy.write("ABC", 2, 2);
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1615,("Writing String threw " + e));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1617,writer,1616,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Writing a Partial String
+     */
+public void testWriteStringPartial_literalMutation3579() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPartial_literalMutation3579");
         StringBuilderWriter writer = new StringBuilderWriter();
         ProxyWriter proxy = new ProxyWriter(writer);
         try {
@@ -134,8 +150,56 @@ public void testWriteStringPartial_literalMutation2430() {
     /** 
      * Test Writing a Partial String
      */
-public void testWriteStringPartial_literalMutation2431() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPartial_literalMutation2431");
+public void testWriteStringPartial_literalMutation3580() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPartial_literalMutation3580");
+        StringBuilderWriter writer = new StringBuilderWriter();
+        ProxyWriter proxy = new ProxyWriter(writer);
+        try {
+            proxy.write("ABC", 0, 2);
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1615,("Writing String threw " + e));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1617,writer,1616,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Writing a Partial String
+     */
+public void testWriteStringPartial_literalMutation3581() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPartial_literalMutation3581");
+        StringBuilderWriter writer = new StringBuilderWriter();
+        ProxyWriter proxy = new ProxyWriter(writer);
+        try {
+            proxy.write("ABC", 1, 1);
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1615,("Writing String threw " + e));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1617,writer,1616,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Writing a Partial String
+     */
+public void testWriteStringPartial_literalMutation3582() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPartial_literalMutation3582");
+        StringBuilderWriter writer = new StringBuilderWriter();
+        ProxyWriter proxy = new ProxyWriter(writer);
+        try {
+            proxy.write("ABC", 1, 4);
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1615,("Writing String threw " + e));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1617,writer,1616,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Writing a Partial String
+     */
+public void testWriteStringPartial_literalMutation3583() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteStringPartial_literalMutation3583");
         StringBuilderWriter writer = new StringBuilderWriter();
         ProxyWriter proxy = new ProxyWriter(writer);
         try {
@@ -191,7 +255,7 @@ public void testWriteCharArray() {
         StringBuilderWriter writer = new StringBuilderWriter();
         ProxyWriter proxy = new ProxyWriter(writer);
         try {
-            proxy.write(new char[]{ 'A' , 'B' , 'C' }, 0, 2);
+            proxy.write(new char[]{ 'A' , 'B' , 'C' }, 2, 2);
         } catch (Exception e) {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1609,("Writing char[] threw " + e));
         }
@@ -207,7 +271,71 @@ public void testWriteCharArrayPartial() {
         StringBuilderWriter writer = new StringBuilderWriter();
         ProxyWriter proxy = new ProxyWriter(writer);
         try {
+            proxy.write(new char[]{ 'A' , 'B' , 'C' }, 0, 2);
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1609,("Writing char[] threw " + e));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1611,writer,1610,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Writing a Partial Char array
+     */
+public void testWriteCharArrayPartial_literalMutation3572() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPartial_literalMutation3572");
+        StringBuilderWriter writer = new StringBuilderWriter();
+        ProxyWriter proxy = new ProxyWriter(writer);
+        try {
+            proxy.write(new char[]{ 'A' , 'B' , 'C' }, 0, 2);
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1609,("Writing char[] threw " + e));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1611,writer,1610,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Writing a Partial Char array
+     */
+public void testWriteCharArrayPartial_literalMutation3573() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPartial_literalMutation3573");
+        StringBuilderWriter writer = new StringBuilderWriter();
+        ProxyWriter proxy = new ProxyWriter(writer);
+        try {
             proxy.write(new char[]{ 'A' , 'B' , 'C' }, 1, 1);
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1609,("Writing char[] threw " + e));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1611,writer,1610,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Writing a Partial Char array
+     */
+public void testWriteCharArrayPartial_literalMutation3574() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPartial_literalMutation3574");
+        StringBuilderWriter writer = new StringBuilderWriter();
+        ProxyWriter proxy = new ProxyWriter(writer);
+        try {
+            proxy.write(new char[]{ 'A' , 'B' , 'C' }, 1, 4);
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1609,("Writing char[] threw " + e));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1611,writer,1610,writer.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Writing a Partial Char array
+     */
+public void testWriteCharArrayPartial_literalMutation3575() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteCharArrayPartial_literalMutation3575");
+        StringBuilderWriter writer = new StringBuilderWriter();
+        ProxyWriter proxy = new ProxyWriter(writer);
+        try {
+            proxy.write(new char[]{ 'A' , 'B' , 'C' }, 1, 3);
         } catch (Exception e) {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1609,("Writing char[] threw " + e));
         }
@@ -269,6 +397,25 @@ public void testNullString() {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1607,("Writing null String threw " + e));
         }
         try {
+            proxy.write(((String)(null)), 1, 0);
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1608,("Writing null String threw " + e));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test writing Null String
+     */
+public void testNullString_literalMutation3559() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullString_literalMutation3559");
+        ProxyWriter proxy = new ProxyWriter(new NullWriter());
+        try {
+            proxy.write(((String)(null)));
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1607,("Writing null String threw " + e));
+        }
+        try {
             proxy.write(((String)(null)), -1, 0);
         } catch (Exception e) {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1608,("Writing null String threw " + e));
@@ -279,8 +426,46 @@ public void testNullString() {
     /** 
      * Test writing Null String
      */
-public void testNullString_literalMutation2419() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullString_literalMutation2419");
+public void testNullString_literalMutation3560() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullString_literalMutation3560");
+        ProxyWriter proxy = new ProxyWriter(new NullWriter());
+        try {
+            proxy.write(((String)(null)));
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1607,("Writing null String threw " + e));
+        }
+        try {
+            proxy.write(((String)(null)), 0, 0);
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1608,("Writing null String threw " + e));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test writing Null String
+     */
+public void testNullString_literalMutation3561() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullString_literalMutation3561");
+        ProxyWriter proxy = new ProxyWriter(new NullWriter());
+        try {
+            proxy.write(((String)(null)));
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1607,("Writing null String threw " + e));
+        }
+        try {
+            proxy.write(((String)(null)), 0, 1);
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1608,("Writing null String threw " + e));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test writing Null String
+     */
+public void testNullString_literalMutation3562() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullString_literalMutation3562");
         ProxyWriter proxy = new ProxyWriter(new NullWriter());
         try {
             proxy.write(((String)(null)));
@@ -289,6 +474,25 @@ public void testNullString_literalMutation2419() {
         }
         try {
             proxy.write(((String)(null)), 0, -1);
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1608,("Writing null String threw " + e));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test writing Null String
+     */
+public void testNullString_literalMutation3563() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullString_literalMutation3563");
+        ProxyWriter proxy = new ProxyWriter(new NullWriter());
+        try {
+            proxy.write(((String)(null)));
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1607,("Writing null String threw " + e));
+        }
+        try {
+            proxy.write(((String)(null)), 0, 0);
         } catch (Exception e) {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1608,("Writing null String threw " + e));
         }
@@ -359,8 +563,8 @@ public void testNullCharArray() {
     /** 
      * Test writing Null Char array
      */
-public void testNullCharArray_literalMutation2413() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullCharArray_literalMutation2413");
+public void testNullCharArray_literalMutation3549() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullCharArray_literalMutation3549");
         ProxyWriter proxy = new ProxyWriter(new NullWriter());
         try {
             proxy.write(((char[])(null)));
@@ -378,8 +582,65 @@ public void testNullCharArray_literalMutation2413() {
     /** 
      * Test writing Null Char array
      */
-public void testNullCharArray_literalMutation2414() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullCharArray_literalMutation2414");
+public void testNullCharArray_literalMutation3550() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullCharArray_literalMutation3550");
+        ProxyWriter proxy = new ProxyWriter(new NullWriter());
+        try {
+            proxy.write(((char[])(null)));
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1604,("Writing null char[] threw " + e));
+        }
+        try {
+            proxy.write(((char[])(null)), -1, 0);
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1605,("Writing null char[] threw " + e));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test writing Null Char array
+     */
+public void testNullCharArray_literalMutation3551() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullCharArray_literalMutation3551");
+        ProxyWriter proxy = new ProxyWriter(new NullWriter());
+        try {
+            proxy.write(((char[])(null)));
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1604,("Writing null char[] threw " + e));
+        }
+        try {
+            proxy.write(((char[])(null)), 0, 0);
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1605,("Writing null char[] threw " + e));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test writing Null Char array
+     */
+public void testNullCharArray_literalMutation3552() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullCharArray_literalMutation3552");
+        ProxyWriter proxy = new ProxyWriter(new NullWriter());
+        try {
+            proxy.write(((char[])(null)));
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1604,("Writing null char[] threw " + e));
+        }
+        try {
+            proxy.write(((char[])(null)), 0, 1);
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1605,("Writing null char[] threw " + e));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test writing Null Char array
+     */
+public void testNullCharArray_literalMutation3553() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullCharArray_literalMutation3553");
         ProxyWriter proxy = new ProxyWriter(new NullWriter());
         try {
             proxy.write(((char[])(null)));
@@ -388,6 +649,25 @@ public void testNullCharArray_literalMutation2414() {
         }
         try {
             proxy.write(((char[])(null)), 0, -1);
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1605,("Writing null char[] threw " + e));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test writing Null Char array
+     */
+public void testNullCharArray_literalMutation3554() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullCharArray_literalMutation3554");
+        ProxyWriter proxy = new ProxyWriter(new NullWriter());
+        try {
+            proxy.write(((char[])(null)));
+        } catch (Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1604,("Writing null char[] threw " + e));
+        }
+        try {
+            proxy.write(((char[])(null)), 0, 0);
         } catch (Exception e) {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1605,("Writing null char[] threw " + e));
         }

@@ -82,6 +82,26 @@ public DeferredFileOutputStreamTest(String name) {
      */
 public void testBelowThreshold() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBelowThreshold");
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) + 41) , null);
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1406,dfos,1405,dfos.isInMemory());
+        byte[] resultBytes = dfos.getData();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1407,testBytes.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1408,resultBytes.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1410,null,1409,java.util.Arrays.equals(resultBytes, testBytes));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where the amount of data falls below the threshold, and
+     * is therefore confined to memory.
+     */
+public void testBelowThreshold_literalMutation3400() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBelowThreshold_literalMutation3400");
         DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) + 43) , null);
         try {
             dfos.write(testBytes, 0, testBytes.length);
@@ -100,11 +120,91 @@ public void testBelowThreshold() {
      * Tests the case where the amount of data falls below the threshold, and
      * is therefore confined to memory.
      */
-public void testBelowThreshold_literalMutation2327() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBelowThreshold_literalMutation2327");
+public void testBelowThreshold_literalMutation3401() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBelowThreshold_literalMutation3401");
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) + 21) , null);
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1406,dfos,1405,dfos.isInMemory());
+        byte[] resultBytes = dfos.getData();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1407,testBytes.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1408,resultBytes.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1410,null,1409,java.util.Arrays.equals(resultBytes, testBytes));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where the amount of data falls below the threshold, and
+     * is therefore confined to memory.
+     */
+public void testBelowThreshold_literalMutation3402() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBelowThreshold_literalMutation3402");
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) + 84) , null);
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1406,dfos,1405,dfos.isInMemory());
+        byte[] resultBytes = dfos.getData();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1407,testBytes.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1408,resultBytes.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1410,null,1409,java.util.Arrays.equals(resultBytes, testBytes));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where the amount of data falls below the threshold, and
+     * is therefore confined to memory.
+     */
+public void testBelowThreshold_literalMutation3404() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBelowThreshold_literalMutation3404");
         DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) + 42) , null);
         try {
             dfos.write(testBytes, 1, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1406,dfos,1405,dfos.isInMemory());
+        byte[] resultBytes = dfos.getData();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1407,testBytes.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1408,resultBytes.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1410,null,1409,java.util.Arrays.equals(resultBytes, testBytes));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where the amount of data falls below the threshold, and
+     * is therefore confined to memory.
+     */
+public void testBelowThreshold_literalMutation3405() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBelowThreshold_literalMutation3405");
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) + 42) , null);
+        try {
+            dfos.write(testBytes, -1, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1406,dfos,1405,dfos.isInMemory());
+        byte[] resultBytes = dfos.getData();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1407,testBytes.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1408,resultBytes.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1410,null,1409,java.util.Arrays.equals(resultBytes, testBytes));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where the amount of data falls below the threshold, and
+     * is therefore confined to memory.
+     */
+public void testBelowThreshold_literalMutation3406() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBelowThreshold_literalMutation3406");
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) + 42) , null);
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
             dfos.close();
         } catch (IOException e) {
         }
@@ -171,7 +271,49 @@ public void testAtThreshold() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAtThreshold");
         DeferredFileOutputStream dfos = new DeferredFileOutputStream(testBytes.length , null);
         try {
+            dfos.write(testBytes, 1, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1400,dfos,1399,dfos.isInMemory());
+        byte[] resultBytes = dfos.getData();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1401,testBytes.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1402,resultBytes.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1404,null,1403,java.util.Arrays.equals(resultBytes, testBytes));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where the amount of data is exactly the same as the
+     * threshold. The behavior should be the same as that for the amount of
+     * data being below (i.e. not exceeding) the threshold.
+     */
+public void testAtThreshold_literalMutation3397() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAtThreshold_literalMutation3397");
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(testBytes.length , null);
+        try {
             dfos.write(testBytes, -1, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1400,dfos,1399,dfos.isInMemory());
+        byte[] resultBytes = dfos.getData();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1401,testBytes.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1402,resultBytes.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1404,null,1403,java.util.Arrays.equals(resultBytes, testBytes));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where the amount of data is exactly the same as the
+     * threshold. The behavior should be the same as that for the amount of
+     * data being below (i.e. not exceeding) the threshold.
+     */
+public void testAtThreshold_literalMutation3398() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAtThreshold_literalMutation3398");
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(testBytes.length , null);
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
             dfos.close();
         } catch (IOException e) {
         }
@@ -310,7 +452,7 @@ public void testAtThreshold() {
      */
 public void testAboveThreshold() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAboveThreshold");
-        File testFile = new File("foo");
+        File testFile = new File("bar");
         testFile.delete();
         DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 5) , testFile);
         try {
@@ -330,8 +472,74 @@ public void testAboveThreshold() {
      * therefore written to disk. The actual data written to disk is verified,
      * as is the file itself.
      */
-public void testAboveThreshold_literalMutation2321() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAboveThreshold_literalMutation2321");
+public void testAboveThreshold_literalMutation3388() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAboveThreshold_literalMutation3388");
+        File testFile = new File("testAboveThreshold.dat");
+        testFile.delete();
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 4) , testFile);
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1396,dfos,1395,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1398,dfos,1397,dfos.getData());
+        verifyResultFile(testFile);
+        testFile.delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where the amount of data exceeds the threshold, and is
+     * therefore written to disk. The actual data written to disk is verified,
+     * as is the file itself.
+     */
+public void testAboveThreshold_literalMutation3389() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAboveThreshold_literalMutation3389");
+        File testFile = new File("testAboveThreshold.dat");
+        testFile.delete();
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 2) , testFile);
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1396,dfos,1395,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1398,dfos,1397,dfos.getData());
+        verifyResultFile(testFile);
+        testFile.delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where the amount of data exceeds the threshold, and is
+     * therefore written to disk. The actual data written to disk is verified,
+     * as is the file itself.
+     */
+public void testAboveThreshold_literalMutation3390() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAboveThreshold_literalMutation3390");
+        File testFile = new File("testAboveThreshold.dat");
+        testFile.delete();
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 10) , testFile);
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1396,dfos,1395,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1398,dfos,1397,dfos.getData());
+        verifyResultFile(testFile);
+        testFile.delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where the amount of data exceeds the threshold, and is
+     * therefore written to disk. The actual data written to disk is verified,
+     * as is the file itself.
+     */
+public void testAboveThreshold_literalMutation3391() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAboveThreshold_literalMutation3391");
         File testFile = new File("testAboveThreshold.dat");
         testFile.delete();
         DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 6) , testFile);
@@ -352,13 +560,57 @@ public void testAboveThreshold_literalMutation2321() {
      * therefore written to disk. The actual data written to disk is verified,
      * as is the file itself.
      */
-public void testAboveThreshold_literalMutation2322() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAboveThreshold_literalMutation2322");
+public void testAboveThreshold_literalMutation3392() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAboveThreshold_literalMutation3392");
         File testFile = new File("testAboveThreshold.dat");
         testFile.delete();
         DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 5) , testFile);
         try {
             dfos.write(testBytes, 1, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1396,dfos,1395,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1398,dfos,1397,dfos.getData());
+        verifyResultFile(testFile);
+        testFile.delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where the amount of data exceeds the threshold, and is
+     * therefore written to disk. The actual data written to disk is verified,
+     * as is the file itself.
+     */
+public void testAboveThreshold_literalMutation3393() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAboveThreshold_literalMutation3393");
+        File testFile = new File("testAboveThreshold.dat");
+        testFile.delete();
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 5) , testFile);
+        try {
+            dfos.write(testBytes, -1, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1396,dfos,1395,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1398,dfos,1397,dfos.getData());
+        verifyResultFile(testFile);
+        testFile.delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where the amount of data exceeds the threshold, and is
+     * therefore written to disk. The actual data written to disk is verified,
+     * as is the file itself.
+     */
+public void testAboveThreshold_literalMutation3394() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAboveThreshold_literalMutation3394");
+        File testFile = new File("testAboveThreshold.dat");
+        testFile.delete();
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 5) , testFile);
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
             dfos.close();
         } catch (IOException e) {
         }
@@ -654,8 +906,8 @@ public void testThresholdReached() {
      * ensure that the <code>thresholdReached()</code> method is only called
      * once, as the threshold is crossed for the first time.
      */
-public void testThresholdReached_literalMutation2348() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation2348");
+public void testThresholdReached_literalMutation3445() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation3445");
         File testFile = new File("testThresholdReached.dat");
         testFile.delete();
         DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) / 1) , testFile);
@@ -679,8 +931,58 @@ public void testThresholdReached_literalMutation2348() {
      * ensure that the <code>thresholdReached()</code> method is only called
      * once, as the threshold is crossed for the first time.
      */
-public void testThresholdReached_literalMutation2349() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation2349");
+public void testThresholdReached_literalMutation3446() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation3446");
+        File testFile = new File("testThresholdReached.dat");
+        testFile.delete();
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) / 4) , testFile);
+        int chunkSize = (testBytes.length) / 3;
+        try {
+            dfos.write(testBytes, 0, chunkSize);
+            dfos.write(testBytes, chunkSize, chunkSize);
+            dfos.write(testBytes, (chunkSize * 2), ((testBytes.length) - (chunkSize * 2)));
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1450,dfos,1449,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1452,dfos,1451,dfos.getData());
+        verifyResultFile(testFile);
+        testFile.delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where there are multiple writes beyond the threshold, to
+     * ensure that the <code>thresholdReached()</code> method is only called
+     * once, as the threshold is crossed for the first time.
+     */
+public void testThresholdReached_literalMutation3447() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation3447");
+        File testFile = new File("testThresholdReached.dat");
+        testFile.delete();
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) / 3) , testFile);
+        int chunkSize = (testBytes.length) / 3;
+        try {
+            dfos.write(testBytes, 0, chunkSize);
+            dfos.write(testBytes, chunkSize, chunkSize);
+            dfos.write(testBytes, (chunkSize * 2), ((testBytes.length) - (chunkSize * 2)));
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1450,dfos,1449,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1452,dfos,1451,dfos.getData());
+        verifyResultFile(testFile);
+        testFile.delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where there are multiple writes beyond the threshold, to
+     * ensure that the <code>thresholdReached()</code> method is only called
+     * once, as the threshold is crossed for the first time.
+     */
+public void testThresholdReached_literalMutation3448() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation3448");
         File testFile = new File("testThresholdReached.dat");
         testFile.delete();
         DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) / 2) , testFile);
@@ -704,8 +1006,83 @@ public void testThresholdReached_literalMutation2349() {
      * ensure that the <code>thresholdReached()</code> method is only called
      * once, as the threshold is crossed for the first time.
      */
-public void testThresholdReached_literalMutation2350() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation2350");
+public void testThresholdReached_literalMutation3449() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation3449");
+        File testFile = new File("testThresholdReached.dat");
+        testFile.delete();
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) / 2) , testFile);
+        int chunkSize = (testBytes.length) / 2;
+        try {
+            dfos.write(testBytes, 0, chunkSize);
+            dfos.write(testBytes, chunkSize, chunkSize);
+            dfos.write(testBytes, (chunkSize * 2), ((testBytes.length) - (chunkSize * 2)));
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1450,dfos,1449,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1452,dfos,1451,dfos.getData());
+        verifyResultFile(testFile);
+        testFile.delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where there are multiple writes beyond the threshold, to
+     * ensure that the <code>thresholdReached()</code> method is only called
+     * once, as the threshold is crossed for the first time.
+     */
+public void testThresholdReached_literalMutation3450() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation3450");
+        File testFile = new File("testThresholdReached.dat");
+        testFile.delete();
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) / 2) , testFile);
+        int chunkSize = (testBytes.length) / 1;
+        try {
+            dfos.write(testBytes, 0, chunkSize);
+            dfos.write(testBytes, chunkSize, chunkSize);
+            dfos.write(testBytes, (chunkSize * 2), ((testBytes.length) - (chunkSize * 2)));
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1450,dfos,1449,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1452,dfos,1451,dfos.getData());
+        verifyResultFile(testFile);
+        testFile.delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where there are multiple writes beyond the threshold, to
+     * ensure that the <code>thresholdReached()</code> method is only called
+     * once, as the threshold is crossed for the first time.
+     */
+public void testThresholdReached_literalMutation3451() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation3451");
+        File testFile = new File("testThresholdReached.dat");
+        testFile.delete();
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) / 2) , testFile);
+        int chunkSize = (testBytes.length) / 6;
+        try {
+            dfos.write(testBytes, 0, chunkSize);
+            dfos.write(testBytes, chunkSize, chunkSize);
+            dfos.write(testBytes, (chunkSize * 2), ((testBytes.length) - (chunkSize * 2)));
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1450,dfos,1449,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1452,dfos,1451,dfos.getData());
+        verifyResultFile(testFile);
+        testFile.delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where there are multiple writes beyond the threshold, to
+     * ensure that the <code>thresholdReached()</code> method is only called
+     * once, as the threshold is crossed for the first time.
+     */
+public void testThresholdReached_literalMutation3452() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation3452");
         File testFile = new File("testThresholdReached.dat");
         testFile.delete();
         DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) / 2) , testFile);
@@ -729,8 +1106,108 @@ public void testThresholdReached_literalMutation2350() {
      * ensure that the <code>thresholdReached()</code> method is only called
      * once, as the threshold is crossed for the first time.
      */
-public void testThresholdReached_literalMutation2351() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation2351");
+public void testThresholdReached_literalMutation3453() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation3453");
+        File testFile = new File("testThresholdReached.dat");
+        testFile.delete();
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) / 2) , testFile);
+        int chunkSize = (testBytes.length) / 3;
+        try {
+            dfos.write(testBytes, -1, chunkSize);
+            dfos.write(testBytes, chunkSize, chunkSize);
+            dfos.write(testBytes, (chunkSize * 2), ((testBytes.length) - (chunkSize * 2)));
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1450,dfos,1449,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1452,dfos,1451,dfos.getData());
+        verifyResultFile(testFile);
+        testFile.delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where there are multiple writes beyond the threshold, to
+     * ensure that the <code>thresholdReached()</code> method is only called
+     * once, as the threshold is crossed for the first time.
+     */
+public void testThresholdReached_literalMutation3454() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation3454");
+        File testFile = new File("testThresholdReached.dat");
+        testFile.delete();
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) / 2) , testFile);
+        int chunkSize = (testBytes.length) / 3;
+        try {
+            dfos.write(testBytes, 0, chunkSize);
+            dfos.write(testBytes, chunkSize, chunkSize);
+            dfos.write(testBytes, (chunkSize * 2), ((testBytes.length) - (chunkSize * 2)));
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1450,dfos,1449,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1452,dfos,1451,dfos.getData());
+        verifyResultFile(testFile);
+        testFile.delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where there are multiple writes beyond the threshold, to
+     * ensure that the <code>thresholdReached()</code> method is only called
+     * once, as the threshold is crossed for the first time.
+     */
+public void testThresholdReached_literalMutation3455() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation3455");
+        File testFile = new File("testThresholdReached.dat");
+        testFile.delete();
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) / 2) , testFile);
+        int chunkSize = (testBytes.length) / 3;
+        try {
+            dfos.write(testBytes, 0, chunkSize);
+            dfos.write(testBytes, chunkSize, chunkSize);
+            dfos.write(testBytes, (chunkSize * 1), ((testBytes.length) - (chunkSize * 2)));
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1450,dfos,1449,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1452,dfos,1451,dfos.getData());
+        verifyResultFile(testFile);
+        testFile.delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where there are multiple writes beyond the threshold, to
+     * ensure that the <code>thresholdReached()</code> method is only called
+     * once, as the threshold is crossed for the first time.
+     */
+public void testThresholdReached_literalMutation3456() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation3456");
+        File testFile = new File("testThresholdReached.dat");
+        testFile.delete();
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) / 2) , testFile);
+        int chunkSize = (testBytes.length) / 3;
+        try {
+            dfos.write(testBytes, 0, chunkSize);
+            dfos.write(testBytes, chunkSize, chunkSize);
+            dfos.write(testBytes, (chunkSize * 4), ((testBytes.length) - (chunkSize * 2)));
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1450,dfos,1449,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1452,dfos,1451,dfos.getData());
+        verifyResultFile(testFile);
+        testFile.delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where there are multiple writes beyond the threshold, to
+     * ensure that the <code>thresholdReached()</code> method is only called
+     * once, as the threshold is crossed for the first time.
+     */
+public void testThresholdReached_literalMutation3457() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation3457");
         File testFile = new File("testThresholdReached.dat");
         testFile.delete();
         DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) / 2) , testFile);
@@ -754,8 +1231,8 @@ public void testThresholdReached_literalMutation2351() {
      * ensure that the <code>thresholdReached()</code> method is only called
      * once, as the threshold is crossed for the first time.
      */
-public void testThresholdReached_literalMutation2352() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation2352");
+public void testThresholdReached_literalMutation3458() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation3458");
         File testFile = new File("testThresholdReached.dat");
         testFile.delete();
         DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) / 2) , testFile);
@@ -764,6 +1241,56 @@ public void testThresholdReached_literalMutation2352() {
             dfos.write(testBytes, 0, chunkSize);
             dfos.write(testBytes, chunkSize, chunkSize);
             dfos.write(testBytes, (chunkSize * 2), ((testBytes.length) - (chunkSize * 1)));
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1450,dfos,1449,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1452,dfos,1451,dfos.getData());
+        verifyResultFile(testFile);
+        testFile.delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where there are multiple writes beyond the threshold, to
+     * ensure that the <code>thresholdReached()</code> method is only called
+     * once, as the threshold is crossed for the first time.
+     */
+public void testThresholdReached_literalMutation3459() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation3459");
+        File testFile = new File("testThresholdReached.dat");
+        testFile.delete();
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) / 2) , testFile);
+        int chunkSize = (testBytes.length) / 3;
+        try {
+            dfos.write(testBytes, 0, chunkSize);
+            dfos.write(testBytes, chunkSize, chunkSize);
+            dfos.write(testBytes, (chunkSize * 2), ((testBytes.length) - (chunkSize * 4)));
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1450,dfos,1449,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1452,dfos,1451,dfos.getData());
+        verifyResultFile(testFile);
+        testFile.delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the case where there are multiple writes beyond the threshold, to
+     * ensure that the <code>thresholdReached()</code> method is only called
+     * once, as the threshold is crossed for the first time.
+     */
+public void testThresholdReached_literalMutation3460() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThresholdReached_literalMutation3460");
+        File testFile = new File("testThresholdReached.dat");
+        testFile.delete();
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) / 2) , testFile);
+        int chunkSize = (testBytes.length) / 3;
+        try {
+            dfos.write(testBytes, 0, chunkSize);
+            dfos.write(testBytes, chunkSize, chunkSize);
+            dfos.write(testBytes, (chunkSize * 2), ((testBytes.length) - (chunkSize * 3)));
             dfos.close();
         } catch (IOException e) {
         }
@@ -1053,8 +1580,62 @@ public void testWriteToSmall() {
     /** 
      * Test wether writeTo() properly writes small content.
      */
-public void testWriteToSmall_literalMutation2356() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteToSmall_literalMutation2356");
+public void testWriteToSmall_literalMutation3466() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteToSmall_literalMutation3466");
+        File testFile = new File("testWriteToMem.dat");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        testFile.delete();
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) * 1) , testFile);
+        try {
+            dfos.write(testBytes);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1460,testFile,1459,testFile.exists());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1462,dfos,1461,dfos.isInMemory());
+            try {
+                dfos.writeTo(baos);
+            } catch (IOException ioe) {
+            }
+            dfos.close();
+            dfos.writeTo(baos);
+        } catch (IOException ioe) {
+        }
+        byte[] copiedBytes = baos.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1464,null,1463,java.util.Arrays.equals(testBytes, copiedBytes));
+        testFile.delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test wether writeTo() properly writes small content.
+     */
+public void testWriteToSmall_literalMutation3467() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteToSmall_literalMutation3467");
+        File testFile = new File("testWriteToMem.dat");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        testFile.delete();
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) * 4) , testFile);
+        try {
+            dfos.write(testBytes);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1460,testFile,1459,testFile.exists());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1462,dfos,1461,dfos.isInMemory());
+            try {
+                dfos.writeTo(baos);
+            } catch (IOException ioe) {
+            }
+            dfos.close();
+            dfos.writeTo(baos);
+        } catch (IOException ioe) {
+        }
+        byte[] copiedBytes = baos.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1464,null,1463,java.util.Arrays.equals(testBytes, copiedBytes));
+        testFile.delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test wether writeTo() properly writes small content.
+     */
+public void testWriteToSmall_literalMutation3468() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteToSmall_literalMutation3468");
         File testFile = new File("testWriteToMem.dat");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         testFile.delete();
@@ -1346,7 +1927,7 @@ public void testWriteToSmall_literalMutation2356() {
      */
 public void testWriteToLarge() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteToLarge");
-        File testFile = new File("foo");
+        File testFile = new File("bar");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         testFile.delete();
         DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) / 2) , testFile);
@@ -1372,12 +1953,68 @@ public void testWriteToLarge() {
     /** 
      * Test wether writeTo() properly writes large content.
      */
-public void testWriteToLarge_literalMutation2354() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteToLarge_literalMutation2354");
+public void testWriteToLarge_literalMutation3462() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteToLarge_literalMutation3462");
         File testFile = new File("testWriteToFile.dat");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         testFile.delete();
         DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) / 1) , testFile);
+        try {
+            dfos.write(testBytes);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1454,testFile,1453,testFile.exists());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1456,dfos,1455,dfos.isInMemory());
+            try {
+                dfos.writeTo(baos);
+            } catch (IOException ioe) {
+            }
+            dfos.close();
+            dfos.writeTo(baos);
+        } catch (IOException ioe) {
+        }
+        byte[] copiedBytes = baos.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1458,null,1457,java.util.Arrays.equals(testBytes, copiedBytes));
+        verifyResultFile(testFile);
+        testFile.delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test wether writeTo() properly writes large content.
+     */
+public void testWriteToLarge_literalMutation3463() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteToLarge_literalMutation3463");
+        File testFile = new File("testWriteToFile.dat");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        testFile.delete();
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) / 4) , testFile);
+        try {
+            dfos.write(testBytes);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1454,testFile,1453,testFile.exists());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1456,dfos,1455,dfos.isInMemory());
+            try {
+                dfos.writeTo(baos);
+            } catch (IOException ioe) {
+            }
+            dfos.close();
+            dfos.writeTo(baos);
+        } catch (IOException ioe) {
+        }
+        byte[] copiedBytes = baos.toByteArray();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1458,null,1457,java.util.Arrays.equals(testBytes, copiedBytes));
+        verifyResultFile(testFile);
+        testFile.delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test wether writeTo() properly writes large content.
+     */
+public void testWriteToLarge_literalMutation3464() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWriteToLarge_literalMutation3464");
+        File testFile = new File("testWriteToFile.dat");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        testFile.delete();
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) / 3) , testFile);
         try {
             dfos.write(testBytes);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1454,testFile,1453,testFile.exists());
@@ -1530,7 +2167,7 @@ public void testWriteToLarge_literalMutation2354() {
      */
 public void testTempFileBelowThreshold() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileBelowThreshold");
-        String prefix = "foo";
+        String prefix = "bar";
         String suffix = ".out";
         File tempDir = new File(".");
         DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) + 42) , prefix , suffix , tempDir);
@@ -1548,10 +2185,10 @@ public void testTempFileBelowThreshold() {
     /** 
      * Test specifying a temporary file and the threshold not reached.
      */
-public void testTempFileBelowThreshold_literalMutation2339() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileBelowThreshold_literalMutation2339");
+public void testTempFileBelowThreshold_literalMutation3428() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileBelowThreshold_literalMutation3428");
         String prefix = "commons-io-test";
-        String suffix = "foo";
+        String suffix = "bar";
         File tempDir = new File(".");
         DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) + 42) , prefix , suffix , tempDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1444,dfos,1443,dfos.getFile());
@@ -1568,8 +2205,8 @@ public void testTempFileBelowThreshold_literalMutation2339() {
     /** 
      * Test specifying a temporary file and the threshold not reached.
      */
-public void testTempFileBelowThreshold_literalMutation2340() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileBelowThreshold_literalMutation2340");
+public void testTempFileBelowThreshold_literalMutation3429() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileBelowThreshold_literalMutation3429");
         String prefix = "commons-io-test";
         String suffix = ".out";
         File tempDir = new File("foo");
@@ -1588,8 +2225,28 @@ public void testTempFileBelowThreshold_literalMutation2340() {
     /** 
      * Test specifying a temporary file and the threshold not reached.
      */
-public void testTempFileBelowThreshold_literalMutation2341() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileBelowThreshold_literalMutation2341");
+public void testTempFileBelowThreshold_literalMutation3430() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileBelowThreshold_literalMutation3430");
+        String prefix = "commons-io-test";
+        String suffix = ".out";
+        File tempDir = new File(".");
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) + 41) , prefix , suffix , tempDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1444,dfos,1443,dfos.getFile());
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1446,dfos,1445,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1448,dfos,1447,dfos.getFile());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test specifying a temporary file and the threshold not reached.
+     */
+public void testTempFileBelowThreshold_literalMutation3431() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileBelowThreshold_literalMutation3431");
         String prefix = "commons-io-test";
         String suffix = ".out";
         File tempDir = new File(".");
@@ -1608,8 +2265,48 @@ public void testTempFileBelowThreshold_literalMutation2341() {
     /** 
      * Test specifying a temporary file and the threshold not reached.
      */
-public void testTempFileBelowThreshold_literalMutation2342() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileBelowThreshold_literalMutation2342");
+public void testTempFileBelowThreshold_literalMutation3432() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileBelowThreshold_literalMutation3432");
+        String prefix = "commons-io-test";
+        String suffix = ".out";
+        File tempDir = new File(".");
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) + 21) , prefix , suffix , tempDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1444,dfos,1443,dfos.getFile());
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1446,dfos,1445,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1448,dfos,1447,dfos.getFile());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test specifying a temporary file and the threshold not reached.
+     */
+public void testTempFileBelowThreshold_literalMutation3433() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileBelowThreshold_literalMutation3433");
+        String prefix = "commons-io-test";
+        String suffix = ".out";
+        File tempDir = new File(".");
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) + 84) , prefix , suffix , tempDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1444,dfos,1443,dfos.getFile());
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1446,dfos,1445,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1448,dfos,1447,dfos.getFile());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test specifying a temporary file and the threshold not reached.
+     */
+public void testTempFileBelowThreshold_literalMutation3434() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileBelowThreshold_literalMutation3434");
         String prefix = "commons-io-test";
         String suffix = ".out";
         File tempDir = new File(".");
@@ -1617,6 +2314,46 @@ public void testTempFileBelowThreshold_literalMutation2342() {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1444,dfos,1443,dfos.getFile());
         try {
             dfos.write(testBytes, 1, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1446,dfos,1445,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1448,dfos,1447,dfos.getFile());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test specifying a temporary file and the threshold not reached.
+     */
+public void testTempFileBelowThreshold_literalMutation3435() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileBelowThreshold_literalMutation3435");
+        String prefix = "commons-io-test";
+        String suffix = ".out";
+        File tempDir = new File(".");
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) + 42) , prefix , suffix , tempDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1444,dfos,1443,dfos.getFile());
+        try {
+            dfos.write(testBytes, -1, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1446,dfos,1445,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1448,dfos,1447,dfos.getFile());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test specifying a temporary file and the threshold not reached.
+     */
+public void testTempFileBelowThreshold_literalMutation3436() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileBelowThreshold_literalMutation3436");
+        String prefix = "commons-io-test";
+        String suffix = ".out";
+        File tempDir = new File(".");
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) + 42) , prefix , suffix , tempDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1444,dfos,1443,dfos.getFile());
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
             dfos.close();
         } catch (IOException e) {
         }
@@ -1776,10 +2513,10 @@ public void testTempFileAboveThreshold() {
     /** 
      * Test specifying a temporary file and the threshold is reached.
      */
-public void testTempFileAboveThreshold_literalMutation2329() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThreshold_literalMutation2329");
+public void testTempFileAboveThreshold_literalMutation3408() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThreshold_literalMutation3408");
         String prefix = "commons-io-test";
-        String suffix = "foo";
+        String suffix = "bar";
         File tempDir = new File(".");
         DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 5) , prefix , suffix , tempDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1426,dfos,1425,dfos.getFile());
@@ -1804,11 +2541,11 @@ public void testTempFileAboveThreshold_literalMutation2329() {
     /** 
      * Test specifying a temporary file and the threshold is reached.
      */
-public void testTempFileAboveThreshold_literalMutation2330() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThreshold_literalMutation2330");
+public void testTempFileAboveThreshold_literalMutation3409() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThreshold_literalMutation3409");
         String prefix = "commons-io-test";
         String suffix = ".out";
-        File tempDir = new File("foo");
+        File tempDir = new File("bar");
         DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 5) , prefix , suffix , tempDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1426,dfos,1425,dfos.getFile());
         try {
@@ -1832,8 +2569,8 @@ public void testTempFileAboveThreshold_literalMutation2330() {
     /** 
      * Test specifying a temporary file and the threshold is reached.
      */
-public void testTempFileAboveThreshold_literalMutation2331() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThreshold_literalMutation2331");
+public void testTempFileAboveThreshold_literalMutation3410() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThreshold_literalMutation3410");
         String prefix = "commons-io-test";
         String suffix = ".out";
         File tempDir = new File(".");
@@ -1860,8 +2597,120 @@ public void testTempFileAboveThreshold_literalMutation2331() {
     /** 
      * Test specifying a temporary file and the threshold is reached.
      */
-public void testTempFileAboveThreshold_literalMutation2332() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThreshold_literalMutation2332");
+public void testTempFileAboveThreshold_literalMutation3411() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThreshold_literalMutation3411");
+        String prefix = "commons-io-test";
+        String suffix = ".out";
+        File tempDir = new File(".");
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 2) , prefix , suffix , tempDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1426,dfos,1425,dfos.getFile());
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1428,dfos,1427,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1430,dfos,1429,dfos.getData());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1432,dfos,1431,dfos.getFile());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1434,dfos.getFile(),1433,dfos.getFile().exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1436,dfos.getFile().getName(),1435,dfos.getFile().getName().startsWith(prefix));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1438,dfos.getFile().getName(),1437,dfos.getFile().getName().endsWith(suffix));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1440,tempDir,1439,tempDir.getPath());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1442,dfos.getFile(),1441,dfos.getFile().getParent());
+        verifyResultFile(dfos.getFile());
+        dfos.getFile().delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test specifying a temporary file and the threshold is reached.
+     */
+public void testTempFileAboveThreshold_literalMutation3412() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThreshold_literalMutation3412");
+        String prefix = "commons-io-test";
+        String suffix = ".out";
+        File tempDir = new File(".");
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 10) , prefix , suffix , tempDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1426,dfos,1425,dfos.getFile());
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1428,dfos,1427,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1430,dfos,1429,dfos.getData());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1432,dfos,1431,dfos.getFile());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1434,dfos.getFile(),1433,dfos.getFile().exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1436,dfos.getFile().getName(),1435,dfos.getFile().getName().startsWith(prefix));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1438,dfos.getFile().getName(),1437,dfos.getFile().getName().endsWith(suffix));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1440,tempDir,1439,tempDir.getPath());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1442,dfos.getFile(),1441,dfos.getFile().getParent());
+        verifyResultFile(dfos.getFile());
+        dfos.getFile().delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test specifying a temporary file and the threshold is reached.
+     */
+public void testTempFileAboveThreshold_literalMutation3413() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThreshold_literalMutation3413");
+        String prefix = "commons-io-test";
+        String suffix = ".out";
+        File tempDir = new File(".");
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 6) , prefix , suffix , tempDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1426,dfos,1425,dfos.getFile());
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1428,dfos,1427,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1430,dfos,1429,dfos.getData());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1432,dfos,1431,dfos.getFile());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1434,dfos.getFile(),1433,dfos.getFile().exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1436,dfos.getFile().getName(),1435,dfos.getFile().getName().startsWith(prefix));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1438,dfos.getFile().getName(),1437,dfos.getFile().getName().endsWith(suffix));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1440,tempDir,1439,tempDir.getPath());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1442,dfos.getFile(),1441,dfos.getFile().getParent());
+        verifyResultFile(dfos.getFile());
+        dfos.getFile().delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test specifying a temporary file and the threshold is reached.
+     */
+public void testTempFileAboveThreshold_literalMutation3414() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThreshold_literalMutation3414");
+        String prefix = "commons-io-test";
+        String suffix = ".out";
+        File tempDir = new File(".");
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 5) , prefix , suffix , tempDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1426,dfos,1425,dfos.getFile());
+        try {
+            dfos.write(testBytes, 1, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1428,dfos,1427,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1430,dfos,1429,dfos.getData());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1432,dfos,1431,dfos.getFile());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1434,dfos.getFile(),1433,dfos.getFile().exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1436,dfos.getFile().getName(),1435,dfos.getFile().getName().startsWith(prefix));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1438,dfos.getFile().getName(),1437,dfos.getFile().getName().endsWith(suffix));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1440,tempDir,1439,tempDir.getPath());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1442,dfos.getFile(),1441,dfos.getFile().getParent());
+        verifyResultFile(dfos.getFile());
+        dfos.getFile().delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test specifying a temporary file and the threshold is reached.
+     */
+public void testTempFileAboveThreshold_literalMutation3415() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThreshold_literalMutation3415");
         String prefix = "commons-io-test";
         String suffix = ".out";
         File tempDir = new File(".");
@@ -1869,6 +2718,34 @@ public void testTempFileAboveThreshold_literalMutation2332() {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1426,dfos,1425,dfos.getFile());
         try {
             dfos.write(testBytes, -1, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1428,dfos,1427,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1430,dfos,1429,dfos.getData());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1432,dfos,1431,dfos.getFile());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1434,dfos.getFile(),1433,dfos.getFile().exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1436,dfos.getFile().getName(),1435,dfos.getFile().getName().startsWith(prefix));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1438,dfos.getFile().getName(),1437,dfos.getFile().getName().endsWith(suffix));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1440,tempDir,1439,tempDir.getPath());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1442,dfos.getFile(),1441,dfos.getFile().getParent());
+        verifyResultFile(dfos.getFile());
+        dfos.getFile().delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test specifying a temporary file and the threshold is reached.
+     */
+public void testTempFileAboveThreshold_literalMutation3416() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThreshold_literalMutation3416");
+        String prefix = "commons-io-test";
+        String suffix = ".out";
+        File tempDir = new File(".");
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 5) , prefix , suffix , tempDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1426,dfos,1425,dfos.getFile());
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
             dfos.close();
         } catch (IOException e) {
         }
@@ -2058,7 +2935,7 @@ public void testTempFileAboveThreshold_literalMutation2332() {
      */
 public void testTempFileAboveThresholdPrefixOnly() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThresholdPrefixOnly");
-        String prefix = "foo";
+        String prefix = "bar";
         String suffix = null;
         File tempDir = null;
         DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 5) , prefix , suffix , tempDir);
@@ -2082,8 +2959,86 @@ public void testTempFileAboveThresholdPrefixOnly() {
     /** 
      * Test specifying a temporary file and the threshold is reached.
      */
-public void testTempFileAboveThresholdPrefixOnly_literalMutation2336() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThresholdPrefixOnly_literalMutation2336");
+public void testTempFileAboveThresholdPrefixOnly_literalMutation3420() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThresholdPrefixOnly_literalMutation3420");
+        String prefix = "commons-io-test";
+        String suffix = null;
+        File tempDir = null;
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 4) , prefix , suffix , tempDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1412,dfos,1411,dfos.getFile());
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1414,dfos,1413,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1416,dfos,1415,dfos.getData());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1418,dfos,1417,dfos.getFile());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1420,dfos.getFile(),1419,dfos.getFile().exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1422,dfos.getFile().getName(),1421,dfos.getFile().getName().startsWith(prefix));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1424,dfos.getFile().getName(),1423,dfos.getFile().getName().endsWith(".tmp"));
+        verifyResultFile(dfos.getFile());
+        dfos.getFile().delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test specifying a temporary file and the threshold is reached.
+     */
+public void testTempFileAboveThresholdPrefixOnly_literalMutation3421() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThresholdPrefixOnly_literalMutation3421");
+        String prefix = "commons-io-test";
+        String suffix = null;
+        File tempDir = null;
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 2) , prefix , suffix , tempDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1412,dfos,1411,dfos.getFile());
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1414,dfos,1413,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1416,dfos,1415,dfos.getData());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1418,dfos,1417,dfos.getFile());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1420,dfos.getFile(),1419,dfos.getFile().exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1422,dfos.getFile().getName(),1421,dfos.getFile().getName().startsWith(prefix));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1424,dfos.getFile().getName(),1423,dfos.getFile().getName().endsWith(".tmp"));
+        verifyResultFile(dfos.getFile());
+        dfos.getFile().delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test specifying a temporary file and the threshold is reached.
+     */
+public void testTempFileAboveThresholdPrefixOnly_literalMutation3422() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThresholdPrefixOnly_literalMutation3422");
+        String prefix = "commons-io-test";
+        String suffix = null;
+        File tempDir = null;
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 10) , prefix , suffix , tempDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1412,dfos,1411,dfos.getFile());
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1414,dfos,1413,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1416,dfos,1415,dfos.getData());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1418,dfos,1417,dfos.getFile());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1420,dfos.getFile(),1419,dfos.getFile().exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1422,dfos.getFile().getName(),1421,dfos.getFile().getName().startsWith(prefix));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1424,dfos.getFile().getName(),1423,dfos.getFile().getName().endsWith(".tmp"));
+        verifyResultFile(dfos.getFile());
+        dfos.getFile().delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test specifying a temporary file and the threshold is reached.
+     */
+public void testTempFileAboveThresholdPrefixOnly_literalMutation3423() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThresholdPrefixOnly_literalMutation3423");
         String prefix = "commons-io-test";
         String suffix = null;
         File tempDir = null;
@@ -2108,8 +3063,8 @@ public void testTempFileAboveThresholdPrefixOnly_literalMutation2336() {
     /** 
      * Test specifying a temporary file and the threshold is reached.
      */
-public void testTempFileAboveThresholdPrefixOnly_literalMutation2337() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThresholdPrefixOnly_literalMutation2337");
+public void testTempFileAboveThresholdPrefixOnly_literalMutation3424() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThresholdPrefixOnly_literalMutation3424");
         String prefix = "commons-io-test";
         String suffix = null;
         File tempDir = null;
@@ -2117,6 +3072,58 @@ public void testTempFileAboveThresholdPrefixOnly_literalMutation2337() {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1412,dfos,1411,dfos.getFile());
         try {
             dfos.write(testBytes, 1, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1414,dfos,1413,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1416,dfos,1415,dfos.getData());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1418,dfos,1417,dfos.getFile());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1420,dfos.getFile(),1419,dfos.getFile().exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1422,dfos.getFile().getName(),1421,dfos.getFile().getName().startsWith(prefix));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1424,dfos.getFile().getName(),1423,dfos.getFile().getName().endsWith(".tmp"));
+        verifyResultFile(dfos.getFile());
+        dfos.getFile().delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test specifying a temporary file and the threshold is reached.
+     */
+public void testTempFileAboveThresholdPrefixOnly_literalMutation3425() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThresholdPrefixOnly_literalMutation3425");
+        String prefix = "commons-io-test";
+        String suffix = null;
+        File tempDir = null;
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 5) , prefix , suffix , tempDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1412,dfos,1411,dfos.getFile());
+        try {
+            dfos.write(testBytes, -1, testBytes.length);
+            dfos.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1414,dfos,1413,dfos.isInMemory());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1416,dfos,1415,dfos.getData());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1418,dfos,1417,dfos.getFile());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1420,dfos.getFile(),1419,dfos.getFile().exists());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1422,dfos.getFile().getName(),1421,dfos.getFile().getName().startsWith(prefix));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1424,dfos.getFile().getName(),1423,dfos.getFile().getName().endsWith(".tmp"));
+        verifyResultFile(dfos.getFile());
+        dfos.getFile().delete();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test specifying a temporary file and the threshold is reached.
+     */
+public void testTempFileAboveThresholdPrefixOnly_literalMutation3426() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileAboveThresholdPrefixOnly_literalMutation3426");
+        String prefix = "commons-io-test";
+        String suffix = null;
+        File tempDir = null;
+        DeferredFileOutputStream dfos = new DeferredFileOutputStream(((testBytes.length) - 5) , prefix , suffix , tempDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1412,dfos,1411,dfos.getFile());
+        try {
+            dfos.write(testBytes, 0, testBytes.length);
             dfos.close();
         } catch (IOException e) {
         }
@@ -2201,8 +3208,8 @@ public void testTempFileError() {
     /** 
      * Test specifying a temporary file and the threshold is reached.
      */
-public void testTempFileError_literalMutation2345() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileError_literalMutation2345");
+public void testTempFileError_literalMutation3439() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileError_literalMutation3439");
         String prefix = null;
         String suffix = ".out";
         File tempDir = new File("foo");
@@ -2216,8 +3223,53 @@ public void testTempFileError_literalMutation2345() {
     /** 
      * Test specifying a temporary file and the threshold is reached.
      */
-public void testTempFileError_literalMutation2346() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileError_literalMutation2346");
+public void testTempFileError_literalMutation3440() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileError_literalMutation3440");
+        String prefix = null;
+        String suffix = ".out";
+        File tempDir = new File(".");
+        try {
+            new DeferredFileOutputStream(((testBytes.length) - 4) , prefix , suffix , tempDir);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test specifying a temporary file and the threshold is reached.
+     */
+public void testTempFileError_literalMutation3441() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileError_literalMutation3441");
+        String prefix = null;
+        String suffix = ".out";
+        File tempDir = new File(".");
+        try {
+            new DeferredFileOutputStream(((testBytes.length) - 2) , prefix , suffix , tempDir);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test specifying a temporary file and the threshold is reached.
+     */
+public void testTempFileError_literalMutation3442() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileError_literalMutation3442");
+        String prefix = null;
+        String suffix = ".out";
+        File tempDir = new File(".");
+        try {
+            new DeferredFileOutputStream(((testBytes.length) - 10) , prefix , suffix , tempDir);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test specifying a temporary file and the threshold is reached.
+     */
+public void testTempFileError_literalMutation3443() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTempFileError_literalMutation3443");
         String prefix = null;
         String suffix = ".out";
         File tempDir = new File(".");

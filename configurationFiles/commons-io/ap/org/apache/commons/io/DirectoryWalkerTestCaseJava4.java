@@ -90,7 +90,7 @@ public DirectoryWalkerTestCaseJava4(String name) {
      */
 public void testFilter() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilter");
-        List results = new TestFileFinder(dirsAndFilesFilter , -1).find(javaDir);
+        List results = new TestFileFinder(dirsAndFilesFilter , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2046,(((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.outputFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1934,results,1933,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2048,results,2047,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
@@ -106,7 +106,7 @@ public void testFilter() {
 @Test(timeout = 1000)
     public void testFilter_add1201() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilter_add1201");
-        List results = new TestFileFinder(dirsAndFilesFilter , -1).find(javaDir);
+        List results = new TestFileFinder(dirsAndFilesFilter , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2046,(((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.outputFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1934,results,1933,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2048,results,2047,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
@@ -123,7 +123,7 @@ public void testFilter() {
 @Test(timeout = 1000)
     public void testFilter_add1202() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilter_add1202");
-        List results = new TestFileFinder(dirsAndFilesFilter , -1).find(javaDir);
+        List results = new TestFileFinder(dirsAndFilesFilter , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2046,(((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.outputFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1934,results,1933,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2048,results,2047,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
@@ -140,7 +140,7 @@ public void testFilter() {
 @Test(timeout = 1000)
     public void testFilter_add1203() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilter_add1203");
-        List results = new TestFileFinder(dirsAndFilesFilter , -1).find(javaDir);
+        List results = new TestFileFinder(dirsAndFilesFilter , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2046,(((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.outputFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1934,results,1933,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2048,results,2047,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
@@ -154,8 +154,23 @@ public void testFilter() {
     /** 
      * Test Filtering
      */
-public void testFilter_literalMutation2639() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilter_literalMutation2639");
+public void testFilter_literalMutation3928() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilter_literalMutation3928");
+        List results = new TestFileFinder(dirsAndFilesFilter , -2).find(javaDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2046,(((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.outputFiles.length)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1934,results,1933,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2048,results,2047,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        checkContainsFiles("Dir", dirs, results);
+        checkContainsFiles("IO File", ioFiles, results);
+        checkContainsFiles("Output File", outputFiles, results);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Filtering
+     */
+public void testFilter_literalMutation3929() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilter_literalMutation3929");
         List results = new TestFileFinder(dirsAndFilesFilter , 0).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2046,(((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.outputFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1934,results,1933,results.size());
@@ -169,13 +184,13 @@ public void testFilter_literalMutation2639() {
     /** 
      * Test Filtering
      */
-public void testFilter_literalMutation2640() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilter_literalMutation2640");
-        List results = new TestFileFinder(dirsAndFilesFilter , -1).find(javaDir);
+public void testFilter_literalMutation3930() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilter_literalMutation3930");
+        List results = new TestFileFinder(dirsAndFilesFilter , 0).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2046,(((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.outputFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1934,results,1933,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2048,results,2047,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
-        checkContainsFiles("foo", dirs, results);
+        checkContainsFiles("Dir", dirs, results);
         checkContainsFiles("IO File", ioFiles, results);
         checkContainsFiles("Output File", outputFiles, results);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -184,9 +199,24 @@ public void testFilter_literalMutation2640() {
     /** 
      * Test Filtering
      */
-public void testFilter_literalMutation2641() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilter_literalMutation2641");
-        List results = new TestFileFinder(dirsAndFilesFilter , -1).find(javaDir);
+public void testFilter_literalMutation3931() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilter_literalMutation3931");
+        List results = new TestFileFinder(dirsAndFilesFilter , 2).find(javaDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2046,(((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.outputFiles.length)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1934,results,1933,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2048,results,2047,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        checkContainsFiles("bar", dirs, results);
+        checkContainsFiles("IO File", ioFiles, results);
+        checkContainsFiles("Output File", outputFiles, results);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Filtering
+     */
+public void testFilter_literalMutation3932() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilter_literalMutation3932");
+        List results = new TestFileFinder(dirsAndFilesFilter , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2046,(((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.outputFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1934,results,1933,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2048,results,2047,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
@@ -199,9 +229,9 @@ public void testFilter_literalMutation2641() {
     /** 
      * Test Filtering
      */
-public void testFilter_literalMutation2642() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilter_literalMutation2642");
-        List results = new TestFileFinder(dirsAndFilesFilter , -1).find(javaDir);
+public void testFilter_literalMutation3933() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilter_literalMutation3933");
+        List results = new TestFileFinder(dirsAndFilesFilter , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2046,(((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.outputFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1934,results,1933,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2048,results,2047,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
@@ -217,7 +247,7 @@ public void testFilter_literalMutation2642() {
 @Test(timeout = 1000)
     public void testFilter_remove932() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilter_remove932");
-        List results = new TestFileFinder(dirsAndFilesFilter , -1).find(javaDir);
+        List results = new TestFileFinder(dirsAndFilesFilter , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2046,(((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.outputFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1934,results,1933,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2048,results,2047,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
@@ -232,7 +262,7 @@ public void testFilter_literalMutation2642() {
 @Test(timeout = 1000)
     public void testFilter_remove933() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilter_remove933");
-        List results = new TestFileFinder(dirsAndFilesFilter , -1).find(javaDir);
+        List results = new TestFileFinder(dirsAndFilesFilter , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2046,(((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.outputFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1934,results,1933,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2048,results,2047,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
@@ -247,7 +277,7 @@ public void testFilter_literalMutation2642() {
 @Test(timeout = 1000)
     public void testFilter_remove934() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilter_remove934");
-        List results = new TestFileFinder(dirsAndFilesFilter , -1).find(javaDir);
+        List results = new TestFileFinder(dirsAndFilesFilter , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2046,(((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.outputFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1934,results,1933,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2048,results,2047,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
@@ -270,9 +300,31 @@ public void testFilterAndLimitA() {
     /** 
      * Test Filtering and limit to depth 0
      */
-public void testFilterAndLimitA_literalMutation2643() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitA_literalMutation2643");
+public void testFilterAndLimitA_literalMutation3934() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitA_literalMutation3934");
+        List results = new TestFileFinder(NOT_SVN , 1).find(javaDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2050,results,2049,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2052,results,2051,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Filtering and limit to depth 0
+     */
+public void testFilterAndLimitA_literalMutation3935() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitA_literalMutation3935");
         List results = new TestFileFinder(NOT_SVN , -1).find(javaDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2050,results,2049,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2052,results,2051,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Filtering and limit to depth 0
+     */
+public void testFilterAndLimitA_literalMutation3936() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitA_literalMutation3936");
+        List results = new TestFileFinder(NOT_SVN , 0).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2050,results,2049,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2052,results,2051,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -293,8 +345,32 @@ public void testFilterAndLimitB() {
     /** 
      * Test Filtering and limit to depth 1
      */
-public void testFilterAndLimitB_literalMutation2644() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitB_literalMutation2644");
+public void testFilterAndLimitB_literalMutation3937() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitB_literalMutation3937");
+        List results = new TestFileFinder(NOT_SVN , 2).find(javaDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1944,results,1943,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2054,results,2053,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2056,results,2055,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.orgDir));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Filtering and limit to depth 1
+     */
+public void testFilterAndLimitB_literalMutation3938() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitB_literalMutation3938");
+        List results = new TestFileFinder(NOT_SVN , 0).find(javaDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1944,results,1943,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2054,results,2053,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2056,results,2055,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.orgDir));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Filtering and limit to depth 1
+     */
+public void testFilterAndLimitB_literalMutation3939() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitB_literalMutation3939");
         List results = new TestFileFinder(NOT_SVN , 0).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1944,results,1943,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2054,results,2053,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
@@ -319,9 +395,51 @@ public void testFilterAndLimitC() {
     /** 
      * Test Filtering and limit to depth 3
      */
-public void testFilterAndLimitC_literalMutation2645() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitC_literalMutation2645");
+public void testFilterAndLimitC_literalMutation3940() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitC_literalMutation3940");
         List results = new TestFileFinder(NOT_SVN , 4).find(javaDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2058,results,2057,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2060,results,2059,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2062,results,2061,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.orgDir));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2064,results,2063,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.apacheDir));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2066,results,2065,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.commonsDir));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Filtering and limit to depth 3
+     */
+public void testFilterAndLimitC_literalMutation3941() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitC_literalMutation3941");
+        List results = new TestFileFinder(NOT_SVN , 2).find(javaDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2058,results,2057,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2060,results,2059,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2062,results,2061,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.orgDir));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2064,results,2063,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.apacheDir));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2066,results,2065,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.commonsDir));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Filtering and limit to depth 3
+     */
+public void testFilterAndLimitC_literalMutation3942() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitC_literalMutation3942");
+        List results = new TestFileFinder(NOT_SVN , 1).find(javaDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2058,results,2057,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2060,results,2059,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2062,results,2061,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.orgDir));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2064,results,2063,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.apacheDir));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2066,results,2065,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.commonsDir));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Filtering and limit to depth 3
+     */
+public void testFilterAndLimitC_literalMutation3943() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitC_literalMutation3943");
+        List results = new TestFileFinder(NOT_SVN , 6).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2058,results,2057,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2060,results,2059,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2062,results,2061,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.orgDir));
@@ -379,8 +497,8 @@ public void testFilterAndLimitD() {
     /** 
      * Test Filtering and limit to depth 5
      */
-public void testFilterAndLimitD_literalMutation2646() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitD_literalMutation2646");
+public void testFilterAndLimitD_literalMutation3944() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitD_literalMutation3944");
         List results = new TestFileFinder(dirsAndFilesFilter , 4).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2067,((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2069,results,2068,results.size());
@@ -393,13 +511,13 @@ public void testFilterAndLimitD_literalMutation2646() {
     /** 
      * Test Filtering and limit to depth 5
      */
-public void testFilterAndLimitD_literalMutation2647() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitD_literalMutation2647");
-        List results = new TestFileFinder(dirsAndFilesFilter , 5).find(javaDir);
+public void testFilterAndLimitD_literalMutation3945() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitD_literalMutation3945");
+        List results = new TestFileFinder(dirsAndFilesFilter , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2067,((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2069,results,2068,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2071,results,2070,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
-        checkContainsFiles("foo", dirs, results);
+        checkContainsFiles("[D] Dir", dirs, results);
         checkContainsFiles("[D] File", ioFiles, results);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -407,8 +525,50 @@ public void testFilterAndLimitD_literalMutation2647() {
     /** 
      * Test Filtering and limit to depth 5
      */
-public void testFilterAndLimitD_literalMutation2648() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitD_literalMutation2648");
+public void testFilterAndLimitD_literalMutation3946() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitD_literalMutation3946");
+        List results = new TestFileFinder(dirsAndFilesFilter , 10).find(javaDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2067,((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2069,results,2068,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2071,results,2070,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        checkContainsFiles("[D] Dir", dirs, results);
+        checkContainsFiles("[D] File", ioFiles, results);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Filtering and limit to depth 5
+     */
+public void testFilterAndLimitD_literalMutation3947() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitD_literalMutation3947");
+        List results = new TestFileFinder(dirsAndFilesFilter , 6).find(javaDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2067,((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2069,results,2068,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2071,results,2070,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        checkContainsFiles("[D] Dir", dirs, results);
+        checkContainsFiles("[D] File", ioFiles, results);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Filtering and limit to depth 5
+     */
+public void testFilterAndLimitD_literalMutation3948() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitD_literalMutation3948");
+        List results = new TestFileFinder(dirsAndFilesFilter , 5).find(javaDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2067,((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2069,results,2068,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2071,results,2070,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        checkContainsFiles("bar", dirs, results);
+        checkContainsFiles("[D] File", ioFiles, results);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Filtering and limit to depth 5
+     */
+public void testFilterAndLimitD_literalMutation3949() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterAndLimitD_literalMutation3949");
         List results = new TestFileFinder(dirsAndFilesFilter , 5).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2067,((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2069,results,2068,results.size());
@@ -451,7 +611,7 @@ public void testFilterAndLimitD_literalMutation2648() {
      */
 public void testFilterDirAndFile1() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile1");
-        List results = new TestFileFinder(dirsFilter , iofilesFilter , -1).find(javaDir);
+        List results = new TestFileFinder(dirsFilter , iofilesFilter , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2072,((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2074,results,2073,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2076,results,2075,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
@@ -466,7 +626,7 @@ public void testFilterDirAndFile1() {
 @Test(timeout = 1000)
     public void testFilterDirAndFile1_add1206() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile1_add1206");
-        List results = new TestFileFinder(dirsFilter , iofilesFilter , -1).find(javaDir);
+        List results = new TestFileFinder(dirsFilter , iofilesFilter , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2072,((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2074,results,2073,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2076,results,2075,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
@@ -482,36 +642,64 @@ public void testFilterDirAndFile1() {
 @Test(timeout = 1000)
     public void testFilterDirAndFile1_add1207() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile1_add1207");
-        List results = new TestFileFinder(dirsFilter , iofilesFilter , -1).find(javaDir);
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2072,((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2074,results,2073,results.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2076,results,2075,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
-        checkContainsFiles("[DirAndFile1] Dir", dirs, results);
-        checkContainsFiles("[DirAndFile1] File", ioFiles, results);
-        checkContainsFiles("[DirAndFile1] File", ioFiles, results);
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Test separate dir and file filters
-     */
-public void testFilterDirAndFile1_literalMutation2649() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile1_literalMutation2649");
         List results = new TestFileFinder(dirsFilter , iofilesFilter , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2072,((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2074,results,2073,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2076,results,2075,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
         checkContainsFiles("[DirAndFile1] Dir", dirs, results);
         checkContainsFiles("[DirAndFile1] File", ioFiles, results);
+        checkContainsFiles("[DirAndFile1] File", ioFiles, results);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     /** 
      * Test separate dir and file filters
      */
-public void testFilterDirAndFile1_literalMutation2650() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile1_literalMutation2650");
-        List results = new TestFileFinder(dirsFilter , iofilesFilter , -1).find(javaDir);
+public void testFilterDirAndFile1_literalMutation3950() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile1_literalMutation3950");
+        List results = new TestFileFinder(dirsFilter , iofilesFilter , -2).find(javaDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2072,((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2074,results,2073,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2076,results,2075,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        checkContainsFiles("[DirAndFile1] Dir", dirs, results);
+        checkContainsFiles("[DirAndFile1] File", ioFiles, results);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test separate dir and file filters
+     */
+public void testFilterDirAndFile1_literalMutation3951() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile1_literalMutation3951");
+        List results = new TestFileFinder(dirsFilter , iofilesFilter , 0).find(javaDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2072,((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2074,results,2073,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2076,results,2075,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        checkContainsFiles("[DirAndFile1] Dir", dirs, results);
+        checkContainsFiles("[DirAndFile1] File", ioFiles, results);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test separate dir and file filters
+     */
+public void testFilterDirAndFile1_literalMutation3952() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile1_literalMutation3952");
+        List results = new TestFileFinder(dirsFilter , iofilesFilter , 0).find(javaDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2072,((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2074,results,2073,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2076,results,2075,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        checkContainsFiles("[DirAndFile1] Dir", dirs, results);
+        checkContainsFiles("[DirAndFile1] File", ioFiles, results);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test separate dir and file filters
+     */
+public void testFilterDirAndFile1_literalMutation3953() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile1_literalMutation3953");
+        List results = new TestFileFinder(dirsFilter , iofilesFilter , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2072,((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2074,results,2073,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2076,results,2075,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
@@ -523,14 +711,14 @@ public void testFilterDirAndFile1_literalMutation2650() {
     /** 
      * Test separate dir and file filters
      */
-public void testFilterDirAndFile1_literalMutation2651() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile1_literalMutation2651");
-        List results = new TestFileFinder(dirsFilter , iofilesFilter , -1).find(javaDir);
+public void testFilterDirAndFile1_literalMutation3954() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile1_literalMutation3954");
+        List results = new TestFileFinder(dirsFilter , iofilesFilter , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2072,((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2074,results,2073,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2076,results,2075,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
         checkContainsFiles("[DirAndFile1] Dir", dirs, results);
-        checkContainsFiles("foo", ioFiles, results);
+        checkContainsFiles("bar", ioFiles, results);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -540,7 +728,7 @@ public void testFilterDirAndFile1_literalMutation2651() {
 @Test(timeout = 1000)
     public void testFilterDirAndFile1_remove937() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile1_remove937");
-        List results = new TestFileFinder(dirsFilter , iofilesFilter , -1).find(javaDir);
+        List results = new TestFileFinder(dirsFilter , iofilesFilter , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2072,((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2074,results,2073,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2076,results,2075,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
@@ -554,7 +742,7 @@ public void testFilterDirAndFile1_literalMutation2651() {
 @Test(timeout = 1000)
     public void testFilterDirAndFile1_remove938() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile1_remove938");
-        List results = new TestFileFinder(dirsFilter , iofilesFilter , -1).find(javaDir);
+        List results = new TestFileFinder(dirsFilter , iofilesFilter , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2072,((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2074,results,2073,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2076,results,2075,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
@@ -567,7 +755,7 @@ public void testFilterDirAndFile1_literalMutation2651() {
      */
 public void testFilterDirAndFile2() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile2");
-        List results = new TestFileFinder(((IOFileFilter)(null)) , ((IOFileFilter)(null)) , -1).find(javaDir);
+        List results = new TestFileFinder(((IOFileFilter)(null)) , ((IOFileFilter)(null)) , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2077,((results.size()) > ((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2079,results,2078,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
         checkContainsFiles("[DirAndFile2] Dir", dirs, results);
@@ -581,7 +769,7 @@ public void testFilterDirAndFile2() {
 @Test(timeout = 1000)
     public void testFilterDirAndFile2_add1208() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile2_add1208");
-        List results = new TestFileFinder(((IOFileFilter)(null)) , ((IOFileFilter)(null)) , -1).find(javaDir);
+        List results = new TestFileFinder(((IOFileFilter)(null)) , ((IOFileFilter)(null)) , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2077,((results.size()) > ((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2079,results,2078,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
         checkContainsFiles("[DirAndFile2] Dir", dirs, results);
@@ -596,34 +784,60 @@ public void testFilterDirAndFile2() {
 @Test(timeout = 1000)
     public void testFilterDirAndFile2_add1209() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile2_add1209");
-        List results = new TestFileFinder(((IOFileFilter)(null)) , ((IOFileFilter)(null)) , -1).find(javaDir);
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2077,((results.size()) > ((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length))));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2079,results,2078,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
-        checkContainsFiles("[DirAndFile2] Dir", dirs, results);
-        checkContainsFiles("[DirAndFile2] File", ioFiles, results);
-        checkContainsFiles("[DirAndFile2] File", ioFiles, results);
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Test separate dir and file filters
-     */
-public void testFilterDirAndFile2_literalMutation2654() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile2_literalMutation2654");
         List results = new TestFileFinder(((IOFileFilter)(null)) , ((IOFileFilter)(null)) , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2077,((results.size()) > ((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2079,results,2078,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
         checkContainsFiles("[DirAndFile2] Dir", dirs, results);
         checkContainsFiles("[DirAndFile2] File", ioFiles, results);
+        checkContainsFiles("[DirAndFile2] File", ioFiles, results);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     /** 
      * Test separate dir and file filters
      */
-public void testFilterDirAndFile2_literalMutation2655() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile2_literalMutation2655");
-        List results = new TestFileFinder(((IOFileFilter)(null)) , ((IOFileFilter)(null)) , -1).find(javaDir);
+public void testFilterDirAndFile2_literalMutation3957() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile2_literalMutation3957");
+        List results = new TestFileFinder(((IOFileFilter)(null)) , ((IOFileFilter)(null)) , -2).find(javaDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2077,((results.size()) > ((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2079,results,2078,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        checkContainsFiles("[DirAndFile2] Dir", dirs, results);
+        checkContainsFiles("[DirAndFile2] File", ioFiles, results);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test separate dir and file filters
+     */
+public void testFilterDirAndFile2_literalMutation3958() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile2_literalMutation3958");
+        List results = new TestFileFinder(((IOFileFilter)(null)) , ((IOFileFilter)(null)) , 0).find(javaDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2077,((results.size()) > ((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2079,results,2078,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        checkContainsFiles("[DirAndFile2] Dir", dirs, results);
+        checkContainsFiles("[DirAndFile2] File", ioFiles, results);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test separate dir and file filters
+     */
+public void testFilterDirAndFile2_literalMutation3959() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile2_literalMutation3959");
+        List results = new TestFileFinder(((IOFileFilter)(null)) , ((IOFileFilter)(null)) , 0).find(javaDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2077,((results.size()) > ((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2079,results,2078,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        checkContainsFiles("[DirAndFile2] Dir", dirs, results);
+        checkContainsFiles("[DirAndFile2] File", ioFiles, results);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test separate dir and file filters
+     */
+public void testFilterDirAndFile2_literalMutation3960() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile2_literalMutation3960");
+        List results = new TestFileFinder(((IOFileFilter)(null)) , ((IOFileFilter)(null)) , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2077,((results.size()) > ((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2079,results,2078,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
         checkContainsFiles("foo", dirs, results);
@@ -634,9 +848,9 @@ public void testFilterDirAndFile2_literalMutation2655() {
     /** 
      * Test separate dir and file filters
      */
-public void testFilterDirAndFile2_literalMutation2656() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile2_literalMutation2656");
-        List results = new TestFileFinder(((IOFileFilter)(null)) , ((IOFileFilter)(null)) , -1).find(javaDir);
+public void testFilterDirAndFile2_literalMutation3961() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile2_literalMutation3961");
+        List results = new TestFileFinder(((IOFileFilter)(null)) , ((IOFileFilter)(null)) , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2077,((results.size()) > ((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2079,results,2078,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
         checkContainsFiles("[DirAndFile2] Dir", dirs, results);
@@ -650,7 +864,7 @@ public void testFilterDirAndFile2_literalMutation2656() {
 @Test(timeout = 1000)
     public void testFilterDirAndFile2_remove939() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile2_remove939");
-        List results = new TestFileFinder(((IOFileFilter)(null)) , ((IOFileFilter)(null)) , -1).find(javaDir);
+        List results = new TestFileFinder(((IOFileFilter)(null)) , ((IOFileFilter)(null)) , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2077,((results.size()) > ((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2079,results,2078,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
         checkContainsFiles("[DirAndFile2] File", ioFiles, results);
@@ -663,7 +877,7 @@ public void testFilterDirAndFile2_literalMutation2656() {
 @Test(timeout = 1000)
     public void testFilterDirAndFile2_remove940() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile2_remove940");
-        List results = new TestFileFinder(((IOFileFilter)(null)) , ((IOFileFilter)(null)) , -1).find(javaDir);
+        List results = new TestFileFinder(((IOFileFilter)(null)) , ((IOFileFilter)(null)) , 2).find(javaDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2077,((results.size()) > ((1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)) + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2079,results,2078,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
         checkContainsFiles("[DirAndFile2] File", ioFiles, results);
@@ -675,7 +889,7 @@ public void testFilterDirAndFile2_literalMutation2656() {
      */
 public void testFilterDirAndFile3() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile3");
-        List results = new TestFileFinder(dirsFilter , ((IOFileFilter)(null)) , -1).find(javaDir);
+        List results = new TestFileFinder(dirsFilter , ((IOFileFilter)(null)) , 2).find(javaDir);
         List resultDirs = directoriesOnly(results);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2080,(1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2082,resultDirs,2081,resultDirs.size());
@@ -690,36 +904,64 @@ public void testFilterDirAndFile3() {
 @Test(timeout = 1000)
     public void testFilterDirAndFile3_add1210() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile3_add1210");
-        List results = new TestFileFinder(dirsFilter , ((IOFileFilter)(null)) , -1).find(javaDir);
-        List resultDirs = directoriesOnly(results);
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2080,(1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2082,resultDirs,2081,resultDirs.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2084,results,2083,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
-        checkContainsFiles("[DirAndFile3] Dir", dirs, resultDirs);
-        checkContainsFiles("[DirAndFile3] Dir", dirs, resultDirs);
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Test separate dir and file filters
-     */
-public void testFilterDirAndFile3_literalMutation2658() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile3_literalMutation2658");
         List results = new TestFileFinder(dirsFilter , ((IOFileFilter)(null)) , 2).find(javaDir);
         List resultDirs = directoriesOnly(results);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2080,(1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2082,resultDirs,2081,resultDirs.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2084,results,2083,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
         checkContainsFiles("[DirAndFile3] Dir", dirs, resultDirs);
+        checkContainsFiles("[DirAndFile3] Dir", dirs, resultDirs);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     /** 
      * Test separate dir and file filters
      */
-public void testFilterDirAndFile3_literalMutation2659() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile3_literalMutation2659");
-        List results = new TestFileFinder(dirsFilter , ((IOFileFilter)(null)) , -1).find(javaDir);
+public void testFilterDirAndFile3_literalMutation3963() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile3_literalMutation3963");
+        List results = new TestFileFinder(dirsFilter , ((IOFileFilter)(null)) , -2).find(javaDir);
+        List resultDirs = directoriesOnly(results);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2080,(1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2082,resultDirs,2081,resultDirs.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2084,results,2083,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        checkContainsFiles("[DirAndFile3] Dir", dirs, resultDirs);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test separate dir and file filters
+     */
+public void testFilterDirAndFile3_literalMutation3964() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile3_literalMutation3964");
+        List results = new TestFileFinder(dirsFilter , ((IOFileFilter)(null)) , 0).find(javaDir);
+        List resultDirs = directoriesOnly(results);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2080,(1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2082,resultDirs,2081,resultDirs.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2084,results,2083,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        checkContainsFiles("[DirAndFile3] Dir", dirs, resultDirs);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test separate dir and file filters
+     */
+public void testFilterDirAndFile3_literalMutation3965() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile3_literalMutation3965");
+        List results = new TestFileFinder(dirsFilter , ((IOFileFilter)(null)) , 0).find(javaDir);
+        List resultDirs = directoriesOnly(results);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2080,(1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2082,resultDirs,2081,resultDirs.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2084,results,2083,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        checkContainsFiles("[DirAndFile3] Dir", dirs, resultDirs);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test separate dir and file filters
+     */
+public void testFilterDirAndFile3_literalMutation3966() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile3_literalMutation3966");
+        List results = new TestFileFinder(dirsFilter , ((IOFileFilter)(null)) , 2).find(javaDir);
         List resultDirs = directoriesOnly(results);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2080,(1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2082,resultDirs,2081,resultDirs.size());
@@ -734,7 +976,7 @@ public void testFilterDirAndFile3_literalMutation2659() {
 @Test(timeout = 1000)
     public void testFilterDirAndFile3_remove941() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile3_remove941");
-        List results = new TestFileFinder(dirsFilter , ((IOFileFilter)(null)) , -1).find(javaDir);
+        List results = new TestFileFinder(dirsFilter , ((IOFileFilter)(null)) , 2).find(javaDir);
         List resultDirs = directoriesOnly(results);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2080,(1 + (org.apache.commons.io.DirectoryWalkerTestCaseJava4.dirs.length)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2082,resultDirs,2081,resultDirs.size());
@@ -747,7 +989,7 @@ public void testFilterDirAndFile3_literalMutation2659() {
      */
 public void testFilterDirAndFile4() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile4");
-        List results = new TestFileFinder(((IOFileFilter)(null)) , iofilesFilter , -1).find(javaDir);
+        List results = new TestFileFinder(((IOFileFilter)(null)) , iofilesFilter , 2).find(javaDir);
         List resultFiles = filesOnly(results);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2085,org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2087,resultFiles,2086,resultFiles.size());
@@ -762,7 +1004,7 @@ public void testFilterDirAndFile4() {
 @Test(timeout = 1000)
     public void testFilterDirAndFile4_add1211() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile4_add1211");
-        List results = new TestFileFinder(((IOFileFilter)(null)) , iofilesFilter , -1).find(javaDir);
+        List results = new TestFileFinder(((IOFileFilter)(null)) , iofilesFilter , 2).find(javaDir);
         List resultFiles = filesOnly(results);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2085,org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2087,resultFiles,2086,resultFiles.size());
@@ -775,8 +1017,22 @@ public void testFilterDirAndFile4() {
     /** 
      * Test separate dir and file filters
      */
-public void testFilterDirAndFile4_literalMutation2661() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile4_literalMutation2661");
+public void testFilterDirAndFile4_literalMutation3968() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile4_literalMutation3968");
+        List results = new TestFileFinder(((IOFileFilter)(null)) , iofilesFilter , -2).find(javaDir);
+        List resultFiles = filesOnly(results);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2085,org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2087,resultFiles,2086,resultFiles.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2089,results,2088,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        checkContainsFiles("[DirAndFile4] File", ioFiles, resultFiles);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test separate dir and file filters
+     */
+public void testFilterDirAndFile4_literalMutation3969() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile4_literalMutation3969");
         List results = new TestFileFinder(((IOFileFilter)(null)) , iofilesFilter , 0).find(javaDir);
         List resultFiles = filesOnly(results);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2085,org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length);
@@ -789,9 +1045,23 @@ public void testFilterDirAndFile4_literalMutation2661() {
     /** 
      * Test separate dir and file filters
      */
-public void testFilterDirAndFile4_literalMutation2662() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile4_literalMutation2662");
-        List results = new TestFileFinder(((IOFileFilter)(null)) , iofilesFilter , -1).find(javaDir);
+public void testFilterDirAndFile4_literalMutation3970() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile4_literalMutation3970");
+        List results = new TestFileFinder(((IOFileFilter)(null)) , iofilesFilter , 0).find(javaDir);
+        List resultFiles = filesOnly(results);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2085,org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2087,resultFiles,2086,resultFiles.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2089,results,2088,results.contains(org.apache.commons.io.DirectoryWalkerTestCaseJava4.javaDir));
+        checkContainsFiles("[DirAndFile4] File", ioFiles, resultFiles);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test separate dir and file filters
+     */
+public void testFilterDirAndFile4_literalMutation3971() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile4_literalMutation3971");
+        List results = new TestFileFinder(((IOFileFilter)(null)) , iofilesFilter , 2).find(javaDir);
         List resultFiles = filesOnly(results);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2085,org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2087,resultFiles,2086,resultFiles.size());
@@ -806,7 +1076,7 @@ public void testFilterDirAndFile4_literalMutation2662() {
 @Test(timeout = 1000)
     public void testFilterDirAndFile4_remove942() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterDirAndFile4_remove942");
-        List results = new TestFileFinder(((IOFileFilter)(null)) , iofilesFilter , -1).find(javaDir);
+        List results = new TestFileFinder(((IOFileFilter)(null)) , iofilesFilter , 2).find(javaDir);
         List resultFiles = filesOnly(results);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2085,org.apache.commons.io.DirectoryWalkerTestCaseJava4.ioFiles.length);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2087,resultFiles,2086,resultFiles.size());
@@ -828,9 +1098,31 @@ public void testLimitToCurrent() {
     /** 
      * Test Limiting to current directory
      */
-public void testLimitToCurrent_literalMutation2666() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLimitToCurrent_literalMutation2666");
+public void testLimitToCurrent_literalMutation3977() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLimitToCurrent_literalMutation3977");
         List results = new TestFileFinder(null , 1).find(current);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2093,results,2092,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2095,results,2094,results.contains(new java.io.File(".")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Limiting to current directory
+     */
+public void testLimitToCurrent_literalMutation3978() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLimitToCurrent_literalMutation3978");
+        List results = new TestFileFinder(null , -1).find(current);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2093,results,2092,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2095,results,2094,results.contains(new java.io.File(".")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Limiting to current directory
+     */
+public void testLimitToCurrent_literalMutation3979() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLimitToCurrent_literalMutation3979");
+        List results = new TestFileFinder(null , 0).find(current);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2093,results,2092,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2095,results,2094,results.contains(new java.io.File(".")));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -842,11 +1134,11 @@ public void testLimitToCurrent_literalMutation2666() {
 public void testMissingStartDirectory() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMissingStartDirectory");
         File invalidDir = new File("invalid-dir");
-        List results = new TestFileFinder(null , -1).find(invalidDir);
+        List results = new TestFileFinder(null , 2).find(invalidDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2097,results,2096,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2099,results,2098,results.contains(invalidDir));
         try {
-            new TestFileFinder(null , -1).find(null);
+            new TestFileFinder(null , 2).find(null);
         } catch (NullPointerException ignore) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -859,12 +1151,12 @@ public void testMissingStartDirectory() {
     public void testMissingStartDirectory_add1212() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMissingStartDirectory_add1212");
         File invalidDir = new File("invalid-dir");
-        List results = new TestFileFinder(null , -1).find(invalidDir);
+        List results = new TestFileFinder(null , 2).find(invalidDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2097,results,2096,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2099,results,2098,results.contains(invalidDir));
         try {
-            new TestFileFinder(null , -1).find(null);
-            new TestFileFinder(null , -1).find(null);
+            new TestFileFinder(null , 2).find(null);
+            new TestFileFinder(null , 2).find(null);
         } catch (NullPointerException ignore) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -873,8 +1165,8 @@ public void testMissingStartDirectory() {
     /** 
      * test an invalid start directory
      */
-public void testMissingStartDirectory_literalMutation2667() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMissingStartDirectory_literalMutation2667");
+public void testMissingStartDirectory_literalMutation3980() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMissingStartDirectory_literalMutation3980");
         File invalidDir = new File("foo");
         List results = new TestFileFinder(null , -1).find(invalidDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2097,results,2096,results.size());
@@ -889,10 +1181,10 @@ public void testMissingStartDirectory_literalMutation2667() {
     /** 
      * test an invalid start directory
      */
-public void testMissingStartDirectory_literalMutation2669() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMissingStartDirectory_literalMutation2669");
+public void testMissingStartDirectory_literalMutation3982() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMissingStartDirectory_literalMutation3982");
         File invalidDir = new File("invalid-dir");
-        List results = new TestFileFinder(null , 2).find(invalidDir);
+        List results = new TestFileFinder(null , -2).find(invalidDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2097,results,2096,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2099,results,2098,results.contains(invalidDir));
         try {
@@ -905,14 +1197,78 @@ public void testMissingStartDirectory_literalMutation2669() {
     /** 
      * test an invalid start directory
      */
-public void testMissingStartDirectory_literalMutation2671() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMissingStartDirectory_literalMutation2671");
+public void testMissingStartDirectory_literalMutation3983() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMissingStartDirectory_literalMutation3983");
         File invalidDir = new File("invalid-dir");
-        List results = new TestFileFinder(null , -1).find(invalidDir);
+        List results = new TestFileFinder(null , 0).find(invalidDir);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2097,results,2096,results.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2099,results,2098,results.contains(invalidDir));
         try {
-            new TestFileFinder(null , 2).find(null);
+            new TestFileFinder(null , -1).find(null);
+        } catch (NullPointerException ignore) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * test an invalid start directory
+     */
+public void testMissingStartDirectory_literalMutation3984() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMissingStartDirectory_literalMutation3984");
+        File invalidDir = new File("invalid-dir");
+        List results = new TestFileFinder(null , 0).find(invalidDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2097,results,2096,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2099,results,2098,results.contains(invalidDir));
+        try {
+            new TestFileFinder(null , -1).find(null);
+        } catch (NullPointerException ignore) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * test an invalid start directory
+     */
+public void testMissingStartDirectory_literalMutation3986() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMissingStartDirectory_literalMutation3986");
+        File invalidDir = new File("invalid-dir");
+        List results = new TestFileFinder(null , 2).find(invalidDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2097,results,2096,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2099,results,2098,results.contains(invalidDir));
+        try {
+            new TestFileFinder(null , -2).find(null);
+        } catch (NullPointerException ignore) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * test an invalid start directory
+     */
+public void testMissingStartDirectory_literalMutation3987() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMissingStartDirectory_literalMutation3987");
+        File invalidDir = new File("invalid-dir");
+        List results = new TestFileFinder(null , 2).find(invalidDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2097,results,2096,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2099,results,2098,results.contains(invalidDir));
+        try {
+            new TestFileFinder(null , 0).find(null);
+        } catch (NullPointerException ignore) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * test an invalid start directory
+     */
+public void testMissingStartDirectory_literalMutation3988() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMissingStartDirectory_literalMutation3988");
+        File invalidDir = new File("invalid-dir");
+        List results = new TestFileFinder(null , 2).find(invalidDir);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2097,results,2096,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2099,results,2098,results.contains(invalidDir));
+        try {
+            new TestFileFinder(null , 0).find(null);
         } catch (NullPointerException ignore) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -923,7 +1279,7 @@ public void testMissingStartDirectory_literalMutation2671() {
      */
 public void testHandleStartDirectoryFalse() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHandleStartDirectoryFalse");
-        List results = new TestFalseFileFinder(null , -1).find(current);
+        List results = new TestFalseFileFinder(null , 2).find(current);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2091,results,2090,results.size());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -931,8 +1287,28 @@ public void testHandleStartDirectoryFalse() {
     /** 
      * test an invalid start directory
      */
-public void testHandleStartDirectoryFalse_literalMutation2664() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHandleStartDirectoryFalse_literalMutation2664");
+public void testHandleStartDirectoryFalse_literalMutation3973() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHandleStartDirectoryFalse_literalMutation3973");
+        List results = new TestFalseFileFinder(null , -2).find(current);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2091,results,2090,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * test an invalid start directory
+     */
+public void testHandleStartDirectoryFalse_literalMutation3974() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHandleStartDirectoryFalse_literalMutation3974");
+        List results = new TestFalseFileFinder(null , 0).find(current);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2091,results,2090,results.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * test an invalid start directory
+     */
+public void testHandleStartDirectoryFalse_literalMutation3975() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHandleStartDirectoryFalse_literalMutation3975");
         List results = new TestFalseFileFinder(null , 0).find(current);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2091,results,2090,results.size());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -1127,11 +1503,11 @@ public void testCancel() {
     /** 
      * Test Cancel
      */
-public void testCancel_literalMutation2633() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCancel_literalMutation2633");
+public void testCancel_literalMutation3920() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCancel_literalMutation3920");
         String cancelName = null;
         try {
-            cancelName = "foo";
+            cancelName = "bar";
             new TestCancelWalker(cancelName , false).find(javaDir);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2023,(("CancelException not thrown for \'" + cancelName) + "\'"));
         } catch (DirectoryWalker.CancelException cancel) {
@@ -1171,8 +1547,8 @@ public void testCancel_literalMutation2633() {
     /** 
      * Test Cancel
      */
-public void testCancel_literalMutation2634() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCancel_literalMutation2634");
+public void testCancel_literalMutation3921() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCancel_literalMutation3921");
         String cancelName = null;
         try {
             cancelName = "DirectoryWalker.java";
@@ -1215,8 +1591,8 @@ public void testCancel_literalMutation2634() {
     /** 
      * Test Cancel
      */
-public void testCancel_literalMutation2635() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCancel_literalMutation2635");
+public void testCancel_literalMutation3922() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCancel_literalMutation3922");
         String cancelName = null;
         try {
             cancelName = "DirectoryWalker.java";
@@ -1232,7 +1608,7 @@ public void testCancel_literalMutation2635() {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2031,((("IOException: " + cancelName) + " ") + ex));
         }
         try {
-            cancelName = "foo";
+            cancelName = "bar";
             new TestCancelWalker(cancelName , false).find(javaDir);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2032,(("CancelException not thrown for \'" + cancelName) + "\'"));
         } catch (DirectoryWalker.CancelException cancel) {
@@ -1259,8 +1635,8 @@ public void testCancel_literalMutation2635() {
     /** 
      * Test Cancel
      */
-public void testCancel_literalMutation2636() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCancel_literalMutation2636");
+public void testCancel_literalMutation3923() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCancel_literalMutation3923");
         String cancelName = null;
         try {
             cancelName = "DirectoryWalker.java";
@@ -1303,8 +1679,52 @@ public void testCancel_literalMutation2636() {
     /** 
      * Test Cancel
      */
-public void testCancel_literalMutation2637() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCancel_literalMutation2637");
+public void testCancel_literalMutation3924() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCancel_literalMutation3924");
+        String cancelName = null;
+        try {
+            cancelName = "DirectoryWalker.java";
+            new TestCancelWalker(cancelName , false).find(javaDir);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2023,(("CancelException not thrown for \'" + cancelName) + "\'"));
+        } catch (DirectoryWalker.CancelException cancel) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2024,("File:  " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2025,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2027,cancel.getFile(),2026,cancel.getFile().getName());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2028,("Depth: " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2030,cancel,2029,cancel.getDepth());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2031,((("IOException: " + cancelName) + " ") + ex));
+        }
+        try {
+            cancelName = "commons";
+            new TestCancelWalker(cancelName , false).find(javaDir);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2032,(("CancelException not thrown for \'" + cancelName) + "\'"));
+        } catch (DirectoryWalker.CancelException cancel) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2033,("File:  " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2034,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2036,cancel.getFile(),2035,cancel.getFile().getName());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2037,("Depth: " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2039,cancel,2038,cancel.getDepth());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2040,((("IOException: " + cancelName) + " ") + ex));
+        }
+        try {
+            List results = new TestCancelWalker(cancelName , false).find(javaDir);
+            File lastFile = ((File)(results.get(((results.size()) - 1))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2041,("Suppress:  " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2042,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2044,lastFile,2043,lastFile.getName());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2045,("Suppress threw " + ex));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Cancel
+     */
+public void testCancel_literalMutation3925() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCancel_literalMutation3925");
         String cancelName = null;
         try {
             cancelName = "DirectoryWalker.java";
@@ -1334,7 +1754,7 @@ public void testCancel_literalMutation2637() {
         }
         try {
             List results = new TestCancelWalker(cancelName , true).find(javaDir);
-            File lastFile = ((File)(results.get(((results.size()) - 1))));
+            File lastFile = ((File)(results.get(((results.size()) - 2))));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2041,("Suppress:  " + cancelName));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2042,cancelName);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2044,lastFile,2043,lastFile.getName());
@@ -1347,8 +1767,52 @@ public void testCancel_literalMutation2637() {
     /** 
      * Test Cancel
      */
-public void testCancel_literalMutation2638() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCancel_literalMutation2638");
+public void testCancel_literalMutation3926() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCancel_literalMutation3926");
+        String cancelName = null;
+        try {
+            cancelName = "DirectoryWalker.java";
+            new TestCancelWalker(cancelName , false).find(javaDir);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2023,(("CancelException not thrown for \'" + cancelName) + "\'"));
+        } catch (DirectoryWalker.CancelException cancel) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2024,("File:  " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2025,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2027,cancel.getFile(),2026,cancel.getFile().getName());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2028,("Depth: " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2030,cancel,2029,cancel.getDepth());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2031,((("IOException: " + cancelName) + " ") + ex));
+        }
+        try {
+            cancelName = "commons";
+            new TestCancelWalker(cancelName , false).find(javaDir);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2032,(("CancelException not thrown for \'" + cancelName) + "\'"));
+        } catch (DirectoryWalker.CancelException cancel) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2033,("File:  " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2034,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2036,cancel.getFile(),2035,cancel.getFile().getName());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2037,("Depth: " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2039,cancel,2038,cancel.getDepth());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2040,((("IOException: " + cancelName) + " ") + ex));
+        }
+        try {
+            List results = new TestCancelWalker(cancelName , true).find(javaDir);
+            File lastFile = ((File)(results.get(((results.size()) - 0))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2041,("Suppress:  " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2042,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2044,lastFile,2043,lastFile.getName());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2045,("Suppress threw " + ex));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Cancel
+     */
+public void testCancel_literalMutation3927() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCancel_literalMutation3927");
         String cancelName = null;
         try {
             cancelName = "DirectoryWalker.java";
@@ -1533,9 +1997,9 @@ public void testMultiThreadCancel() {
     /** 
      * Test Cancel
      */
-public void testMultiThreadCancel_literalMutation2673() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiThreadCancel_literalMutation2673");
-        String cancelName = "foo";
+public void testMultiThreadCancel_literalMutation3990() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiThreadCancel_literalMutation3990");
+        String cancelName = "bar";
         TestMultiThreadCancelWalker walker = new TestMultiThreadCancelWalker(cancelName , false);
         try {
             walker.find(javaDir);
@@ -1579,8 +2043,8 @@ public void testMultiThreadCancel_literalMutation2673() {
     /** 
      * Test Cancel
      */
-public void testMultiThreadCancel_literalMutation2674() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiThreadCancel_literalMutation2674");
+public void testMultiThreadCancel_literalMutation3991() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiThreadCancel_literalMutation3991");
         String cancelName = "DirectoryWalker.java";
         TestMultiThreadCancelWalker walker = new TestMultiThreadCancelWalker(cancelName , true);
         try {
@@ -1625,8 +2089,54 @@ public void testMultiThreadCancel_literalMutation2674() {
     /** 
      * Test Cancel
      */
-public void testMultiThreadCancel_literalMutation2675() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiThreadCancel_literalMutation2675");
+public void testMultiThreadCancel_literalMutation3992() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiThreadCancel_literalMutation3992");
+        String cancelName = "DirectoryWalker.java";
+        TestMultiThreadCancelWalker walker = new TestMultiThreadCancelWalker(cancelName , false);
+        try {
+            walker.find(javaDir);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2100,(("CancelException not thrown for \'" + cancelName) + "\'"));
+        } catch (DirectoryWalker.CancelException cancel) {
+            File last = ((File)(walker.results.get(((walker.results.size()) - 2))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2101,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2103,last,2102,last.getName());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2104,("Depth: " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2106,cancel,2105,cancel.getDepth());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2107,((("IOException: " + cancelName) + " ") + ex));
+        }
+        try {
+            cancelName = "commons";
+            walker = new TestMultiThreadCancelWalker(cancelName , false);
+            walker.find(javaDir);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2108,(("CancelException not thrown for \'" + cancelName) + "\'"));
+        } catch (DirectoryWalker.CancelException cancel) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2109,("File:  " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2110,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2112,cancel.getFile(),2111,cancel.getFile().getName());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2113,("Depth: " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2115,cancel,2114,cancel.getDepth());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2116,((("IOException: " + cancelName) + " ") + ex));
+        }
+        try {
+            walker = new TestMultiThreadCancelWalker(cancelName , true);
+            List results = walker.find(javaDir);
+            File lastFile = ((File)(results.get(((results.size()) - 1))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2117,("Suppress:  " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2118,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2120,lastFile,2119,lastFile.getName());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2121,("Suppress threw " + ex));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Cancel
+     */
+public void testMultiThreadCancel_literalMutation3993() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiThreadCancel_literalMutation3993");
         String cancelName = "DirectoryWalker.java";
         TestMultiThreadCancelWalker walker = new TestMultiThreadCancelWalker(cancelName , false);
         try {
@@ -1671,61 +2181,15 @@ public void testMultiThreadCancel_literalMutation2675() {
     /** 
      * Test Cancel
      */
-public void testMultiThreadCancel_literalMutation2676() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiThreadCancel_literalMutation2676");
+public void testMultiThreadCancel_literalMutation3994() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiThreadCancel_literalMutation3994");
         String cancelName = "DirectoryWalker.java";
         TestMultiThreadCancelWalker walker = new TestMultiThreadCancelWalker(cancelName , false);
         try {
             walker.find(javaDir);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2100,(("CancelException not thrown for \'" + cancelName) + "\'"));
         } catch (DirectoryWalker.CancelException cancel) {
-            File last = ((File)(walker.results.get(((walker.results.size()) - 1))));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2101,cancelName);
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2103,last,2102,last.getName());
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2104,("Depth: " + cancelName));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2106,cancel,2105,cancel.getDepth());
-        } catch (IOException ex) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2107,((("IOException: " + cancelName) + " ") + ex));
-        }
-        try {
-            cancelName = "foo";
-            walker = new TestMultiThreadCancelWalker(cancelName , false);
-            walker.find(javaDir);
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2108,(("CancelException not thrown for \'" + cancelName) + "\'"));
-        } catch (DirectoryWalker.CancelException cancel) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2109,("File:  " + cancelName));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2110,cancelName);
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2112,cancel.getFile(),2111,cancel.getFile().getName());
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2113,("Depth: " + cancelName));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2115,cancel,2114,cancel.getDepth());
-        } catch (IOException ex) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2116,((("IOException: " + cancelName) + " ") + ex));
-        }
-        try {
-            walker = new TestMultiThreadCancelWalker(cancelName , true);
-            List results = walker.find(javaDir);
-            File lastFile = ((File)(results.get(((results.size()) - 1))));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2117,("Suppress:  " + cancelName));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2118,cancelName);
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2120,lastFile,2119,lastFile.getName());
-        } catch (IOException ex) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2121,("Suppress threw " + ex));
-        }
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    /** 
-     * Test Cancel
-     */
-public void testMultiThreadCancel_literalMutation2677() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiThreadCancel_literalMutation2677");
-        String cancelName = "DirectoryWalker.java";
-        TestMultiThreadCancelWalker walker = new TestMultiThreadCancelWalker(cancelName , false);
-        try {
-            walker.find(javaDir);
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2100,(("CancelException not thrown for \'" + cancelName) + "\'"));
-        } catch (DirectoryWalker.CancelException cancel) {
-            File last = ((File)(walker.results.get(((walker.results.size()) - 1))));
+            File last = ((File)(walker.results.get(((walker.results.size()) - 0))));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2101,cancelName);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2103,last,2102,last.getName());
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2104,("Depth: " + cancelName));
@@ -1763,8 +2227,100 @@ public void testMultiThreadCancel_literalMutation2677() {
     /** 
      * Test Cancel
      */
-public void testMultiThreadCancel_literalMutation2678() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiThreadCancel_literalMutation2678");
+public void testMultiThreadCancel_literalMutation3995() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiThreadCancel_literalMutation3995");
+        String cancelName = "DirectoryWalker.java";
+        TestMultiThreadCancelWalker walker = new TestMultiThreadCancelWalker(cancelName , false);
+        try {
+            walker.find(javaDir);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2100,(("CancelException not thrown for \'" + cancelName) + "\'"));
+        } catch (DirectoryWalker.CancelException cancel) {
+            File last = ((File)(walker.results.get(((walker.results.size()) - 1))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2101,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2103,last,2102,last.getName());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2104,("Depth: " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2106,cancel,2105,cancel.getDepth());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2107,((("IOException: " + cancelName) + " ") + ex));
+        }
+        try {
+            cancelName = "bar";
+            walker = new TestMultiThreadCancelWalker(cancelName , false);
+            walker.find(javaDir);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2108,(("CancelException not thrown for \'" + cancelName) + "\'"));
+        } catch (DirectoryWalker.CancelException cancel) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2109,("File:  " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2110,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2112,cancel.getFile(),2111,cancel.getFile().getName());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2113,("Depth: " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2115,cancel,2114,cancel.getDepth());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2116,((("IOException: " + cancelName) + " ") + ex));
+        }
+        try {
+            walker = new TestMultiThreadCancelWalker(cancelName , true);
+            List results = walker.find(javaDir);
+            File lastFile = ((File)(results.get(((results.size()) - 1))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2117,("Suppress:  " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2118,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2120,lastFile,2119,lastFile.getName());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2121,("Suppress threw " + ex));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Cancel
+     */
+public void testMultiThreadCancel_literalMutation3996() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiThreadCancel_literalMutation3996");
+        String cancelName = "DirectoryWalker.java";
+        TestMultiThreadCancelWalker walker = new TestMultiThreadCancelWalker(cancelName , false);
+        try {
+            walker.find(javaDir);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2100,(("CancelException not thrown for \'" + cancelName) + "\'"));
+        } catch (DirectoryWalker.CancelException cancel) {
+            File last = ((File)(walker.results.get(((walker.results.size()) - 1))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2101,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2103,last,2102,last.getName());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2104,("Depth: " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2106,cancel,2105,cancel.getDepth());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2107,((("IOException: " + cancelName) + " ") + ex));
+        }
+        try {
+            cancelName = "commons";
+            walker = new TestMultiThreadCancelWalker(cancelName , true);
+            walker.find(javaDir);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2108,(("CancelException not thrown for \'" + cancelName) + "\'"));
+        } catch (DirectoryWalker.CancelException cancel) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2109,("File:  " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2110,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2112,cancel.getFile(),2111,cancel.getFile().getName());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2113,("Depth: " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2115,cancel,2114,cancel.getDepth());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2116,((("IOException: " + cancelName) + " ") + ex));
+        }
+        try {
+            walker = new TestMultiThreadCancelWalker(cancelName , true);
+            List results = walker.find(javaDir);
+            File lastFile = ((File)(results.get(((results.size()) - 1))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2117,("Suppress:  " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2118,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2120,lastFile,2119,lastFile.getName());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2121,("Suppress threw " + ex));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Cancel
+     */
+public void testMultiThreadCancel_literalMutation3997() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiThreadCancel_literalMutation3997");
         String cancelName = "DirectoryWalker.java";
         TestMultiThreadCancelWalker walker = new TestMultiThreadCancelWalker(cancelName , false);
         try {
@@ -1809,8 +2365,8 @@ public void testMultiThreadCancel_literalMutation2678() {
     /** 
      * Test Cancel
      */
-public void testMultiThreadCancel_literalMutation2679() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiThreadCancel_literalMutation2679");
+public void testMultiThreadCancel_literalMutation3998() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiThreadCancel_literalMutation3998");
         String cancelName = "DirectoryWalker.java";
         TestMultiThreadCancelWalker walker = new TestMultiThreadCancelWalker(cancelName , false);
         try {
@@ -1843,6 +2399,98 @@ public void testMultiThreadCancel_literalMutation2679() {
             walker = new TestMultiThreadCancelWalker(cancelName , true);
             List results = walker.find(javaDir);
             File lastFile = ((File)(results.get(((results.size()) - 2))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2117,("Suppress:  " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2118,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2120,lastFile,2119,lastFile.getName());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2121,("Suppress threw " + ex));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Cancel
+     */
+public void testMultiThreadCancel_literalMutation3999() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiThreadCancel_literalMutation3999");
+        String cancelName = "DirectoryWalker.java";
+        TestMultiThreadCancelWalker walker = new TestMultiThreadCancelWalker(cancelName , false);
+        try {
+            walker.find(javaDir);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2100,(("CancelException not thrown for \'" + cancelName) + "\'"));
+        } catch (DirectoryWalker.CancelException cancel) {
+            File last = ((File)(walker.results.get(((walker.results.size()) - 1))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2101,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2103,last,2102,last.getName());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2104,("Depth: " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2106,cancel,2105,cancel.getDepth());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2107,((("IOException: " + cancelName) + " ") + ex));
+        }
+        try {
+            cancelName = "commons";
+            walker = new TestMultiThreadCancelWalker(cancelName , false);
+            walker.find(javaDir);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2108,(("CancelException not thrown for \'" + cancelName) + "\'"));
+        } catch (DirectoryWalker.CancelException cancel) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2109,("File:  " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2110,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2112,cancel.getFile(),2111,cancel.getFile().getName());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2113,("Depth: " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2115,cancel,2114,cancel.getDepth());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2116,((("IOException: " + cancelName) + " ") + ex));
+        }
+        try {
+            walker = new TestMultiThreadCancelWalker(cancelName , true);
+            List results = walker.find(javaDir);
+            File lastFile = ((File)(results.get(((results.size()) - 0))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2117,("Suppress:  " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2118,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2120,lastFile,2119,lastFile.getName());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2121,("Suppress threw " + ex));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Cancel
+     */
+public void testMultiThreadCancel_literalMutation4000() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiThreadCancel_literalMutation4000");
+        String cancelName = "DirectoryWalker.java";
+        TestMultiThreadCancelWalker walker = new TestMultiThreadCancelWalker(cancelName , false);
+        try {
+            walker.find(javaDir);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2100,(("CancelException not thrown for \'" + cancelName) + "\'"));
+        } catch (DirectoryWalker.CancelException cancel) {
+            File last = ((File)(walker.results.get(((walker.results.size()) - 1))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2101,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2103,last,2102,last.getName());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2104,("Depth: " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2106,cancel,2105,cancel.getDepth());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2107,((("IOException: " + cancelName) + " ") + ex));
+        }
+        try {
+            cancelName = "commons";
+            walker = new TestMultiThreadCancelWalker(cancelName , false);
+            walker.find(javaDir);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2108,(("CancelException not thrown for \'" + cancelName) + "\'"));
+        } catch (DirectoryWalker.CancelException cancel) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2109,("File:  " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2110,cancelName);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2112,cancel.getFile(),2111,cancel.getFile().getName());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2113,("Depth: " + cancelName));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2115,cancel,2114,cancel.getDepth());
+        } catch (IOException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2116,((("IOException: " + cancelName) + " ") + ex));
+        }
+        try {
+            walker = new TestMultiThreadCancelWalker(cancelName , true);
+            List results = walker.find(javaDir);
+            File lastFile = ((File)(results.get(((results.size()) - 0))));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2117,("Suppress:  " + cancelName));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2118,cancelName);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2120,lastFile,2119,lastFile.getName());

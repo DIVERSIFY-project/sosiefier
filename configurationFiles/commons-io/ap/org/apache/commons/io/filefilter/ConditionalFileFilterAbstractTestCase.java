@@ -169,7 +169,53 @@ public abstract class ConditionalFileFilterAbstractTestCase extends IOFileFilter
         filters.add(new IOFileFilterAbstractTestCase.TesterTrueFileFilter());
         filters.add(new IOFileFilterAbstractTestCase.TesterTrueFileFilter());
         filters.add(new IOFileFilterAbstractTestCase.TesterTrueFileFilter());
+        for (int i = 1 ; i < (filters.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1138,i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1140,fileFilter.getFileFilters(),1139,fileFilter.getFileFilters().size());
+            fileFilter.addFileFilter(filters.get(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1141,(i + 1));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1143,fileFilter.getFileFilters(),1142,fileFilter.getFileFilters().size());
+        }
+        for (IOFileFilter filter : fileFilter.getFileFilters()) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1145,filters,1144,filters.contains(filter));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1147,filters,1146,filters.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1149,fileFilter.getFileFilters(),1148,fileFilter.getFileFilters().size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testAdd_literalMutation2306() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAdd_literalMutation2306");
+        List<org.apache.commons.io.filefilter.IOFileFilterAbstractTestCase.TesterTrueFileFilter> filters = new ArrayList<org.apache.commons.io.filefilter.IOFileFilterAbstractTestCase.TesterTrueFileFilter>();
+        ConditionalFileFilter fileFilter = getConditionalFileFilter();
+        filters.add(new IOFileFilterAbstractTestCase.TesterTrueFileFilter());
+        filters.add(new IOFileFilterAbstractTestCase.TesterTrueFileFilter());
+        filters.add(new IOFileFilterAbstractTestCase.TesterTrueFileFilter());
+        filters.add(new IOFileFilterAbstractTestCase.TesterTrueFileFilter());
         for (int i = -1 ; i < (filters.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1138,i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1140,fileFilter.getFileFilters(),1139,fileFilter.getFileFilters().size());
+            fileFilter.addFileFilter(filters.get(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1141,(i + 1));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1143,fileFilter.getFileFilters(),1142,fileFilter.getFileFilters().size());
+        }
+        for (IOFileFilter filter : fileFilter.getFileFilters()) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1145,filters,1144,filters.contains(filter));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1147,filters,1146,filters.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1149,fileFilter.getFileFilters(),1148,fileFilter.getFileFilters().size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testAdd_literalMutation2307() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAdd_literalMutation2307");
+        List<org.apache.commons.io.filefilter.IOFileFilterAbstractTestCase.TesterTrueFileFilter> filters = new ArrayList<org.apache.commons.io.filefilter.IOFileFilterAbstractTestCase.TesterTrueFileFilter>();
+        ConditionalFileFilter fileFilter = getConditionalFileFilter();
+        filters.add(new IOFileFilterAbstractTestCase.TesterTrueFileFilter());
+        filters.add(new IOFileFilterAbstractTestCase.TesterTrueFileFilter());
+        filters.add(new IOFileFilterAbstractTestCase.TesterTrueFileFilter());
+        filters.add(new IOFileFilterAbstractTestCase.TesterTrueFileFilter());
+        for (int i = 0 ; i < (filters.size()) ; i++) {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1138,i);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1140,fileFilter.getFileFilters(),1139,fileFilter.getFileFilters().size());
             fileFilter.addFileFilter(filters.get(i));
@@ -405,6 +451,38 @@ public abstract class ConditionalFileFilterAbstractTestCase extends IOFileFilter
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    public void testRemove_literalMutation2326() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemove_literalMutation2326");
+        List<org.apache.commons.io.filefilter.IOFileFilterAbstractTestCase.TesterTrueFileFilter> filters = new ArrayList<org.apache.commons.io.filefilter.IOFileFilterAbstractTestCase.TesterTrueFileFilter>();
+        ConditionalFileFilter fileFilter = getConditionalFileFilter();
+        filters.add(new IOFileFilterAbstractTestCase.TesterTrueFileFilter());
+        filters.add(new IOFileFilterAbstractTestCase.TesterTrueFileFilter());
+        filters.add(new IOFileFilterAbstractTestCase.TesterTrueFileFilter());
+        filters.add(new IOFileFilterAbstractTestCase.TesterTrueFileFilter());
+        for (int i = -1 ; i < (filters.size()) ; i++) {
+            fileFilter.removeFileFilter(filters.get(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1150,!(fileFilter.getFileFilters().contains(filters.get(i))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1152,fileFilter.getFileFilters(),1151,fileFilter.getFileFilters().size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testRemove_literalMutation2327() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemove_literalMutation2327");
+        List<org.apache.commons.io.filefilter.IOFileFilterAbstractTestCase.TesterTrueFileFilter> filters = new ArrayList<org.apache.commons.io.filefilter.IOFileFilterAbstractTestCase.TesterTrueFileFilter>();
+        ConditionalFileFilter fileFilter = getConditionalFileFilter();
+        filters.add(new IOFileFilterAbstractTestCase.TesterTrueFileFilter());
+        filters.add(new IOFileFilterAbstractTestCase.TesterTrueFileFilter());
+        filters.add(new IOFileFilterAbstractTestCase.TesterTrueFileFilter());
+        filters.add(new IOFileFilterAbstractTestCase.TesterTrueFileFilter());
+        for (int i = 0 ; i < (filters.size()) ; i++) {
+            fileFilter.removeFileFilter(filters.get(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1150,!(fileFilter.getFileFilters().contains(filters.get(i))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1152,fileFilter.getFileFilters(),1151,fileFilter.getFileFilters().size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     @Test(timeout = 1000)
     public void testRemove_remove414() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemove_remove414");
@@ -516,8 +594,35 @@ public abstract class ConditionalFileFilterAbstractTestCase extends IOFileFilter
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testNoFilters_literalMutation1538() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoFilters_literalMutation1538");
+    public void testNoFilters_literalMutation2315() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoFilters_literalMutation2315");
+        ConditionalFileFilter fileFilter = getConditionalFileFilter();
+        File file = new File(this.workingPath , (((TEST_FILE_NAME_PREFIX) + 0) + (TEST_FILE_TYPE)));
+        assertFileFiltering(1, ((IOFileFilter)(fileFilter)), file, false);
+        assertFilenameFiltering(1, ((IOFileFilter)(fileFilter)), file, false);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNoFilters_literalMutation2316() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoFilters_literalMutation2316");
+        ConditionalFileFilter fileFilter = getConditionalFileFilter();
+        File file = new File(this.workingPath , (((TEST_FILE_NAME_PREFIX) + 0) + (TEST_FILE_TYPE)));
+        assertFileFiltering(1, ((IOFileFilter)(fileFilter)), file, false);
+        assertFilenameFiltering(1, ((IOFileFilter)(fileFilter)), file, false);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNoFilters_literalMutation2317() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoFilters_literalMutation2317");
+        ConditionalFileFilter fileFilter = getConditionalFileFilter();
+        File file = new File(this.workingPath , (((TEST_FILE_NAME_PREFIX) + 1) + (TEST_FILE_TYPE)));
+        assertFileFiltering(2, ((IOFileFilter)(fileFilter)), file, false);
+        assertFilenameFiltering(1, ((IOFileFilter)(fileFilter)), file, false);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNoFilters_literalMutation2318() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoFilters_literalMutation2318");
         ConditionalFileFilter fileFilter = getConditionalFileFilter();
         File file = new File(this.workingPath , (((TEST_FILE_NAME_PREFIX) + 1) + (TEST_FILE_TYPE)));
         assertFileFiltering(0, ((IOFileFilter)(fileFilter)), file, false);
@@ -525,8 +630,17 @@ public abstract class ConditionalFileFilterAbstractTestCase extends IOFileFilter
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testNoFilters_literalMutation1539() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoFilters_literalMutation1539");
+    public void testNoFilters_literalMutation2319() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoFilters_literalMutation2319");
+        ConditionalFileFilter fileFilter = getConditionalFileFilter();
+        File file = new File(this.workingPath , (((TEST_FILE_NAME_PREFIX) + 1) + (TEST_FILE_TYPE)));
+        assertFileFiltering(0, ((IOFileFilter)(fileFilter)), file, false);
+        assertFilenameFiltering(1, ((IOFileFilter)(fileFilter)), file, false);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNoFilters_literalMutation2320() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoFilters_literalMutation2320");
         ConditionalFileFilter fileFilter = getConditionalFileFilter();
         File file = new File(this.workingPath , (((TEST_FILE_NAME_PREFIX) + 1) + (TEST_FILE_TYPE)));
         assertFileFiltering(1, ((IOFileFilter)(fileFilter)), file, true);
@@ -534,8 +648,17 @@ public abstract class ConditionalFileFilterAbstractTestCase extends IOFileFilter
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testNoFilters_literalMutation1540() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoFilters_literalMutation1540");
+    public void testNoFilters_literalMutation2321() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoFilters_literalMutation2321");
+        ConditionalFileFilter fileFilter = getConditionalFileFilter();
+        File file = new File(this.workingPath , (((TEST_FILE_NAME_PREFIX) + 1) + (TEST_FILE_TYPE)));
+        assertFileFiltering(1, ((IOFileFilter)(fileFilter)), file, false);
+        assertFilenameFiltering(2, ((IOFileFilter)(fileFilter)), file, false);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNoFilters_literalMutation2322() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoFilters_literalMutation2322");
         ConditionalFileFilter fileFilter = getConditionalFileFilter();
         File file = new File(this.workingPath , (((TEST_FILE_NAME_PREFIX) + 1) + (TEST_FILE_TYPE)));
         assertFileFiltering(1, ((IOFileFilter)(fileFilter)), file, false);
@@ -543,12 +666,21 @@ public abstract class ConditionalFileFilterAbstractTestCase extends IOFileFilter
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testNoFilters_literalMutation1541() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoFilters_literalMutation1541");
+    public void testNoFilters_literalMutation2323() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoFilters_literalMutation2323");
         ConditionalFileFilter fileFilter = getConditionalFileFilter();
         File file = new File(this.workingPath , (((TEST_FILE_NAME_PREFIX) + 1) + (TEST_FILE_TYPE)));
         assertFileFiltering(1, ((IOFileFilter)(fileFilter)), file, false);
-        assertFilenameFiltering(1, ((IOFileFilter)(fileFilter)), file, false);
+        assertFilenameFiltering(0, ((IOFileFilter)(fileFilter)), file, false);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNoFilters_literalMutation2324() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoFilters_literalMutation2324");
+        ConditionalFileFilter fileFilter = getConditionalFileFilter();
+        File file = new File(this.workingPath , (((TEST_FILE_NAME_PREFIX) + 1) + (TEST_FILE_TYPE)));
+        assertFileFiltering(1, ((IOFileFilter)(fileFilter)), file, false);
+        assertFilenameFiltering(1, ((IOFileFilter)(fileFilter)), file, true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -872,6 +1004,62 @@ public abstract class ConditionalFileFilterAbstractTestCase extends IOFileFilter
 
     public void testFilterBuiltUsingConstructor() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterBuiltUsingConstructor");
+        List<java.util.List<org.apache.commons.io.filefilter.IOFileFilter>> testFilters = getTestFilters();
+        List<boolean[]> testTrueResults = getTrueResults();
+        List<boolean[]> testFalseResults = getFalseResults();
+        List<java.lang.Boolean> testFileResults = getFileResults();
+        List<java.lang.Boolean> testFilenameResults = getFilenameResults();
+        for (int i = 2 ; i < (testFilters.size()) ; i++) {
+            List<org.apache.commons.io.filefilter.IOFileFilter> filters = testFilters.get(i);
+            boolean[] trueResults = testTrueResults.get(i);
+            boolean[] falseResults = testFalseResults.get(i);
+            boolean fileResults = testFileResults.get(i).booleanValue();
+            boolean filenameResults = testFilenameResults.get(i).booleanValue();
+            IOFileFilter filter = buildFilterUsingConstructor(filters);
+            resetTrueFilters(this.trueFilters);
+            resetFalseFilters(this.falseFilters);
+            assertFileFiltering(i, filter, this.file, fileResults);
+            assertTrueFiltersInvoked(i, trueFilters, trueResults);
+            assertFalseFiltersInvoked(i, falseFilters, falseResults);
+            resetTrueFilters(this.trueFilters);
+            resetFalseFilters(this.falseFilters);
+            assertFilenameFiltering(i, filter, this.file, filenameResults);
+            assertTrueFiltersInvoked(i, trueFilters, trueResults);
+            assertFalseFiltersInvoked(i, falseFilters, falseResults);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testFilterBuiltUsingConstructor_literalMutation2312() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterBuiltUsingConstructor_literalMutation2312");
+        List<java.util.List<org.apache.commons.io.filefilter.IOFileFilter>> testFilters = getTestFilters();
+        List<boolean[]> testTrueResults = getTrueResults();
+        List<boolean[]> testFalseResults = getFalseResults();
+        List<java.lang.Boolean> testFileResults = getFileResults();
+        List<java.lang.Boolean> testFilenameResults = getFilenameResults();
+        for (int i = 0 ; i < (testFilters.size()) ; i++) {
+            List<org.apache.commons.io.filefilter.IOFileFilter> filters = testFilters.get(i);
+            boolean[] trueResults = testTrueResults.get(i);
+            boolean[] falseResults = testFalseResults.get(i);
+            boolean fileResults = testFileResults.get(i).booleanValue();
+            boolean filenameResults = testFilenameResults.get(i).booleanValue();
+            IOFileFilter filter = buildFilterUsingConstructor(filters);
+            resetTrueFilters(this.trueFilters);
+            resetFalseFilters(this.falseFilters);
+            assertFileFiltering(i, filter, this.file, fileResults);
+            assertTrueFiltersInvoked(i, trueFilters, trueResults);
+            assertFalseFiltersInvoked(i, falseFilters, falseResults);
+            resetTrueFilters(this.trueFilters);
+            resetFalseFilters(this.falseFilters);
+            assertFilenameFiltering(i, filter, this.file, filenameResults);
+            assertTrueFiltersInvoked(i, trueFilters, trueResults);
+            assertFalseFiltersInvoked(i, falseFilters, falseResults);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testFilterBuiltUsingConstructor_literalMutation2313() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterBuiltUsingConstructor_literalMutation2313");
         List<java.util.List<org.apache.commons.io.filefilter.IOFileFilter>> testFilters = getTestFilters();
         List<boolean[]> testTrueResults = getTrueResults();
         List<boolean[]> testFalseResults = getFalseResults();
@@ -1480,6 +1668,62 @@ public abstract class ConditionalFileFilterAbstractTestCase extends IOFileFilter
 
     public void testFilterBuiltUsingAdd() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterBuiltUsingAdd");
+        List<java.util.List<org.apache.commons.io.filefilter.IOFileFilter>> testFilters = getTestFilters();
+        List<boolean[]> testTrueResults = getTrueResults();
+        List<boolean[]> testFalseResults = getFalseResults();
+        List<java.lang.Boolean> testFileResults = getFileResults();
+        List<java.lang.Boolean> testFilenameResults = getFilenameResults();
+        for (int i = 2 ; i < (testFilters.size()) ; i++) {
+            List<org.apache.commons.io.filefilter.IOFileFilter> filters = testFilters.get(i);
+            boolean[] trueResults = testTrueResults.get(i);
+            boolean[] falseResults = testFalseResults.get(i);
+            boolean fileResults = testFileResults.get(i).booleanValue();
+            boolean filenameResults = testFilenameResults.get(i).booleanValue();
+            IOFileFilter filter = buildFilterUsingAdd(filters);
+            resetTrueFilters(this.trueFilters);
+            resetFalseFilters(this.falseFilters);
+            assertFileFiltering(i, filter, this.file, fileResults);
+            assertTrueFiltersInvoked(i, trueFilters, trueResults);
+            assertFalseFiltersInvoked(i, falseFilters, falseResults);
+            resetTrueFilters(this.trueFilters);
+            resetFalseFilters(this.falseFilters);
+            assertFilenameFiltering(i, filter, this.file, filenameResults);
+            assertTrueFiltersInvoked(i, trueFilters, trueResults);
+            assertFalseFiltersInvoked(i, falseFilters, falseResults);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testFilterBuiltUsingAdd_literalMutation2309() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterBuiltUsingAdd_literalMutation2309");
+        List<java.util.List<org.apache.commons.io.filefilter.IOFileFilter>> testFilters = getTestFilters();
+        List<boolean[]> testTrueResults = getTrueResults();
+        List<boolean[]> testFalseResults = getFalseResults();
+        List<java.lang.Boolean> testFileResults = getFileResults();
+        List<java.lang.Boolean> testFilenameResults = getFilenameResults();
+        for (int i = 0 ; i < (testFilters.size()) ; i++) {
+            List<org.apache.commons.io.filefilter.IOFileFilter> filters = testFilters.get(i);
+            boolean[] trueResults = testTrueResults.get(i);
+            boolean[] falseResults = testFalseResults.get(i);
+            boolean fileResults = testFileResults.get(i).booleanValue();
+            boolean filenameResults = testFilenameResults.get(i).booleanValue();
+            IOFileFilter filter = buildFilterUsingAdd(filters);
+            resetTrueFilters(this.trueFilters);
+            resetFalseFilters(this.falseFilters);
+            assertFileFiltering(i, filter, this.file, fileResults);
+            assertTrueFiltersInvoked(i, trueFilters, trueResults);
+            assertFalseFiltersInvoked(i, falseFilters, falseResults);
+            resetTrueFilters(this.trueFilters);
+            resetFalseFilters(this.falseFilters);
+            assertFilenameFiltering(i, filter, this.file, filenameResults);
+            assertTrueFiltersInvoked(i, trueFilters, trueResults);
+            assertFalseFiltersInvoked(i, falseFilters, falseResults);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testFilterBuiltUsingAdd_literalMutation2310() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFilterBuiltUsingAdd_literalMutation2310");
         List<java.util.List<org.apache.commons.io.filefilter.IOFileFilter>> testFilters = getTestFilters();
         List<boolean[]> testTrueResults = getTrueResults();
         List<boolean[]> testFalseResults = getFalseResults();

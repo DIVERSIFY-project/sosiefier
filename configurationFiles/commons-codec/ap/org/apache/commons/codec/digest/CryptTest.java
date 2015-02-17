@@ -60,7 +60,7 @@ public class CryptTest {
 @Test(expected = IllegalArgumentException.class)
     public void testCrypt() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCrypt");
-        org.apache.commons.codec.digest.Crypt.crypt("foo", "");
+        org.apache.commons.codec.digest.Crypt.crypt("bar", "");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -72,9 +72,9 @@ public class CryptTest {
      * hash would not be verifyable with other implementations of crypt().
      */
 @Test(expected = IllegalArgumentException.class)
-    public void testCryptWithEmptySalt_literalMutation1374() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCryptWithEmptySalt_literalMutation1374");
-        org.apache.commons.codec.digest.Crypt.crypt("secret", "foo");
+    public void testCryptWithEmptySalt_literalMutation1494() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCryptWithEmptySalt_literalMutation1494");
+        org.apache.commons.codec.digest.Crypt.crypt("secret", "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

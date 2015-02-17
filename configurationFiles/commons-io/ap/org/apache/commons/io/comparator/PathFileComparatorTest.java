@@ -51,8 +51,8 @@ public void testCaseSensitivity() {
     /** 
      * Test case sensitivity
      */
-public void testCaseSensitivity_literalMutation2266() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCaseSensitivity_literalMutation2266");
+public void testCaseSensitivity_literalMutation3223() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCaseSensitivity_literalMutation3223");
         File file3 = new File("foo");
         Comparator<java.io.File> sensitive = new PathFileComparator(null);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1342,((sensitive.compare(equalFile1, equalFile2)) == 0));

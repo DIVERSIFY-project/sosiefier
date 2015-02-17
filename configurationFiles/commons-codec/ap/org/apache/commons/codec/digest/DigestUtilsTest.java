@@ -51,7 +51,7 @@ public class DigestUtilsTest {
 @Test
     public void testMd2Hex() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMd2Hex");
-        String hashMe = "foo";
+        String hashMe = "bar";
         String hash = org.apache.commons.codec.digest.DigestUtils.md2Hex(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(hashMe));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1190,hash,1189,hash.length());
         hashMe = "length < 32";
@@ -69,7 +69,7 @@ public class DigestUtilsTest {
         String hashMe = "this is some string that is longer than 32 characters";
         String hash = org.apache.commons.codec.digest.DigestUtils.md2Hex(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(hashMe));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1190,hash,1189,hash.length());
-        hashMe = "foo";
+        hashMe = "bar";
         hash = org.apache.commons.codec.digest.DigestUtils.md2Hex(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(hashMe));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1192,hash,1191,hash.length());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -81,7 +81,7 @@ public class DigestUtilsTest {
 @Test
     public void testMd2Length() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMd2Length");
-        String hashMe = "foo";
+        String hashMe = "bar";
         byte[] hash = org.apache.commons.codec.digest.DigestUtils.md2(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(hashMe));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1193,hash.length);
         hashMe = "length < 16";
@@ -94,8 +94,8 @@ public class DigestUtilsTest {
      * An MD2 hash should always be a 16 element byte[].
      */
 @Test
-    public void testMd2Length_literalMutation1379() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMd2Length_literalMutation1379");
+    public void testMd2Length_literalMutation1499() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMd2Length_literalMutation1499");
         String hashMe = "this is some string that is longer than 16 characters";
         byte[] hash = org.apache.commons.codec.digest.DigestUtils.md2(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(hashMe));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1193,hash.length);
@@ -111,7 +111,7 @@ public class DigestUtilsTest {
 @Test
     public void testMd5Hex() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMd5Hex");
-        String hashMe = "foo";
+        String hashMe = "bar";
         String hash = org.apache.commons.codec.digest.DigestUtils.md5Hex(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(hashMe));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1196,hash,1195,hash.length());
         hashMe = "length < 32";
@@ -141,7 +141,7 @@ public class DigestUtilsTest {
 @Test
     public void testMd5Length() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMd5Length");
-        String hashMe = "foo";
+        String hashMe = "bar";
         byte[] hash = org.apache.commons.codec.digest.DigestUtils.md5(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(hashMe));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1199,hash.length);
         hashMe = "length < 16";
@@ -154,8 +154,8 @@ public class DigestUtilsTest {
      * An MD5 hash should always be a 16 element byte[].
      */
 @Test
-    public void testMd5Length_literalMutation1383() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMd5Length_literalMutation1383");
+    public void testMd5Length_literalMutation1503() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMd5Length_literalMutation1503");
         String hashMe = "this is some string that is longer than 16 characters";
         byte[] hash = org.apache.commons.codec.digest.DigestUtils.md5(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(hashMe));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1199,hash.length);
@@ -271,8 +271,8 @@ public class DigestUtilsTest {
     }
 
     @Test
-    public void testSha1UpdateWithByteArray_literalMutation1385() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSha1UpdateWithByteArray_literalMutation1385");
+    public void testSha1UpdateWithByteArray_literalMutation1505() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSha1UpdateWithByteArray_literalMutation1505");
         final String d1 = "C\'est un homme qui rentre dans un café, et plouf";
         final String d2 = "foo";
         MessageDigest messageDigest = org.apache.commons.codec.digest.DigestUtils.getSha1Digest();
@@ -435,7 +435,7 @@ public class DigestUtilsTest {
     @Test
     public void testSha1UpdateWithString() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSha1UpdateWithString");
-        final String d1 = "foo";
+        final String d1 = "bar";
         final String d2 = "C\'est un homme, c\'est qu\'une tête, on lui offre un cadeau: \'oh... encore un chapeau!\'";
         MessageDigest messageDigest = org.apache.commons.codec.digest.DigestUtils.getSha1Digest();
         messageDigest.update(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(d1));
@@ -451,10 +451,10 @@ public class DigestUtilsTest {
     }
 
     @Test
-    public void testSha1UpdateWithString_literalMutation1387() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSha1UpdateWithString_literalMutation1387");
+    public void testSha1UpdateWithString_literalMutation1507() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSha1UpdateWithString_literalMutation1507");
         final String d1 = "C\'est un homme qui rentre dans un café, et plouf";
-        final String d2 = "foo";
+        final String d2 = "bar";
         MessageDigest messageDigest = org.apache.commons.codec.digest.DigestUtils.getSha1Digest();
         messageDigest.update(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(d1));
         messageDigest.update(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(d2));
@@ -688,8 +688,8 @@ public class DigestUtilsTest {
 
     @SuppressWarnings(value = "deprecation")
     @Test
-    public void testShaUpdateWithByteArray_literalMutation1390() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShaUpdateWithByteArray_literalMutation1390");
+    public void testShaUpdateWithByteArray_literalMutation1510() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShaUpdateWithByteArray_literalMutation1510");
         final String d1 = "foo";
         final String d2 = "C\'est un homme, c\'est qu\'une tête, on lui offre un cadeau: \'oh... encore un chapeau!\'";
         MessageDigest messageDigest = org.apache.commons.codec.digest.DigestUtils.getShaDigest();
@@ -707,10 +707,10 @@ public class DigestUtilsTest {
 
     @SuppressWarnings(value = "deprecation")
     @Test
-    public void testShaUpdateWithByteArray_literalMutation1391() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShaUpdateWithByteArray_literalMutation1391");
+    public void testShaUpdateWithByteArray_literalMutation1511() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShaUpdateWithByteArray_literalMutation1511");
         final String d1 = "C\'est un homme qui rentre dans un café, et plouf";
-        final String d2 = "foo";
+        final String d2 = "bar";
         MessageDigest messageDigest = org.apache.commons.codec.digest.DigestUtils.getShaDigest();
         messageDigest.update(d1.getBytes());
         messageDigest.update(d2.getBytes());
@@ -897,9 +897,9 @@ public class DigestUtilsTest {
 
     @SuppressWarnings(value = "deprecation")
     @Test
-    public void testShaUpdateWithString_literalMutation1393() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShaUpdateWithString_literalMutation1393");
-        final String d1 = "foo";
+    public void testShaUpdateWithString_literalMutation1513() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShaUpdateWithString_literalMutation1513");
+        final String d1 = "bar";
         final String d2 = "C\'est un homme, c\'est qu\'une tête, on lui offre un cadeau: \'oh... encore un chapeau!\'";
         MessageDigest messageDigest = org.apache.commons.codec.digest.DigestUtils.getShaDigest();
         messageDigest.update(org.apache.commons.codec.binary.StringUtils.getBytesUtf8(d1));
@@ -916,8 +916,8 @@ public class DigestUtilsTest {
 
     @SuppressWarnings(value = "deprecation")
     @Test
-    public void testShaUpdateWithString_literalMutation1394() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShaUpdateWithString_literalMutation1394");
+    public void testShaUpdateWithString_literalMutation1514() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShaUpdateWithString_literalMutation1514");
         final String d1 = "C\'est un homme qui rentre dans un café, et plouf";
         final String d2 = "foo";
         MessageDigest messageDigest = org.apache.commons.codec.digest.DigestUtils.getShaDigest();

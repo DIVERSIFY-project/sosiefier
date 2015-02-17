@@ -188,7 +188,7 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
     public void testEncodeAtzNotEmpty() throws EncoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeAtzNotEmpty");
         final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
-        final String[] names = new String[]{ "foo" , "átz" , "Ignácz" , "Ignátz" , "Ignác" };
+        final String[] names = new String[]{ "bar" , "átz" , "Ignácz" , "Ignátz" , "Ignác" };
         for (final String name : names) {
             assertNotEmpty(bmpm, name);
         }
@@ -196,10 +196,10 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
     }
 
     @Test
-    public void testEncodeAtzNotEmpty_literalMutation126() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeAtzNotEmpty_literalMutation126");
+    public void testEncodeAtzNotEmpty_literalMutation152() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeAtzNotEmpty_literalMutation152");
         final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
-        final String[] names = new String[]{ "ácz" , "foo" , "Ignácz" , "Ignátz" , "Ignác" };
+        final String[] names = new String[]{ "ácz" , "bar" , "Ignácz" , "Ignátz" , "Ignác" };
         for (final String name : names) {
             assertNotEmpty(bmpm, name);
         }
@@ -207,10 +207,10 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
     }
 
     @Test
-    public void testEncodeAtzNotEmpty_literalMutation127() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeAtzNotEmpty_literalMutation127");
+    public void testEncodeAtzNotEmpty_literalMutation153() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeAtzNotEmpty_literalMutation153");
         final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
-        final String[] names = new String[]{ "ácz" , "átz" , "foo" , "Ignátz" , "Ignác" };
+        final String[] names = new String[]{ "ácz" , "átz" , "bar" , "Ignátz" , "Ignác" };
         for (final String name : names) {
             assertNotEmpty(bmpm, name);
         }
@@ -218,10 +218,10 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
     }
 
     @Test
-    public void testEncodeAtzNotEmpty_literalMutation128() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeAtzNotEmpty_literalMutation128");
+    public void testEncodeAtzNotEmpty_literalMutation154() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeAtzNotEmpty_literalMutation154");
         final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
-        final String[] names = new String[]{ "ácz" , "átz" , "Ignácz" , "foo" , "Ignác" };
+        final String[] names = new String[]{ "ácz" , "átz" , "Ignácz" , "bar" , "Ignác" };
         for (final String name : names) {
             assertNotEmpty(bmpm, name);
         }
@@ -229,8 +229,8 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
     }
 
     @Test
-    public void testEncodeAtzNotEmpty_literalMutation129() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeAtzNotEmpty_literalMutation129");
+    public void testEncodeAtzNotEmpty_literalMutation155() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeAtzNotEmpty_literalMutation155");
         final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
         final String[] names = new String[]{ "ácz" , "átz" , "Ignácz" , "Ignátz" , "foo" };
         for (final String name : names) {
@@ -274,7 +274,7 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
     public void testEncodeGna() throws EncoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEncodeGna");
         final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
-        bmpm.encode("foo");
+        bmpm.encode("bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -344,7 +344,7 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidLanguageIllegalArgumentException() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testInvalidLanguageIllegalArgumentException");
-        Languages.getInstance("foo");
+        Languages.getInstance("bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -363,7 +363,7 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    @Test(timeout = 10000L)
+    @Test(timeout = 10001L)
     public void testLongestEnglishSurname() throws EncoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLongestEnglishSurname");
         final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
@@ -371,9 +371,33 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 9999L)
+    public void testLongestEnglishSurname_literalMutation161() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLongestEnglishSurname_literalMutation161");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        bmpm.encode("MacGhilleseatheanaich");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 5000L)
+    public void testLongestEnglishSurname_literalMutation162() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLongestEnglishSurname_literalMutation162");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        bmpm.encode("MacGhilleseatheanaich");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 20000L)
+    public void testLongestEnglishSurname_literalMutation163() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLongestEnglishSurname_literalMutation163");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        bmpm.encode("MacGhilleseatheanaich");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     @Test(timeout = 10000L)
-    public void testLongestEnglishSurname_literalMutation135() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLongestEnglishSurname_literalMutation135");
+    public void testLongestEnglishSurname_literalMutation164() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLongestEnglishSurname_literalMutation164");
         final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
         bmpm.encode("foo");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -390,54 +414,70 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
     public void testNegativeIndexForRuleMatchIndexOutOfBoundsException_add61() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNegativeIndexForRuleMatchIndexOutOfBoundsException_add61");
         final Rule r = new Rule("a" , "" , "" , new Rule.Phoneme("" , Languages.ANY_LANGUAGE));
-        r.patternAndContextMatches("bob", -1);
-        r.patternAndContextMatches("bob", -1);
+        r.patternAndContextMatches("bob", 2);
+        r.patternAndContextMatches("bob", 2);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void testNegativeIndexForRuleMatchIndexOutOfBoundsException() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNegativeIndexForRuleMatchIndexOutOfBoundsException");
-        final Rule r = new Rule("foo" , "" , "" , new Rule.Phoneme("" , Languages.ANY_LANGUAGE));
+        final Rule r = new Rule("bar" , "" , "" , new Rule.Phoneme("" , Languages.ANY_LANGUAGE));
         r.patternAndContextMatches("bob", -1);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
-    public void testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation137() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation137");
+    public void testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation166() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation166");
         final Rule r = new Rule("a" , "foo" , "" , new Rule.Phoneme("" , Languages.ANY_LANGUAGE));
         r.patternAndContextMatches("bob", -1);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
-    public void testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation138() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation138");
-        final Rule r = new Rule("a" , "" , "foo" , new Rule.Phoneme("" , Languages.ANY_LANGUAGE));
+    public void testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation167() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation167");
+        final Rule r = new Rule("a" , "" , "bar" , new Rule.Phoneme("" , Languages.ANY_LANGUAGE));
         r.patternAndContextMatches("bob", -1);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
-    public void testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation139() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation139");
-        final Rule r = new Rule("a" , "" , "" , new Rule.Phoneme("foo" , Languages.ANY_LANGUAGE));
+    public void testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation168() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation168");
+        final Rule r = new Rule("a" , "" , "" , new Rule.Phoneme("bar" , Languages.ANY_LANGUAGE));
         r.patternAndContextMatches("bob", -1);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
-    public void testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation140() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation140");
+    public void testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation169() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation169");
         final Rule r = new Rule("a" , "" , "" , new Rule.Phoneme("" , Languages.ANY_LANGUAGE));
-        r.patternAndContextMatches("foo", -1);
+        r.patternAndContextMatches("bar", -1);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
-    public void testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation141() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation141");
+    public void testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation170() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation170");
+        final Rule r = new Rule("a" , "" , "" , new Rule.Phoneme("" , Languages.ANY_LANGUAGE));
+        r.patternAndContextMatches("bob", -2);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation171() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation171");
+        final Rule r = new Rule("a" , "" , "" , new Rule.Phoneme("" , Languages.ANY_LANGUAGE));
+        r.patternAndContextMatches("bob", 0);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation172() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNegativeIndexForRuleMatchIndexOutOfBoundsException_literalMutation172");
         final Rule r = new Rule("a" , "" , "" , new Rule.Phoneme("" , Languages.ANY_LANGUAGE));
         r.patternAndContextMatches("bob", 0);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -501,7 +541,7 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
     @Test
     public void testOOM() throws EncoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOOM");
-        final String phrase = "foo" + ("cfaaa><?&#<!--</script>&lang&fc;aadeaf?>>&bdquo<    cc =\"abff\"    /></   afe  >" + "<script><!-- f(\';<    cf aefbeef = \"bfabadcf\" ebbfeedd = fccabeb >");
+        final String phrase = "bar" + ("cfaaa><?&#<!--</script>&lang&fc;aadeaf?>>&bdquo<    cc =\"abff\"    /></   afe  >" + "<script><!-- f(\';<    cf aefbeef = \"bfabadcf\" ebbfeedd = fccabeb >");
         final BeiderMorseEncoder encoder = new BeiderMorseEncoder();
         encoder.setNameType(org.apache.commons.codec.language.bm.NameType.GENERIC);
         encoder.setRuleType(org.apache.commons.codec.language.bm.RuleType.EXACT);
@@ -514,8 +554,8 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
     }
 
     @Test
-    public void testOOM_literalMutation143() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOOM_literalMutation143");
+    public void testOOM_literalMutation174() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOOM_literalMutation174");
         final String phrase = "200697900\'-->&#1913348150;</  bceaeef >aadaabcf\"aedfbff<!--\'-->?>cae" + ("foo" + "<script><!-- f(\';<    cf aefbeef = \"bfabadcf\" ebbfeedd = fccabeb >");
         final BeiderMorseEncoder encoder = new BeiderMorseEncoder();
         encoder.setNameType(org.apache.commons.codec.language.bm.NameType.GENERIC);
@@ -529,9 +569,9 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
     }
 
     @Test
-    public void testOOM_literalMutation144() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOOM_literalMutation144");
-        final String phrase = "200697900\'-->&#1913348150;</  bceaeef >aadaabcf\"aedfbff<!--\'-->?>cae" + ("cfaaa><?&#<!--</script>&lang&fc;aadeaf?>>&bdquo<    cc =\"abff\"    /></   afe  >" + "foo");
+    public void testOOM_literalMutation175() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOOM_literalMutation175");
+        final String phrase = "200697900\'-->&#1913348150;</  bceaeef >aadaabcf\"aedfbff<!--\'-->?>cae" + ("cfaaa><?&#<!--</script>&lang&fc;aadeaf?>>&bdquo<    cc =\"abff\"    /></   afe  >" + "bar");
         final BeiderMorseEncoder encoder = new BeiderMorseEncoder();
         encoder.setNameType(org.apache.commons.codec.language.bm.NameType.GENERIC);
         encoder.setRuleType(org.apache.commons.codec.language.bm.RuleType.EXACT);
@@ -544,8 +584,8 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
     }
 
     @Test
-    public void testOOM_literalMutation145() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOOM_literalMutation145");
+    public void testOOM_literalMutation176() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOOM_literalMutation176");
         final String phrase = "200697900\'-->&#1913348150;</  bceaeef >aadaabcf\"aedfbff<!--\'-->?>cae" + ("cfaaa><?&#<!--</script>&lang&fc;aadeaf?>>&bdquo<    cc =\"abff\"    /></   afe  >" + "<script><!-- f(\';<    cf aefbeef = \"bfabadcf\" ebbfeedd = fccabeb >");
         final BeiderMorseEncoder encoder = new BeiderMorseEncoder();
         encoder.setNameType(org.apache.commons.codec.language.bm.NameType.GENERIC);
@@ -559,8 +599,53 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
     }
 
     @Test
-    public void testOOM_literalMutation146() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOOM_literalMutation146");
+    public void testOOM_literalMutation177() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOOM_literalMutation177");
+        final String phrase = "200697900\'-->&#1913348150;</  bceaeef >aadaabcf\"aedfbff<!--\'-->?>cae" + ("cfaaa><?&#<!--</script>&lang&fc;aadeaf?>>&bdquo<    cc =\"abff\"    /></   afe  >" + "<script><!-- f(\';<    cf aefbeef = \"bfabadcf\" ebbfeedd = fccabeb >");
+        final BeiderMorseEncoder encoder = new BeiderMorseEncoder();
+        encoder.setNameType(org.apache.commons.codec.language.bm.NameType.GENERIC);
+        encoder.setRuleType(org.apache.commons.codec.language.bm.RuleType.EXACT);
+        encoder.setMaxPhonemes(5);
+        final String phonemes = encoder.encode(phrase);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),204,((phonemes.length()) > 0));
+        final String[] phonemeArr = phonemes.split("\\|");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),205,((phonemeArr.length) <= 10));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testOOM_literalMutation178() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOOM_literalMutation178");
+        final String phrase = "200697900\'-->&#1913348150;</  bceaeef >aadaabcf\"aedfbff<!--\'-->?>cae" + ("cfaaa><?&#<!--</script>&lang&fc;aadeaf?>>&bdquo<    cc =\"abff\"    /></   afe  >" + "<script><!-- f(\';<    cf aefbeef = \"bfabadcf\" ebbfeedd = fccabeb >");
+        final BeiderMorseEncoder encoder = new BeiderMorseEncoder();
+        encoder.setNameType(org.apache.commons.codec.language.bm.NameType.GENERIC);
+        encoder.setRuleType(org.apache.commons.codec.language.bm.RuleType.EXACT);
+        encoder.setMaxPhonemes(20);
+        final String phonemes = encoder.encode(phrase);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),204,((phonemes.length()) > 0));
+        final String[] phonemeArr = phonemes.split("\\|");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),205,((phonemeArr.length) <= 10));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testOOM_literalMutation179() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOOM_literalMutation179");
+        final String phrase = "200697900\'-->&#1913348150;</  bceaeef >aadaabcf\"aedfbff<!--\'-->?>cae" + ("cfaaa><?&#<!--</script>&lang&fc;aadeaf?>>&bdquo<    cc =\"abff\"    /></   afe  >" + "<script><!-- f(\';<    cf aefbeef = \"bfabadcf\" ebbfeedd = fccabeb >");
+        final BeiderMorseEncoder encoder = new BeiderMorseEncoder();
+        encoder.setNameType(org.apache.commons.codec.language.bm.NameType.GENERIC);
+        encoder.setRuleType(org.apache.commons.codec.language.bm.RuleType.EXACT);
+        encoder.setMaxPhonemes(11);
+        final String phonemes = encoder.encode(phrase);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),204,((phonemes.length()) > 0));
+        final String[] phonemeArr = phonemes.split("\\|");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),205,((phonemeArr.length) <= 10));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testOOM_literalMutation180() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOOM_literalMutation180");
         final String phrase = "200697900\'-->&#1913348150;</  bceaeef >aadaabcf\"aedfbff<!--\'-->?>cae" + ("cfaaa><?&#<!--</script>&lang&fc;aadeaf?>>&bdquo<    cc =\"abff\"    /></   afe  >" + "<script><!-- f(\';<    cf aefbeef = \"bfabadcf\" ebbfeedd = fccabeb >");
         final BeiderMorseEncoder encoder = new BeiderMorseEncoder();
         encoder.setNameType(org.apache.commons.codec.language.bm.NameType.GENERIC);
@@ -568,7 +653,7 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
         encoder.setMaxPhonemes(10);
         final String phonemes = encoder.encode(phrase);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),204,((phonemes.length()) > 0));
-        final String[] phonemeArr = phonemes.split("foo");
+        final String[] phonemeArr = phonemes.split("bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),205,((phonemeArr.length) <= 10));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -774,6 +859,27 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck");
         final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
         final StringBuilder stringBuffer = new StringBuilder();
+        stringBuffer.append(TEST_CHARS[1]);
+        for (int i = 0, j = 1 ; i < 40 ; i++ , j++) {
+            if (j == (TEST_CHARS.length)) {
+                j = 0;
+            } 
+            bmpm.encode(stringBuffer.toString());
+            stringBuffer.append(TEST_CHARS[j]);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * (Un)luckily, the worse performing test because of the data in {@link #TEST_CHARS}
+     * 
+     * @throws EncoderException
+     */
+@Test
+    public void testSpeedCheck_literalMutation183() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck_literalMutation183");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        final StringBuilder stringBuffer = new StringBuilder();
         stringBuffer.append(TEST_CHARS[-1]);
         for (int i = 0, j = 1 ; i < 40 ; i++ , j++) {
             if (j == (TEST_CHARS.length)) {
@@ -791,8 +897,29 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
      * @throws EncoderException
      */
 @Test
-    public void testSpeedCheck_literalMutation149() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck_literalMutation149");
+    public void testSpeedCheck_literalMutation184() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck_literalMutation184");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        final StringBuilder stringBuffer = new StringBuilder();
+        stringBuffer.append(TEST_CHARS[0]);
+        for (int i = 0, j = 1 ; i < 40 ; i++ , j++) {
+            if (j == (TEST_CHARS.length)) {
+                j = 0;
+            } 
+            bmpm.encode(stringBuffer.toString());
+            stringBuffer.append(TEST_CHARS[j]);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * (Un)luckily, the worse performing test because of the data in {@link #TEST_CHARS}
+     * 
+     * @throws EncoderException
+     */
+@Test
+    public void testSpeedCheck_literalMutation185() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck_literalMutation185");
         final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
         final StringBuilder stringBuffer = new StringBuilder();
         stringBuffer.append(TEST_CHARS[0]);
@@ -812,8 +939,50 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
      * @throws EncoderException
      */
 @Test
-    public void testSpeedCheck_literalMutation150() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck_literalMutation150");
+    public void testSpeedCheck_literalMutation186() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck_literalMutation186");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        final StringBuilder stringBuffer = new StringBuilder();
+        stringBuffer.append(TEST_CHARS[0]);
+        for (int i = -1, j = 1 ; i < 40 ; i++ , j++) {
+            if (j == (TEST_CHARS.length)) {
+                j = 0;
+            } 
+            bmpm.encode(stringBuffer.toString());
+            stringBuffer.append(TEST_CHARS[j]);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * (Un)luckily, the worse performing test because of the data in {@link #TEST_CHARS}
+     * 
+     * @throws EncoderException
+     */
+@Test
+    public void testSpeedCheck_literalMutation187() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck_literalMutation187");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        final StringBuilder stringBuffer = new StringBuilder();
+        stringBuffer.append(TEST_CHARS[0]);
+        for (int i = 0, j = 1 ; i < 40 ; i++ , j++) {
+            if (j == (TEST_CHARS.length)) {
+                j = 0;
+            } 
+            bmpm.encode(stringBuffer.toString());
+            stringBuffer.append(TEST_CHARS[j]);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * (Un)luckily, the worse performing test because of the data in {@link #TEST_CHARS}
+     * 
+     * @throws EncoderException
+     */
+@Test
+    public void testSpeedCheck_literalMutation188() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck_literalMutation188");
         final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
         final StringBuilder stringBuffer = new StringBuilder();
         stringBuffer.append(TEST_CHARS[0]);
@@ -833,8 +1002,71 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
      * @throws EncoderException
      */
 @Test
-    public void testSpeedCheck_literalMutation151() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck_literalMutation151");
+    public void testSpeedCheck_literalMutation189() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck_literalMutation189");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        final StringBuilder stringBuffer = new StringBuilder();
+        stringBuffer.append(TEST_CHARS[0]);
+        for (int i = 0, j = 0 ; i < 40 ; i++ , j++) {
+            if (j == (TEST_CHARS.length)) {
+                j = 0;
+            } 
+            bmpm.encode(stringBuffer.toString());
+            stringBuffer.append(TEST_CHARS[j]);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * (Un)luckily, the worse performing test because of the data in {@link #TEST_CHARS}
+     * 
+     * @throws EncoderException
+     */
+@Test
+    public void testSpeedCheck_literalMutation190() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck_literalMutation190");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        final StringBuilder stringBuffer = new StringBuilder();
+        stringBuffer.append(TEST_CHARS[0]);
+        for (int i = 0, j = 0 ; i < 40 ; i++ , j++) {
+            if (j == (TEST_CHARS.length)) {
+                j = 0;
+            } 
+            bmpm.encode(stringBuffer.toString());
+            stringBuffer.append(TEST_CHARS[j]);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * (Un)luckily, the worse performing test because of the data in {@link #TEST_CHARS}
+     * 
+     * @throws EncoderException
+     */
+@Test
+    public void testSpeedCheck_literalMutation191() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck_literalMutation191");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        final StringBuilder stringBuffer = new StringBuilder();
+        stringBuffer.append(TEST_CHARS[0]);
+        for (int i = 0, j = 1 ; i < 39 ; i++ , j++) {
+            if (j == (TEST_CHARS.length)) {
+                j = 0;
+            } 
+            bmpm.encode(stringBuffer.toString());
+            stringBuffer.append(TEST_CHARS[j]);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * (Un)luckily, the worse performing test because of the data in {@link #TEST_CHARS}
+     * 
+     * @throws EncoderException
+     */
+@Test
+    public void testSpeedCheck_literalMutation192() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck_literalMutation192");
         final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
         final StringBuilder stringBuffer = new StringBuilder();
         stringBuffer.append(TEST_CHARS[0]);
@@ -854,14 +1086,98 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
      * @throws EncoderException
      */
 @Test
-    public void testSpeedCheck_literalMutation152() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck_literalMutation152");
+    public void testSpeedCheck_literalMutation193() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck_literalMutation193");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        final StringBuilder stringBuffer = new StringBuilder();
+        stringBuffer.append(TEST_CHARS[0]);
+        for (int i = 0, j = 1 ; i < 20 ; i++ , j++) {
+            if (j == (TEST_CHARS.length)) {
+                j = 0;
+            } 
+            bmpm.encode(stringBuffer.toString());
+            stringBuffer.append(TEST_CHARS[j]);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * (Un)luckily, the worse performing test because of the data in {@link #TEST_CHARS}
+     * 
+     * @throws EncoderException
+     */
+@Test
+    public void testSpeedCheck_literalMutation194() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck_literalMutation194");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        final StringBuilder stringBuffer = new StringBuilder();
+        stringBuffer.append(TEST_CHARS[0]);
+        for (int i = 0, j = 1 ; i < 80 ; i++ , j++) {
+            if (j == (TEST_CHARS.length)) {
+                j = 0;
+            } 
+            bmpm.encode(stringBuffer.toString());
+            stringBuffer.append(TEST_CHARS[j]);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * (Un)luckily, the worse performing test because of the data in {@link #TEST_CHARS}
+     * 
+     * @throws EncoderException
+     */
+@Test
+    public void testSpeedCheck_literalMutation195() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck_literalMutation195");
         final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
         final StringBuilder stringBuffer = new StringBuilder();
         stringBuffer.append(TEST_CHARS[0]);
         for (int i = 0, j = 1 ; i < 40 ; i++ , j++) {
             if (j == (TEST_CHARS.length)) {
                 j = 1;
+            } 
+            bmpm.encode(stringBuffer.toString());
+            stringBuffer.append(TEST_CHARS[j]);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * (Un)luckily, the worse performing test because of the data in {@link #TEST_CHARS}
+     * 
+     * @throws EncoderException
+     */
+@Test
+    public void testSpeedCheck_literalMutation196() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck_literalMutation196");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        final StringBuilder stringBuffer = new StringBuilder();
+        stringBuffer.append(TEST_CHARS[0]);
+        for (int i = 0, j = 1 ; i < 40 ; i++ , j++) {
+            if (j == (TEST_CHARS.length)) {
+                j = -1;
+            } 
+            bmpm.encode(stringBuffer.toString());
+            stringBuffer.append(TEST_CHARS[j]);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * (Un)luckily, the worse performing test because of the data in {@link #TEST_CHARS}
+     * 
+     * @throws EncoderException
+     */
+@Test
+    public void testSpeedCheck_literalMutation197() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck_literalMutation197");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        final StringBuilder stringBuffer = new StringBuilder();
+        stringBuffer.append(TEST_CHARS[0]);
+        for (int i = 0, j = 1 ; i < 40 ; i++ , j++) {
+            if (j == (TEST_CHARS.length)) {
+                j = 0;
             } 
             bmpm.encode(stringBuffer.toString());
             stringBuffer.append(TEST_CHARS[j]);
@@ -945,7 +1261,7 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
     public void testSpeedCheck2() throws EncoderException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck2");
         final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
-        final String phrase = "foo";
+        final String phrase = "bar";
         for (int i = 1 ; i <= (phrase.length()) ; i++) {
             bmpm.encode(phrase.subSequence(0, i));
         }
@@ -953,8 +1269,8 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
     }
 
     @Test
-    public void testSpeedCheck2_literalMutation154() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck2_literalMutation154");
+    public void testSpeedCheck2_literalMutation199() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck2_literalMutation199");
         final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
         final String phrase = "ItstheendoftheworldasweknowitandIfeelfine";
         for (int i = 2 ; i <= (phrase.length()) ; i++) {
@@ -964,12 +1280,56 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
     }
 
     @Test
-    public void testSpeedCheck2_literalMutation155() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck2_literalMutation155");
+    public void testSpeedCheck2_literalMutation200() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck2_literalMutation200");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        final String phrase = "ItstheendoftheworldasweknowitandIfeelfine";
+        for (int i = 0 ; i <= (phrase.length()) ; i++) {
+            bmpm.encode(phrase.subSequence(0, i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSpeedCheck2_literalMutation201() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck2_literalMutation201");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        final String phrase = "ItstheendoftheworldasweknowitandIfeelfine";
+        for (int i = 0 ; i <= (phrase.length()) ; i++) {
+            bmpm.encode(phrase.subSequence(0, i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSpeedCheck2_literalMutation202() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck2_literalMutation202");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        final String phrase = "ItstheendoftheworldasweknowitandIfeelfine";
+        for (int i = 1 ; i <= (phrase.length()) ; i++) {
+            bmpm.encode(phrase.subSequence(1, i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSpeedCheck2_literalMutation203() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck2_literalMutation203");
         final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
         final String phrase = "ItstheendoftheworldasweknowitandIfeelfine";
         for (int i = 1 ; i <= (phrase.length()) ; i++) {
             bmpm.encode(phrase.subSequence(-1, i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSpeedCheck2_literalMutation204() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck2_literalMutation204");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        final String phrase = "ItstheendoftheworldasweknowitandIfeelfine";
+        for (int i = 1 ; i <= (phrase.length()) ; i++) {
+            bmpm.encode(phrase.subSequence(0, i));
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -1008,8 +1368,19 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
     }
 
     @Test
-    public void testSpeedCheck3_literalMutation157() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck3_literalMutation157");
+    public void testSpeedCheck3_literalMutation206() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck3_literalMutation206");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        final String phrase = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
+        for (int i = 2 ; i <= (phrase.length()) ; i++) {
+            bmpm.encode(phrase.subSequence(0, i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSpeedCheck3_literalMutation207() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck3_literalMutation207");
         final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
         final String phrase = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
         for (int i = 0 ; i <= (phrase.length()) ; i++) {
@@ -1019,12 +1390,45 @@ public class BeiderMorseEncoderTest extends StringEncoderAbstractTest<org.apache
     }
 
     @Test
-    public void testSpeedCheck3_literalMutation158() throws EncoderException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck3_literalMutation158");
+    public void testSpeedCheck3_literalMutation208() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck3_literalMutation208");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        final String phrase = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
+        for (int i = 0 ; i <= (phrase.length()) ; i++) {
+            bmpm.encode(phrase.subSequence(0, i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSpeedCheck3_literalMutation209() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck3_literalMutation209");
         final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
         final String phrase = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
         for (int i = 1 ; i <= (phrase.length()) ; i++) {
             bmpm.encode(phrase.subSequence(1, i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSpeedCheck3_literalMutation210() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck3_literalMutation210");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        final String phrase = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
+        for (int i = 1 ; i <= (phrase.length()) ; i++) {
+            bmpm.encode(phrase.subSequence(-1, i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testSpeedCheck3_literalMutation211() throws EncoderException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSpeedCheck3_literalMutation211");
+        final BeiderMorseEncoder bmpm = createGenericApproxEncoder();
+        final String phrase = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
+        for (int i = 1 ; i <= (phrase.length()) ; i++) {
+            bmpm.encode(phrase.subSequence(0, i));
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }

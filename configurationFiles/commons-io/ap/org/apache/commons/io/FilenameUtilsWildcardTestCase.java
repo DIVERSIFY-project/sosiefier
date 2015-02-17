@@ -238,8 +238,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3899() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3899");
+    public void testSplitOnTokens_literalMutation5800() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5800");
         assertArrayEquals(new String[]{ "Ad" , "foo" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
@@ -252,9 +252,9 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3900() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3900");
-        assertArrayEquals(new String[]{ "Ad" , "*" , "foo" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
+    public void testSplitOnTokens_literalMutation5801() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5801");
+        assertArrayEquals(new String[]{ "Ad" , "*" , "bar" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
         assertArrayEquals(new String[]{ "Test" , "?" , "*" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test?*One"));
@@ -266,8 +266,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3901() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3901");
+    public void testSplitOnTokens_literalMutation5802() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5802");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("foo"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
@@ -280,8 +280,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3902() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3902");
+    public void testSplitOnTokens_literalMutation5803() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5803");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "foo" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
@@ -294,10 +294,10 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3903() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3903");
+    public void testSplitOnTokens_literalMutation5804() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5804");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
-        assertArrayEquals(new String[]{ "Ad" , "foo" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
+        assertArrayEquals(new String[]{ "Ad" , "bar" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
         assertArrayEquals(new String[]{ "Test" , "?" , "*" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test?*One"));
         assertArrayEquals(new String[]{ "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("****"));
@@ -308,10 +308,10 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3904() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3904");
+    public void testSplitOnTokens_literalMutation5805() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5805");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
-        assertArrayEquals(new String[]{ "Ad" , "?" , "foo" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
+        assertArrayEquals(new String[]{ "Ad" , "?" , "bar" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
         assertArrayEquals(new String[]{ "Test" , "?" , "*" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test?*One"));
         assertArrayEquals(new String[]{ "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("****"));
@@ -322,8 +322,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3905() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3905");
+    public void testSplitOnTokens_literalMutation5806() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5806");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("foo"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
@@ -336,8 +336,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3906() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3906");
+    public void testSplitOnTokens_literalMutation5807() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5807");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "foo" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
@@ -350,8 +350,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3907() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3907");
+    public void testSplitOnTokens_literalMutation5808() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5808");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "foo" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
@@ -364,11 +364,11 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3908() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3908");
+    public void testSplitOnTokens_literalMutation5809() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5809");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
-        assertArrayEquals(new String[]{ "Test" , "*" , "foo" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
+        assertArrayEquals(new String[]{ "Test" , "*" , "bar" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
         assertArrayEquals(new String[]{ "Test" , "?" , "*" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test?*One"));
         assertArrayEquals(new String[]{ "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("****"));
         assertArrayEquals(new String[]{ "*" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*??*"));
@@ -378,8 +378,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3909() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3909");
+    public void testSplitOnTokens_literalMutation5810() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5810");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "foo" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
@@ -392,8 +392,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3910() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3910");
+    public void testSplitOnTokens_literalMutation5811() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5811");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("foo"));
@@ -406,8 +406,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3911() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3911");
+    public void testSplitOnTokens_literalMutation5812() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5812");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
@@ -420,8 +420,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3912() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3912");
+    public void testSplitOnTokens_literalMutation5813() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5813");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
@@ -434,12 +434,12 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3913() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3913");
+    public void testSplitOnTokens_literalMutation5814() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5814");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
-        assertArrayEquals(new String[]{ "Test" , "?" , "foo" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test?*One"));
+        assertArrayEquals(new String[]{ "Test" , "?" , "bar" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test?*One"));
         assertArrayEquals(new String[]{ "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("****"));
         assertArrayEquals(new String[]{ "*" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*??*"));
         assertArrayEquals(new String[]{ "*" , "?" , "*" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*?**?*"));
@@ -448,12 +448,12 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3914() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3914");
+    public void testSplitOnTokens_literalMutation5815() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5815");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
-        assertArrayEquals(new String[]{ "Test" , "?" , "*" , "foo" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test?*One"));
+        assertArrayEquals(new String[]{ "Test" , "?" , "*" , "bar" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test?*One"));
         assertArrayEquals(new String[]{ "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("****"));
         assertArrayEquals(new String[]{ "*" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*??*"));
         assertArrayEquals(new String[]{ "*" , "?" , "*" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*?**?*"));
@@ -462,12 +462,12 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3915() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3915");
+    public void testSplitOnTokens_literalMutation5816() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5816");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
-        assertArrayEquals(new String[]{ "Test" , "?" , "*" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("foo"));
+        assertArrayEquals(new String[]{ "Test" , "?" , "*" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("bar"));
         assertArrayEquals(new String[]{ "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("****"));
         assertArrayEquals(new String[]{ "*" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*??*"));
         assertArrayEquals(new String[]{ "*" , "?" , "*" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*?**?*"));
@@ -476,13 +476,13 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3916() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3916");
+    public void testSplitOnTokens_literalMutation5817() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5817");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
         assertArrayEquals(new String[]{ "Test" , "?" , "*" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test?*One"));
-        assertArrayEquals(new String[]{ "foo" }, org.apache.commons.io.FilenameUtils.splitOnTokens("****"));
+        assertArrayEquals(new String[]{ "bar" }, org.apache.commons.io.FilenameUtils.splitOnTokens("****"));
         assertArrayEquals(new String[]{ "*" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*??*"));
         assertArrayEquals(new String[]{ "*" , "?" , "*" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*?**?*"));
         assertArrayEquals(new String[]{ "h" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("h??*"));
@@ -490,13 +490,13 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3917() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3917");
+    public void testSplitOnTokens_literalMutation5818() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5818");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
         assertArrayEquals(new String[]{ "Test" , "?" , "*" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test?*One"));
-        assertArrayEquals(new String[]{ "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("foo"));
+        assertArrayEquals(new String[]{ "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("bar"));
         assertArrayEquals(new String[]{ "*" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*??*"));
         assertArrayEquals(new String[]{ "*" , "?" , "*" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*?**?*"));
         assertArrayEquals(new String[]{ "h" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("h??*"));
@@ -504,8 +504,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3918() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3918");
+    public void testSplitOnTokens_literalMutation5819() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5819");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
@@ -518,22 +518,22 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3919() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3919");
+    public void testSplitOnTokens_literalMutation5820() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5820");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
         assertArrayEquals(new String[]{ "Test" , "?" , "*" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test?*One"));
         assertArrayEquals(new String[]{ "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("****"));
-        assertArrayEquals(new String[]{ "*" , "foo" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*??*"));
+        assertArrayEquals(new String[]{ "*" , "bar" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*??*"));
         assertArrayEquals(new String[]{ "*" , "?" , "*" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*?**?*"));
         assertArrayEquals(new String[]{ "h" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("h??*"));
         assertArrayEquals(new String[]{ "" }, org.apache.commons.io.FilenameUtils.splitOnTokens(""));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3920() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3920");
+    public void testSplitOnTokens_literalMutation5821() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5821");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
@@ -546,8 +546,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3921() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3921");
+    public void testSplitOnTokens_literalMutation5822() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5822");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
@@ -560,106 +560,106 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3922() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3922");
+    public void testSplitOnTokens_literalMutation5823() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5823");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
         assertArrayEquals(new String[]{ "Test" , "?" , "*" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test?*One"));
         assertArrayEquals(new String[]{ "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("****"));
-        assertArrayEquals(new String[]{ "*" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("foo"));
+        assertArrayEquals(new String[]{ "*" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("bar"));
         assertArrayEquals(new String[]{ "*" , "?" , "*" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*?**?*"));
         assertArrayEquals(new String[]{ "h" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("h??*"));
         assertArrayEquals(new String[]{ "" }, org.apache.commons.io.FilenameUtils.splitOnTokens(""));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3923() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3923");
+    public void testSplitOnTokens_literalMutation5824() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5824");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
         assertArrayEquals(new String[]{ "Test" , "?" , "*" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test?*One"));
         assertArrayEquals(new String[]{ "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("****"));
         assertArrayEquals(new String[]{ "*" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*??*"));
-        assertArrayEquals(new String[]{ "foo" , "?" , "*" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*?**?*"));
+        assertArrayEquals(new String[]{ "bar" , "?" , "*" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*?**?*"));
         assertArrayEquals(new String[]{ "h" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("h??*"));
         assertArrayEquals(new String[]{ "" }, org.apache.commons.io.FilenameUtils.splitOnTokens(""));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3924() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3924");
+    public void testSplitOnTokens_literalMutation5825() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5825");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
         assertArrayEquals(new String[]{ "Test" , "?" , "*" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test?*One"));
         assertArrayEquals(new String[]{ "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("****"));
         assertArrayEquals(new String[]{ "*" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*??*"));
-        assertArrayEquals(new String[]{ "*" , "foo" , "*" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*?**?*"));
+        assertArrayEquals(new String[]{ "*" , "bar" , "*" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*?**?*"));
         assertArrayEquals(new String[]{ "h" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("h??*"));
         assertArrayEquals(new String[]{ "" }, org.apache.commons.io.FilenameUtils.splitOnTokens(""));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3925() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3925");
+    public void testSplitOnTokens_literalMutation5826() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5826");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
         assertArrayEquals(new String[]{ "Test" , "?" , "*" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test?*One"));
         assertArrayEquals(new String[]{ "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("****"));
         assertArrayEquals(new String[]{ "*" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*??*"));
-        assertArrayEquals(new String[]{ "*" , "?" , "foo" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*?**?*"));
+        assertArrayEquals(new String[]{ "*" , "?" , "bar" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*?**?*"));
         assertArrayEquals(new String[]{ "h" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("h??*"));
         assertArrayEquals(new String[]{ "" }, org.apache.commons.io.FilenameUtils.splitOnTokens(""));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3926() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3926");
+    public void testSplitOnTokens_literalMutation5827() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5827");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
         assertArrayEquals(new String[]{ "Test" , "?" , "*" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test?*One"));
         assertArrayEquals(new String[]{ "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("****"));
         assertArrayEquals(new String[]{ "*" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*??*"));
-        assertArrayEquals(new String[]{ "*" , "?" , "*" , "foo" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*?**?*"));
+        assertArrayEquals(new String[]{ "*" , "?" , "*" , "bar" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*?**?*"));
         assertArrayEquals(new String[]{ "h" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("h??*"));
         assertArrayEquals(new String[]{ "" }, org.apache.commons.io.FilenameUtils.splitOnTokens(""));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3927() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3927");
+    public void testSplitOnTokens_literalMutation5828() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5828");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
         assertArrayEquals(new String[]{ "Test" , "?" , "*" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test?*One"));
         assertArrayEquals(new String[]{ "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("****"));
         assertArrayEquals(new String[]{ "*" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*??*"));
-        assertArrayEquals(new String[]{ "*" , "?" , "*" , "?" , "foo" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*?**?*"));
+        assertArrayEquals(new String[]{ "*" , "?" , "*" , "?" , "bar" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*?**?*"));
         assertArrayEquals(new String[]{ "h" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("h??*"));
         assertArrayEquals(new String[]{ "" }, org.apache.commons.io.FilenameUtils.splitOnTokens(""));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3928() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3928");
+    public void testSplitOnTokens_literalMutation5829() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5829");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
         assertArrayEquals(new String[]{ "Test" , "?" , "*" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test?*One"));
         assertArrayEquals(new String[]{ "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("****"));
         assertArrayEquals(new String[]{ "*" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*??*"));
-        assertArrayEquals(new String[]{ "*" , "?" , "*" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("foo"));
+        assertArrayEquals(new String[]{ "*" , "?" , "*" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("bar"));
         assertArrayEquals(new String[]{ "h" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("h??*"));
         assertArrayEquals(new String[]{ "" }, org.apache.commons.io.FilenameUtils.splitOnTokens(""));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3929() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3929");
+    public void testSplitOnTokens_literalMutation5830() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5830");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
@@ -672,8 +672,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3930() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3930");
+    public void testSplitOnTokens_literalMutation5831() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5831");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
@@ -686,8 +686,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3931() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3931");
+    public void testSplitOnTokens_literalMutation5832() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5832");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
@@ -700,8 +700,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3932() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3932");
+    public void testSplitOnTokens_literalMutation5833() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5833");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
@@ -709,13 +709,13 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertArrayEquals(new String[]{ "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("****"));
         assertArrayEquals(new String[]{ "*" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*??*"));
         assertArrayEquals(new String[]{ "*" , "?" , "*" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*?**?*"));
-        assertArrayEquals(new String[]{ "h" , "?" , "?" , "foo" }, org.apache.commons.io.FilenameUtils.splitOnTokens("h??*"));
+        assertArrayEquals(new String[]{ "h" , "?" , "?" , "bar" }, org.apache.commons.io.FilenameUtils.splitOnTokens("h??*"));
         assertArrayEquals(new String[]{ "" }, org.apache.commons.io.FilenameUtils.splitOnTokens(""));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3933() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3933");
+    public void testSplitOnTokens_literalMutation5834() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5834");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
@@ -723,13 +723,13 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertArrayEquals(new String[]{ "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("****"));
         assertArrayEquals(new String[]{ "*" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*??*"));
         assertArrayEquals(new String[]{ "*" , "?" , "*" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*?**?*"));
-        assertArrayEquals(new String[]{ "h" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("foo"));
+        assertArrayEquals(new String[]{ "h" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("bar"));
         assertArrayEquals(new String[]{ "" }, org.apache.commons.io.FilenameUtils.splitOnTokens(""));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3934() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3934");
+    public void testSplitOnTokens_literalMutation5835() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5835");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
@@ -742,8 +742,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testSplitOnTokens_literalMutation3935() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation3935");
+    public void testSplitOnTokens_literalMutation5836() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSplitOnTokens_literalMutation5836");
         assertArrayEquals(new String[]{ "Ad" , "*" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad*er"));
         assertArrayEquals(new String[]{ "Ad" , "?" , "er" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Ad?er"));
         assertArrayEquals(new String[]{ "Test" , "*" , "?" , "One" }, org.apache.commons.io.FilenameUtils.splitOnTokens("Test*?One"));
@@ -752,7 +752,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertArrayEquals(new String[]{ "*" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*??*"));
         assertArrayEquals(new String[]{ "*" , "?" , "*" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("*?**?*"));
         assertArrayEquals(new String[]{ "h" , "?" , "?" , "*" }, org.apache.commons.io.FilenameUtils.splitOnTokens("h??*"));
-        assertArrayEquals(new String[]{ "" }, org.apache.commons.io.FilenameUtils.splitOnTokens("foo"));
+        assertArrayEquals(new String[]{ "" }, org.apache.commons.io.FilenameUtils.splitOnTokens("bar"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2147,7 +2147,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
 
     public void testMatch() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch");
-        assertMatch("foo", "log.txt", true);
+        assertMatch("bar", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
         assertMatch("log.txt", "log.txt*1", false);
@@ -2184,7 +2184,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
 
     public void testMatch2() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2");
-        assertMatch("log.txt", "foo", true);
+        assertMatch("log.txt", "bar", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
         assertMatch("log.txt", "log.txt*1", false);
@@ -2219,9 +2219,9 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3804() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3804");
-        assertMatch("log.txt", "log.txt", true);
+    public void testMatch2_literalMutation5705() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5705");
+        assertMatch("log.txt", "log.txt", false);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
         assertMatch("log.txt", "log.txt*1", false);
@@ -2256,8 +2256,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3805() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3805");
+    public void testMatch2_literalMutation5706() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5706");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("foo", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -2293,8 +2293,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3806() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3806");
+    public void testMatch2_literalMutation5707() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5707");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "foo", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -2330,8 +2330,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3807() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3807");
+    public void testMatch2_literalMutation5708() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5708");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", true);
         assertMatch("log.txt", "log.txt*", true);
@@ -2367,8 +2367,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3808() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3808");
+    public void testMatch2_literalMutation5709() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5709");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("foo", "log.txt*", true);
@@ -2404,8 +2404,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3809() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3809");
+    public void testMatch2_literalMutation5710() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5710");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "foo", true);
@@ -2441,11 +2441,11 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3810() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3810");
+    public void testMatch2_literalMutation5711() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5711");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
-        assertMatch("log.txt", "log.txt*", true);
+        assertMatch("log.txt", "log.txt*", false);
         assertMatch("log.txt", "log.txt*1", false);
         assertMatch("log.txt", "*log.txt*", true);
         assertMatch("log.txt", "*.txt", true);
@@ -2478,8 +2478,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3811() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3811");
+    public void testMatch2_literalMutation5712() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5712");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -2515,12 +2515,12 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3812() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3812");
+    public void testMatch2_literalMutation5713() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5713");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
-        assertMatch("log.txt", "foo", false);
+        assertMatch("log.txt", "bar", false);
         assertMatch("log.txt", "*log.txt*", true);
         assertMatch("log.txt", "*.txt", true);
         assertMatch("txt.log", "*.txt", false);
@@ -2552,8 +2552,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3813() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3813");
+    public void testMatch2_literalMutation5714() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5714");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -2589,13 +2589,13 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3814() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3814");
+    public void testMatch2_literalMutation5715() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5715");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
         assertMatch("log.txt", "log.txt*1", false);
-        assertMatch("foo", "*log.txt*", true);
+        assertMatch("bar", "*log.txt*", true);
         assertMatch("log.txt", "*.txt", true);
         assertMatch("txt.log", "*.txt", false);
         assertMatch("config.ini", "*.ini", true);
@@ -2626,13 +2626,13 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3815() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3815");
+    public void testMatch2_literalMutation5716() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5716");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
         assertMatch("log.txt", "log.txt*1", false);
-        assertMatch("log.txt", "foo", true);
+        assertMatch("log.txt", "bar", true);
         assertMatch("log.txt", "*.txt", true);
         assertMatch("txt.log", "*.txt", false);
         assertMatch("config.ini", "*.ini", true);
@@ -2663,8 +2663,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3816() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3816");
+    public void testMatch2_literalMutation5717() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5717");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -2700,14 +2700,14 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3817() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3817");
+    public void testMatch2_literalMutation5718() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5718");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
         assertMatch("log.txt", "log.txt*1", false);
         assertMatch("log.txt", "*log.txt*", true);
-        assertMatch("foo", "*.txt", true);
+        assertMatch("bar", "*.txt", true);
         assertMatch("txt.log", "*.txt", false);
         assertMatch("config.ini", "*.ini", true);
         assertMatch("config.txt.bak", "con*.txt", false);
@@ -2737,8 +2737,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3818() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3818");
+    public void testMatch2_literalMutation5719() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5719");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -2774,14 +2774,14 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3819() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3819");
+    public void testMatch2_literalMutation5720() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5720");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
         assertMatch("log.txt", "log.txt*1", false);
         assertMatch("log.txt", "*log.txt*", true);
-        assertMatch("log.txt", "*.txt", true);
+        assertMatch("log.txt", "*.txt", false);
         assertMatch("txt.log", "*.txt", false);
         assertMatch("config.ini", "*.ini", true);
         assertMatch("config.txt.bak", "con*.txt", false);
@@ -2811,15 +2811,15 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3820() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3820");
+    public void testMatch2_literalMutation5721() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5721");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
         assertMatch("log.txt", "log.txt*1", false);
         assertMatch("log.txt", "*log.txt*", true);
         assertMatch("log.txt", "*.txt", true);
-        assertMatch("foo", "*.txt", false);
+        assertMatch("bar", "*.txt", false);
         assertMatch("config.ini", "*.ini", true);
         assertMatch("config.txt.bak", "con*.txt", false);
         assertMatch("log.txt9", "*.txt?", true);
@@ -2848,15 +2848,15 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3821() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3821");
+    public void testMatch2_literalMutation5722() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5722");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
         assertMatch("log.txt", "log.txt*1", false);
         assertMatch("log.txt", "*log.txt*", true);
         assertMatch("log.txt", "*.txt", true);
-        assertMatch("txt.log", "foo", false);
+        assertMatch("txt.log", "bar", false);
         assertMatch("config.ini", "*.ini", true);
         assertMatch("config.txt.bak", "con*.txt", false);
         assertMatch("log.txt9", "*.txt?", true);
@@ -2885,8 +2885,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3822() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3822");
+    public void testMatch2_literalMutation5723() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5723");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -2922,8 +2922,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3823() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3823");
+    public void testMatch2_literalMutation5724() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5724");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -2959,8 +2959,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3824() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3824");
+    public void testMatch2_literalMutation5725() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5725");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -2968,7 +2968,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.txt", "*log.txt*", true);
         assertMatch("log.txt", "*.txt", true);
         assertMatch("txt.log", "*.txt", false);
-        assertMatch("config.ini", "foo", true);
+        assertMatch("config.ini", "bar", true);
         assertMatch("config.txt.bak", "con*.txt", false);
         assertMatch("log.txt9", "*.txt?", true);
         assertMatch("log.txt", "*.txt?", false);
@@ -2996,8 +2996,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3825() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3825");
+    public void testMatch2_literalMutation5726() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5726");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3033,8 +3033,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3826() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3826");
+    public void testMatch2_literalMutation5727() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5727");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3070,8 +3070,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3827() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3827");
+    public void testMatch2_literalMutation5728() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5728");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3080,7 +3080,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.txt", "*.txt", true);
         assertMatch("txt.log", "*.txt", false);
         assertMatch("config.ini", "*.ini", true);
-        assertMatch("config.txt.bak", "foo", false);
+        assertMatch("config.txt.bak", "bar", false);
         assertMatch("log.txt9", "*.txt?", true);
         assertMatch("log.txt", "*.txt?", false);
         assertMatch("progtestcase.java~5~", "*test*.java~*~", true);
@@ -3107,8 +3107,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3828() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3828");
+    public void testMatch2_literalMutation5729() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5729");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3144,8 +3144,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3829() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3829");
+    public void testMatch2_literalMutation5730() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5730");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3181,8 +3181,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3830() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3830");
+    public void testMatch2_literalMutation5731() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5731");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3192,7 +3192,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("txt.log", "*.txt", false);
         assertMatch("config.ini", "*.ini", true);
         assertMatch("config.txt.bak", "con*.txt", false);
-        assertMatch("log.txt9", "foo", true);
+        assertMatch("log.txt9", "bar", true);
         assertMatch("log.txt", "*.txt?", false);
         assertMatch("progtestcase.java~5~", "*test*.java~*~", true);
         assertMatch("progtestcase.java;5~", "*test*.java~*~", false);
@@ -3218,8 +3218,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3831() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3831");
+    public void testMatch2_literalMutation5732() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5732");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3229,7 +3229,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("txt.log", "*.txt", false);
         assertMatch("config.ini", "*.ini", true);
         assertMatch("config.txt.bak", "con*.txt", false);
-        assertMatch("log.txt9", "*.txt?", true);
+        assertMatch("log.txt9", "*.txt?", false);
         assertMatch("log.txt", "*.txt?", false);
         assertMatch("progtestcase.java~5~", "*test*.java~*~", true);
         assertMatch("progtestcase.java;5~", "*test*.java~*~", false);
@@ -3255,8 +3255,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3832() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3832");
+    public void testMatch2_literalMutation5733() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5733");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3292,8 +3292,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3833() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3833");
+    public void testMatch2_literalMutation5734() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5734");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3329,8 +3329,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3834() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3834");
+    public void testMatch2_literalMutation5735() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5735");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3341,7 +3341,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("config.ini", "*.ini", true);
         assertMatch("config.txt.bak", "con*.txt", false);
         assertMatch("log.txt9", "*.txt?", true);
-        assertMatch("log.txt", "*.txt?", false);
+        assertMatch("log.txt", "*.txt?", true);
         assertMatch("progtestcase.java~5~", "*test*.java~*~", true);
         assertMatch("progtestcase.java;5~", "*test*.java~*~", false);
         assertMatch("progtestcase.java~5", "*test*.java~*~", false);
@@ -3366,8 +3366,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3835() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3835");
+    public void testMatch2_literalMutation5736() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5736");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3403,8 +3403,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3836() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3836");
+    public void testMatch2_literalMutation5737() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5737");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3416,7 +3416,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("config.txt.bak", "con*.txt", false);
         assertMatch("log.txt9", "*.txt?", true);
         assertMatch("log.txt", "*.txt?", false);
-        assertMatch("progtestcase.java~5~", "foo", true);
+        assertMatch("progtestcase.java~5~", "bar", true);
         assertMatch("progtestcase.java;5~", "*test*.java~*~", false);
         assertMatch("progtestcase.java~5", "*test*.java~*~", false);
         assertMatch("log.txt", "log.*", true);
@@ -3440,8 +3440,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3837() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3837");
+    public void testMatch2_literalMutation5738() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5738");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3453,7 +3453,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("config.txt.bak", "con*.txt", false);
         assertMatch("log.txt9", "*.txt?", true);
         assertMatch("log.txt", "*.txt?", false);
-        assertMatch("progtestcase.java~5~", "*test*.java~*~", true);
+        assertMatch("progtestcase.java~5~", "*test*.java~*~", false);
         assertMatch("progtestcase.java;5~", "*test*.java~*~", false);
         assertMatch("progtestcase.java~5", "*test*.java~*~", false);
         assertMatch("log.txt", "log.*", true);
@@ -3477,8 +3477,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3838() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3838");
+    public void testMatch2_literalMutation5739() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5739");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3514,8 +3514,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3839() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3839");
+    public void testMatch2_literalMutation5740() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5740");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3528,7 +3528,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.txt9", "*.txt?", true);
         assertMatch("log.txt", "*.txt?", false);
         assertMatch("progtestcase.java~5~", "*test*.java~*~", true);
-        assertMatch("progtestcase.java;5~", "foo", false);
+        assertMatch("progtestcase.java;5~", "bar", false);
         assertMatch("progtestcase.java~5", "*test*.java~*~", false);
         assertMatch("log.txt", "log.*", true);
         assertMatch("log.txt", "log?*", true);
@@ -3551,8 +3551,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3840() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3840");
+    public void testMatch2_literalMutation5741() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5741");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3588,8 +3588,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3841() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3841");
+    public void testMatch2_literalMutation5742() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5742");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3625,8 +3625,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3842() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3842");
+    public void testMatch2_literalMutation5743() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5743");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3640,7 +3640,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.txt", "*.txt?", false);
         assertMatch("progtestcase.java~5~", "*test*.java~*~", true);
         assertMatch("progtestcase.java;5~", "*test*.java~*~", false);
-        assertMatch("progtestcase.java~5", "foo", false);
+        assertMatch("progtestcase.java~5", "bar", false);
         assertMatch("log.txt", "log.*", true);
         assertMatch("log.txt", "log?*", true);
         assertMatch("log.txt12", "log.txt??", true);
@@ -3662,8 +3662,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3843() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3843");
+    public void testMatch2_literalMutation5744() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5744");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3677,7 +3677,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.txt", "*.txt?", false);
         assertMatch("progtestcase.java~5~", "*test*.java~*~", true);
         assertMatch("progtestcase.java;5~", "*test*.java~*~", false);
-        assertMatch("progtestcase.java~5", "*test*.java~*~", false);
+        assertMatch("progtestcase.java~5", "*test*.java~*~", true);
         assertMatch("log.txt", "log.*", true);
         assertMatch("log.txt", "log?*", true);
         assertMatch("log.txt12", "log.txt??", true);
@@ -3699,8 +3699,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3844() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3844");
+    public void testMatch2_literalMutation5745() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5745");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3736,8 +3736,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3845() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3845");
+    public void testMatch2_literalMutation5746() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5746");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3752,7 +3752,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("progtestcase.java~5~", "*test*.java~*~", true);
         assertMatch("progtestcase.java;5~", "*test*.java~*~", false);
         assertMatch("progtestcase.java~5", "*test*.java~*~", false);
-        assertMatch("log.txt", "foo", true);
+        assertMatch("log.txt", "bar", true);
         assertMatch("log.txt", "log?*", true);
         assertMatch("log.txt12", "log.txt??", true);
         assertMatch("log.log", "log**log", true);
@@ -3773,8 +3773,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3846() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3846");
+    public void testMatch2_literalMutation5747() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5747");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3789,7 +3789,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("progtestcase.java~5~", "*test*.java~*~", true);
         assertMatch("progtestcase.java;5~", "*test*.java~*~", false);
         assertMatch("progtestcase.java~5", "*test*.java~*~", false);
-        assertMatch("log.txt", "log.*", true);
+        assertMatch("log.txt", "log.*", false);
         assertMatch("log.txt", "log?*", true);
         assertMatch("log.txt12", "log.txt??", true);
         assertMatch("log.log", "log**log", true);
@@ -3810,8 +3810,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3847() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3847");
+    public void testMatch2_literalMutation5748() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5748");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3847,8 +3847,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3848() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3848");
+    public void testMatch2_literalMutation5749() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5749");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3884,8 +3884,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3849() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3849");
+    public void testMatch2_literalMutation5750() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5750");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3901,7 +3901,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("progtestcase.java;5~", "*test*.java~*~", false);
         assertMatch("progtestcase.java~5", "*test*.java~*~", false);
         assertMatch("log.txt", "log.*", true);
-        assertMatch("log.txt", "log?*", true);
+        assertMatch("log.txt", "log?*", false);
         assertMatch("log.txt12", "log.txt??", true);
         assertMatch("log.log", "log**log", true);
         assertMatch("log.log", "log**", true);
@@ -3921,8 +3921,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3850() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3850");
+    public void testMatch2_literalMutation5751() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5751");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3939,7 +3939,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("progtestcase.java~5", "*test*.java~*~", false);
         assertMatch("log.txt", "log.*", true);
         assertMatch("log.txt", "log?*", true);
-        assertMatch("foo", "log.txt??", true);
+        assertMatch("bar", "log.txt??", true);
         assertMatch("log.log", "log**log", true);
         assertMatch("log.log", "log**", true);
         assertMatch("log.log", "log.**", true);
@@ -3958,8 +3958,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3851() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3851");
+    public void testMatch2_literalMutation5752() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5752");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -3976,7 +3976,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("progtestcase.java~5", "*test*.java~*~", false);
         assertMatch("log.txt", "log.*", true);
         assertMatch("log.txt", "log?*", true);
-        assertMatch("log.txt12", "foo", true);
+        assertMatch("log.txt12", "bar", true);
         assertMatch("log.log", "log**log", true);
         assertMatch("log.log", "log**", true);
         assertMatch("log.log", "log.**", true);
@@ -3995,8 +3995,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3852() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3852");
+    public void testMatch2_literalMutation5753() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5753");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4032,8 +4032,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3853() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3853");
+    public void testMatch2_literalMutation5754() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5754");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4069,8 +4069,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3854() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3854");
+    public void testMatch2_literalMutation5755() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5755");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4088,7 +4088,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.txt", "log.*", true);
         assertMatch("log.txt", "log?*", true);
         assertMatch("log.txt12", "log.txt??", true);
-        assertMatch("log.log", "foo", true);
+        assertMatch("log.log", "bar", true);
         assertMatch("log.log", "log**", true);
         assertMatch("log.log", "log.**", true);
         assertMatch("log.log", "**.log", true);
@@ -4106,8 +4106,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3855() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3855");
+    public void testMatch2_literalMutation5756() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5756");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4143,8 +4143,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3856() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3856");
+    public void testMatch2_literalMutation5757() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5757");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4163,7 +4163,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.txt", "log?*", true);
         assertMatch("log.txt12", "log.txt??", true);
         assertMatch("log.log", "log**log", true);
-        assertMatch("foo", "log**", true);
+        assertMatch("bar", "log**", true);
         assertMatch("log.log", "log.**", true);
         assertMatch("log.log", "**.log", true);
         assertMatch("log.log", "**log", true);
@@ -4180,8 +4180,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3857() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3857");
+    public void testMatch2_literalMutation5758() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5758");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4217,8 +4217,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3858() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3858");
+    public void testMatch2_literalMutation5759() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5759");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4237,7 +4237,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.txt", "log?*", true);
         assertMatch("log.txt12", "log.txt??", true);
         assertMatch("log.log", "log**log", true);
-        assertMatch("log.log", "log**", true);
+        assertMatch("log.log", "log**", false);
         assertMatch("log.log", "log.**", true);
         assertMatch("log.log", "**.log", true);
         assertMatch("log.log", "**log", true);
@@ -4254,8 +4254,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3859() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3859");
+    public void testMatch2_literalMutation5760() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5760");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4291,8 +4291,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3860() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3860");
+    public void testMatch2_literalMutation5761() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5761");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4312,7 +4312,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.txt12", "log.txt??", true);
         assertMatch("log.log", "log**log", true);
         assertMatch("log.log", "log**", true);
-        assertMatch("log.log", "foo", true);
+        assertMatch("log.log", "bar", true);
         assertMatch("log.log", "**.log", true);
         assertMatch("log.log", "**log", true);
         assertMatch("log.log", "log*log", true);
@@ -4328,8 +4328,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3861() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3861");
+    public void testMatch2_literalMutation5762() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5762");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4365,8 +4365,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3862() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3862");
+    public void testMatch2_literalMutation5763() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5763");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4387,7 +4387,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.log", "log**log", true);
         assertMatch("log.log", "log**", true);
         assertMatch("log.log", "log.**", true);
-        assertMatch("foo", "**.log", true);
+        assertMatch("bar", "**.log", true);
         assertMatch("log.log", "**log", true);
         assertMatch("log.log", "log*log", true);
         assertMatch("log.log", "log*", true);
@@ -4402,8 +4402,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3863() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3863");
+    public void testMatch2_literalMutation5764() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5764");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4424,7 +4424,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.log", "log**log", true);
         assertMatch("log.log", "log**", true);
         assertMatch("log.log", "log.**", true);
-        assertMatch("log.log", "foo", true);
+        assertMatch("log.log", "bar", true);
         assertMatch("log.log", "**log", true);
         assertMatch("log.log", "log*log", true);
         assertMatch("log.log", "log*", true);
@@ -4439,8 +4439,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3864() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3864");
+    public void testMatch2_literalMutation5765() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5765");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4461,7 +4461,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.log", "log**log", true);
         assertMatch("log.log", "log**", true);
         assertMatch("log.log", "log.**", true);
-        assertMatch("log.log", "**.log", true);
+        assertMatch("log.log", "**.log", false);
         assertMatch("log.log", "**log", true);
         assertMatch("log.log", "log*log", true);
         assertMatch("log.log", "log*", true);
@@ -4476,8 +4476,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3865() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3865");
+    public void testMatch2_literalMutation5766() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5766");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4513,8 +4513,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3866() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3866");
+    public void testMatch2_literalMutation5767() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5767");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4536,8 +4536,119 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.log", "log**", true);
         assertMatch("log.log", "log.**", true);
         assertMatch("log.log", "**.log", true);
+        assertMatch("log.log", "bar", true);
+        assertMatch("log.log", "log*log", true);
+        assertMatch("log.log", "log*", true);
+        assertMatch("log.log", "log.*", true);
+        assertMatch("log.log", "*.log", true);
+        assertMatch("log.log", "*log", true);
+        assertMatch("log.log", "*log?", false);
+        assertMatch("log.log", "*log?*", true);
+        assertMatch("log.log.abc", "*log?abc", true);
+        assertMatch("log.log.abc.log.abc", "*log?abc", true);
+        assertMatch("log.log.abc.log.abc.d", "*log?abc?d", true);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testMatch2_literalMutation5768() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5768");
+        assertMatch("log.txt", "log.txt", true);
+        assertMatch("log.txt1", "log.txt", false);
+        assertMatch("log.txt", "log.txt*", true);
+        assertMatch("log.txt", "log.txt*1", false);
+        assertMatch("log.txt", "*log.txt*", true);
+        assertMatch("log.txt", "*.txt", true);
+        assertMatch("txt.log", "*.txt", false);
+        assertMatch("config.ini", "*.ini", true);
+        assertMatch("config.txt.bak", "con*.txt", false);
+        assertMatch("log.txt9", "*.txt?", true);
+        assertMatch("log.txt", "*.txt?", false);
+        assertMatch("progtestcase.java~5~", "*test*.java~*~", true);
+        assertMatch("progtestcase.java;5~", "*test*.java~*~", false);
+        assertMatch("progtestcase.java~5", "*test*.java~*~", false);
+        assertMatch("log.txt", "log.*", true);
+        assertMatch("log.txt", "log?*", true);
+        assertMatch("log.txt12", "log.txt??", true);
+        assertMatch("log.log", "log**log", true);
+        assertMatch("log.log", "log**", true);
+        assertMatch("log.log", "log.**", true);
+        assertMatch("log.log", "**.log", true);
+        assertMatch("log.log", "**log", false);
+        assertMatch("log.log", "log*log", true);
+        assertMatch("log.log", "log*", true);
+        assertMatch("log.log", "log.*", true);
+        assertMatch("log.log", "*.log", true);
+        assertMatch("log.log", "*log", true);
+        assertMatch("log.log", "*log?", false);
+        assertMatch("log.log", "*log?*", true);
+        assertMatch("log.log.abc", "*log?abc", true);
+        assertMatch("log.log.abc.log.abc", "*log?abc", true);
+        assertMatch("log.log.abc.log.abc.d", "*log?abc?d", true);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testMatch2_literalMutation5769() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5769");
+        assertMatch("log.txt", "log.txt", true);
+        assertMatch("log.txt1", "log.txt", false);
+        assertMatch("log.txt", "log.txt*", true);
+        assertMatch("log.txt", "log.txt*1", false);
+        assertMatch("log.txt", "*log.txt*", true);
+        assertMatch("log.txt", "*.txt", true);
+        assertMatch("txt.log", "*.txt", false);
+        assertMatch("config.ini", "*.ini", true);
+        assertMatch("config.txt.bak", "con*.txt", false);
+        assertMatch("log.txt9", "*.txt?", true);
+        assertMatch("log.txt", "*.txt?", false);
+        assertMatch("progtestcase.java~5~", "*test*.java~*~", true);
+        assertMatch("progtestcase.java;5~", "*test*.java~*~", false);
+        assertMatch("progtestcase.java~5", "*test*.java~*~", false);
+        assertMatch("log.txt", "log.*", true);
+        assertMatch("log.txt", "log?*", true);
+        assertMatch("log.txt12", "log.txt??", true);
+        assertMatch("log.log", "log**log", true);
+        assertMatch("log.log", "log**", true);
+        assertMatch("log.log", "log.**", true);
+        assertMatch("log.log", "**.log", true);
+        assertMatch("log.log", "**log", true);
+        assertMatch("bar", "log*log", true);
+        assertMatch("log.log", "log*", true);
+        assertMatch("log.log", "log.*", true);
+        assertMatch("log.log", "*.log", true);
+        assertMatch("log.log", "*log", true);
+        assertMatch("log.log", "*log?", false);
+        assertMatch("log.log", "*log?*", true);
+        assertMatch("log.log.abc", "*log?abc", true);
+        assertMatch("log.log.abc.log.abc", "*log?abc", true);
+        assertMatch("log.log.abc.log.abc.d", "*log?abc?d", true);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testMatch2_literalMutation5770() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5770");
+        assertMatch("log.txt", "log.txt", true);
+        assertMatch("log.txt1", "log.txt", false);
+        assertMatch("log.txt", "log.txt*", true);
+        assertMatch("log.txt", "log.txt*1", false);
+        assertMatch("log.txt", "*log.txt*", true);
+        assertMatch("log.txt", "*.txt", true);
+        assertMatch("txt.log", "*.txt", false);
+        assertMatch("config.ini", "*.ini", true);
+        assertMatch("config.txt.bak", "con*.txt", false);
+        assertMatch("log.txt9", "*.txt?", true);
+        assertMatch("log.txt", "*.txt?", false);
+        assertMatch("progtestcase.java~5~", "*test*.java~*~", true);
+        assertMatch("progtestcase.java;5~", "*test*.java~*~", false);
+        assertMatch("progtestcase.java~5", "*test*.java~*~", false);
+        assertMatch("log.txt", "log.*", true);
+        assertMatch("log.txt", "log?*", true);
+        assertMatch("log.txt12", "log.txt??", true);
+        assertMatch("log.log", "log**log", true);
+        assertMatch("log.log", "log**", true);
+        assertMatch("log.log", "log.**", true);
+        assertMatch("log.log", "**.log", true);
+        assertMatch("log.log", "**log", true);
         assertMatch("log.log", "foo", true);
-        assertMatch("log.log", "log*log", true);
         assertMatch("log.log", "log*", true);
         assertMatch("log.log", "log.*", true);
         assertMatch("log.log", "*.log", true);
@@ -4550,8 +4661,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3867() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3867");
+    public void testMatch2_literalMutation5771() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5771");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4574,7 +4685,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.log", "log.**", true);
         assertMatch("log.log", "**.log", true);
         assertMatch("log.log", "**log", true);
-        assertMatch("log.log", "log*log", true);
+        assertMatch("log.log", "log*log", false);
         assertMatch("log.log", "log*", true);
         assertMatch("log.log", "log.*", true);
         assertMatch("log.log", "*.log", true);
@@ -4587,82 +4698,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3868() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3868");
-        assertMatch("log.txt", "log.txt", true);
-        assertMatch("log.txt1", "log.txt", false);
-        assertMatch("log.txt", "log.txt*", true);
-        assertMatch("log.txt", "log.txt*1", false);
-        assertMatch("log.txt", "*log.txt*", true);
-        assertMatch("log.txt", "*.txt", true);
-        assertMatch("txt.log", "*.txt", false);
-        assertMatch("config.ini", "*.ini", true);
-        assertMatch("config.txt.bak", "con*.txt", false);
-        assertMatch("log.txt9", "*.txt?", true);
-        assertMatch("log.txt", "*.txt?", false);
-        assertMatch("progtestcase.java~5~", "*test*.java~*~", true);
-        assertMatch("progtestcase.java;5~", "*test*.java~*~", false);
-        assertMatch("progtestcase.java~5", "*test*.java~*~", false);
-        assertMatch("log.txt", "log.*", true);
-        assertMatch("log.txt", "log?*", true);
-        assertMatch("log.txt12", "log.txt??", true);
-        assertMatch("log.log", "log**log", true);
-        assertMatch("log.log", "log**", true);
-        assertMatch("log.log", "log.**", true);
-        assertMatch("log.log", "**.log", true);
-        assertMatch("log.log", "**log", true);
-        assertMatch("foo", "log*log", true);
-        assertMatch("log.log", "log*", true);
-        assertMatch("log.log", "log.*", true);
-        assertMatch("log.log", "*.log", true);
-        assertMatch("log.log", "*log", true);
-        assertMatch("log.log", "*log?", false);
-        assertMatch("log.log", "*log?*", true);
-        assertMatch("log.log.abc", "*log?abc", true);
-        assertMatch("log.log.abc.log.abc", "*log?abc", true);
-        assertMatch("log.log.abc.log.abc.d", "*log?abc?d", true);
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    public void testMatch2_literalMutation3869() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3869");
-        assertMatch("log.txt", "log.txt", true);
-        assertMatch("log.txt1", "log.txt", false);
-        assertMatch("log.txt", "log.txt*", true);
-        assertMatch("log.txt", "log.txt*1", false);
-        assertMatch("log.txt", "*log.txt*", true);
-        assertMatch("log.txt", "*.txt", true);
-        assertMatch("txt.log", "*.txt", false);
-        assertMatch("config.ini", "*.ini", true);
-        assertMatch("config.txt.bak", "con*.txt", false);
-        assertMatch("log.txt9", "*.txt?", true);
-        assertMatch("log.txt", "*.txt?", false);
-        assertMatch("progtestcase.java~5~", "*test*.java~*~", true);
-        assertMatch("progtestcase.java;5~", "*test*.java~*~", false);
-        assertMatch("progtestcase.java~5", "*test*.java~*~", false);
-        assertMatch("log.txt", "log.*", true);
-        assertMatch("log.txt", "log?*", true);
-        assertMatch("log.txt12", "log.txt??", true);
-        assertMatch("log.log", "log**log", true);
-        assertMatch("log.log", "log**", true);
-        assertMatch("log.log", "log.**", true);
-        assertMatch("log.log", "**.log", true);
-        assertMatch("log.log", "**log", true);
-        assertMatch("log.log", "foo", true);
-        assertMatch("log.log", "log*", true);
-        assertMatch("log.log", "log.*", true);
-        assertMatch("log.log", "*.log", true);
-        assertMatch("log.log", "*log", true);
-        assertMatch("log.log", "*log?", false);
-        assertMatch("log.log", "*log?*", true);
-        assertMatch("log.log.abc", "*log?abc", true);
-        assertMatch("log.log.abc.log.abc", "*log?abc", true);
-        assertMatch("log.log.abc.log.abc.d", "*log?abc?d", true);
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    public void testMatch2_literalMutation3870() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3870");
+    public void testMatch2_literalMutation5772() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5772");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4686,7 +4723,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.log", "**.log", true);
         assertMatch("log.log", "**log", true);
         assertMatch("log.log", "log*log", true);
-        assertMatch("log.log", "log*", true);
+        assertMatch("bar", "log*", true);
         assertMatch("log.log", "log.*", true);
         assertMatch("log.log", "*.log", true);
         assertMatch("log.log", "*log", true);
@@ -4698,8 +4735,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3871() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3871");
+    public void testMatch2_literalMutation5773() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5773");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4723,7 +4760,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.log", "**.log", true);
         assertMatch("log.log", "**log", true);
         assertMatch("log.log", "log*log", true);
-        assertMatch("foo", "log*", true);
+        assertMatch("log.log", "bar", true);
         assertMatch("log.log", "log.*", true);
         assertMatch("log.log", "*.log", true);
         assertMatch("log.log", "*log", true);
@@ -4735,8 +4772,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3872() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3872");
+    public void testMatch2_literalMutation5774() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5774");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4760,7 +4797,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.log", "**.log", true);
         assertMatch("log.log", "**log", true);
         assertMatch("log.log", "log*log", true);
-        assertMatch("log.log", "foo", true);
+        assertMatch("log.log", "log*", false);
         assertMatch("log.log", "log.*", true);
         assertMatch("log.log", "*.log", true);
         assertMatch("log.log", "*log", true);
@@ -4772,45 +4809,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3873() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3873");
-        assertMatch("log.txt", "log.txt", true);
-        assertMatch("log.txt1", "log.txt", false);
-        assertMatch("log.txt", "log.txt*", true);
-        assertMatch("log.txt", "log.txt*1", false);
-        assertMatch("log.txt", "*log.txt*", true);
-        assertMatch("log.txt", "*.txt", true);
-        assertMatch("txt.log", "*.txt", false);
-        assertMatch("config.ini", "*.ini", true);
-        assertMatch("config.txt.bak", "con*.txt", false);
-        assertMatch("log.txt9", "*.txt?", true);
-        assertMatch("log.txt", "*.txt?", false);
-        assertMatch("progtestcase.java~5~", "*test*.java~*~", true);
-        assertMatch("progtestcase.java;5~", "*test*.java~*~", false);
-        assertMatch("progtestcase.java~5", "*test*.java~*~", false);
-        assertMatch("log.txt", "log.*", true);
-        assertMatch("log.txt", "log?*", true);
-        assertMatch("log.txt12", "log.txt??", true);
-        assertMatch("log.log", "log**log", true);
-        assertMatch("log.log", "log**", true);
-        assertMatch("log.log", "log.**", true);
-        assertMatch("log.log", "**.log", true);
-        assertMatch("log.log", "**log", true);
-        assertMatch("log.log", "log*log", true);
-        assertMatch("log.log", "log*", true);
-        assertMatch("log.log", "log.*", true);
-        assertMatch("log.log", "*.log", true);
-        assertMatch("log.log", "*log", true);
-        assertMatch("log.log", "*log?", false);
-        assertMatch("log.log", "*log?*", true);
-        assertMatch("log.log.abc", "*log?abc", true);
-        assertMatch("log.log.abc.log.abc", "*log?abc", true);
-        assertMatch("log.log.abc.log.abc.d", "*log?abc?d", true);
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    public void testMatch2_literalMutation3874() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3874");
+    public void testMatch2_literalMutation5775() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5775");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4846,8 +4846,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3875() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3875");
+    public void testMatch2_literalMutation5776() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5776");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4872,7 +4872,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.log", "**log", true);
         assertMatch("log.log", "log*log", true);
         assertMatch("log.log", "log*", true);
-        assertMatch("log.log", "foo", true);
+        assertMatch("log.log", "bar", true);
         assertMatch("log.log", "*.log", true);
         assertMatch("log.log", "*log", true);
         assertMatch("log.log", "*log?", false);
@@ -4883,8 +4883,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3876() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3876");
+    public void testMatch2_literalMutation5777() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5777");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4920,8 +4920,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3877() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3877");
+    public void testMatch2_literalMutation5778() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5778");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4957,8 +4957,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3878() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3878");
+    public void testMatch2_literalMutation5779() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5779");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -4994,8 +4994,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3879() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3879");
+    public void testMatch2_literalMutation5780() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5780");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -5021,7 +5021,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.log", "log*log", true);
         assertMatch("log.log", "log*", true);
         assertMatch("log.log", "log.*", true);
-        assertMatch("log.log", "*.log", true);
+        assertMatch("log.log", "*.log", false);
         assertMatch("log.log", "*log", true);
         assertMatch("log.log", "*log?", false);
         assertMatch("log.log", "*log?*", true);
@@ -5031,8 +5031,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3880() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3880");
+    public void testMatch2_literalMutation5781() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5781");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -5068,8 +5068,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3881() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3881");
+    public void testMatch2_literalMutation5782() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5782");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -5105,8 +5105,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3882() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3882");
+    public void testMatch2_literalMutation5783() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5783");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -5142,8 +5142,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3883() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3883");
+    public void testMatch2_literalMutation5784() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5784");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -5171,7 +5171,7 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.log", "log.*", true);
         assertMatch("log.log", "*.log", true);
         assertMatch("log.log", "*log", true);
-        assertMatch("foo", "*log?", false);
+        assertMatch("bar", "*log?", false);
         assertMatch("log.log", "*log?*", true);
         assertMatch("log.log.abc", "*log?abc", true);
         assertMatch("log.log.abc.log.abc", "*log?abc", true);
@@ -5179,8 +5179,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3884() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3884");
+    public void testMatch2_literalMutation5785() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5785");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -5216,8 +5216,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3885() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3885");
+    public void testMatch2_literalMutation5786() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5786");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -5253,8 +5253,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3886() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3886");
+    public void testMatch2_literalMutation5787() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5787");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -5290,8 +5290,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3887() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3887");
+    public void testMatch2_literalMutation5788() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5788");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -5320,15 +5320,52 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.log", "*.log", true);
         assertMatch("log.log", "*log", true);
         assertMatch("log.log", "*log?", false);
-        assertMatch("log.log", "foo", true);
+        assertMatch("log.log", "bar", true);
         assertMatch("log.log.abc", "*log?abc", true);
         assertMatch("log.log.abc.log.abc", "*log?abc", true);
         assertMatch("log.log.abc.log.abc.d", "*log?abc?d", true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3888() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3888");
+    public void testMatch2_literalMutation5789() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5789");
+        assertMatch("log.txt", "log.txt", true);
+        assertMatch("log.txt1", "log.txt", false);
+        assertMatch("log.txt", "log.txt*", true);
+        assertMatch("log.txt", "log.txt*1", false);
+        assertMatch("log.txt", "*log.txt*", true);
+        assertMatch("log.txt", "*.txt", true);
+        assertMatch("txt.log", "*.txt", false);
+        assertMatch("config.ini", "*.ini", true);
+        assertMatch("config.txt.bak", "con*.txt", false);
+        assertMatch("log.txt9", "*.txt?", true);
+        assertMatch("log.txt", "*.txt?", false);
+        assertMatch("progtestcase.java~5~", "*test*.java~*~", true);
+        assertMatch("progtestcase.java;5~", "*test*.java~*~", false);
+        assertMatch("progtestcase.java~5", "*test*.java~*~", false);
+        assertMatch("log.txt", "log.*", true);
+        assertMatch("log.txt", "log?*", true);
+        assertMatch("log.txt12", "log.txt??", true);
+        assertMatch("log.log", "log**log", true);
+        assertMatch("log.log", "log**", true);
+        assertMatch("log.log", "log.**", true);
+        assertMatch("log.log", "**.log", true);
+        assertMatch("log.log", "**log", true);
+        assertMatch("log.log", "log*log", true);
+        assertMatch("log.log", "log*", true);
+        assertMatch("log.log", "log.*", true);
+        assertMatch("log.log", "*.log", true);
+        assertMatch("log.log", "*log", true);
+        assertMatch("log.log", "*log?", false);
+        assertMatch("log.log", "*log?*", false);
+        assertMatch("log.log.abc", "*log?abc", true);
+        assertMatch("log.log.abc.log.abc", "*log?abc", true);
+        assertMatch("log.log.abc.log.abc.d", "*log?abc?d", true);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testMatch2_literalMutation5790() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5790");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -5358,51 +5395,14 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.log", "*log", true);
         assertMatch("log.log", "*log?", false);
         assertMatch("log.log", "*log?*", true);
-        assertMatch("log.log.abc", "*log?abc", true);
+        assertMatch("bar", "*log?abc", true);
         assertMatch("log.log.abc.log.abc", "*log?abc", true);
         assertMatch("log.log.abc.log.abc.d", "*log?abc?d", true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3889() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3889");
-        assertMatch("log.txt", "log.txt", true);
-        assertMatch("log.txt1", "log.txt", false);
-        assertMatch("log.txt", "log.txt*", true);
-        assertMatch("log.txt", "log.txt*1", false);
-        assertMatch("log.txt", "*log.txt*", true);
-        assertMatch("log.txt", "*.txt", true);
-        assertMatch("txt.log", "*.txt", false);
-        assertMatch("config.ini", "*.ini", true);
-        assertMatch("config.txt.bak", "con*.txt", false);
-        assertMatch("log.txt9", "*.txt?", true);
-        assertMatch("log.txt", "*.txt?", false);
-        assertMatch("progtestcase.java~5~", "*test*.java~*~", true);
-        assertMatch("progtestcase.java;5~", "*test*.java~*~", false);
-        assertMatch("progtestcase.java~5", "*test*.java~*~", false);
-        assertMatch("log.txt", "log.*", true);
-        assertMatch("log.txt", "log?*", true);
-        assertMatch("log.txt12", "log.txt??", true);
-        assertMatch("log.log", "log**log", true);
-        assertMatch("log.log", "log**", true);
-        assertMatch("log.log", "log.**", true);
-        assertMatch("log.log", "**.log", true);
-        assertMatch("log.log", "**log", true);
-        assertMatch("log.log", "log*log", true);
-        assertMatch("log.log", "log*", true);
-        assertMatch("log.log", "log.*", true);
-        assertMatch("log.log", "*.log", true);
-        assertMatch("log.log", "*log", true);
-        assertMatch("log.log", "*log?", false);
-        assertMatch("log.log", "*log?*", true);
-        assertMatch("foo", "*log?abc", true);
-        assertMatch("log.log.abc.log.abc", "*log?abc", true);
-        assertMatch("log.log.abc.log.abc.d", "*log?abc?d", true);
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    public void testMatch2_literalMutation3890() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3890");
+    public void testMatch2_literalMutation5791() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5791");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -5438,8 +5438,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3891() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3891");
+    public void testMatch2_literalMutation5792() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5792");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -5475,8 +5475,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3892() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3892");
+    public void testMatch2_literalMutation5793() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5793");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -5512,8 +5512,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3893() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3893");
+    public void testMatch2_literalMutation5794() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5794");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -5549,8 +5549,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3894() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3894");
+    public void testMatch2_literalMutation5795() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5795");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -5581,13 +5581,13 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         assertMatch("log.log", "*log?", false);
         assertMatch("log.log", "*log?*", true);
         assertMatch("log.log.abc", "*log?abc", true);
-        assertMatch("log.log.abc.log.abc", "*log?abc", true);
+        assertMatch("log.log.abc.log.abc", "*log?abc", false);
         assertMatch("log.log.abc.log.abc.d", "*log?abc?d", true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3895() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3895");
+    public void testMatch2_literalMutation5796() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5796");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -5623,8 +5623,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3896() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3896");
+    public void testMatch2_literalMutation5797() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5797");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -5660,8 +5660,8 @@ public class FilenameUtilsWildcardTestCase extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMatch2_literalMutation3897() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation3897");
+    public void testMatch2_literalMutation5798() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMatch2_literalMutation5798");
         assertMatch("log.txt", "log.txt", true);
         assertMatch("log.txt1", "log.txt", false);
         assertMatch("log.txt", "log.txt*", true);
@@ -7168,9 +7168,9 @@ public void test_IO_246() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3937() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3937");
-        assertMatch("aaa", "foo", true);
+public void test_IO_246_literalMutation5838() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5838");
+        assertMatch("aaa", "bar", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
         assertMatch("aa", "aa?*", false);
@@ -7188,9 +7188,9 @@ public void test_IO_246_literalMutation3937() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3938() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3938");
-        assertMatch("aaa", "aa*?", true);
+public void test_IO_246_literalMutation5839() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5839");
+        assertMatch("aaa", "aa*?", false);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
         assertMatch("aa", "aa?*", false);
@@ -7208,10 +7208,10 @@ public void test_IO_246_literalMutation3938() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3939() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3939");
+public void test_IO_246_literalMutation5840() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5840");
         assertMatch("aaa", "aa*?", true);
-        assertMatch("foo", "?*", false);
+        assertMatch("bar", "?*", false);
         assertMatch("a", "a?*", false);
         assertMatch("aa", "aa?*", false);
         assertMatch("a", "?*", true);
@@ -7228,10 +7228,10 @@ public void test_IO_246_literalMutation3939() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3940() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3940");
+public void test_IO_246_literalMutation5841() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5841");
         assertMatch("aaa", "aa*?", true);
-        assertMatch("", "foo", false);
+        assertMatch("", "bar", false);
         assertMatch("a", "a?*", false);
         assertMatch("aa", "aa?*", false);
         assertMatch("a", "?*", true);
@@ -7248,10 +7248,10 @@ public void test_IO_246_literalMutation3940() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3941() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3941");
+public void test_IO_246_literalMutation5842() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5842");
         assertMatch("aaa", "aa*?", true);
-        assertMatch("", "?*", false);
+        assertMatch("", "?*", true);
         assertMatch("a", "a?*", false);
         assertMatch("aa", "aa?*", false);
         assertMatch("a", "?*", true);
@@ -7268,8 +7268,8 @@ public void test_IO_246_literalMutation3941() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3942() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3942");
+public void test_IO_246_literalMutation5843() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5843");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("foo", "a?*", false);
@@ -7288,8 +7288,8 @@ public void test_IO_246_literalMutation3942() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3943() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3943");
+public void test_IO_246_literalMutation5844() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5844");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "foo", false);
@@ -7308,11 +7308,11 @@ public void test_IO_246_literalMutation3943() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3944() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3944");
+public void test_IO_246_literalMutation5845() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5845");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
-        assertMatch("a", "a?*", false);
+        assertMatch("a", "a?*", true);
         assertMatch("aa", "aa?*", false);
         assertMatch("a", "?*", true);
         assertMatch("aa", "?*", true);
@@ -7328,12 +7328,12 @@ public void test_IO_246_literalMutation3944() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3945() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3945");
+public void test_IO_246_literalMutation5846() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5846");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
-        assertMatch("foo", "aa?*", false);
+        assertMatch("bar", "aa?*", false);
         assertMatch("a", "?*", true);
         assertMatch("aa", "?*", true);
         assertMatch("aaa", "?*", true);
@@ -7348,8 +7348,8 @@ public void test_IO_246_literalMutation3945() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3946() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3946");
+public void test_IO_246_literalMutation5847() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5847");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7368,8 +7368,8 @@ public void test_IO_246_literalMutation3946() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3947() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3947");
+public void test_IO_246_literalMutation5848() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5848");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7388,8 +7388,8 @@ public void test_IO_246_literalMutation3947() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3948() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3948");
+public void test_IO_246_literalMutation5849() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5849");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7408,13 +7408,13 @@ public void test_IO_246_literalMutation3948() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3949() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3949");
+public void test_IO_246_literalMutation5850() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5850");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
         assertMatch("aa", "aa?*", false);
-        assertMatch("a", "foo", true);
+        assertMatch("a", "bar", true);
         assertMatch("aa", "?*", true);
         assertMatch("aaa", "?*", true);
         assertMatch("", "?", false);
@@ -7428,8 +7428,8 @@ public void test_IO_246_literalMutation3949() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3950() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3950");
+public void test_IO_246_literalMutation5851() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5851");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7448,8 +7448,8 @@ public void test_IO_246_literalMutation3950() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3951() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3951");
+public void test_IO_246_literalMutation5852() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5852");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7468,8 +7468,8 @@ public void test_IO_246_literalMutation3951() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3952() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3952");
+public void test_IO_246_literalMutation5853() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5853");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7488,14 +7488,14 @@ public void test_IO_246_literalMutation3952() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3953() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3953");
+public void test_IO_246_literalMutation5854() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5854");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
         assertMatch("aa", "aa?*", false);
         assertMatch("a", "?*", true);
-        assertMatch("aa", "?*", true);
+        assertMatch("aa", "?*", false);
         assertMatch("aaa", "?*", true);
         assertMatch("", "?", false);
         assertMatch("a", "a?", false);
@@ -7508,15 +7508,15 @@ public void test_IO_246_literalMutation3953() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3954() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3954");
+public void test_IO_246_literalMutation5855() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5855");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
         assertMatch("aa", "aa?*", false);
         assertMatch("a", "?*", true);
         assertMatch("aa", "?*", true);
-        assertMatch("foo", "?*", true);
+        assertMatch("bar", "?*", true);
         assertMatch("", "?", false);
         assertMatch("a", "a?", false);
         assertMatch("aa", "aa?", false);
@@ -7528,15 +7528,15 @@ public void test_IO_246_literalMutation3954() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3955() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3955");
+public void test_IO_246_literalMutation5856() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5856");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
         assertMatch("aa", "aa?*", false);
         assertMatch("a", "?*", true);
         assertMatch("aa", "?*", true);
-        assertMatch("aaa", "foo", true);
+        assertMatch("aaa", "bar", true);
         assertMatch("", "?", false);
         assertMatch("a", "a?", false);
         assertMatch("aa", "aa?", false);
@@ -7548,8 +7548,8 @@ public void test_IO_246_literalMutation3955() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3956() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3956");
+public void test_IO_246_literalMutation5857() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5857");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7568,8 +7568,8 @@ public void test_IO_246_literalMutation3956() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3957() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3957");
+public void test_IO_246_literalMutation5858() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5858");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7588,8 +7588,8 @@ public void test_IO_246_literalMutation3957() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3958() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3958");
+public void test_IO_246_literalMutation5859() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5859");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7608,8 +7608,8 @@ public void test_IO_246_literalMutation3958() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3959() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3959");
+public void test_IO_246_literalMutation5860() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5860");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7617,7 +7617,7 @@ public void test_IO_246_literalMutation3959() {
         assertMatch("a", "?*", true);
         assertMatch("aa", "?*", true);
         assertMatch("aaa", "?*", true);
-        assertMatch("", "?", false);
+        assertMatch("", "?", true);
         assertMatch("a", "a?", false);
         assertMatch("aa", "aa?", false);
         assertMatch("aab", "aa?", true);
@@ -7628,8 +7628,8 @@ public void test_IO_246_literalMutation3959() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3960() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3960");
+public void test_IO_246_literalMutation5861() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5861");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7638,7 +7638,7 @@ public void test_IO_246_literalMutation3960() {
         assertMatch("aa", "?*", true);
         assertMatch("aaa", "?*", true);
         assertMatch("", "?", false);
-        assertMatch("foo", "a?", false);
+        assertMatch("bar", "a?", false);
         assertMatch("aa", "aa?", false);
         assertMatch("aab", "aa?", true);
         assertMatch("aaa", "*a", true);
@@ -7648,8 +7648,8 @@ public void test_IO_246_literalMutation3960() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3961() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3961");
+public void test_IO_246_literalMutation5862() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5862");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7668,8 +7668,8 @@ public void test_IO_246_literalMutation3961() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3962() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3962");
+public void test_IO_246_literalMutation5863() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5863");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7688,8 +7688,8 @@ public void test_IO_246_literalMutation3962() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3963() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3963");
+public void test_IO_246_literalMutation5864() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5864");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7699,7 +7699,7 @@ public void test_IO_246_literalMutation3963() {
         assertMatch("aaa", "?*", true);
         assertMatch("", "?", false);
         assertMatch("a", "a?", false);
-        assertMatch("foo", "aa?", false);
+        assertMatch("bar", "aa?", false);
         assertMatch("aab", "aa?", true);
         assertMatch("aaa", "*a", true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -7708,8 +7708,8 @@ public void test_IO_246_literalMutation3963() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3964() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3964");
+public void test_IO_246_literalMutation5865() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5865");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7719,7 +7719,7 @@ public void test_IO_246_literalMutation3964() {
         assertMatch("aaa", "?*", true);
         assertMatch("", "?", false);
         assertMatch("a", "a?", false);
-        assertMatch("aa", "foo", false);
+        assertMatch("aa", "bar", false);
         assertMatch("aab", "aa?", true);
         assertMatch("aaa", "*a", true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -7728,8 +7728,8 @@ public void test_IO_246_literalMutation3964() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3965() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3965");
+public void test_IO_246_literalMutation5866() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5866");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7739,7 +7739,7 @@ public void test_IO_246_literalMutation3965() {
         assertMatch("aaa", "?*", true);
         assertMatch("", "?", false);
         assertMatch("a", "a?", false);
-        assertMatch("aa", "aa?", false);
+        assertMatch("aa", "aa?", true);
         assertMatch("aab", "aa?", true);
         assertMatch("aaa", "*a", true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -7748,8 +7748,8 @@ public void test_IO_246_literalMutation3965() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3966() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3966");
+public void test_IO_246_literalMutation5867() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5867");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7768,8 +7768,8 @@ public void test_IO_246_literalMutation3966() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3967() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3967");
+public void test_IO_246_literalMutation5868() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5868");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7780,7 +7780,7 @@ public void test_IO_246_literalMutation3967() {
         assertMatch("", "?", false);
         assertMatch("a", "a?", false);
         assertMatch("aa", "aa?", false);
-        assertMatch("aab", "foo", true);
+        assertMatch("aab", "bar", true);
         assertMatch("aaa", "*a", true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -7788,8 +7788,8 @@ public void test_IO_246_literalMutation3967() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3968() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3968");
+public void test_IO_246_literalMutation5869() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5869");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7808,8 +7808,8 @@ public void test_IO_246_literalMutation3968() {
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3969() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3969");
+public void test_IO_246_literalMutation5870() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5870");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7821,15 +7821,15 @@ public void test_IO_246_literalMutation3969() {
         assertMatch("a", "a?", false);
         assertMatch("aa", "aa?", false);
         assertMatch("aab", "aa?", true);
-        assertMatch("foo", "*a", true);
+        assertMatch("bar", "*a", true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3970() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3970");
+public void test_IO_246_literalMutation5871() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5871");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -7841,15 +7841,15 @@ public void test_IO_246_literalMutation3970() {
         assertMatch("a", "a?", false);
         assertMatch("aa", "aa?", false);
         assertMatch("aab", "aa?", true);
-        assertMatch("aaa", "foo", true);
+        assertMatch("aaa", "bar", true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     /** 
      * See https://issues.apache.org/jira/browse/IO-246
      */
-public void test_IO_246_literalMutation3971() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation3971");
+public void test_IO_246_literalMutation5872() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_IO_246_literalMutation5872");
         assertMatch("aaa", "aa*?", true);
         assertMatch("", "?*", false);
         assertMatch("a", "a?*", false);
@@ -8175,8 +8175,8 @@ public void test_IO_246_literalMutation3971() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLocaleIndependence_literalMutation3786() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation3786");
+    public void testLocaleIndependence_literalMutation5681() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5681");
         Locale orig = Locale.getDefault();
         Locale[] locales = Locale.getAvailableLocales();
         String[][] data = new String[][]{ new String[]{ "I" , "foo" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
@@ -8197,8 +8197,8 @@ public void test_IO_246_literalMutation3971() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLocaleIndependence_literalMutation3787() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation3787");
+    public void testLocaleIndependence_literalMutation5682() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5682");
         Locale orig = Locale.getDefault();
         Locale[] locales = Locale.getAvailableLocales();
         String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "foo" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
@@ -8219,11 +8219,11 @@ public void test_IO_246_literalMutation3971() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLocaleIndependence_literalMutation3788() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation3788");
+    public void testLocaleIndependence_literalMutation5683() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5683");
         Locale orig = Locale.getDefault();
         Locale[] locales = Locale.getAvailableLocales();
-        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "foo" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
+        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "bar" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
         try {
             for (int i = 0 ; i < (data.length) ; i++) {
                 for (Locale locale : locales) {
@@ -8241,8 +8241,8 @@ public void test_IO_246_literalMutation3971() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLocaleIndependence_literalMutation3789() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation3789");
+    public void testLocaleIndependence_literalMutation5684() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5684");
         Locale orig = Locale.getDefault();
         Locale[] locales = Locale.getAvailableLocales();
         String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "foo" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
@@ -8263,11 +8263,11 @@ public void test_IO_246_literalMutation3971() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLocaleIndependence_literalMutation3790() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation3790");
+    public void testLocaleIndependence_literalMutation5685() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5685");
         Locale orig = Locale.getDefault();
         Locale[] locales = Locale.getAvailableLocales();
-        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "foo" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
+        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "bar" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
         try {
             for (int i = 0 ; i < (data.length) ; i++) {
                 for (Locale locale : locales) {
@@ -8285,11 +8285,11 @@ public void test_IO_246_literalMutation3971() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLocaleIndependence_literalMutation3791() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation3791");
+    public void testLocaleIndependence_literalMutation5686() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5686");
         Locale orig = Locale.getDefault();
         Locale[] locales = Locale.getAvailableLocales();
-        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "foo" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
+        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "bar" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
         try {
             for (int i = 0 ; i < (data.length) ; i++) {
                 for (Locale locale : locales) {
@@ -8307,11 +8307,11 @@ public void test_IO_246_literalMutation3971() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLocaleIndependence_literalMutation3792() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation3792");
+    public void testLocaleIndependence_literalMutation5687() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5687");
         Locale orig = Locale.getDefault();
         Locale[] locales = Locale.getAvailableLocales();
-        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "foo" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
+        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "bar" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
         try {
             for (int i = 0 ; i < (data.length) ; i++) {
                 for (Locale locale : locales) {
@@ -8329,11 +8329,11 @@ public void test_IO_246_literalMutation3971() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLocaleIndependence_literalMutation3793() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation3793");
+    public void testLocaleIndependence_literalMutation5688() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5688");
         Locale orig = Locale.getDefault();
         Locale[] locales = Locale.getAvailableLocales();
-        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "foo" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
+        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "bar" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
         try {
             for (int i = 0 ; i < (data.length) ; i++) {
                 for (Locale locale : locales) {
@@ -8351,8 +8351,8 @@ public void test_IO_246_literalMutation3971() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLocaleIndependence_literalMutation3794() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation3794");
+    public void testLocaleIndependence_literalMutation5689() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5689");
         Locale orig = Locale.getDefault();
         Locale[] locales = Locale.getAvailableLocales();
         String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "foo" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
@@ -8373,11 +8373,11 @@ public void test_IO_246_literalMutation3971() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLocaleIndependence_literalMutation3795() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation3795");
+    public void testLocaleIndependence_literalMutation5690() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5690");
         Locale orig = Locale.getDefault();
         Locale[] locales = Locale.getAvailableLocales();
-        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "foo" , "σ" } , new String[]{ "ς" , "σ" } };
+        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "bar" , "σ" } , new String[]{ "ς" , "σ" } };
         try {
             for (int i = 0 ; i < (data.length) ; i++) {
                 for (Locale locale : locales) {
@@ -8395,11 +8395,11 @@ public void test_IO_246_literalMutation3971() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLocaleIndependence_literalMutation3796() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation3796");
+    public void testLocaleIndependence_literalMutation5691() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5691");
         Locale orig = Locale.getDefault();
         Locale[] locales = Locale.getAvailableLocales();
-        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "foo" } , new String[]{ "ς" , "σ" } };
+        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "bar" } , new String[]{ "ς" , "σ" } };
         try {
             for (int i = 0 ; i < (data.length) ; i++) {
                 for (Locale locale : locales) {
@@ -8417,8 +8417,8 @@ public void test_IO_246_literalMutation3971() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLocaleIndependence_literalMutation3797() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation3797");
+    public void testLocaleIndependence_literalMutation5692() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5692");
         Locale orig = Locale.getDefault();
         Locale[] locales = Locale.getAvailableLocales();
         String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "foo" , "σ" } };
@@ -8439,11 +8439,11 @@ public void test_IO_246_literalMutation3971() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLocaleIndependence_literalMutation3798() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation3798");
+    public void testLocaleIndependence_literalMutation5693() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5693");
         Locale orig = Locale.getDefault();
         Locale[] locales = Locale.getAvailableLocales();
-        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "foo" } };
+        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "bar" } };
         try {
             for (int i = 0 ; i < (data.length) ; i++) {
                 for (Locale locale : locales) {
@@ -8461,8 +8461,8 @@ public void test_IO_246_literalMutation3971() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLocaleIndependence_literalMutation3799() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation3799");
+    public void testLocaleIndependence_literalMutation5694() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5694");
         Locale orig = Locale.getDefault();
         Locale[] locales = Locale.getAvailableLocales();
         String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
@@ -8483,8 +8483,52 @@ public void test_IO_246_literalMutation3971() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLocaleIndependence_literalMutation3800() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation3800");
+    public void testLocaleIndependence_literalMutation5695() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5695");
+        Locale orig = Locale.getDefault();
+        Locale[] locales = Locale.getAvailableLocales();
+        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
+        try {
+            for (int i = -1 ; i < (data.length) ; i++) {
+                for (Locale locale : locales) {
+                    Locale.setDefault(locale);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4927,("Test data corrupt: " + i));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4929,data[i][0],4928,data[i][0].equalsIgnoreCase(data[i][1]));
+                    boolean match = org.apache.commons.io.FilenameUtils.wildcardMatch(data[i][0], data[i][1], org.apache.commons.io.IOCase.INSENSITIVE);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4930,(((java.util.Locale.getDefault().toString()) + ": ") + i));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4931,match);
+                }
+            }
+        } finally {
+            Locale.setDefault(orig);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLocaleIndependence_literalMutation5696() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5696");
+        Locale orig = Locale.getDefault();
+        Locale[] locales = Locale.getAvailableLocales();
+        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
+        try {
+            for (int i = 0 ; i < (data.length) ; i++) {
+                for (Locale locale : locales) {
+                    Locale.setDefault(locale);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4927,("Test data corrupt: " + i));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4929,data[i][0],4928,data[i][0].equalsIgnoreCase(data[i][1]));
+                    boolean match = org.apache.commons.io.FilenameUtils.wildcardMatch(data[i][0], data[i][1], org.apache.commons.io.IOCase.INSENSITIVE);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4930,(((java.util.Locale.getDefault().toString()) + ": ") + i));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4931,match);
+                }
+            }
+        } finally {
+            Locale.setDefault(orig);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLocaleIndependence_literalMutation5697() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5697");
         Locale orig = Locale.getDefault();
         Locale[] locales = Locale.getAvailableLocales();
         String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
@@ -8505,8 +8549,52 @@ public void test_IO_246_literalMutation3971() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testLocaleIndependence_literalMutation3801() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation3801");
+    public void testLocaleIndependence_literalMutation5698() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5698");
+        Locale orig = Locale.getDefault();
+        Locale[] locales = Locale.getAvailableLocales();
+        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
+        try {
+            for (int i = 0 ; i < (data.length) ; i++) {
+                for (Locale locale : locales) {
+                    Locale.setDefault(locale);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4927,("Test data corrupt: " + i));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4929,data[i][0],4928,data[i][0].equalsIgnoreCase(data[i][1]));
+                    boolean match = org.apache.commons.io.FilenameUtils.wildcardMatch(data[i][-1], data[i][1], org.apache.commons.io.IOCase.INSENSITIVE);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4930,(((java.util.Locale.getDefault().toString()) + ": ") + i));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4931,match);
+                }
+            }
+        } finally {
+            Locale.setDefault(orig);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLocaleIndependence_literalMutation5699() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5699");
+        Locale orig = Locale.getDefault();
+        Locale[] locales = Locale.getAvailableLocales();
+        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
+        try {
+            for (int i = 0 ; i < (data.length) ; i++) {
+                for (Locale locale : locales) {
+                    Locale.setDefault(locale);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4927,("Test data corrupt: " + i));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4929,data[i][0],4928,data[i][0].equalsIgnoreCase(data[i][1]));
+                    boolean match = org.apache.commons.io.FilenameUtils.wildcardMatch(data[i][0], data[i][1], org.apache.commons.io.IOCase.INSENSITIVE);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4930,(((java.util.Locale.getDefault().toString()) + ": ") + i));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4931,match);
+                }
+            }
+        } finally {
+            Locale.setDefault(orig);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLocaleIndependence_literalMutation5700() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5700");
         Locale orig = Locale.getDefault();
         Locale[] locales = Locale.getAvailableLocales();
         String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
@@ -8517,6 +8605,50 @@ public void test_IO_246_literalMutation3971() {
                     fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4927,("Test data corrupt: " + i));
                     fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4929,data[i][0],4928,data[i][0].equalsIgnoreCase(data[i][1]));
                     boolean match = org.apache.commons.io.FilenameUtils.wildcardMatch(data[i][0], data[i][2], org.apache.commons.io.IOCase.INSENSITIVE);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4930,(((java.util.Locale.getDefault().toString()) + ": ") + i));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4931,match);
+                }
+            }
+        } finally {
+            Locale.setDefault(orig);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLocaleIndependence_literalMutation5701() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5701");
+        Locale orig = Locale.getDefault();
+        Locale[] locales = Locale.getAvailableLocales();
+        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
+        try {
+            for (int i = 0 ; i < (data.length) ; i++) {
+                for (Locale locale : locales) {
+                    Locale.setDefault(locale);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4927,("Test data corrupt: " + i));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4929,data[i][0],4928,data[i][0].equalsIgnoreCase(data[i][1]));
+                    boolean match = org.apache.commons.io.FilenameUtils.wildcardMatch(data[i][0], data[i][0], org.apache.commons.io.IOCase.INSENSITIVE);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4930,(((java.util.Locale.getDefault().toString()) + ": ") + i));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4931,match);
+                }
+            }
+        } finally {
+            Locale.setDefault(orig);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testLocaleIndependence_literalMutation5702() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_literalMutation5702");
+        Locale orig = Locale.getDefault();
+        Locale[] locales = Locale.getAvailableLocales();
+        String[][] data = new String[][]{ new String[]{ "I" , "i" } , new String[]{ "i" , "I" } , new String[]{ "i" , "İ" } , new String[]{ "i" , "ı" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } , new String[]{ "ς" , "σ" } };
+        try {
+            for (int i = 0 ; i < (data.length) ; i++) {
+                for (Locale locale : locales) {
+                    Locale.setDefault(locale);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4927,("Test data corrupt: " + i));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4929,data[i][0],4928,data[i][0].equalsIgnoreCase(data[i][1]));
+                    boolean match = org.apache.commons.io.FilenameUtils.wildcardMatch(data[i][0], data[i][0], org.apache.commons.io.IOCase.INSENSITIVE);
                     fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4930,(((java.util.Locale.getDefault().toString()) + ": ") + i));
                     fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4931,match);
                 }

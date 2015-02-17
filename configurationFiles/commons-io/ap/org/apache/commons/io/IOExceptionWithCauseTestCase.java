@@ -27,7 +27,7 @@ public class IOExceptionWithCauseTestCase extends TestCase {
      */
 public void testIOExceptionStringThrowable() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIOExceptionStringThrowable");
-        Throwable cause = new IllegalArgumentException("foo");
+        Throwable cause = new IllegalArgumentException("bar");
         IOExceptionWithCause exception = new IOExceptionWithCause("message" , cause);
         validate(exception, cause, "message");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -36,8 +36,8 @@ public void testIOExceptionStringThrowable() {
     /** 
      * Tests the {@link IOExceptionWithCause#IOExceptionWithCause(String,Throwable)} constructor.
      */
-public void testIOExceptionStringThrowable_literalMutation4137() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIOExceptionStringThrowable_literalMutation4137");
+public void testIOExceptionStringThrowable_literalMutation6244() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIOExceptionStringThrowable_literalMutation6244");
         Throwable cause = new IllegalArgumentException("cause");
         IOExceptionWithCause exception = new IOExceptionWithCause("foo" , cause);
         validate(exception, cause, "message");
@@ -47,8 +47,8 @@ public void testIOExceptionStringThrowable_literalMutation4137() {
     /** 
      * Tests the {@link IOExceptionWithCause#IOExceptionWithCause(String,Throwable)} constructor.
      */
-public void testIOExceptionStringThrowable_literalMutation4138() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIOExceptionStringThrowable_literalMutation4138");
+public void testIOExceptionStringThrowable_literalMutation6245() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIOExceptionStringThrowable_literalMutation6245");
         Throwable cause = new IllegalArgumentException("cause");
         IOExceptionWithCause exception = new IOExceptionWithCause("message" , cause);
         validate(exception, cause, "foo");
@@ -84,7 +84,7 @@ public void testIOExceptionStringThrowable_literalMutation4138() {
      */
 public void testIOExceptionThrowable() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIOExceptionThrowable");
-        Throwable cause = new IllegalArgumentException("foo");
+        Throwable cause = new IllegalArgumentException("bar");
         IOExceptionWithCause exception = new IOExceptionWithCause(cause);
         validate(exception, cause, "java.lang.IllegalArgumentException: cause");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -93,8 +93,8 @@ public void testIOExceptionThrowable() {
     /** 
      * Tests the {@link IOExceptionWithCause#IOExceptionWithCause(Throwable)} constructor.
      */
-public void testIOExceptionThrowable_literalMutation4140() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIOExceptionThrowable_literalMutation4140");
+public void testIOExceptionThrowable_literalMutation6247() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIOExceptionThrowable_literalMutation6247");
         Throwable cause = new IllegalArgumentException("cause");
         IOExceptionWithCause exception = new IOExceptionWithCause(cause);
         validate(exception, cause, "foo");

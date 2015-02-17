@@ -148,7 +148,7 @@ public class FileUtilsDirectoryContainsTestCase extends FileBasedTestCase {
 @Test
     public void testFileDoesNotExistBug() throws IOException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFileDoesNotExistBug");
-        final File file = new File(top , "foo");
+        final File file = new File(top , "bar");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2598,top,2597,top.exists());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2600,file,2599,file.exists());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2602,null,2601,org.apache.commons.io.FileUtils.directoryContains(top, file));
@@ -170,8 +170,8 @@ public class FileUtilsDirectoryContainsTestCase extends FileBasedTestCase {
     }
 
     @Test
-    public void testUnrealizedContainment_literalMutation3134() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnrealizedContainment_literalMutation3134");
+    public void testUnrealizedContainment_literalMutation4839() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnrealizedContainment_literalMutation4839");
         final File dir = new File("DOESNOTEXIST");
         final File file = new File(dir , "foo");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2613,dir,2612,dir.exists());

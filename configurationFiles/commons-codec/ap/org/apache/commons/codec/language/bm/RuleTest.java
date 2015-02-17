@@ -39,6 +39,22 @@ public class RuleTest {
     public void testPhonemeComparedToLaterIsNegative() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPhonemeComparedToLaterIsNegative");
         for (final Rule.Phoneme[] phs : makePhonemes()) {
+            for (int i = 1 ; i < (phs.length) ; i++) {
+                for (int j = i + 1 ; j < (phs.length) ; j++) {
+                    final int c = Rule.Phoneme.COMPARATOR.compare(phs[i], phs[j]);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),349,(((("Comparing " + (phs[i].getPhonemeText())) + " to ") + (phs[j].getPhonemeText())) + " should be negative"));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),351,null,350,java.lang.Integer.valueOf(c));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),352,new org.apache.commons.codec.language.bm.RuleTest.NegativeIntegerBaseMatcher());
+                }
+            }
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testPhonemeComparedToLaterIsNegative_literalMutation319() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPhonemeComparedToLaterIsNegative_literalMutation319");
+        for (final Rule.Phoneme[] phs : makePhonemes()) {
             for (int i = -1 ; i < (phs.length) ; i++) {
                 for (int j = i + 1 ; j < (phs.length) ; j++) {
                     final int c = Rule.Phoneme.COMPARATOR.compare(phs[i], phs[j]);
@@ -52,8 +68,56 @@ public class RuleTest {
     }
 
     @Test
-    public void testPhonemeComparedToLaterIsNegative_literalMutation254() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPhonemeComparedToLaterIsNegative_literalMutation254");
+    public void testPhonemeComparedToLaterIsNegative_literalMutation320() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPhonemeComparedToLaterIsNegative_literalMutation320");
+        for (final Rule.Phoneme[] phs : makePhonemes()) {
+            for (int i = 0 ; i < (phs.length) ; i++) {
+                for (int j = i + 1 ; j < (phs.length) ; j++) {
+                    final int c = Rule.Phoneme.COMPARATOR.compare(phs[i], phs[j]);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),349,(((("Comparing " + (phs[i].getPhonemeText())) + " to ") + (phs[j].getPhonemeText())) + " should be negative"));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),351,null,350,java.lang.Integer.valueOf(c));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),352,new org.apache.commons.codec.language.bm.RuleTest.NegativeIntegerBaseMatcher());
+                }
+            }
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testPhonemeComparedToLaterIsNegative_literalMutation321() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPhonemeComparedToLaterIsNegative_literalMutation321");
+        for (final Rule.Phoneme[] phs : makePhonemes()) {
+            for (int i = 0 ; i < (phs.length) ; i++) {
+                for (int j = i + 2 ; j < (phs.length) ; j++) {
+                    final int c = Rule.Phoneme.COMPARATOR.compare(phs[i], phs[j]);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),349,(((("Comparing " + (phs[i].getPhonemeText())) + " to ") + (phs[j].getPhonemeText())) + " should be negative"));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),351,null,350,java.lang.Integer.valueOf(c));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),352,new org.apache.commons.codec.language.bm.RuleTest.NegativeIntegerBaseMatcher());
+                }
+            }
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testPhonemeComparedToLaterIsNegative_literalMutation322() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPhonemeComparedToLaterIsNegative_literalMutation322");
+        for (final Rule.Phoneme[] phs : makePhonemes()) {
+            for (int i = 0 ; i < (phs.length) ; i++) {
+                for (int j = i + 0 ; j < (phs.length) ; j++) {
+                    final int c = Rule.Phoneme.COMPARATOR.compare(phs[i], phs[j]);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),349,(((("Comparing " + (phs[i].getPhonemeText())) + " to ") + (phs[j].getPhonemeText())) + " should be negative"));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),351,null,350,java.lang.Integer.valueOf(c));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),352,new org.apache.commons.codec.language.bm.RuleTest.NegativeIntegerBaseMatcher());
+                }
+            }
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testPhonemeComparedToLaterIsNegative_literalMutation323() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPhonemeComparedToLaterIsNegative_literalMutation323");
         for (final Rule.Phoneme[] phs : makePhonemes()) {
             for (int i = 0 ; i < (phs.length) ; i++) {
                 for (int j = i + 0 ; j < (phs.length) ; j++) {
@@ -140,10 +204,10 @@ public class RuleTest {
     }
 
     @Test
-    public void testSubSequenceWorks_literalMutation257() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSubSequenceWorks_literalMutation257");
+    public void testSubSequenceWorks_literalMutation326() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSubSequenceWorks_literalMutation326");
         final Rule.Phoneme a = new Rule.Phoneme("a" , null);
-        final Rule.Phoneme b = new Rule.Phoneme("foo" , null);
+        final Rule.Phoneme b = new Rule.Phoneme("bar" , null);
         final Rule.Phoneme cd = new Rule.Phoneme("cd" , null);
         final Rule.Phoneme ef = new Rule.Phoneme("ef" , null);
         final Rule.Phoneme ghi = new Rule.Phoneme("ghi" , null);
@@ -200,11 +264,11 @@ public class RuleTest {
     }
 
     @Test
-    public void testSubSequenceWorks_literalMutation259() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSubSequenceWorks_literalMutation259");
+    public void testSubSequenceWorks_literalMutation328() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSubSequenceWorks_literalMutation328");
         final Rule.Phoneme a = new Rule.Phoneme("a" , null);
         final Rule.Phoneme b = new Rule.Phoneme("b" , null);
-        final Rule.Phoneme cd = new Rule.Phoneme("foo" , null);
+        final Rule.Phoneme cd = new Rule.Phoneme("bar" , null);
         final Rule.Phoneme ef = new Rule.Phoneme("ef" , null);
         final Rule.Phoneme ghi = new Rule.Phoneme("ghi" , null);
         final Rule.Phoneme jkl = new Rule.Phoneme("jkl" , null);
@@ -260,8 +324,8 @@ public class RuleTest {
     }
 
     @Test
-    public void testSubSequenceWorks_literalMutation261() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSubSequenceWorks_literalMutation261");
+    public void testSubSequenceWorks_literalMutation330() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSubSequenceWorks_literalMutation330");
         final Rule.Phoneme a = new Rule.Phoneme("a" , null);
         final Rule.Phoneme b = new Rule.Phoneme("b" , null);
         final Rule.Phoneme cd = new Rule.Phoneme("cd" , null);
@@ -320,8 +384,8 @@ public class RuleTest {
     }
 
     @Test
-    public void testSubSequenceWorks_literalMutation263() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSubSequenceWorks_literalMutation263");
+    public void testSubSequenceWorks_literalMutation332() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSubSequenceWorks_literalMutation332");
         final Rule.Phoneme a = new Rule.Phoneme("a" , null);
         final Rule.Phoneme b = new Rule.Phoneme("b" , null);
         final Rule.Phoneme cd = new Rule.Phoneme("cd" , null);
@@ -380,14 +444,14 @@ public class RuleTest {
     }
 
     @Test
-    public void testSubSequenceWorks_literalMutation265() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSubSequenceWorks_literalMutation265");
+    public void testSubSequenceWorks_literalMutation334() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSubSequenceWorks_literalMutation334");
         final Rule.Phoneme a = new Rule.Phoneme("a" , null);
         final Rule.Phoneme b = new Rule.Phoneme("b" , null);
         final Rule.Phoneme cd = new Rule.Phoneme("cd" , null);
         final Rule.Phoneme ef = new Rule.Phoneme("ef" , null);
         final Rule.Phoneme ghi = new Rule.Phoneme("ghi" , null);
-        final Rule.Phoneme jkl = new Rule.Phoneme("foo" , null);
+        final Rule.Phoneme jkl = new Rule.Phoneme("bar" , null);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),357,a.getPhonemeText(),356,a.getPhonemeText().charAt(0));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),359,b.getPhonemeText(),358,b.getPhonemeText().charAt(0));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),361,cd.getPhonemeText(),360,cd.getPhonemeText().charAt(0));

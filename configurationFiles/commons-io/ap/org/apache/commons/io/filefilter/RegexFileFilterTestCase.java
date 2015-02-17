@@ -686,7 +686,7 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
 
     public void testRegex() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex");
-        IOFileFilter filter = new RegexFileFilter("foo");
+        IOFileFilter filter = new RegexFileFilter("bar");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
         assertFiltering(filter, new File("test-.java"), false);
@@ -725,10 +725,10 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2218() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2218");
+    public void testRegex_literalMutation3166() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3166");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
-        assertFiltering(filter, new File("foo"), true);
+        assertFiltering(filter, new File("bar"), true);
         assertFiltering(filter, new File("test-10.java"), true);
         assertFiltering(filter, new File("test-.java"), false);
         filter = new RegexFileFilter("^[Tt]est.java$");
@@ -766,8 +766,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2219() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2219");
+    public void testRegex_literalMutation3167() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3167");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), false);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -807,11 +807,11 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2220() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2220");
+    public void testRegex_literalMutation3168() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3168");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
-        assertFiltering(filter, new File("foo"), true);
+        assertFiltering(filter, new File("bar"), true);
         assertFiltering(filter, new File("test-.java"), false);
         filter = new RegexFileFilter("^[Tt]est.java$");
         assertFiltering(filter, new File("Test.java"), true);
@@ -848,8 +848,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2221() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2221");
+    public void testRegex_literalMutation3169() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3169");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), false);
@@ -889,8 +889,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2222() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2222");
+    public void testRegex_literalMutation3170() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3170");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -930,8 +930,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2223() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2223");
+    public void testRegex_literalMutation3171() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3171");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -971,13 +971,13 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2224() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2224");
+    public void testRegex_literalMutation3172() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3172");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
         assertFiltering(filter, new File("test-.java"), false);
-        filter = new RegexFileFilter("foo");
+        filter = new RegexFileFilter("bar");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test.java"), true);
         assertFiltering(filter, new File("tEST.java"), false);
@@ -1012,14 +1012,14 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2225() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2225");
+    public void testRegex_literalMutation3173() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3173");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
         assertFiltering(filter, new File("test-.java"), false);
         filter = new RegexFileFilter("^[Tt]est.java$");
-        assertFiltering(filter, new File("foo"), true);
+        assertFiltering(filter, new File("bar"), true);
         assertFiltering(filter, new File("test.java"), true);
         assertFiltering(filter, new File("tEST.java"), false);
         filter = new RegexFileFilter(Pattern.compile("^test.java$", Pattern.CASE_INSENSITIVE));
@@ -1053,8 +1053,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2226() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2226");
+    public void testRegex_literalMutation3174() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3174");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -1094,8 +1094,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2227() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2227");
+    public void testRegex_literalMutation3175() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3175");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -1135,15 +1135,15 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2228() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2228");
+    public void testRegex_literalMutation3176() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3176");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
         assertFiltering(filter, new File("test-.java"), false);
         filter = new RegexFileFilter("^[Tt]est.java$");
         assertFiltering(filter, new File("Test.java"), true);
-        assertFiltering(filter, new File("test.java"), true);
+        assertFiltering(filter, new File("test.java"), false);
         assertFiltering(filter, new File("tEST.java"), false);
         filter = new RegexFileFilter(Pattern.compile("^test.java$", Pattern.CASE_INSENSITIVE));
         assertFiltering(filter, new File("Test.java"), true);
@@ -1176,8 +1176,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2229() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2229");
+    public void testRegex_literalMutation3177() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3177");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -1217,8 +1217,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2230() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2230");
+    public void testRegex_literalMutation3178() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3178");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -1258,8 +1258,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2231() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2231");
+    public void testRegex_literalMutation3179() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3179");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -1299,8 +1299,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2232() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2232");
+    public void testRegex_literalMutation3180() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3180");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -1340,8 +1340,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2233() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2233");
+    public void testRegex_literalMutation3181() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3181");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -1381,8 +1381,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2234() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2234");
+    public void testRegex_literalMutation3182() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3182");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -1422,8 +1422,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2235() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2235");
+    public void testRegex_literalMutation3183() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3183");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -1434,7 +1434,7 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         assertFiltering(filter, new File("tEST.java"), false);
         filter = new RegexFileFilter(Pattern.compile("^test.java$", Pattern.CASE_INSENSITIVE));
         assertFiltering(filter, new File("Test.java"), true);
-        assertFiltering(filter, new File("test.java"), true);
+        assertFiltering(filter, new File("test.java"), false);
         assertFiltering(filter, new File("tEST.java"), true);
         filter = new RegexFileFilter("^test.java$" , Pattern.CASE_INSENSITIVE);
         assertFiltering(filter, new File("Test.java"), true);
@@ -1463,8 +1463,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2236() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2236");
+    public void testRegex_literalMutation3184() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3184");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -1504,8 +1504,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2237() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2237");
+    public void testRegex_literalMutation3185() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3185");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -1517,7 +1517,7 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         filter = new RegexFileFilter(Pattern.compile("^test.java$", Pattern.CASE_INSENSITIVE));
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test.java"), true);
-        assertFiltering(filter, new File("tEST.java"), true);
+        assertFiltering(filter, new File("tEST.java"), false);
         filter = new RegexFileFilter("^test.java$" , Pattern.CASE_INSENSITIVE);
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test.java"), true);
@@ -1545,8 +1545,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2238() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2238");
+    public void testRegex_literalMutation3186() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3186");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -1586,8 +1586,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2239() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2239");
+    public void testRegex_literalMutation3187() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3187");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -1627,8 +1627,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2240() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2240");
+    public void testRegex_literalMutation3188() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3188");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -1642,7 +1642,7 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         assertFiltering(filter, new File("test.java"), true);
         assertFiltering(filter, new File("tEST.java"), true);
         filter = new RegexFileFilter("^test.java$" , Pattern.CASE_INSENSITIVE);
-        assertFiltering(filter, new File("Test.java"), true);
+        assertFiltering(filter, new File("Test.java"), false);
         assertFiltering(filter, new File("test.java"), true);
         assertFiltering(filter, new File("tEST.java"), true);
         filter = new RegexFileFilter("^test.java$" , IOCase.INSENSITIVE);
@@ -1668,8 +1668,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2241() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2241");
+    public void testRegex_literalMutation3189() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3189");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -1684,7 +1684,7 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         assertFiltering(filter, new File("tEST.java"), true);
         filter = new RegexFileFilter("^test.java$" , Pattern.CASE_INSENSITIVE);
         assertFiltering(filter, new File("Test.java"), true);
-        assertFiltering(filter, new File("foo"), true);
+        assertFiltering(filter, new File("bar"), true);
         assertFiltering(filter, new File("tEST.java"), true);
         filter = new RegexFileFilter("^test.java$" , IOCase.INSENSITIVE);
         assertFiltering(filter, new File("Test.java"), true);
@@ -1709,8 +1709,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2242() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2242");
+    public void testRegex_literalMutation3190() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3190");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -1750,8 +1750,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2243() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2243");
+    public void testRegex_literalMutation3191() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3191");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -1767,9 +1767,132 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         filter = new RegexFileFilter("^test.java$" , Pattern.CASE_INSENSITIVE);
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test.java"), true);
+        assertFiltering(filter, new File("bar"), true);
+        filter = new RegexFileFilter("^test.java$" , IOCase.INSENSITIVE);
+        assertFiltering(filter, new File("Test.java"), true);
+        assertFiltering(filter, new File("test.java"), true);
+        assertFiltering(filter, new File("tEST.java"), true);
+        try {
+            new RegexFileFilter(((String)(null)));
+        } catch (IllegalArgumentException ex) {
+        }
+        try {
+            new RegexFileFilter(((String)(null)) , Pattern.CASE_INSENSITIVE);
+        } catch (IllegalArgumentException ex) {
+        }
+        try {
+            new RegexFileFilter(((String)(null)) , IOCase.INSENSITIVE);
+        } catch (IllegalArgumentException ex) {
+        }
+        try {
+            new RegexFileFilter(((Pattern)(null)));
+        } catch (IllegalArgumentException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testRegex_literalMutation3192() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3192");
+        IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
+        assertFiltering(filter, new File("Test.java"), true);
+        assertFiltering(filter, new File("test-10.java"), true);
+        assertFiltering(filter, new File("test-.java"), false);
+        filter = new RegexFileFilter("^[Tt]est.java$");
+        assertFiltering(filter, new File("Test.java"), true);
+        assertFiltering(filter, new File("test.java"), true);
+        assertFiltering(filter, new File("tEST.java"), false);
+        filter = new RegexFileFilter(Pattern.compile("^test.java$", Pattern.CASE_INSENSITIVE));
+        assertFiltering(filter, new File("Test.java"), true);
+        assertFiltering(filter, new File("test.java"), true);
+        assertFiltering(filter, new File("tEST.java"), true);
+        filter = new RegexFileFilter("^test.java$" , Pattern.CASE_INSENSITIVE);
+        assertFiltering(filter, new File("Test.java"), true);
+        assertFiltering(filter, new File("test.java"), true);
+        assertFiltering(filter, new File("tEST.java"), false);
+        filter = new RegexFileFilter("^test.java$" , IOCase.INSENSITIVE);
+        assertFiltering(filter, new File("Test.java"), true);
+        assertFiltering(filter, new File("test.java"), true);
+        assertFiltering(filter, new File("tEST.java"), true);
+        try {
+            new RegexFileFilter(((String)(null)));
+        } catch (IllegalArgumentException ex) {
+        }
+        try {
+            new RegexFileFilter(((String)(null)) , Pattern.CASE_INSENSITIVE);
+        } catch (IllegalArgumentException ex) {
+        }
+        try {
+            new RegexFileFilter(((String)(null)) , IOCase.INSENSITIVE);
+        } catch (IllegalArgumentException ex) {
+        }
+        try {
+            new RegexFileFilter(((Pattern)(null)));
+        } catch (IllegalArgumentException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testRegex_literalMutation3193() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3193");
+        IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
+        assertFiltering(filter, new File("Test.java"), true);
+        assertFiltering(filter, new File("test-10.java"), true);
+        assertFiltering(filter, new File("test-.java"), false);
+        filter = new RegexFileFilter("^[Tt]est.java$");
+        assertFiltering(filter, new File("Test.java"), true);
+        assertFiltering(filter, new File("test.java"), true);
+        assertFiltering(filter, new File("tEST.java"), false);
+        filter = new RegexFileFilter(Pattern.compile("^test.java$", Pattern.CASE_INSENSITIVE));
+        assertFiltering(filter, new File("Test.java"), true);
+        assertFiltering(filter, new File("test.java"), true);
+        assertFiltering(filter, new File("tEST.java"), true);
+        filter = new RegexFileFilter("^test.java$" , Pattern.CASE_INSENSITIVE);
+        assertFiltering(filter, new File("Test.java"), true);
+        assertFiltering(filter, new File("test.java"), true);
+        assertFiltering(filter, new File("tEST.java"), true);
+        filter = new RegexFileFilter("bar" , IOCase.INSENSITIVE);
+        assertFiltering(filter, new File("Test.java"), true);
+        assertFiltering(filter, new File("test.java"), true);
+        assertFiltering(filter, new File("tEST.java"), true);
+        try {
+            new RegexFileFilter(((String)(null)));
+        } catch (IllegalArgumentException ex) {
+        }
+        try {
+            new RegexFileFilter(((String)(null)) , Pattern.CASE_INSENSITIVE);
+        } catch (IllegalArgumentException ex) {
+        }
+        try {
+            new RegexFileFilter(((String)(null)) , IOCase.INSENSITIVE);
+        } catch (IllegalArgumentException ex) {
+        }
+        try {
+            new RegexFileFilter(((Pattern)(null)));
+        } catch (IllegalArgumentException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testRegex_literalMutation3194() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3194");
+        IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
+        assertFiltering(filter, new File("Test.java"), true);
+        assertFiltering(filter, new File("test-10.java"), true);
+        assertFiltering(filter, new File("test-.java"), false);
+        filter = new RegexFileFilter("^[Tt]est.java$");
+        assertFiltering(filter, new File("Test.java"), true);
+        assertFiltering(filter, new File("test.java"), true);
+        assertFiltering(filter, new File("tEST.java"), false);
+        filter = new RegexFileFilter(Pattern.compile("^test.java$", Pattern.CASE_INSENSITIVE));
+        assertFiltering(filter, new File("Test.java"), true);
+        assertFiltering(filter, new File("test.java"), true);
+        assertFiltering(filter, new File("tEST.java"), true);
+        filter = new RegexFileFilter("^test.java$" , Pattern.CASE_INSENSITIVE);
+        assertFiltering(filter, new File("Test.java"), true);
+        assertFiltering(filter, new File("test.java"), true);
+        assertFiltering(filter, new File("tEST.java"), true);
+        filter = new RegexFileFilter("^test.java$" , IOCase.INSENSITIVE);
         assertFiltering(filter, new File("foo"), true);
-        filter = new RegexFileFilter("^test.java$" , IOCase.INSENSITIVE);
-        assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test.java"), true);
         assertFiltering(filter, new File("tEST.java"), true);
         try {
@@ -1791,90 +1914,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2244() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2244");
-        IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
-        assertFiltering(filter, new File("Test.java"), true);
-        assertFiltering(filter, new File("test-10.java"), true);
-        assertFiltering(filter, new File("test-.java"), false);
-        filter = new RegexFileFilter("^[Tt]est.java$");
-        assertFiltering(filter, new File("Test.java"), true);
-        assertFiltering(filter, new File("test.java"), true);
-        assertFiltering(filter, new File("tEST.java"), false);
-        filter = new RegexFileFilter(Pattern.compile("^test.java$", Pattern.CASE_INSENSITIVE));
-        assertFiltering(filter, new File("Test.java"), true);
-        assertFiltering(filter, new File("test.java"), true);
-        assertFiltering(filter, new File("tEST.java"), true);
-        filter = new RegexFileFilter("^test.java$" , Pattern.CASE_INSENSITIVE);
-        assertFiltering(filter, new File("Test.java"), true);
-        assertFiltering(filter, new File("test.java"), true);
-        assertFiltering(filter, new File("tEST.java"), false);
-        filter = new RegexFileFilter("^test.java$" , IOCase.INSENSITIVE);
-        assertFiltering(filter, new File("Test.java"), true);
-        assertFiltering(filter, new File("test.java"), true);
-        assertFiltering(filter, new File("tEST.java"), true);
-        try {
-            new RegexFileFilter(((String)(null)));
-        } catch (IllegalArgumentException ex) {
-        }
-        try {
-            new RegexFileFilter(((String)(null)) , Pattern.CASE_INSENSITIVE);
-        } catch (IllegalArgumentException ex) {
-        }
-        try {
-            new RegexFileFilter(((String)(null)) , IOCase.INSENSITIVE);
-        } catch (IllegalArgumentException ex) {
-        }
-        try {
-            new RegexFileFilter(((Pattern)(null)));
-        } catch (IllegalArgumentException ex) {
-        }
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    public void testRegex_literalMutation2245() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2245");
-        IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
-        assertFiltering(filter, new File("Test.java"), true);
-        assertFiltering(filter, new File("test-10.java"), true);
-        assertFiltering(filter, new File("test-.java"), false);
-        filter = new RegexFileFilter("^[Tt]est.java$");
-        assertFiltering(filter, new File("Test.java"), true);
-        assertFiltering(filter, new File("test.java"), true);
-        assertFiltering(filter, new File("tEST.java"), false);
-        filter = new RegexFileFilter(Pattern.compile("^test.java$", Pattern.CASE_INSENSITIVE));
-        assertFiltering(filter, new File("Test.java"), true);
-        assertFiltering(filter, new File("test.java"), true);
-        assertFiltering(filter, new File("tEST.java"), true);
-        filter = new RegexFileFilter("^test.java$" , Pattern.CASE_INSENSITIVE);
-        assertFiltering(filter, new File("Test.java"), true);
-        assertFiltering(filter, new File("test.java"), true);
-        assertFiltering(filter, new File("tEST.java"), true);
-        filter = new RegexFileFilter("foo" , IOCase.INSENSITIVE);
-        assertFiltering(filter, new File("Test.java"), true);
-        assertFiltering(filter, new File("test.java"), true);
-        assertFiltering(filter, new File("tEST.java"), true);
-        try {
-            new RegexFileFilter(((String)(null)));
-        } catch (IllegalArgumentException ex) {
-        }
-        try {
-            new RegexFileFilter(((String)(null)) , Pattern.CASE_INSENSITIVE);
-        } catch (IllegalArgumentException ex) {
-        }
-        try {
-            new RegexFileFilter(((String)(null)) , IOCase.INSENSITIVE);
-        } catch (IllegalArgumentException ex) {
-        }
-        try {
-            new RegexFileFilter(((Pattern)(null)));
-        } catch (IllegalArgumentException ex) {
-        }
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    public void testRegex_literalMutation2246() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2246");
+    public void testRegex_literalMutation3195() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3195");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -1892,7 +1933,7 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         assertFiltering(filter, new File("test.java"), true);
         assertFiltering(filter, new File("tEST.java"), true);
         filter = new RegexFileFilter("^test.java$" , IOCase.INSENSITIVE);
-        assertFiltering(filter, new File("foo"), true);
+        assertFiltering(filter, new File("Test.java"), false);
         assertFiltering(filter, new File("test.java"), true);
         assertFiltering(filter, new File("tEST.java"), true);
         try {
@@ -1914,49 +1955,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2247() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2247");
-        IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
-        assertFiltering(filter, new File("Test.java"), true);
-        assertFiltering(filter, new File("test-10.java"), true);
-        assertFiltering(filter, new File("test-.java"), false);
-        filter = new RegexFileFilter("^[Tt]est.java$");
-        assertFiltering(filter, new File("Test.java"), true);
-        assertFiltering(filter, new File("test.java"), true);
-        assertFiltering(filter, new File("tEST.java"), false);
-        filter = new RegexFileFilter(Pattern.compile("^test.java$", Pattern.CASE_INSENSITIVE));
-        assertFiltering(filter, new File("Test.java"), true);
-        assertFiltering(filter, new File("test.java"), true);
-        assertFiltering(filter, new File("tEST.java"), true);
-        filter = new RegexFileFilter("^test.java$" , Pattern.CASE_INSENSITIVE);
-        assertFiltering(filter, new File("Test.java"), true);
-        assertFiltering(filter, new File("test.java"), true);
-        assertFiltering(filter, new File("tEST.java"), true);
-        filter = new RegexFileFilter("^test.java$" , IOCase.INSENSITIVE);
-        assertFiltering(filter, new File("Test.java"), true);
-        assertFiltering(filter, new File("test.java"), true);
-        assertFiltering(filter, new File("tEST.java"), true);
-        try {
-            new RegexFileFilter(((String)(null)));
-        } catch (IllegalArgumentException ex) {
-        }
-        try {
-            new RegexFileFilter(((String)(null)) , Pattern.CASE_INSENSITIVE);
-        } catch (IllegalArgumentException ex) {
-        }
-        try {
-            new RegexFileFilter(((String)(null)) , IOCase.INSENSITIVE);
-        } catch (IllegalArgumentException ex) {
-        }
-        try {
-            new RegexFileFilter(((Pattern)(null)));
-        } catch (IllegalArgumentException ex) {
-        }
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    public void testRegex_literalMutation2248() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2248");
+    public void testRegex_literalMutation3196() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3196");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -1996,8 +1996,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2249() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2249");
+    public void testRegex_literalMutation3197() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3197");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -2037,8 +2037,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2250() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2250");
+    public void testRegex_literalMutation3198() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3198");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);
@@ -2078,8 +2078,8 @@ public class RegexFileFilterTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testRegex_literalMutation2251() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation2251");
+    public void testRegex_literalMutation3199() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRegex_literalMutation3199");
         IOFileFilter filter = new RegexFileFilter("^.*[tT]est(-\\d+)?\\.java$");
         assertFiltering(filter, new File("Test.java"), true);
         assertFiltering(filter, new File("test-10.java"), true);

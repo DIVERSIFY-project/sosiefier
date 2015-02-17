@@ -1698,9 +1698,9 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation745() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation745");
-        assertDoubleMetaphone("TSTN", "foo");
+    public void testDoubleMetaphone_literalMutation818() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation818");
+        assertDoubleMetaphone("TSTN", "bar");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
         assertDoubleMetaphone("PRN", "brown");
@@ -1740,10 +1740,10 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation746() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation746");
+    public void testDoubleMetaphone_literalMutation819() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation819");
         assertDoubleMetaphone("TSTN", "testing");
-        assertDoubleMetaphone("foo", "The");
+        assertDoubleMetaphone("bar", "The");
         assertDoubleMetaphone("KK", "quick");
         assertDoubleMetaphone("PRN", "brown");
         assertDoubleMetaphone("FKS", "fox");
@@ -1782,10 +1782,10 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation747() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation747");
+    public void testDoubleMetaphone_literalMutation820() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation820");
         assertDoubleMetaphone("TSTN", "testing");
-        assertDoubleMetaphone("0", "foo");
+        assertDoubleMetaphone("0", "bar");
         assertDoubleMetaphone("KK", "quick");
         assertDoubleMetaphone("PRN", "brown");
         assertDoubleMetaphone("FKS", "fox");
@@ -1824,8 +1824,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation748() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation748");
+    public void testDoubleMetaphone_literalMutation821() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation821");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("foo", "quick");
@@ -1866,11 +1866,11 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation749() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation749");
+    public void testDoubleMetaphone_literalMutation822() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation822");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
-        assertDoubleMetaphone("KK", "foo");
+        assertDoubleMetaphone("KK", "bar");
         assertDoubleMetaphone("PRN", "brown");
         assertDoubleMetaphone("FKS", "fox");
         assertDoubleMetaphone("JMPT", "jumped");
@@ -1908,8 +1908,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation750() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation750");
+    public void testDoubleMetaphone_literalMutation823() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation823");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -1950,12 +1950,12 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation751() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation751");
+    public void testDoubleMetaphone_literalMutation824() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation824");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
-        assertDoubleMetaphone("PRN", "foo");
+        assertDoubleMetaphone("PRN", "bar");
         assertDoubleMetaphone("FKS", "fox");
         assertDoubleMetaphone("JMPT", "jumped");
         assertDoubleMetaphone("AFR", "over");
@@ -1992,13 +1992,13 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation752() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation752");
+    public void testDoubleMetaphone_literalMutation825() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation825");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
         assertDoubleMetaphone("PRN", "brown");
-        assertDoubleMetaphone("foo", "fox");
+        assertDoubleMetaphone("bar", "fox");
         assertDoubleMetaphone("JMPT", "jumped");
         assertDoubleMetaphone("AFR", "over");
         assertDoubleMetaphone("0", "the");
@@ -2034,8 +2034,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation753() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation753");
+    public void testDoubleMetaphone_literalMutation826() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation826");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -2076,14 +2076,14 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation754() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation754");
+    public void testDoubleMetaphone_literalMutation827() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation827");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
         assertDoubleMetaphone("PRN", "brown");
         assertDoubleMetaphone("FKS", "fox");
-        assertDoubleMetaphone("foo", "jumped");
+        assertDoubleMetaphone("bar", "jumped");
         assertDoubleMetaphone("AFR", "over");
         assertDoubleMetaphone("0", "the");
         assertDoubleMetaphone("LS", "lazy");
@@ -2118,14 +2118,14 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation755() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation755");
+    public void testDoubleMetaphone_literalMutation828() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation828");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
         assertDoubleMetaphone("PRN", "brown");
         assertDoubleMetaphone("FKS", "fox");
-        assertDoubleMetaphone("JMPT", "foo");
+        assertDoubleMetaphone("JMPT", "bar");
         assertDoubleMetaphone("AFR", "over");
         assertDoubleMetaphone("0", "the");
         assertDoubleMetaphone("LS", "lazy");
@@ -2160,8 +2160,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation756() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation756");
+    public void testDoubleMetaphone_literalMutation829() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation829");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -2202,15 +2202,15 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation757() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation757");
+    public void testDoubleMetaphone_literalMutation830() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation830");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
         assertDoubleMetaphone("PRN", "brown");
         assertDoubleMetaphone("FKS", "fox");
         assertDoubleMetaphone("JMPT", "jumped");
-        assertDoubleMetaphone("AFR", "foo");
+        assertDoubleMetaphone("AFR", "bar");
         assertDoubleMetaphone("0", "the");
         assertDoubleMetaphone("LS", "lazy");
         assertDoubleMetaphone("TKS", "dogs");
@@ -2244,8 +2244,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation758() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation758");
+    public void testDoubleMetaphone_literalMutation831() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation831");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -2286,8 +2286,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation759() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation759");
+    public void testDoubleMetaphone_literalMutation832() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation832");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -2328,8 +2328,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation760() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation760");
+    public void testDoubleMetaphone_literalMutation833() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation833");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -2338,7 +2338,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphone("JMPT", "jumped");
         assertDoubleMetaphone("AFR", "over");
         assertDoubleMetaphone("0", "the");
-        assertDoubleMetaphone("foo", "lazy");
+        assertDoubleMetaphone("bar", "lazy");
         assertDoubleMetaphone("TKS", "dogs");
         assertDoubleMetaphone("MKFR", "MacCafferey");
         assertDoubleMetaphone("STFN", "Stephan");
@@ -2370,8 +2370,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation761() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation761");
+    public void testDoubleMetaphone_literalMutation834() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation834");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -2380,7 +2380,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphone("JMPT", "jumped");
         assertDoubleMetaphone("AFR", "over");
         assertDoubleMetaphone("0", "the");
-        assertDoubleMetaphone("LS", "foo");
+        assertDoubleMetaphone("LS", "bar");
         assertDoubleMetaphone("TKS", "dogs");
         assertDoubleMetaphone("MKFR", "MacCafferey");
         assertDoubleMetaphone("STFN", "Stephan");
@@ -2412,8 +2412,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation762() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation762");
+    public void testDoubleMetaphone_literalMutation835() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation835");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -2423,7 +2423,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphone("AFR", "over");
         assertDoubleMetaphone("0", "the");
         assertDoubleMetaphone("LS", "lazy");
-        assertDoubleMetaphone("foo", "dogs");
+        assertDoubleMetaphone("bar", "dogs");
         assertDoubleMetaphone("MKFR", "MacCafferey");
         assertDoubleMetaphone("STFN", "Stephan");
         assertDoubleMetaphone("KSSK", "Kuczewski");
@@ -2454,8 +2454,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation763() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation763");
+    public void testDoubleMetaphone_literalMutation836() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation836");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -2496,8 +2496,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation764() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation764");
+    public void testDoubleMetaphone_literalMutation837() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation837");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -2538,8 +2538,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation765() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation765");
+    public void testDoubleMetaphone_literalMutation838() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation838");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -2580,8 +2580,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation766() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation766");
+    public void testDoubleMetaphone_literalMutation839() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation839");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -2593,7 +2593,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphone("LS", "lazy");
         assertDoubleMetaphone("TKS", "dogs");
         assertDoubleMetaphone("MKFR", "MacCafferey");
-        assertDoubleMetaphone("foo", "Stephan");
+        assertDoubleMetaphone("bar", "Stephan");
         assertDoubleMetaphone("KSSK", "Kuczewski");
         assertDoubleMetaphone("MKLL", "McClelland");
         assertDoubleMetaphone("SNHS", "san jose");
@@ -2622,8 +2622,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation767() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation767");
+    public void testDoubleMetaphone_literalMutation840() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation840");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -2664,8 +2664,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation768() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation768");
+    public void testDoubleMetaphone_literalMutation841() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation841");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -2678,7 +2678,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphone("TKS", "dogs");
         assertDoubleMetaphone("MKFR", "MacCafferey");
         assertDoubleMetaphone("STFN", "Stephan");
-        assertDoubleMetaphone("foo", "Kuczewski");
+        assertDoubleMetaphone("bar", "Kuczewski");
         assertDoubleMetaphone("MKLL", "McClelland");
         assertDoubleMetaphone("SNHS", "san jose");
         assertDoubleMetaphone("SNFP", "xenophobia");
@@ -2706,8 +2706,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation769() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation769");
+    public void testDoubleMetaphone_literalMutation842() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation842");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -2748,8 +2748,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation770() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation770");
+    public void testDoubleMetaphone_literalMutation843() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation843");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -2790,8 +2790,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation771() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation771");
+    public void testDoubleMetaphone_literalMutation844() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation844");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -2832,8 +2832,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation772() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation772");
+    public void testDoubleMetaphone_literalMutation845() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation845");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -2848,7 +2848,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphone("STFN", "Stephan");
         assertDoubleMetaphone("KSSK", "Kuczewski");
         assertDoubleMetaphone("MKLL", "McClelland");
-        assertDoubleMetaphone("foo", "san jose");
+        assertDoubleMetaphone("bar", "san jose");
         assertDoubleMetaphone("SNFP", "xenophobia");
         assertDoubleMetaphoneAlt("TSTN", "testing");
         assertDoubleMetaphoneAlt("T", "The");
@@ -2874,8 +2874,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation773() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation773");
+    public void testDoubleMetaphone_literalMutation846() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation846");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -2916,8 +2916,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation774() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation774");
+    public void testDoubleMetaphone_literalMutation847() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation847");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -2958,8 +2958,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation775() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation775");
+    public void testDoubleMetaphone_literalMutation848() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation848");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -2975,7 +2975,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphone("KSSK", "Kuczewski");
         assertDoubleMetaphone("MKLL", "McClelland");
         assertDoubleMetaphone("SNHS", "san jose");
-        assertDoubleMetaphone("SNFP", "foo");
+        assertDoubleMetaphone("SNFP", "bar");
         assertDoubleMetaphoneAlt("TSTN", "testing");
         assertDoubleMetaphoneAlt("T", "The");
         assertDoubleMetaphoneAlt("KK", "quick");
@@ -3000,8 +3000,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation776() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation776");
+    public void testDoubleMetaphone_literalMutation849() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation849");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3042,8 +3042,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation777() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation777");
+    public void testDoubleMetaphone_literalMutation850() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation850");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3084,8 +3084,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation778() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation778");
+    public void testDoubleMetaphone_literalMutation851() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation851");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3103,7 +3103,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphone("SNHS", "san jose");
         assertDoubleMetaphone("SNFP", "xenophobia");
         assertDoubleMetaphoneAlt("TSTN", "testing");
-        assertDoubleMetaphoneAlt("foo", "The");
+        assertDoubleMetaphoneAlt("bar", "The");
         assertDoubleMetaphoneAlt("KK", "quick");
         assertDoubleMetaphoneAlt("PRN", "brown");
         assertDoubleMetaphoneAlt("FKS", "fox");
@@ -3126,8 +3126,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation779() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation779");
+    public void testDoubleMetaphone_literalMutation852() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation852");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3168,8 +3168,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation780() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation780");
+    public void testDoubleMetaphone_literalMutation853() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation853");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3210,8 +3210,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation781() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation781");
+    public void testDoubleMetaphone_literalMutation854() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation854");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3252,8 +3252,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation782() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation782");
+    public void testDoubleMetaphone_literalMutation855() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation855");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3294,8 +3294,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation783() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation783");
+    public void testDoubleMetaphone_literalMutation856() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation856");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3336,8 +3336,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation784() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation784");
+    public void testDoubleMetaphone_literalMutation857() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation857");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3378,8 +3378,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation785() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation785");
+    public void testDoubleMetaphone_literalMutation858() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation858");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3400,7 +3400,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphoneAlt("T", "The");
         assertDoubleMetaphoneAlt("KK", "quick");
         assertDoubleMetaphoneAlt("PRN", "brown");
-        assertDoubleMetaphoneAlt("FKS", "foo");
+        assertDoubleMetaphoneAlt("FKS", "bar");
         assertDoubleMetaphoneAlt("AMPT", "jumped");
         assertDoubleMetaphoneAlt("AFR", "over");
         assertDoubleMetaphoneAlt("T", "the");
@@ -3420,8 +3420,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation786() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation786");
+    public void testDoubleMetaphone_literalMutation859() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation859");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3443,7 +3443,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphoneAlt("KK", "quick");
         assertDoubleMetaphoneAlt("PRN", "brown");
         assertDoubleMetaphoneAlt("FKS", "fox");
-        assertDoubleMetaphoneAlt("foo", "jumped");
+        assertDoubleMetaphoneAlt("bar", "jumped");
         assertDoubleMetaphoneAlt("AFR", "over");
         assertDoubleMetaphoneAlt("T", "the");
         assertDoubleMetaphoneAlt("LS", "lazy");
@@ -3462,8 +3462,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation787() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation787");
+    public void testDoubleMetaphone_literalMutation860() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation860");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3504,8 +3504,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation788() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation788");
+    public void testDoubleMetaphone_literalMutation861() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation861");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3546,8 +3546,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation789() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation789");
+    public void testDoubleMetaphone_literalMutation862() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation862");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3570,7 +3570,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphoneAlt("PRN", "brown");
         assertDoubleMetaphoneAlt("FKS", "fox");
         assertDoubleMetaphoneAlt("AMPT", "jumped");
-        assertDoubleMetaphoneAlt("AFR", "foo");
+        assertDoubleMetaphoneAlt("AFR", "bar");
         assertDoubleMetaphoneAlt("T", "the");
         assertDoubleMetaphoneAlt("LS", "lazy");
         assertDoubleMetaphoneAlt("TKS", "dogs");
@@ -3588,8 +3588,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation790() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation790");
+    public void testDoubleMetaphone_literalMutation863() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation863");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3613,7 +3613,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphoneAlt("FKS", "fox");
         assertDoubleMetaphoneAlt("AMPT", "jumped");
         assertDoubleMetaphoneAlt("AFR", "over");
-        assertDoubleMetaphoneAlt("foo", "the");
+        assertDoubleMetaphoneAlt("bar", "the");
         assertDoubleMetaphoneAlt("LS", "lazy");
         assertDoubleMetaphoneAlt("TKS", "dogs");
         assertDoubleMetaphoneAlt("MKFR", "MacCafferey");
@@ -3630,8 +3630,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation791() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation791");
+    public void testDoubleMetaphone_literalMutation864() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation864");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3672,8 +3672,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation792() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation792");
+    public void testDoubleMetaphone_literalMutation865() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation865");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3714,8 +3714,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation793() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation793");
+    public void testDoubleMetaphone_literalMutation866() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation866");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3740,7 +3740,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphoneAlt("AMPT", "jumped");
         assertDoubleMetaphoneAlt("AFR", "over");
         assertDoubleMetaphoneAlt("T", "the");
-        assertDoubleMetaphoneAlt("LS", "foo");
+        assertDoubleMetaphoneAlt("LS", "bar");
         assertDoubleMetaphoneAlt("TKS", "dogs");
         assertDoubleMetaphoneAlt("MKFR", "MacCafferey");
         assertDoubleMetaphoneAlt("STFN", "Stephan");
@@ -3756,8 +3756,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation794() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation794");
+    public void testDoubleMetaphone_literalMutation867() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation867");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3798,8 +3798,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation795() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation795");
+    public void testDoubleMetaphone_literalMutation868() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation868");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3825,7 +3825,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphoneAlt("AFR", "over");
         assertDoubleMetaphoneAlt("T", "the");
         assertDoubleMetaphoneAlt("LS", "lazy");
-        assertDoubleMetaphoneAlt("TKS", "foo");
+        assertDoubleMetaphoneAlt("TKS", "bar");
         assertDoubleMetaphoneAlt("MKFR", "MacCafferey");
         assertDoubleMetaphoneAlt("STFN", "Stephan");
         assertDoubleMetaphoneAlt("KXFS", "Kutchefski");
@@ -3840,8 +3840,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation796() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation796");
+    public void testDoubleMetaphone_literalMutation869() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation869");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3882,8 +3882,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation797() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation797");
+    public void testDoubleMetaphone_literalMutation870() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation870");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3910,7 +3910,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphoneAlt("T", "the");
         assertDoubleMetaphoneAlt("LS", "lazy");
         assertDoubleMetaphoneAlt("TKS", "dogs");
-        assertDoubleMetaphoneAlt("MKFR", "foo");
+        assertDoubleMetaphoneAlt("MKFR", "bar");
         assertDoubleMetaphoneAlt("STFN", "Stephan");
         assertDoubleMetaphoneAlt("KXFS", "Kutchefski");
         assertDoubleMetaphoneAlt("MKLL", "McClelland");
@@ -3924,8 +3924,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation798() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation798");
+    public void testDoubleMetaphone_literalMutation871() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation871");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -3966,8 +3966,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation799() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation799");
+    public void testDoubleMetaphone_literalMutation872() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation872");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -4008,8 +4008,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation800() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation800");
+    public void testDoubleMetaphone_literalMutation873() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation873");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -4050,8 +4050,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation801() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation801");
+    public void testDoubleMetaphone_literalMutation874() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation874");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -4080,7 +4080,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphoneAlt("TKS", "dogs");
         assertDoubleMetaphoneAlt("MKFR", "MacCafferey");
         assertDoubleMetaphoneAlt("STFN", "Stephan");
-        assertDoubleMetaphoneAlt("KXFS", "foo");
+        assertDoubleMetaphoneAlt("KXFS", "bar");
         assertDoubleMetaphoneAlt("MKLL", "McClelland");
         assertDoubleMetaphoneAlt("SNHS", "san jose");
         assertDoubleMetaphoneAlt("SNFP", "xenophobia");
@@ -4092,8 +4092,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation802() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation802");
+    public void testDoubleMetaphone_literalMutation875() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation875");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -4123,7 +4123,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphoneAlt("MKFR", "MacCafferey");
         assertDoubleMetaphoneAlt("STFN", "Stephan");
         assertDoubleMetaphoneAlt("KXFS", "Kutchefski");
-        assertDoubleMetaphoneAlt("foo", "McClelland");
+        assertDoubleMetaphoneAlt("bar", "McClelland");
         assertDoubleMetaphoneAlt("SNHS", "san jose");
         assertDoubleMetaphoneAlt("SNFP", "xenophobia");
         assertDoubleMetaphoneAlt("FKR", "Fokker");
@@ -4134,8 +4134,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation803() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation803");
+    public void testDoubleMetaphone_literalMutation876() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation876");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -4176,8 +4176,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation804() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation804");
+    public void testDoubleMetaphone_literalMutation877() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation877");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -4208,7 +4208,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphoneAlt("STFN", "Stephan");
         assertDoubleMetaphoneAlt("KXFS", "Kutchefski");
         assertDoubleMetaphoneAlt("MKLL", "McClelland");
-        assertDoubleMetaphoneAlt("foo", "san jose");
+        assertDoubleMetaphoneAlt("bar", "san jose");
         assertDoubleMetaphoneAlt("SNFP", "xenophobia");
         assertDoubleMetaphoneAlt("FKR", "Fokker");
         assertDoubleMetaphoneAlt("AK", "Joqqi");
@@ -4218,8 +4218,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation805() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation805");
+    public void testDoubleMetaphone_literalMutation878() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation878");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -4250,7 +4250,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphoneAlt("STFN", "Stephan");
         assertDoubleMetaphoneAlt("KXFS", "Kutchefski");
         assertDoubleMetaphoneAlt("MKLL", "McClelland");
-        assertDoubleMetaphoneAlt("SNHS", "foo");
+        assertDoubleMetaphoneAlt("SNHS", "bar");
         assertDoubleMetaphoneAlt("SNFP", "xenophobia");
         assertDoubleMetaphoneAlt("FKR", "Fokker");
         assertDoubleMetaphoneAlt("AK", "Joqqi");
@@ -4260,8 +4260,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation806() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation806");
+    public void testDoubleMetaphone_literalMutation879() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation879");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -4293,7 +4293,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphoneAlt("KXFS", "Kutchefski");
         assertDoubleMetaphoneAlt("MKLL", "McClelland");
         assertDoubleMetaphoneAlt("SNHS", "san jose");
-        assertDoubleMetaphoneAlt("foo", "xenophobia");
+        assertDoubleMetaphoneAlt("bar", "xenophobia");
         assertDoubleMetaphoneAlt("FKR", "Fokker");
         assertDoubleMetaphoneAlt("AK", "Joqqi");
         assertDoubleMetaphoneAlt("HF", "Hovvi");
@@ -4302,8 +4302,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation807() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation807");
+    public void testDoubleMetaphone_literalMutation880() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation880");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -4335,7 +4335,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphoneAlt("KXFS", "Kutchefski");
         assertDoubleMetaphoneAlt("MKLL", "McClelland");
         assertDoubleMetaphoneAlt("SNHS", "san jose");
-        assertDoubleMetaphoneAlt("SNFP", "foo");
+        assertDoubleMetaphoneAlt("SNFP", "bar");
         assertDoubleMetaphoneAlt("FKR", "Fokker");
         assertDoubleMetaphoneAlt("AK", "Joqqi");
         assertDoubleMetaphoneAlt("HF", "Hovvi");
@@ -4344,50 +4344,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation808() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation808");
-        assertDoubleMetaphone("TSTN", "testing");
-        assertDoubleMetaphone("0", "The");
-        assertDoubleMetaphone("KK", "quick");
-        assertDoubleMetaphone("PRN", "brown");
-        assertDoubleMetaphone("FKS", "fox");
-        assertDoubleMetaphone("JMPT", "jumped");
-        assertDoubleMetaphone("AFR", "over");
-        assertDoubleMetaphone("0", "the");
-        assertDoubleMetaphone("LS", "lazy");
-        assertDoubleMetaphone("TKS", "dogs");
-        assertDoubleMetaphone("MKFR", "MacCafferey");
-        assertDoubleMetaphone("STFN", "Stephan");
-        assertDoubleMetaphone("KSSK", "Kuczewski");
-        assertDoubleMetaphone("MKLL", "McClelland");
-        assertDoubleMetaphone("SNHS", "san jose");
-        assertDoubleMetaphone("SNFP", "xenophobia");
-        assertDoubleMetaphoneAlt("TSTN", "testing");
-        assertDoubleMetaphoneAlt("T", "The");
-        assertDoubleMetaphoneAlt("KK", "quick");
-        assertDoubleMetaphoneAlt("PRN", "brown");
-        assertDoubleMetaphoneAlt("FKS", "fox");
-        assertDoubleMetaphoneAlt("AMPT", "jumped");
-        assertDoubleMetaphoneAlt("AFR", "over");
-        assertDoubleMetaphoneAlt("T", "the");
-        assertDoubleMetaphoneAlt("LS", "lazy");
-        assertDoubleMetaphoneAlt("TKS", "dogs");
-        assertDoubleMetaphoneAlt("MKFR", "MacCafferey");
-        assertDoubleMetaphoneAlt("STFN", "Stephan");
-        assertDoubleMetaphoneAlt("KXFS", "Kutchefski");
-        assertDoubleMetaphoneAlt("MKLL", "McClelland");
-        assertDoubleMetaphoneAlt("SNHS", "san jose");
-        assertDoubleMetaphoneAlt("SNFP", "xenophobia");
-        assertDoubleMetaphoneAlt("foo", "Fokker");
-        assertDoubleMetaphoneAlt("AK", "Joqqi");
-        assertDoubleMetaphoneAlt("HF", "Hovvi");
-        assertDoubleMetaphoneAlt("XRN", "Czerny");
-        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
-    }
-
-    @Test
-    public void testDoubleMetaphone_literalMutation809() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation809");
+    public void testDoubleMetaphone_literalMutation881() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation881");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -4420,7 +4378,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphoneAlt("MKLL", "McClelland");
         assertDoubleMetaphoneAlt("SNHS", "san jose");
         assertDoubleMetaphoneAlt("SNFP", "xenophobia");
-        assertDoubleMetaphoneAlt("FKR", "foo");
+        assertDoubleMetaphoneAlt("bar", "Fokker");
         assertDoubleMetaphoneAlt("AK", "Joqqi");
         assertDoubleMetaphoneAlt("HF", "Hovvi");
         assertDoubleMetaphoneAlt("XRN", "Czerny");
@@ -4428,8 +4386,50 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation810() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation810");
+    public void testDoubleMetaphone_literalMutation882() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation882");
+        assertDoubleMetaphone("TSTN", "testing");
+        assertDoubleMetaphone("0", "The");
+        assertDoubleMetaphone("KK", "quick");
+        assertDoubleMetaphone("PRN", "brown");
+        assertDoubleMetaphone("FKS", "fox");
+        assertDoubleMetaphone("JMPT", "jumped");
+        assertDoubleMetaphone("AFR", "over");
+        assertDoubleMetaphone("0", "the");
+        assertDoubleMetaphone("LS", "lazy");
+        assertDoubleMetaphone("TKS", "dogs");
+        assertDoubleMetaphone("MKFR", "MacCafferey");
+        assertDoubleMetaphone("STFN", "Stephan");
+        assertDoubleMetaphone("KSSK", "Kuczewski");
+        assertDoubleMetaphone("MKLL", "McClelland");
+        assertDoubleMetaphone("SNHS", "san jose");
+        assertDoubleMetaphone("SNFP", "xenophobia");
+        assertDoubleMetaphoneAlt("TSTN", "testing");
+        assertDoubleMetaphoneAlt("T", "The");
+        assertDoubleMetaphoneAlt("KK", "quick");
+        assertDoubleMetaphoneAlt("PRN", "brown");
+        assertDoubleMetaphoneAlt("FKS", "fox");
+        assertDoubleMetaphoneAlt("AMPT", "jumped");
+        assertDoubleMetaphoneAlt("AFR", "over");
+        assertDoubleMetaphoneAlt("T", "the");
+        assertDoubleMetaphoneAlt("LS", "lazy");
+        assertDoubleMetaphoneAlt("TKS", "dogs");
+        assertDoubleMetaphoneAlt("MKFR", "MacCafferey");
+        assertDoubleMetaphoneAlt("STFN", "Stephan");
+        assertDoubleMetaphoneAlt("KXFS", "Kutchefski");
+        assertDoubleMetaphoneAlt("MKLL", "McClelland");
+        assertDoubleMetaphoneAlt("SNHS", "san jose");
+        assertDoubleMetaphoneAlt("SNFP", "xenophobia");
+        assertDoubleMetaphoneAlt("FKR", "bar");
+        assertDoubleMetaphoneAlt("AK", "Joqqi");
+        assertDoubleMetaphoneAlt("HF", "Hovvi");
+        assertDoubleMetaphoneAlt("XRN", "Czerny");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testDoubleMetaphone_literalMutation883() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation883");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -4470,8 +4470,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation811() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation811");
+    public void testDoubleMetaphone_literalMutation884() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation884");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -4512,8 +4512,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation812() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation812");
+    public void testDoubleMetaphone_literalMutation885() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation885");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -4554,8 +4554,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation813() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation813");
+    public void testDoubleMetaphone_literalMutation886() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation886");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -4596,8 +4596,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation814() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation814");
+    public void testDoubleMetaphone_literalMutation887() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation887");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -4638,8 +4638,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testDoubleMetaphone_literalMutation815() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation815");
+    public void testDoubleMetaphone_literalMutation888() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDoubleMetaphone_literalMutation888");
         assertDoubleMetaphone("TSTN", "testing");
         assertDoubleMetaphone("0", "The");
         assertDoubleMetaphone("KK", "quick");
@@ -4675,7 +4675,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         assertDoubleMetaphoneAlt("FKR", "Fokker");
         assertDoubleMetaphoneAlt("AK", "Joqqi");
         assertDoubleMetaphoneAlt("HF", "Hovvi");
-        assertDoubleMetaphoneAlt("XRN", "foo");
+        assertDoubleMetaphoneAlt("XRN", "bar");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -6195,62 +6195,62 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation817() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation817");
-        final String[][] testFixture = new String[][]{ new String[]{ "" , "foo" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation890() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation890");
+        final String[][] testFixture = new String[][]{ new String[]{ "" , "bar" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
         doubleMetaphoneEqualTest(testFixture, false);
         doubleMetaphoneEqualTest(testFixture, true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation818() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation818");
-        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "foo" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation891() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation891");
+        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "bar" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
         doubleMetaphoneEqualTest(testFixture, false);
         doubleMetaphoneEqualTest(testFixture, true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation819() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation819");
-        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "foo" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation892() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation892");
+        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "bar" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
         doubleMetaphoneEqualTest(testFixture, false);
         doubleMetaphoneEqualTest(testFixture, true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation820() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation820");
-        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "foo" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation893() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation893");
+        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "bar" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
         doubleMetaphoneEqualTest(testFixture, false);
         doubleMetaphoneEqualTest(testFixture, true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation821() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation821");
-        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "foo" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation894() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation894");
+        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "bar" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
         doubleMetaphoneEqualTest(testFixture, false);
         doubleMetaphoneEqualTest(testFixture, true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation822() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation822");
-        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "foo" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation895() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation895");
+        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "bar" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
         doubleMetaphoneEqualTest(testFixture, false);
         doubleMetaphoneEqualTest(testFixture, true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation823() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation823");
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation896() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation896");
         final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "foo" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
         doubleMetaphoneEqualTest(testFixture, false);
         doubleMetaphoneEqualTest(testFixture, true);
@@ -6258,26 +6258,26 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation824() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation824");
-        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "foo" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation897() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation897");
+        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "bar" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
         doubleMetaphoneEqualTest(testFixture, false);
         doubleMetaphoneEqualTest(testFixture, true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation825() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation825");
-        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "foo" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation898() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation898");
+        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "bar" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
         doubleMetaphoneEqualTest(testFixture, false);
         doubleMetaphoneEqualTest(testFixture, true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation826() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation826");
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation899() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation899");
         final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "foo" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
         doubleMetaphoneEqualTest(testFixture, false);
         doubleMetaphoneEqualTest(testFixture, true);
@@ -6285,44 +6285,44 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation827() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation827");
-        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "foo" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation900() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation900");
+        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "bar" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
         doubleMetaphoneEqualTest(testFixture, false);
         doubleMetaphoneEqualTest(testFixture, true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation828() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation828");
-        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "foo" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation901() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation901");
+        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "bar" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
         doubleMetaphoneEqualTest(testFixture, false);
         doubleMetaphoneEqualTest(testFixture, true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation829() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation829");
-        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "foo" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation902() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation902");
+        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "bar" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
         doubleMetaphoneEqualTest(testFixture, false);
         doubleMetaphoneEqualTest(testFixture, true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation830() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation830");
-        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "foo" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation903() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation903");
+        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "bar" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
         doubleMetaphoneEqualTest(testFixture, false);
         doubleMetaphoneEqualTest(testFixture, true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation831() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation831");
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation904() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation904");
         final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "foo" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
         doubleMetaphoneEqualTest(testFixture, false);
         doubleMetaphoneEqualTest(testFixture, true);
@@ -6330,26 +6330,26 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation832() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation832");
-        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "foo" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation905() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation905");
+        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "bar" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
         doubleMetaphoneEqualTest(testFixture, false);
         doubleMetaphoneEqualTest(testFixture, true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation833() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation833");
-        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "foo" } , new String[]{ "Philipowitz" , "Filipowicz" } };
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation906() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation906");
+        final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "bar" } , new String[]{ "Philipowitz" , "Filipowicz" } };
         doubleMetaphoneEqualTest(testFixture, false);
         doubleMetaphoneEqualTest(testFixture, true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation834() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation834");
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation907() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation907");
         final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "foo" , "Filipowicz" } };
         doubleMetaphoneEqualTest(testFixture, false);
         doubleMetaphoneEqualTest(testFixture, true);
@@ -6357,8 +6357,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation835() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation835");
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation908() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation908");
         final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "foo" } };
         doubleMetaphoneEqualTest(testFixture, false);
         doubleMetaphoneEqualTest(testFixture, true);
@@ -6366,8 +6366,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation836() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation836");
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation909() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation909");
         final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
         doubleMetaphoneEqualTest(testFixture, true);
         doubleMetaphoneEqualTest(testFixture, true);
@@ -6375,8 +6375,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualBasic_literalMutation837() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation837");
+    public void testIsDoubleMetaphoneEqualBasic_literalMutation910() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualBasic_literalMutation910");
         final String[][] testFixture = new String[][]{ new String[]{ "" , "" } , new String[]{ "Case" , "case" } , new String[]{ "CASE" , "Case" } , new String[]{ "caSe" , "cAsE" } , new String[]{ "cookie" , "quick" } , new String[]{ "quick" , "cookie" } , new String[]{ "Brian" , "Bryan" } , new String[]{ "Auto" , "Otto" } , new String[]{ "Steven" , "Stefan" } , new String[]{ "Philipowitz" , "Filipowicz" } };
         doubleMetaphoneEqualTest(testFixture, false);
         doubleMetaphoneEqualTest(testFixture, false);
@@ -6426,18 +6426,18 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualExtended2_literalMutation839() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended2_literalMutation839");
-        final String[][] testFixture = new String[][]{ new String[]{ "Jablonski" , "foo" } };
+    public void testIsDoubleMetaphoneEqualExtended2_literalMutation912() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended2_literalMutation912");
+        final String[][] testFixture = new String[][]{ new String[]{ "Jablonski" , "bar" } };
         doubleMetaphoneEqualTest(testFixture, true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualExtended2_literalMutation840() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended2_literalMutation840");
+    public void testIsDoubleMetaphoneEqualExtended2_literalMutation913() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended2_literalMutation913");
         final String[][] testFixture = new String[][]{ new String[]{ "Jablonski" , "Yablonsky" } };
-        doubleMetaphoneEqualTest(testFixture, true);
+        doubleMetaphoneEqualTest(testFixture, false);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -6623,7 +6623,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         validateFixture(FIXTURE);
         final StringBuilder failures = new StringBuilder();
         final StringBuilder matches = new StringBuilder();
-        final String cr = java.lang.System.getProperty("foo");
+        final String cr = java.lang.System.getProperty("bar");
         matches.append(("private static final String[][] MATCHES = {" + cr));
         int failCount = 0;
         for (int i = 0 ; i < (FIXTURE.length) ; i++) {
@@ -6650,8 +6650,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
      * FIXTURE array.
      */
 @Test
-    public void testIsDoubleMetaphoneEqualExtended3_literalMutation842() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation842");
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation915() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation915");
         validateFixture(FIXTURE);
         final StringBuilder failures = new StringBuilder();
         final StringBuilder matches = new StringBuilder();
@@ -6682,8 +6682,40 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
      * FIXTURE array.
      */
 @Test
-    public void testIsDoubleMetaphoneEqualExtended3_literalMutation843() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation843");
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation916() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation916");
+        validateFixture(FIXTURE);
+        final StringBuilder failures = new StringBuilder();
+        final StringBuilder matches = new StringBuilder();
+        final String cr = java.lang.System.getProperty("line.separator");
+        matches.append(("private static final String[][] MATCHES = {" + cr));
+        int failCount = 1;
+        for (int i = 0 ; i < (FIXTURE.length) ; i++) {
+            final String name0 = FIXTURE[i][0];
+            final String name1 = FIXTURE[i][1];
+            final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
+            final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
+            if ((match1 == false) && (match2 == false)) {
+                final String failMsg = ((((("[" + i) + "] ") + name0) + " and ") + name1) + cr;
+                failures.append(failMsg);
+                failCount++;
+            } else {
+                matches.append(((((("{\"" + name0) + "\", \"") + name1) + "\"},") + cr));
+            }
+        }
+        matches.append("};");
+        if (failCount > 0) {
+        } 
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Used to generate the MATCHES array and test possible matches from the
+     * FIXTURE array.
+     */
+@Test
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation917() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation917");
         validateFixture(FIXTURE);
         final StringBuilder failures = new StringBuilder();
         final StringBuilder matches = new StringBuilder();
@@ -6714,8 +6746,40 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
      * FIXTURE array.
      */
 @Test
-    public void testIsDoubleMetaphoneEqualExtended3_literalMutation844() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation844");
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation918() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation918");
+        validateFixture(FIXTURE);
+        final StringBuilder failures = new StringBuilder();
+        final StringBuilder matches = new StringBuilder();
+        final String cr = java.lang.System.getProperty("line.separator");
+        matches.append(("private static final String[][] MATCHES = {" + cr));
+        int failCount = 0;
+        for (int i = 0 ; i < (FIXTURE.length) ; i++) {
+            final String name0 = FIXTURE[i][0];
+            final String name1 = FIXTURE[i][1];
+            final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
+            final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
+            if ((match1 == false) && (match2 == false)) {
+                final String failMsg = ((((("[" + i) + "] ") + name0) + " and ") + name1) + cr;
+                failures.append(failMsg);
+                failCount++;
+            } else {
+                matches.append(((((("{\"" + name0) + "\", \"") + name1) + "\"},") + cr));
+            }
+        }
+        matches.append("};");
+        if (failCount > 0) {
+        } 
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Used to generate the MATCHES array and test possible matches from the
+     * FIXTURE array.
+     */
+@Test
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation919() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation919");
         validateFixture(FIXTURE);
         final StringBuilder failures = new StringBuilder();
         final StringBuilder matches = new StringBuilder();
@@ -6746,8 +6810,104 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
      * FIXTURE array.
      */
 @Test
-    public void testIsDoubleMetaphoneEqualExtended3_literalMutation845() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation845");
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation920() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation920");
+        validateFixture(FIXTURE);
+        final StringBuilder failures = new StringBuilder();
+        final StringBuilder matches = new StringBuilder();
+        final String cr = java.lang.System.getProperty("line.separator");
+        matches.append(("private static final String[][] MATCHES = {" + cr));
+        int failCount = 0;
+        for (int i = -1 ; i < (FIXTURE.length) ; i++) {
+            final String name0 = FIXTURE[i][0];
+            final String name1 = FIXTURE[i][1];
+            final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
+            final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
+            if ((match1 == false) && (match2 == false)) {
+                final String failMsg = ((((("[" + i) + "] ") + name0) + " and ") + name1) + cr;
+                failures.append(failMsg);
+                failCount++;
+            } else {
+                matches.append(((((("{\"" + name0) + "\", \"") + name1) + "\"},") + cr));
+            }
+        }
+        matches.append("};");
+        if (failCount > 0) {
+        } 
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Used to generate the MATCHES array and test possible matches from the
+     * FIXTURE array.
+     */
+@Test
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation921() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation921");
+        validateFixture(FIXTURE);
+        final StringBuilder failures = new StringBuilder();
+        final StringBuilder matches = new StringBuilder();
+        final String cr = java.lang.System.getProperty("line.separator");
+        matches.append(("private static final String[][] MATCHES = {" + cr));
+        int failCount = 0;
+        for (int i = 0 ; i < (FIXTURE.length) ; i++) {
+            final String name0 = FIXTURE[i][0];
+            final String name1 = FIXTURE[i][1];
+            final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
+            final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
+            if ((match1 == false) && (match2 == false)) {
+                final String failMsg = ((((("[" + i) + "] ") + name0) + " and ") + name1) + cr;
+                failures.append(failMsg);
+                failCount++;
+            } else {
+                matches.append(((((("{\"" + name0) + "\", \"") + name1) + "\"},") + cr));
+            }
+        }
+        matches.append("};");
+        if (failCount > 0) {
+        } 
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Used to generate the MATCHES array and test possible matches from the
+     * FIXTURE array.
+     */
+@Test
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation922() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation922");
+        validateFixture(FIXTURE);
+        final StringBuilder failures = new StringBuilder();
+        final StringBuilder matches = new StringBuilder();
+        final String cr = java.lang.System.getProperty("line.separator");
+        matches.append(("private static final String[][] MATCHES = {" + cr));
+        int failCount = 0;
+        for (int i = 0 ; i < (FIXTURE.length) ; i++) {
+            final String name0 = FIXTURE[i][1];
+            final String name1 = FIXTURE[i][1];
+            final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
+            final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
+            if ((match1 == false) && (match2 == false)) {
+                final String failMsg = ((((("[" + i) + "] ") + name0) + " and ") + name1) + cr;
+                failures.append(failMsg);
+                failCount++;
+            } else {
+                matches.append(((((("{\"" + name0) + "\", \"") + name1) + "\"},") + cr));
+            }
+        }
+        matches.append("};");
+        if (failCount > 0) {
+        } 
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Used to generate the MATCHES array and test possible matches from the
+     * FIXTURE array.
+     */
+@Test
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation923() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation923");
         validateFixture(FIXTURE);
         final StringBuilder failures = new StringBuilder();
         final StringBuilder matches = new StringBuilder();
@@ -6778,8 +6938,40 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
      * FIXTURE array.
      */
 @Test
-    public void testIsDoubleMetaphoneEqualExtended3_literalMutation846() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation846");
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation924() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation924");
+        validateFixture(FIXTURE);
+        final StringBuilder failures = new StringBuilder();
+        final StringBuilder matches = new StringBuilder();
+        final String cr = java.lang.System.getProperty("line.separator");
+        matches.append(("private static final String[][] MATCHES = {" + cr));
+        int failCount = 0;
+        for (int i = 0 ; i < (FIXTURE.length) ; i++) {
+            final String name0 = FIXTURE[i][0];
+            final String name1 = FIXTURE[i][1];
+            final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
+            final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
+            if ((match1 == false) && (match2 == false)) {
+                final String failMsg = ((((("[" + i) + "] ") + name0) + " and ") + name1) + cr;
+                failures.append(failMsg);
+                failCount++;
+            } else {
+                matches.append(((((("{\"" + name0) + "\", \"") + name1) + "\"},") + cr));
+            }
+        }
+        matches.append("};");
+        if (failCount > 0) {
+        } 
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Used to generate the MATCHES array and test possible matches from the
+     * FIXTURE array.
+     */
+@Test
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation925() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation925");
         validateFixture(FIXTURE);
         final StringBuilder failures = new StringBuilder();
         final StringBuilder matches = new StringBuilder();
@@ -6810,8 +7002,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
      * FIXTURE array.
      */
 @Test
-    public void testIsDoubleMetaphoneEqualExtended3_literalMutation847() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation847");
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation926() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation926");
         validateFixture(FIXTURE);
         final StringBuilder failures = new StringBuilder();
         final StringBuilder matches = new StringBuilder();
@@ -6820,7 +7012,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         int failCount = 0;
         for (int i = 0 ; i < (FIXTURE.length) ; i++) {
             final String name0 = FIXTURE[i][0];
-            final String name1 = FIXTURE[i][1];
+            final String name1 = FIXTURE[i][0];
             final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
             final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
             if ((match1 == false) && (match2 == false)) {
@@ -6842,8 +7034,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
      * FIXTURE array.
      */
 @Test
-    public void testIsDoubleMetaphoneEqualExtended3_literalMutation848() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation848");
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation927() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation927");
         validateFixture(FIXTURE);
         final StringBuilder failures = new StringBuilder();
         final StringBuilder matches = new StringBuilder();
@@ -6852,7 +7044,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         int failCount = 0;
         for (int i = 0 ; i < (FIXTURE.length) ; i++) {
             final String name0 = FIXTURE[i][0];
-            final String name1 = FIXTURE[i][1];
+            final String name1 = FIXTURE[i][0];
             final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
             final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
             if ((match1 == false) && (match2 == false)) {
@@ -6874,8 +7066,72 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
      * FIXTURE array.
      */
 @Test
-    public void testIsDoubleMetaphoneEqualExtended3_literalMutation849() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation849");
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation928() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation928");
+        validateFixture(FIXTURE);
+        final StringBuilder failures = new StringBuilder();
+        final StringBuilder matches = new StringBuilder();
+        final String cr = java.lang.System.getProperty("line.separator");
+        matches.append(("private static final String[][] MATCHES = {" + cr));
+        int failCount = 0;
+        for (int i = 0 ; i < (FIXTURE.length) ; i++) {
+            final String name0 = FIXTURE[i][0];
+            final String name1 = FIXTURE[i][1];
+            final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
+            final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
+            if ((match1 == false) && (match2 == false)) {
+                final String failMsg = ((((("[" + i) + "] ") + name0) + " and ") + name1) + cr;
+                failures.append(failMsg);
+                failCount++;
+            } else {
+                matches.append(((((("{\"" + name0) + "\", \"") + name1) + "\"},") + cr));
+            }
+        }
+        matches.append("};");
+        if (failCount > 0) {
+        } 
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Used to generate the MATCHES array and test possible matches from the
+     * FIXTURE array.
+     */
+@Test
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation929() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation929");
+        validateFixture(FIXTURE);
+        final StringBuilder failures = new StringBuilder();
+        final StringBuilder matches = new StringBuilder();
+        final String cr = java.lang.System.getProperty("line.separator");
+        matches.append(("private static final String[][] MATCHES = {" + cr));
+        int failCount = 0;
+        for (int i = 0 ; i < (FIXTURE.length) ; i++) {
+            final String name0 = FIXTURE[i][0];
+            final String name1 = FIXTURE[i][1];
+            final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
+            final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
+            if ((match1 == false) && (match2 == false)) {
+                final String failMsg = ((((("[" + i) + "] ") + name0) + " and ") + name1) + cr;
+                failures.append(failMsg);
+                failCount++;
+            } else {
+                matches.append(((((("{\"" + name0) + "\", \"") + name1) + "\"},") + cr));
+            }
+        }
+        matches.append("};");
+        if (failCount > 0) {
+        } 
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Used to generate the MATCHES array and test possible matches from the
+     * FIXTURE array.
+     */
+@Test
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation930() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation930");
         validateFixture(FIXTURE);
         final StringBuilder failures = new StringBuilder();
         final StringBuilder matches = new StringBuilder();
@@ -6906,8 +7162,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
      * FIXTURE array.
      */
 @Test
-    public void testIsDoubleMetaphoneEqualExtended3_literalMutation850() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation850");
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation931() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation931");
         validateFixture(FIXTURE);
         final StringBuilder failures = new StringBuilder();
         final StringBuilder matches = new StringBuilder();
@@ -6938,8 +7194,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
      * FIXTURE array.
      */
 @Test
-    public void testIsDoubleMetaphoneEqualExtended3_literalMutation851() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation851");
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation932() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation932");
         validateFixture(FIXTURE);
         final StringBuilder failures = new StringBuilder();
         final StringBuilder matches = new StringBuilder();
@@ -6970,8 +7226,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
      * FIXTURE array.
      */
 @Test
-    public void testIsDoubleMetaphoneEqualExtended3_literalMutation852() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation852");
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation933() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation933");
         validateFixture(FIXTURE);
         final StringBuilder failures = new StringBuilder();
         final StringBuilder matches = new StringBuilder();
@@ -6984,7 +7240,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
             final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
             final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
             if ((match1 == false) && (match2 == false)) {
-                final String failMsg = ((((("[" + i) + "foo") + name0) + " and ") + name1) + cr;
+                final String failMsg = ((((("[" + i) + "bar") + name0) + " and ") + name1) + cr;
                 failures.append(failMsg);
                 failCount++;
             } else {
@@ -7002,8 +7258,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
      * FIXTURE array.
      */
 @Test
-    public void testIsDoubleMetaphoneEqualExtended3_literalMutation853() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation853");
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation934() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation934");
         validateFixture(FIXTURE);
         final StringBuilder failures = new StringBuilder();
         final StringBuilder matches = new StringBuilder();
@@ -7016,7 +7272,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
             final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
             final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
             if ((match1 == false) && (match2 == false)) {
-                final String failMsg = ((((("[" + i) + "] ") + name0) + "foo") + name1) + cr;
+                final String failMsg = ((((("[" + i) + "] ") + name0) + "bar") + name1) + cr;
                 failures.append(failMsg);
                 failCount++;
             } else {
@@ -7034,8 +7290,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
      * FIXTURE array.
      */
 @Test
-    public void testIsDoubleMetaphoneEqualExtended3_literalMutation854() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation854");
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation935() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation935");
         validateFixture(FIXTURE);
         final StringBuilder failures = new StringBuilder();
         final StringBuilder matches = new StringBuilder();
@@ -7052,7 +7308,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
                 failures.append(failMsg);
                 failCount++;
             } else {
-                matches.append(((((("foo" + name0) + "\", \"") + name1) + "\"},") + cr));
+                matches.append(((((("bar" + name0) + "\", \"") + name1) + "\"},") + cr));
             }
         }
         matches.append("};");
@@ -7066,8 +7322,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
      * FIXTURE array.
      */
 @Test
-    public void testIsDoubleMetaphoneEqualExtended3_literalMutation855() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation855");
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation936() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation936");
         validateFixture(FIXTURE);
         final StringBuilder failures = new StringBuilder();
         final StringBuilder matches = new StringBuilder();
@@ -7084,7 +7340,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
                 failures.append(failMsg);
                 failCount++;
             } else {
-                matches.append(((((("{\"" + name0) + "foo") + name1) + "\"},") + cr));
+                matches.append(((((("{\"" + name0) + "bar") + name1) + "\"},") + cr));
             }
         }
         matches.append("};");
@@ -7098,8 +7354,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
      * FIXTURE array.
      */
 @Test
-    public void testIsDoubleMetaphoneEqualExtended3_literalMutation856() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation856");
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation937() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation937");
         validateFixture(FIXTURE);
         final StringBuilder failures = new StringBuilder();
         final StringBuilder matches = new StringBuilder();
@@ -7116,7 +7372,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
                 failures.append(failMsg);
                 failCount++;
             } else {
-                matches.append(((((("{\"" + name0) + "\", \"") + name1) + "foo") + cr));
+                matches.append(((((("{\"" + name0) + "\", \"") + name1) + "bar") + cr));
             }
         }
         matches.append("};");
@@ -7130,8 +7386,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
      * FIXTURE array.
      */
 @Test
-    public void testIsDoubleMetaphoneEqualExtended3_literalMutation857() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation857");
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation938() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation938");
         validateFixture(FIXTURE);
         final StringBuilder failures = new StringBuilder();
         final StringBuilder matches = new StringBuilder();
@@ -7162,8 +7418,40 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
      * FIXTURE array.
      */
 @Test
-    public void testIsDoubleMetaphoneEqualExtended3_literalMutation858() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation858");
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation939() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation939");
+        validateFixture(FIXTURE);
+        final StringBuilder failures = new StringBuilder();
+        final StringBuilder matches = new StringBuilder();
+        final String cr = java.lang.System.getProperty("line.separator");
+        matches.append(("private static final String[][] MATCHES = {" + cr));
+        int failCount = 0;
+        for (int i = 0 ; i < (FIXTURE.length) ; i++) {
+            final String name0 = FIXTURE[i][0];
+            final String name1 = FIXTURE[i][1];
+            final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
+            final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
+            if ((match1 == false) && (match2 == false)) {
+                final String failMsg = ((((("[" + i) + "] ") + name0) + " and ") + name1) + cr;
+                failures.append(failMsg);
+                failCount++;
+            } else {
+                matches.append(((((("{\"" + name0) + "\", \"") + name1) + "\"},") + cr));
+            }
+        }
+        matches.append("};");
+        if (failCount > 1) {
+        } 
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Used to generate the MATCHES array and test possible matches from the
+     * FIXTURE array.
+     */
+@Test
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation940() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation940");
         validateFixture(FIXTURE);
         final StringBuilder failures = new StringBuilder();
         final StringBuilder matches = new StringBuilder();
@@ -7185,6 +7473,38 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
         }
         matches.append("};");
         if (failCount > -1) {
+        } 
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Used to generate the MATCHES array and test possible matches from the
+     * FIXTURE array.
+     */
+@Test
+    public void testIsDoubleMetaphoneEqualExtended3_literalMutation941() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualExtended3_literalMutation941");
+        validateFixture(FIXTURE);
+        final StringBuilder failures = new StringBuilder();
+        final StringBuilder matches = new StringBuilder();
+        final String cr = java.lang.System.getProperty("line.separator");
+        matches.append(("private static final String[][] MATCHES = {" + cr));
+        int failCount = 0;
+        for (int i = 0 ; i < (FIXTURE.length) ; i++) {
+            final String name0 = FIXTURE[i][0];
+            final String name1 = FIXTURE[i][1];
+            final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
+            final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
+            if ((match1 == false) && (match2 == false)) {
+                final String failMsg = ((((("[" + i) + "] ") + name0) + " and ") + name1) + cr;
+                failures.append(failMsg);
+                failCount++;
+            } else {
+                matches.append(((((("{\"" + name0) + "\", \"") + name1) + "\"},") + cr));
+            }
+        }
+        matches.append("};");
+        if (failCount > 0) {
         } 
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -7365,6 +7685,22 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     public void testIsDoubleMetaphoneEqualWithMATCHES() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualWithMATCHES");
         validateFixture(MATCHES);
+        for (int i = 1 ; i < (MATCHES.length) ; i++) {
+            final String name0 = MATCHES[i][0];
+            final String name1 = MATCHES[i][1];
+            final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
+            final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
+            if ((match1 == false) && (match2 == false)) {
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),614,((((("Expected match [" + i) + "] ") + name0) + " and ") + name1));
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testIsDoubleMetaphoneEqualWithMATCHES_literalMutation943() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualWithMATCHES_literalMutation943");
+        validateFixture(MATCHES);
         for (int i = -1 ; i < (MATCHES.length) ; i++) {
             final String name0 = MATCHES[i][0];
             final String name1 = MATCHES[i][1];
@@ -7378,8 +7714,40 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualWithMATCHES_literalMutation860() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualWithMATCHES_literalMutation860");
+    public void testIsDoubleMetaphoneEqualWithMATCHES_literalMutation944() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualWithMATCHES_literalMutation944");
+        validateFixture(MATCHES);
+        for (int i = 0 ; i < (MATCHES.length) ; i++) {
+            final String name0 = MATCHES[i][0];
+            final String name1 = MATCHES[i][1];
+            final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
+            final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
+            if ((match1 == false) && (match2 == false)) {
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),614,((((("Expected match [" + i) + "] ") + name0) + " and ") + name1));
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testIsDoubleMetaphoneEqualWithMATCHES_literalMutation945() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualWithMATCHES_literalMutation945");
+        validateFixture(MATCHES);
+        for (int i = 0 ; i < (MATCHES.length) ; i++) {
+            final String name0 = MATCHES[i][1];
+            final String name1 = MATCHES[i][1];
+            final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
+            final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
+            if ((match1 == false) && (match2 == false)) {
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),614,((((("Expected match [" + i) + "] ") + name0) + " and ") + name1));
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testIsDoubleMetaphoneEqualWithMATCHES_literalMutation946() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualWithMATCHES_literalMutation946");
         validateFixture(MATCHES);
         for (int i = 0 ; i < (MATCHES.length) ; i++) {
             final String name0 = MATCHES[i][-1];
@@ -7394,8 +7762,24 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualWithMATCHES_literalMutation861() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualWithMATCHES_literalMutation861");
+    public void testIsDoubleMetaphoneEqualWithMATCHES_literalMutation947() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualWithMATCHES_literalMutation947");
+        validateFixture(MATCHES);
+        for (int i = 0 ; i < (MATCHES.length) ; i++) {
+            final String name0 = MATCHES[i][0];
+            final String name1 = MATCHES[i][1];
+            final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
+            final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
+            if ((match1 == false) && (match2 == false)) {
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),614,((((("Expected match [" + i) + "] ") + name0) + " and ") + name1));
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testIsDoubleMetaphoneEqualWithMATCHES_literalMutation948() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualWithMATCHES_literalMutation948");
         validateFixture(MATCHES);
         for (int i = 0 ; i < (MATCHES.length) ; i++) {
             final String name0 = MATCHES[i][0];
@@ -7410,12 +7794,12 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualWithMATCHES_literalMutation862() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualWithMATCHES_literalMutation862");
+    public void testIsDoubleMetaphoneEqualWithMATCHES_literalMutation949() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualWithMATCHES_literalMutation949");
         validateFixture(MATCHES);
         for (int i = 0 ; i < (MATCHES.length) ; i++) {
             final String name0 = MATCHES[i][0];
-            final String name1 = MATCHES[i][1];
+            final String name1 = MATCHES[i][0];
             final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
             final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
             if ((match1 == false) && (match2 == false)) {
@@ -7426,8 +7810,40 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualWithMATCHES_literalMutation863() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualWithMATCHES_literalMutation863");
+    public void testIsDoubleMetaphoneEqualWithMATCHES_literalMutation950() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualWithMATCHES_literalMutation950");
+        validateFixture(MATCHES);
+        for (int i = 0 ; i < (MATCHES.length) ; i++) {
+            final String name0 = MATCHES[i][0];
+            final String name1 = MATCHES[i][0];
+            final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
+            final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
+            if ((match1 == false) && (match2 == false)) {
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),614,((((("Expected match [" + i) + "] ") + name0) + " and ") + name1));
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testIsDoubleMetaphoneEqualWithMATCHES_literalMutation951() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualWithMATCHES_literalMutation951");
+        validateFixture(MATCHES);
+        for (int i = 0 ; i < (MATCHES.length) ; i++) {
+            final String name0 = MATCHES[i][0];
+            final String name1 = MATCHES[i][1];
+            final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
+            final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
+            if ((match1 == false) && (match2 == false)) {
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),614,((((("Expected match [" + i) + "] ") + name0) + " and ") + name1));
+            } 
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test
+    public void testIsDoubleMetaphoneEqualWithMATCHES_literalMutation952() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualWithMATCHES_literalMutation952");
         validateFixture(MATCHES);
         for (int i = 0 ; i < (MATCHES.length) ; i++) {
             final String name0 = MATCHES[i][0];
@@ -7442,15 +7858,15 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualWithMATCHES_literalMutation864() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualWithMATCHES_literalMutation864");
+    public void testIsDoubleMetaphoneEqualWithMATCHES_literalMutation953() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualWithMATCHES_literalMutation953");
         validateFixture(MATCHES);
         for (int i = 0 ; i < (MATCHES.length) ; i++) {
             final String name0 = MATCHES[i][0];
             final String name1 = MATCHES[i][1];
             final boolean match1 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, false);
             final boolean match2 = getStringEncoder().isDoubleMetaphoneEqual(name0, name1, true);
-            if ((match1 == false) && (match2 == false)) {
+            if ((match1 == true) && (match2 == false)) {
                 fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),614,((((("Expected match [" + i) + "] ") + name0) + " and ") + name1));
             } 
         }
@@ -7458,8 +7874,8 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     }
 
     @Test
-    public void testIsDoubleMetaphoneEqualWithMATCHES_literalMutation865() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualWithMATCHES_literalMutation865");
+    public void testIsDoubleMetaphoneEqualWithMATCHES_literalMutation954() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneEqualWithMATCHES_literalMutation954");
         validateFixture(MATCHES);
         for (int i = 0 ; i < (MATCHES.length) ; i++) {
             final String name0 = MATCHES[i][0];
@@ -7509,14 +7925,14 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
     @Test
     public void testIsDoubleMetaphoneNotEqual() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneNotEqual");
-        doubleMetaphoneNotEqualTest(false);
+        doubleMetaphoneNotEqualTest(true);
         doubleMetaphoneNotEqualTest(true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
-    public void testIsDoubleMetaphoneNotEqual_literalMutation867() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneNotEqual_literalMutation867");
+    public void testIsDoubleMetaphoneNotEqual_literalMutation956() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsDoubleMetaphoneNotEqual_literalMutation956");
         doubleMetaphoneNotEqualTest(false);
         doubleMetaphoneNotEqualTest(false);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -7568,7 +7984,7 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
 @Test
     public void testSetMaxCodeLength() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetMaxCodeLength");
-        final String value = "foo";
+        final String value = "bar";
         final DoubleMetaphone doubleMetaphone = new DoubleMetaphone();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),618,doubleMetaphone,617,doubleMetaphone.getMaxCodeLen());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),620,doubleMetaphone,619,doubleMetaphone.doubleMetaphone(value, false));
@@ -7584,14 +8000,68 @@ public void assertDoubleMetaphoneAlt(final String expected, final String source)
      * Test setting maximum length
      */
 @Test
-    public void testSetMaxCodeLength_literalMutation869() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetMaxCodeLength_literalMutation869");
+    public void testSetMaxCodeLength_literalMutation958() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetMaxCodeLength_literalMutation958");
         final String value = "jumped";
         final DoubleMetaphone doubleMetaphone = new DoubleMetaphone();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),618,doubleMetaphone,617,doubleMetaphone.getMaxCodeLen());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),620,doubleMetaphone,619,doubleMetaphone.doubleMetaphone(value, false));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),622,doubleMetaphone,621,doubleMetaphone.doubleMetaphone(value, true));
         doubleMetaphone.setMaxCodeLen(4);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),624,doubleMetaphone,623,doubleMetaphone.getMaxCodeLen());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),626,doubleMetaphone,625,doubleMetaphone.doubleMetaphone(value, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),628,doubleMetaphone,627,doubleMetaphone.doubleMetaphone(value, true));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test setting maximum length
+     */
+@Test
+    public void testSetMaxCodeLength_literalMutation959() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetMaxCodeLength_literalMutation959");
+        final String value = "jumped";
+        final DoubleMetaphone doubleMetaphone = new DoubleMetaphone();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),618,doubleMetaphone,617,doubleMetaphone.getMaxCodeLen());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),620,doubleMetaphone,619,doubleMetaphone.doubleMetaphone(value, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),622,doubleMetaphone,621,doubleMetaphone.doubleMetaphone(value, true));
+        doubleMetaphone.setMaxCodeLen(2);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),624,doubleMetaphone,623,doubleMetaphone.getMaxCodeLen());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),626,doubleMetaphone,625,doubleMetaphone.doubleMetaphone(value, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),628,doubleMetaphone,627,doubleMetaphone.doubleMetaphone(value, true));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test setting maximum length
+     */
+@Test
+    public void testSetMaxCodeLength_literalMutation960() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetMaxCodeLength_literalMutation960");
+        final String value = "jumped";
+        final DoubleMetaphone doubleMetaphone = new DoubleMetaphone();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),618,doubleMetaphone,617,doubleMetaphone.getMaxCodeLen());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),620,doubleMetaphone,619,doubleMetaphone.doubleMetaphone(value, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),622,doubleMetaphone,621,doubleMetaphone.doubleMetaphone(value, true));
+        doubleMetaphone.setMaxCodeLen(1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),624,doubleMetaphone,623,doubleMetaphone.getMaxCodeLen());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),626,doubleMetaphone,625,doubleMetaphone.doubleMetaphone(value, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),628,doubleMetaphone,627,doubleMetaphone.doubleMetaphone(value, true));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test setting maximum length
+     */
+@Test
+    public void testSetMaxCodeLength_literalMutation961() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetMaxCodeLength_literalMutation961");
+        final String value = "jumped";
+        final DoubleMetaphone doubleMetaphone = new DoubleMetaphone();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),618,doubleMetaphone,617,doubleMetaphone.getMaxCodeLen());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),620,doubleMetaphone,619,doubleMetaphone.doubleMetaphone(value, false));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),622,doubleMetaphone,621,doubleMetaphone.doubleMetaphone(value, true));
+        doubleMetaphone.setMaxCodeLen(6);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),624,doubleMetaphone,623,doubleMetaphone.getMaxCodeLen());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),626,doubleMetaphone,625,doubleMetaphone.doubleMetaphone(value, false));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),628,doubleMetaphone,627,doubleMetaphone.doubleMetaphone(value, true));

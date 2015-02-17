@@ -319,8 +319,8 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2294() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2294");
+    public void testCounting_literalMutation3301() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3301");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 1 ; i < 20 ; i++) {
@@ -351,8 +351,168 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2295() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2295");
+    public void testCounting_literalMutation3302() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3302");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = -1 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3303() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3303");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3304() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3304");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 19 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3305() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3305");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3306() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3306");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 40 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3307() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3307");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 21 ; i++) {
@@ -383,8 +543,8 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2296() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2296");
+    public void testCounting_literalMutation3308() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3308");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -415,8 +575,40 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2297() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2297");
+    public void testCounting_literalMutation3309() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3309");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 1, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3310() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3310");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -447,8 +639,40 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2298() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2298");
+    public void testCounting_literalMutation3311() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3311");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3312() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3312");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -479,8 +703,200 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2299() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2299");
+    public void testCounting_literalMutation3313() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3313");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 10);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3314() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3314");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 40);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3315() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3315");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 21);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3316() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3316");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[9];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3317() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3317");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[5];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3318() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3318");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[20];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3319() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3319");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -511,8 +927,8 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2300() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2300");
+    public void testCounting_literalMutation3320() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3320");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -543,8 +959,104 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2301() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2301");
+    public void testCounting_literalMutation3321() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3321");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 10 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3322() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3322");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 40 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3323() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3323");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 21 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3324() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3324");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -575,8 +1087,200 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2302() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2302");
+    public void testCounting_literalMutation3325() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3325");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 15 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3326() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3326");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 60 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3327() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3327");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 31 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3328() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3328");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 19)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3329() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3329");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 10)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3330() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3330");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 40)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3331() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3331");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -607,8 +1311,8 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2303() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2303");
+    public void testCounting_literalMutation3332() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3332");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -639,8 +1343,40 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2304() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2304");
+    public void testCounting_literalMutation3333() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3333");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 1, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3334() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3334");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -671,8 +1407,40 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2305() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2305");
+    public void testCounting_literalMutation3335() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3335");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3336() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3336");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -703,8 +1471,200 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2306() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2306");
+    public void testCounting_literalMutation3337() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3337");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 15);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3338() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3338");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 60);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3339() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3339");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 31);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3340() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3340");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 24 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3341() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3341");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 12 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3342() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3342");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 50 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3343() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3343");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -735,8 +1695,104 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2307() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2307");
+    public void testCounting_literalMutation3344() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3344");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 34 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3345() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3345");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 17 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3346() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3346");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 70 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3347() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3347");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -767,8 +1823,104 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2308() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2308");
+    public void testCounting_literalMutation3348() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3348");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 24)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3349() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3349");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 12)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3350() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3350");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 50)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3351() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3351");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -799,8 +1951,104 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2309() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2309");
+    public void testCounting_literalMutation3352() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3352");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 4, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3353() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3353");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 2, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3354() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3354");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 10, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3355() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3355");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -831,8 +2079,104 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2310() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2310");
+    public void testCounting_literalMutation3356() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3356");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 4);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3357() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3357");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 2);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3358() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3358");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 10);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3359() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3359");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -863,8 +2207,8 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2311() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2311");
+    public void testCounting_literalMutation3360() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3360");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -895,8 +2239,40 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2312() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2312");
+    public void testCounting_literalMutation3361() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3361");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 1, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3362() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3362");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -927,8 +2303,136 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2313() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2313");
+    public void testCounting_literalMutation3363() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3363");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3364() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3364");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 34);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3365() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3365");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 17);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3366() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3366");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 70);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3367() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3367");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -959,8 +2463,40 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2314() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2314");
+    public void testCounting_literalMutation3368() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3368");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 1 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3369() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3369");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -991,8 +2527,136 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2315() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2315");
+    public void testCounting_literalMutation3370() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3370");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3371() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3371");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 9 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3372() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3372");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 5 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3373() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3373");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3374() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3374");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -1023,8 +2687,8 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2316() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2316");
+    public void testCounting_literalMutation3375() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3375");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -1055,8 +2719,8 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2317() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2317");
+    public void testCounting_literalMutation3376() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3376");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -1087,8 +2751,200 @@ public class CountingOutputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testCounting_literalMutation2318() throws IOException {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation2318");
+    public void testCounting_literalMutation3377() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3377");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 17, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3378() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3378");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 70, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3379() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3379");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 36, 45);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3380() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3380");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 44);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3381() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3381");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 22);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3382() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3382");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(baos);
+        for (int i = 0 ; i < 20 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 0, 20);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1381,cos,1380,cos.getCount());
+        byte[] array = new byte[10];
+        for (int i = 20 ; i < 30 ; i++) {
+            array[(i - 20)] = ((byte)(i));
+        }
+        cos.write(array);
+        assertByteArrayEquals("CountingOutputStream.write(byte[])", baos.toByteArray(), 0, 30);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1383,cos,1382,cos.getCount());
+        for (int i = 25 ; i < 35 ; i++) {
+            array[(i - 25)] = ((byte)(i));
+        }
+        cos.write(array, 5, 5);
+        assertByteArrayEquals("CountingOutputStream.write(byte[], int, int)", baos.toByteArray(), 0, 35);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,cos,1384,cos.getCount());
+        int count = cos.resetCount();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1386,count);
+        for (int i = 0 ; i < 10 ; i++) {
+            cos.write(i);
+        }
+        assertByteArrayEquals("CountingOutputStream.write(int)", baos.toByteArray(), 35, 90);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1388,cos,1387,cos.getCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testCounting_literalMutation3383() throws IOException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCounting_literalMutation3383");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CountingOutputStream cos = new CountingOutputStream(baos);
         for (int i = 0 ; i < 20 ; i++) {
@@ -1550,8 +3406,62 @@ public void testLargeFiles_IO84() throws Exception {
     /** 
      * Test for files > 2GB in size - see issue IO-84
      */
-public void testLargeFiles_IO84_literalMutation2319() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLargeFiles_IO84_literalMutation2319");
+public void testLargeFiles_IO84_literalMutation3384() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLargeFiles_IO84_literalMutation3384");
+        long size = ((long)(Integer.MAX_VALUE)) + ((long)(2));
+        NullInputStream mock = new NullInputStream(size);
+        OutputStream nos = new NullOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(nos);
+        org.apache.commons.io.IOUtils.copyLarge(mock, cos);
+        try {
+            cos.getCount();
+        } catch (ArithmeticException ae) {
+        }
+        try {
+            cos.resetCount();
+        } catch (ArithmeticException ae) {
+        }
+        mock.close();
+        org.apache.commons.io.IOUtils.copyLarge(mock, cos);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1389,size);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1391,cos,1390,cos.getByteCount());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1392,size);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1394,cos,1393,cos.resetByteCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test for files > 2GB in size - see issue IO-84
+     */
+public void testLargeFiles_IO84_literalMutation3385() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLargeFiles_IO84_literalMutation3385");
+        long size = ((long)(Integer.MAX_VALUE)) + ((long)(0));
+        NullInputStream mock = new NullInputStream(size);
+        OutputStream nos = new NullOutputStream();
+        CountingOutputStream cos = new CountingOutputStream(nos);
+        org.apache.commons.io.IOUtils.copyLarge(mock, cos);
+        try {
+            cos.getCount();
+        } catch (ArithmeticException ae) {
+        }
+        try {
+            cos.resetCount();
+        } catch (ArithmeticException ae) {
+        }
+        mock.close();
+        org.apache.commons.io.IOUtils.copyLarge(mock, cos);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1389,size);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1391,cos,1390,cos.getByteCount());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1392,size);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1394,cos,1393,cos.resetByteCount());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test for files > 2GB in size - see issue IO-84
+     */
+public void testLargeFiles_IO84_literalMutation3386() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLargeFiles_IO84_literalMutation3386");
         long size = ((long)(Integer.MAX_VALUE)) + ((long)(0));
         NullInputStream mock = new NullInputStream(size);
         OutputStream nos = new NullOutputStream();

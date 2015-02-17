@@ -18,7 +18,7 @@ public class TestMethodCallAdder extends TestProcessor {
 			List<CtInvocation> invocations = Query.getElements(method, new TypeFilter(CtInvocation.class));
 			//this index serves to replace ith literal is replaced by zero in the ith clone of the method
 			int lit_index = 0;
-			for(CtInvocation invocation : invocations){
+			for(CtInvocation invocation : invocations) {
 				if(toAdd(invocation) && !isAssert(invocation)) {
 					//clone the method
 					CtMethod cloned_method = cloneMethodTest(method, "_add", 1000);

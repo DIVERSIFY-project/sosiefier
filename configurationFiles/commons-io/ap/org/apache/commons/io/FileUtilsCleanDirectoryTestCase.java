@@ -104,8 +104,8 @@ public class FileUtilsCleanDirectoryTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testDeletesRegular_literalMutation3077() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeletesRegular_literalMutation3077");
+    public void testDeletesRegular_literalMutation4777() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeletesRegular_literalMutation4777");
         org.apache.commons.io.FileUtils.touch(new File(top , "regular"));
         org.apache.commons.io.FileUtils.touch(new File(top , "foo"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2493,top.list().length);
@@ -181,8 +181,8 @@ public class FileUtilsCleanDirectoryTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testDeletesNested_literalMutation3075() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeletesNested_literalMutation3075");
+    public void testDeletesNested_literalMutation4775() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDeletesNested_literalMutation4775");
         final File nested = new File(top , "nested");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2490,nested,2489,nested.mkdirs());
         org.apache.commons.io.FileUtils.touch(new File(nested , "foo"));
@@ -244,8 +244,8 @@ public class FileUtilsCleanDirectoryTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testThrowsOnNullList_literalMutation3084() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowsOnNullList_literalMutation3084");
+    public void testThrowsOnNullList_literalMutation4787() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowsOnNullList_literalMutation4787");
         if ((java.lang.System.getProperty("os.name").startsWith("foo")) || (!(chmod(top, 0, false)))) {
             return ;
         } 
@@ -258,8 +258,22 @@ public class FileUtilsCleanDirectoryTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testThrowsOnNullList_literalMutation3085() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowsOnNullList_literalMutation3085");
+    public void testThrowsOnNullList_literalMutation4788() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowsOnNullList_literalMutation4788");
+        if ((java.lang.System.getProperty("os.name").startsWith("Win")) || (!(chmod(top, 1, false)))) {
+            return ;
+        } 
+        try {
+            org.apache.commons.io.FileUtils.cleanDirectory(top);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2498,("Failed to list contents of " + (top.getAbsolutePath())));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),785,e,784,e.getMessage());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testThrowsOnNullList_literalMutation4789() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowsOnNullList_literalMutation4789");
         if ((java.lang.System.getProperty("os.name").startsWith("Win")) || (!(chmod(top, -1, false)))) {
             return ;
         } 
@@ -272,9 +286,23 @@ public class FileUtilsCleanDirectoryTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testThrowsOnNullList_literalMutation3086() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowsOnNullList_literalMutation3086");
+    public void testThrowsOnNullList_literalMutation4790() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowsOnNullList_literalMutation4790");
         if ((java.lang.System.getProperty("os.name").startsWith("Win")) || (!(chmod(top, 0, false)))) {
+            return ;
+        } 
+        try {
+            org.apache.commons.io.FileUtils.cleanDirectory(top);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2498,("Failed to list contents of " + (top.getAbsolutePath())));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),785,e,784,e.getMessage());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testThrowsOnNullList_literalMutation4791() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowsOnNullList_literalMutation4791");
+        if ((java.lang.System.getProperty("os.name").startsWith("Win")) || (!(chmod(top, 0, true)))) {
             return ;
         } 
         try {
@@ -324,7 +352,7 @@ public class FileUtilsCleanDirectoryTestCase extends FileBasedTestCase {
 
     public void testThrowsOnCannotDeleteFile() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowsOnCannotDeleteFile");
-        final File file = new File(top , "foo");
+        final File file = new File(top , "bar");
         org.apache.commons.io.FileUtils.touch(file);
         if ((java.lang.System.getProperty("os.name").startsWith("Win")) || (!(chmod(top, 500, false)))) {
             return ;
@@ -338,11 +366,11 @@ public class FileUtilsCleanDirectoryTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testThrowsOnCannotDeleteFile_literalMutation3079() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowsOnCannotDeleteFile_literalMutation3079");
+    public void testThrowsOnCannotDeleteFile_literalMutation4779() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowsOnCannotDeleteFile_literalMutation4779");
         final File file = new File(top , "restricted");
         org.apache.commons.io.FileUtils.touch(file);
-        if ((java.lang.System.getProperty("foo").startsWith("Win")) || (!(chmod(top, 500, false)))) {
+        if ((java.lang.System.getProperty("bar").startsWith("Win")) || (!(chmod(top, 500, false)))) {
             return ;
         } 
         try {
@@ -354,11 +382,11 @@ public class FileUtilsCleanDirectoryTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testThrowsOnCannotDeleteFile_literalMutation3080() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowsOnCannotDeleteFile_literalMutation3080");
+    public void testThrowsOnCannotDeleteFile_literalMutation4780() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowsOnCannotDeleteFile_literalMutation4780");
         final File file = new File(top , "restricted");
         org.apache.commons.io.FileUtils.touch(file);
-        if ((java.lang.System.getProperty("os.name").startsWith("foo")) || (!(chmod(top, 500, false)))) {
+        if ((java.lang.System.getProperty("os.name").startsWith("bar")) || (!(chmod(top, 500, false)))) {
             return ;
         } 
         try {
@@ -370,8 +398,24 @@ public class FileUtilsCleanDirectoryTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testThrowsOnCannotDeleteFile_literalMutation3081() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowsOnCannotDeleteFile_literalMutation3081");
+    public void testThrowsOnCannotDeleteFile_literalMutation4781() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowsOnCannotDeleteFile_literalMutation4781");
+        final File file = new File(top , "restricted");
+        org.apache.commons.io.FileUtils.touch(file);
+        if ((java.lang.System.getProperty("os.name").startsWith("Win")) || (!(chmod(top, 501, false)))) {
+            return ;
+        } 
+        try {
+            org.apache.commons.io.FileUtils.cleanDirectory(top);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2495,("Unable to delete file: " + (file.getAbsolutePath())));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2497,e,2496,e.getMessage());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testThrowsOnCannotDeleteFile_literalMutation4782() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowsOnCannotDeleteFile_literalMutation4782");
         final File file = new File(top , "restricted");
         org.apache.commons.io.FileUtils.touch(file);
         if ((java.lang.System.getProperty("os.name").startsWith("Win")) || (!(chmod(top, 499, false)))) {
@@ -386,11 +430,43 @@ public class FileUtilsCleanDirectoryTestCase extends FileBasedTestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testThrowsOnCannotDeleteFile_literalMutation3082() throws Exception {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowsOnCannotDeleteFile_literalMutation3082");
+    public void testThrowsOnCannotDeleteFile_literalMutation4783() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowsOnCannotDeleteFile_literalMutation4783");
         final File file = new File(top , "restricted");
         org.apache.commons.io.FileUtils.touch(file);
-        if ((java.lang.System.getProperty("os.name").startsWith("Win")) || (!(chmod(top, 500, false)))) {
+        if ((java.lang.System.getProperty("os.name").startsWith("Win")) || (!(chmod(top, 250, false)))) {
+            return ;
+        } 
+        try {
+            org.apache.commons.io.FileUtils.cleanDirectory(top);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2495,("Unable to delete file: " + (file.getAbsolutePath())));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2497,e,2496,e.getMessage());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testThrowsOnCannotDeleteFile_literalMutation4784() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowsOnCannotDeleteFile_literalMutation4784");
+        final File file = new File(top , "restricted");
+        org.apache.commons.io.FileUtils.touch(file);
+        if ((java.lang.System.getProperty("os.name").startsWith("Win")) || (!(chmod(top, 1000, false)))) {
+            return ;
+        } 
+        try {
+            org.apache.commons.io.FileUtils.cleanDirectory(top);
+        } catch (IOException e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2495,("Unable to delete file: " + (file.getAbsolutePath())));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2497,e,2496,e.getMessage());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testThrowsOnCannotDeleteFile_literalMutation4785() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowsOnCannotDeleteFile_literalMutation4785");
+        final File file = new File(top , "restricted");
+        org.apache.commons.io.FileUtils.touch(file);
+        if ((java.lang.System.getProperty("os.name").startsWith("Win")) || (!(chmod(top, 500, true)))) {
             return ;
         } 
         try {

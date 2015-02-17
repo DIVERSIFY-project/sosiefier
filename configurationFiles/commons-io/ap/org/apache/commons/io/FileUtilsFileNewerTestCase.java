@@ -117,7 +117,7 @@ public class FileUtilsFileNewerTestCase extends FileBasedTestCase {
 public void testIsFileNewer() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewer");
         if (!(m_testFile1.exists())) {
-            throw new IllegalStateException("foo");
+            throw new IllegalStateException("bar");
         } 
         long fileLastModified = m_testFile1.lastModified();
         final long TWO_SECOND = 2000;
@@ -134,8 +134,8 @@ public void testIsFileNewer() {
      * @see FileUtils#isFileNewer(File, Date)
      * @see FileUtils#isFileNewer(File, File)
      */
-public void testIsFileNewer_literalMutation3136() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewer_literalMutation3136");
+public void testIsFileNewer_literalMutation4841() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewer_literalMutation4841");
         if (!(m_testFile1.exists())) {
             throw new IllegalStateException("The m_testFile1 should exist");
         } 
@@ -154,8 +154,68 @@ public void testIsFileNewer_literalMutation3136() {
      * @see FileUtils#isFileNewer(File, Date)
      * @see FileUtils#isFileNewer(File, File)
      */
-public void testIsFileNewer_literalMutation3137() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewer_literalMutation3137");
+public void testIsFileNewer_literalMutation4842() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewer_literalMutation4842");
+        if (!(m_testFile1.exists())) {
+            throw new IllegalStateException("The m_testFile1 should exist");
+        } 
+        long fileLastModified = m_testFile1.lastModified();
+        final long TWO_SECOND = 1999;
+        testIsFileNewer("two second earlier is not newer", m_testFile1, (fileLastModified + TWO_SECOND), false);
+        testIsFileNewer("same time is not newer", m_testFile1, fileLastModified, false);
+        testIsFileNewer("two second later is newer", m_testFile1, (fileLastModified - TWO_SECOND), true);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the <code>isFileNewer(File, *)</code> methods which a "normal" file.
+     * 
+     * @see FileUtils#isFileNewer(File, long)
+     * @see FileUtils#isFileNewer(File, Date)
+     * @see FileUtils#isFileNewer(File, File)
+     */
+public void testIsFileNewer_literalMutation4843() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewer_literalMutation4843");
+        if (!(m_testFile1.exists())) {
+            throw new IllegalStateException("The m_testFile1 should exist");
+        } 
+        long fileLastModified = m_testFile1.lastModified();
+        final long TWO_SECOND = 1000;
+        testIsFileNewer("two second earlier is not newer", m_testFile1, (fileLastModified + TWO_SECOND), false);
+        testIsFileNewer("same time is not newer", m_testFile1, fileLastModified, false);
+        testIsFileNewer("two second later is newer", m_testFile1, (fileLastModified - TWO_SECOND), true);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the <code>isFileNewer(File, *)</code> methods which a "normal" file.
+     * 
+     * @see FileUtils#isFileNewer(File, long)
+     * @see FileUtils#isFileNewer(File, Date)
+     * @see FileUtils#isFileNewer(File, File)
+     */
+public void testIsFileNewer_literalMutation4844() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewer_literalMutation4844");
+        if (!(m_testFile1.exists())) {
+            throw new IllegalStateException("The m_testFile1 should exist");
+        } 
+        long fileLastModified = m_testFile1.lastModified();
+        final long TWO_SECOND = 4000;
+        testIsFileNewer("two second earlier is not newer", m_testFile1, (fileLastModified + TWO_SECOND), false);
+        testIsFileNewer("same time is not newer", m_testFile1, fileLastModified, false);
+        testIsFileNewer("two second later is newer", m_testFile1, (fileLastModified - TWO_SECOND), true);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the <code>isFileNewer(File, *)</code> methods which a "normal" file.
+     * 
+     * @see FileUtils#isFileNewer(File, long)
+     * @see FileUtils#isFileNewer(File, Date)
+     * @see FileUtils#isFileNewer(File, File)
+     */
+public void testIsFileNewer_literalMutation4845() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewer_literalMutation4845");
         if (!(m_testFile1.exists())) {
             throw new IllegalStateException("The m_testFile1 should exist");
         } 
@@ -174,8 +234,8 @@ public void testIsFileNewer_literalMutation3137() {
      * @see FileUtils#isFileNewer(File, Date)
      * @see FileUtils#isFileNewer(File, File)
      */
-public void testIsFileNewer_literalMutation3138() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewer_literalMutation3138");
+public void testIsFileNewer_literalMutation4846() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewer_literalMutation4846");
         if (!(m_testFile1.exists())) {
             throw new IllegalStateException("The m_testFile1 should exist");
         } 
@@ -194,8 +254,8 @@ public void testIsFileNewer_literalMutation3138() {
      * @see FileUtils#isFileNewer(File, Date)
      * @see FileUtils#isFileNewer(File, File)
      */
-public void testIsFileNewer_literalMutation3139() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewer_literalMutation3139");
+public void testIsFileNewer_literalMutation4847() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewer_literalMutation4847");
         if (!(m_testFile1.exists())) {
             throw new IllegalStateException("The m_testFile1 should exist");
         } 
@@ -214,8 +274,8 @@ public void testIsFileNewer_literalMutation3139() {
      * @see FileUtils#isFileNewer(File, Date)
      * @see FileUtils#isFileNewer(File, File)
      */
-public void testIsFileNewer_literalMutation3140() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewer_literalMutation3140");
+public void testIsFileNewer_literalMutation4848() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewer_literalMutation4848");
         if (!(m_testFile1.exists())) {
             throw new IllegalStateException("The m_testFile1 should exist");
         } 
@@ -234,8 +294,8 @@ public void testIsFileNewer_literalMutation3140() {
      * @see FileUtils#isFileNewer(File, Date)
      * @see FileUtils#isFileNewer(File, File)
      */
-public void testIsFileNewer_literalMutation3141() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewer_literalMutation3141");
+public void testIsFileNewer_literalMutation4849() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewer_literalMutation4849");
         if (!(m_testFile1.exists())) {
             throw new IllegalStateException("The m_testFile1 should exist");
         } 
@@ -254,8 +314,8 @@ public void testIsFileNewer_literalMutation3141() {
      * @see FileUtils#isFileNewer(File, Date)
      * @see FileUtils#isFileNewer(File, File)
      */
-public void testIsFileNewer_literalMutation3142() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewer_literalMutation3142");
+public void testIsFileNewer_literalMutation4850() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewer_literalMutation4850");
         if (!(m_testFile1.exists())) {
             throw new IllegalStateException("The m_testFile1 should exist");
         } 
@@ -263,7 +323,7 @@ public void testIsFileNewer_literalMutation3142() {
         final long TWO_SECOND = 2000;
         testIsFileNewer("two second earlier is not newer", m_testFile1, (fileLastModified + TWO_SECOND), false);
         testIsFileNewer("same time is not newer", m_testFile1, fileLastModified, false);
-        testIsFileNewer("two second later is newer", m_testFile1, (fileLastModified - TWO_SECOND), true);
+        testIsFileNewer("two second later is newer", m_testFile1, (fileLastModified - TWO_SECOND), false);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -355,7 +415,7 @@ public void testIsFileNewer_literalMutation3142() {
      */
 public void testIsFileNewerImaginaryFile() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewerImaginaryFile");
-        File imaginaryFile = new File(FileBasedTestCase.getTestDirectory() , "foo");
+        File imaginaryFile = new File(FileBasedTestCase.getTestDirectory() , "bar");
         if (imaginaryFile.exists()) {
             throw new IllegalStateException("The imaginary File exists");
         } 
@@ -370,8 +430,8 @@ public void testIsFileNewerImaginaryFile() {
      * @see FileUtils#isFileNewer(File, Date)
      * @see FileUtils#isFileNewer(File, File)
      */
-public void testIsFileNewerImaginaryFile_literalMutation3144() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewerImaginaryFile_literalMutation3144");
+public void testIsFileNewerImaginaryFile_literalMutation4852() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewerImaginaryFile_literalMutation4852");
         File imaginaryFile = new File(FileBasedTestCase.getTestDirectory() , "imaginaryFile");
         if (imaginaryFile.exists()) {
             throw new IllegalStateException("foo");
@@ -387,13 +447,13 @@ public void testIsFileNewerImaginaryFile_literalMutation3144() {
      * @see FileUtils#isFileNewer(File, Date)
      * @see FileUtils#isFileNewer(File, File)
      */
-public void testIsFileNewerImaginaryFile_literalMutation3145() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewerImaginaryFile_literalMutation3145");
+public void testIsFileNewerImaginaryFile_literalMutation4853() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewerImaginaryFile_literalMutation4853");
         File imaginaryFile = new File(FileBasedTestCase.getTestDirectory() , "imaginaryFile");
         if (imaginaryFile.exists()) {
             throw new IllegalStateException("The imaginary File exists");
         } 
-        testIsFileNewer("foo", imaginaryFile, m_testFile2.lastModified(), false);
+        testIsFileNewer("bar", imaginaryFile, m_testFile2.lastModified(), false);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -404,13 +464,13 @@ public void testIsFileNewerImaginaryFile_literalMutation3145() {
      * @see FileUtils#isFileNewer(File, Date)
      * @see FileUtils#isFileNewer(File, File)
      */
-public void testIsFileNewerImaginaryFile_literalMutation3146() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewerImaginaryFile_literalMutation3146");
+public void testIsFileNewerImaginaryFile_literalMutation4854() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewerImaginaryFile_literalMutation4854");
         File imaginaryFile = new File(FileBasedTestCase.getTestDirectory() , "imaginaryFile");
         if (imaginaryFile.exists()) {
             throw new IllegalStateException("The imaginary File exists");
         } 
-        testIsFileNewer("imaginary file can be newer", imaginaryFile, m_testFile2.lastModified(), false);
+        testIsFileNewer("imaginary file can be newer", imaginaryFile, m_testFile2.lastModified(), true);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -538,6 +598,34 @@ public void testIsFileNewerNoFile() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewerNoFile");
         try {
             org.apache.commons.io.FileUtils.isFileNewer(null, 1);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the <code>isFileNewer(File, long)</code> method without specifying a <code>File</code>.
+     * <br/>
+     * The test is successfull if the method throws an <code>IllegalArgumentException</code>.
+     */
+public void testIsFileNewerNoFile_literalMutation4858() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewerNoFile_literalMutation4858");
+        try {
+            org.apache.commons.io.FileUtils.isFileNewer(null, -1);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the <code>isFileNewer(File, long)</code> method without specifying a <code>File</code>.
+     * <br/>
+     * The test is successfull if the method throws an <code>IllegalArgumentException</code>.
+     */
+public void testIsFileNewerNoFile_literalMutation4859() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsFileNewerNoFile_literalMutation4859");
+        try {
+            org.apache.commons.io.FileUtils.isFileNewer(null, 0);
         } catch (IllegalArgumentException e) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());

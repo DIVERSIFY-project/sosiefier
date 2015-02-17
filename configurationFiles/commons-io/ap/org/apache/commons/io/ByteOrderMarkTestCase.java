@@ -136,8 +136,104 @@ public void testErrors() {
     /** 
      * Test Erros
      */
-public void testErrors_literalMutation2543() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation2543");
+public void testErrors_literalMutation3778() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3778");
+        try {
+            new ByteOrderMark(null , 0 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("" , 1 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("a" , ((int[])(null)));
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("b" , new int[0]);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Erros
+     */
+public void testErrors_literalMutation3779() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3779");
+        try {
+            new ByteOrderMark(null , 0 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("" , 1 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("a" , ((int[])(null)));
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("b" , new int[0]);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Erros
+     */
+public void testErrors_literalMutation3780() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3780");
+        try {
+            new ByteOrderMark(null , 1 , 1 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("" , 1 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("a" , ((int[])(null)));
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("b" , new int[0]);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Erros
+     */
+public void testErrors_literalMutation3781() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3781");
+        try {
+            new ByteOrderMark(null , 1 , 4 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("" , 1 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("a" , ((int[])(null)));
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("b" , new int[0]);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Erros
+     */
+public void testErrors_literalMutation3782() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3782");
         try {
             new ByteOrderMark(null , 1 , 3 , 3);
         } catch (IllegalArgumentException e) {
@@ -160,8 +256,32 @@ public void testErrors_literalMutation2543() {
     /** 
      * Test Erros
      */
-public void testErrors_literalMutation2544() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation2544");
+public void testErrors_literalMutation3783() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3783");
+        try {
+            new ByteOrderMark(null , 1 , 2 , 4);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("" , 1 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("a" , ((int[])(null)));
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("b" , new int[0]);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Erros
+     */
+public void testErrors_literalMutation3784() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3784");
         try {
             new ByteOrderMark(null , 1 , 2 , 2);
         } catch (IllegalArgumentException e) {
@@ -184,14 +304,14 @@ public void testErrors_literalMutation2544() {
     /** 
      * Test Erros
      */
-public void testErrors_literalMutation2545() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation2545");
+public void testErrors_literalMutation3785() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3785");
         try {
-            new ByteOrderMark(null , 1 , 2 , 3);
+            new ByteOrderMark(null , 1 , 2 , 1);
         } catch (IllegalArgumentException e) {
         }
         try {
-            new ByteOrderMark("foo" , 1 , 2 , 3);
+            new ByteOrderMark("" , 1 , 2 , 3);
         } catch (IllegalArgumentException e) {
         }
         try {
@@ -208,8 +328,56 @@ public void testErrors_literalMutation2545() {
     /** 
      * Test Erros
      */
-public void testErrors_literalMutation2546() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation2546");
+public void testErrors_literalMutation3786() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3786");
+        try {
+            new ByteOrderMark(null , 1 , 2 , 6);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("" , 1 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("a" , ((int[])(null)));
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("b" , new int[0]);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Erros
+     */
+public void testErrors_literalMutation3787() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3787");
+        try {
+            new ByteOrderMark(null , 1 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("bar" , 1 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("a" , ((int[])(null)));
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("b" , new int[0]);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Erros
+     */
+public void testErrors_literalMutation3788() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3788");
         try {
             new ByteOrderMark(null , 1 , 2 , 3);
         } catch (IllegalArgumentException e) {
@@ -232,8 +400,104 @@ public void testErrors_literalMutation2546() {
     /** 
      * Test Erros
      */
-public void testErrors_literalMutation2547() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation2547");
+public void testErrors_literalMutation3789() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3789");
+        try {
+            new ByteOrderMark(null , 1 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("" , 0 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("a" , ((int[])(null)));
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("b" , new int[0]);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Erros
+     */
+public void testErrors_literalMutation3790() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3790");
+        try {
+            new ByteOrderMark(null , 1 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("" , 0 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("a" , ((int[])(null)));
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("b" , new int[0]);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Erros
+     */
+public void testErrors_literalMutation3791() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3791");
+        try {
+            new ByteOrderMark(null , 1 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("" , 1 , 1 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("a" , ((int[])(null)));
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("b" , new int[0]);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Erros
+     */
+public void testErrors_literalMutation3792() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3792");
+        try {
+            new ByteOrderMark(null , 1 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("" , 1 , 4 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("a" , ((int[])(null)));
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("b" , new int[0]);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Erros
+     */
+public void testErrors_literalMutation3793() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3793");
         try {
             new ByteOrderMark(null , 1 , 2 , 3);
         } catch (IllegalArgumentException e) {
@@ -256,8 +520,32 @@ public void testErrors_literalMutation2547() {
     /** 
      * Test Erros
      */
-public void testErrors_literalMutation2548() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation2548");
+public void testErrors_literalMutation3794() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3794");
+        try {
+            new ByteOrderMark(null , 1 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("" , 1 , 2 , 4);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("a" , ((int[])(null)));
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("b" , new int[0]);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Erros
+     */
+public void testErrors_literalMutation3795() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3795");
         try {
             new ByteOrderMark(null , 1 , 2 , 3);
         } catch (IllegalArgumentException e) {
@@ -280,18 +568,18 @@ public void testErrors_literalMutation2548() {
     /** 
      * Test Erros
      */
-public void testErrors_literalMutation2549() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation2549");
+public void testErrors_literalMutation3796() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3796");
         try {
             new ByteOrderMark(null , 1 , 2 , 3);
         } catch (IllegalArgumentException e) {
         }
         try {
-            new ByteOrderMark("" , 1 , 2 , 3);
+            new ByteOrderMark("" , 1 , 2 , 1);
         } catch (IllegalArgumentException e) {
         }
         try {
-            new ByteOrderMark("foo" , ((int[])(null)));
+            new ByteOrderMark("a" , ((int[])(null)));
         } catch (IllegalArgumentException e) {
         }
         try {
@@ -304,8 +592,56 @@ public void testErrors_literalMutation2549() {
     /** 
      * Test Erros
      */
-public void testErrors_literalMutation2551() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation2551");
+public void testErrors_literalMutation3797() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3797");
+        try {
+            new ByteOrderMark(null , 1 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("" , 1 , 2 , 6);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("a" , ((int[])(null)));
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("b" , new int[0]);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Erros
+     */
+public void testErrors_literalMutation3798() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3798");
+        try {
+            new ByteOrderMark(null , 1 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("" , 1 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("bar" , ((int[])(null)));
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("b" , new int[0]);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Erros
+     */
+public void testErrors_literalMutation3800() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3800");
         try {
             new ByteOrderMark(null , 1 , 2 , 3);
         } catch (IllegalArgumentException e) {
@@ -319,7 +655,7 @@ public void testErrors_literalMutation2551() {
         } catch (IllegalArgumentException e) {
         }
         try {
-            new ByteOrderMark("foo" , new int[0]);
+            new ByteOrderMark("bar" , new int[0]);
         } catch (IllegalArgumentException e) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -328,8 +664,32 @@ public void testErrors_literalMutation2551() {
     /** 
      * Test Erros
      */
-public void testErrors_literalMutation2552() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation2552");
+public void testErrors_literalMutation3801() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3801");
+        try {
+            new ByteOrderMark(null , 1 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("" , 1 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("a" , ((int[])(null)));
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("b" , new int[1]);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Erros
+     */
+public void testErrors_literalMutation3802() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3802");
         try {
             new ByteOrderMark(null , 1 , 2 , 3);
         } catch (IllegalArgumentException e) {
@@ -344,6 +704,30 @@ public void testErrors_literalMutation2552() {
         }
         try {
             new ByteOrderMark("b" , new int[-1]);
+        } catch (IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test Erros
+     */
+public void testErrors_literalMutation3803() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testErrors_literalMutation3803");
+        try {
+            new ByteOrderMark(null , 1 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("" , 1 , 2 , 3);
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("a" , ((int[])(null)));
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new ByteOrderMark("b" , new int[0]);
         } catch (IllegalArgumentException e) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());

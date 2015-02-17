@@ -69,6 +69,44 @@ public class TaggedInputStreamTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    public void testNormalStream_literalMutation1312() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNormalStream_literalMutation1312");
+        try {
+            InputStream stream = new TaggedInputStream(new ByteArrayInputStream(new byte[]{ 'a' , 'b' , 'c' }));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),893,stream,892,stream.available());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),895,stream,894,stream.read());
+            byte[] buffer = new byte[0];
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),897,stream,896,stream.read(buffer));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),898,buffer[0]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),900,stream,899,stream.read(buffer, 0, 1));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),901,buffer[0]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),581,-1);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),903,stream,902,stream.read());
+            stream.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    public void testNormalStream_literalMutation1313() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNormalStream_literalMutation1313");
+        try {
+            InputStream stream = new TaggedInputStream(new ByteArrayInputStream(new byte[]{ 'a' , 'b' , 'c' }));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),893,stream,892,stream.available());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),895,stream,894,stream.read());
+            byte[] buffer = new byte[0];
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),897,stream,896,stream.read(buffer));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),898,buffer[0]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),900,stream,899,stream.read(buffer, 0, 1));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),901,buffer[0]);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),581,-1);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),903,stream,902,stream.read());
+            stream.close();
+        } catch (IOException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     @Test(timeout = 1000)
     public void testBrokenStream_add250() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBrokenStream_add250");
@@ -323,7 +361,7 @@ public class TaggedInputStreamTest extends TestCase {
 
     public void testBrokenStream() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBrokenStream");
-        IOException exception = new IOException("foo");
+        IOException exception = new IOException("bar");
         TaggedInputStream stream = new TaggedInputStream(new BrokenInputStream(exception));
         try {
             stream.available();
@@ -403,7 +441,7 @@ public class TaggedInputStreamTest extends TestCase {
 
     public void testOtherException() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOtherException");
-        IOException exception = new IOException("foo");
+        IOException exception = new IOException("bar");
         InputStream closed = new ClosedInputStream();
         TaggedInputStream stream = new TaggedInputStream(closed);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),905,stream,904,stream.isCauseOf(exception));
