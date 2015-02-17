@@ -39,6 +39,10 @@ public abstract class JsonSectionInput {
 
     protected int errorCount;
 
+    public JsonSectionInput() {
+
+    }
+
     public JsonSectionInput(InputProgram inputProgram, JSONObject jsonObject) {
         this.jsonObject = jsonObject;
         this.inputProgram = inputProgram;

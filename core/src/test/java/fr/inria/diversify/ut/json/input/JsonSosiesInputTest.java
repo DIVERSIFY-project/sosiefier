@@ -4,12 +4,14 @@ import com.fasterxml.uuid.UUIDComparator;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.json.input.JsonHeaderInput;
+import fr.inria.diversify.persistence.json.input.JsonSectionInput;
 import fr.inria.diversify.persistence.json.input.JsonSosiesInput;
 import fr.inria.diversify.persistence.json.output.JsonHeaderOutput;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.ut.MockInputProgram;
 import fr.inria.diversify.ut.json.output.JsonHeaderOutputTest;
 import fr.inria.diversify.ut.json.output.JsonSosieOutputForUT;
+import fr.inria.diversify.ut.json.output.JsonSosieOutputTest;
 import mockit.Mocked;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,13 +21,12 @@ import java.io.ByteArrayInputStream;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 import static fr.inria.diversify.ut.json.SectionTestUtils.assertEqualsTransformation;
 import static fr.inria.diversify.ut.json.SectionTestUtils.createTransformations;
 import static fr.inria.diversify.ut.json.SectionTestUtils.createTransformationsJSONObjectWithErrors;
+import static fr.inria.diversify.ut.json.output.JsonSosieOutputTest.*;
 import static org.junit.Assert.*;
 
 /**
@@ -35,6 +36,55 @@ public class JsonSosiesInputTest {
 
 
     private static final String EMPTY_STR = "";
+
+    public static class CustomSectionInput1 extends JsonSectionInput {
+        @Override
+        public void read(HashMap<UUID, Transformation> transformations) {     }
+    }
+    public static class CustomSectionInput extends JsonSectionInput {
+
+        public boolean gotHere;
+
+        @Override
+        public void read(HashMap<UUID, Transformation> transformations) {
+            gotHere = getJsonObject().has("theObjectName") && getJsonObject().has("theObjectName11");
+        }
+    }
+
+    /**
+     * Test the proper reading of custom sections
+     */
+    @Test
+    public void testReadCustomSections() {
+        List<Transformation> transfs = createTransformations(new MockInputProgram());
+
+        JsonSosieOutputForUT out = new JsonSosieOutputForUT(transfs, "/uzr/h0m3/my.jzon",
+                "mySrc/pom.xml", "sosie-generator/pom.xml");
+        out.setSection(CustomSection.class, new CustomSection("theObjectName"));
+        out.setSection(CustomSection1.class, new CustomSection("theObjectName11"));
+        out.writeToJsonNow();
+
+        MockInputProgram p = new MockInputProgram();
+        InputStreamReader r = new InputStreamReader(
+                new ByteArrayInputStream(out.getJSONObject().toString().getBytes(StandardCharsets.UTF_8)));
+        JsonSosiesInput input = new JsonSosiesInput(r, p);
+        //Mock the header section
+        input.setSection(JsonHeaderInput.class, new JsonHeaderInputTest.JsonHeaderInputForUT());
+
+        //Set two custom sections
+        CustomSectionInput a = new CustomSectionInput();
+        CustomSectionInput b = new CustomSectionInput();
+        input.setSection(CustomSectionInput.class, a);
+        input.setSection(CustomSectionInput1.class, b);
+
+        //Read
+        input.read();
+
+        //Assert
+        assertTrue(a.gotHere);
+        assertTrue(b.gotHere);
+    }
+
 
     /**
      * Test that all sections are properly initialized in every constructor

@@ -1,11 +1,14 @@
 package fr.inria.diversify.ut.json.output;
 
+import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.persistence.json.output.JsonHeaderOutput;
+import fr.inria.diversify.persistence.json.output.JsonSectionOutput;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.ut.MockInputProgram;
 import mockit.Mocked;
 import mockit.Verifications;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Test;
 
 import java.io.FileWriter;
@@ -21,27 +24,43 @@ import static org.junit.Assert.*;
  */
 public class JsonSosieOutputTest {
 
+    public static class CustomSection1 extends JsonSectionOutput { }
+    public static class CustomSection extends JsonSectionOutput {
+
+        private final String sectionName;
+
+        public CustomSection(String sectionName) {
+            this.sectionName = sectionName;
+        }
+
+        @Override
+        public void write(JSONObject outputObject) {
+            super.write(outputObject);
+            try {
+                outputObject.put(sectionName, new JSONObject());
+            } catch (JSONException e) {
+                throw new PersistenceException(e);
+            }
+        }
+    }
+
     /**
-     * Test that sosies are given an unique ID
-     * @param anyWriter
+     * Test that custom sections are called properly
      * @throws IOException
      * @throws JSONException
      */
     @Test
-    public void testSosiesUniqueId(@Mocked FileWriter anyWriter) throws IOException, JSONException {
+    public void testCustomSections() throws JSONException {
         List<Transformation> transfs = createTransformations(new MockInputProgram());
+
         JsonSosieOutputForUT out = new JsonSosieOutputForUT(transfs, "/uzr/h0m3/my.jzon",
                 "mySrc/pom.xml", "sosie-generator/pom.xml");
-        out.write();
+        out.setSection(CustomSection.class, new CustomSection("theObjectName"));
+        out.setSection(CustomSection1.class, new CustomSection("theObjectName11"));
+        out.writeToJsonNow();
 
-        assertNotEquals(transfs.get(0).getIndex(), transfs.get(1).getIndex());
-        assertNotEquals(transfs.get(0).getIndex(), transfs.get(2).getIndex());
-        assertNotEquals(transfs.get(1).getIndex(), transfs.get(2).getIndex());
-    }
-
-    @Test
-    public void testCustomSections() {
-
+        assertTrue(out.getJSONObject().has("theObjectName"));
+        assertTrue(out.getJSONObject().has("theObjectName11"));
     }
 
     /**

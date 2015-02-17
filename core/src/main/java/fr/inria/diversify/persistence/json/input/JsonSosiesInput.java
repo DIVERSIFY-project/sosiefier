@@ -50,7 +50,7 @@ public class JsonSosiesInput {
     /**
      * Visibles section for reading customization
      */
-    private HashMap<String, JsonSectionInput> visibleSections;
+    private HashMap<String, JsonSectionInput> sections;
 
     public JsonSosiesInput() {
         initSections();
@@ -73,7 +73,7 @@ public class JsonSosiesInput {
      * @param section Output Section to be set
      */
     public void setSection(Class<? extends JsonSectionInput> aClass, JsonSectionInput section) {
-        visibleSections.put(aClass.getName(), section);
+        sections.put(aClass.getName(), section);
     }
 
     /**
@@ -82,7 +82,7 @@ public class JsonSosiesInput {
      * @return
      */
     public JsonSectionInput getSection(Class<? extends JsonSectionInput> aClass){
-        return visibleSections.get(aClass.getName());
+        return sections.get(aClass.getName());
     }
 
 
@@ -120,7 +120,7 @@ public class JsonSosiesInput {
      * Init all sections in the input
      */
     private void initSections() {
-        visibleSections = new HashMap<>();
+        sections = new HashMap<>();
         setSection(JsonFailuresInput.class, new JsonFailuresInput(inputProgram, jsonObject));
         setSection(JsonAstTransformationCollectionInput.class,
                 new JsonAstTransformationCollectionInput(inputProgram, jsonObject));
@@ -156,6 +156,13 @@ public class JsonSosiesInput {
         asts.setLoadMessages(getLoadMessages());
         asts.setFailures(failures.getFailures());
         asts.read(result);
+
+        for ( JsonSectionInput s : sections.values() ) {
+            if ( s.equals(headerInput) || s.equals(failures) || s.equals(asts) ) continue;
+            s.setInputProgram(inputProgram);
+            s.setJsonObject(jsonObject);
+            s.read(result);
+        }
 
         return result.values();
     }
