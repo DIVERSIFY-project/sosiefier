@@ -1,5 +1,6 @@
 package fr.inria.diversify.transformation;
 
+import com.fasterxml.uuid.Generators;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import org.json.JSONArray;
@@ -48,7 +49,7 @@ public abstract class AbstractTransformation implements Transformation {
     /**
      * An index to identify the transformation in the storage
      */
-    private int index = -1;
+    private UUID index = null;
 
     /**
      * The series number is an ID for a given serie containing this transformation.
@@ -86,9 +87,9 @@ public abstract class AbstractTransformation implements Transformation {
         object.put("name", name);
         object.put("failures", failuresToJSON());
         object.put("status", status);
-        if ( index == -1 ) {
+        if ( index == null ) {
             globalID++;
-            index = globalID;
+            index = Generators.timeBasedGenerator().generate();
         }
         object.put("tindex", index);
         object.put("series", getSeries());
@@ -181,11 +182,12 @@ public abstract class AbstractTransformation implements Transformation {
 
 
     @Override
-    public int getIndex() {
+    public UUID getIndex() {
+        if ( index == null ) index = Generators.timeBasedGenerator().generate();
         return index;
     }
 
-    public void setIndex(int index) {
+    public void setIndex(UUID index) {
         this.index = index;
     }
 

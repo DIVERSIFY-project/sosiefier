@@ -1,5 +1,6 @@
 package fr.inria.diversify;
 
+import com.fasterxml.uuid.Generators;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
@@ -30,7 +31,7 @@ public class FromISSTAToTestEyeFormat {
 
     public static void main(String[] args) throws Exception {
 
-        Log.NONE();
+        Log.INFO();
 
         InputConfiguration inputConfiguration = new InputConfiguration(CONF_PATH);
 
@@ -92,14 +93,13 @@ public class FromISSTAToTestEyeFormat {
         JSONArray transformations = new JSONArray();
         result.put(JsonSectionOutput.TRANSFORMATIONS, transformations);
 
-        int globalIndex = 0;
         for ( File f : new File(inputConfiguration.getPreviousTransformationPath()).listFiles() ) {
             JSONArray a = getArray(f);
             for ( int i = 0;  i < a.length() - 2; i ++) {
                 try {
                     JSONObject tObj = a.getJSONObject(i);
-                    globalIndex++;
-                    if ( tObj.has(JsonSectionOutput.TINDEX) ) tObj.put(JsonSectionOutput.TINDEX, globalIndex);
+                    if ( tObj.has(JsonSectionOutput.TINDEX) )
+                        tObj.put(JsonSectionOutput.TINDEX, Generators.timeBasedGenerator().generate());
                     if ( tObj.has("variableMapping") ) {
                         tObj.put(JsonSectionOutput.VARIABLE_MAP, tObj.get("variableMapping"));
                         tObj.remove("variableMapping");
@@ -114,7 +114,7 @@ public class FromISSTAToTestEyeFormat {
                         transformations.put(tObj);
                     }
                 } catch (JSONException e) {
-                    System.out.println("FUUUUUUUCCCKKKKK!!!!!!!");
+                    System.out.println("Error! That's all I'm telling " + e.getMessage());
                 }
             }
         }

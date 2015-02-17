@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
 
@@ -31,7 +32,7 @@ public class JsonAstReplaceInput extends JsonAstTransformationInput {
     }
 
     @Override
-    public void read(HashMap<Integer, Transformation> transformations) {
+    public void read(HashMap<UUID, Transformation> transformations) {
 
         ASTReplace transf = null;
         try {

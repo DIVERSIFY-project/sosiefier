@@ -14,8 +14,7 @@ import java.util.List;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TRANSFORMATIONS;
 import static fr.inria.diversify.ut.json.SectionTestUtils.createTransformations;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 /**
  * Created by marodrig on 12/01/2015.
@@ -35,9 +34,9 @@ public class JsonSosieOutputTest {
                 "mySrc/pom.xml", "sosie-generator/pom.xml");
         out.write();
 
-        assertEquals(transfs.get(0).getIndex(), 0);
-        assertEquals(transfs.get(1).getIndex(), 1);
-        assertEquals(transfs.get(2).getIndex(), 2);
+        assertNotEquals(transfs.get(0).getIndex(), transfs.get(1).getIndex());
+        assertNotEquals(transfs.get(0).getIndex(), transfs.get(2).getIndex());
+        assertNotEquals(transfs.get(1).getIndex(), transfs.get(2).getIndex());
     }
 
     @Test

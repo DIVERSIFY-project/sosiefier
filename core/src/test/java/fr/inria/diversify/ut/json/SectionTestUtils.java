@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
 import static org.junit.Assert.assertEquals;
@@ -27,6 +28,10 @@ import static org.junit.Assert.assertTrue;
  */
 public class SectionTestUtils {
 
+    public static final UUID TEST_ID_1 = UUID.fromString("de305d54-75b4-431b-adb2-eb6b9e546011"); //From wikipedia
+    public static final UUID TEST_ID_2 = UUID.fromString("de305d54-75b4-431b-adb2-eb6b9e546012"); //From wikipedia
+    public static final UUID TEST_ID_3 = UUID.fromString("de305d54-75b4-431b-adb2-eb6b9e546013"); //From wikipedia
+    public static final UUID TEST_ID_4 = UUID.fromString("de305d54-75b4-431b-adb2-eb6b9e546014"); //From wikipedia
 
     public static void writeAssertions(JsonSectionOutput d) throws JSONException {
 
@@ -74,7 +79,7 @@ public class SectionTestUtils {
      */
     public static JSONObject createDeleteASTTransformationJSON() throws JSONException {
         ASTDelete r = new ASTDelete();
-        r.setIndex(1);
+        r.setIndex(TEST_ID_1); //From wikipedia
         r.setStatus(-1);
         r.setTransplantationPoint(new FakeCodeFragment("org.MyClass:1", "ctReturn", "return 0"));
         JsonAstDeleteOutput d = new JsonAstDeleteOutput();
@@ -90,7 +95,7 @@ public class SectionTestUtils {
      */
     public static JSONObject createAddASTTransformationJSON() throws JSONException {
         ASTAdd r = new ASTAdd();
-        r.setIndex(1);
+        r.setIndex(TEST_ID_1);
         r.setStatus(-1);
         r.setTransplantationPoint(new FakeCodeFragment("org.MyClass:1", "ctReturn", "return 0"));
         r.setTransplant(new FakeCodeFragment("org.MyOtherClass:10", "ctIf", "if ( int == 0 ) int = 10"));
@@ -104,7 +109,7 @@ public class SectionTestUtils {
 
     public static JSONObject createReplaceASTTransformationJSON() {
         ASTReplace r = new ASTReplace();
-        r.setIndex(1);
+        r.setIndex(TEST_ID_1);
         r.setStatus(-1);
 
         r.setTransplantationPoint(new FakeCodeFragment("org.MyClass:1", "ctReturn", "return 0"));
@@ -156,18 +161,18 @@ public class SectionTestUtils {
      */
     public static List<Transformation> createTransformations(InputProgram p) {
         ASTAdd add = new ASTAdd();
-        add.setIndex(0);
+        add.setIndex(TEST_ID_1);
         add.setStatus(-1);
         add.setTransplantationPoint(p.getCodeFragments().get(0));
         add.setTransplant(p.getCodeFragments().get(1));
 
         ASTDelete del = new ASTDelete();
-        del.setIndex(0);
+        del.setIndex(TEST_ID_2);
         del.setStatus(-2);
         del.setTransplantationPoint(p.getCodeFragments().get(2));
 
         ASTReplace r = new ASTReplace();
-        r.setIndex(0);
+        r.setIndex(TEST_ID_3);
         r.setStatus(0);
         r.setTransplantationPoint(p.getCodeFragments().get(1));
         r.setTransplant(p.getCodeFragments().get(2));

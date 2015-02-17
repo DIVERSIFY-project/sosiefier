@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by marodrig on 12/01/2015.
@@ -66,7 +67,7 @@ public abstract class JsonSectionInput {
         this.jsonObject = jsonObject;
     }
 
-    public abstract void read(HashMap<Integer, Transformation> transformations);
+    public abstract void read(HashMap<UUID, Transformation> transformations);
 
     /**
      * Input program where the code fragments of the transformations are

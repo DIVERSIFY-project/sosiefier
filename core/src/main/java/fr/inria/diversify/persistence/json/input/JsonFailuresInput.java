@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.UUID;
 
 import static fr.inria.diversify.persistence.json.output.JsonFailuresOutput.FAILURES_DICTIONARY;
 
@@ -23,7 +24,7 @@ public class JsonFailuresInput extends JsonSectionInput {
     }
 
     @Override
-    public void read(HashMap<Integer, Transformation> transformations) {
+    public void read(HashMap<UUID, Transformation> transformations) {
 
         failures = new HashMap<>();
         try {

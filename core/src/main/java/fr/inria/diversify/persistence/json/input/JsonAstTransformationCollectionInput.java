@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.UUID;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.NAME;
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TINDEX;
@@ -29,7 +30,7 @@ public class JsonAstTransformationCollectionInput extends JsonSectionInput {
     }
 
     @Override
-    public void read(HashMap<Integer, Transformation> transformations) {
+    public void read(HashMap<UUID, Transformation> transformations) {
 
         JSONArray tr = null;
         try {
@@ -41,10 +42,10 @@ public class JsonAstTransformationCollectionInput extends JsonSectionInput {
 
         for (int i = 0; i < tr.length(); i++) {
             checkToManyErrors();
-            int index = -1;
+            UUID index = null;
             try {
                 JSONObject obj = tr.getJSONObject(i);
-                index = obj.getInt(TINDEX);
+                index = UUID.fromString(obj.getString(TINDEX));
                 for (JsonAstTransformationInput si : sections) {
                     if (si.canRead(TRANSFORMATIONS + "." + obj.getString(NAME))) {
                         si.setJsonObject(obj);
@@ -53,17 +54,23 @@ public class JsonAstTransformationCollectionInput extends JsonSectionInput {
                         si.read(transformations);
                     }
                 }
-                index = -1;
+            } catch (IllegalArgumentException e) {
+                throwError("Invalid index", e, false);
             } catch (PersistenceException pe) {
-                //Don't report twice the cause in case it has been already reported
-                String s = "Transf " + index + " cannot load.";
-                if ( getLoadMessages().size() > 0 &&
-                        getLoadMessages().get(getLoadMessages().size() - 1).contains(pe.getMessage()) )
-                    throwError(s, null, false);
-                else throwError(s, pe, false);
+                if (index == null) throwError("Cannot load. Invalid transformation index", pe, false);
+                else {
+                    //Don't report twice the cause in case it has been already reported
+                    String s = "Transf " + index + " cannot load.";
+                    if (getLoadMessages().size() > 0 &&
+                            getLoadMessages().get(getLoadMessages().size() - 1).contains(pe.getMessage()))
+                        throwError(s, null, false);
+                    else throwError(s, pe, false);
+                }
             } catch (JSONException e) {
+                if (index == null) throwError("Cannot load. Invalid transformation index", e, false);
                 throwError("Transf " + index + ". Unable to parse from JSON ", e, false);
             } catch (Exception e) {
+                if (index == null) throwError("Cannot load. Invalid transformation index", e, false);
                 throwError("Transf " + index + ". Unexpected error. ", e, false);
             }
         }
@@ -71,6 +78,7 @@ public class JsonAstTransformationCollectionInput extends JsonSectionInput {
 
     /**
      * Builds the sub sections that will read the transformation section
+     *
      * @return
      */
     private Collection<JsonAstTransformationInput> buildSections() {

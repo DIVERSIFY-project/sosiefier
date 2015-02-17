@@ -16,6 +16,7 @@ import org.junit.Test;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.UUID;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
 import static fr.inria.diversify.ut.json.SectionTestUtils.*;
@@ -35,7 +36,7 @@ public class JsonAstTransformationCollectionInputTest {
     public void testWrongJSON() {
         JsonAstTransformationCollectionInput input = new JsonAstTransformationCollectionInput(
                 new MockInputProgram(), new JSONObject());
-        try { input.read(new HashMap<Integer, Transformation>()); } catch (PersistenceException e) {}
+        try { input.read(new HashMap<UUID, Transformation>()); } catch (PersistenceException e) {}
         assertEquals(1, input.getLoadMessages().size());
         assertTrue(input.getLoadMessages().get(0).contains("Unable to obtain the transformations object"));
     }
@@ -52,7 +53,7 @@ public class JsonAstTransformationCollectionInputTest {
 
         //Read with errors
         JsonAstTransformationCollectionInput input = new JsonAstTransformationCollectionInput(p, jsonObject);
-        HashMap<Integer, Transformation> r = new HashMap<Integer, Transformation>();
+        HashMap<UUID, Transformation> r = new HashMap<>();
         input.read(r);
 
         assertEquals(2, r.size()); //Test that only two transformations where read out of three
@@ -87,11 +88,11 @@ public class JsonAstTransformationCollectionInputTest {
         InputProgram p = new MockInputProgram();
         JsonAstTransformationCollectionInput reader = new JsonAstTransformationCollectionInput(p, data);
 
-        HashMap<Integer, Transformation> result = new HashMap<>();
+        HashMap<UUID, Transformation> result = new HashMap<>();
         reader.read(result);
 
-        ASTTransformation ast = (ASTTransformation) result.get(1);
-        assertEquals(1, ast.getIndex());
+        ASTTransformation ast = (ASTTransformation) result.get(TEST_ID_1);
+        assertEquals(TEST_ID_1, ast.getIndex());
         assertEquals(-1, ast.getStatus());
         assertEquals(1, result.size());
         assertEquals(p.getCodeFragments().get(0), ast.getTransplantationPoint());

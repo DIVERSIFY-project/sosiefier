@@ -1,5 +1,6 @@
 package fr.inria.diversify.persistence.json.input;
 
+import com.fasterxml.uuid.Generators;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
@@ -11,6 +12,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.UUID;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
 
@@ -33,17 +35,19 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
 
     /**
      * Prepend the error message with the transformation index
+     *
      * @param transf Transformation
-     * @param s Error message
+     * @param s      Error message
      * @return
      */
     protected String getTransformationErrorString(ASTTransformation transf, String s) {
-        if (transf != null) return  "Transformation " + transf.getIndex() + " " + s;
+        if (transf != null) return "Transformation " + transf.getIndex() + " " + s;
         return s;
     }
 
     /**
      * Log the status of the JSON loading of a Code fragment for a transformation
+     *
      * @param ast
      * @param cf
      * @param src
@@ -51,22 +55,21 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
      */
     protected void logCfStatus(ASTTransformation ast, CodeFragment cf, String pos, String src) {
         StringBuilder sb = new StringBuilder("");
-        if ( ast != null ) sb.append("Transf ").append(ast.getIndex()).append(". ");
+        if (ast != null) sb.append("Transf ").append(ast.getIndex()).append(". ");
 
-        if ( cf == null ) {
+        if (cf == null) {
             sb.append("Unable to find code fragment \"").append(src).append("\" at \"").append(pos).append("\"");
             String s = sb.toString();
             throwError(s, null, true);
-        }
-        else {
-            if ( !cf.positionString().equals(pos) )  {
+        } else {
+            if (!cf.positionString().equals(pos)) {
                 sb.append("Position mismatch -> Storage: \"").append(pos).append("\"; Found: \"").
                         append(cf.positionString()).append("\".");
                 throwWarning(sb.toString(), null, false);
             }
-            if ( !cf.equalString().equals(src) ) {
+            if (!cf.equalString().equals(src)) {
                 sb = new StringBuilder("");
-                if ( ast != null ) sb.append("Transf ").append(ast.getIndex()).append(". ");
+                if (ast != null) sb.append("Transf ").append(ast.getIndex()).append(". ");
                 sb.append("Source mismatch -> Storage: \"").append(src).
                         append("\"; Found: \"").append(cf.equalString()).append("\".");
                 throwWarning(sb.toString(), null, false);
@@ -75,18 +78,35 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
     }
 
     /**
+     * Takes a string and returns a valid UUI from the string if such string is a valid
+     * UUI. Otherwise, generates a new UUI
+     *
+     * @param uuid
+     * @return
+     */
+    private UUID getValidUUI(String uuid) {
+        if (uuid == null) return Generators.timeBasedGenerator().generate();
+        try {
+            UUID fromStringUUID = UUID.fromString(uuid);
+            String toStringUUID = fromStringUUID.toString();
+            if (toStringUUID.equals(uuid)) return fromStringUUID;
+        } catch (IllegalArgumentException e) {
+            return Generators.timeBasedGenerator().generate();
+        }
+        return Generators.timeBasedGenerator().generate();
+    }
+
+    /**
      * gets data from the JSON  object into the transformation object
      */
-    protected ASTTransformation get(HashMap<Integer, Transformation> t) throws JSONException {
+    protected ASTTransformation get(HashMap<UUID, Transformation> t) throws JSONException {
 
         HashMap<Integer, String> failures = getFailures();
-
-        int index = getJsonObject().getInt(TINDEX);
+        UUID index = getValidUUI(getJsonObject().getString(TINDEX));
         ASTTransformation astt;
         if (t.containsKey(index)) astt = (ASTTransformation) t.get(index);
         else {
             astt = build();
-            //t.put(index, astt);
             astt.setIndex(index);
             astt.setStatus(getJsonObject().getInt(STATUS));
         }
@@ -95,15 +115,17 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
 
     /**
      * Adds the transformation to the transformation's dictionary
-     * @param t Transformation's dictionary
+     *
+     * @param t    Transformation's dictionary
      * @param astt AST Transformation
      */
-    protected void addTransformation(HashMap<Integer, Transformation> t, ASTTransformation astt) {
+    protected void addTransformation(HashMap<UUID, Transformation> t, ASTTransformation astt) {
         t.put(astt.getIndex(), astt);
     }
 
     /**
      * Put the transformation after the reading is properly done
+     *
      * @param transformation
      */
     protected void putTransformation(ASTTransformation transformation) {
@@ -111,7 +133,7 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
     }
 
     @Override
-    public void read(HashMap<Integer, Transformation> transformations) {
+    public void read(HashMap<UUID, Transformation> transformations) {
         try {
             get(transformations);
         } catch (JSONException e) {
@@ -122,7 +144,7 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
     protected Map<String, String> getVarMap(JSONObject jsonObject) throws JSONException {
         Map<String, String> varMap = new HashMap<>();
         Iterator<String> nameItr = jsonObject.keys();
-        while(nameItr.hasNext()) {
+        while (nameItr.hasNext()) {
             String name = nameItr.next();
             varMap.put(name, jsonObject.getString(name));
         }
@@ -131,6 +153,7 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
 
     /**
      * Indicate if can handle a section within the file
+     *
      * @param s Section name
      * @return True if can handle
      */
@@ -138,9 +161,10 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
 
     /**
      * Failures dictionary
+     *
      * @return The failures dictionary
      */
-    public HashMap<Integer,String> getFailures() {
+    public HashMap<Integer, String> getFailures() {
         return failures;
     }
 

@@ -1,5 +1,6 @@
 package fr.inria.diversify.ut.json.input;
 
+import com.fasterxml.uuid.UUIDComparator;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.Header;
@@ -18,6 +19,7 @@ import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import static fr.inria.diversify.persistence.json.input.JsonSosiesInput.ERROR;
 import static fr.inria.diversify.persistence.json.input.JsonSosiesInput.WARNING;
@@ -73,7 +75,7 @@ public class JsonHeaderInputTest {
     @Test
     public void testRead_AllOK() throws JSONException {
         JsonHeaderInputForUT t = new JsonHeaderInputForUT(new InputProgram(), getGoodJson());
-        t.read(new HashMap<Integer, Transformation>());
+        t.read(new HashMap<UUID, Transformation>());
         assertEquals(0, t.getLoadMessages().size());
     }
 
@@ -88,7 +90,7 @@ public class JsonHeaderInputTest {
 
         JsonHeaderInputForUT t = new JsonHeaderInputForUT(new InputProgram(), o);
         try {
-            t.read(new HashMap<Integer, Transformation>());
+            t.read(new HashMap<UUID, Transformation>());
         } catch (PersistenceException e) {
             //Do nothing we are testing the proper logging of errors
         }
@@ -109,7 +111,7 @@ public class JsonHeaderInputTest {
 
         JsonHeaderInputForUT t = new JsonHeaderInputForUT(new InputProgram(), o);
         try {
-            t.read(new HashMap<Integer, Transformation>());
+            t.read(new HashMap<UUID, Transformation>());
             fail("should have raised an exception");
         } catch (PersistenceException e) {
             //Yeah!! it raises it!
@@ -129,7 +131,7 @@ public class JsonHeaderInputTest {
         JSONObject o = getGoodJson();
         o.getJSONObject(Header.HEADER).put(MavenHeader.VERSION, "2.0-SNAPSHOT");
         JsonHeaderInputForUT t = new JsonHeaderInputForUT(new InputProgram(), o);
-        t.read(new HashMap<Integer, Transformation>());
+        t.read(new HashMap<UUID, Transformation>());
     }
 
     /**
@@ -140,7 +142,7 @@ public class JsonHeaderInputTest {
         JSONObject o = getGoodJson();
         o.getJSONObject(Header.HEADER).put(MavenHeader.VERSION, "1.0-SNAPSHOT");
         JsonHeaderInputForUT t = new JsonHeaderInputForUT(new InputProgram(), o);
-        t.read(new HashMap<Integer, Transformation>());
+        t.read(new HashMap<UUID, Transformation>());
         assertEquals("WARNING: This project version don't match with the one of the sosies!. " +
                 "Expected 1.2.1. Got 1.0-SNAPSHOT", t.getLoadMessages().get(0).trim());
     }

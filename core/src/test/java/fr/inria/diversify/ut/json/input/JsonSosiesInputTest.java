@@ -1,5 +1,6 @@
 package fr.inria.diversify.ut.json.input;
 
+import com.fasterxml.uuid.UUIDComparator;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.json.input.JsonHeaderInput;
@@ -100,9 +101,12 @@ public class JsonSosiesInputTest {
         // there is only Transformation for each type
         //t.sort((o1, o2) -> o1.getIndex() - o2.getIndex());
         //result.sort((o1, o2) -> o1.getIndex() - o2.getIndex());
+        final UUIDComparator cuuid = new UUIDComparator();
         Comparator<Transformation> c = new Comparator<Transformation>() {
             @Override
-            public int compare(Transformation o1, Transformation o2) { return o1.getIndex() - o2.getIndex(); }
+            public int compare(Transformation o1, Transformation o2) {
+                return cuuid.compare(o1.getIndex(), o2.getIndex());
+            }
         };
         t.sort(c);
         result.sort(c);

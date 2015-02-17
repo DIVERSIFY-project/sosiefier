@@ -1,5 +1,6 @@
 package fr.inria.diversify.it.persistence;
 
+import com.fasterxml.uuid.UUIDComparator;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.it.SosieGeneratorIntegrationTests;
 import fr.inria.diversify.persistence.json.input.JsonSosiesInput;
@@ -17,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -63,8 +65,9 @@ public class PersistenceSubsystem extends SosieGeneratorIntegrationTests {
         List<Transformation> newLoad = new ArrayList<>(newIn.read());
 
         //Let's trust there are no repeated indexes
-        oldLoad.sort((o1, o2) -> o1.getIndex() - o2.getIndex());
-        newLoad.sort((o1, o2) -> o1.getIndex() - o2.getIndex());
+        UUIDComparator comparator = new UUIDComparator();
+        oldLoad.sort((o1, o2) -> comparator.compare(o1.getIndex(), o2.getIndex()));
+        newLoad.sort((o1, o2) -> comparator.compare(o1.getIndex(), o2.getIndex()));
 
         //Test that old and new gives same result
         assertEquals(oldLoad.size(), newLoad.size());

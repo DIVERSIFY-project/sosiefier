@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * User: Simon
@@ -43,8 +44,8 @@ public interface Transformation {
 
     public boolean isSosie();
 
-    public int getIndex();
+    public UUID getIndex();
 
-    public void setIndex(int index);
+    public void setIndex(UUID index);
 
 }

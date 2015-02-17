@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
 import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * Created by marodrig on 23/01/2015.
@@ -35,7 +36,7 @@ public class JsonHeaderInput extends JsonSectionInput {
     }
 
     @Override
-    public void read(HashMap<Integer, Transformation> transformations) {
+    public void read(HashMap<UUID, Transformation> transformations) {
 
         //Indicate that an exception must be raised because of mismatch in the src
         boolean raise = false;

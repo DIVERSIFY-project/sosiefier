@@ -11,10 +11,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by marodrig on 09/01/2015.
@@ -138,7 +135,7 @@ public class JsonSosiesInput {
     public Collection<Transformation> read() {
         open(); //Open the json file
 
-        HashMap<Integer, Transformation> result = new HashMap<>();
+        HashMap<UUID, Transformation> result = new HashMap<>();
         JsonHeaderInput headerInput = (JsonHeaderInput)getSection(JsonHeaderInput.class);
         headerInput.setJsonObject(jsonObject);
         headerInput.setInputProgram(inputProgram);

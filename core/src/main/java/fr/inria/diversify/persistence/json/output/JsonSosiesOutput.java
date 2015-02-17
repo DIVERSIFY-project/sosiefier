@@ -97,10 +97,6 @@ public class JsonSosiesOutput {
      * Writes the transformation into a JSON object
      */
     protected void writeToJson() {
-        //Make sure all transformations have unique id. //TODO: Investigate the advantages of adding a UUId
-        int id = 0;
-        for (Transformation t : transformations) t.setIndex(id++);
-
         //Write the header
         JsonHeaderOutput header = (JsonHeaderOutput) sections.get(JsonHeaderOutput.class);
         header.setTransformations(transformations);
