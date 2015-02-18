@@ -15,6 +15,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -32,6 +35,11 @@ public class SectionTestUtils {
     public static final UUID TEST_ID_2 = UUID.fromString("de305d54-75b4-431b-adb2-eb6b9e546012"); //From wikipedia
     public static final UUID TEST_ID_3 = UUID.fromString("de305d54-75b4-431b-adb2-eb6b9e546013"); //From wikipedia
     public static final UUID TEST_ID_4 = UUID.fromString("de305d54-75b4-431b-adb2-eb6b9e546014"); //From wikipedia
+
+    public static InputStreamReader getReaderFromJson(JSONObject o) {
+        return new InputStreamReader(
+                new ByteArrayInputStream(o.toString().getBytes(StandardCharsets.UTF_8)));
+    }
 
     public static void writeAssertions(JsonSectionOutput d) throws JSONException {
 

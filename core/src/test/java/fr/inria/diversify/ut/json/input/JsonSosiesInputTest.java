@@ -23,9 +23,8 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-import static fr.inria.diversify.ut.json.SectionTestUtils.assertEqualsTransformation;
-import static fr.inria.diversify.ut.json.SectionTestUtils.createTransformations;
-import static fr.inria.diversify.ut.json.SectionTestUtils.createTransformationsJSONObjectWithErrors;
+import static fr.inria.diversify.ut.json.SectionTestUtils.*;
+import static fr.inria.diversify.ut.json.SectionTestUtils.getReaderFromJson;
 import static fr.inria.diversify.ut.json.output.JsonSosieOutputTest.*;
 import static org.junit.Assert.*;
 
@@ -65,11 +64,8 @@ public class JsonSosiesInputTest {
         out.writeToJsonNow();
 
         MockInputProgram p = new MockInputProgram();
-        InputStreamReader r = new InputStreamReader(
-                new ByteArrayInputStream(out.getJSONObject().toString().getBytes(StandardCharsets.UTF_8)));
-        JsonSosiesInput input = new JsonSosiesInput(r, p);
         //Mock the header section
-        input.setSection(JsonHeaderInput.class, new JsonHeaderInputTest.JsonHeaderInputForUT());
+        JsonSosiesInput input = new JsonSosiesInputForUT(getReaderFromJson(out.getJSONObject()), p);
 
         //Set two custom sections
         CustomSectionInput a = new CustomSectionInput();
@@ -92,9 +88,7 @@ public class JsonSosiesInputTest {
     @Test
     public void testConstructors() {
         InputProgram p = new InputProgram();
-        InputStreamReader r = new InputStreamReader(
-                new ByteArrayInputStream(EMPTY_STR.getBytes(StandardCharsets.UTF_8)));
-        JsonSosiesInput input = new JsonSosiesInput(r, p);
+        JsonSosiesInput input = new JsonSosiesInput(getReaderFromJson(new JSONObject()), p);
         assertTrue(input.getInputProgram() != null);
 
         input = new JsonSosiesInput("/uzr/h0m3/my.jzon", p);
@@ -112,12 +106,8 @@ public class JsonSosiesInputTest {
         JSONObject out = createTransformationsJSONObjectWithErrors(p);
 
         //Read the transformations
-        InputStreamReader r = new InputStreamReader(
-                new ByteArrayInputStream(out.toString().getBytes(StandardCharsets.UTF_8)));
-        JsonSosiesInput input = new JsonSosiesInput(r, p);
-        //Mock the header section
-        input.setSection(JsonHeaderInput.class, new JsonHeaderInputTest.JsonHeaderInputForUT());
-        ArrayList<Transformation> result = new ArrayList<>(input.read());
+        JsonSosiesInput input = new JsonSosiesInputForUT(getReaderFromJson(out), p); //JsonHeader Mocked
+        input.read();
 
         assertEquals(3, input.getLoadMessages().size());
     }
@@ -135,12 +125,8 @@ public class JsonSosiesInputTest {
         out.writeToJsonNow();
 
         //Read the transformations
-        InputStreamReader r = new InputStreamReader(
-                new ByteArrayInputStream(out.getJSONObject().toString().getBytes(StandardCharsets.UTF_8)));
-        JsonSosiesInput input = new JsonSosiesInput(r, p);
+        JsonSosiesInput input = new JsonSosiesInputForUT(getReaderFromJson(out.getJSONObject()), p); //Mock the header section
 
-        //Mock the header section
-        input.setSection(JsonHeaderInput.class, new JsonHeaderInputTest.JsonHeaderInputForUT());
         ArrayList<Transformation> result = new ArrayList<>(input.read());
 
         //Assert that the header was properly read
