@@ -2,7 +2,6 @@ package fr.inria.diversify.testamplification.logger;
 
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -26,6 +25,8 @@ public class AssertLogWriter extends LogWriter {
     private Map<Class, Method[]> getters;
     private Map<Class, Field[]> fields;
     private Map<Class, String> classToId;
+    private static int testCount = 0;
+    private static int monitoringCount = 0;
 
     private static int count = 0;
 
@@ -41,6 +42,7 @@ public class AssertLogWriter extends LogWriter {
 
 
     public void writeTestStart(Thread thread, String testSignature) {
+        testCount++;
         String semaphore = "";
         try {
             StringBuilder stringBuilder = new StringBuilder();
@@ -204,9 +206,11 @@ public class AssertLogWriter extends LogWriter {
     public void logAssertArgument(Thread thread, int idAssertTarget, Object target,  int idAssertInvocation, Object invocation) {
         logAssertArgument(thread, idAssertTarget, target);
         logAssertArgument(thread, idAssertInvocation, invocation);
+        monitoringCount--;
     }
 
     public void logAssertArgument(Thread thread, int idAssert, Object invocation) {
+        monitoringCount++;
         String semaphore = "";
         if (getLogMethod(thread)) {
             try {
@@ -235,7 +239,6 @@ public class AssertLogWriter extends LogWriter {
         }
     }
 
-
     public void close() {
         for (Thread thread : fileWriters.keySet()) {
             String semaphore = "";
@@ -243,6 +246,9 @@ public class AssertLogWriter extends LogWriter {
                 PrintWriter flw = getFileWriter(thread);
                 semaphore = flw.toString() + flw.hashCode();
                 flw.close();
+                if(thread.getName().contains("main")) {
+                    printCount();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -250,6 +256,17 @@ public class AssertLogWriter extends LogWriter {
         }
     }
 
+    protected void printCount() {
+        try {
+            String countFileName = dir.getAbsolutePath() + "/count";
+            PrintWriter f = new PrintWriter(new FileWriter(countFileName));
+            f.append("test count: "+testCount);
+            f.append("\nmonitoring point count: "+monitoringCount);
+            f.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     protected synchronized PrintWriter getFileWriter(Thread thread) throws IOException, InterruptedException {
         if (!fileWriters.containsKey(thread)) {
             String fileName = getThreadLogFilePath(thread) + "_" + System.currentTimeMillis();
@@ -327,9 +344,7 @@ public class AssertLogWriter extends LogWriter {
         return ret;
     }
 
-
     protected Method[] findGetters(Class aClass){
-//        System.out.println("getter for " + aClass);
         List<Method> getters = new ArrayList<Method>();
         for(Method method : aClass.getMethods()){
             if(isGetter(method) && !methodDefinedInObject(method)) {
@@ -347,7 +362,6 @@ public class AssertLogWriter extends LogWriter {
         Method[] ret = new Method[getters.size()];
 
        for(int i = 0; i< ret.length; i++ ) {
-//           System.out.println("\t" + getters.get(i));
            ret[i] = getters.get(i);
        }
         return ret;
@@ -358,15 +372,6 @@ public class AssertLogWriter extends LogWriter {
                 && method.getParameterTypes().length == 0;
     }
 
-    protected boolean isGetter(Class aClass, Method method) {
-        return getterOf(null,method);
-//        for(Field field: aClass.getFields()) {
-//            if (getterOf(field,method))
-//                return true;
-//        }
-//        return false;
-    }
-
     protected boolean methodDefinedInObject(Method method) {
         for(Method objectMethod : Object.class.getMethods()) {
             if(objectMethod.equals(method)) {
@@ -374,14 +379,5 @@ public class AssertLogWriter extends LogWriter {
             }
         }
         return false;
-    }
-
-    protected boolean getterOf(Field field, Method method) {
-        return method.getName().startsWith("get")
-                //&& method.getName().toLowerCase().contains(field.getName().toLowerCase())
-                && method.getParameterTypes().length == 0
-                && !method.toString().contains("java.lang.Object.");
-               // && method.getReturnType().isAssignableFrom(field.getType());
-
     }
 }
