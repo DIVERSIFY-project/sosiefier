@@ -3,24 +3,16 @@ package fr.inria.diversify.ut.json.input;
 import com.fasterxml.uuid.UUIDComparator;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.persistence.json.input.JsonHeaderInput;
 import fr.inria.diversify.persistence.json.input.JsonSectionInput;
 import fr.inria.diversify.persistence.json.input.JsonSosiesInput;
-import fr.inria.diversify.persistence.json.output.JsonHeaderOutput;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.ut.MockInputProgram;
 import fr.inria.diversify.ut.json.output.JsonHeaderOutputTest;
 import fr.inria.diversify.ut.json.output.JsonSosieOutputForUT;
-import fr.inria.diversify.ut.json.output.JsonSosieOutputTest;
-import mockit.Mocked;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.FileWriter;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import static fr.inria.diversify.ut.json.SectionTestUtils.*;
@@ -42,11 +34,11 @@ public class JsonSosiesInputTest {
     }
     public static class CustomSectionInput extends JsonSectionInput {
 
-        public boolean gotHere;
+        public boolean readMethodCalled;
 
         @Override
         public void read(HashMap<UUID, Transformation> transformations) {
-            gotHere = getJsonObject().has("theObjectName") && getJsonObject().has("theObjectName11");
+            readMethodCalled = getJsonObject().has("theObjectName") && getJsonObject().has("theObjectName11");
         }
     }
 
@@ -77,8 +69,8 @@ public class JsonSosiesInputTest {
         input.read();
 
         //Assert
-        assertTrue(a.gotHere);
-        assertTrue(b.gotHere);
+        assertTrue(a.readMethodCalled);
+        assertTrue(b.readMethodCalled);
     }
 
 
