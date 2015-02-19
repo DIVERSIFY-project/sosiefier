@@ -33,7 +33,7 @@ import static fr.inria.diversify.transformation.AbstractTransformation.SOSIE;
  */
 public class CorrectedTransformationsToSosie {
 
-    private static final String CONF_PATH = "C:\\MarcelStuff\\data\\DIVERSE\\input_configurations\\CheckSosies-CommonColl.properties";
+    //private static final String CONF_PATH = "C:\\MarcelStuff\\data\\DIVERSE\\input_configurations\\CheckSosies-CommonColl.properties";
 
     //Readed transformations
     private ArrayList<Transformation> transformations;
@@ -43,15 +43,15 @@ public class CorrectedTransformationsToSosie {
 
     public static void main(String[] args) throws Exception {
 
-        new CorrectedTransformationsToSosie().start();
+        new CorrectedTransformationsToSosie().start(args[0]);
 
 
     }
 
-    private void start() throws Exception {
+    private void start(String confPath) throws Exception {
         Log.INFO();
 
-        InputConfiguration inputConfiguration = new InputConfiguration(CONF_PATH);
+        InputConfiguration inputConfiguration = new InputConfiguration(confPath);
 
         verifyTransformations(inputConfiguration);
     }

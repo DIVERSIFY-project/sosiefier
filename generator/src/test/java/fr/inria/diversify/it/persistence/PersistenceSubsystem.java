@@ -56,6 +56,7 @@ public class PersistenceSubsystem extends SosieGeneratorIntegrationTests {
 
         //Write with the new system
         transfPath = transfPath.substring(0, transfPath.lastIndexOf('.')) + "_new.json";
+
         JsonSosiesOutput newOut = new JsonSosiesOutput(oldLoad, transfPath,
                 inputProgram.getProgramDir() + "/pom.xml", "1.0-SNAPSHOT");
         newOut.write();
