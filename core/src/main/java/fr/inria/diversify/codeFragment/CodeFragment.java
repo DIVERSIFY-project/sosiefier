@@ -88,8 +88,10 @@ public abstract class CodeFragment {
 
     @Override
     public String toString() {
-        String tmp = "Input:" + getInputContext();
-        tmp = tmp + "\nOutput: " + getOutputContext() + "\nSource: " + codeFragment;
+        String tmp =" Source: " + codeFragment;
+        tmp += "\nPosition:" + codeFragment.getPosition();
+        tmp += "\nInput:" + getInputContext();
+        tmp += "\nOutput: " + getOutputContext();
         return tmp;
     }
 

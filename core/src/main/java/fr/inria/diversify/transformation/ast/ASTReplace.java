@@ -23,7 +23,7 @@ public class ASTReplace extends ASTTransformation {
     /**
      * Transplant code fragment, i.e. the code that is going to be inserted
      */
-    private CodeFragment transplant;
+    protected CodeFragment transplant;
 
     /**
      * Map to perform variable mapping. See article:
@@ -77,7 +77,7 @@ public class ASTReplace extends ASTTransformation {
                 Log.debug("random variable mapping: {}", variableMapping);
                 stmt.replaceVar(transplantationPoint, variableMapping);
                 if (stmt.codeFragmentString().equals(transplantationPoint.codeFragmentString())) {
-                    throw new BuildTransplantException("same statment");
+                    throw new BuildTransplantException("same statement");
                 }
             }
             return stmt.getCtCodeFragment();
@@ -104,7 +104,6 @@ public class ASTReplace extends ASTTransformation {
         if (!this.getClass().isAssignableFrom(other.getClass()))
             return false;
         ASTReplace otherReplace = (ASTReplace) other;
-
         if (!equalParent(otherReplace.parent))
             return false;
 
@@ -128,8 +127,7 @@ public class ASTReplace extends ASTTransformation {
 
     @Override
     public String toString() {
-        String ret = new String();
-
+        String ret = "replace\n";
         ret = ret + "transplantationPoint: " + transplantationPoint.toString() + "\n" +
                 type + ": " + getTransplant().toString() + "\n" +
                 "varMapping: " + variableMapping + "\n";
@@ -161,5 +159,4 @@ public class ASTReplace extends ASTTransformation {
     public void updateStatementList() {
         getInputProgram().getCodeFragments().remove(transplantationPoint);
     }
-
 }

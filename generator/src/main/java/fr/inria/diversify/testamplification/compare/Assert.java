@@ -1,5 +1,6 @@
 package fr.inria.diversify.testamplification.compare;
 
+import java.text.StringCharacterIterator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,12 +15,20 @@ public class Assert {
     static Map<Integer, String> dico = new HashMap<>();
 
     protected int assertId;
-    protected int classId;
+ //   protected int classId;
+    protected String className;
 
-    public Assert(int assertId, int classId, String[] methods) {
+    public Assert(int assertId, String className, String[] methods) {
         this.assertId = assertId;
-        this.classId = classId;
+        this.className = className;
         this.methods = methods;
+    }
+
+    public Assert(int assertId, String className, String[] mth, Object[] valueS) {
+        this.assertId = assertId;
+        this.className = className;
+        this.methods = mth;
+        values = valueS;
     }
 
     public int getAssertId() {
@@ -31,7 +40,7 @@ public class Assert {
     }
 
     public String toString() {
-        String ret = assertId + ", "  + dico.get(classId) + ": ";
+        String ret = assertId + ", "  + className + ": ";
 
         for(int i = 0; i < values.length; i++)  {
             ret += "\n\t" + methods[i] + "(): " + values[i];
@@ -40,8 +49,8 @@ public class Assert {
         return ret;
     }
 
-    public int getClassId() {
-        return classId;
+    public String getClassName() {
+        return className;
     }
 
     public String[] getMethods() {

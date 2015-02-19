@@ -1,6 +1,5 @@
 package fr.inria.diversify.sosie.logger.processor;
 
-import fr.inria.diversify.transformation.AbstractTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.Log;

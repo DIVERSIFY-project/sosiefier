@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -15,11 +16,6 @@ import java.util.List;
  * Time: 3:20 PM
  */
 public class BytecodeDelete extends BytecodeTransformation {
-
-    @Override
-    public String getTransformationString() throws Exception {
-        return "";
-    }
 
     public BytecodeDelete(CtMethod method, int index, List<CtMethod> methods)  {
         methodLocation = method;

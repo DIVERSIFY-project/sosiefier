@@ -7,7 +7,6 @@ import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
-//import spoon.reflect.reference.CtCatchVariableReference;
 import spoon.reflect.visitor.CtAbstractVisitor;
 import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;

@@ -36,8 +36,6 @@ public class Main {
         suicide();
     }
 
-
-
     protected static void initPropertiesFile(String git) throws IOException, InterruptedException, GitAPIException {
         Log.info("clone the repository https://github.com/simonAllier/sosie-exp.git in {}", git);
         GitUtils gitUtils = new GitUtils(git);
@@ -63,7 +61,7 @@ public class Main {
         }
         reader.close();
         BufferedWriter out = new BufferedWriter(new FileWriter("nbProcess"));
-        out.write(Math.max(1,i/2)+"");
+        out.write(Math.max(1,i/4)+"");
         out.close();
     }
 

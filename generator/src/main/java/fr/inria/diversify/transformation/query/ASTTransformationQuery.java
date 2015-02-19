@@ -8,13 +8,11 @@ import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
-import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.factory.Factory;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 /**
@@ -65,11 +63,6 @@ public class ASTTransformationQuery extends TransformationQuery {
         this.subType = subType;
     }
 
-
-    @Override
-    public void setType(String type) {
-
-    }
 
     @Override
     public Transformation query() throws QueryException {
@@ -307,8 +300,9 @@ public class ASTTransformationQuery extends TransformationQuery {
         int size = getInputProgram().getCodeFragments().size();
         CodeFragment stmt = getInputProgram().getCodeFragments().get(r.nextInt(size));
 
-        while (withCoverage && getInputProgram().getCoverageReport().codeFragmentCoverage(stmt) == 0)
+        while (withCoverage && getInputProgram().getCoverageReport().codeFragmentCoverage(stmt) == 0) {
             stmt = getInputProgram().getCodeFragments().get(r.nextInt(size));
+        }
         return stmt;
     }
 

@@ -9,7 +9,6 @@ import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -37,12 +36,6 @@ public class MutationToSosieQuery extends TransformationQuery {
     protected void init(String mutationDirectory) throws TransformationParserException {
         TransformationParser tf = new TransformationParser(true, inputProgram);
         mutations = new ArrayList(tf.parseDir(mutationDirectory));
-    }
-
-
-    @Override
-    public void setType(String type) {
-
     }
 
     public Transformation query() throws QueryException {

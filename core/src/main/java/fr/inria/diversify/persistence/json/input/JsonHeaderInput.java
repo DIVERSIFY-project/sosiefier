@@ -35,6 +35,8 @@ public class JsonHeaderInput extends JsonSectionInput {
         super(inputProgram, jsonObject);
     }
 
+
+
     @Override
     public void read(HashMap<UUID, Transformation> transformations) {
 

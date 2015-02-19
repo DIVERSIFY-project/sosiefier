@@ -69,7 +69,7 @@ public class InputConfiguration {
 
     public InputConfiguration(String file) throws IOException {
         this(new FileInputStream(file));
-        if (rootPath == null || rootPath.equals("")) rootPath = new File(file).getParent();
+        if (rootPath == null || rootPath.equals("")) rootPath = System.getProperty("user.dir");
     }
 
     /**
@@ -130,8 +130,8 @@ public class InputConfiguration {
      *
      * @return String with the path
      */
-    public String getSourceCodeDir() {
-        return getAbsolutePath(prop.getProperty("project") + "/" + prop.getProperty("src"));
+    public String getRelativeSourceCodeDir() {
+        return prop.getProperty("src");
     }
 
 
@@ -283,7 +283,7 @@ public class InputConfiguration {
      */
     public boolean validate() {
         checkPath("Project path", getProjectPath(), true);
-        checkPath("Source path", getSourceCodeDir(), true);
+        checkPath("Source path", getProjectPath() + "/"+ getResultPath() , true);
         checkPath("Previous transformation path", getPreviousTransformationPath(), false);
         checkPath("Coverage dir", getCoverageDir(), false);
         checkPath("Root dir", getRootPath(), false);

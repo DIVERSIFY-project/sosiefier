@@ -31,7 +31,6 @@ import spoon.reflect.reference.CtTypeReference;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.nio.file.attribute.UserDefinedFileAttributeView;
 import java.util.*;
 
 /**
@@ -474,7 +473,7 @@ public class TransformationJsonParser {
         return trans;
     }
 
-    protected Transformation parseBytecode(JSONObject jsonObject) throws TransformationParserException {
+    protected BytecodeTransformation parseBytecode(JSONObject jsonObject) throws TransformationParserException {
 
         String name;
         BytecodeTransformation trans = null;

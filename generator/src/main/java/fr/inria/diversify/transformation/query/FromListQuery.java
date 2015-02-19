@@ -16,7 +16,8 @@ import java.util.Random;
  */
 public class FromListQuery extends TransformationQuery {
 
-    private final List<Transformation> list;
+    private final List<Transformation> transformations;
+    boolean removeAfterQuery = true;
     boolean shuffle = false;
 
     public FromListQuery(InputProgram inputProgram) throws TransformationParserException {
@@ -29,12 +30,7 @@ public class FromListQuery extends TransformationQuery {
         } else {
             ts = parser.parseFile(f);
         }
-        list = new ArrayList(ts);
-    }
-
-    @Override
-    public void setType(String type) {
-
+        transformations = new ArrayList(ts);
     }
 
     @Override
@@ -42,12 +38,24 @@ public class FromListQuery extends TransformationQuery {
         int index = 0;
         if(shuffle) {
             Random r = new Random();
-            index = r.nextInt(list.size());
+            index = r.nextInt(transformations.size());
         }
-        return list.remove(index);
+        if(removeAfterQuery) {
+            return transformations.remove(index);
+        } else {
+            return transformations.get(index);
+        }
+    }
+
+    public boolean hasNextTransformation() {
+        return !transformations.isEmpty();
     }
 
     public void setShuffle(boolean shuffle) {
         this.shuffle = shuffle;
+    }
+
+    public void setRemoveAfterQuery(boolean removeAfterQuery) {
+        this.removeAfterQuery = removeAfterQuery;
     }
 }

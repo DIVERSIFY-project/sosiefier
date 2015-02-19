@@ -4,7 +4,6 @@ import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
-import fr.inria.diversify.statistic.RunResults;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
@@ -116,17 +115,17 @@ public class GenerateReport {
 
     protected String transformationDetail(Transformation transformation) throws Exception {
         String detail = "";
-        detail += "package: " + transformation.packageLocationName();
-        detail += "\nclass: " + transformation.classLocationName();
-
-        detail += "\nname: " + transformation.getName();
-        detail += "\ntype: " + transformation.getType();
-
-        try {
-            detail += "\n" + transformation.getTransformationString();
-        } catch (Exception e) {
-            Log.debug("");
-        }
+//        detail += "package: " + transformation.packageLocationName();
+//        detail += "\nclass: " + transformation.classLocationName();
+//
+//        detail += "\nname: " + transformation.getName();
+//        detail += "\ntype: " + transformation.getType();
+//
+//        try {
+//            detail += "\n" + transformation.getTransformationString();
+//        } catch (Exception e) {
+//            Log.debug("");
+//        }
 
         return detail;
     }

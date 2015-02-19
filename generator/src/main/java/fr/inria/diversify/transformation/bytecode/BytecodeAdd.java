@@ -21,11 +21,6 @@ import java.util.List;
 public class BytecodeAdd extends BytecodeTransformation {
     protected byte[] byteCodeToAdd;
 
-    @Override
-    public String getTransformationString() throws Exception {
-        return "";
-    }
-
     public BytecodeAdd(CtMethod method, int index, byte[] bytecode, List<CtMethod> methods) {
         methodLocation = method;
         opcodeIndex = index;

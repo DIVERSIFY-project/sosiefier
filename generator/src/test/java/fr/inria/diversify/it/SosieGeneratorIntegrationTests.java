@@ -54,7 +54,10 @@ public class SosieGeneratorIntegrationTests {
         InputProgram inputProgram = new InputProgram();
         inputProgram.configure(c);
         inputProgram.setFactory(factory);
+        inputProgram.setRelativeSourceCodeDir(c.getRelativeSourceCodeDir());
+        inputProgram.setPreviousTransformationsPath(c.getPreviousTransformationPath());
         inputProgram.processCodeFragments();
+
         return inputProgram;
     }
 

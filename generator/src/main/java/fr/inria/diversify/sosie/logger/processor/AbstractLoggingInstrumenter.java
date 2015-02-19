@@ -1,5 +1,6 @@
 package fr.inria.diversify.sosie.logger.processor;
 
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtBreak;
@@ -110,9 +111,11 @@ public abstract class AbstractLoggingInstrumenter<E extends CtElement> extends A
         if(transformations == null) {
             return false;
         }
+
         String methodSignature = method.getDeclaringType().getQualifiedName() +"."+ method.getSimpleName();
         for (Transformation trans : transformations) {
-            String transSignature = trans.classLocationName() +"."+ trans.methodLocationName();
+            SingleTransformation singleTrans = (SingleTransformation) trans;
+            String transSignature = singleTrans.classLocationName() +"."+ singleTrans.methodLocationName();
             if(transSignature.equals(methodSignature)) {
                 return true;
             }

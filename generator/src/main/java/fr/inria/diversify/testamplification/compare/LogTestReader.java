@@ -1,5 +1,6 @@
 package fr.inria.diversify.testamplification.compare;
 
+import fr.inria.diversify.testamplification.compare.diff.Pool;
 import fr.inria.diversify.util.Log;
 
 import java.io.BufferedReader;
@@ -26,13 +27,15 @@ public class LogTestReader {
 
         Log.debug("load trace in directory: {}", file.getAbsolutePath());
         for (File f : file.listFiles()) {
-                try {
-                    Log.debug("parse file: {}", f.getAbsoluteFile());
-                    splitByTest(f);
-                } catch (Exception e) {
-                    Log.debug("error for: {}", f.getAbsoluteFile());
-                    e.printStackTrace();
-                }
+            if (f.isFile() && f.getName().startsWith("logmain")) {
+            try {
+                Log.debug("parse file: {}", f.getAbsoluteFile());
+                splitByTest(f);
+            } catch (Exception e) {
+                Log.debug("error for: {}", f.getAbsoluteFile());
+                e.printStackTrace();
+            }
+        }
 
         }
         Log.debug("number of test: {}",traceByTest.size());
@@ -42,39 +45,66 @@ public class LogTestReader {
 
     int count = 0;
     protected Assert parseAssert(String assertLog) {
-        String[] split = assertLog.split(";");
-        int assertId = Integer.parseInt(split[1]);
-        int classId = Integer.parseInt(split[2]);
-        Assert assertO = new Assert(assertId, classId, getters.get(classId));
+        Assert assertO = null;
 
-        count++;
-        Object[] pValues = previousValues.get(classId);
-        if(split.length != 3) {
-            String[] tmp = assertLog.split(":;:");
+            String[] split = assertLog.split(";");
+            int assertId = Pool.getCanonicalVersion(Integer.parseInt(split[1]));
+            int classId = Pool.getCanonicalVersion(Integer.parseInt(split[2]));
+            String className = Pool.getCanonicalVersion(idToClass.get(classId));
+            assertO = new Assert(assertId, className, getters.get(classId));
 
-            Object[] values = parseValues(Arrays.copyOfRange(tmp, 1, tmp.length));
-            if (pValues == null) {
-                pValues = values;
-                previousValues.put(classId, pValues);
-            } else {
-                char[] masque = split[3].toCharArray();
-                if(assertLog.endsWith(":;:")) {
+            count++;
+            Object[] pValues = previousValues.get(classId);
+            if (split.length != 3) {
+                String[] tmp = assertLog.split(":;:");
+
+                Object[] values = parseValues(Arrays.copyOfRange(tmp, 1, tmp.length));
+                if (assertLog.endsWith(":;:")) {
                     values = Arrays.copyOf(values, values.length + 1);
                     values[values.length - 1] = "";
                 }
-                int index = 0;
-                for (int i = 0; i < masque.length - 1; i++) {
-                    if (masque[i] == '1') {
-                        pValues[i] = values[index];
-                        index++;
+                if (pValues == null) {
+                    pValues = values;
+                    previousValues.put(classId, pValues);
+                } else {
+                    char[] masque = split[3].toCharArray();
+
+                    int index = 0;
+                    for (int i = 0; i < masque.length - 1; i++) {
+                        if (masque[i] == '1') {
+                            try {
+                                pValues[i] = values[index];
+                            }catch (Exception e) {
+                                pValues[i] = "";
+                            }
+                            index++;
+                        }
                     }
                 }
             }
-        }
-        assertO.setValues(Arrays.copyOf(pValues, pValues.length));
+            assertO.setValues(Arrays.copyOf(pValues, pValues.length));
 
         return assertO;
     }
+
+//    protected String[] getValue(String assertLog) {
+//        List<String> array = new ArrayList<>();
+//
+//
+//        for(char c : assertLog.toCharArray()) {
+//            if( count == 0 && c == ':') {
+//                count = 1;
+//            } else if( count == 1 && c == ':') {
+//                count = 1;
+//            } else if( count == 2 && c == ':') {
+//                count = 1;
+//            } else if( count == 3 ) {
+//                count = 1;
+//            }
+//
+//        }
+//
+//    }
 
     protected Object[] parseValues(String[] values) {
         Object[] parseValues = new Object[values.length];
@@ -85,22 +115,22 @@ public class LogTestReader {
     }
 
     protected Object parseValue(String value) {
-        //value is a set
+        //value is a Map
         if(value.startsWith("{") && value.endsWith("}")) {
 
             Set<Object> set = new HashSet<>();
-            for(String s : value.substring(1,value.length()-1).split(", ")) {
+            for(String s : value.substring(1,value.length()-1).split(",\\s?")) {
                 set.add(parseValue(s));
             }
-            return set;
+            return Pool.getCanonicalVersion(set);
         }
-        //value is a array or a list
+        //value is a array or a list or set
         if(value.startsWith("[") && value.endsWith("]")) {
-            List<Object> list = new ArrayList<>();
-            for(String s : value.substring(1,value.length()-1).split(", ")) {
+            Set<Object> list = new HashSet<>();
+            for(String s : value.substring(1,value.length()-1).split(",\\s?")) {
                 list.add(parseValue(s));
             }
-            return list;
+            return Pool.getCanonicalVersion(list);
         }
         //toString() is not define
         if(value.split("@").length > 1) {
@@ -110,7 +140,7 @@ public class LogTestReader {
         if( value.split("\\$").length > 1) {
             return parseValue(value.split("\\$")[0]);
         }
-        return value.intern();
+        return Pool.getCanonicalVersion(value);
     }
 
     protected void splitByTest(File file) throws Exception {
@@ -118,6 +148,7 @@ public class LogTestReader {
         List<Assert> assertLogs = new LinkedList();
         String currentTest = null;
         BufferedReader reader = new BufferedReader(new FileReader(file));
+
         reader.readLine();
         String line = "";
         String logEntry = "";
@@ -168,7 +199,7 @@ public class LogTestReader {
 
     protected void addTest(String testName, List<Assert> assertLogs) {
         if(!traceByTest.containsKey(testName)) {
-            traceByTest.put(testName,new Test(testName));
+            traceByTest.put(testName, new Test(testName));
         }
         traceByTest.get(testName).addLog(new LogTest(assertLogs));
     }
@@ -178,7 +209,7 @@ public class LogTestReader {
         String[] methods = new String[split.length - 2];
 
         for(int i = 2; i < split.length; i++) {
-            methods[i - 2] = split[i];
+            methods[i - 2] = Pool.getCanonicalVersion(split[i]);
         }
         getters.put(Integer.parseInt(split[1]), methods);
     }

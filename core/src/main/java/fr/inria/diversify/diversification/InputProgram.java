@@ -437,6 +437,7 @@ public class InputProgram {
      * @param configuration
      */
     public void configure(InputConfiguration configuration) {
+        setRelativeSourceCodeDir(configuration.getRelativeSourceCodeDir());
         setProgramDir(configuration.getProjectPath());
         setSourceCodeDir(configuration.getSourceCodeDir());
         setPreviousTransformationsPath(configuration.getPreviousTransformationPath());
@@ -482,22 +483,36 @@ public class InputProgram {
     /**
      * Path to the test source code of the input program
      */
-    public String getTestSourceCodeDir() {
+    public String getRelativeTestSourceCodeDir() {
         return testSourceCodeDir;
     }
 
-    public void setTestSourceCodeDir(String testSourceCodeDir) {
+    /**
+     * Path to the test source code of the input program
+     */
+    public String getAbsoluteTestSourceCodeDir() {
+        return  programDir + "/" + testSourceCodeDir;
+    }
+
+    public void setRelativeTestSourceCodeDir(String testSourceCodeDir) {
         this.testSourceCodeDir = testSourceCodeDir;
     }
 
     /**
-     * Path to the source of the input program
+     * Path to the  source of the input program
      */
-    public String getSourceCodeDir() {
+    public String getAbsoluteSourceCodeDir() {
+        return programDir + "/" + sourceCodeDir;
+    }
+
+    /**
+     * Path to the  source of the input program
+     */
+    public String getRelativeSourceCodeDir() {
         return sourceCodeDir;
     }
 
-    public void setSourceCodeDir(String sourceCodeDir) {
+    public void setRelativeSourceCodeDir(String sourceCodeDir) {
         this.sourceCodeDir = sourceCodeDir;
     }
 

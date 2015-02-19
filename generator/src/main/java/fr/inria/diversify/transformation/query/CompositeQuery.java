@@ -4,8 +4,6 @@ import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -31,9 +29,6 @@ public class CompositeQuery extends TransformationQuery  {
         ast = new ASTTransformationQuery(inputProgram);
         mutation = new MutationQuery(inputProgram);
     }
-
-    @Override
-    public void setType(String type) {}
 
     @Override
     public Transformation query() {

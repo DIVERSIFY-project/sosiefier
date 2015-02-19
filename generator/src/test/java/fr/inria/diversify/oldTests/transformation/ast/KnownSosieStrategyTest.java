@@ -3,7 +3,6 @@ package fr.inria.diversify.oldTests.transformation.ast;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.AbstractTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.KnownSosieQuery;
 import fr.inria.diversify.transformation.query.QueryException;
@@ -39,7 +38,7 @@ public class KnownSosieStrategyTest {
             Factory factory = new SpoonMetaFactory().buildNewFactory(getResourcePath("easymock-light-3.2"), 5);
             inputProgram = new InputProgram();
             inputProgram.setFactory(factory);
-            inputProgram.setSourceCodeDir(getResourcePath("easymock-light-3.2"));
+            inputProgram.setRelativeSourceCodeDir(getResourcePath("easymock-light-3.2"));
             inputProgram.setPreviousTransformationsPath(getResourcePath("easymock3.2-non-rep-index.json"));
             inputProgram.setTransformationPerRun(5);
             inputProgram.processCodeFragments();
@@ -181,7 +180,7 @@ public class KnownSosieStrategyTest {
 
         //52
         st.executeQuery();
-        st.setLastTransformationStatus(AbstractTransformation.COMPILED_FAIL);
+        st.setLastTransformationStatus(Transformation.COMPILED_FAIL);
         assertEquals(1, st.getLastIncrementalSeries());
 
         //53
@@ -194,7 +193,7 @@ public class KnownSosieStrategyTest {
         inputProgram.setTransformationPerRun(6);
         st.executeQuery();
         Collection<Transformation> cf63 = st.getMultiTransformations();
-        st.setLastTransformationStatus(AbstractTransformation.COMPILED_FAIL);
+        st.setLastTransformationStatus(Transformation.COMPILED_FAIL);
         assertEquals(2, st.getLastIncrementalSeries());
 
         //62 is bad blood
@@ -276,7 +275,7 @@ public class KnownSosieStrategyTest {
 
         //52
         st.executeQuery();
-        st.setLastTransformationStatus(AbstractTransformation.COMPILED_FAIL);
+        st.setLastTransformationStatus(Transformation.COMPILED_FAIL);
         assertEquals(1, st.getLastIncrementalSeries());
 
         //53
