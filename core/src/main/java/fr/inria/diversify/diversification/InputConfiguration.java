@@ -134,6 +134,13 @@ public class InputConfiguration {
         return prop.getProperty("src");
     }
 
+    /**
+     * The absolute source Dir
+     * @return
+     */
+    public String getAbsoluteSourceCodeDir() {
+        return getAbsolutePath(getProjectPath() + "/" + getRelativeSourceCodeDir());
+    }
 
     /**
      * Returns the path of the previously found transformations

@@ -83,13 +83,16 @@ public class FromISSTAToTestEyeFormat {
      * @throws JSONException
      * @throws IOException
      */
-    private static void getherIntoTestEyeFormat(InputConfiguration inputConfiguration) throws JSONException, IOException {
+    public static void getherIntoTestEyeFormat(InputConfiguration inputConfiguration) throws JSONException, IOException {
         JSONObject result = new JSONObject();
-        JsonHeaderOutput output = new JsonHeaderOutput(inputConfiguration.getProjectPath() + "/pom.xml", "1.0.0");
+        JsonHeaderOutput output = new JsonHeaderOutput(inputConfiguration.getProjectPath() + "/pom.xml",
+                InputConfiguration.LATEST_GENERATOR_VERSION);
         output.write(result);
+
         JsonFailuresOutput failuresOutput = new JsonFailuresOutput();
         failuresOutput.setTransformations(new ArrayList<>());
         failuresOutput.write(result);
+
         JSONArray transformations = new JSONArray();
         result.put(JsonSectionOutput.TRANSFORMATIONS, transformations);
 
@@ -114,15 +117,14 @@ public class FromISSTAToTestEyeFormat {
                         transformations.put(tObj);
                     }
                 } catch (JSONException e) {
-                    System.out.println("Error! That's all I'm telling " + e.getMessage());
+                    System.out.println("Error! ... And that's all I'm telling: " + e.getMessage());
                 }
             }
         }
 
-        FileWriter fw = new FileWriter(inputConfiguration.getResultPath());
+        FileWriter fw = new FileWriter(inputConfiguration.getResultPath() + "/testEye.json");
         result.write(fw);
         fw.close();
-
     }
 
     private static void correctSource(JSONObject o) throws JSONException {

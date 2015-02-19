@@ -18,45 +18,19 @@ import java.util.*;
  */
 public abstract class Transformation {
 
-    //A global ID for the transformations. For our purposes is enough a simple global increment.
-    private static int globalID = 0;
-
-    //public default String getTransformationString() throws Exception {return "";}
-    public abstract String getTransformationString() throws Exception;
-
-    private static int id = 0;
-
     //status of the transformation when transformation raises an exception
     public static int EXCEPTION = -4;
-
     //status of the transformation when the transformation has not been tested
     public static int NOT_TESTED = -3;
-
-
-
-
-
-
-    public UUID getIndex() {
-        if ( index == null ) index = Generators.timeBasedGenerator().generate();
-        return index;
-    }
     //status of the transformation when the transformation fails to compile
     public static int COMPILED_FAIL = -2;
-
-    public void setIndex(UUID index) {
-        this.index = index;
-    }
     //status of the transformation when the transformation's  test fails
     public static int TEST_FAIL = -1;
-
     //sosie status for a transformation
     public static int SOSIE = 0;
 
-    /**
-     * An index to identify the transformation in the storage
-     */
-    private UUID index = null;
+    @Deprecated
+    private static int id = 0;
 
     /**
      * The series number is an ID for a given serie containing this transformation.
@@ -86,9 +60,47 @@ public abstract class Transformation {
     //input programs over which transformations are going to be perform
     private InputProgram inputProgram;
 
+    /**
+     * Globally unique index to identify the transformation in the storage
+     */
+    private UUID index = null;
 
+    //public default String getTransformationString() throws Exception {return "";}
+    public abstract String getTransformationString() throws Exception;
+
+    /**
+     * Globally unique id for the transformation
+     * @return A UUID
+     */
+    public UUID getIndex() {
+        if ( index == null ) index = Generators.timeBasedGenerator().generate();
+        return index;
+    }
+
+    public void setIndex(UUID index) {
+        this.index = index;
+    }
+
+
+    /**
+     * Applies the transformation
+     * @param srcDir Src dir where the transformation is going to be stored
+     * @throws Exception
+     */
     public abstract void apply(String srcDir) throws Exception;
+
+    /**
+     * Applies the transformation using parent transformation information
+     * @param srcDir Src dir where the transformation is going to be stored
+     * @throws Exception
+     */
     public abstract void applyWithParent(String srcDir) throws Exception;
+
+    /**
+     * Restores the transplantation point to its original state
+     * @param srcDir Src dir where the restored file is going to be stored
+     * @throws Exception
+     */
     public abstract void restore(String srcDir) throws Exception;
 
 
@@ -101,7 +113,6 @@ public abstract class Transformation {
         object.put("failures", failuresToJSON());
         object.put("status", status);
         if ( index == null ) {
-            globalID++;
             index = Generators.timeBasedGenerator().generate();
         }
         object.put("tindex", index);
