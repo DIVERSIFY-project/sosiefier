@@ -439,7 +439,7 @@ public class InputProgram {
     public void configure(InputConfiguration configuration) {
         setRelativeSourceCodeDir(configuration.getRelativeSourceCodeDir());
         setProgramDir(configuration.getProjectPath());
-        setSourceCodeDir(configuration.getSourceCodeDir());
+        setRelativeSourceCodeDir(configuration.getRelativeSourceCodeDir());
         setPreviousTransformationsPath(configuration.getPreviousTransformationPath());
         setClassesDir(configuration.getClassesDir());
         setCoverageDir(configuration.getCoverageDir());

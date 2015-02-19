@@ -1,5 +1,6 @@
 package fr.inria.diversify.transformation;
 
+import com.fasterxml.uuid.Generators;
 import fr.inria.diversify.diversification.InputProgram;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,7 +22,7 @@ public abstract class Transformation {
     private static int globalID = 0;
 
     //public default String getTransformationString() throws Exception {return "";}
-    public String getTransformationString() throws Exception;
+    public abstract String getTransformationString() throws Exception;
 
     private static int id = 0;
 
@@ -31,11 +32,21 @@ public abstract class Transformation {
     //status of the transformation when the transformation has not been tested
     public static int NOT_TESTED = -3;
 
-    public UUID getIndex();
+
+
+
+
+
+    public UUID getIndex() {
+        if ( index == null ) index = Generators.timeBasedGenerator().generate();
+        return index;
+    }
     //status of the transformation when the transformation fails to compile
     public static int COMPILED_FAIL = -2;
 
-    public void setIndex(UUID index);
+    public void setIndex(UUID index) {
+        this.index = index;
+    }
     //status of the transformation when the transformation's  test fails
     public static int TEST_FAIL = -1;
 
@@ -45,7 +56,7 @@ public abstract class Transformation {
     /**
      * An index to identify the transformation in the storage
      */
-    private int index = -1;
+    private UUID index = null;
 
     /**
      * The series number is an ID for a given serie containing this transformation.
@@ -81,6 +92,7 @@ public abstract class Transformation {
     public abstract void restore(String srcDir) throws Exception;
 
 
+
     @Deprecated
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
@@ -88,9 +100,9 @@ public abstract class Transformation {
         object.put("name", name);
         object.put("failures", failuresToJSON());
         object.put("status", status);
-        if ( index == -1 ) {
+        if ( index == null ) {
             globalID++;
-            index = globalID;
+            index = Generators.timeBasedGenerator().generate();
         }
         object.put("tindex", index);
         object.put("series", getSeries());
@@ -100,6 +112,7 @@ public abstract class Transformation {
 
         return object;
     }
+
 
     @Deprecated
     protected JSONArray failuresToJSON() {
@@ -142,14 +155,6 @@ public abstract class Transformation {
             return otherParent.equals(parent);
 
         return true;
-    }
-    
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
     }
 
     /**

@@ -2,7 +2,6 @@ package fr.inria.diversify.codeFragmentProcessor;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
-import jdk.internal.org.objectweb.asm.Handle;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.declaration.CtElement;
 

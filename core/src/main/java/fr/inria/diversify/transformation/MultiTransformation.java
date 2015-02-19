@@ -16,6 +16,11 @@ public class MultiTransformation extends Transformation {
     }
 
     @Override
+    public String getTransformationString() throws Exception {
+        return null;
+    }
+
+    @Override
     public void apply(String srcDir) throws Exception {
         for(Transformation transformation: transformations) {
             transformation.apply(srcDir);

@@ -1,6 +1,5 @@
 package fr.inria.diversify;
 
-import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.diversification.InputConfiguration;
@@ -8,25 +7,18 @@ import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.persistence.json.input.JsonSosiesInput;
 import fr.inria.diversify.persistence.json.output.JsonSosiesOutput;
-import fr.inria.diversify.transformation.AbstractTransformation;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.util.GitUtils;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
-import org.eclipse.jgit.api.errors.GitAPIException;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.lang.management.ManagementFactory;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
-import static fr.inria.diversify.transformation.AbstractTransformation.EXCEPTION;
-import static fr.inria.diversify.transformation.AbstractTransformation.SOSIE;
+import static fr.inria.diversify.transformation.Transformation.EXCEPTION;
+import static fr.inria.diversify.transformation.Transformation.SOSIE;
 
 /**
  * Takes a series of corrected transformations and check if they are still sosies
@@ -149,7 +141,7 @@ public class CorrectedTransformationsToSosie {
      */
     private int applyTransformation(InputConfiguration inputConfiguration, Transformation t) throws Exception {
         String s = inputConfiguration.getTempDir() + "/src/main/java";
-        int status = AbstractTransformation.NOT_TESTED;
+        int status = Transformation.NOT_TESTED;
         try {
             t.apply(s);
 
@@ -186,7 +178,7 @@ public class CorrectedTransformationsToSosie {
         p.configure(inputConfiguration);
 
         long t = System.currentTimeMillis();
-        p.setFactory(new SpoonMetaFactory().buildNewFactory(inputConfiguration.getSourceCodeDir(), 7));
+        p.setFactory(new SpoonMetaFactory().buildNewFactory(inputConfiguration.getRelativeSourceCodeDir(), 7));
         Log.info("Build: " + Math.abs(System.currentTimeMillis() - t));
 
         t = System.currentTimeMillis();

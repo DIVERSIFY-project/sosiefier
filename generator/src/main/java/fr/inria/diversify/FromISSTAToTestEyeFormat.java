@@ -63,7 +63,7 @@ public class FromISSTAToTestEyeFormat {
         p.configure(inputConfiguration);
 
         long t = System.currentTimeMillis();
-        p.setFactory(new SpoonMetaFactory().buildNewFactory(inputConfiguration.getSourceCodeDir(), 7));
+        p.setFactory(new SpoonMetaFactory().buildNewFactory(p.getAbsoluteSourceCodeDir(), 7));
         Log.info("Build: " + Math.abs(System.currentTimeMillis() - t));
 
         t = System.currentTimeMillis();
