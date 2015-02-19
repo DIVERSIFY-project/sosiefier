@@ -45,7 +45,11 @@ public class JsonAstTransformationCollectionInput extends JsonSectionInput {
             UUID index = null;
             try {
                 JSONObject obj = tr.getJSONObject(i);
-                index = UUID.fromString(obj.getString(TINDEX));
+                try {
+                    index = UUID.fromString(obj.getString(TINDEX));
+                } catch (IllegalArgumentException e) {
+                    throwWarning("Invalid index. ", e, false);
+                }
                 for (JsonAstTransformationInput si : sections) {
                     if (si.canRead(TRANSFORMATIONS + "." + obj.getString(NAME))) {
                         si.setJsonObject(obj);
@@ -54,8 +58,6 @@ public class JsonAstTransformationCollectionInput extends JsonSectionInput {
                         si.read(transformations);
                     }
                 }
-            } catch (IllegalArgumentException e) {
-                throwError("Invalid index", e, false);
             } catch (PersistenceException pe) {
                 if (index == null) throwError("Cannot load. Invalid transformation index", pe, false);
                 else {

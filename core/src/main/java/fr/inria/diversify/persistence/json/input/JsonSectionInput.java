@@ -93,7 +93,7 @@ public abstract class JsonSectionInput {
         return loadMessages;
     }
 
-    protected void throwWarning(String s, JSONException e, boolean raise) {
+    protected void throwWarning(String s, Exception e, boolean raise) {
         String msg = e == null ? "" : e.getMessage();
         getLoadMessages().add(JsonSosiesInput.WARNING + " " + s + " " + msg);
         if ( raise ) throw new PersistenceException(s, e);
