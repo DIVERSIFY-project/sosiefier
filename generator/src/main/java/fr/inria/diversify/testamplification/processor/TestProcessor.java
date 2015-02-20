@@ -49,8 +49,8 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
         cloneNumber++;
 
         CtAnnotation toRemove = cloned_method.getAnnotations().stream()
-                .filter(annotation -> annotation.toString().contains("Override"))
-                .findFirst().orElse(null);
+                                             .filter(annotation -> annotation.toString().contains("Override"))
+                                             .findFirst().orElse(null);
 
         if(toRemove != null) {
             cloned_method.removeAnnotation(toRemove);

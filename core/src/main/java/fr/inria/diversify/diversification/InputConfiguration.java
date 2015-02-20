@@ -134,6 +134,15 @@ public class InputConfiguration {
         return prop.getProperty("src");
     }
 
+    /**
+     * Returns the full path of the test (source) code of a project.
+     *
+     * @return String with the path
+     */
+    public String getRelativeTestSourceCodeDir() {
+        return prop.getProperty("testSrc", "src/test/java");
+    }
+
 
     /**
      * Returns the path of the previously found transformations
