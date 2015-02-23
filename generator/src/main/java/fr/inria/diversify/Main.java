@@ -7,6 +7,7 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 
 import java.io.*;
 import java.lang.management.ManagementFactory;
+import java.util.Random;
 
 /**
  * Main program
@@ -39,7 +40,15 @@ public class Main {
     protected static void initPropertiesFile(String git) throws IOException, InterruptedException, GitAPIException {
         Log.info("clone the repository https://github.com/simonAllier/sosie-exp.git in {}", git);
         GitUtils gitUtils = new GitUtils(git);
+
         gitUtils.cloneRepo();
+
+        Random r = new Random();
+        int sleep = r.nextInt(600);
+        Log.info("sleep {} seconds", sleep);
+        Thread.sleep(sleep*1000);
+
+        gitUtils.pull();
 
         String propertiesFile = gitUtils.getFirstPropertyFile();
         BufferedWriter out = new BufferedWriter(new FileWriter("propertiesFile"));
