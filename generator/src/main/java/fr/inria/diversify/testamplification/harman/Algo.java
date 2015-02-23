@@ -73,6 +73,8 @@ public class Algo {
     public Set<CtMethod> testDataRegeneration(Set<CtMethod> testSuite, CtClass testClass) {
         Set<CtMethod> newTestSuite = new HashSet<>();
         Random r = new Random();
+
+        setBuilderGoal(testClass);
         for (CtMethod test : testSuite) {
             double fitnessCurrentSol = 0;
             CtMethod currentSol = test;
@@ -106,6 +108,10 @@ public class Algo {
         return newTestSuite;
     }
 
+    protected void setBuilderGoal(CtClass testClass) {
+        builder.setGoals(new String[]{"-Dtest="+testClass.getSimpleName(),"test"});
+    }
+
     protected double fitness(CtMethod original, CtMethod currentSol) {
         List<CtLiteral> currentSolVector = inputVectors.get(currentSol);
         List<CtLiteral> originalVector = getNumber(original);
@@ -132,17 +138,21 @@ public class Algo {
         String originalTestName = cl.getQualifiedName() + "." +method.getSimpleName().split("____")[0];
 
         List<Double> originalTestCoverage = originalTestCoverages.get(originalTestName);
-        List<Double> methodCoverage = neighboursCoverage.get(cl.getQualifiedName() + "." +method.getSimpleName());
+        List<Double> neighbourCoverage = neighboursCoverage.get(cl.getQualifiedName() + "." +method.getSimpleName());
 
-        Log.info("{}", originalTestCoverage.stream().mapToDouble(a-> a).sum());
-        Log.info("{}", methodCoverage.stream().mapToDouble(a-> a).sum());
-        double distance = 0;
-        for(int i = 0; i < originalTestCoverage.size(); i++) {
-            double tmp = originalTestCoverage.get(i) - methodCoverage.get(i);
-            distance += tmp * tmp;
+
+        if(originalTestCoverage.size() != neighbourCoverage.size()) {
+            return 100;
+        } else {
+
+            double distance = 0;
+            for (int i = 0; i < originalTestCoverage.size(); i++) {
+                double tmp = originalTestCoverage.get(i) - neighbourCoverage.get(i);
+                distance += tmp * tmp;
+            }
+
+            return Math.sqrt(distance);
         }
-
-        return Math.sqrt(distance);
     }
 
     protected List<CtMethod> generateNeighbours(CtMethod test, CtClass testClass) throws InterruptedException, IOException {
@@ -238,7 +248,8 @@ public class Algo {
         cloned_method.setParent(method.getParent());
 
         //rename the clone
-        cloned_method.setSimpleName(method.getSimpleName()+"____"+cloneCount);
+        String originalTestName =  method.getSimpleName().split("____")[0];
+        cloned_method.setSimpleName(originalTestName + "____"+cloneCount);
         cloneCount++;
 
         CtAnnotation toRemove = cloned_method.getAnnotations().stream()
@@ -283,7 +294,7 @@ public class Algo {
 
     }
 
-    private void modif(List<CtLiteral> cloneElem,int index, Function<Object, Number> f) {
+    private void modif(List<CtLiteral> cloneElem, int index, Function<Object, Number> f) {
         CtLiteral literal = cloneElem.get(index);
         Object value = literal.getValue();
         Number newValue = f.apply(value);

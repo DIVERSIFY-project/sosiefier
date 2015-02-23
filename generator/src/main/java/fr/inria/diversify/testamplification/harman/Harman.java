@@ -4,10 +4,16 @@ import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
-import org.apache.commons.io.FileUtils;
+import fr.inria.diversify.util.DiversifyPrettyPrinter;
+import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
+import spoon.compiler.Environment;
+import spoon.processing.AbstractProcessor;
+import spoon.processing.ProcessingManager;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtMethod;
+import spoon.reflect.factory.Factory;
+import spoon.support.QueueProcessingManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +42,12 @@ public class Harman {
         for(CtClass testClass : originalTests.keySet()) {
             Set<CtMethod> newTest = algo.testDataRegeneration(originalTests.get(testClass), testClass);
             newTests.put(testClass,newTest);
+
+            builder.setGoals(new String[]{"clean", "test"});
+            builder.runBuilder();
         }
+        generateNewSource();
+        writeJavaClass();
     }
 
     public void init(String tmpDir) throws IOException, InterruptedException {
@@ -87,5 +98,48 @@ public class Harman {
 
         builder.setGoals(phases);
         builder.initTimeOut();
+    }
+
+    protected void generateNewSource() {
+        for(CtClass cl : newTests.keySet()) {
+            generateNewSource(cl, newTests.get(cl));
+        }
+    }
+
+    protected void generateNewSource(CtClass testClass, Set<CtMethod> testMethods) {
+        for(CtMethod method : testMethods) {
+            testClass.addMethod(method);
+        }
+        writeJavaClass();
+    }
+
+    protected void writeJavaClass() {
+        File fileFrom = new File(inputProgram.getAbsoluteTestSourceCodeDir());
+        File out = new File(tmpDir + "/" + inputProgram.getRelativeTestSourceCodeDir());
+        Environment env = inputProgram.getFactory().getEnvironment();
+        AbstractProcessor processor = new JavaOutputProcessorWithFilter(out, new DiversifyPrettyPrinter(env), allClassesName(fileFrom));
+        applyProcessor(inputProgram.getFactory(), processor);
+    }
+
+    protected void applyProcessor(Factory factory, AbstractProcessor processor) {
+        ProcessingManager pm = new QueueProcessingManager(factory);
+        pm.addProcessor(processor);
+        pm.process();
+    }
+
+    protected List<String> allClassesName(File dir) {
+        List<String> list = new ArrayList<>();
+
+        for(File file : dir.listFiles())
+            if(file.isDirectory())
+                list.addAll(allClassesName(file));
+            else {
+                String name = file.getName();
+                if(name.endsWith(".java")) {
+                    String[] tmp = name.substring(0, name.length() - 5).split("/");
+                    list.add(tmp[tmp.length - 1]);
+                }
+            }
+        return list;
     }
 }
