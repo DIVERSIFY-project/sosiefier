@@ -5,6 +5,7 @@ import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.util.DiversifyPrettyPrinter;
 import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
 import fr.inria.diversify.util.Log;
+import org.apache.commons.io.FileUtils;
 import spoon.compiler.Environment;
 import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
@@ -70,39 +71,47 @@ public class Algo {
         }
     }
 
-    public Set<CtMethod> testDataRegeneration(Set<CtMethod> testSuite, CtClass testClass) {
-        Set<CtMethod> newTestSuite = new HashSet<>();
+    public Map<CtMethod, Integer> testDataRegeneration(Set<CtMethod> testSuite, CtClass testClass) {
+        Map<CtMethod, Integer> newTestSuite = new HashMap<>();
         Random r = new Random();
-
+        int i = 0;
         setBuilderGoal(testClass);
         for (CtMethod test : testSuite) {
-            double fitnessCurrentSol = 0;
-            CtMethod currentSol = test;
-            int count = 0;
-            while(count < searchRadius) {
-                CtMethod nextSol = null;
-                try {
-                    List<CtMethod> neighbours = generateNeighbours(currentSol, testClass);
-                    while (!neighbours.isEmpty()) {
-                        CtMethod n = neighbours.remove(r.nextInt(neighbours.size()));
-                        if (fitness(test,n) > fitnessCurrentSol) {
-                            nextSol = n;
-                            break;
+            i++;
+            if(!getNumber(test).isEmpty()) {
+                double fitnessCurrentSol = 0;
+                CtMethod currentSol = test;
+                int count = 0;
+                while (count < searchRadius) {
+                    Log.info("original method {} ({}/{}), current searchRadius: {}",test.getSimpleName(), i, testSuite.size(), count);
+                    CtMethod nextSol = null;
+                    try {
+                        List<CtMethod> neighbours = generateNeighbours(currentSol, testClass);
+                        while (!neighbours.isEmpty()) {
+                            CtMethod n = neighbours.remove(r.nextInt(neighbours.size()));
+                            if (fitness(test, n) > fitnessCurrentSol) {
+                                nextSol = n;
+                                break;
+                            }
                         }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.info("error during neighbours evaluation");
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Log.info("error during neighbours evaluation");
-                } if(nextSol == null) {
-                    break;
-                } else {
-                    fitnessCurrentSol = fitness(test, nextSol);
-                    currentSol = nextSol;
-                    count++;
+                    if (nextSol == null) {
+                        break;
+                    } else {
+                        fitnessCurrentSol = fitness(test, nextSol);
+                        currentSol = nextSol;
+                        count++;
+                    }
                 }
-            }
-            if(currentSol != test) {
-                newTestSuite.add(currentSol);
+                if (currentSol != test) {
+                    Log.info("new method add: {}",currentSol.getSimpleName());
+                    Log.info("original: {}, new {}", getNumber(test), getNumber(currentSol));
+
+                    newTestSuite.put(currentSol, count);
+                }
             }
         }
         return newTestSuite;
@@ -116,12 +125,7 @@ public class Algo {
         List<CtLiteral> currentSolVector = inputVectors.get(currentSol);
         List<CtLiteral> originalVector = getNumber(original);
 
-        double vectorDistance = 0;
-        for(int i = 0; i < originalVector.size(); i++ ) {
-            double tmp = ((Number) currentSolVector.get(i).getValue()).doubleValue() - ((Number) originalVector.get(i).getValue()).doubleValue();
-            vectorDistance += tmp * tmp;
-        }
-        vectorDistance = Math.sqrt(vectorDistance);
+        double vectorDistance = euclidienDistance(currentSolVector, originalVector);
         double coverageDistance = coverageDistance(currentSol);
 
         if(coverageDistance == 0  && vectorDistance > 0) {
@@ -131,6 +135,15 @@ public class Algo {
             return -coverageDistance;
         }
         return 0;
+    }
+
+    protected double euclidienDistance(List<CtLiteral> currentSolVector, List<CtLiteral> originalVector) {
+        double vectorDistance = 0;
+        for(int i = 0; i < originalVector.size(); i++ ) {
+            double tmp = ((Number) currentSolVector.get(i).getValue()).doubleValue() - ((Number) originalVector.get(i).getValue()).doubleValue();
+            vectorDistance += tmp * tmp;
+        }
+        return  Math.sqrt(vectorDistance);
     }
 
     protected double coverageDistance(CtMethod method) {
@@ -158,7 +171,8 @@ public class Algo {
     protected List<CtMethod> generateNeighbours(CtMethod test, CtClass testClass) throws InterruptedException, IOException {
         List<CtMethod> neighbours = new ArrayList<>();
 
-        List<List<CtLiteral>> combi = new ArrayList<>();
+
+        Collection<List<CtLiteral>> combi = new ArrayList<>();
         List<CtLiteral> number = getNumber(test);
 
 
@@ -167,15 +181,17 @@ public class Algo {
         combi.addAll(combi(number, interactionLevel, (Object n) -> literalMultiTwo(n)));
         combi.addAll(combi(number, interactionLevel, (Object n) -> literalDivTwo(n)));
 
+        combi = filterCombi(combi);
+
         inputVectors = new HashMap<>();
         for(List<CtLiteral> c : combi) {
             neighbours.add(generateNeighbour(test, c));
         }
         generateNewSource(testClass, neighbours);
-        builder.runBuilder();
         computeNeighboursFitness(neighbours, builder.getFailedTests());
 
         restoreTestclass(testClass, neighbours);
+        FileUtils.forceDelete(jacocoDir);
 
         return neighbours;
     }
@@ -339,4 +355,21 @@ public class Algo {
         }
         return clone;
     }
+
+
+    protected Set<List<CtLiteral>> filterCombi(Collection<List<CtLiteral>> combi) {
+        Map<List<CtLiteral>, List<Number>> map = new HashMap<>();
+
+        for( List<CtLiteral> lit: combi) {
+            List<Number> numbers = lit.stream()
+                                      .map(l -> (Number) l.getValue())
+                                      .collect(Collectors.toList());
+            if(!map.values().contains(numbers)) {
+                map.put(lit,numbers);
+            }
+        }
+       return map.keySet();
+
+    }
+
 }

@@ -12,6 +12,7 @@ import spoon.processing.ProcessingManager;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtMethod;
+import spoon.reflect.declaration.ModifierKind;
 import spoon.reflect.factory.Factory;
 import spoon.support.QueueProcessingManager;
 
@@ -25,7 +26,7 @@ import java.util.stream.Collectors;
  */
 public class Harman {
     protected Map<CtClass, Set<CtMethod>> originalTests;
-    protected Map<CtClass, Set<CtMethod>> newTests;
+ //   protected Map<CtClass, Set<CtMethod>> newTests;
     protected String tmpDir;
     InputProgram inputProgram;
     protected AbstractBuilder builder;
@@ -40,20 +41,22 @@ public class Harman {
         Algo algo = new Algo(tmpDir, inputProgram, builder, applicationClasses, 10, 1);
         algo.initFitnessValue();
         for(CtClass testClass : originalTests.keySet()) {
-            Set<CtMethod> newTest = algo.testDataRegeneration(originalTests.get(testClass), testClass);
-            newTests.put(testClass,newTest);
+
+            Map<CtMethod, Integer> newTest = algo.testDataRegeneration(originalTests.get(testClass), testClass);
+          //  newTests.put(testClass,newTest);
+            generateNewSource(testClass,newTest);
 
             builder.setGoals(new String[]{"clean", "test"});
             builder.runBuilder();
         }
-        generateNewSource();
+     //   generateNewSource();
         writeJavaClass();
     }
 
     public void init(String tmpDir) throws IOException, InterruptedException {
         this.tmpDir = tmpDir;
         originalTests = new HashMap<>();
-        newTests = new HashMap<>();
+      //  newTests = new HashMap<>();
 
         for(CtElement element : inputProgram.getAllElement(CtClass.class)) {
             CtClass cl = (CtClass) element;
@@ -85,10 +88,14 @@ public class Harman {
     }
 
     protected boolean isTestMethod(CtMethod candidate) {
-        return candidate.getSimpleName().contains("test")
-                || candidate.getAnnotations().stream()
-                            .map(annotation -> annotation.toString())
-                            .anyMatch(annotation -> annotation.startsWith("@org.junit.Test"));
+        boolean isAnnotationTest = candidate.getAnnotations().stream()
+                                             .map(annotation -> annotation.toString())
+                                             .anyMatch(annotation -> annotation.startsWith("@org.junit.Test"));
+        boolean isOldTest = candidate.getSimpleName().contains("test")
+                && candidate.getParameters().isEmpty()
+                && !candidate.getModifiers().contains(ModifierKind.PRIVATE);
+
+        return isAnnotationTest || isOldTest;
     }
 
 
@@ -100,14 +107,15 @@ public class Harman {
         builder.initTimeOut();
     }
 
-    protected void generateNewSource() {
-        for(CtClass cl : newTests.keySet()) {
-            generateNewSource(cl, newTests.get(cl));
-        }
-    }
+//    protected void generateNewSource() {
+//        for(CtClass cl : newTests.keySet()) {
+//            generateNewSource(cl, newTests.get(cl));
+//        }
+//    }
 
-    protected void generateNewSource(CtClass testClass, Set<CtMethod> testMethods) {
-        for(CtMethod method : testMethods) {
+    protected void generateNewSource(CtClass testClass, Map<CtMethod, Integer> testMethods) {
+        for(CtMethod method : testMethods.keySet()) {
+//            method.setDocComment(method.getDocComment()+ "\nsearchRadius: "+ testMethods.get(method));
             testClass.addMethod(method);
         }
         writeJavaClass();

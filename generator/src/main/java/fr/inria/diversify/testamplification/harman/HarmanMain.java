@@ -40,8 +40,7 @@ public class HarmanMain {
         initInputProgram();
 
         transform();
-        copyLogger();
-        writeId();
+       Log.info("");
     }
 
     public static void main(String[] args) throws Exception, InvalidSdkException {
@@ -200,5 +199,4 @@ public class HarmanMain {
 
         inputProgram.setCoverageDir(inputConfiguration.getProperty("jacoco"));
     }
-
 }
