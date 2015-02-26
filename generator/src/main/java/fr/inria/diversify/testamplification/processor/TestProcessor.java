@@ -4,6 +4,7 @@ import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtInvocation;
 import spoon.reflect.declaration.CtAnnotation;
 import spoon.reflect.declaration.CtMethod;
+import spoon.reflect.declaration.ModifierKind;
 import spoon.reflect.reference.CtPackageReference;
 import spoon.reflect.reference.CtTypeReference;
 
@@ -27,18 +28,21 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
 
     @Override
     public boolean isToBeProcessed(CtMethod candidate) {
+        return isTest(candidate) && !mutatedMethod.contains(candidate);
+    }
 
+    protected boolean isTest(CtMethod candidate) {
         if(candidate.isImplicit()
+                || !candidate.getModifiers().contains(ModifierKind.PUBLIC)
                 || candidate.getBody() == null
-                || candidate.getBody().getStatements().size() == 0
-                || mutatedMethod.contains(candidate)) {
+                || candidate.getBody().getStatements().size() == 0) {
             return false;
         }
 
         return candidate.getSimpleName().contains("test")
-            || candidate.getAnnotations().stream()
-                .map(annotation -> annotation.toString())
-                .anyMatch(annotation -> annotation.startsWith("@org.junit.Test"));
+                || candidate.getAnnotations().stream()
+                            .map(annotation -> annotation.toString())
+                            .anyMatch(annotation -> annotation.startsWith("@org.junit.Test"));
     }
 
     protected CtMethod cloneMethod(CtMethod method, String suffix) {

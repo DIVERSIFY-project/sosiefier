@@ -307,7 +307,7 @@ public class AssertLogWriter extends LogWriter {
                 publicFields = new Field[0];
             } else {
                 methods = findGetters(aClass);
-                publicFields = findPublicFields(aClass);
+                publicFields = findFields(aClass);
             }
             fields.put(aClass,publicFields);
             getters.put(aClass, methods);
@@ -330,16 +330,17 @@ public class AssertLogWriter extends LogWriter {
             releaseFileWriter(semaphore);
     }
 
-    protected Field[] findPublicFields(Class aClass) {
-        List<Field> publicFields = new ArrayList<Field>();
+    protected Field[] findFields(Class aClass) {
+        List<Field> fields = new ArrayList<Field>();
         for(Field field : aClass.getFields()) {
-            if(Modifier.isPublic(field.getModifiers())) {
-                publicFields.add(field);
+            if(!Modifier.isPublic(field.getModifiers())) {
+                field.setAccessible(true);
             }
+            fields.add(field);
         }
-        Field[] ret = new Field[publicFields.size()];
-        for(int i = 0; i < publicFields.size(); i++) {
-            ret[i] = publicFields.get(i);
+        Field[] ret = new Field[fields.size()];
+        for(int i = 0; i < fields.size(); i++) {
+            ret[i] = fields.get(i);
         }
         return ret;
     }

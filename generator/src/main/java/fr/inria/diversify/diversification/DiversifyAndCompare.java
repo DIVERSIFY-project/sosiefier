@@ -85,7 +85,6 @@ public class DiversifyAndCompare extends SinglePointDiversify {
             result.filter(filter);
             result.setSosie(sosie);
             diff.add(result.toJson());
-            Pool.reset();
         } finally {
             Pool.reset();
             FileUtils.forceDelete(new File(sosieDir));

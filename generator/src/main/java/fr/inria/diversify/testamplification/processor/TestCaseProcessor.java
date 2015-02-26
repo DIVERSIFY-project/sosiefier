@@ -68,7 +68,7 @@ public class TestCaseProcessor extends TestProcessor {
 
 		String snippet;
 		String idAssertInvocation = idFor(arg.getPosition().getLine()+"_"+arg.toString(), "ASSERT_I");
-		if(arg instanceof CtInvocation) {
+		if(arg instanceof CtInvocation && !((CtInvocation) arg).getExecutable().isStatic()) {
 			CtInvocation invocation = (CtInvocation) arg;
 			CtExpression target = invocation.getTarget();
 			String idAssertTarget = idFor(arg.getPosition().getLine()+"_"+invocation.toString(), "ASSERT_T");
