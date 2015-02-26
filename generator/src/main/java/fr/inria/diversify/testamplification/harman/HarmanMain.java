@@ -40,7 +40,6 @@ public class HarmanMain {
         initInputProgram();
 
         transform();
-       Log.info("");
     }
 
     public static void main(String[] args) throws Exception, InvalidSdkException {
@@ -76,7 +75,6 @@ public class HarmanMain {
         harman.run();
 
         writeJavaClass(factory, out, fileFrom);
-        Log.info("number of new test: {}", TestProcessor.getCount());
     }
 
     public String initDirectory() throws IOException, InterruptedException {

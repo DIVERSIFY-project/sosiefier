@@ -25,32 +25,42 @@ import java.util.stream.Collectors;
  * Created by Simon on 20/02/15.
  */
 public class Harman {
+    protected Result result;
     protected Map<CtClass, Set<CtMethod>> originalTests;
  //   protected Map<CtClass, Set<CtMethod>> newTests;
     protected String tmpDir;
     InputProgram inputProgram;
     protected AbstractBuilder builder;
     List<CtClass> applicationClasses;
-
+    protected String resultDir;
 
     public Harman(InputConfiguration inputConfiguration) {
+        this.resultDir = inputConfiguration.getResultPath();
         this.inputProgram = inputConfiguration.getInputProgram();
+        result = new Result();
     }
 
     public void run() throws IOException, InterruptedException {
-        Algo algo = new Algo(tmpDir, inputProgram, builder, applicationClasses, 10, 1);
+        Algo algo = new Algo(tmpDir, inputProgram, builder, applicationClasses, result);
         algo.initFitnessValue();
         for(CtClass testClass : originalTests.keySet()) {
 
-            Map<CtMethod, Integer> newTest = algo.testDataRegeneration(originalTests.get(testClass), testClass);
+            algo.testDataRegeneration(originalTests.get(testClass), testClass);
           //  newTests.put(testClass,newTest);
-            generateNewSource(testClass,newTest);
+
 
             builder.setGoals(new String[]{"clean", "test"});
             builder.runBuilder();
         }
-     //   generateNewSource();
+        generateNewSource();
         writeJavaClass();
+
+        File file = new File(resultDir);
+        if(!file.exists()) {
+            file.mkdirs();
+        }
+        result.printCSVSummary(resultDir+ "/csvSummary.csv");
+        result.printSummary(resultDir+ "/summary");
     }
 
     public void init(String tmpDir) throws IOException, InterruptedException {
@@ -107,16 +117,12 @@ public class Harman {
         builder.initTimeOut();
     }
 
-//    protected void generateNewSource() {
-//        for(CtClass cl : newTests.keySet()) {
-//            generateNewSource(cl, newTests.get(cl));
-//        }
-//    }
-
-    protected void generateNewSource(CtClass testClass, Map<CtMethod, Integer> testMethods) {
-        for(CtMethod method : testMethods.keySet()) {
+    protected void generateNewSource() {
+        for(CtClass cl : result.getNewTestByClasses().keySet()) {
+            for (CtMethod method : result.getNewTestByClasses().get(cl)) {
 //            method.setDocComment(method.getDocComment()+ "\nsearchRadius: "+ testMethods.get(method));
-            testClass.addMethod(method);
+                cl.addMethod(method);
+            }
         }
         writeJavaClass();
     }

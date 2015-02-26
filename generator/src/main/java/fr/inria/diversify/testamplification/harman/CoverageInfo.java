@@ -1,7 +1,6 @@
 package fr.inria.diversify.testamplification.harman;
 
 
-import fr.inria.diversify.util.Log;
 import org.jacoco.core.analysis.Analyzer;
 import org.jacoco.core.analysis.CoverageBuilder;
 import org.jacoco.core.analysis.IClassCoverage;
@@ -70,27 +69,25 @@ public class CoverageInfo {
         return coverageBuilder;
     }
 
-
-
     public List<Double> branchCoverageInfo(List<CtClass> classes) {
         List<Double> coverage = new ArrayList<>();
         for(CtClass cl : classes) {
-            coverage.addAll(branchCoverageInfo(cl));
+            if(!(cl == null || cl.getPackage() == null || cl.getPackage().getSignature() == null)) {
+                String name = cl.getPackage().getSignature().replace(".", "/") + "/" + cl.getSimpleName();
+                coverage.addAll(branchCoverageInfo(name));
+            }
         }
         return coverage;
     }
 
-    public List<Double> branchCoverageInfo(CtClass cl) {
+    public List<Double> branchCoverageInfo(String className) {
         List<Double> coverage = new ArrayList<>();
 
         IClassCoverage classCoverage = null;
-        if(!(cl == null || cl.getPackage() == null || cl.getPackage().getSignature() == null)) {
-            String name =  cl.getPackage().getSignature().replace(".","/")+"/"+cl.getSimpleName();
-            for (IClassCoverage cc : coverageBuilder.getClasses()) {
-                if(name.equals(cc.getName())) {
-                    classCoverage = cc;
-                    break;
-                }
+        for (IClassCoverage cc : coverageBuilder.getClasses()) {
+            if(className.equals(cc.getName())) {
+                classCoverage = cc;
+                break;
             }
         }
         if(classCoverage == null || classCoverage.getBranchCounter().getCoveredCount() == 0) {
@@ -110,29 +107,8 @@ public class CoverageInfo {
         return coverage;
     }
 
-    protected List<Double> initListFor(CtClass cl) {
-        int begin = begin(cl);
-        int end = end(cl);
-        List<Double> list = new ArrayList<>(end - begin);
-        for(int i = begin; i < end ; i++) {
-            list.add(0d);
-        }
-        return list;
-    }
-
-
-    protected int begin(CtClass cl) {
-        return cl.getPosition().getLine();
-    }
-
-    protected int end(CtClass cl) {
-        return cl.getMethods().stream()
-                .map(mth -> ((CtMethod) mth).getBody())
-                .filter(body -> body != null)
-                .mapToInt(body -> ((CtBlock) body).getPosition().getEndLine())
-                .max()
-                .orElse(begin(cl));
-
+    public boolean isCoveredClass(String className) {
+        return branchCoverageInfo(className).stream().mapToDouble(e -> e).sum() != 0;
     }
 
     public String getFileName() {

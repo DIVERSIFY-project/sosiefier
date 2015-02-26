@@ -28,9 +28,10 @@ import java.util.stream.Collectors;
  * Created by Simon on 19/02/15.
  */
 public class Algo {
+    protected Result result;
     int cloneCount = 0;
-    int searchRadius;
-    int interactionLevel;
+    protected int searchRadius = 10;
+    int interactionLevel = 1;
     protected AbstractBuilder builder;
     protected File jacocoDir;
     protected  List<CtClass> applicationClasses;
@@ -41,14 +42,21 @@ public class Algo {
     protected String tmpDir;
     private Map<CtMethod, List<CtLiteral>> inputVectors;
 
-    public Algo(String tmpDir, InputProgram inputProgram, AbstractBuilder builder, List<CtClass> applicationClasses, int searchRadius, int interactionLevel) {
-        this.searchRadius = searchRadius;
-        this.interactionLevel = interactionLevel;
+    public Algo(String tmpDir, InputProgram inputProgram, AbstractBuilder builder, List<CtClass> applicationClasses, Result result) {
+        this.result = result;
         this.tmpDir = tmpDir;
         this.inputProgram = inputProgram;
         this.builder = builder;
         this.jacocoDir = new File(tmpDir+"/target/site/junco");
         this.applicationClasses = applicationClasses;
+    }
+
+    public void setInteractionLevel(int interactionLevel) {
+        this.interactionLevel = interactionLevel;
+    }
+
+    public void setSearchRadius(int searchRadius) {
+        this.searchRadius = searchRadius;
     }
 
     protected void initFitnessValue() throws IOException, InterruptedException {
@@ -58,21 +66,21 @@ public class Algo {
     protected void initFitnessValue(Map<String, List<Double>> coverages) throws IOException, InterruptedException {
 
         builder.runBuilder();
+        if(jacocoDir.exists()) {
+            for (File file : jacocoDir.listFiles()) {
+                if (file.getName().endsWith(".exec")) {
+                    String testName = file.getName().substring(0, file.getName().length() - 5);
+                    String dir = tmpDir + "/target/classes/";
+                    CoverageInfo coverageInfo = new CoverageInfo(dir, file);
+                    coverageInfo.create();
 
-        for(File file: jacocoDir.listFiles()) {
-            if(file.getName().endsWith(".exec")) {
-                String testName = file.getName().substring(0, file.getName().length() - 5);
-                String dir = tmpDir + "/target/classes/";
-                CoverageInfo coverageInfo = new CoverageInfo(dir, file);
-                coverageInfo.create();
-
-                coverages.put(testName, coverageInfo.branchCoverageInfo(applicationClasses));
+                    coverages.put(testName, coverageInfo.branchCoverageInfo(applicationClasses));
+                }
             }
         }
     }
 
-    public Map<CtMethod, Integer> testDataRegeneration(Set<CtMethod> testSuite, CtClass testClass) {
-        Map<CtMethod, Integer> newTestSuite = new HashMap<>();
+    public void testDataRegeneration(Set<CtMethod> testSuite, CtClass testClass) {
         Random r = new Random();
         int i = 0;
         setBuilderGoal(testClass);
@@ -110,11 +118,11 @@ public class Algo {
                     Log.info("new method add: {}",currentSol.getSimpleName());
                     Log.info("original: {}, new {}", getNumber(test), getNumber(currentSol));
 
-                    newTestSuite.put(currentSol, count);
+                    result.addNewTest(testClass, test, currentSol, count, cloneCount);
+                    cloneCount = 0;
                 }
             }
         }
-        return newTestSuite;
     }
 
     protected void setBuilderGoal(CtClass testClass) {
@@ -154,7 +162,9 @@ public class Algo {
         List<Double> neighbourCoverage = neighboursCoverage.get(cl.getQualifiedName() + "." +method.getSimpleName());
 
 
-        if(originalTestCoverage.size() != neighbourCoverage.size()) {
+        if(originalTestCoverage == null
+            || neighbourCoverage == null
+            || originalTestCoverage.size() != neighbourCoverage.size()) {
             return 100;
         } else {
 
@@ -188,6 +198,7 @@ public class Algo {
             neighbours.add(generateNeighbour(test, c));
         }
         generateNewSource(testClass, neighbours);
+
         computeNeighboursFitness(neighbours, builder.getFailedTests());
 
         restoreTestclass(testClass, neighbours);
