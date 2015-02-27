@@ -16,8 +16,7 @@ import java.util.Set;
  * This first version replaces all integer literals by 0
  * */
 public class TestDataMutator extends TestProcessor {
-    protected static String[] stringList = {"foo", "bar", "baz"};
-
+    public static  int dataCount = 0;
 	/* This processor looks for all literals in a method (for the moment only int)
 	 * It creates as many clones of the method as there are literals in the method
 	 * The ith literal is replaced by zero in the ith clone of the method
@@ -36,7 +35,10 @@ public class TestDataMutator extends TestProcessor {
 				if (!literalInAssert(lit) && !isCase(lit)) {
                     if (lit.getValue() instanceof Number) {
                         createNumberMutant(method, lit, lit_index);
+                    } if(lit.getValue() instanceof String) {
+                      createStringMutant(method, lit, lit_index);
                     } else {
+                        dataCount++;
                         //clone the method
                         CtMethod cloned_method = cloneMethod(method, "_literalMutation");
                         //add the cloned method in the same class as the original method
@@ -48,8 +50,6 @@ public class TestDataMutator extends TestProcessor {
                         if (!replaceByRandom(literal)) {
                             ((CtClass) method.getDeclaringType()).removeMethod(cloned_method);
                             mutatedMethod.remove(cloned_method);
-                        } else {
-                            count++;
                         }
                     }
                 }
@@ -63,6 +63,7 @@ public class TestDataMutator extends TestProcessor {
 
     protected void createNumberMutant(CtMethod method, CtLiteral literal, int lit_index) {
         for(Number literalMutated : literalMutated(literal)) {
+            dataCount++;
             //clone the method
             CtMethod cloned_method = cloneMethod(method, "_literalMutation");
             //add the cloned method in the same class as the original method
@@ -93,10 +94,36 @@ public class TestDataMutator extends TestProcessor {
                 }
             }
             toReplace.replace(newLiteral);
-
-            count++;
         }
     }
+
+    protected void createStringMutant(CtMethod method, CtLiteral literal, int lit_index) {
+        String string = ((String) literal.getValue());
+        Random r = new Random();
+        String[] array = new String[3];
+        int index = r.nextInt(string.length() -2) +1;
+        array[0] = string.substring(0,index - 1) + (char)r.nextInt(256) + string.substring(index , string.length());
+
+        index = r.nextInt(string.length() -2) +1;
+        array[1] = string.substring(0,index) + (char)r.nextInt(256) + string.substring(index, string.length());
+
+        index = r.nextInt(string.length() -2) +1;
+        array[2] = string.substring(0,index ) + string.substring(index +1, string.length());
+
+        for(String literalMutated : array) {
+            dataCount++;
+            //clone the method
+            CtMethod cloned_method = cloneMethod(method, "_literalMutation");
+            //add the cloned method in the same class as the original method
+            ((CtClass) method.getDeclaringType()).addMethod(cloned_method);
+            //get the lit_indexth literal of the cloned method
+            CtLiteral newLiteral = Query.getElements(cloned_method, new TypeFilter<CtLiteral>(CtLiteral.class))
+                                        .get(lit_index);
+
+            newLiteral.setValue(literalMutated);
+        }
+    }
+
 
     protected Set<? extends Number> literalMutated(CtLiteral literal) {
         Set<Number> values = new HashSet<>();
@@ -107,8 +134,6 @@ public class TestDataMutator extends TestProcessor {
         values.add(value / 2);
         values.add(value * 2);
 
-//        values.add(value + 2);
-//        values.add(value - 2);
         return values;
     }
 
@@ -126,16 +151,17 @@ public class TestDataMutator extends TestProcessor {
 	protected boolean replaceByRandom(CtLiteral literal) {
 		Object value = literal.getValue();
 		CtElement toReplace = literal;
-		Random r = new Random();
 		CtLiteral newLiteral = literal.getFactory().Core().createLiteral();
 		newLiteral.setTypeCasts(literal.getTypeCasts());
 
-		if(value instanceof String) {
-			newLiteral.setValue(stringList[r.nextInt(2)]);
-		} else if(value instanceof Boolean) {
+
+            if(value instanceof Boolean) {
             Boolean b = (Boolean) value;
             if(b) {
-                newLiteral.setValue(false);
+                if(!(literal.getParent() instanceof CtWhile)) {
+                    newLiteral.setValue(false);
+                    return false;
+                }
             } else {
                 newLiteral.setValue(true);
             }

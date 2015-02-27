@@ -333,10 +333,9 @@ public class AssertLogWriter extends LogWriter {
     protected Field[] findFields(Class aClass) {
         List<Field> fields = new ArrayList<Field>();
         for(Field field : aClass.getFields()) {
-            if(!Modifier.isPublic(field.getModifiers())) {
-                field.setAccessible(true);
+            if(Modifier.isPublic(field.getModifiers())) {
+                fields.add(field);
             }
-            fields.add(field);
         }
         Field[] ret = new Field[fields.size()];
         for(int i = 0; i < fields.size(); i++) {
@@ -348,7 +347,7 @@ public class AssertLogWriter extends LogWriter {
     protected Method[] findGetters(Class aClass){
         List<Method> getters = new ArrayList<Method>();
         for(Method method : aClass.getMethods()){
-            if(isGetter(method) && !methodDefinedInObject(method)) {
+            if((isGetter(method) || isIs(method)) && !methodDefinedInObject(method)) {
                 getters.add(method);
             }
         }
@@ -366,6 +365,11 @@ public class AssertLogWriter extends LogWriter {
            ret[i] = getters.get(i);
        }
         return ret;
+    }
+
+    protected boolean isIs(Method method) {
+        return method.getName().startsWith("is")
+                && method.getParameterTypes().length == 0;
     }
 
     protected boolean isGetter(Method method) {

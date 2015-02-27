@@ -30,7 +30,6 @@ public class TestMethodCallRemover extends TestProcessor {
 						CtInvocation stmt = Query.getElements(cloned_method, new TypeFilter<CtInvocation>(CtInvocation.class)).get(lit_index);
 						CtBlock b = ((CtBlock) stmt.getParent());
 						b.removeStatement(stmt);
-						count++;
 					}
 				lit_index++;
 			}

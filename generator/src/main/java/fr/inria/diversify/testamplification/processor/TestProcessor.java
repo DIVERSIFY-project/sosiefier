@@ -21,7 +21,7 @@ import java.util.Map;
  */
 public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
     protected static List<CtMethod> mutatedMethod = new LinkedList<>();
-    protected static int count;
+    protected static int count = 0;
     protected static Map<String, String> idMap = new HashMap();
 
     protected int cloneNumber = 1;
@@ -46,6 +46,7 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
     }
 
     protected CtMethod cloneMethod(CtMethod method, String suffix) {
+        count++;
         CtMethod cloned_method = this.getFactory().Core().clone(method);
         cloned_method.setParent(method.getParent());
         //rename the clone

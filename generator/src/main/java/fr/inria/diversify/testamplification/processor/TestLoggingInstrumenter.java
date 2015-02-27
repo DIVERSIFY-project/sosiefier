@@ -7,9 +7,6 @@ import spoon.reflect.declaration.ModifierKind;
 import spoon.reflect.factory.Factory;
 import spoon.support.reflect.code.CtCodeSnippetStatementImpl;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 /**
  * User: Simon
  * Date: 10/21/13

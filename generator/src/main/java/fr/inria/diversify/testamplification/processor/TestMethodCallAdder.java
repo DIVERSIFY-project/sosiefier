@@ -29,7 +29,6 @@ public class TestMethodCallAdder extends TestProcessor {
 					//get the lit_indexth literal of the cloned method
 					CtInvocation stmt = Query.getElements(cloned_method, new TypeFilter<CtInvocation>(CtInvocation.class)).get(lit_index);
 					stmt.insertBefore(this.getFactory().Core().clone(stmt));
-					count++;
 				}
 				lit_index++;
 			}

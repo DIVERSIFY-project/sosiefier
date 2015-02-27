@@ -114,14 +114,17 @@ public class MakeAmpliTest {
             applyProcessor(sourceFactory, m);
         }
         if(removeAssert) {
-            TestCaseProcessor tc = new TestCaseProcessor();
+            TestCaseProcessor tc = new TestCaseProcessor(testDirectory);
             applyProcessor(sourceFactory, tc);
+
         }
 
         File fileFrom = new File(test);
         File out = new File(outputDirectory + "/" + testDirectory);
         writeJavaClass(sourceFactory, out, fileFrom);
         Log.info("number of new test: {}", TestProcessor.getCount());
+        Log.info("number of data test: {}", TestDataMutator.dataCount);
+        Log.info("number of monitoring point {}:",TestCaseProcessor.monitorPointCount);
     }
 
     protected void writeJavaClass(Factory factory, File out, File fileFrom) {
