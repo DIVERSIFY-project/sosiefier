@@ -27,14 +27,16 @@ public class CoverageReport implements ICoverageReport {
     protected CoverageBuilder coverageBuilder;
     private final File executionDataFile;
     private final File classesDirectory;
+    protected String classToCover;
 
     private ExecutionDataStore executionDataStore;
     private SessionInfoStore sessionInfoStore;
 
 
-    public CoverageReport(String classesDir, File jacocoFile) {
+    public CoverageReport(String classesDir, File jacocoFile, String classToCover) {
         this.executionDataFile = jacocoFile;
         this.classesDirectory = new File(classesDir);
+        this.classToCover = classToCover;
     }
 
 
@@ -71,10 +73,14 @@ public class CoverageReport implements ICoverageReport {
 
     public double codeFragmentCoverage(CodeFragment stmt) {
         IClassCoverage classCoverage = null;
-        for (IClassCoverage cc : coverageBuilder.getClasses()) {
-            CtSimpleType<?> cl = stmt.getSourceClass();
-            if(!(cl == null || cl.getPackage() == null || cl.getPackage().getSignature() == null)) {
-                String name =  cl.getPackage().getSignature().replace(".","/")+"/"+cl.getSimpleName();
+        CtSimpleType<?> cl = stmt.getSourceClass();
+
+        if(classToCover != null && !cl.getQualifiedName().equals(classToCover)) {
+            return 0d;
+        }
+        if(!(cl == null || cl.getPackage() == null || cl.getPackage().getSignature() == null)) {
+            String name =  cl.getPackage().getSignature().replace(".","/")+"/"+cl.getSimpleName();
+            for (IClassCoverage cc : coverageBuilder.getClasses()) {
                 if(name.equals(cc.getName())) {
                     classCoverage = cc;
                     break;
@@ -82,8 +88,8 @@ public class CoverageReport implements ICoverageReport {
             }
         }
         if(classCoverage == null)
-            return 0;
-        double ret = 0;
+            return 0d;
+        double ret = 0d;
         for (int i = stmt.getStartLine(); i <= stmt.getEndLine(); i++)
              if(classCoverage.getLine(i).getStatus() == ICounter.FULLY_COVERED)
                 ret++;
@@ -93,10 +99,15 @@ public class CoverageReport implements ICoverageReport {
 
     public double elementCoverage(CtElement operator) {
         IClassCoverage classCoverage = null;
-        for (IClassCoverage cc : coverageBuilder.getClasses()) {
-            CtSimpleType<?> cl = operator.getParent(CtSimpleType.class);
-            if(!(cl == null || cl.getPackage() == null || cl.getPackage().getSignature() == null)) {
-                String name =  cl.getPackage().getSignature().replace(".","/")+"/"+cl.getSimpleName();
+        CtSimpleType<?> cl = operator.getParent(CtSimpleType.class);
+
+        if(classToCover != null && !cl.getQualifiedName().equals(classToCover)) {
+            return 0d;
+        }
+
+        if(!(cl == null || cl.getPackage() == null || cl.getPackage().getSignature() == null)) {
+            String name =  cl.getPackage().getSignature().replace(".","/")+"/"+cl.getSimpleName();
+            for (IClassCoverage cc : coverageBuilder.getClasses()) {
                 if(name.equals(cc.getName())) {
                     classCoverage = cc;
                     break;
@@ -117,10 +128,15 @@ public class CoverageReport implements ICoverageReport {
     @Override
     public int opCodeCoverage(CtMethod method, int indexOpcode) {
         IClassCoverage classCoverage = null;
-        for (IClassCoverage cc : coverageBuilder.getClasses()) {
-            CtClass cl = method.getDeclaringClass();
+        CtClass cl = method.getDeclaringClass();
 
-            String name =   cl.getName().replace(".","/");
+        if(classToCover != null && !cl.getName().equals(classToCover)) {
+            return 0;
+        }
+
+        String name = cl.getName().replace(".","/");
+
+        for (IClassCoverage cc : coverageBuilder.getClasses()) {
             if(name.equals(cc.getName())) {
                 classCoverage = cc;
                 break;

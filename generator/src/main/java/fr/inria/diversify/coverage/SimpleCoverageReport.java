@@ -22,11 +22,11 @@ public class SimpleCoverageReport extends CoverageReport {
     private List<Set<CoverageSourcePosition>> simpleCoverage;
 
     public SimpleCoverageReport(String classesDir, String jacocoFile) {
-        super(classesDir, new File(jacocoFile));
+        super(classesDir, new File(jacocoFile), null);
     }
 
     public SimpleCoverageReport(String classesDir, File jacocoFile) {
-        super(classesDir, jacocoFile);
+        super(classesDir, jacocoFile, null);
     }
 
     /**

@@ -12,7 +12,6 @@ import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.diversification.*;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.statistic.CVLMetric;
-import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.query.*;
 import fr.inria.diversify.util.Log;
@@ -66,17 +65,16 @@ public class DiversifyMain {
         AbstractBuilder builder = initBuilder(runner.getTmpDir());
         runner.setBuilder(builder);
 
-        try {
-            int n = Integer.parseInt(inputConfiguration.getProperty("nbRun"));
-            runner.run(n);
-        } finally {
-            writeResult(runner);
-            runner.deleteTmpFiles();
-        }
+
 
         if (inputConfiguration.getProperty("stat").equals("true")) {
             computeStatistic();
-        }
+        } else {
+            int n = Integer.parseInt(inputConfiguration.getProperty("nbRun"));
+            runner.run(n);
+            writeResult(runner);
+            runner.deleteTmpFiles();
+            }
     }
 
     protected void initDependency() throws Exception, InvalidSdkException {
@@ -316,9 +314,14 @@ public class DiversifyMain {
         ICoverageReport icr = null;
         if (jacocoFile != null) {
             try {
+
                 File file = new File(jacocoFile);
-                if (file.isDirectory()) icr = new MultiCoverageReport(classes, file);
-                else icr = new CoverageReport(classes, file);
+                if (file.isDirectory()) {
+                    icr = new MultiCoverageReport(classes, file);
+                } else {
+                    String classToCover = inputConfiguration.getProperty("coverage.class", null);
+                    icr = new CoverageReport(classes, file, classToCover);
+                }
                 icr.create();
                 return icr;
             } catch (IOException e) {
@@ -404,15 +407,38 @@ public class DiversifyMain {
         for (String type : getAllTransformationType(transformations))
             write.writeGoodTransformation(type);
 
+//        Set<Transformation> singleTransformation = transformations.stream()
+//                                                                        .filter(t -> t instanceof SingleTransformation)
+//                                                                        .map(t -> (SingleTransformation) t)
+//                .filter(t -> t.classLocationName().equals("org.apache.commons.codec.binary.Base64"))
+//                                                                        .collect(Collectors.toSet());
+//        write.writeTransformation(fileName +"_FileUtils.json",singleTransformation);
+//
+//        singleTransformation = transformations.stream()
+//                       .filter(t -> t instanceof SingleTransformation)
+//                       .map(t -> (SingleTransformation) t)
+//                    .filter(t -> t.isSosie()).filter(t -> t.classLocationName().equals("org.apache.commons.codec.binary.Base64"))
+//                       .collect(Collectors.toSet());
+//        write.writeTransformation(fileName +"_sosie_FileUtils.json",singleTransformation);
 
         CVLMetric cvlMetric = new CVLMetric(inputProgram);
         cvlMetric.printMetrics(fileName + "_cvlMetric.csv");
 
-//       Visu v = new Visu(fileName + "_visu/visu", inputProgram);
-//        v.writeJSON(transformations);
-
+        visu(transformations);
 //        FailureMatrix matrix = new FailureMatrix(transformations,inputConfiguration.getProperty("allTestFile"));
 //        matrix.printAllMatrix(fileName);
+    }
+
+    protected void visu(Collection<Transformation> transformations) throws Exception {
+        String out = inputConfiguration.getProperty("result");
+
+        Set<SingleTransformation> singleTransformation = transformations.stream()
+                                                                        .filter(t -> t instanceof SingleTransformation)
+                                                                        .map(t -> (SingleTransformation) t)
+                                                                        .collect(Collectors.toSet());
+
+        Visu v = new Visu(out + "_visu/visu", inputProgram);
+        v.writeJSON(singleTransformation);
     }
 
     protected Set<String> getAllTransformationType(Collection<Transformation> transformations) {

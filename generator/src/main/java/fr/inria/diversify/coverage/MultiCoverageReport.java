@@ -36,7 +36,7 @@ public class MultiCoverageReport implements ICoverageReport {
         coverages = new ArrayList<>();
         for (File file : jacocoDir.listFiles()) {
             if (file.getName().endsWith(".exec"))
-                coverages.add(new CoverageReport(classesDir, file));
+                coverages.add(new CoverageReport(classesDir, file, null));
         }
     }
 
@@ -59,7 +59,7 @@ public class MultiCoverageReport implements ICoverageReport {
     }
 
     public void addJacocoFile(File file) throws IOException {
-        CoverageReport cr = new CoverageReport(classesDir, file);
+        CoverageReport cr = new CoverageReport(classesDir, file, null);
         cr.create();
         coverages.add(cr);
     }
