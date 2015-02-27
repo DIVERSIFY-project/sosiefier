@@ -29,24 +29,24 @@ public class Visu {
     }
 
     protected Map<String, Set<SingleTransformation>> mapByPackage(Collection<SingleTransformation> transformations) {
-        Map<String, Set<SingleTransformation>> map = new HashMap<String, Set<SingleTransformation>>();
+        Map<String, Set<SingleTransformation>> map = new HashMap<>();
 
         for(SingleTransformation trans : transformations) {
             String className = trans.packageLocationName();
             if(!map.containsKey(className))
-                map.put(className, new HashSet<SingleTransformation>());
+                map.put(className, new HashSet<>());
             map.get(className).add(trans);
         }
         return map;
     }
 
     protected Map<String, Set<SingleTransformation>> mapByPClass(Collection<SingleTransformation> transformations) {
-        Map<String, Set<SingleTransformation>> map = new HashMap<String, Set<SingleTransformation>>();
+        Map<String, Set<SingleTransformation>> map = new HashMap<>();
 
         for(SingleTransformation trans : transformations) {
             String className = trans.classLocationName().split("\\$")[0];
             if(!map.containsKey(className))
-                map.put(className, new HashSet<SingleTransformation>());
+                map.put(className, new HashSet<>());
             map.get(className).add(trans);
         }
         return map;
@@ -87,7 +87,7 @@ public class Visu {
 
         JSONArray array = new JSONArray();
         initCurrentFile(cl);
-        List<SingleTransformation> trans = new ArrayList<SingleTransformation>();
+        List<SingleTransformation> trans = new ArrayList<>();
         int currentLine = -1;
         for(SingleTransformation transformation : sortTransformation(transformations)) {
             if(transformation.line() == currentLine)
@@ -96,7 +96,7 @@ public class Visu {
                 if(!trans.isEmpty())
                     array.put(JSONLine(trans,currentLine));
                 currentLine = transformation.line();
-                trans = new ArrayList<SingleTransformation>();
+                trans = new ArrayList<>();
                 trans.add(transformation);
             }
         }
@@ -168,14 +168,14 @@ public class Visu {
     }
 
     protected JSONObject JSONLine(List<SingleTransformation> transformations, int position) throws Exception {
-        Map<String, List<SingleTransformation>> map = new HashMap<String, List<SingleTransformation>>();
+        Map<String, List<SingleTransformation>> map = new HashMap<>();
 
         JSONObject line = new JSONObject();
         line.put("position", position - emptyLineBefore(position) - 5);
         for(SingleTransformation trans : transformations) {
             String key = trans.getType()+":"+trans.getName();
             if(!map.containsKey(key))
-                map.put(key, new ArrayList<SingleTransformation>());
+                map.put(key, new ArrayList<>());
             map.get(key).add(trans);
         }
         JSONArray array = new JSONArray();
@@ -255,5 +255,4 @@ public class Visu {
         line.put("sosie",sosie);
         return line;
     }
-
 }
