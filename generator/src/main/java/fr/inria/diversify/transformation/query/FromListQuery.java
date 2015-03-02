@@ -33,6 +33,23 @@ public class FromListQuery extends TransformationQuery {
         transformations = new ArrayList(ts);
     }
 
+    public FromListQuery(InputProgram inputProgram, int rangeMin, int rangeMax) throws TransformationParserException {
+        super(inputProgram);
+        TransformationJsonParser parser = new TransformationJsonParser(false, getInputProgram());
+        File f = new File(getInputProgram().getPreviousTransformationsPath());
+        Collection<Transformation> ts;
+        if (f.isDirectory()) {
+            ts = parser.parseDir(f.getAbsolutePath());
+        } else {
+            ts = parser.parseFile(f);
+        }
+        ArrayList<Transformation> tmp = new ArrayList(ts);
+        transformations = new ArrayList<>();
+        for(int i = rangeMin; i < rangeMax  ; i++) {
+             transformations.add(tmp.get(i));
+        }
+    }
+
     @Override
     public Transformation query() throws QueryException {
         int index = 0;

@@ -275,7 +275,14 @@ public class DiversifyMain {
                 return new ASTTransformationQuery(inputProgram, cl, subType, true);
             }
             case "fromlist": {
-                FromListQuery query = new FromListQuery(inputProgram);
+                int rangeMin = Integer.parseInt(inputConfiguration.getProperty("transformation.range.min", "-1"));
+                int rangeMax = Integer.parseInt(inputConfiguration.getProperty("transformation.range.max", "-1"));
+                FromListQuery query;
+                if(rangeMax == -1 || rangeMin == -1) {
+                    query = new FromListQuery(inputProgram);
+                } else {
+                    query = new FromListQuery(inputProgram, rangeMin, rangeMax);
+                }
                 query.setShuffle(true);
                 query.setRemoveAfterQuery(true);
                 return query;
@@ -407,24 +414,25 @@ public class DiversifyMain {
         for (String type : getAllTransformationType(transformations))
             write.writeGoodTransformation(type);
 
-//        Set<Transformation> singleTransformation = transformations.stream()
-//                                                                        .filter(t -> t instanceof SingleTransformation)
-//                                                                        .map(t -> (SingleTransformation) t)
-//                .filter(t -> t.classLocationName().equals("org.apache.commons.codec.binary.Base64"))
-//                                                                        .collect(Collectors.toSet());
-//        write.writeTransformation(fileName +"_FileUtils.json",singleTransformation);
-//
-//        singleTransformation = transformations.stream()
-//                       .filter(t -> t instanceof SingleTransformation)
-//                       .map(t -> (SingleTransformation) t)
-//                    .filter(t -> t.isSosie()).filter(t -> t.classLocationName().equals("org.apache.commons.codec.binary.Base64"))
-//                       .collect(Collectors.toSet());
-//        write.writeTransformation(fileName +"_sosie_FileUtils.json",singleTransformation);
+        Set<Transformation> singleTransformation = transformations.stream()
+                .filter(t -> t instanceof SingleTransformation)
+                .map(t -> (SingleTransformation) t)
+                .filter(t -> t.classLocationName().equals("org.apache.commons.io.FileUtils"))
+                .collect(Collectors.toSet());
+        write.writeTransformation(fileName +"FileUtils.json",singleTransformation);
+
+        singleTransformation = transformations.stream()
+                .filter(t -> t instanceof SingleTransformation)
+                .map(t -> (SingleTransformation) t)
+                .filter(t -> t.isSosie()).filter(t -> t.classLocationName().equals("org.apache.commons.io.FileUtils"))
+                .collect(Collectors.toSet());
+
+        write.writeTransformation(fileName +"_sosie_FileUtils.json",singleTransformation);
 
         CVLMetric cvlMetric = new CVLMetric(inputProgram);
         cvlMetric.printMetrics(fileName + "_cvlMetric.csv");
 
-        visu(transformations);
+//        visu(transformations);
 //        FailureMatrix matrix = new FailureMatrix(transformations,inputConfiguration.getProperty("allTestFile"));
 //        matrix.printAllMatrix(fileName);
     }

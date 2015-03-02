@@ -108,13 +108,14 @@ public class AssertLogWriter extends LogWriter {
                 results[i] = "null";
             }
         }
-
+        int j= 0;
         for(; i < results.length ; i++) {
             try {
-                results[i] = formatVar(classPublicFields[i].get(object));
+                results[i] = formatVar(classPublicFields[j].get(object));
             } catch (Exception e) {
                 results[i] = "null";
             }
+            j++;
         }
 
         StringBuilder sameValue = new StringBuilder();
@@ -122,7 +123,7 @@ public class AssertLogWriter extends LogWriter {
         boolean sameValues = true;
         if(previousValues.containsKey(objectClass)) {
             String[] pValues = previousValues.get(objectClass);
-            for (i = 0; i < classGetters.length; i++) {
+            for (i = 0; i < results.length; i++) {
                 if (pValues[i].equals(results[i])) {
                     sameValue.append("0");
                 } else {
@@ -134,8 +135,8 @@ public class AssertLogWriter extends LogWriter {
             }
         } else {
             sameValues = false;
-            String[] pValues = new String[classGetters.length];
-            for (i = 0; i < classGetters.length; i++) {
+            String[] pValues = new String[results.length];
+            for (i = 0; i < results.length; i++) {
                 sameValue.append("1");
                 result.add(results[i]);
                 pValues[i] = results[i];
@@ -285,9 +286,9 @@ public class AssertLogWriter extends LogWriter {
     }
 
     protected Field[] getPublicFields(Thread thread, Class aClass) throws IOException, InterruptedException {
-        if(!fields.containsKey(aClass)) {
-            intGettersAndFields(thread, aClass);
-        }
+//        if(!fields.containsKey(aClass)) {
+//            intGettersAndFields(thread, aClass);
+//        }
         return fields.get(aClass);
     }
 
@@ -300,34 +301,33 @@ public class AssertLogWriter extends LogWriter {
 
 
     protected void intGettersAndFields(Thread thread, Class aClass) throws IOException, InterruptedException {
-            Method[] methods;
+        Method[] methods;
         Field[] publicFields;
-            if(aClass == null) {
-                methods = new Method[0];
-                publicFields = new Field[0];
-            } else {
-                methods = findGetters(aClass);
-                publicFields = findFields(aClass);
-            }
-            fields.put(aClass,publicFields);
-            getters.put(aClass, methods);
 
+        if(aClass == null) {
+            methods = new Method[0];
+            publicFields = new Field[0];
+        } else {
+            methods = findGetters(aClass);
+            publicFields = findFields(aClass);
+        }
+        fields.put(aClass,publicFields);
+        getters.put(aClass, methods);
 
+        String classId = getClassId(thread, aClass);
 
-            String classId = getClassId(thread, aClass);
+        PrintWriter fileWriter = getFileWriter(thread);
+        String semaphore = fileWriter.toString() + fileWriter.hashCode();
 
-            PrintWriter fileWriter = getFileWriter(thread);
-            String semaphore = fileWriter.toString() + fileWriter.hashCode();
-
-            fileWriter.append(end + "Gt" + simpleSeparator + classId);
-            for(Method method : methods) {
-                fileWriter.append(simpleSeparator + method.getName());
-            }
+        fileWriter.append(end + "Gt" + simpleSeparator + classId);
+        for(Method method : methods) {
+            fileWriter.append(simpleSeparator + method.getName());
+        }
         for(Field field : publicFields) {
             fileWriter.append(simpleSeparator + field.getName());
         }
 
-            releaseFileWriter(semaphore);
+        releaseFileWriter(semaphore);
     }
 
     protected Field[] findFields(Class aClass) {
