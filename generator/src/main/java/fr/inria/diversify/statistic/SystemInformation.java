@@ -32,21 +32,20 @@ public class SystemInformation {
         object.put("os.version", System.getProperty("os.version"));
         object.put("os.arch", System.getProperty("os.arch"));
 
-        try {
-            JSONArray cpus = new JSONArray();
-            object.put("cpu", cpus);
-            for(CpuInfo cpuInfo: sigar.getCpuInfoList()) {
-                JSONObject cpu = new JSONObject();
-                cpus.put(cpu);
-
-                cpu.put("model", cpuInfo.getModel());
-                cpu.put("vendor", cpuInfo.getVendor());
-                cpu.put("core", cpuInfo.getTotalCores());
-                cpu.put("mhz", cpuInfo.getMhz());
-            }
-            object.put("memory", (sigar.getMem().getTotal() / 1024 / 1024));
-        } catch (SigarException e) {
-        }
+//        try {
+//            JSONArray cpus = new JSONArray();
+//            object.put("cpu", cpus);
+//            for(CpuInfo cpuInfo: sigar.getCpuInfoList()) {
+//                JSONObject cpu = new JSONObject();
+//                cpus.put(cpu);
+//
+//                cpu.put("model", cpuInfo.getModel());
+//                cpu.put("vendor", cpuInfo.getVendor());
+//                cpu.put("core", cpuInfo.getTotalCores());
+//                cpu.put("mhz", cpuInfo.getMhz());
+//            }
+//            object.put("memory", (sigar.getMem().getTotal() / 1024 / 1024));
+//        } catch (SigarException e) {}
         return object;
     }
 

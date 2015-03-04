@@ -6,7 +6,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -184,4 +186,24 @@ public class AssertDiff {
         return Pool.getCanonicalVersion(value);
     }
 
+    protected List<String> getMethodDiff() {
+        List<String> methods = new ArrayList<>();
+        if(excludeThisDiff) {
+            return methods;
+        }
+
+        for (int i = 0; i < original.getValues().length; i++) {
+            try {
+                Object oValue = original.getValues()[i];
+                Object sValue = sosie.getValues()[i];
+
+                if (!oValue.equals(sValue) && !methodFilter.contains(original.getMethods()[i])) {
+                   methods.add(original.getAssertId()+":"+original.getMethods()[i]);
+                }
+            }catch (Exception e ) {
+
+            }
+        }
+        return methods;
+    }
 }

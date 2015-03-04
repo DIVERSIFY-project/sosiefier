@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
  */
 public class ParseTransformationAndDiff {
     protected Map<Transformation, Diff> diffs;
+    Map<String, Set<String>> filter;
     protected InputProgram inputProgram;
 
 
@@ -29,18 +30,18 @@ public class ParseTransformationAndDiff {
         ParseTransformationAndDiff p = new ParseTransformationAndDiff(inputProgram);
         p.initSpoon(inputConfiguration);
         p.parseDir(args[1]);
-        Map<String, Set<String>> filter = p.loadFilter(inputConfiguration.getProperty("compare.filter"));
+        p.loadFilter(inputConfiguration.getProperty("compare.filter"));
 
 
-        p.applyFilter(p.diffs, filter);
-        p.stat(p.diffs);
+        p.applyFilter();
+        p.stat();
         for(Transformation trans : p.diffs.keySet()) {
             p.diffs.get(trans).toJson();
         }
 
     }
 
-    public void stat(Map<Transformation, Diff> diffs) {
+    public void stat() {
         int count = 0;
         for (Transformation transformation : diffs.keySet()) {
            int sum = diffs.get(transformation).size();
@@ -56,7 +57,7 @@ public class ParseTransformationAndDiff {
 
     }
 
-    public void applyFilter(Map<Transformation, Diff> diffs, Map<String, Set<String>> filter) {
+    public void applyFilter() {
         for (Transformation trans : diffs.keySet()) {
             diffs.get(trans).filter(filter);
         }
@@ -139,9 +140,9 @@ public class ParseTransformationAndDiff {
         return inputProgram;
     }
 
-    public Map<String, Set<String>> loadFilter(String file) throws IOException {
+    public void loadFilter(String file) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
-        Map<String, Set<String>> filter = new HashMap<>();
+        filter = new HashMap<>();
 
         String line = reader.readLine();
         while (line != null) {
@@ -152,7 +153,6 @@ public class ParseTransformationAndDiff {
             filter.get(tmp[0]).add(line.substring(tmp[0].length() + 1, line.length()));
             line = reader.readLine();
         }
-        return filter;
     }
 
     protected void initSpoon(InputConfiguration inputConfiguration) throws IllegalAccessException, InstantiationException, ClassNotFoundException {

@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.testamplification.ParseTransformationAndDiff;
 import fr.inria.diversify.testamplification.compare.diff.Diff;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParserException;
@@ -24,10 +25,24 @@ public class AmpSosieQuery extends TransformationQuery {
     protected boolean removeAfterQuery = true;
     protected boolean shuffle = false;
 
-    public AmpSosieQuery(InputProgram inputProgram) throws TransformationParserException, IOException, JSONException {
-        super(inputProgram);
-        parseDir(getInputProgram().getPreviousTransformationsPath());
 
+
+    public AmpSosieQuery(InputProgram inputProgram) {
+        super(inputProgram);
+
+    }
+
+    public void initDiff(String transformationDir, String filterFile) throws JSONException, IOException, TransformationParserException {
+        ParseTransformationAndDiff parser = new ParseTransformationAndDiff(inputProgram);
+
+        parser.parseDir(transformationDir);
+        parser.loadFilter(filterFile);
+
+        parser.applyFilter();
+
+        diffs = parser.getDiffs().values().stream()
+                .filter(diff -> diff.size() != 0)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -53,8 +68,7 @@ public class AmpSosieQuery extends TransformationQuery {
 
     protected List<Diff> mostDifferentTransformation() {
         if(curentDiff == null) {
-            return diffs.stream()
-                    .collect(Collectors.toList());
+            return diffs;
         } else {
             int size = curentDiff.size();
             return diffs.stream()
@@ -64,7 +78,7 @@ public class AmpSosieQuery extends TransformationQuery {
     }
 
     public boolean hasNextTransformation() {
-        return !diffs.isEmpty();
+        return !diffs.isEmpty() && !mostDifferentTransformation().isEmpty();
     }
 
     public void currentTransformationEnd() {
@@ -77,45 +91,5 @@ public class AmpSosieQuery extends TransformationQuery {
 
     public void setRemoveAfterQuery(boolean removeAfterQuery) {
         this.removeAfterQuery = removeAfterQuery;
-    }
-
-    public void parseDir(String dirName) throws IOException, JSONException, TransformationParserException {
-        diffs = new ArrayList<>();
-        File dir = new File(dirName);
-
-        for (File file : dir.listFiles()) {
-            if (file.isFile() && file.getName().endsWith(".json")) {
-                try {
-                    Diff diff = parseFile(file);
-                    if(diff.size() != 0) {
-                        diffs.add(diff);
-                    }
-                } catch (Exception e) {
-
-                    Log.debug("{}", file);
-                }
-            }
-        }
-    }
-
-    protected Diff parseFile(File file) throws IOException, JSONException, TransformationParserException {
-        BufferedReader br = null;
-        StringBuilder sb = null;
-        try {
-            br = new BufferedReader(new FileReader(file));
-            sb = new StringBuilder();
-            String line = br.readLine();
-            while (line != null) {
-                sb.append(line);
-                line = br.readLine();
-            }
-        } finally {
-            if (br != null) br.close();
-        }
-
-        JSONObject object = new JSONObject(sb.toString());
-        Diff diff = new Diff(object, inputProgram);
-
-        return diff;
     }
 }

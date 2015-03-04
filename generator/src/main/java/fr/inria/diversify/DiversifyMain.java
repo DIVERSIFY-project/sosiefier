@@ -106,7 +106,7 @@ public class DiversifyMain {
     protected AbstractDiversify initRunner() throws Exception {
         AbstractDiversify abstractDiversify = null;
         String runner = inputConfiguration.getProperty("runner", "simple");
-        String projet = inputConfiguration.getProperty("project");
+        String project = inputConfiguration.getProperty("project");
         String src = inputConfiguration.getProperty("src");
         String testSrcDir = inputConfiguration.getProperty("testSrc", null);
         String sosieDir = inputConfiguration.getProperty("copy.sosie.sources.to", "");
@@ -114,11 +114,11 @@ public class DiversifyMain {
 
         switch (runner) {
             case "simple":
-                abstractDiversify = new SinglePointDiversify(inputConfiguration, projet, src);
+                abstractDiversify = new SinglePointDiversify(inputConfiguration, project, src);
                 break;
             case "multi": {
                 int multiTransformationSize = Integer.parseInt(inputConfiguration.getProperty("multiTransformation.size"));
-                MultiTransformationGenerator multi = new MultiTransformationGenerator(inputConfiguration, projet, src);
+                MultiTransformationGenerator multi = new MultiTransformationGenerator(inputConfiguration, project, src);
                 multi.setTransformationSize(multiTransformationSize);
                 multi.setOnlySosie(false);
                 abstractDiversify = multi;
@@ -126,29 +126,28 @@ public class DiversifyMain {
             }
             case "multisosie": {
                 int multiTransformationSize = Integer.parseInt(inputConfiguration.getProperty("multiTransformation.size"));
-                MultiTransformationGenerator multi = new MultiTransformationGenerator(inputConfiguration, projet, src);
+                MultiTransformationGenerator multi = new MultiTransformationGenerator(inputConfiguration, project, src);
                 multi.setTransformationSize(multiTransformationSize);
                 multi.setOnlySosie(true);
                 abstractDiversify = multi;
                 break;
             }
             case "fse": {
-                DiversifyAndCompare dac = new DiversifyAndCompare(inputConfiguration, projet, src, testSrcDir, inputConfiguration.getProperty("compare.filter"));
+                DiversifyAndCompare dac = new DiversifyAndCompare(inputConfiguration, project, src, testSrcDir, inputConfiguration.getProperty("compare.filter"));
                 dac.setAmplifiedTestDir(inputConfiguration.getProperty("amplifiedTestDir"));
                 dac.setOriginalLogDir(inputConfiguration.getProperty("compare.originalLog"));
-//                dac.setFilterFile(inputConfiguration.getProperty("compare.filter"));
                 abstractDiversify = dac;
                 break;
             }
             case "android": {
-                abstractDiversify = new SinglePointDiversify(inputConfiguration, projet, src);
+                abstractDiversify = new SinglePointDiversify(inputConfiguration, project, src);
                 abstractDiversify.setAndroid(true);
                 break;
             }
 
         }
         abstractDiversify.setSosieSourcesDir(sosieDir);
-      abstractDiversify.init(projet, inputConfiguration.getProperty("tmpDir"));
+      abstractDiversify.init(project, inputConfiguration.getProperty("tmpDir"));
 
 //        abstractDiversify.setBuilder(initBuilder(tmpDir));
         abstractDiversify.setResultDir(resultDir);
@@ -288,7 +287,7 @@ public class DiversifyMain {
             }
             case "ampsosie": {
                 AmpSosieQuery query = new AmpSosieQuery(inputProgram);
-
+                query.initDiff(inputConfiguration.getPreviousTransformationPath(), inputConfiguration.getProperty("compare.filter"));
                 query.setShuffle(true);
                 query.setRemoveAfterQuery(false);
                 return query;
@@ -395,7 +394,7 @@ public class DiversifyMain {
     protected void computeDiversifyStat(String transDir, String fileName) throws Exception {
         TransformationParser tf = new TransformationParser(true, inputProgram);
 //        TransformationOldParser tf = new TransformationOldParser(true);
-        Collection<Transformation> transformations = tf.parseDir(transDir);
+          Collection<Transformation> transformations = tf.parse(transDir);
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
 
 

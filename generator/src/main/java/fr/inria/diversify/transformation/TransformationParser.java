@@ -23,6 +23,23 @@ public class  TransformationParser {
         parser = new TransformationJsonParser(b, inputProgram);
     }
 
+
+    /**
+     * Parses a complete  or file
+     * @param fileName  file or Directory containing JSON parse files
+     * @return A list of all transformations found
+     * @throws IOException
+     * @throws JSONException
+     */
+    public Collection<Transformation> parse(String fileName) throws TransformationParserException {
+        File file = new File(fileName);
+        if(file.isDirectory()) {
+            return parser.parseDir(fileName);
+        } else {
+            return parser.parseFile(file);
+        }
+    }
+
     /**
      * Parses a complete directory
      * @param dir Directory containing JSON parse files

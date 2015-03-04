@@ -270,8 +270,8 @@ public class TransformationJsonParser {
                 throw new TransformationParserException("Unknown transformation type for " + jsonObject.toString());
 
             if (jsonObject.has("tindex")) {
-                Integer i = jsonObject.getInt("tindex");
-                trans.setIndex(UUID.fromString(i.toString()));
+   //             Integer i = jsonObject.getInt("tindex");
+     //           trans.setIndex(UUID.fromString(i.toString()));
             }
             trans.setFailures(getFailures(jsonObject));
             trans.setStatus(jsonObject.getInt("status"));
@@ -460,8 +460,8 @@ public class TransformationJsonParser {
                 trans = parseASTDelete(jsonObject);
 
             if ( jsonObject.has("tindex") ) {
-                Integer i = jsonObject.getInt("tindex");
-                trans.setIndex(UUID.fromString(i.toString()));
+//                Integer i = jsonObject.getInt("tindex");
+//                trans.setIndex(UUID.fromString(i.toString()));
             }
 
             trans.setName(jsonObject.getString("name"));

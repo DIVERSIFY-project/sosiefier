@@ -154,7 +154,6 @@ public class LogDiff implements Comparable {
                 .filter(assertDiff -> !notSyncro.contains(assertDiff.getAssertId()))
                 .collect(Collectors.toList());
 
-        //for()
 
         other.assertDiffs.stream()
                 .filter(assertDiff -> assertDiffs.stream()
@@ -167,18 +166,19 @@ public class LogDiff implements Comparable {
         allNotSyncro.addAll(other.notSyncro);
         allNotSyncro.addAll(notSyncro);
 
-        Set<AssertDiff> commonsAssertDiffs = assertDiffs.stream()
-                                 .filter(assertDiff -> !allNotSyncro.contains(assertDiff.getAssertId()))
-                                 .collect(Collectors.toSet());
+        Set<String> commonsAssertMethodDiffs = new HashSet<>();
+
+        assertDiffs.stream()
+                .filter(assertDiff -> !allNotSyncro.contains(assertDiff.getAssertId()))
+                .forEach(assertDiff -> commonsAssertMethodDiffs.addAll(assertDiff.getMethodDiff()));
+
 
         other.assertDiffs.stream()
-                         .filter(assertDiff -> !allNotSyncro.contains(assertDiff.getAssertId()))
-                         .forEach(assertDiff -> commonsAssertDiffs.add(assertDiff));
+                .filter(assertDiff -> !allNotSyncro.contains(assertDiff.getAssertId()))
+                .forEach(assertDiff -> commonsAssertMethodDiffs.addAll(assertDiff.getMethodDiff()));
 
         return  allNotSyncro.size()
-                + commonsAssertDiffs.stream()
-                             .mapToInt(assertDiff -> assertDiff.nbOfDiff())
-                             .sum();
+                + commonsAssertMethodDiffs.size();
     }
 }
 
