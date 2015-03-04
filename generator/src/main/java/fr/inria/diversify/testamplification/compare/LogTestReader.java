@@ -56,13 +56,10 @@ public class LogTestReader {
             count++;
             Object[] pValues = previousValues.get(classId);
             if (split.length != 3) {
-                String[] tmp = assertLog.split(":;:");
+                List<String> tmp = split(assertLog, ":;:");
 
-                Object[] values = parseValues(Arrays.copyOfRange(tmp, 1, tmp.length));
-                if (assertLog.endsWith(":;:")) {
-                    values = Arrays.copyOf(values, values.length + 1);
-                    values[values.length - 1] = "";
-                }
+                Object[] values = parseValues(tmp.subList(1, tmp.size()));
+
                 if (pValues == null) {
                     pValues = values;
                     previousValues.put(classId, pValues);
@@ -87,29 +84,25 @@ public class LogTestReader {
         return assertO;
     }
 
-//    protected String[] getValue(String assertLog) {
-//        List<String> array = new ArrayList<>();
-//
-//
-//        for(char c : assertLog.toCharArray()) {
-//            if( count == 0 && c == ':') {
-//                count = 1;
-//            } else if( count == 1 && c == ':') {
-//                count = 1;
-//            } else if( count == 2 && c == ':') {
-//                count = 1;
-//            } else if( count == 3 ) {
-//                count = 1;
-//            }
-//
-//        }
-//
-//    }
 
-    protected Object[] parseValues(String[] values) {
-        Object[] parseValues = new Object[values.length];
-        for(int i = 0; i < values.length; i++) {
-            parseValues[i] = parseValue(values[i]);
+    protected  List<String> split(String toSplit, String by) {
+        List<String> split = new ArrayList<>();
+        int begin = 0;
+        int end = toSplit.indexOf(by, begin);
+        while (end != -1) {
+            split.add(toSplit.substring(begin, end));
+            begin = end + by.length();
+            end = toSplit.indexOf(by, begin);
+        }
+        split.add(toSplit.substring(begin,toSplit.length()));
+        return split;
+    }
+
+
+    protected Object[] parseValues(List<String> values) {
+        Object[] parseValues = new Object[values.size()];
+        for(int i = 0; i < values.size(); i++) {
+            parseValues[i] = parseValue(values.get(i));
         }
         return parseValues;
     }

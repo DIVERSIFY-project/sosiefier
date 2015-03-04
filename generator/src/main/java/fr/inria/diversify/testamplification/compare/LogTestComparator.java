@@ -40,7 +40,7 @@ public class LogTestComparator {
     protected TestDiff compareTest(Test original, Test sosie) {
         TestDiff result = new TestDiff(original.getSignature());
         countExcludeTest = 50;
-        Log.debug("compare test {}", original.getSignature());
+        Log.trace("compare test {}", original.getSignature());
 
         LogDiff logResult = compareLog(original.getLog(0), sosie.getLog(0));
         if(logResult == null) {

@@ -133,24 +133,23 @@ public class DiversifyMain {
                 break;
             }
             case "fse": {
-                DiversifyAndCompare dac = new DiversifyAndCompare(inputConfiguration, projet, src, testSrcDir);
+                DiversifyAndCompare dac = new DiversifyAndCompare(inputConfiguration, projet, src, testSrcDir, inputConfiguration.getProperty("compare.filter"));
                 dac.setAmplifiedTestDir(inputConfiguration.getProperty("amplifiedTestDir"));
                 dac.setOriginalLogDir(inputConfiguration.getProperty("compare.originalLog"));
-                dac.setFilterFile(inputConfiguration.getProperty("compare.filter"));
+//                dac.setFilterFile(inputConfiguration.getProperty("compare.filter"));
                 abstractDiversify = dac;
                 break;
             }
             case "android": {
-                abstractDiversify = new DiversifyAndCompare(inputConfiguration, projet, src, testSrcDir);
+                abstractDiversify = new SinglePointDiversify(inputConfiguration, projet, src);
                 abstractDiversify.setAndroid(true);
                 break;
             }
 
         }
-
-
-      abstractDiversify.init(projet, inputConfiguration.getProperty("tmpDir"));
         abstractDiversify.setSosieSourcesDir(sosieDir);
+      abstractDiversify.init(projet, inputConfiguration.getProperty("tmpDir"));
+
 //        abstractDiversify.setBuilder(initBuilder(tmpDir));
         abstractDiversify.setResultDir(resultDir);
 
@@ -432,7 +431,7 @@ public class DiversifyMain {
         CVLMetric cvlMetric = new CVLMetric(inputProgram);
         cvlMetric.printMetrics(fileName + "_cvlMetric.csv");
 
-//        visu(transformations);
+        visu(transformations);
 //        FailureMatrix matrix = new FailureMatrix(transformations,inputConfiguration.getProperty("allTestFile"));
 //        matrix.printAllMatrix(fileName);
     }

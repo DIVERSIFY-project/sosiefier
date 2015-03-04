@@ -6,6 +6,7 @@ import fr.inria.diversify.testamplification.CompareAmpliTest;
 import fr.inria.diversify.testamplification.compare.diff.Diff;
 import fr.inria.diversify.testamplification.compare.diff.Pool;
 import fr.inria.diversify.testamplification.compare.diff.TestDiff;
+import fr.inria.diversify.transformation.NullTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
@@ -15,13 +16,8 @@ import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.io.*;
+import java.util.*;
 
 /**
  * Created by Simon on 21/01/15.
@@ -31,13 +27,52 @@ public class DiversifyAndCompare extends SinglePointDiversify {
     protected String originalLogDir;
     protected String testSrcDir;
     protected List<JSONObject> diff;
+    protected Map<String, Set<String>> filter;
     protected String filterFile;
 
-    public DiversifyAndCompare(InputConfiguration inputConfiguration, String projectDir, String srcDir, String testDir) {
+    public DiversifyAndCompare(InputConfiguration inputConfiguration, String projectDir, String srcDir, String testDir, String filterFile) {
         super(inputConfiguration, projectDir, srcDir);
         testSrcDir = testDir;
         diff = new ArrayList<>();
+        this.filterFile = filterFile;
+
     }
+
+    private void initFilter() throws Exception {
+        Transformation trans = new NullTransformation();
+        try {
+            applyTransformation(trans);
+
+            try {
+                int status = runTest(tmpDir);
+
+                trans.setStatus(status);
+                trans.setFailures(builder.getTestFail());
+                if (status == 0) {
+                    compare(trans, true);
+                }
+                // error during runTest
+            } catch (Exception e) {
+                trans.setStatus(-2);
+                Log.debug("compile error during diversification", e);
+            }
+        } catch (Exception e) {}
+    }
+
+    @Override
+    public void run(int n) throws Exception {
+        initFilter();
+        if(n > 0) {
+            for (int i = 0; i < n; i++) {
+                run(transQuery.query());
+            }
+        } else {
+            while (transQuery.hasNextTransformation()) {
+                run(transQuery.query());
+            }
+        }
+    }
+
 
     protected void run(Transformation trans) throws Exception {
         Log.info("trial {}", trial);
@@ -54,7 +89,7 @@ public class DiversifyAndCompare extends SinglePointDiversify {
                 trans.setStatus(status);
                 trans.setFailures(builder.getTestFail());
                 if (status == 0) {
-                    compare(trans);
+                    compare(trans, false);
                 }
                 // error during runTest
             } catch (Exception e) {
@@ -72,19 +107,36 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         } catch (BuildTransplantException e) {}
     }
 
-    protected void compare(Transformation sosie) throws IOException, JSONException, InterruptedException {
+    protected void compare(Transformation sosie, boolean makeFilter) throws IOException, JSONException, InterruptedException {
         String sosieDir = copySosieProgram();
         try {
             copyTestAndLogger(sosieDir);
             runSosie(sosieDir);
+//
+//            File log = new File(sosieDir + "/log/");
+//            FileUtils.forceDelete(log);
+//            log.mkdir();
+//            (new File(log +"/id")).createNewFile();
+//            runSosie(sosieDir);
+
             CompareAmpliTest cat = new CompareAmpliTest();
 
             Diff result = cat.compare(originalLogDir, sosieDir + "/log");
 
-            Map<String, Set<String>> filter = cat.loadFilter(filterFile);
-            result.filter(filter);
-            result.setSosie(sosie);
-            diff.add(result.toJson());
+            if(makeFilter) {
+                filter = cat.loadFilter(filterFile);
+                for(String f : result.buildFilter()) {
+                    String[] tmp = f.split(" ");
+                    if(!filter.containsKey(tmp[0])) {
+                        filter.put(tmp[0], new HashSet<>());
+                    }
+                    filter.get(tmp[0]).add(f.substring(tmp[0].length() + 1,f.length()));
+                }
+            } else {
+                result.filter(filter);
+                result.setSosie(sosie);
+                diff.add(result.toJson());
+            }
         } finally {
             Pool.reset();
             FileUtils.forceDelete(new File(sosieDir));
@@ -97,8 +149,12 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         log.mkdir();
         File id = new File(sosieDir + "/log/id");
         id.createNewFile();
+        File testDir = new File(sosieDir + "/" +testSrcDir);
+        FileUtils.forceDelete(testDir);
 
-        FileUtils.copyDirectory(new File(amplifiedTestDir), new File(sosieDir + "/" +testSrcDir));
+        testDir.mkdirs();
+
+        FileUtils.copyDirectory(new File(amplifiedTestDir), testDir);
         File dir = new File(sosieDir+"/"+sourceDir+ "/fr/inria/diversify/testamplification/logger");
         FileUtils.forceMkdir(dir);
         String packagePath = System.getProperty("user.dir") + "/generator/src/main/java/fr/inria/diversify/testamplification/logger/";
@@ -121,9 +177,9 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         this.originalLogDir = originalLogDir;
     }
 
-    public void setFilterFile(String filterFile) {
-        this.filterFile = filterFile;
-    }
+//    public void setFilterFile(String filterFile) {
+//        this.filterFile = filterFile;
+//    }
 
     public String printResult(String output) {
         Log.info("session result: {}", sessionResults);
@@ -150,5 +206,17 @@ public class DiversifyAndCompare extends SinglePointDiversify {
             ret +=  tmp[i] + "/";
         }
         return ret;
+    }
+
+    public Set<String> loadFilter(String file) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        Set<String> filter = new HashSet<>();
+
+        String line = reader.readLine();
+        while(line != null) {
+            filter.add(line);
+            line = reader.readLine();
+        }
+        return filter;
     }
 }
