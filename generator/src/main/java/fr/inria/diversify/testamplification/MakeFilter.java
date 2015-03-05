@@ -8,6 +8,7 @@ import fr.inria.diversify.testamplification.compare.LogTestComparator;
 import fr.inria.diversify.testamplification.compare.LogTestReader;
 import fr.inria.diversify.testamplification.compare.Test;
 import fr.inria.diversify.testamplification.compare.diff.Diff;
+import fr.inria.diversify.testamplification.compare.diff.Filter;
 import fr.inria.diversify.testamplification.compare.diff.Pool;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
@@ -30,15 +31,16 @@ public class MakeFilter {
         int n = Integer.parseInt(args[2]);
         String p1dir = args[0];
         String p2dir = args[1];
-        Set<String> diffs;
+//        Set<String> diffs;
         String out;
 
         MakeFilter mk = new MakeFilter();
+        Filter filter;
         if(args.length == 5) {
-            diffs = mk.loadFilter(args[3]);
+            filter = new Filter(args[3]);
             out = args[4];
         } else {
-            diffs = new HashSet<>();
+            filter = new Filter();
             out = args[3];
         }
 
@@ -48,7 +50,7 @@ public class MakeFilter {
             mk.runProgram(p1dir, false);
             mk.runProgram(p2dir, false);
             Diff testdiff = mk.compare(p1dir + "/log", p2dir + "/log");
-            diffs.addAll(testdiff.buildFilter());
+            filter.addFilter(testdiff.buildFilter());
         }
 
         for(int i = 0; i < n/3; i++) {
@@ -57,7 +59,7 @@ public class MakeFilter {
             mk.runProgram(p1dir, true);
             mk.runProgram(p2dir, false);
             Diff testdiff = mk.compare(p1dir + "/log", p2dir + "/log");
-            diffs.addAll(testdiff.buildFilter());
+            filter.addFilter(testdiff.buildFilter());
         }
         for(int i = 0; i < n/3; i++) {
             Pool.reset();
@@ -65,9 +67,10 @@ public class MakeFilter {
             mk.runProgram(p1dir, true);
             mk.runProgram(p2dir, true);
             Diff testdiff = mk.compare(p1dir + "/log", p2dir + "/log");
-            diffs.addAll(testdiff.buildFilter());
+            filter.addFilter(testdiff.buildFilter());
         }
-        mk.printFilter(diffs, out);
+        filter.print(out);
+//        mk.printFilter(diffs, out);
     }
 
     protected void runProgram(String dir, boolean clean) throws IOException, InterruptedException {
@@ -96,30 +99,30 @@ public class MakeFilter {
         return  comparator.compare();
     }
 
-    public Set<String> loadFilter(String file) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        Set<String> filter = new HashSet<>();
+//    public Set<String> loadFilter(String file) throws IOException {
+//        BufferedReader reader = new BufferedReader(new FileReader(file));
+//        Set<String> filter = new HashSet<>();
+//
+//        String line = reader.readLine();
+//        while(line != null) {
+//            filter.add(line);
+//            line = reader.readLine();
+//        }
+//        return filter;
+//    }
 
-        String line = reader.readLine();
-        while(line != null) {
-            filter.add(line);
-            line = reader.readLine();
-        }
-        return filter;
-    }
-
-    public void printFilter(Set<String> diffs, String fileName) throws IOException, JSONException {
-        FileWriter fw = new FileWriter(fileName);
-            diffs.stream()
-                 .distinct()
-                .forEach(f -> {
-                    try {
-                        fw.append(f + "\n");
-                    } catch (Exception e) {}
-                });
-
-        fw.close();
-    }
+//    public void printFilter(Set<String> diffs, String fileName) throws IOException, JSONException {
+//        FileWriter fw = new FileWriter(fileName);
+//            diffs.stream()
+//                 .distinct()
+//                .forEach(f -> {
+//                    try {
+//                        fw.append(f + "\n");
+//                    } catch (Exception e) {}
+//                });
+//
+//        fw.close();
+//    }
 
     protected String copyProgram(String tmpDir) throws IOException, JSONException {
         //Store the whole sosie program.

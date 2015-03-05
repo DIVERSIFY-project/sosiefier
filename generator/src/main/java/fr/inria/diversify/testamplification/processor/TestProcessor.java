@@ -20,6 +20,7 @@ import java.util.Map;
  * Created by Simon on 03/12/14.
  */
 public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
+    public static List<CtMethod> notHarmanTest = new LinkedList<>();
     protected static List<CtMethod> mutatedMethod = new LinkedList<>();
     protected static int count = 0;
     protected static Map<String, String> idMap = new HashMap();

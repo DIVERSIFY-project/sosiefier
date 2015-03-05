@@ -4,6 +4,7 @@ import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.testamplification.compare.diff.Diff;
+import fr.inria.diversify.testamplification.compare.diff.Filter;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.util.Log;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
  */
 public class ParseTransformationAndDiff {
     protected Map<Transformation, Diff> diffs;
-    Map<String, Set<String>> filter;
+    Filter filter;
     protected InputProgram inputProgram;
 
 
@@ -31,6 +32,7 @@ public class ParseTransformationAndDiff {
         p.initSpoon(inputConfiguration);
         p.parseDir(args[1]);
         p.loadFilter(inputConfiguration.getProperty("compare.filter"));
+//        p.loadFilter(inputConfiguration.getProperty("compare.filter"));
 
 
         p.applyFilter();
@@ -141,18 +143,7 @@ public class ParseTransformationAndDiff {
     }
 
     public void loadFilter(String file) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        filter = new HashMap<>();
-
-        String line = reader.readLine();
-        while (line != null) {
-            String[] tmp = line.split(" ");
-            if (!filter.containsKey(tmp[0])) {
-                filter.put(tmp[0], new HashSet<>());
-            }
-            filter.get(tmp[0]).add(line.substring(tmp[0].length() + 1, line.length()));
-            line = reader.readLine();
-        }
+       filter = new Filter(file);
     }
 
     protected void initSpoon(InputConfiguration inputConfiguration) throws IllegalAccessException, InstantiationException, ClassNotFoundException {

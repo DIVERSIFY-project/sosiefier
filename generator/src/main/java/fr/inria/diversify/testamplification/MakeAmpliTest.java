@@ -3,6 +3,7 @@ package fr.inria.diversify.testamplification;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.factories.SpoonMetaFactory;
+import fr.inria.diversify.testamplification.compare.diff.Filter;
 import fr.inria.diversify.testamplification.processor.*;
 import fr.inria.diversify.testamplification.processor.TestLoggingInstrumenter;
 import fr.inria.diversify.testamplification.processor.TestProcessor;
@@ -13,24 +14,25 @@ import org.apache.commons.io.FileUtils;
 import spoon.compiler.Environment;
 import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
+import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.factory.Factory;
 import spoon.support.QueueProcessingManager;
 
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.lang.ClassNotFoundException;
 import java.lang.IllegalAccessException;
 import java.lang.InstantiationException;
 import java.lang.String;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Simon on 03/12/14.
  */
 public class MakeAmpliTest {
 
+    private final boolean makeHarmanFilter;
+    private final String filterFile;
     private String outputDirectory;
     private String projectDirectory;
     private String srcDirectory;
@@ -63,6 +65,8 @@ public class MakeAmpliTest {
         methodCallRemover = Boolean.parseBoolean(inputConfiguration.getProperty("methodCallRemover", "false"));
         removeNotClone = Boolean.parseBoolean(inputConfiguration.getProperty("removeNotClone", "false"));
         logNewTest  = Boolean.parseBoolean(inputConfiguration.getProperty("logNewTest", "false"));
+        makeHarmanFilter = Boolean.parseBoolean(inputConfiguration.getProperty("makeHarmanFilter", "false"));
+        filterFile = inputConfiguration.getProperty("compare.filter", "'");
 
         MavenDependencyResolver t = new MavenDependencyResolver();
         t.DependencyResolver(projectDirectory + "/pom.xml");
@@ -85,7 +89,7 @@ public class MakeAmpliTest {
     }
 
 
-    protected void transform() {
+    protected void transform() throws IOException {
         String src = projectDirectory + "/" + srcDirectory;
         String test = projectDirectory + "/" + testDirectory;
 
@@ -118,13 +122,39 @@ public class MakeAmpliTest {
             applyProcessor(sourceFactory, tc);
 
         }
-
-        File fileFrom = new File(test);
-        File out = new File(outputDirectory + "/" + testDirectory);
-        writeJavaClass(sourceFactory, out, fileFrom);
+        if(makeHarmanFilter) {
+            makeHarmanFilter();
+        } else {
+            File fileFrom = new File(test);
+            File out = new File(outputDirectory + "/" + testDirectory);
+            writeJavaClass(sourceFactory, out, fileFrom);
+        }
         Log.info("number of new test: {}", TestProcessor.getCount());
         Log.info("number of data test: {}", TestDataMutator.dataCount);
         Log.info("number of monitoring point {}:",TestCaseProcessor.monitorPointCount);
+    }
+
+    protected void makeHarmanFilter() throws IOException {
+        Filter filter = new Filter(filterFile);
+        filter.print(outputDirectory +"/filterOriginal");
+
+        Filter harmanTestAllMonitor = new Filter(filter);
+        for(CtMethod test: TestDataMutator.notHarmanTest) {
+            harmanTestAllMonitor.addTest(test.getSimpleName());
+        }
+        harmanTestAllMonitor.print(outputDirectory + "/filterHarmanTestAllMonitor");
+
+        Filter allTestHarmanMonitor = new Filter(filter);
+        for(String monitorPoint: TestCaseProcessor.NotHarmanMonitorPoint) {
+            allTestHarmanMonitor.addMonitorPoint(Integer.parseInt(monitorPoint));
+        }
+        allTestHarmanMonitor.print(outputDirectory + "/filterAllTestHarmanMonitor");
+
+        Filter harmanTestHarmanMonitor = new Filter(allTestHarmanMonitor);
+        for(CtMethod test: TestDataMutator.notHarmanTest) {
+            harmanTestHarmanMonitor.addTest(test.getSimpleName());
+        }
+        harmanTestHarmanMonitor.print(outputDirectory + "/filterHarmanTestHarmanMonitor");
     }
 
     protected void writeJavaClass(Factory factory, File out, File fileFrom) {

@@ -4,6 +4,7 @@ import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.statistic.SinglePointSessionResults;
 import fr.inria.diversify.testamplification.CompareAmpliTest;
 import fr.inria.diversify.testamplification.compare.diff.Diff;
+import fr.inria.diversify.testamplification.compare.diff.Filter;
 import fr.inria.diversify.testamplification.compare.diff.Pool;
 import fr.inria.diversify.testamplification.compare.diff.TestDiff;
 import fr.inria.diversify.transformation.NullTransformation;
@@ -27,7 +28,7 @@ public class DiversifyAndCompare extends SinglePointDiversify {
     protected String originalLogDir;
     protected String testSrcDir;
     protected List<JSONObject> diff;
-    protected Map<String, Set<String>> filter;
+    protected Filter filter;
     protected String filterFile;
 
     public DiversifyAndCompare(InputConfiguration inputConfiguration, String projectDir, String srcDir, String testDir, String filterFile) {
@@ -112,26 +113,14 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         try {
             copyTestAndLogger(sosieDir);
             runSosie(sosieDir);
-//
-//            File log = new File(sosieDir + "/log/");
-//            FileUtils.forceDelete(log);
-//            log.mkdir();
-//            (new File(log +"/id")).createNewFile();
-//            runSosie(sosieDir);
 
             CompareAmpliTest cat = new CompareAmpliTest();
 
             Diff result = cat.compare(originalLogDir, sosieDir + "/log");
 
             if(makeFilter) {
-                filter = cat.loadFilter(filterFile);
-                for(String f : result.buildFilter()) {
-                    String[] tmp = f.split(" ");
-                    if(!filter.containsKey(tmp[0])) {
-                        filter.put(tmp[0], new HashSet<>());
-                    }
-                    filter.get(tmp[0]).add(f.substring(tmp[0].length() + 1,f.length()));
-                }
+                filter = new Filter(filterFile);
+                filter.addFilter(result.buildFilter());
             } else {
                 result.filter(filter);
                 result.setSosie(sosie);

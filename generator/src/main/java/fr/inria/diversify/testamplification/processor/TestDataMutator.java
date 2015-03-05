@@ -7,24 +7,15 @@ import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 /* This processor is meant to replace all literal values in test cases by other literal values
- * This first version replaces all integer literals by 0
  * */
 public class TestDataMutator extends TestProcessor {
+
     public static  int dataCount = 0;
-	/* This processor looks for all literals in a method (for the moment only int)
-	 * It creates as many clones of the method as there are literals in the method
-	 * The ith literal is replaced by zero in the ith clone of the method
-	 * Perspectives: 
-	 * - replace integers by random values; 
-	 * - have each literal replaced by several values;
-	 * - chose among a list of predefined values, depending on the type of the literal (� la koopman)
-	 * */
+
+
 	public void process(CtMethod method) {
 		try{			
 			//get the list of literals in the method
@@ -51,6 +42,7 @@ public class TestDataMutator extends TestProcessor {
                             ((CtClass) method.getDeclaringType()).removeMethod(cloned_method);
                             mutatedMethod.remove(cloned_method);
                         }
+                        notHarmanTest.add(cloned_method);
                     }
                 }
 				lit_index++;
@@ -98,6 +90,7 @@ public class TestDataMutator extends TestProcessor {
     }
 
     protected void createStringMutant(CtMethod method, CtLiteral literal, int lit_index) {
+
         String string = ((String) literal.getValue());
         Random r = new Random();
         String[] array = new String[3];
@@ -121,6 +114,7 @@ public class TestDataMutator extends TestProcessor {
                                         .get(lit_index);
 
             newLiteral.setValue(literalMutated);
+            notHarmanTest.add(cloned_method);
         }
     }
 

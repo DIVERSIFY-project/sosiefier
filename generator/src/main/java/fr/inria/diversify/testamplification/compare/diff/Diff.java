@@ -73,10 +73,15 @@ public class Diff {
         return sosie;
     }
 
-    public void filter(Map<String, Set<String>> filter) {
+//    public void filter(Map<String, Set<String>> filter) {
+//        testDiffs.stream()
+//            .filter(d -> filter.containsKey(d.getSignature()))
+//            .forEach(d -> d.filter(filter.get(d.getSignature())));
+//    }
+
+    public void filter(Filter filter) {
         testDiffs.stream()
-            .filter(d -> filter.containsKey(d.getSignature()))
-            .forEach(d -> d.filter(filter.get(d.getSignature())));
+                .forEach(d -> d.filter(filter));
     }
 
     public void merge(Diff other) {

@@ -15,6 +15,7 @@ import java.util.List;
 public class TestCaseProcessor extends TestProcessor {
     protected String testDir;
     public static int monitorPointCount = 0;
+    public static List<String> NotHarmanMonitorPoint = new ArrayList<>();
 
 	/*
 	 * This processor removes all the assertions from a test case
@@ -41,13 +42,11 @@ public class TestCaseProcessor extends TestProcessor {
                         CtCase ctCase = (CtCase) invocation.getParent();
                         int index = ctCase.getStatements().indexOf(invocation);
                         getArgs(invocation).stream()
-//                                            .filter(arg -> arg instanceof CtInvocation)
                                            .forEach(arg -> ctCase.getStatements().add(index, buildLogStatement(arg)));
                         ctCase.getStatements().remove(invocation);
                     } else {
                         CtBlock block = (CtBlock) invocation.getParent();
                         getArgs(invocation).stream()
-//                                           .filter(arg -> arg instanceof CtInvocation)
                                            .forEach(arg -> invocation.insertBefore(buildLogStatement(arg)));
                         block.removeStatement(invocation);
                     }
@@ -113,30 +112,9 @@ public class TestCaseProcessor extends TestProcessor {
 		return list;
 	}
 
-
-//	protected CtCodeSnippetStatement buildLogStatement(CtElement arg) {
-//		CtCodeSnippetStatement stmt = new CtCodeSnippetStatementImpl();
-//
-//		String snippet;
-//		String idAssertInvocation = idFor(arg.getPosition().getLine()+"_"+arg.toString(), "ASSERT_I");
-//		if(arg instanceof CtInvocation && !((CtInvocation) arg).getExecutable().isStatic()) {
-//			CtInvocation invocation = (CtInvocation) arg;
-//			CtExpression target = invocation.getTarget();
-//			String idAssertTarget = idFor(arg.getPosition().getLine()+"_"+invocation.toString(), "ASSERT_T");
-//
-//			snippet = getLogName() + ".logAssertArgument(Thread.currentThread()," + idAssertTarget + "," + target
-//					+ "," + idAssertInvocation + ","  + arg + ")";
-//		} else {
-//			snippet = getLogName() + ".logAssertArgument(Thread.currentThread()," + idAssertInvocation + ","+ arg + ")";
-//		}
-//		stmt.setValue(snippet);
-//
-//		return stmt;
-//	}
-
-
     protected CtCodeSnippetStatement buildLogStatement(CtElement arg) {
         String id = idFor(arg.getPosition().getLine()+"_"+arg.toString(), "ASSERT_I");
+        NotHarmanMonitorPoint.add(id);
         return buildSnippet(id, arg.toString());
     }
 }

@@ -45,14 +45,6 @@ public class LogDiff implements Comparable {
         return assertDiffs.size() - ((LogDiff) o).assertDiffs.size();
     }
 
-    public boolean isAllDiff() {
-        return allDiff != -1;
-    }
-
-    public int getAllDiff() {
-        return allDiff;
-    }
-
     public void setAllDiff(int allDiff) {
         this.allDiff = allDiff;
     }
@@ -179,6 +171,10 @@ public class LogDiff implements Comparable {
 
         return  allNotSyncro.size()
                 + commonsAssertMethodDiffs.size();
+    }
+
+    public void filterMonitorPoint(Set<Integer> monitorPoint) {
+        notSyncro.addAll(monitorPoint);
     }
 }
 

@@ -73,11 +73,26 @@ public class TestDiff {
         }
     }
 
-    public void filter(Set<String> filter) {
-        if(filter.contains("excludeThisTest")) {
+//    public void filter(Set<String> filter) {
+//        if(filter.contains("excludeThisTest")) {
+//            excludeThisTest = true;
+//        } else {
+//            diff.stream().forEach(d -> d.filter(filter));
+//            diff = diff.stream().filter(d -> !d.isEmpty()).collect(Collectors.toList());
+//        }
+//    }
+
+
+    public void filter(Filter filter) {
+
+        if(filter.excludeThisTest(signature)) {
             excludeThisTest = true;
         } else {
-            diff.stream().forEach(d -> d.filter(filter));
+            diff.stream().forEach(d -> d.filterMonitorPoint(filter.getMonitorPoint()));
+            diff.stream()
+                    .filter(d -> filter.get(signature) != null)
+                    .forEach(d -> d.filter(filter.get(signature)));
+
             diff = diff.stream().filter(d -> !d.isEmpty()).collect(Collectors.toList());
         }
     }

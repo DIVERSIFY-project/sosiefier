@@ -96,7 +96,6 @@ public class CoverageReport implements ICoverageReport {
         return ret/(double)(stmt.getEndLine()- stmt.getStartLine() + 1);
     }
 
-
     public double elementCoverage(CtElement operator) {
         IClassCoverage classCoverage = null;
         CtSimpleType<?> cl = operator.getParent(CtSimpleType.class);

@@ -124,7 +124,7 @@ public class AssertLogWriter extends LogWriter {
         if(previousValues.containsKey(objectClass)) {
             String[] pValues = previousValues.get(objectClass);
             for (i = 0; i < results.length; i++) {
-                if (false && pValues[i].equals(results[i])) {
+                if (pValues[i].equals(results[i])) {
                     sameValue.append("0");
                 } else {
                     sameValues = false;

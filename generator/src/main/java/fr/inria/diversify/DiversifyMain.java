@@ -412,20 +412,20 @@ public class DiversifyMain {
         for (String type : getAllTransformationType(transformations))
             write.writeGoodTransformation(type);
 
-        Set<Transformation> singleTransformation = transformations.stream()
-                .filter(t -> t instanceof SingleTransformation)
-                .map(t -> (SingleTransformation) t)
-                .filter(t -> t.classLocationName().equals("org.apache.commons.io.FileUtils"))
-                .collect(Collectors.toSet());
-        write.writeTransformation(fileName +"FileUtils.json",singleTransformation);
-
-        singleTransformation = transformations.stream()
-                .filter(t -> t instanceof SingleTransformation)
-                .map(t -> (SingleTransformation) t)
-                .filter(t -> t.isSosie()).filter(t -> t.classLocationName().equals("org.apache.commons.io.FileUtils"))
-                .collect(Collectors.toSet());
-
-        write.writeTransformation(fileName +"_sosie_FileUtils.json",singleTransformation);
+//        Set<Transformation> singleTransformation = transformations.stream()
+//                .filter(t -> t instanceof SingleTransformation)
+//                .map(t -> (SingleTransformation) t)
+//                .filter(t -> t.classLocationName().equals("org.apache.commons.lang3.StringUtils"))
+//                .collect(Collectors.toSet());
+//        write.writeTransformation(fileName +"StringUtils.json",singleTransformation);
+//
+//        singleTransformation = transformations.stream()
+//                .filter(t -> t instanceof SingleTransformation)
+//                .map(t -> (SingleTransformation) t)
+//                .filter(t -> t.isSosie()).filter(t -> t.classLocationName().equals("org.apache.commons.lang3.StringUtils"))
+//                .collect(Collectors.toSet());
+//
+//        write.writeTransformation(fileName +"_sosie_StringUtils.json",singleTransformation);
 
         CVLMetric cvlMetric = new CVLMetric(inputProgram);
         cvlMetric.printMetrics(fileName + "_cvlMetric.csv");
