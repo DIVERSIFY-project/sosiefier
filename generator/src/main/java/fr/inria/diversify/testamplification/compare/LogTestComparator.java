@@ -92,8 +92,10 @@ public class LogTestComparator {
                 if(notSyncro.isEmpty()) {
                    break;
                 } else {
-                    originalAssert = original.next();
-                    sosieAssert = sosie.next();
+                    if(original.hasNext() && sosie.hasNext()) {
+                        originalAssert = original.next();
+                        sosieAssert = sosie.next();
+                    }
                 }
             }
         }
