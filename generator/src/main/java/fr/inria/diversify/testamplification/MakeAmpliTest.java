@@ -71,7 +71,9 @@ public class MakeAmpliTest {
         MavenDependencyResolver t = new MavenDependencyResolver();
         t.DependencyResolver(projectDirectory + "/pom.xml");
 
-        initOutputDirectory();
+        if(!makeHarmanFilter) {
+            initOutputDirectory();
+        }
         transform();
 
         copyLogger();

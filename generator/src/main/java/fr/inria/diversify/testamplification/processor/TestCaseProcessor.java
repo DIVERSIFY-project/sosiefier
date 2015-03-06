@@ -57,25 +57,16 @@ public class TestCaseProcessor extends TestProcessor {
         if(!method.getModifiers().contains(ModifierKind.STATIC)) {
             List<CtAssignment> assignments = Query.getElements(method, new TypeFilter(CtAssignment.class));
             for (CtAssignment assignment : assignments) {
-                try {
-                    if(!(assignment.getParent() instanceof CtLoop)){
-                        assignment.insertAfter(logAssignment(assignment.getAssigned()));
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Log.debug("");
+                if(!(assignment.getParent() instanceof CtLoop)){
+                    assignment.insertAfter(logAssignment(assignment.getAssigned()));
                 }
             }
 
             List<CtLocalVariable> vars = Query.getElements(method, new TypeFilter(CtLocalVariable.class));
             for (CtLocalVariable var : vars) {
-                try {
-                    if (var.getDefaultExpression() != null && !(var.getParent() instanceof CtLoop)) {
-                        var.insertAfter(logLocalVar(var));
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Log.debug("");
+
+                if (var.getDefaultExpression() != null && !(var.getParent() instanceof CtLoop)) {
+                    var.insertAfter(logLocalVar(var));
                 }
             }
         }
@@ -83,12 +74,14 @@ public class TestCaseProcessor extends TestProcessor {
 
     protected CtCodeSnippetStatement logLocalVar(CtLocalVariable var) {
         String id = idFor(var.getPosition().getLine() + "_" + var.getReference());
+        NotHarmanMonitorPoint.add(id);
         return buildSnippet(id, var.getSimpleName());
     }
 
 
     protected CtCodeSnippetStatement logAssignment(CtElement expression) {
         String id = idFor(expression.getPosition().getLine()+"_"+expression.toString(), "ASSIGNMENT");
+        NotHarmanMonitorPoint.add(id);
         return buildSnippet(id, expression.toString());
     }
 
@@ -114,7 +107,7 @@ public class TestCaseProcessor extends TestProcessor {
 
     protected CtCodeSnippetStatement buildLogStatement(CtElement arg) {
         String id = idFor(arg.getPosition().getLine()+"_"+arg.toString(), "ASSERT_I");
-        NotHarmanMonitorPoint.add(id);
+
         return buildSnippet(id, arg.toString());
     }
 }

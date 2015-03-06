@@ -83,7 +83,6 @@ public class LogTestComparator {
             }
             if (originalAssert.getAssertId() == sosieAssert.getAssertId()) {
                 result.add(compareAssert(originalAssert, sosieAssert));
-
                 originalAssert = original.next();
                 sosieAssert = sosie.next();
             } else {

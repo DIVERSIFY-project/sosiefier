@@ -34,6 +34,7 @@ public class CompareAmpliTest {
         LogTestReader reader = new LogTestReader();
 
         Collection<Test> testOriginal = reader.loadLog(dirOriginalLog);
+        reader = new LogTestReader();
         Collection<Test> testSosie = reader.loadLog(dirSosieLog);
 
         LogTestComparator comparator = new LogTestComparator(testOriginal, testSosie);

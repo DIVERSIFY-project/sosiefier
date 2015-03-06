@@ -174,7 +174,10 @@ public class LogDiff implements Comparable {
     }
 
     public void filterMonitorPoint(Set<Integer> monitorPoint) {
-        notSyncro.addAll(monitorPoint);
+        notSyncro.removeAll(monitorPoint);
+        assertDiffs = assertDiffs.stream()
+                .filter(assertDiff -> !monitorPoint.contains(assertDiff.getAssertId()))
+                .collect(Collectors.toList());
     }
 }
 

@@ -41,6 +41,9 @@ public class Filter {
     public void addFilter(Set<String> set) {
         for(String string : set) {
             String[] tmp = string.split(" ");
+            if (!filter.containsKey(tmp[0])) {
+                filter.put(tmp[0], new HashSet<>());
+            }
             filter.get(tmp[0]).add(string.substring(tmp[0].length() + 1, string.length()));
         }
     }
@@ -61,12 +64,7 @@ public class Filter {
                     if (!filter.containsKey(tmp[0])) {
                         filter.put(tmp[0], new HashSet<>());
                     }
-                    try {
                         filter.get(tmp[0]).add(line.substring(tmp[0].length() + 1, line.length()));
-
-                    }    catch (Exception e) {
-                        System.out.print("");
-                    }
                 }
             }
             line = reader.readLine();
