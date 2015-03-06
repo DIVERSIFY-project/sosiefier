@@ -9,6 +9,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.*;
+import java.util.stream.Collectors;
+
 
 /**
  * Created by Simon on 13/02/15.
@@ -73,15 +75,12 @@ public class Diff {
         return sosie;
     }
 
-//    public void filter(Map<String, Set<String>> filter) {
-//        testDiffs.stream()
-//            .filter(d -> filter.containsKey(d.getSignature()))
-//            .forEach(d -> d.filter(filter.get(d.getSignature())));
-//    }
-
     public void filter(Filter filter) {
         testDiffs.stream()
                 .forEach(d -> d.filter(filter));
+        testDiffs = testDiffs.stream()
+                .filter(d -> d.size() != 0)
+                .collect(Collectors.toList());
     }
 
     public void merge(Diff other) {

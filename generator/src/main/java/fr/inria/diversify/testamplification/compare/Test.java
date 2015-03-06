@@ -2,19 +2,20 @@ package fr.inria.diversify.testamplification.compare;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Simon on 15/01/15.
  */
 public class Test {
     protected String signature;
-    protected List<LogTest> logs;
+    protected List<AbstractMonitoringPoint> monitoringPoints;
     protected int index;
 
 
     public Test(String signature) {
         this.signature = signature;
-        logs = new ArrayList<>();
+        monitoringPoints = new ArrayList<>();
     }
 
     public String getSignature() {
@@ -22,15 +23,28 @@ public class Test {
     }
 
 
-    public void addLog(LogTest logTest) {
-        logs.add(logTest);
+    public void addAllMonitoringPoint(List<AbstractMonitoringPoint> monitoringPoints) {
+        this.monitoringPoints.addAll(monitoringPoints);
     }
 
     public int size() {
-        return logs.size();
+        return monitoringPoints.size();
     }
 
-    public LogTest getLog(int i) {
-        return logs.get(i);
+    public AbstractMonitoringPoint geMonitoringPoint(int i) {
+        return monitoringPoints.get(i);
+    }
+
+    public List<Integer> getAllId() {
+        return monitoringPoints.stream()
+                .map(point -> point.getId())
+                .collect(Collectors.toList());
+    }
+
+    public AbstractMonitoringPoint getMonitoringPoint(int id) {
+        return monitoringPoints.stream()
+                .filter(point -> point.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 }

@@ -39,19 +39,19 @@ public class LogTestReader {
 
         }
         Log.debug("number of test: {}",traceByTest.size());
-        Assert.dico.putAll(idToClass);
+        MultiMonitoringPoint.dico.putAll(idToClass);
         return traceByTest.values();
     }
 
     int count = 0;
-    protected Assert parseAssert(String assertLog) {
-        Assert assertO = null;
+    protected SingleMonitoringPoint parseMonitoringPoint(String assertLog) {
+        SingleMonitoringPoint monitoringPoint = null;
 
             String[] split = assertLog.split(";");
             int assertId = Pool.getCanonicalVersion(Integer.parseInt(split[1]));
             int classId = Pool.getCanonicalVersion(Integer.parseInt(split[2]));
             String className = Pool.getCanonicalVersion(idToClass.get(classId));
-            assertO = new Assert(assertId, className, getters.get(classId));
+        monitoringPoint = new SingleMonitoringPoint(assertId, className, getters.get(classId));
 
             count++;
             Object[] pValues = previousValues.get(classId);
@@ -79,9 +79,9 @@ public class LogTestReader {
                     }
                 }
             }
-            assertO.setValues(Arrays.copyOf(pValues, pValues.length));
+        monitoringPoint.setValues(Arrays.copyOf(pValues, pValues.length));
 
-        return assertO;
+        return monitoringPoint;
     }
 
 
@@ -138,7 +138,7 @@ public class LogTestReader {
 
     protected void splitByTest(File file) throws Exception {
         reset();
-        List<Assert> assertLogs = new LinkedList();
+        List<AbstractMonitoringPoint> monitoringPoint = new LinkedList();
         String currentTest = null;
         BufferedReader reader = new BufferedReader(new FileReader(file));
 
@@ -159,12 +159,12 @@ public class LogTestReader {
                             if (currentTest != null) {
                                 testToExclude.add(currentTest);
                             }
-                            assertLogs = new LinkedList<>();
+                            monitoringPoint = new LinkedList<>();
                             currentTest = parseTestName(logEntry);
                             break;
                         case "TE" :
                             if(currentTest != null) {
-                                addTest(currentTest, assertLogs);
+                                addTest(currentTest, monitoringPoint);
                                 currentTest = null;
                             }
                             break;
@@ -175,7 +175,23 @@ public class LogTestReader {
                             parseGetters(logEntry);
                             break;
                         default:
-                            assertLogs.add(parseAssert(logEntry));
+                            SingleMonitoringPoint point = parseMonitoringPoint(logEntry);
+                            AbstractMonitoringPoint previous = monitoringPoint.stream()
+                                    .filter(p -> p.getId() == point.getId())
+                                    .findFirst()
+                                    .orElse(null);
+                            if(previous != null) {
+                                if(previous instanceof SingleMonitoringPoint) {
+                                    MultiMonitoringPoint multi = previous.toMulti();
+                                    if(point.getValues() != null) {
+                                        multi.add(point);
+                                    }
+                                    monitoringPoint.remove(previous);
+                                    monitoringPoint.add(multi);
+                                }
+                            } else {
+                                monitoringPoint.add(point);
+                            }
                             break;
                     }
                     logEntry = "";
@@ -190,11 +206,11 @@ public class LogTestReader {
 
 
 
-    protected void addTest(String testName, List<Assert> assertLogs) {
+    protected void addTest(String testName, List<AbstractMonitoringPoint> assertLogs) {
         if(!traceByTest.containsKey(testName)) {
             traceByTest.put(testName, new Test(testName));
         }
-        traceByTest.get(testName).addLog(new LogTest(assertLogs));
+        traceByTest.get(testName).addAllMonitoringPoint(assertLogs);
     }
 
     protected void parseGetters(String logEntry) {

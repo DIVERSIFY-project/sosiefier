@@ -45,7 +45,7 @@ public class FromListQuery extends TransformationQuery {
         }
         ArrayList<Transformation> tmp = new ArrayList(ts);
         transformations = new ArrayList<>();
-        for(int i = rangeMin; i < Math.max(rangeMax, tmp.size())  ; i++) {
+        for(int i = rangeMin; i < Math.min(rangeMax, tmp.size())  ; i++) {
              transformations.add(tmp.get(i));
         }
     }

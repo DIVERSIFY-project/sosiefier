@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
  * Created by Simon on 19/01/15.
  */
 public class TestDiff {
-    List<LogDiff> diff;
+    List<MonitoringPointDiff> diff;
     String signature;
-     boolean excludeThisTest = false;
+    boolean excludeThisTest = false;
 
     public TestDiff(String signature) {
         this.signature = signature;
@@ -27,13 +27,11 @@ public class TestDiff {
         buildFrom(object);
     }
 
-    public void add(LogDiff logResult) {
-        if(logResult != null) {
+    public void add(MonitoringPointDiff logResult) {
             diff.add(logResult);
-        }
     }
 
-    public List<LogDiff> getDiff() {
+    public List<MonitoringPointDiff> getDiff() {
         return diff;
     }
 
@@ -52,7 +50,7 @@ public class TestDiff {
             JSONArray array = new JSONArray();
             object.put("logDiff", array);
 
-            for (LogDiff d : diff) {
+            for (MonitoringPointDiff d : diff) {
                 array.put(d.toJson());
             }
         }
@@ -63,24 +61,17 @@ public class TestDiff {
         this.signature = object.getString("test");
         diff = new ArrayList<>();
 
-        if(object.has("excludeThisTest")) {
+        if(object.has("exclude")) {
             excludeThisTest = true;
         } else {
             JSONArray logDiff = object.getJSONArray("logDiff");
             for (int i = 0; i < logDiff.length(); i++) {
-                diff.add(new LogDiff(logDiff.getJSONObject(i)));
+                diff.add(new MonitoringPointDiff(logDiff.getJSONObject(i)));
             }
         }
     }
 
-//    public void filter(Set<String> filter) {
-//        if(filter.contains("excludeThisTest")) {
-//            excludeThisTest = true;
-//        } else {
-//            diff.stream().forEach(d -> d.filter(filter));
-//            diff = diff.stream().filter(d -> !d.isEmpty()).collect(Collectors.toList());
-//        }
-//    }
+
 
 
     public void filter(Filter filter) {
@@ -88,25 +79,30 @@ public class TestDiff {
         if(filter.excludeThisTest(signature)) {
             excludeThisTest = true;
         } else {
-            diff.stream().forEach(d -> d.filterMonitorPoint(filter.getMonitorPoint()));
+            diff = diff.stream()
+                    .filter(d -> !filter.getMonitorPoint().contains(d.id))
+                    .collect(Collectors.toList());
             diff.stream()
                     .filter(d -> filter.get(signature) != null)
                     .forEach(d -> d.filter(filter.get(signature)));
 
-            diff = diff.stream().filter(d -> !d.isEmpty()).collect(Collectors.toList());
+            diff = diff.stream()
+                    .filter(d -> d.size() != 0)
+                    .collect(Collectors.toList());
         }
     }
 
     public Set<String> buildFilter() {
         Set<String> filter = new HashSet<>();
         if(excludeThisTest) {
-            filter.add("excludeThisTest");
+            filter.add("exclude");
         } else {
-            for (LogDiff d : diff) {
-                filter.addAll(d.buildFilter());
+            for (MonitoringPointDiff d : diff) {
+                filter.add(d.buildFilter());
             }
         }
-        return filter.stream().map(f -> signature + " " + f).collect(Collectors.toSet());
+        return filter.stream()
+                .map(f -> signature + " " + f).collect(Collectors.toSet());
     }
 
     public void excludeThisTest() {
@@ -138,8 +134,7 @@ public class TestDiff {
         if(excludeThisTest || other.excludeThisTest) {
             excludeThisTest = true;
         } else {
-            //all diff.size() == 1
-            diff.get(0).merge(other.diff.get(0));
+//            diff.get(0).merge(other.diff.get(0));
 
         }
     }
@@ -148,8 +143,8 @@ public class TestDiff {
         if(excludeThisTest || other.excludeThisTest) {
             return 0;
         } else {
-            //all diff.size() == 1
-            return diff.get(0).mergeSize(other.diff.get(0));
+            return 0;
+//            return diff.get(0).mergeSize(other.diff.get(0));
 
         }
     }
