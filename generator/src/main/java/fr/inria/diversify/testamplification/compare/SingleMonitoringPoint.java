@@ -2,6 +2,8 @@ package fr.inria.diversify.testamplification.compare;
 
 import fr.inria.diversify.testamplification.compare.diff.MonitoringPointDiff;
 
+import java.util.Arrays;
+
 /**
  * User: Simon
  * Date: 06/03/15
@@ -37,16 +39,27 @@ public class SingleMonitoringPoint extends AbstractMonitoringPoint {
                 diff.setClassDiff(true);
                 return diff;
             } else {
-                for (int i = 0; i < values.length; i++) {
+                for (int i = 0; i < methods.length; i++) {
+                    String mth = methods[i];
                     Object oValue = this.getValues()[i];
-                    Object sValue = otherCast.getValues()[i];
+                    Object sValue = otherCast.getValues()[otherCast.indexOfMethod(mth)];
                     if (!oValue.equals(sValue)) {
-                       diff.addMethodDiff(methods[i], oValue, sValue);
+                       diff.addMethodDiff(mth, oValue, sValue);
                     }
                 }
             }
         }
         return diff;
+    }
+
+
+    protected int indexOfMethod(String mth) {
+        for (int i = 0; i < methods.length; i++) {
+            if(methods[i].equals(mth)) {
+                return  i;
+            }
+        }
+        return  -1;
     }
 
     public void setValues(Object[] values) {

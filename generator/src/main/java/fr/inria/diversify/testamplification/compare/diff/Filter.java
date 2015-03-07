@@ -50,27 +50,24 @@ public class Filter {
 
     protected void load(String file) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
-
-
         String line = reader.readLine();
         while (line != null) {
             String[] tmp = line.split(" ");
-            if(isInteger(tmp[0])) {
-                monitorPointToExclude.add(Integer.parseInt(tmp[0]));
-            } else {
-                if (tmp.length == 2 && tmp[1].startsWith("exclude")) {
-                    testToExclude.add(tmp[0]);
+            if (tmp[1].equals("exclude")) {
+                if(isInteger(tmp[0])) {
+                    monitorPointToExclude.add(Integer.parseInt(tmp[0]));
                 } else {
-                    if (!filter.containsKey(tmp[0])) {
-                        filter.put(tmp[0], new HashSet<>());
-                    }
-                        filter.get(tmp[0]).add(line.substring(tmp[0].length() + 1, line.length()));
+                    testToExclude.add(tmp[0]);
                 }
+            } else {
+                if (!filter.containsKey(tmp[0])) {
+                    filter.put(tmp[0], new HashSet<>());
+                }
+                filter.get(tmp[0]).add(line.substring(tmp[0].length() + 1, line.length()));
             }
             line = reader.readLine();
         }
     }
-
 
     protected boolean isInteger(String string) {
         try {

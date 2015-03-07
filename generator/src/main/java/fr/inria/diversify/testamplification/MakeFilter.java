@@ -31,7 +31,6 @@ public class MakeFilter {
         int n = Integer.parseInt(args[2]);
         String p1dir = args[0];
         String p2dir = args[1];
-//        Set<String> diffs;
         String out;
 
         MakeFilter mk = new MakeFilter();

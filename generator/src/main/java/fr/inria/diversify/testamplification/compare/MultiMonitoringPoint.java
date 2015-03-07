@@ -35,24 +35,24 @@ public class MultiMonitoringPoint extends AbstractMonitoringPoint {
             diff.setIsMulti(true);
             return diff;
         } else {
-            boolean max = false;
+            boolean notSameSize = false;
             MultiMonitoringPoint otherCast = (MultiMonitoringPoint) other;
             int borne = monitoringPoints.size();
             if(this.monitoringPoints.size() != otherCast.monitoringPoints.size())  {
                 borne = Math.min(this.monitoringPoints.size(), otherCast.monitoringPoints.size());
-                max = true;
+                notSameSize = true;
             }
             int i = 0;
             for(; i< borne; i++) {
                 MonitoringPointDiff tmp = this.monitoringPoints.get(i).compare(otherCast.monitoringPoints.get(i));
-                diff.addAllMethodDiff(tmp.getMethodsDiff());
-                if (tmp.getClassDiff() == true) {
-                    max = true;
+                diff.addAllMethodDiff(tmp.getMethodsDiff(), tmp.getValueOriginal(), tmp.getValueSosie());
+                if (tmp.getClassDiff()) {
+                    notSameSize = true;
                     break;
                 }
             }
 
-            if(max) {
+            if(notSameSize) {
                 diff.setMaxSize(i);
             }
             return diff;

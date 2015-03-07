@@ -23,6 +23,7 @@ public class MonitoringPointDiff {
     protected int maxSize; //pour les multiMonitoringPoint
 
     protected boolean exclude = false;
+    private Object originalValues;
 
     public MonitoringPointDiff(int id) {
         maxSize = -1;
@@ -53,9 +54,11 @@ public class MonitoringPointDiff {
     }
 
     public void addMethodDiff(String method, Object oValue, Object sValue) {
-        methodsDiff.add(method);
-        valueOriginal.add(oValue.toString());
-        valueSosie.add(sValue.toString());
+        if(!methodsDiff.contains(method)) {
+            methodsDiff.add(method);
+            valueOriginal.add(oValue.toString());
+            valueSosie.add(sValue.toString());
+        }
     }
 
     public void setIsMulti(boolean isMulti) {
@@ -74,8 +77,10 @@ public class MonitoringPointDiff {
         maxSize = size;
     }
 
-    public void addAllMethodDiff(Collection<String> methodsDiff) {
-        this.methodsDiff.addAll(methodsDiff);
+    public void addAllMethodDiff(List<String> methodsDiff, List<String> valueOriginal, List<String> valueSosie) {
+        for(int i = 0; i < methodsDiff.size(); i++) {
+            addMethodDiff(methodsDiff.get(i), valueOriginal.get(i), valueSosie.get(i));
+        }
     }
 
     public int size() {
@@ -140,5 +145,13 @@ public class MonitoringPointDiff {
                 }
             }
         }
+    }
+
+    public List<String> getValueOriginal() {
+        return valueOriginal;
+    }
+
+    public List<String> getValueSosie() {
+        return valueSosie;
     }
 }

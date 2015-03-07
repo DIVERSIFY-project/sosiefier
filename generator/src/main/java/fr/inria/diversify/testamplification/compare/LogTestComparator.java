@@ -40,7 +40,7 @@ public class LogTestComparator {
         TestDiff result = new TestDiff(original.getSignature());
         Log.trace("compare test {}", original.getSignature());
 
-        List<Integer> allId = new ArrayList<>(original.getAllId());
+        Set<Integer> allId = new HashSet<>(original.getAllId());
         allId.addAll(sosie.getAllId());
 
         for(int id : allId) {

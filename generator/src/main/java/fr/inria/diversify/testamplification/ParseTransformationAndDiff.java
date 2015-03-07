@@ -7,6 +7,7 @@ import fr.inria.diversify.testamplification.compare.diff.Diff;
 import fr.inria.diversify.testamplification.compare.diff.Filter;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParserException;
+import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,14 +37,14 @@ public class ParseTransformationAndDiff {
 
 
         p.applyFilter();
-        p.stat();
-        for(Transformation trans : p.diffs.keySet()) {
-            p.diffs.get(trans).toJson();
-        }
+        List<Transformation> transformations = p.stat();
+
+        p.writeTransformations(inputConfiguration.getProperty("result"), transformations);
 
     }
 
-    public void stat() {
+    public List<Transformation> stat() {
+        List<Transformation> transformations = new ArrayList<>();
         int count = 0;
         for (Transformation transformation : diffs.keySet()) {
            int sum = diffs.get(transformation).size();
@@ -51,12 +52,22 @@ public class ParseTransformationAndDiff {
             if(sum != 0) {
                 Log.info("{} \nnb: {}\n",transformation, sum);
                 count++;
+                transformations.add(transformation);
                 Log.info(diffs.get(transformation).toString());
             }
         }
         Log.info("{} {}",diffs.size(), count);
+        return transformations;
 
 
+    }
+
+    public String writeTransformations(String fileName, List<Transformation> transformations) throws IOException, JSONException {
+        if (transformations.isEmpty())
+            return "";
+
+        TransformationsWriter write = new TransformationsWriter(transformations, fileName);
+        return write.writeAllTransformation(null);
     }
 
     public void applyFilter() {
@@ -157,11 +168,4 @@ public class ParseTransformationAndDiff {
                 Integer.parseInt(inputConfiguration.getProperty("javaVersion")));
         inputProgram.setFactory(factory);
     }
-
-
-    protected List<Integer> foo() {
-        List ret = new ArrayList<>();
-        return ret;
-    }
-
 }

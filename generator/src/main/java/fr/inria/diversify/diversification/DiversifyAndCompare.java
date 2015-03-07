@@ -49,7 +49,7 @@ public class DiversifyAndCompare extends SinglePointDiversify {
 
                 trans.setStatus(status);
                 trans.setFailures(builder.getTestFail());
-                if (status == 0) {
+                if (status > -2) {
                     compare(trans, true);
                 }
                 // error during runTest
@@ -122,6 +122,7 @@ public class DiversifyAndCompare extends SinglePointDiversify {
                 filter = new Filter(filterFile);
                 filter.addFilter(result.buildFilter());
             } else {
+                int size = result.size();
                 result.filter(filter);
                 result.setSosie(sosie);
                 diff.add(result.toJson());
@@ -166,10 +167,6 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         this.originalLogDir = originalLogDir;
     }
 
-//    public void setFilterFile(String filterFile) {
-//        this.filterFile = filterFile;
-//    }
-
     public String printResult(String output) {
         Log.info("session result: {}", sessionResults);
         mkDirResult(output);
@@ -195,17 +192,5 @@ public class DiversifyAndCompare extends SinglePointDiversify {
             ret +=  tmp[i] + "/";
         }
         return ret;
-    }
-
-    public Set<String> loadFilter(String file) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        Set<String> filter = new HashSet<>();
-
-        String line = reader.readLine();
-        while(line != null) {
-            filter.add(line);
-            line = reader.readLine();
-        }
-        return filter;
     }
 }
