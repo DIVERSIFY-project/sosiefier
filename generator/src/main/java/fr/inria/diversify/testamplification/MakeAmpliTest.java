@@ -162,7 +162,13 @@ public class MakeAmpliTest {
     protected void writeJavaClass(Factory factory, File out, File fileFrom) {
         Environment env = factory.getEnvironment();
         AbstractProcessor processor = new JavaOutputProcessorWithFilter(out, new DiversifyPrettyPrinter(env), allClassesName(fileFrom));
-        applyProcessor(factory, processor);
+        try {
+            applyProcessor(factory, processor);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.debug("");
+        }
+
     }
 
     protected Factory initSpoon(String srcDirectory) {

@@ -255,6 +255,8 @@ public class TransformationJsonParser {
 
             Transformation trans = null;
 
+            if (type.equals("multi"))
+                trans = parseMultiTransformation(jsonObject);
             if (type.equals("mutation"))
                 trans = parseMutation(jsonObject);
             if (type.equals("adrStmt"))
@@ -284,6 +286,16 @@ public class TransformationJsonParser {
         } catch (JSONException e) {
             throw new TransformationParserException(e);
         }
+    }
+
+    private Transformation parseMultiTransformation(JSONObject jsonObject) throws JSONException, TransformationParserException {
+        MultiTransformation trans = new MultiTransformation(true);
+
+        JSONArray array = jsonObject.getJSONArray("transformations");
+        for(int i = 0; i < array.length(); i++) {
+            trans.add(parseTransformation(array.getJSONObject(i)));
+        }
+        return trans;
     }
 
     protected Transformation parseOther(JSONObject jsonObject) throws JSONException, TransformationParserException {

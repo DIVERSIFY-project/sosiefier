@@ -133,4 +133,12 @@ public class Diff {
         }
         return ret;
     }
+
+    public Diff clone () {
+        Diff d = new Diff();
+        for(TestDiff testDiff: testDiffs) {
+            d.add(testDiff.clone());
+        }
+        return d;
+    }
 }

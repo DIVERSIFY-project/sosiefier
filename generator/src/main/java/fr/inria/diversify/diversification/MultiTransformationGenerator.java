@@ -1,50 +1,64 @@
 package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.statistic.SinglePointSessionResults;
+import fr.inria.diversify.testamplification.compare.diff.Diff;
 import fr.inria.diversify.transformation.MultiTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
 import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
+import fr.inria.diversify.transformation.query.AmpSosieQuery;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * Created by Simon on 13/02/15.
  */
-public class MultiTransformationGenerator extends AbstractDiversify {
+public class MultiTransformationGenerator extends DiversifyAndCompare {
     protected MultiTransformation currentMultiTransformation;
     protected boolean onlySosie;
+
 
     protected int transformationSize;
 
     public MultiTransformationGenerator(InputConfiguration inputConfiguration, String projectDir, String srcDir) {
-        this.sourceDir = srcDir;
-        this.projectDir = projectDir;
-        transformations = new ArrayList<>();
-        this.inputConfiguration = inputConfiguration;
-        sessionResults = new SinglePointSessionResults();
+        super(inputConfiguration, projectDir, srcDir, null, null);
     }
 
     @Override
     public void run(int n) throws Exception {
-        currentMultiTransformation = new MultiTransformation();
-        while(transformations.size() < n && transQuery.hasNextTransformation()) {
-
+        currentMultiTransformation = new MultiTransformation(true);
+        while(trial < n && transQuery.hasNextTransformation()) {
             applyAndCheck(transQuery.query());
 
-            if(currentMultiTransformation.size() == transformationSize) {
-                transformations.add(currentMultiTransformation);
+            addTransformation();
+
+            if(currentMultiTransformation.size() == transformationSize || !transQuery.hasNextTransformation()) {
+                addTransformation();
 
                 copySosieProgram();
-                currentMultiTransformation = new MultiTransformation();
+                currentMultiTransformation = new MultiTransformation(true);
                 transQuery.currentTransformationEnd();
                 trial++;
+            }
+        }
+    }
+
+    protected void addTransformation() throws JSONException {
+        if(currentMultiTransformation.getStatus() == 0) {
+            Transformation clone = currentMultiTransformation.clone();
+            if(!transformations.contains(clone)) {
+                transformations.add(clone);
+                Diff d = ((AmpSosieQuery) transQuery).getCurrentDiff().clone();
+                d.setSosie(clone);
+                diff.add(d.toJson());
             }
         }
     }

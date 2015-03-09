@@ -186,10 +186,15 @@ public abstract class AbstractDiversify {
     }
 
     protected void mkDirResult(String output) {
-        String[] tmp = output.split("/");
         String dirs = "";
-        for (int i = 0; i < tmp.length - 1; i++) {
-            dirs = dirs + tmp[i] + "/";
+        if(output.endsWith("/")) {
+            dirs = output;
+        } else {
+            String[] tmp = output.split("/");
+
+            for (int i = 0; i < tmp.length - 1; i++) {
+                dirs = dirs + tmp[i] + "/";
+            }
         }
         new File(dirs).mkdirs();
         Log.debug("mkdir: {}", dirs);

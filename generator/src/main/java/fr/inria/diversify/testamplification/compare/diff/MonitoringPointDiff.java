@@ -38,7 +38,7 @@ public class MonitoringPointDiff {
         classDiff = jsonObject.getBoolean("classDiff");
         isMulti = jsonObject.getBoolean("isMulti");
         maxSize = jsonObject.getInt("maxSize");
-        JSONArray diff = jsonObject.getJSONArray("methodDiff");
+        JSONArray diff = jsonObject.getJSONArray("methodDiffs");
         int length = diff.length();
         methodsDiff = new ArrayList<>();
         valueOriginal = new ArrayList<>();
@@ -153,5 +153,50 @@ public class MonitoringPointDiff {
 
     public List<String> getValueSosie() {
         return valueSosie;
+    }
+
+    public void merge(MonitoringPointDiff diffOther) {
+        if(maxSize != -1 || diffOther.maxSize != -1) {
+            maxSize = Math.min(maxSize, diffOther.maxSize);
+        }
+        exclude = exclude || diffOther.exclude;
+        classDiff = classDiff || diffOther.classDiff;
+        isMulti = isMulti || diffOther.classDiff;
+
+        if(classDiff) {
+            methodsDiff.clear();
+        } else {
+            methodsDiff.addAll(diffOther.methodsDiff);
+        }
+    }
+
+    public MonitoringPointDiff clone() {
+        MonitoringPointDiff diff = new MonitoringPointDiff(id);
+        diff.methodsDiff.addAll(methodsDiff);
+        diff.classDiff = classDiff;
+        diff.isMulti = isMulti;
+        diff.exclude = exclude;
+        diff.maxSize = maxSize;
+
+        return diff;
+    }
+
+    public int mergeSize(MonitoringPointDiff diffOther) {
+        if(exclude || diffOther.exclude)
+            return 0;
+        int size = 0;
+        if(maxSize != -1 || diffOther.maxSize != -1) {
+            size = 1;
+        }
+        if(classDiff || diffOther.classDiff) {
+            size++;
+        }
+        if(isMulti || diffOther.classDiff) {
+            size++;
+        }
+
+        Set<String> set = new HashSet<>(methodsDiff);
+        set.addAll(diffOther.methodsDiff);
+        return size + set.size();
     }
 }

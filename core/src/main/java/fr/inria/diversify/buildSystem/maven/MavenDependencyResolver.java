@@ -30,6 +30,7 @@ import java.util.*;
  */
 public class MavenDependencyResolver {
     Set<URL> jarURL = new HashSet<>();
+    Set<String> dependencyResolve = new HashSet<>();
     Properties properties;
     String baseDir;
 
@@ -89,7 +90,10 @@ public class MavenDependencyResolver {
                 Log.debug("resolve artifact: {}", artifactId);
 
                 File pomD = resolver.resolve(artifactId + ":pom", urls);
-                resolveAllDependencies(loadProject(pomD));
+                if(!dependencyResolve.contains(pomD.getAbsolutePath())) {
+                    dependencyResolve.add(pomD.getAbsolutePath());
+                    resolveAllDependencies(loadProject(pomD));
+                }
 
             } catch (Exception e) {}
 
@@ -117,7 +121,7 @@ public class MavenDependencyResolver {
     }
 
     protected void resolveModuleDependencies(String moduleName) throws IOException, XmlPullParserException {
-        MavenProject project = loadProject(new File(baseDir + "/" + moduleName + "/pom.xml"));
+        MavenProject project = loadProject(new File(baseDir + moduleName + "/pom.xml"));
         resolveAllDependencies(project);
     }
 

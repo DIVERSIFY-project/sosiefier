@@ -48,7 +48,7 @@ public class TestDiff {
             object.put("excludeThisTest", true);
         } else {
             JSONArray array = new JSONArray();
-            object.put("logDiff", array);
+            object.put("monitoringPoints", array);
 
             for (MonitoringPointDiff d : diff) {
                 array.put(d.toJson());
@@ -64,7 +64,13 @@ public class TestDiff {
         if(object.has("exclude")) {
             excludeThisTest = true;
         } else {
-            JSONArray logDiff = object.getJSONArray("logDiff");
+            JSONArray logDiff;
+            if( object.has("logDiff")) { //old version
+                logDiff = object.getJSONArray("logDiff");
+            } else {
+                logDiff = object.getJSONArray("monitoringPoints");
+            }
+
             for (int i = 0; i < logDiff.length(); i++) {
                 diff.add(new MonitoringPointDiff(logDiff.getJSONObject(i)));
             }
@@ -134,8 +140,17 @@ public class TestDiff {
         if(excludeThisTest || other.excludeThisTest) {
             excludeThisTest = true;
         } else {
-//            diff.get(0).merge(other.diff.get(0));
-
+            for(MonitoringPointDiff diffOther : other.diff) {
+                MonitoringPointDiff diffThis = diff.stream()
+                        .filter(d -> d.id == diffOther.id)
+                        .findAny()
+                        .orElse(null);
+                if(diffThis != null) {
+                    diffThis.merge(diffOther);
+                } else {
+                    diff.add(diffOther.clone());
+                }
+            }
         }
     }
 
@@ -143,10 +158,29 @@ public class TestDiff {
         if(excludeThisTest || other.excludeThisTest) {
             return 0;
         } else {
-            return 0;
-//            return diff.get(0).mergeSize(other.diff.get(0));
-
+            int size = 0;
+            for(MonitoringPointDiff diffOther : other.diff) {
+                MonitoringPointDiff diffThis = diff.stream()
+                        .filter(d -> d.id == diffOther.id)
+                        .findAny()
+                        .orElse(null);
+                if(diffThis != null) {
+                    size += diffThis.mergeSize(diffOther);
+                } else {
+                    size += diffOther.size();
+                }
+            }
+            return size;
         }
+    }
+
+    public TestDiff clone() {
+        TestDiff td = new TestDiff(signature);
+        td.excludeThisTest = excludeThisTest;
+        for(MonitoringPointDiff md : diff) {
+            td.add(md.clone());
+        }
+        return td;
     }
 }
 

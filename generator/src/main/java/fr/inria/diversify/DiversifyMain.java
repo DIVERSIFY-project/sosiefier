@@ -63,6 +63,7 @@ public class DiversifyMain {
         AbstractDiversify runner = initRunner();
         runner.setTransformationQuery(query);
         AbstractBuilder builder = initBuilder(runner.getTmpDir());
+        inputProgram.setCoverageReport(initCoverageReport(runner.getTmpDir()));
         runner.setBuilder(builder);
 
 
@@ -225,7 +226,7 @@ public class DiversifyMain {
                                     .collect(Collectors.joining(System.getProperty("path.separator")));
             inputProgram.setExternalSourceCodeDir(sourcesDir);
         }
-        inputProgram.setCoverageReport(initCoverageReport());
+//        inputProgram.setCoverageReport(initCoverageReport());
 
         inputProgram.setTransformationPerRun(
                 Integer.parseInt(inputConfiguration.getProperty("transformation.size", "1")));
@@ -312,9 +313,9 @@ public class DiversifyMain {
         }
     }
 
-    protected ICoverageReport initCoverageReport() {
+    protected ICoverageReport initCoverageReport(String tmpDir) {
         String jacocoFile = inputConfiguration.getProperty("jacoco");
-        String classes = inputConfiguration.getProperty("project") + "/" + inputConfiguration.getProperty("classes");
+        String classes = tmpDir + "/" + inputConfiguration.getProperty("classes");
 
         ICoverageReport icr = null;
         if (jacocoFile != null) {
@@ -415,14 +416,14 @@ public class DiversifyMain {
 //        Set<Transformation> singleTransformation = transformations.stream()
 //                .filter(t -> t instanceof SingleTransformation)
 //                .map(t -> (SingleTransformation) t)
-//                .filter(t -> t.classLocationName().equals("org.apache.commons.lang3.StringUtils"))
+//                .filter(t -> t.classLocationName().equals("org.apache.commons.collections4.bidimap.DualTreeBidiMap"))
 //                .collect(Collectors.toSet());
 //        write.writeTransformation(fileName +"StringUtils.json",singleTransformation);
 //
 //        singleTransformation = transformations.stream()
 //                .filter(t -> t instanceof SingleTransformation)
 //                .map(t -> (SingleTransformation) t)
-//                .filter(t -> t.isSosie()).filter(t -> t.classLocationName().equals("org.apache.commons.lang3.StringUtils"))
+//                .filter(t -> t.isSosie()).filter(t -> t.classLocationName().equals("org.apache.commons.collections4.bidimap.DualTreeBidiMap"))
 //                .collect(Collectors.toSet());
 //
 //        write.writeTransformation(fileName +"_sosie_StringUtils.json",singleTransformation);
@@ -430,7 +431,7 @@ public class DiversifyMain {
         CVLMetric cvlMetric = new CVLMetric(inputProgram);
         cvlMetric.printMetrics(fileName + "_cvlMetric.csv");
 
-        visu(transformations);
+//        visu(transformations);
 //        FailureMatrix matrix = new FailureMatrix(transformations,inputConfiguration.getProperty("allTestFile"));
 //        matrix.printAllMatrix(fileName);
     }

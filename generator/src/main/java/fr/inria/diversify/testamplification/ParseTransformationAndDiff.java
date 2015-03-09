@@ -45,6 +45,7 @@ public class ParseTransformationAndDiff {
 
     public List<Transformation> stat() {
         List<Transformation> transformations = new ArrayList<>();
+        int totalSum = 0;
         int count = 0;
         for (Transformation transformation : diffs.keySet()) {
            int sum = diffs.get(transformation).size();
@@ -54,9 +55,10 @@ public class ParseTransformationAndDiff {
                 count++;
                 transformations.add(transformation);
                 Log.info(diffs.get(transformation).toString());
+                totalSum += sum;
             }
         }
-        Log.info("{} {}",diffs.size(), count);
+        Log.info("nb sosie: {}, nb diverse sosie: {}, mean divergence: {}",diffs.size(), count, ((double) totalSum)/((double) count));
         return transformations;
 
 

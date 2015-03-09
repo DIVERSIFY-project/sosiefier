@@ -5,13 +5,8 @@ import fr.inria.diversify.testamplification.ParseTransformationAndDiff;
 import fr.inria.diversify.testamplification.compare.diff.Diff;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParserException;
-import fr.inria.diversify.util.Log;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -21,7 +16,7 @@ import java.util.stream.Collectors;
  */
 public class AmpSosieQuery extends TransformationQuery {
     protected List<Diff> diffs;
-    protected Diff curentDiff;
+    protected Diff currentDiff;
     protected boolean removeAfterQuery = true;
     protected boolean shuffle = false;
 
@@ -54,10 +49,10 @@ public class AmpSosieQuery extends TransformationQuery {
             index = r.nextInt(mostDifferentTransformation.size());
         }
         Diff diff = mostDifferentTransformation.get(index);
-        if(curentDiff == null) {
-            curentDiff = diff;
+        if(currentDiff == null) {
+            currentDiff = diff;
         } else {
-            curentDiff.merge(diff);
+            currentDiff.merge(diff);
         }
 
         if(removeAfterQuery) {
@@ -67,12 +62,12 @@ public class AmpSosieQuery extends TransformationQuery {
     }
 
     protected List<Diff> mostDifferentTransformation() {
-        if(curentDiff == null) {
+        if(currentDiff == null) {
             return diffs;
         } else {
-            int size = curentDiff.size();
+            int size = currentDiff.size();
             return diffs.stream()
-                    .filter(diff -> curentDiff.mergeSize(diff) > size)
+                    .filter(diff -> currentDiff.mergeSize(diff) > size)
                     .collect(Collectors.toList());
         }
     }
@@ -82,7 +77,7 @@ public class AmpSosieQuery extends TransformationQuery {
     }
 
     public void currentTransformationEnd() {
-        curentDiff = null;
+        currentDiff = null;
     }
 
     public void setShuffle(boolean shuffle) {
@@ -91,5 +86,9 @@ public class AmpSosieQuery extends TransformationQuery {
 
     public void setRemoveAfterQuery(boolean removeAfterQuery) {
         this.removeAfterQuery = removeAfterQuery;
+    }
+
+    public Diff getCurrentDiff() {
+        return currentDiff;
     }
 }

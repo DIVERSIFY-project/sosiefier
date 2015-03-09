@@ -1,18 +1,39 @@
 package fr.inria.diversify.transformation;
 
-import java.util.LinkedList;
-import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.*;
 
 /**
  * Created by Simon on 28/01/15.
  */
 public class MultiTransformation extends Transformation {
-    List<Transformation> transformations;
+    Collection<Transformation> transformations;
 
 
-    public  MultiTransformation() {
-        transformations = new LinkedList<>();
+    public  MultiTransformation(boolean set) {
+        if(set) {
+            transformations = new HashSet<>();
+        } else {
+            transformations = new LinkedList<>();
+        }
         type = "multi";
+        name= "multi";
+        failures = new ArrayList<>();
+    }
+
+    @Override
+    public JSONObject toJSONObject() throws JSONException {
+        JSONObject object = super.toJSONObject();
+        final JSONArray array = new JSONArray();
+        object.put("transformations",array);
+       for(Transformation trans : transformations) {
+           array.put(trans.toJSONObject());
+       }
+
+        return object;
     }
 
     @Override
@@ -52,5 +73,33 @@ public class MultiTransformation extends Transformation {
 
     public int size() {
         return transformations.size();
+    }
+
+    public  MultiTransformation clone() {
+        MultiTransformation transformation = new MultiTransformation(transformations instanceof Set);
+        transformation.transformations = new ArrayList<>(transformations);
+        transformation.status = status;
+
+        return transformation;
+    }
+
+    public  int hashCode() {
+        return super.hashCode() * transformations.hashCode();
+    }
+
+    public boolean equals(Object other) {
+        if(other == null)
+            return false;
+        if(!this.getClass().isAssignableFrom(other.getClass()))
+            return  false;
+        MultiTransformation otherMulti = (MultiTransformation)other;
+
+        if(!equalParent(otherMulti.parent))
+            return false;
+
+        return status == otherMulti.status &&
+                name.equals(otherMulti.name) &&
+                failures.equals(otherMulti.failures) &&
+                transformations.equals(otherMulti.transformations);
     }
 }
