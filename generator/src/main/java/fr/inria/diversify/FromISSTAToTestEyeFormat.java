@@ -5,6 +5,7 @@ import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
+import fr.inria.diversify.persistence.json.input.JsonAstTransformationInput;
 import fr.inria.diversify.persistence.json.input.JsonSosiesInput;
 import fr.inria.diversify.persistence.json.output.*;
 import fr.inria.diversify.transformation.Transformation;
@@ -16,19 +17,20 @@ import org.json.JSONObject;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.UUID;
 
 /**
+ * Converts sosies from the old format to the brand new format
  *
- * Class to turn ISSTA JSON sosies into the Brand new TestEye format
- *
+ * <p/>
  * Created by marodrig on 11/02/2015.
  */
 public class FromISSTAToTestEyeFormat {
 
 
     //private static final String CONF_PATH = "C:\\MarcelStuff\\data\\DIVERSE\\input_configurations\\IsstaToTestEye-CommonColl.properties";
-    //private static final String CONF_PATH = "C:\\MarcelStuff\\data\\DIVERSE\\input_configurations\\IsstaToTestEye-CommonColl.properties";
-    private static final String CONF_PATH = "C:\\MarcelStuff\\data\\DIVERSE\\input_configurations\\IsstaToTestEye-CommonMath.properties";
+    private static final String CONF_PATH = "C:\\MarcelStuff\\data\\DIVERSE\\input_configurations\\IsstaToTestEye-gson.properties";
+    //private static final String CONF_PATH = "C:\\MarcelStuff\\data\\DIVERSE\\input_configurations\\IsstaToTestEye-CommonMath.properties";
 
     public static void main(String[] args) throws Exception {
 
@@ -52,15 +54,17 @@ public class FromISSTAToTestEyeFormat {
 
     /**
      * Loads the sosies with the JsonSosiesInput
+     *
      * @param inputConfiguration Input configuration to load
      * @return The collection of transformations loaded
      * @throws Exception
      */
-    private static Collection<Transformation> loadWithSosiesInput(InputConfiguration inputConfiguration) throws Exception {
+    public static Collection<Transformation> loadWithSosiesInput(InputConfiguration inputConfiguration) throws Exception {
         MavenDependencyResolver dr = new MavenDependencyResolver();
         dr.DependencyResolver(inputConfiguration.getProjectPath() + "\\pom.xml");
 
         InputProgram p = new InputProgram();
+        p.setSearchLineTolerance(25);
         p.configure(inputConfiguration);
 
         long t = System.currentTimeMillis();
@@ -80,6 +84,7 @@ public class FromISSTAToTestEyeFormat {
 
     /**
      * Gather scattered files into one single TestEye JSONFile.
+     *
      * @param inputConfiguration Input configuration
      * @throws JSONException
      * @throws IOException
@@ -97,21 +102,29 @@ public class FromISSTAToTestEyeFormat {
         JSONArray transformations = new JSONArray();
         result.put(JsonSectionOutput.TRANSFORMATIONS, transformations);
 
-        for ( File f : new File(inputConfiguration.getPreviousTransformationPath()).listFiles() ) {
+        File[] files = null;
+        File tpFile = new File(inputConfiguration.getPreviousTransformationPath());
+        if (tpFile.isDirectory()) files = tpFile.listFiles();
+        else files = new File[]{tpFile};
+
+
+        for (File f : files) {
             JSONArray a = getArray(f);
-            for ( int i = 0;  i < a.length() - 2; i ++) {
+            for (int i = 0; i < a.length() - 2; i++) {
                 try {
                     JSONObject tObj = a.getJSONObject(i);
-                    if ( tObj.has(JsonSectionOutput.TINDEX) )
-                        tObj.put(JsonSectionOutput.TINDEX, Generators.timeBasedGenerator().generate());
-                    if ( tObj.has("variableMapping") ) {
+                    if (tObj.has(JsonSectionOutput.TINDEX)) {
+                        UUID uuid = JsonAstTransformationInput.getValidUUI(tObj.getString(JsonSectionOutput.TINDEX));
+                        tObj.put(JsonSectionOutput.TINDEX, uuid);
+                    }
+                    if (tObj.has("variableMapping")) {
                         tObj.put(JsonSectionOutput.VARIABLE_MAP, tObj.get("variableMapping"));
                         tObj.remove("variableMapping");
                     }
-                    if ( tObj.has(JsonSectionOutput.TRANSPLANT) ) {
+                    if (tObj.has(JsonSectionOutput.TRANSPLANT)) {
                         correctSource(tObj.getJSONObject(JsonSectionOutput.TRANSPLANT));
                     }
-                    if ( tObj.has(JsonSectionOutput.TRANSPLANT_POINT) ) {
+                    if (tObj.has(JsonSectionOutput.TRANSPLANT_POINT)) {
                         correctSource(tObj.getJSONObject(JsonSectionOutput.TRANSPLANT_POINT));
                     }
                     if (tObj.has(JsonSectionOutput.STATUS) && tObj.getInt(JsonSectionOutput.STATUS) == 0) {
@@ -130,13 +143,14 @@ public class FromISSTAToTestEyeFormat {
     }
 
     private static void correctSource(JSONObject o) throws JSONException {
-        if ( o.has("sourceCode") ) {
+        if (o.has("sourceCode")) {
             o.put(JsonSectionOutput.SOURCE_CODE, o.getString("sourceCode"));
         }
     }
 
     /**
      * Get the array from the json
+     *
      * @param input A file with a JSON Array inside
      * @return
      * @throws IOException

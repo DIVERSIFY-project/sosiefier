@@ -49,10 +49,31 @@ public class InputProgram {
      */
     private AbstractCodeFragmentProcessor<?> codeFragmentProcessor;
 
+    public int getSearchLineTolerance() {
+        return searchLineTolerance;
+    }
+
+    public void setSearchLineTolerance(int searchLineTolerance) {
+        this.searchLineTolerance = searchLineTolerance;
+    }
+
+    /**
+     * Sets the tolerance for the distance of lines to find a fragment
+     */
+    private int searchLineTolerance;
+
+    public double getSearchToleranceThreshold() {
+        return searchToleranceThreshold;
+    }
+
+    public void setSearchToleranceThreshold(double searchToleranceThreshold) {
+        this.searchToleranceThreshold = searchToleranceThreshold;
+    }
+
     /**
      * Default tolerance value for the code fragment searching algorithm
      */
-    private double searchToleranceThreshold = 0.9999999;
+    private double searchToleranceThreshold = 0.85;
 
     /**
      * List of all the code fragments extracted by Spoon of the input program
@@ -227,7 +248,7 @@ public class InputProgram {
 
     public CodeFragment findCodeFragment(String position, String searchValue,
                                          Accessor<CodeFragment, String> accesor) {
-        return findCodeFragment(position, searchValue, accesor, 5, 0.85);
+        return findCodeFragment(position, searchValue, accesor, searchLineTolerance, searchToleranceThreshold);
     }
 
     public CodeFragment findCodeFragment(String position, String searchValue,
@@ -248,7 +269,8 @@ public class InputProgram {
         int similiarFragmentCount = 0;
         int similarMinDist = Integer.MAX_VALUE;
 
-        CodeFragmentList fragments = getCodeFragmentsByClass().get(position);
+        //CodeFragmentList fragments = getCodeFragmentsByClass().get(position);
+        CodeFragmentList fragments = getCodeFragments();
         if (fragments != null) {
             for (CodeFragment codeFragment : fragments) {
                 String[] cfPos = codeFragment.positionString().split(":");

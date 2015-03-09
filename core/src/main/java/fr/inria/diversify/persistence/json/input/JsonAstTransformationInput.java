@@ -84,7 +84,7 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
      * @param uuid
      * @return
      */
-    private UUID getValidUUI(String uuid) {
+    public static UUID getValidUUI(String uuid) {
         if (uuid == null) return Generators.timeBasedGenerator().generate();
         try {
             UUID fromStringUUID = UUID.fromString(uuid);
