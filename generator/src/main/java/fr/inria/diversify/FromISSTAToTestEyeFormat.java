@@ -27,7 +27,8 @@ public class FromISSTAToTestEyeFormat {
 
 
     //private static final String CONF_PATH = "C:\\MarcelStuff\\data\\DIVERSE\\input_configurations\\IsstaToTestEye-CommonColl.properties";
-    private static final String CONF_PATH = "C:\\MarcelStuff\\data\\DIVERSE\\input_configurations\\IsstaToTestEye-CommonColl.properties";
+    //private static final String CONF_PATH = "C:\\MarcelStuff\\data\\DIVERSE\\input_configurations\\IsstaToTestEye-CommonColl.properties";
+    private static final String CONF_PATH = "C:\\MarcelStuff\\data\\DIVERSE\\input_configurations\\IsstaToTestEye-CommonMath.properties";
 
     public static void main(String[] args) throws Exception {
 
@@ -122,7 +123,8 @@ public class FromISSTAToTestEyeFormat {
             }
         }
 
-        FileWriter fw = new FileWriter(inputConfiguration.getResultPath() + "/testEye.json");
+        //FileWriter fw = new FileWriter(inputConfiguration.getResultPath() + "/testEye.json");
+        FileWriter fw = new FileWriter(inputConfiguration.getResultPath());
         result.write(fw);
         fw.close();
     }

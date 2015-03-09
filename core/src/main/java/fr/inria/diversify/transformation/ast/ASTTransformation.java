@@ -80,10 +80,8 @@ public abstract class ASTTransformation extends SingleTransformation {
         CtSimpleType<?> type = getOriginalClass(transplantationPoint);
         Factory factory = type.getFactory();
         Environment env = factory.getEnvironment();
-
         JavaOutputProcessor processor = new JavaOutputProcessor(new File(directory), new DefaultJavaPrettyPrinter(env));
         processor.setFactory(factory);
-
         processor.createJavaFile(type);
         Log.debug("write type {} in directory {}", type.getQualifiedName(), directory);
     }
