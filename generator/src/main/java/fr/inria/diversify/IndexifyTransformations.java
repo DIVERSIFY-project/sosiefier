@@ -13,6 +13,7 @@ import java.util.Properties;
  * <p/>
  * Created by marodrig on 25/07/2014.
  */
+@Deprecated
 public class IndexifyTransformations {
 
     public static void main(String[] args) throws Exception {

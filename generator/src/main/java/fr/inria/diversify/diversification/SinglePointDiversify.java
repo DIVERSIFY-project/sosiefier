@@ -41,7 +41,6 @@ public class SinglePointDiversify extends AbstractDiversify {
         for(int i = 0;i < n; i++  ) {
             run(transQuery.query());
         }
-        Log.info("session result: {}", sessionResults);
     }
 
 
@@ -82,8 +81,8 @@ public class SinglePointDiversify extends AbstractDiversify {
         } catch (ApplyTransformationException e) {
             tryRestore(trans,e);
         } catch (BuildTransplantException e) {}
-        Integer result = runTest(tmpDir);
-        Log.debug("run after restore: " +result);
+//        Integer result = runTest(tmpDir);
+//        Log.debug("run after restore: " +result);
     }
 
 

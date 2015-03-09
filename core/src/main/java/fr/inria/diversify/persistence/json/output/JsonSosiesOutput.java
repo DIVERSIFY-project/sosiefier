@@ -1,6 +1,7 @@
 package fr.inria.diversify.persistence.json.output;
 
 import fr.inria.diversify.persistence.PersistenceException;
+import fr.inria.diversify.persistence.json.input.JsonSectionInput;
 import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,7 +31,7 @@ public class JsonSosiesOutput {
     /**
      * Customizable sections by the user of the output
      */
-    private HashMap<Class<? extends JsonSectionOutput>, JsonSectionOutput> visibleSections;
+    private HashMap<Class<? extends JsonSectionOutput>, JsonSectionOutput> sections;
 
     /**
      * Saves the sosies with version information
@@ -58,16 +59,20 @@ public class JsonSosiesOutput {
      * @param generatorVersion
      */
     private void initSections(String srcPOM, String generatorVersion) {
+        sections = new HashMap<>();
+
         astSections = Arrays.asList(new JsonAstTransformationOutput[]{
                         new JsonAstReplaceOutput(),
                         new JsonAstAddOutput(),
                         new JsonAstDeleteOutput(),
                 });
-        visibleSections = new HashMap<>();
-        for (JsonSectionOutput s : astSections) visibleSections.put(s.getClass(), s);
+        for (JsonSectionOutput s : astSections) sections.put(s.getClass(), s);
+
         JsonHeaderOutput s = new JsonHeaderOutput(srcPOM, generatorVersion);
         s.setTransformations(transformations);
-        visibleSections.put(JsonHeaderOutput.class, s);
+        sections.put(JsonHeaderOutput.class, s);
+
+        sections.put(JsonFailuresOutput.class, new JsonFailuresOutput());
     }
 
     /**
@@ -76,7 +81,7 @@ public class JsonSosiesOutput {
      * @param section Output Section to be set
      */
     public void setSection(Class<? extends JsonSectionOutput> aClass, JsonSectionOutput section) {
-        visibleSections.put(aClass, section);
+        sections.put(aClass, section);
     }
 
     /**
@@ -85,23 +90,20 @@ public class JsonSosiesOutput {
      * @return
      */
     public JsonSectionOutput getSection(Class<? extends JsonSectionOutput> aClass){
-        return visibleSections.get(aClass.getClass());
+        return sections.get(aClass.getClass());
     }
 
     /**
      * Writes the transformation into a JSON object
      */
     protected void writeToJson() {
-        //Make sure all transformations have unique id. //TODO: Investigate the advantages of adding a UUId
-        int id = 0;
-        for (Transformation t : transformations) t.setIndex(id++);
-
         //Write the header
-        visibleSections.get(JsonHeaderOutput.class).setTransformations(transformations);
-        visibleSections.get(JsonHeaderOutput.class).write(outputObject);
+        JsonHeaderOutput header = (JsonHeaderOutput) sections.get(JsonHeaderOutput.class);
+        header.setTransformations(transformations);
+        header.write(outputObject);
 
         //Write failures to file
-        JsonFailuresOutput failures = new JsonFailuresOutput();
+        JsonFailuresOutput failures = (JsonFailuresOutput) sections.get(JsonFailuresOutput.class);
         failures.setTransformations(transformations);
         failures.write(outputObject);
 
@@ -111,6 +113,14 @@ public class JsonSosiesOutput {
             s.setFailuresDict(failures.getFailuresDict());
             s.write(outputObject);
         }
+
+        //Write the rest of the trasnformations
+        for ( JsonSectionOutput s : sections.values() ) {
+            if ( s.equals(header) || s.equals(failures) || astSections.contains(s) ) continue;
+            s.setTransformations(transformations);
+            s.write(outputObject);
+        }
+
     }
 
     /**

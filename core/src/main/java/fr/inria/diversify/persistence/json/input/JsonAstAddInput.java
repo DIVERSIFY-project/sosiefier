@@ -5,11 +5,13 @@ import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
+import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
 
@@ -33,7 +35,7 @@ public class JsonAstAddInput extends JsonAstTransformationInput {
     }
 
     @Override
-    public void read(HashMap<Integer, Transformation> transformations) {
+    public void read(HashMap<UUID, Transformation> transformations) {
 
         try {
             if ( getJsonObject() == null ) throw new PersistenceException("JSON object unset");
@@ -55,7 +57,7 @@ public class JsonAstAddInput extends JsonAstTransformationInput {
             //Add transformation if all went OK
             addTransformation(transformations, transf);
         } catch (JSONException e) {
-            throw new PersistenceException("Unable to parse delete transformation", e);
+            throw new PersistenceException("Unable to parse add transformation", e);
         }
     }
 

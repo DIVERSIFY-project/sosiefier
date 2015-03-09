@@ -11,10 +11,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by marodrig on 09/01/2015.
@@ -53,7 +50,7 @@ public class JsonSosiesInput {
     /**
      * Visibles section for reading customization
      */
-    private HashMap<String, JsonSectionInput> visibleSections;
+    private HashMap<String, JsonSectionInput> sections;
 
     public JsonSosiesInput() {
         initSections();
@@ -76,7 +73,7 @@ public class JsonSosiesInput {
      * @param section Output Section to be set
      */
     public void setSection(Class<? extends JsonSectionInput> aClass, JsonSectionInput section) {
-        visibleSections.put(aClass.getName(), section);
+        sections.put(aClass.getName(), section);
     }
 
     /**
@@ -85,7 +82,7 @@ public class JsonSosiesInput {
      * @return
      */
     public JsonSectionInput getSection(Class<? extends JsonSectionInput> aClass){
-        return visibleSections.get(aClass.getName());
+        return sections.get(aClass.getName());
     }
 
 
@@ -123,10 +120,10 @@ public class JsonSosiesInput {
      * Init all sections in the input
      */
     private void initSections() {
-        visibleSections = new HashMap<>();
+        sections = new HashMap<>();
         setSection(JsonFailuresInput.class, new JsonFailuresInput(inputProgram, jsonObject));
         setSection(JsonAstTransformationCollectionInput.class,
-                new JsonAstTransformationCollectionInput(inputProgram, jsonObject));
+                   new JsonAstTransformationCollectionInput(inputProgram, jsonObject));
         setSection(JsonHeaderInput.class, new JsonHeaderInput(inputProgram, jsonObject));
     }
 
@@ -138,7 +135,7 @@ public class JsonSosiesInput {
     public Collection<Transformation> read() {
         open(); //Open the json file
 
-        HashMap<Integer, Transformation> result = new HashMap<>();
+        HashMap<UUID, Transformation> result = new HashMap<>();
         JsonHeaderInput headerInput = (JsonHeaderInput)getSection(JsonHeaderInput.class);
         headerInput.setJsonObject(jsonObject);
         headerInput.setInputProgram(inputProgram);
@@ -159,6 +156,13 @@ public class JsonSosiesInput {
         asts.setLoadMessages(getLoadMessages());
         asts.setFailures(failures.getFailures());
         asts.read(result);
+
+        for ( JsonSectionInput s : sections.values() ) {
+            if ( s.equals(headerInput) || s.equals(failures) || s.equals(asts) ) continue;
+            s.setInputProgram(inputProgram);
+            s.setJsonObject(jsonObject);
+            s.read(result);
+        }
 
         return result.values();
     }

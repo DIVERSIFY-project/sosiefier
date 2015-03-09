@@ -2,12 +2,9 @@ package fr.inria.diversify.sosie.logger.processor;
 
 import fr.inria.diversify.transformation.Transformation;
 import spoon.reflect.code.*;
-import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
-import spoon.support.reflect.code.CtBlockImpl;
 import spoon.support.reflect.code.CtCodeSnippetStatementImpl;
 
 

@@ -59,7 +59,7 @@ public class InstruTestAndMethod {
 
             InputProgram inputProgram = new InputProgram();
             inputProgram.setFactory(factory);
-            inputProgram.setSourceCodeDir(src);
+            inputProgram.setRelativeSourceCodeDir(src);
             inputProgram.setPreviousTransformationsPath(prevTransfPath);
             inputProgram.processCodeFragments();
 

@@ -22,7 +22,7 @@ import java.util.Map;
 public class ASTAdd extends ASTTransformation {
     protected CodeFragment transplant;
     protected Map<String, String> variableMapping;
-
+    protected boolean adTransplantBefore = false;
 
     public ASTAdd() {
         name = "add";
@@ -71,15 +71,22 @@ public class ASTAdd extends ASTTransformation {
             CtStatement tmp = (CtStatement) factory.Core().clone(transplantationPoint.getCtCodeFragment());
 
             tmp.setParent(stmtIf);
-            body.addStatement(tmp);
 
             stmtToAdd.getCtCodeFragment().setParent(stmtIf);
-            body.addStatement((CtStatement) factory.Core().clone(stmtToAdd.getCtCodeFragment()));
+
+            if(adTransplantBefore) {
+                body.addStatement((CtStatement) factory.Core().clone(stmtToAdd.getCtCodeFragment()));
+                body.addStatement(tmp);
+            } else {
+                body.addStatement(tmp);
+                body.addStatement((CtStatement) factory.Core().clone(stmtToAdd.getCtCodeFragment()));
+            }
             return stmtIf;
         } catch (Exception e) {
             throw new RuntimeException(new BuildTransplantException("", e));
         }
     }
+
     protected boolean withVarMapping() {
         return name.equals("add");
     }
@@ -117,8 +124,7 @@ public class ASTAdd extends ASTTransformation {
 
     @Override
     public String toString() {
-        String ret = new String();
-
+        String ret = "add\n";
         ret = ret + "transplantationPoint: "+ transplantationPoint.toString()+"\n" +
                 "varMapping: "+variableMapping+"\n";
 

@@ -103,8 +103,7 @@ public class LinkSubstitution extends CVLTransformation {
         LinkSubstitution o = (LinkSubstitution)other;
 
         try {
-        return stmtType().equals(o.stmtType())
-                && transformationPoint.equals(o.transformationPoint)
+        return transformationPoint.equals(o.transformationPoint)
                 && transplant.equals(o.transplant)
                 && ((classOrInterfaceSubstitution == null && o.classOrInterfaceSubstitution == null)
                 || classOrInterfaceSubstitution.equals(o.classOrInterfaceSubstitution));

@@ -22,6 +22,10 @@ import java.util.*;
  */
 public class InputConfiguration {
 
+    //GENERATOR VERSIONS
+    public static final String GEN_VERSION_1_0_0 = "1.0.0";
+    public static final String LATEST_GENERATOR_VERSION = GEN_VERSION_1_0_0;
+
     /**
      * Internal properties
      */
@@ -32,10 +36,10 @@ public class InputConfiguration {
      */
     private InputProgram inputProgram;
 
-    /**
+    /*
      * Output path to all operations resulting in output
      */
-    private String outputPath;
+    //private String outputPath;
 
     /**
      * Errors raised during validation
@@ -43,6 +47,7 @@ public class InputConfiguration {
     private List<String> errors;
 
     private String rootPath;
+
 
     public InputConfiguration() {
         prop = new Properties();
@@ -64,7 +69,7 @@ public class InputConfiguration {
 
     public InputConfiguration(String file) throws IOException {
         this(new FileInputStream(file));
-        if (rootPath == null || rootPath.equals("")) rootPath = new File(file).getParent();
+        if (rootPath == null || rootPath.equals("")) rootPath = System.getProperty("user.dir");
     }
 
     /**
@@ -125,10 +130,17 @@ public class InputConfiguration {
      *
      * @return String with the path
      */
-    public String getSourceCodeDir() {
-        return getAbsolutePath(prop.getProperty("project") + "/" + prop.getProperty("src"));
+    public String getRelativeSourceCodeDir() {
+        return prop.getProperty("src");
     }
 
+    /**
+     * The absolute source Dir
+     * @return
+     */
+    public String getAbsoluteSourceCodeDir() {
+        return getAbsolutePath(getProjectPath() + "/" + getRelativeSourceCodeDir());
+    }
 
     /**
      * Returns the path of the previously found transformations
@@ -254,7 +266,8 @@ public class InputConfiguration {
     }
 
     protected String getAbsolutePath(String path) {
-        Path p = null;
+        Path p = Paths.get(path);
+        if ( new File(path).exists() || p.isAbsolute() ) return path;
         if (rootPath != null && !rootPath.equals("")) p = Paths.get(rootPath + "/" + path);
         else p = Paths.get(path);
         return p.normalize().toString().replace(File.separator, "/");
@@ -277,10 +290,19 @@ public class InputConfiguration {
      */
     public boolean validate() {
         checkPath("Project path", getProjectPath(), true);
-        checkPath("Source path", getSourceCodeDir(), true);
+        checkPath("Source path", getProjectPath() + "/"+ getResultPath() , true);
         checkPath("Previous transformation path", getPreviousTransformationPath(), false);
         checkPath("Coverage dir", getCoverageDir(), false);
         checkPath("Root dir", getRootPath(), false);
+        checkPath("Temp directory", getTempDir(), false);
         return errors.size() == 0;
+    }
+
+    /**
+     * Gets the temporary directory for all operations
+     * @return
+     */
+    public String getTempDir() {
+        return getAbsolutePath(getProperty("tmpDir"));
     }
 }

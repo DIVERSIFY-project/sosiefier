@@ -31,7 +31,6 @@ import spoon.reflect.reference.CtTypeReference;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.nio.file.attribute.UserDefinedFileAttributeView;
 import java.util.*;
 
 /**
@@ -271,7 +270,8 @@ public class TransformationJsonParser {
                 throw new TransformationParserException("Unknown transformation type for " + jsonObject.toString());
 
             if (jsonObject.has("tindex")) {
-                trans.setIndex(jsonObject.getInt("tindex"));
+                Integer i = jsonObject.getInt("tindex");
+                trans.setIndex(UUID.fromString(i.toString()));
             }
             trans.setFailures(getFailures(jsonObject));
             trans.setStatus(jsonObject.getInt("status"));
@@ -460,7 +460,8 @@ public class TransformationJsonParser {
                 trans = parseASTDelete(jsonObject);
 
             if ( jsonObject.has("tindex") ) {
-                trans.setIndex(jsonObject.getInt("tindex"));
+                Integer i = jsonObject.getInt("tindex");
+                trans.setIndex(UUID.fromString(i.toString()));
             }
 
             trans.setName(jsonObject.getString("name"));
@@ -472,7 +473,7 @@ public class TransformationJsonParser {
         return trans;
     }
 
-    protected Transformation parseBytecode(JSONObject jsonObject) throws TransformationParserException {
+    protected BytecodeTransformation parseBytecode(JSONObject jsonObject) throws TransformationParserException {
 
         String name;
         BytecodeTransformation trans = null;

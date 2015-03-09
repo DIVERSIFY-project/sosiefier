@@ -9,7 +9,6 @@ import fr.inria.diversify.transformation.other.ReplaceNew;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -23,11 +22,6 @@ public class OtherQuery extends TransformationQuery {
     public OtherQuery(InputProgram inputProgram) {
         super(inputProgram);
         this.coverageReport = inputProgram.getCoverageReport();
-    }
-
-    @Override
-    public void setType(String type) {
-
     }
 
     @Override

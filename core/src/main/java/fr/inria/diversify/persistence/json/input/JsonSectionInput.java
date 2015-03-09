@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by marodrig on 12/01/2015.
@@ -19,7 +20,7 @@ public abstract class JsonSectionInput {
     /**
      * Max number of errors allowed
      */
-    public static final int MAX_ERRORS = 40;
+    public static final int MAX_ERRORS = 4000;
 
     /**
      * JSon to read transformations from
@@ -37,6 +38,10 @@ public abstract class JsonSectionInput {
     private List<String> loadMessages;
 
     protected int errorCount;
+
+    public JsonSectionInput() {
+
+    }
 
     public JsonSectionInput(InputProgram inputProgram, JSONObject jsonObject) {
         this.jsonObject = jsonObject;
@@ -66,7 +71,7 @@ public abstract class JsonSectionInput {
         this.jsonObject = jsonObject;
     }
 
-    public abstract void read(HashMap<Integer, Transformation> transformations);
+    public abstract void read(HashMap<UUID, Transformation> transformations);
 
     /**
      * Input program where the code fragments of the transformations are
@@ -88,7 +93,7 @@ public abstract class JsonSectionInput {
         return loadMessages;
     }
 
-    protected void throwWarning(String s, JSONException e, boolean raise) {
+    protected void throwWarning(String s, Exception e, boolean raise) {
         String msg = e == null ? "" : e.getMessage();
         getLoadMessages().add(JsonSosiesInput.WARNING + " " + s + " " + msg);
         if ( raise ) throw new PersistenceException(s, e);
@@ -110,6 +115,6 @@ public abstract class JsonSectionInput {
      * Halts the loading process if to many errors are registered
      */
     public void checkToManyErrors() {
-        if ( errorCount > MAX_ERRORS ) throwError("To many errors", null, true);
+        //if ( errorCount > MAX_ERRORS ) throwError("To many errors", null, true);
     }
 }

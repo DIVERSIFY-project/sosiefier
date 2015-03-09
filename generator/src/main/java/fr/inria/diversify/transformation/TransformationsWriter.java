@@ -78,7 +78,7 @@ public class TransformationsWriter {
             }
         }
         JSONObject dico = new JSONObject();
-        dico.put("failureDictionary",AbstractTransformation.failuresDico);
+        dico.put("failureDictionary", Transformation.failuresDico);
         obj.put(dico);
         obj.put(new SystemInformation().toJson());
         obj.write(out);

@@ -1,5 +1,6 @@
 package fr.inria.diversify.util;
 
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
 
 import java.util.Collection;
@@ -20,7 +21,7 @@ public class TransformationFilter {
         for(Transformation trans: transformations) {
             if((type == null || trans.getType().equals(type))
                     && (name == null || trans.getName().equals(name))
-                    && (transplantPosition == null || !trans.classLocationName().contains(transplantPosition))) {
+                    && (transplantPosition == null )) {
                 set.add(trans);
             }
         }

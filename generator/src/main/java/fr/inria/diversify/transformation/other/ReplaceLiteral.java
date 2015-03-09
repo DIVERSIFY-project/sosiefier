@@ -62,15 +62,6 @@ public class ReplaceLiteral extends SourceCodeTransformation {
         return transplantationPoint.getPosition().getLine();
     }
 
-    @Override
-    public String getLevel() {
-        return "AST";
-    }
-
-    @Override
-    public String stmtType() {
-        return "other";
-    }
 
     public void addSourceCode() {
         Log.debug("transformation: {}, {}", type, name);

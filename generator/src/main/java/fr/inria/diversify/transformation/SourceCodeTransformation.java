@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Simon on 30/10/14.
  */
-public abstract class SourceCodeTransformation extends AbstractTransformation {
+public abstract class SourceCodeTransformation extends SingleTransformation {
 
 
     /**

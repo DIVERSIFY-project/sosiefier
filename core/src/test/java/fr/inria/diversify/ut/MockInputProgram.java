@@ -5,6 +5,8 @@ import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.ut.diversification.FakeFragmentProcessor;
 
+import java.util.HashMap;
+
 /**
  * Created by marodrig on 12/01/2015.
  */
@@ -24,9 +26,11 @@ public class MockInputProgram extends InputProgram {
     @Override
     public void processCodeFragments() {
         if ( codeFragments == null ) codeFragments = new CodeFragmentList();
+        if ( codeFragmentsByClass == null ) codeFragmentsByClass = new HashMap<>();
         if ( codeFragments.size() == 0 ) {
             FakeFragmentProcessor f = new FakeFragmentProcessor();
-            for (CodeFragment fg : f.getCodeFragments()) codeFragments.add(fg);
+            for( CodeFragment cf : f.getCodeFragments() ) codeFragments.add(cf);
+            codeFragmentsByClass.putAll(f.getCodeFragmentsByClass());
         }
     }
 }

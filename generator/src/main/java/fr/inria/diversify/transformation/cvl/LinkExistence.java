@@ -97,8 +97,7 @@ public class LinkExistence extends CVLTransformation {
         LinkExistence o = (LinkExistence)other;
 
         try {
-        return stmtType().equals(o.stmtType())
-                && transformationPoint.equals(o.transformationPoint)
+        return transformationPoint.equals(o.transformationPoint)
                 && ((classOrInterfaceExistence == null && o.classOrInterfaceExistence == null)
                     || classOrInterfaceExistence.equals(o.classOrInterfaceExistence));
         } catch (Exception e) {}

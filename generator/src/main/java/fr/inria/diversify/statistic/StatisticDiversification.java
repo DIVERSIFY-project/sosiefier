@@ -1,6 +1,6 @@
 package fr.inria.diversify.statistic;
 
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.Log;
 
@@ -18,14 +18,14 @@ public class StatisticDiversification {
     protected static char separator = ';';
     protected static String sourceCityFileSuffix  = "source.csv";;
 
-    protected Collection<Transformation> transformations;
+    protected Collection<SingleTransformation> transformations;
     protected int numberOfFailureMax;
 
-    public StatisticDiversification(Collection<Transformation> transformations) {
+    public StatisticDiversification(Collection<SingleTransformation> transformations) {
         this.transformations = transformations;
 
         this.numberOfFailureMax = 0;
-        for(Transformation t : transformations)
+        for(SingleTransformation t : transformations)
             this.numberOfFailureMax = Math.max(this.numberOfFailureMax, t.getStatus());
     }
 
@@ -60,9 +60,9 @@ public class StatisticDiversification {
 //        return 0;
 //    }
 
-    protected List<Transformation> transformation(String type) {
-        List<Transformation> trans = new ArrayList<Transformation>();
-        for(Transformation t : transformations)
+    protected List<SingleTransformation> transformation(String type) {
+        List<SingleTransformation> trans = new ArrayList<SingleTransformation>();
+        for(SingleTransformation t : transformations)
             if(t.getType().equals(type))
                 trans.add(t);
         return trans;
@@ -92,7 +92,7 @@ public class StatisticDiversification {
         bw.write("type"+separator+"name"+separator+"package"+separator+
                 "class"+separator+"method"+separator+"status"+separator+
                 "stmtType"+separator+"level"+separator+"line"+separator+"usedSubType\n");
-        for(Transformation trans : transformations) {
+        for(SingleTransformation trans : transformations) {
             StringBuffer sb = new StringBuffer();
             try {
                 sb.append(trans.getType());
@@ -106,10 +106,10 @@ public class StatisticDiversification {
                 sb.append(trans.methodLocationName());
                 sb.append(separator);
                 sb.append(trans.getStatus()+"");
-                sb.append(separator);
-                sb.append(trans.stmtType());
-                sb.append(separator);
-                sb.append(trans.getLevel());
+//                sb.append(separator);
+//                sb.append(trans.stmtType());
+//                sb.append(separator);
+//                sb.append(trans.getLevel());
                 sb.append(separator);
                 sb.append(trans.line());
                 sb.append(separator);

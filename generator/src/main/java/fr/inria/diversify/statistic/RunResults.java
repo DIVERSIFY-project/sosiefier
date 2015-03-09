@@ -1,9 +1,9 @@
 package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
-import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

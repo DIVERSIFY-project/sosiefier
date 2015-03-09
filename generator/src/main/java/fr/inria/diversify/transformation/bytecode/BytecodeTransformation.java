@@ -1,6 +1,6 @@
 package fr.inria.diversify.transformation.bytecode;
 
-import fr.inria.diversify.transformation.AbstractTransformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.util.Log;
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -19,7 +19,7 @@ import java.util.List;
  * Date: 11/6/13
  * Time: 5:28 PM
  */
-public abstract class BytecodeTransformation extends AbstractTransformation {
+public abstract class BytecodeTransformation extends SingleTransformation {
     protected CtMethod methodLocation;
     protected int opcodeIndex;
     protected List<CtMethod> methods;
@@ -109,15 +109,6 @@ public abstract class BytecodeTransformation extends AbstractTransformation {
     public String methodLocationName() {
         return methodLocation.getLongName();
     }
-    @Override
-    public String getLevel() {
-        return "bytecode";
-    }
-
-    @Override
-    public String stmtType() {
-        return "bytecode";
-    }
 
     public void setOpcodeIndex(int opcodeIndex) {
         this.opcodeIndex = opcodeIndex;
@@ -130,7 +121,13 @@ public abstract class BytecodeTransformation extends AbstractTransformation {
     public int line() {return 0;}
 
     @Override
+    public String getTransformationString() throws Exception {
+        return null;
+    }
+
+    @Override
     public void printJavaFile(String srcDir) throws IOException {
 
     }
+
 }

@@ -183,8 +183,7 @@ public class ObjectExistence extends CVLTransformation {
         ObjectExistence o = (ObjectExistence)other;
 
         try {
-        return stmtType().equals(o.stmtType())
-                && transformationPoint.equals(o.transformationPoint);
+        return transformationPoint.equals(o.transformationPoint);
         } catch (Exception e) {}
         return false;
     }

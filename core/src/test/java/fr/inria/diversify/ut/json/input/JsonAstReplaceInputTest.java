@@ -13,8 +13,10 @@ import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
+import static fr.inria.diversify.ut.json.SectionTestUtils.TEST_ID_1;
 import static fr.inria.diversify.ut.json.SectionTestUtils.createReplaceASTTransformationJSON;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertFalse;
@@ -35,11 +37,11 @@ public class JsonAstReplaceInputTest {
         JSONObject o = createReplaceASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
 
         JsonAstReplaceInput reader = new JsonAstReplaceInput(p, o);
-        HashMap<Integer, Transformation> result = new HashMap<>();
+        HashMap<UUID, Transformation> result = new HashMap<>();
         reader.read(result);
 
-        ASTReplace replace = (ASTReplace) result.get(1);
-        assertEquals(1, replace.getIndex());
+        ASTReplace replace = (ASTReplace) result.get(TEST_ID_1);
+        assertEquals(TEST_ID_1, replace.getIndex());
         assertEquals(-1, replace.getStatus());
         assertEquals(1, result.size());
         assertEquals(p.getCodeFragments().get(0), replace.getTransplantationPoint());
@@ -51,7 +53,7 @@ public class JsonAstReplaceInputTest {
         InputProgram p = new MockInputProgram();
         reader.setInputProgram(p);
         //Create json replace
-        HashMap<Integer, Transformation> r = new HashMap<>();
+        HashMap<UUID, Transformation> r = new HashMap<>();
         try { reader.read(r);
         } catch (PersistenceException e) { // DO NOTHING, WE EXPECT THIS WHILE TESTING ERROR HANDLING
         }
@@ -65,12 +67,14 @@ public class JsonAstReplaceInputTest {
      */
     @Test
     public void testWithErrors_UnableToFindCodeFragment() throws JSONException {
-        String error1 = "ERROR  : Transf 1. Unable to find code fragment \"return 0\" at \"org.MyClass:200\". ";
+        String error1 = "ERROR  : Transf " + TEST_ID_1 +
+                ". Unable to find code fragment \"return 0\" at \"org.MyClass:200\". ";
         JSONObject o = createReplaceASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
         o.getJSONObject(TRANSPLANT_POINT).put(POSITION, "org.MyClass:200");
         assertEquals(error1, testErrors(new JsonAstReplaceInput(null, o), o, 1, 0).get(0));
 
-        error1 = "ERROR  : Transf 1. Unable to find code fragment \"fullyDifferent()\" at \"org.MyClass:1\". ";
+        error1 = "ERROR  : Transf " + TEST_ID_1 +
+                ". Unable to find code fragment \"fullyDifferent()\" at \"org.MyClass:1\". ";
         o = createReplaceASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
         o.getJSONObject(TRANSPLANT_POINT).put(SOURCE_CODE, "fullyDifferent()");
         assertEquals(error1, testErrors(new JsonAstReplaceInput(null, o), o, 1, 0).get(0));
@@ -79,9 +83,10 @@ public class JsonAstReplaceInputTest {
     @Test
     public void testWithErrors_MismatchCF() throws JSONException {
 
-        String error1 = "WARNING: Transf 1. Position mismatch -> Storage: " +
+        String error1 = "WARNING: Transf " + TEST_ID_1 + ". Position mismatch -> Storage: " +
                 "\"org.MyClass:2\"; Found: \"org.MyClass:1\". ";
-        String error2 = "WARNING: Transf 1. Source mismatch -> Storage: \"return   0\"; Found: \"return 0\". ";
+        String error2 = "WARNING: Transf " + TEST_ID_1 +
+                ". Source mismatch -> Storage: \"return   0\"; Found: \"return 0\". ";
 
         JSONObject o = createReplaceASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
         o.getJSONObject(TRANSPLANT_POINT).put(POSITION, "org.MyClass:2");

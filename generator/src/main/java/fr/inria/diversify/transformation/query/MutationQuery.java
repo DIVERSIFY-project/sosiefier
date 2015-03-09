@@ -9,10 +9,8 @@ import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtReturn;
-import spoon.reflect.declaration.CtElement;
 
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -66,11 +64,6 @@ public class MutationQuery extends TransformationQuery {
         inlineConstant = getInputProgram().getAllElement(CtLocalVariable.class).stream()
             .map(operator -> (CtLocalVariable)operator)
             .collect(Collectors.toList());
-    }
-
-    @Override
-    public void setType(String type) {
-        this.type = type;
     }
 
     @Override

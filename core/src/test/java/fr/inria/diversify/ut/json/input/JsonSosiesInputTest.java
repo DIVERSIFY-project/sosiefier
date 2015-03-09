@@ -1,29 +1,23 @@
 package fr.inria.diversify.ut.json.input;
 
+import com.fasterxml.uuid.UUIDComparator;
+import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.persistence.json.input.JsonHeaderInput;
+import fr.inria.diversify.persistence.json.input.JsonSectionInput;
 import fr.inria.diversify.persistence.json.input.JsonSosiesInput;
-import fr.inria.diversify.persistence.json.output.JsonHeaderOutput;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.ut.MockInputProgram;
 import fr.inria.diversify.ut.json.output.JsonHeaderOutputTest;
 import fr.inria.diversify.ut.json.output.JsonSosieOutputForUT;
-import mockit.Mocked;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.FileWriter;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
-import static fr.inria.diversify.ut.json.SectionTestUtils.assertEqualsTransformation;
-import static fr.inria.diversify.ut.json.SectionTestUtils.createTransformations;
-import static fr.inria.diversify.ut.json.SectionTestUtils.createTransformationsJSONObjectWithErrors;
+import static fr.inria.diversify.ut.json.SectionTestUtils.*;
+import static fr.inria.diversify.ut.json.SectionTestUtils.getReaderFromJson;
+import static fr.inria.diversify.ut.json.output.JsonSosieOutputTest.*;
 import static org.junit.Assert.*;
 
 /**
@@ -34,15 +28,59 @@ public class JsonSosiesInputTest {
 
     private static final String EMPTY_STR = "";
 
+    public static class CustomSectionInput1 extends JsonSectionInput {
+        @Override
+        public void read(HashMap<UUID, Transformation> transformations) {     }
+    }
+    public static class CustomSectionInput extends JsonSectionInput {
+
+        public boolean readMethodCalled;
+
+        @Override
+        public void read(HashMap<UUID, Transformation> transformations) {
+            readMethodCalled = getJsonObject().has("theObjectName") && getJsonObject().has("theObjectName11");
+        }
+    }
+
+    /**
+     * Test the proper reading of custom sections
+     */
+    @Test
+    public void testReadCustomSections() {
+        List<Transformation> transfs = createTransformations(new MockInputProgram());
+
+        JsonSosieOutputForUT out = new JsonSosieOutputForUT(transfs, "/uzr/h0m3/my.jzon",
+                "mySrc/pom.xml", "sosie-generator/pom.xml");
+        out.setSection(CustomSection.class, new CustomSection("theObjectName"));
+        out.setSection(CustomSection1.class, new CustomSection("theObjectName11"));
+        out.writeToJsonNow();
+
+        MockInputProgram p = new MockInputProgram();
+        //Mock the header section
+        JsonSosiesInput input = new JsonSosiesInputForUT(getReaderFromJson(out.getJSONObject()), p);
+
+        //Set two custom sections
+        CustomSectionInput a = new CustomSectionInput();
+        CustomSectionInput b = new CustomSectionInput();
+        input.setSection(CustomSectionInput.class, a);
+        input.setSection(CustomSectionInput1.class, b);
+
+        //Read
+        input.read();
+
+        //Assert
+        assertTrue(a.readMethodCalled);
+        assertTrue(b.readMethodCalled);
+    }
+
+
     /**
      * Test that all sections are properly initialized in every constructor
      */
     @Test
     public void testConstructors() {
         InputProgram p = new InputProgram();
-        InputStreamReader r = new InputStreamReader(
-                new ByteArrayInputStream(EMPTY_STR.getBytes(StandardCharsets.UTF_8)));
-        JsonSosiesInput input = new JsonSosiesInput(r, p);
+        JsonSosiesInput input = new JsonSosiesInput(getReaderFromJson(new JSONObject()), p);
         assertTrue(input.getInputProgram() != null);
 
         input = new JsonSosiesInput("/uzr/h0m3/my.jzon", p);
@@ -60,12 +98,8 @@ public class JsonSosiesInputTest {
         JSONObject out = createTransformationsJSONObjectWithErrors(p);
 
         //Read the transformations
-        InputStreamReader r = new InputStreamReader(
-                new ByteArrayInputStream(out.toString().getBytes(StandardCharsets.UTF_8)));
-        JsonSosiesInput input = new JsonSosiesInput(r, p);
-        //Mock the header section
-        input.setSection(JsonHeaderInput.class, new JsonHeaderInputTest.JsonHeaderInputForUT());
-        ArrayList<Transformation> result = new ArrayList<>(input.read());
+        JsonSosiesInput input = new JsonSosiesInputForUT(getReaderFromJson(out), p); //JsonHeader Mocked
+        input.read();
 
         assertEquals(3, input.getLoadMessages().size());
     }
@@ -79,16 +113,12 @@ public class JsonSosiesInputTest {
         InputProgram p = new MockInputProgram();
         List<Transformation> t = createTransformations(p);
         JsonSosieOutputForUT out = new JsonSosieOutputForUT(t, "/uzr/h0m3/my.jzon",
-                JsonHeaderOutputTest.SRC_POM, JsonHeaderOutputTest.GEN_VER);
+                JsonHeaderOutputTest.SRC_POM, InputConfiguration.LATEST_GENERATOR_VERSION);
         out.writeToJsonNow();
 
         //Read the transformations
-        InputStreamReader r = new InputStreamReader(
-                new ByteArrayInputStream(out.getJSONObject().toString().getBytes(StandardCharsets.UTF_8)));
-        JsonSosiesInput input = new JsonSosiesInput(r, p);
+        JsonSosiesInput input = new JsonSosiesInputForUT(getReaderFromJson(out.getJSONObject()), p); //Mock the header section
 
-        //Mock the header section
-        input.setSection(JsonHeaderInput.class, new JsonHeaderInputTest.JsonHeaderInputForUT());
         ArrayList<Transformation> result = new ArrayList<>(input.read());
 
         //Assert that the header was properly read
@@ -99,9 +129,12 @@ public class JsonSosiesInputTest {
         // there is only Transformation for each type
         //t.sort((o1, o2) -> o1.getIndex() - o2.getIndex());
         //result.sort((o1, o2) -> o1.getIndex() - o2.getIndex());
+        final UUIDComparator cuuid = new UUIDComparator();
         Comparator<Transformation> c = new Comparator<Transformation>() {
             @Override
-            public int compare(Transformation o1, Transformation o2) { return o1.getIndex() - o2.getIndex(); }
+            public int compare(Transformation o1, Transformation o2) {
+                return cuuid.compare(o1.getIndex(), o2.getIndex());
+            }
         };
         t.sort(c);
         result.sort(c);

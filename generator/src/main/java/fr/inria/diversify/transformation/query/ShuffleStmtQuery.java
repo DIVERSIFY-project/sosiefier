@@ -10,7 +10,6 @@ import spoon.reflect.code.CtStatement;
 import spoon.reflect.code.CtSuperAccess;
 import spoon.reflect.declaration.CtElement;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -29,12 +28,6 @@ public class ShuffleStmtQuery extends TransformationQuery {
         coverageReport = inputProgram.getCoverageReport();
     }
 
-
-    @Override
-    public void setType(String type) {
-
-    }
-
     @Override
     public Transformation query() {
         ShuffleStmtTransformation sst = new ShuffleStmtTransformation();
@@ -51,10 +44,6 @@ public class ShuffleStmtQuery extends TransformationQuery {
         return sst;
     }
 
-    @Override
-    public void executeQuery() {
-
-    }
 
     protected boolean isCandidate(CtBlock<?> block) {
         if(block.getStatements().size() >= 3)

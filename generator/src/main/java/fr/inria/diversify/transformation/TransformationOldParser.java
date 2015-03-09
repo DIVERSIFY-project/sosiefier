@@ -34,9 +34,9 @@ public class TransformationOldParser {
         this.inputProgram = inputProgram;
 
         if (toSet)
-            transformations = new HashSet<Transformation>();
+            transformations = new HashSet<>();
         else
-            transformations = new ArrayList<Transformation>();
+            transformations = new ArrayList<>();
     }
 
     public Collection<Transformation> parseDir(String dir) throws IOException, JSONException {
@@ -74,7 +74,7 @@ public class TransformationOldParser {
     }
 
     public List<Transformation> parseFile(File file) throws IOException, JSONException {
-        List<Transformation> list = new ArrayList<Transformation>();
+        List<Transformation> list = new ArrayList<>();
 
         BufferedReader br = new BufferedReader(new FileReader(file));
         StringBuilder sb = new StringBuilder();
@@ -84,7 +84,7 @@ public class TransformationOldParser {
             line = br.readLine();
         }
         if (sb.length() == 0)
-            return new ArrayList<Transformation>();
+            return new ArrayList<>();
         JSONArray array = new JSONArray(sb.toString());
         for (int i = 0; i < array.length(); i++) {
             count++;

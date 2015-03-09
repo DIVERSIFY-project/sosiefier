@@ -1,7 +1,6 @@
 package fr.inria.diversify.sosie.logger.processor;
 
 import fr.inria.diversify.transformation.Transformation;
-import spoon.reflect.code.CtAssert;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.cu.CompilationUnit;
@@ -9,7 +8,6 @@ import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtConstructor;
 import spoon.reflect.declaration.CtExecutable;
-import spoon.reflect.declaration.CtMethod;
 
 import java.util.List;
 

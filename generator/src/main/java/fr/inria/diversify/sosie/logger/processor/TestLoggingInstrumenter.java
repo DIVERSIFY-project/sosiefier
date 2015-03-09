@@ -4,11 +4,7 @@ import fr.inria.diversify.transformation.Transformation;
 import spoon.reflect.code.CtCodeSnippetStatement;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.code.CtStatement;
-import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
-import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
-import spoon.reflect.reference.CtTypeReference;
 import spoon.support.reflect.code.CtCodeSnippetStatementImpl;
 
 import java.util.ArrayList;

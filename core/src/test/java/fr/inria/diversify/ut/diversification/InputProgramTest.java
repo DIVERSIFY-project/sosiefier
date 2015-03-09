@@ -106,7 +106,7 @@ public class InputProgramTest {
         InputProgram p = new InputProgram();
         p.configure(configuration);
 
-        assertEquals(p.getSourceCodeDir(), configuration.getSourceCodeDir());
+        assertEquals(p.getRelativeSourceCodeDir(), configuration.getRelativeSourceCodeDir());
         assertEquals(p.getPreviousTransformationsPath(), configuration.getPreviousTransformationPath());
         assertEquals(p.getClassesDir(), configuration.getClassesDir());
         assertEquals(p.getCoverageDir(), configuration.getCoverageDir());

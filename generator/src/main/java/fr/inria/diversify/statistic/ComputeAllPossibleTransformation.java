@@ -121,8 +121,8 @@ public class ComputeAllPossibleTransformation {
         return nb;
     }
 
-    public Set<Transformation> getAllReplace() throws InterruptedException {
-        final Set<Transformation> allReplace = new HashSet<Transformation>();
+    public Set<SingleTransformation> getAllReplace() throws InterruptedException {
+        final Set<SingleTransformation> allReplace = new HashSet<SingleTransformation>();
         ExecutorService pool = Executors.newFixedThreadPool(50);
         for (CodeFragment cf1 : codeFragments) {
                 final  CodeFragment cfTmp = cf1;
@@ -150,8 +150,8 @@ public class ComputeAllPossibleTransformation {
         return allReplace;
     }
 
-    public Set<Transformation> getAllDelete() {
-        Set<Transformation> allReplace = new HashSet<Transformation>();
+    public Set<SingleTransformation> getAllDelete() {
+        Set<SingleTransformation> allReplace = new HashSet<SingleTransformation>();
 
         for (CodeFragment cf1 : codeFragments) {
                     ASTDelete r = new ASTDelete();
@@ -161,8 +161,8 @@ public class ComputeAllPossibleTransformation {
         return allReplace;
     }
 
-    public Set<Transformation> getAllAdd() throws InterruptedException {
-        final Set<Transformation> allReplace = new HashSet<Transformation>();
+    public Set<SingleTransformation> getAllAdd() throws InterruptedException {
+        final Set<SingleTransformation> allReplace = new HashSet<SingleTransformation>();
         ExecutorService pool = Executors.newFixedThreadPool(50);
         for (CodeFragment cf1 : codeFragments) {
             final  CodeFragment cfTmp = cf1;

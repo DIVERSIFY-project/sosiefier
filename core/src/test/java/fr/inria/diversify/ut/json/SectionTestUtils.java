@@ -1,5 +1,6 @@
 package fr.inria.diversify.ut.json;
 
+import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.json.output.*;
 import fr.inria.diversify.transformation.Transformation;
@@ -14,8 +15,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
 import static org.junit.Assert.assertEquals;
@@ -26,6 +31,15 @@ import static org.junit.Assert.assertTrue;
  */
 public class SectionTestUtils {
 
+    public static final UUID TEST_ID_1 = UUID.fromString("de305d54-75b4-431b-adb2-eb6b9e546011"); //From wikipedia
+    public static final UUID TEST_ID_2 = UUID.fromString("de305d54-75b4-431b-adb2-eb6b9e546012"); //From wikipedia
+    public static final UUID TEST_ID_3 = UUID.fromString("de305d54-75b4-431b-adb2-eb6b9e546013"); //From wikipedia
+    public static final UUID TEST_ID_4 = UUID.fromString("de305d54-75b4-431b-adb2-eb6b9e546014"); //From wikipedia
+
+    public static InputStreamReader getReaderFromJson(JSONObject o) {
+        return new InputStreamReader(
+                new ByteArrayInputStream(o.toString().getBytes(StandardCharsets.UTF_8)));
+    }
 
     public static void writeAssertions(JsonSectionOutput d) throws JSONException {
 
@@ -73,7 +87,7 @@ public class SectionTestUtils {
      */
     public static JSONObject createDeleteASTTransformationJSON() throws JSONException {
         ASTDelete r = new ASTDelete();
-        r.setIndex(1);
+        r.setIndex(TEST_ID_1); //From wikipedia
         r.setStatus(-1);
         r.setTransplantationPoint(new FakeCodeFragment("org.MyClass:1", "ctReturn", "return 0"));
         JsonAstDeleteOutput d = new JsonAstDeleteOutput();
@@ -89,7 +103,7 @@ public class SectionTestUtils {
      */
     public static JSONObject createAddASTTransformationJSON() throws JSONException {
         ASTAdd r = new ASTAdd();
-        r.setIndex(1);
+        r.setIndex(TEST_ID_1);
         r.setStatus(-1);
         r.setTransplantationPoint(new FakeCodeFragment("org.MyClass:1", "ctReturn", "return 0"));
         r.setTransplant(new FakeCodeFragment("org.MyOtherClass:10", "ctIf", "if ( int == 0 ) int = 10"));
@@ -103,7 +117,7 @@ public class SectionTestUtils {
 
     public static JSONObject createReplaceASTTransformationJSON() {
         ASTReplace r = new ASTReplace();
-        r.setIndex(1);
+        r.setIndex(TEST_ID_1);
         r.setStatus(-1);
 
         r.setTransplantationPoint(new FakeCodeFragment("org.MyClass:1", "ctReturn", "return 0"));
@@ -122,7 +136,7 @@ public class SectionTestUtils {
     public static JSONObject createTransformationsJSONObjectWithErrors(InputProgram p) throws JSONException {
         List<Transformation> t = createTransformations(p);
         JsonSosieOutputForUT out = new JsonSosieOutputForUT(t, "/uzr/h0m3/my.jzon",
-                JsonHeaderOutputTest.SRC_POM, JsonHeaderOutputTest.GEN_VER);
+                JsonHeaderOutputTest.SRC_POM, InputConfiguration.LATEST_GENERATOR_VERSION);
         out.writeToJsonNow(); //We need to mock the File writer so no writing to file is done
 
 
@@ -143,7 +157,7 @@ public class SectionTestUtils {
     public static JSONObject createTransformationsJSONObject(InputProgram p) {
         List<Transformation> t = createTransformations(p);
         JsonSosieOutputForUT out = new JsonSosieOutputForUT(t, "/uzr/h0m3/my.jzon",
-                JsonHeaderOutputTest.SRC_POM, JsonHeaderOutputTest.GEN_VER);
+                JsonHeaderOutputTest.SRC_POM, InputConfiguration.LATEST_GENERATOR_VERSION);
         out.writeToJsonNow(); //We need to mock the File writer so no writing to file is done
         return out.getJSONObject();
     }
@@ -155,18 +169,18 @@ public class SectionTestUtils {
      */
     public static List<Transformation> createTransformations(InputProgram p) {
         ASTAdd add = new ASTAdd();
-        add.setIndex(0);
+        add.setIndex(TEST_ID_1);
         add.setStatus(-1);
         add.setTransplantationPoint(p.getCodeFragments().get(0));
         add.setTransplant(p.getCodeFragments().get(1));
 
         ASTDelete del = new ASTDelete();
-        del.setIndex(0);
+        del.setIndex(TEST_ID_2);
         del.setStatus(-2);
         del.setTransplantationPoint(p.getCodeFragments().get(2));
 
         ASTReplace r = new ASTReplace();
-        r.setIndex(0);
+        r.setIndex(TEST_ID_3);
         r.setStatus(0);
         r.setTransplantationPoint(p.getCodeFragments().get(1));
         r.setTransplant(p.getCodeFragments().get(2));

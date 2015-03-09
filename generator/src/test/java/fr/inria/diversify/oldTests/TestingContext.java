@@ -22,7 +22,7 @@ public class TestingContext {
             Factory factory = new SpoonMetaFactory().buildNewFactory(srcPath, 5);
             inputProgram = new InputProgram();
             inputProgram.setFactory(factory);
-            inputProgram.setSourceCodeDir(srcPath);
+            inputProgram.setRelativeSourceCodeDir(srcPath);
             inputProgram.processCodeFragments();
         }
 

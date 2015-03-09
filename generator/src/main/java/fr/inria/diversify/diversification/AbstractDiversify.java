@@ -2,8 +2,9 @@ package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.sosie.logger.Instru;
 import fr.inria.diversify.statistic.AbstractSessionResults;
-import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.buildSystem.AbstractBuilder;
+import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.GitUtils;
 import fr.inria.diversify.util.Log;
@@ -74,6 +75,10 @@ public abstract class AbstractDiversify {
 
     public void setOriginalTmpDir(String originalTmpDir) { this.originalTmpDir = originalTmpDir; }
 
+    public String getTmpDir() {
+        return tmpDir;
+    }
+
     public void setTransformationQuery(TransformationQuery transQuery) {
         this.transQuery = transQuery;
     }
@@ -133,6 +138,7 @@ public abstract class AbstractDiversify {
      * @return
      */
     public String printResult(String output) {
+        Log.info("session result: {}", sessionResults);
         mkDirResult(output);
         String prefix = output + System.currentTimeMillis();
         String fileName = "";
@@ -148,7 +154,7 @@ public abstract class AbstractDiversify {
     public void printResultInGitRepo(String output, String git) {
         String absoluteFileName = printResult(git + "/" + output);
         String fileName = absoluteFileName.substring(git.length() + 1, absoluteFileName.length());
-
+        Log.info("add dir {} in git", fileName);
         try {
             GitUtils gitUtils = new GitUtils(git);
             gitUtils.pull();
@@ -156,7 +162,6 @@ public abstract class AbstractDiversify {
             gitUtils.commit("update");
             gitUtils.push();
         } catch (IOException e) {
-
             e.printStackTrace();
         } catch (GitAPIException e) {
             e.printStackTrace();
@@ -215,8 +220,8 @@ public abstract class AbstractDiversify {
      */
     public void deleteTmpFiles() {
         try {
-            org.codehaus.plexus.util.FileUtils.cleanDirectory(tmpDir);
-            org.codehaus.plexus.util.FileUtils.forceDelete(tmpDir);
+            FileUtils.cleanDirectory(new File(tmpDir));
+           FileUtils.forceDelete(new File(tmpDir));
         } catch (IOException e) {
             try {
                 init(projectDir, originalTmpDir);
@@ -295,11 +300,14 @@ public abstract class AbstractDiversify {
     protected void tryRestore(Transformation trans, Exception e) throws Exception {
         try {
             trans.restore(tmpDir + "/" + sourceDir);
-        } catch (Exception restore) {}
+        } catch (Exception restore) {
+            e.printStackTrace();
+            Log.debug("");
+        }
 
-        try {
-            trans.printJavaFile(tmpDir + "/" + sourceDir);
-        } catch (Exception print) {}
+//        try {
+//            trans.printJavaFile(tmpDir + "/" + sourceDir);
+//        } catch (Exception print) {}
 
         int status = runTest(tmpDir);
         if (status != 0) {

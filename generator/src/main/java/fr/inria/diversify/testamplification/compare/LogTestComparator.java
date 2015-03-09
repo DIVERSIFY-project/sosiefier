@@ -1,6 +1,7 @@
 package fr.inria.diversify.testamplification.compare;
 
 import fr.inria.diversify.testamplification.compare.diff.AssertDiff;
+import fr.inria.diversify.testamplification.compare.diff.Diff;
 import fr.inria.diversify.testamplification.compare.diff.LogDiff;
 import fr.inria.diversify.testamplification.compare.diff.TestDiff;
 import fr.inria.diversify.util.Log;
@@ -22,8 +23,8 @@ public class LogTestComparator {
         sosieTests = new ArrayList<>(test);
     }
 
-    public List<TestDiff> compare() throws JSONException {
-        List<TestDiff> result = new ArrayList<>(originalTests.size());
+    public Diff compare() throws JSONException {
+        Diff result = new Diff();
         for(Test original : originalTests) {
             for (Test sosie : sosieTests) {
                 if(original.getSignature().equals(sosie.getSignature()) && sosie.size() == 1) {
@@ -35,26 +36,20 @@ public class LogTestComparator {
         return result;
     }
 
-
+    int countExcludeTest;
     protected TestDiff compareTest(Test original, Test sosie) {
         TestDiff result = new TestDiff(original.getSignature());
-
+        countExcludeTest = 50;
         Log.debug("compare test {}", original.getSignature());
-        for (int i = 0; i < original.size(); i++) {
-            if(sosie.size() < i  || !compareLog(original.getLog(i), sosie.getLog(i)).isEmpty()) {
-                List<LogDiff> currentResult = new ArrayList<>(sosie.size());
-                for (int j = 0; j < sosie.size(); j++) {
-                    LogDiff logResult = compareLog(original.getLog(i), sosie.getLog(j));
-                    if (logResult.isEmpty()) {
-                        break;
-                    } else {
-                        currentResult.add(logResult);
-                    }
-                }
-                LogDiff smallerDiff = currentResult.stream()
-                                                     .sorted()
-                                                     .findFirst().orElse(null);
-                result.add(smallerDiff);
+
+        LogDiff logResult = compareLog(original.getLog(0), sosie.getLog(0));
+        if(logResult == null) {
+            result = new TestDiff(original.getSignature());
+            result.excludeThisTest();
+            return result;
+        } else {
+            if (!logResult.isEmpty()) {
+                result.add(logResult);
             }
         }
         return result;
@@ -83,14 +78,16 @@ public class LogTestComparator {
         Assert sosieAssert = sosie.next();
 
         while(original.hasNext() && sosie.hasNext()) {
-
+            if (countExcludeTest < 0) {
+                return null;
+            }
             if (originalAssert.getAssertId() == sosieAssert.getAssertId()) {
                 result.add(compareAssert(originalAssert, sosieAssert));
 
                 originalAssert = original.next();
                 sosieAssert = sosie.next();
             } else {
-                Set<Assert> notSyncro = findSyncro(original, sosie);
+                Set<Integer> notSyncro = findSyncro(original, sosie);
                 result.addAll(notSyncro);
                 if(notSyncro.isEmpty()) {
                    break;
@@ -103,7 +100,8 @@ public class LogTestComparator {
         return result;
     }
 
-    private Set<Assert> findSyncro(LogTest original, LogTest sosie) {
+    private Set<Integer> findSyncro(LogTest original, LogTest sosie) {
+        countExcludeTest--;
         int oNON = original.numberOfNext();
         int sNON = sosie.numberOfNext();
         int borne = Math.min(original.numberOfNext(),sosie.numberOfNext());
@@ -115,25 +113,24 @@ public class LogTestComparator {
         }
     }
 
-    private Set<Assert> findSyncro(LogTest original, LogTest sosie, int borne) {
+    private Set<Integer> findSyncro(LogTest original, LogTest sosie, int borne) {
         Assert originalAssert = original.peek();
         Assert sosieAssert;
-        Set<Assert> assertNotSyncro = new HashSet<>();
-        Set<Assert> sosieNotSyncro = new HashSet<>();
+        Set<Integer> assertNotSyncro = new HashSet<>();
+        Set<Integer> sosieNotSyncro = new HashSet<>();
 
         for(int i = 0; i < borne; i++) {
             sosieNotSyncro.clear();
-            assertNotSyncro.add(originalAssert);
-            assertNotSyncro.add(sosie.peek());
+            assertNotSyncro.add(originalAssert.getAssertId());
+            assertNotSyncro.add(sosie.peek().getAssertId());
             for (int j = i; j < borne - i; j++) {
                 sosieAssert = sosie.next();
-                if (originalAssert.getAssertId() == sosieAssert.getAssertId()) {
+                if (compareAssert(originalAssert, sosieAssert) == null) {
                     assertNotSyncro.addAll(sosieNotSyncro);
                     return assertNotSyncro;
                 }
-                sosieNotSyncro.add(sosieAssert);
+                sosieNotSyncro.add(sosieAssert.getAssertId());
             }
-//            assertNotSyncro.removeAll(sosieNotSyncro);
 
             sosie.previous(borne - i);
             originalAssert = original.next();
@@ -144,16 +141,17 @@ public class LogTestComparator {
     }
 
     protected AssertDiff compareAssert(Assert originalAssert, Assert sosieAssert) {
-        if(originalAssert.getAssertId() == sosieAssert.getAssertId()) {
-            for(int i = 0; i < originalAssert.getValues().length; i++) {
+        if (originalAssert.getAssertId() == sosieAssert.getAssertId()) {
+            int borne = Math.min(originalAssert.getValues().length, sosieAssert.getValues().length);
+            for (int i = 0; i < borne; i++) {
                 Object oValue = originalAssert.getValues()[i];
                 Object sValue = sosieAssert.getValues()[i];
-                if(!oValue.equals(sValue)) {
+                if (!oValue.equals(sValue)) {
                     return new AssertDiff(originalAssert, sosieAssert);
                 }
             }
         } else {
-           return new AssertDiff(originalAssert, sosieAssert);
+            return new AssertDiff(originalAssert, sosieAssert);
         }
         return null;
     }
@@ -169,5 +167,4 @@ public class LogTestComparator {
             }
         }
     }
-
 }

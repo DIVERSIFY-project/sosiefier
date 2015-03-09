@@ -4,11 +4,9 @@ import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
-import fr.inria.diversify.sosie.SosiePoolCreator;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
-import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,6 +21,7 @@ import java.util.*;
  * <p/>
  * Created by marodrig on 19/06/2014.
  */
+@Deprecated
 public class FromISSTAToPoolCreatorInput {
 
     HashMap<String, Integer[]> diffCount;
@@ -94,7 +93,7 @@ public class FromISSTAToPoolCreatorInput {
     private void test(InputConfiguration inputConfiguration) throws IllegalAccessException, InstantiationException, ClassNotFoundException, IOException, JSONException {
 
         String project = inputConfiguration.getProjectPath();
-        String src = inputConfiguration.getSourceCodeDir();
+        String src = inputConfiguration.getRelativeSourceCodeDir();
         String prevTransfPath = inputConfiguration.getPreviousTransformationPath();
         String out = inputConfiguration.getResultPath();
 
@@ -104,7 +103,7 @@ public class FromISSTAToPoolCreatorInput {
 
         InputProgram inputProgram = new InputProgram();
         inputProgram.setFactory(factory);
-        inputProgram.setSourceCodeDir(src);
+        inputProgram.setRelativeSourceCodeDir(src);
         inputProgram.setPreviousTransformationsPath(prevTransfPath);
         inputProgram.processCodeFragments();
 
@@ -198,7 +197,7 @@ public class FromISSTAToPoolCreatorInput {
 
         String project = inputConfiguration.getProjectPath();
         Log.info("Project: " + project);
-        String src = inputConfiguration.getSourceCodeDir();
+        String src = inputConfiguration.getRelativeSourceCodeDir();
         String prevTransfPath = inputConfiguration.getPreviousTransformationPath();
         Log.info("Transf path: " + prevTransfPath);
         String out = inputConfiguration.getResultPath();
@@ -254,7 +253,7 @@ public class FromISSTAToPoolCreatorInput {
 
             InputProgram inputProgram = new InputProgram();
             inputProgram.setFactory(factory);
-            inputProgram.setSourceCodeDir(src);
+            inputProgram.setRelativeSourceCodeDir(src);
             inputProgram.setPreviousTransformationsPath(prevTransfPath);
             inputProgram.processCodeFragments();
 

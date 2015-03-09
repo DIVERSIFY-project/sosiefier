@@ -1,6 +1,5 @@
 package fr.inria.diversify.sosie.logger.processor;
 
-import fr.inria.diversify.transformation.AbstractTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.Log;
@@ -86,7 +85,7 @@ public class TransplantationPointCallCountInstrumenter extends AbstractLoggingIn
 
             try {
                 CompilationUnit cu = e.getPosition().getCompilationUnit();
-                String posId = Integer.toString(elementsMap.get(e.getPosition().toString()).transformations.get(0).getIndex());
+                String posId = elementsMap.get(e.getPosition().toString()).transformations.get(0).getIndex().toString();
                 posId = idFor(posId, "POT");
                 String probeStr = getLogName() + ".writeSourcePositionCall(\"" + posId + "\")";
                 stop = true;

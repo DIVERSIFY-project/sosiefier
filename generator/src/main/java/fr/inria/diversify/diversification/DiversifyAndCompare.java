@@ -3,6 +3,8 @@ package fr.inria.diversify.diversification;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.statistic.SinglePointSessionResults;
 import fr.inria.diversify.testamplification.CompareAmpliTest;
+import fr.inria.diversify.testamplification.compare.diff.Diff;
+import fr.inria.diversify.testamplification.compare.diff.Pool;
 import fr.inria.diversify.testamplification.compare.diff.TestDiff;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
@@ -10,6 +12,7 @@ import fr.inria.diversify.transformation.ast.exception.ApplyTransformationExcept
 import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -17,6 +20,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Simon on 21/01/15.
@@ -24,9 +29,9 @@ import java.util.List;
 public class DiversifyAndCompare extends SinglePointDiversify {
     protected String amplifiedTestDir;
     protected String originalLogDir;
-    protected InputProgram inputProgram;
     protected String testSrcDir;
     protected List<JSONObject> diff;
+    protected String filterFile;
 
     public DiversifyAndCompare(InputConfiguration inputConfiguration, String projectDir, String srcDir, String testDir) {
         super(inputConfiguration, projectDir, srcDir);
@@ -49,13 +54,7 @@ public class DiversifyAndCompare extends SinglePointDiversify {
                 trans.setStatus(status);
                 trans.setFailures(builder.getTestFail());
                 if (status == 0) {
-                    String sosieDir = copySosieProgram();
-                    copyTestAndLogger(sosieDir);
-                    runSosie(sosieDir);
-                    CompareAmpliTest cat = new CompareAmpliTest();
-
-                    List<TestDiff> result = cat.compare(originalLogDir, sosieDir + "/log");
-                    diff.add(cat.toJson(result, trans));
+                    compare(trans);
                 }
                 // error during runTest
             } catch (Exception e) {
@@ -69,11 +68,30 @@ public class DiversifyAndCompare extends SinglePointDiversify {
             ((SinglePointSessionResults) sessionResults).addRunResults(trans);
         } catch (ApplyTransformationException e) {
             tryRestore(trans,e);
+            e.printStackTrace();
         } catch (BuildTransplantException e) {}
-        Integer result = runTest(tmpDir);
-        Log.debug("run after restore: " +result);
     }
 
+    protected void compare(Transformation sosie) throws IOException, JSONException, InterruptedException {
+        String sosieDir = copySosieProgram();
+        try {
+            copyTestAndLogger(sosieDir);
+            runSosie(sosieDir);
+            CompareAmpliTest cat = new CompareAmpliTest();
+
+            Diff result = cat.compare(originalLogDir, sosieDir + "/log");
+
+            Map<String, Set<String>> filter = cat.loadFilter(filterFile);
+            result.filter(filter);
+            result.setSosie(sosie);
+            diff.add(result.toJson());
+            Pool.reset();
+        } finally {
+            Pool.reset();
+            FileUtils.forceDelete(new File(sosieDir));
+        }
+
+    }
 
     protected void copyTestAndLogger(String sosieDir) throws IOException {
         File log = new File(sosieDir + "/log");
@@ -84,12 +102,13 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         FileUtils.copyDirectory(new File(amplifiedTestDir), new File(sosieDir + "/" +testSrcDir));
         File dir = new File(sosieDir+"/"+sourceDir+ "/fr/inria/diversify/testamplification/logger");
         FileUtils.forceMkdir(dir);
-        String packagePath = System.getProperty("user.dir") + "/src/main/java/fr/inria/diversify/testamplification/logger/";
+        String packagePath = System.getProperty("user.dir") + "/generator/src/main/java/fr/inria/diversify/testamplification/logger/";
         FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.Logger.class.getSimpleName() + ".java"), dir);
         FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.ShutdownHookLog.class.getSimpleName() + ".java"), dir);
         FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.LogWriter.class.getSimpleName() + ".java"),dir);
         FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.AssertLogWriter.class.getSimpleName() + ".java"),dir);
     }
+
     protected void runSosie(String sosieDir) throws IOException, InterruptedException {
         MavenBuilder builder = new MavenBuilder(sosieDir);
         builder.runGoals(new String[]{"clean", "test"}, false);
@@ -103,21 +122,34 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         this.originalLogDir = originalLogDir;
     }
 
+    public void setFilterFile(String filterFile) {
+        this.filterFile = filterFile;
+    }
+
     public String printResult(String output) {
+        Log.info("session result: {}", sessionResults);
         mkDirResult(output);
         String fileName = "";
         try {
-            fileName = output + System.currentTimeMillis() + ".json";
+            int i = 0;
             for(JSONObject d : diff) {
+                fileName = output + System.currentTimeMillis() +i+ ".json";
                 FileWriter fw = new FileWriter(fileName);
                 d.write(fw);
                 fw.close();
+                i++;
+                Log.info("write diff in {}", fileName);
             }
 
-            Log.info("write result in {}", fileName);
+
         } catch (Exception e) {
             Log.error("error in Builder.printResult", e);
         }
-        return fileName;
+        String[] tmp = output.split("/");
+        String ret = "";
+        for (int i = 0; i< tmp.length -1; i++) {
+            ret +=  tmp[i] + "/";
+        }
+        return ret;
     }
 }

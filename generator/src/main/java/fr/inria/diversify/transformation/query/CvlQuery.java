@@ -28,9 +28,6 @@ public class CvlQuery extends TransformationQuery {
     }
 
     @Override
-    public void setType(String type) {}
-
-    @Override
     public Transformation query() {
         try {
             Transformation t = null;

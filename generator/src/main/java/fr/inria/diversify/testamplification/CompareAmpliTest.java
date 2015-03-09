@@ -3,17 +3,13 @@ package fr.inria.diversify.testamplification;
 import fr.inria.diversify.testamplification.compare.LogTestComparator;
 import fr.inria.diversify.testamplification.compare.LogTestReader;
 import fr.inria.diversify.testamplification.compare.Test;
-import fr.inria.diversify.testamplification.compare.diff.TestDiff;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.testamplification.compare.diff.Diff;
 import fr.inria.diversify.util.Log;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
 /**
  * Created by Simon on 15/01/15.
@@ -24,11 +20,16 @@ public class CompareAmpliTest {
         Log.DEBUG();
         CompareAmpliTest cat = new CompareAmpliTest();
 
-        List<TestDiff> diff = cat.compare(args[0], args[1]);
-        cat.print(cat.toJson(diff, null), args[2]);
+        Diff diff = cat.compare(args[0], args[1]);
+        diff.setSosie(null);
+        cat.print(diff.toJson(), args[2]);
+        cat.buildAndPrintFilter(diff, args[3]);
+        Map<String, Set<String>> filter = cat.loadFilter(args[3]);
+        diff.filter(filter);
+        cat.print(diff.toJson(),args[2]+".json");
     }
 
-    public List<TestDiff> compare(String dirOriginalLog, String dirSosieLog) throws JSONException, IOException {
+    public Diff compare(String dirOriginalLog, String dirSosieLog) throws JSONException, IOException {
         LogTestReader reader = new LogTestReader();
 
         Collection<Test> testOriginal = reader.loadLog(dirOriginalLog);
@@ -45,19 +46,27 @@ public class CompareAmpliTest {
         fw.close();
     }
 
-    public JSONObject toJson(List<TestDiff> diffs, Transformation sosie) throws JSONException {
-        JSONObject object = new JSONObject();
+    public Map<String, Set<String>> loadFilter(String file) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        Map<String, Set<String>> filter = new HashMap<>();
 
-        object.put("transformation",sosie.toJSONObject());
-
-        JSONArray array = new JSONArray();
-        object.put("testDiff", array);
-        for(TestDiff diff : diffs) {
-            if(!diff.getDiff().isEmpty()) {
-                array.put(diff.toJSON());
+        String line = reader.readLine();
+        while(line != null) {
+            String[] tmp = line.split(" ");
+            if(!filter.containsKey(tmp[0])) {
+                filter.put(tmp[0], new HashSet<>());
             }
+            filter.get(tmp[0]).add(line.substring(tmp[0].length() + 1,line.length()));
+            line = reader.readLine();
         }
+        return filter;
+    }
 
-        return object;
+    public void buildAndPrintFilter(Diff diffs, String fileName) throws IOException, JSONException {
+        FileWriter fw = new FileWriter(fileName);
+        for(String f : diffs.buildFilter()) {
+            fw.append(f + "\n");
+        }
+        fw.close();
     }
 }

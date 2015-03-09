@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
 
@@ -37,7 +38,7 @@ public class JsonAstDeleteInput extends JsonAstTransformationInput {
      * @param transformations Transformation to be modified by the reader. May increase size after method call.
      */
     @Override
-    public void read(HashMap<Integer, Transformation> transformations) {
+    public void read(HashMap<UUID, Transformation> transformations) {
         try {
             ASTDelete transf = (ASTDelete)get(transformations); //add the transformation to the transformations map if not present
             JSONObject cfJson = getJsonObject().getJSONObject(TRANSPLANT_POINT);

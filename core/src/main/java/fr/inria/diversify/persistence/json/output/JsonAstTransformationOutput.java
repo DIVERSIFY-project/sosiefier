@@ -67,7 +67,7 @@ public abstract class JsonAstTransformationOutput extends JsonSectionOutput {
     protected void putDataToJSON(JSONObject object, Transformation transformation) throws JSONException {
         if (transformation instanceof ASTTransformation) {
             ASTTransformation astt = (ASTTransformation) transformation;
-            object.put(TINDEX, astt.getIndex());
+            object.put(TINDEX, astt.getIndex().toString());
             object.put(TRANSF_TYPE, astt.getType());
             object.put(STATUS, astt.getStatus());
             object.put(NAME, astt.getName());

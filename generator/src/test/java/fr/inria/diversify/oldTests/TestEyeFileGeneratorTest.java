@@ -7,7 +7,6 @@ import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
@@ -31,7 +30,7 @@ public class TestEyeFileGeneratorTest {
         dr.DependencyResolver(getResourcePath("easymock-light-3.2/pom.xml"));
         InputProgram inputProgram = new InputProgram();
         inputProgram.setFactory(new SpoonMetaFactory().buildNewFactory(getResourcePath("easymock-light-3.2/src/main"), 5));
-        inputProgram.setSourceCodeDir(getResourcePath("easymock-light-3.2"));
+        inputProgram.setRelativeSourceCodeDir(getResourcePath("easymock-light-3.2"));
         return inputProgram;
     }
 
