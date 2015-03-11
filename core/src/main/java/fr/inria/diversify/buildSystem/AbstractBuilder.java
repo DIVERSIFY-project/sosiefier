@@ -35,9 +35,6 @@ public abstract class AbstractBuilder {
     //setting file for the compiler
     protected File setting;
 
-    //List containing all errors
-    protected List<String> errors;
-
     //Errors that we are OK with...
     protected List<String> acceptedErrors;
 
@@ -87,7 +84,7 @@ public abstract class AbstractBuilder {
 
     public AbstractBuilder(String directory) {
         this.directory = directory;
-        errors = new ArrayList<>();
+        failedTests = new ArrayList<>();
         acceptedErrors = new ArrayList<>();
         runCount = 0;
         saveOutputToFile = false;
@@ -99,7 +96,7 @@ public abstract class AbstractBuilder {
         compileError = false;
         allTestRun = false;
         status = -3;
-        errors = new ArrayList<>();
+        failedTests = new ArrayList<>();
     }
 
     public void runBuilder() throws InterruptedException {
@@ -233,7 +230,7 @@ public abstract class AbstractBuilder {
     }
 
     public List<String> getTestFail() {
-        return errors;
+        return failedTests;
     }
 
     public boolean allTestRun() {

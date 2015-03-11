@@ -84,9 +84,6 @@ public class MavenBuilder extends AbstractBuilder {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-//        //Tell the main thread that we are done
-//        latch.countDown();
     }
 
     /**
@@ -99,7 +96,7 @@ public class MavenBuilder extends AbstractBuilder {
         parser.setAcceptedErrors(acceptedErrors);
 
         parser.parse(r, "\n");
-        errors = parser.getCompileErrors();
+//        errors = parser.getCompileErrors();
         failedTests = parser.getFailedTests();
         status = parser.getStatus();
     }
