@@ -35,16 +35,17 @@ public class TransformationsWriter {
         }
     }
 
-    public String writeGoodTransformation(String type) throws IOException, JSONException {
+    public String writeSosie(String type) throws IOException, JSONException {
         Collection<Transformation> goodTransformation = transformations.stream().
                 filter(t -> t.getStatus() == 0 && (type == null || t.getType().equals(type)))
                 .collect(Collectors.toList());
 
         String fileName;
-        if(type == null)
-            fileName = directoryName + "/good.json";
-        else
-            fileName = directoryName+ "/" + type + "_good.json";
+        if(type == null) {
+            fileName = directoryName + "/sosie.json";
+        } else {
+            fileName = directoryName + "/" + type + "_sosie.json";
+        }
 
 
 

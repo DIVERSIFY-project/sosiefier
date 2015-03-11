@@ -50,6 +50,7 @@ public class MakeFilter {
             mk.runProgram(p2dir, false);
             Diff testdiff = mk.compare(p1dir + "/log", p2dir + "/log");
             filter.addFilter(testdiff.buildFilter());
+            Log.info("filter size: {}", testdiff.size());
         }
 
         for(int i = 0; i < n/3; i++) {
@@ -59,6 +60,7 @@ public class MakeFilter {
             mk.runProgram(p2dir, false);
             Diff testdiff = mk.compare(p1dir + "/log", p2dir + "/log");
             filter.addFilter(testdiff.buildFilter());
+            Log.info("filter size: {}", testdiff.size());
         }
         for(int i = 0; i < n/3; i++) {
             Pool.reset();
@@ -67,9 +69,10 @@ public class MakeFilter {
             mk.runProgram(p2dir, true);
             Diff testdiff = mk.compare(p1dir + "/log", p2dir + "/log");
             filter.addFilter(testdiff.buildFilter());
+            Log.info("filter size: {}", testdiff.size());
         }
         filter.print(out);
-//        mk.printFilter(diffs, out);
+
     }
 
     protected void runProgram(String dir, boolean clean) throws IOException, InterruptedException {
@@ -94,58 +97,11 @@ public class MakeFilter {
         Collection<Test> testSosie = reader.loadLog(dirSosieLog);
 
         LogTestComparator comparator = new LogTestComparator(testOriginal, testSosie);
-
-        return  comparator.compare();
-    }
-
-//    public Set<String> loadFilter(String file) throws IOException {
-//        BufferedReader reader = new BufferedReader(new FileReader(file));
-//        Set<String> filter = new HashSet<>();
-//
-//        String line = reader.readLine();
-//        while(line != null) {
-//            filter.add(line);
-//            line = reader.readLine();
-//        }
-//        return filter;
-//    }
-
-//    public void printFilter(Set<String> diffs, String fileName) throws IOException, JSONException {
-//        FileWriter fw = new FileWriter(fileName);
-//            diffs.stream()
-//                 .distinct()
-//                .forEach(f -> {
-//                    try {
-//                        fw.append(f + "\n");
-//                    } catch (Exception e) {}
-//                });
-//
-//        fw.close();
-//    }
-
-    protected String copyProgram(String tmpDir) throws IOException, JSONException {
-        //Store the whole sosie program.
-        try {
-
-
-            String destPath = tmpDir + System.currentTimeMillis();
-            (new File(destPath)).mkdirs();
-
-            Instru instru = new Instru(inputProgram.getProgramDir(), inputProgram.getRelativeSourceCodeDir(),
-                    inputProgram.getRelativeTestSourceCodeDir(), 6, destPath, null);
-            instru.setMethodCall(false);
-            instru.setVariable(false);
-            instru.setError(false);
-            instru.setNewTest(false);
-            instru.instru();
-
-            return destPath;
-
-
-        } catch (IOException e) {
-            //We may also don't want to recover from here. If no instrumentation possible... now what?
-            throw new RuntimeException(e);
-        }
+        Diff diff = comparator.compare();
+        Log.info("total point fix: {}", comparator.nbPointFix);
+        Log.info("total point non fix: {}",comparator.nbPointNotFix);
+        Log.info("total point: {}",comparator.nbPointNotFix +comparator.nbPointFix);
+        return  diff;
     }
 
     /**

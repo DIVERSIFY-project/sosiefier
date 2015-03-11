@@ -3,6 +3,9 @@ package fr.inria.diversify.testamplification.compare;
 import fr.inria.diversify.testamplification.compare.diff.MonitoringPointDiff;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * User: Simon
@@ -39,10 +42,12 @@ public class SingleMonitoringPoint extends AbstractMonitoringPoint {
                 diff.setClassDiff(true);
                 return diff;
             } else {
-                for (int i = 0; i < methods.length; i++) {
+                for (int i = 0; i < methods.length; i++)  {
                     String mth = methods[i];
                     Object oValue = this.getValues()[i];
                     Object sValue = otherCast.getValues()[otherCast.indexOfMethod(mth)];
+                    addValue(id+mth, oValue);
+                    addValue(id+mth, sValue);
                     if (!oValue.equals(sValue)) {
                        diff.addMethodDiff(mth, oValue, sValue);
                     }
@@ -92,5 +97,40 @@ public class SingleMonitoringPoint extends AbstractMonitoringPoint {
 
     public String getClassName() {
         return className;
+    }
+
+
+
+    static Map<String, Boolean> pointIsFix;
+    static Map<String, Object> pointValue;
+
+    public static int nbOfFixPoint() {
+        return pointIsFix.values().stream()
+                .filter(b -> b)
+                .collect(Collectors.toList())
+                .size();
+    }
+
+    public static int nbOfNotFixPoint() {
+        return pointIsFix.values().stream()
+                .filter(b -> !b)
+                .collect(Collectors.toList())
+                .size();
+    }
+
+    public static void initPoint() {
+        pointIsFix = new HashMap<>();
+        pointValue = new HashMap<>();
+    }
+
+    public static void addValue(String id, Object value) {
+        if(!pointValue.containsKey(id)) {
+            pointValue.put(id, value);
+            pointIsFix.put(id, true);
+        } else {
+            if(!pointValue.get(id).equals(value)) {
+                pointIsFix.put(id, false);
+            }
+        }
     }
 }

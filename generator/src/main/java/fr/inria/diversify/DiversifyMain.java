@@ -408,25 +408,84 @@ public class DiversifyMain {
         for (String type : getAllTransformationType(transformations))
             write.writeAllTransformation(type);
 
-        write.writeGoodTransformation(null);
+        write.writeSosie(null);
 
         for (String type : getAllTransformationType(transformations))
-            write.writeGoodTransformation(type);
+            write.writeSosie(type);
 
-//        Set<Transformation> singleTransformation = transformations.stream()
-//                .filter(t -> t instanceof SingleTransformation)
-//                .map(t -> (SingleTransformation) t)
-//                .filter(t -> t.classLocationName().equals("org.apache.commons.collections4.bidimap.DualTreeBidiMap"))
-//                .collect(Collectors.toSet());
-//        write.writeTransformation(fileName +"StringUtils.json",singleTransformation);
-//
-//        singleTransformation = transformations.stream()
-//                .filter(t -> t instanceof SingleTransformation)
-//                .map(t -> (SingleTransformation) t)
-//                .filter(t -> t.isSosie()).filter(t -> t.classLocationName().equals("org.apache.commons.collections4.bidimap.DualTreeBidiMap"))
-//                .collect(Collectors.toSet());
-//
-//        write.writeTransformation(fileName +"_sosie_StringUtils.json",singleTransformation);
+        Set<Transformation> singleTransformation = transformations.stream()
+                .filter(t -> t.getStatus() == 0)
+                .filter(t -> t instanceof SingleTransformation)
+                .map(t -> (SingleTransformation) t)
+                .filter(t -> t.classLocationName().equals("com.google.common.collect.HashBiMap"))
+                .collect(Collectors.toSet());
+        write.writeTransformation(fileName +"_sosie_HashBiMap.json",singleTransformation);
+
+        singleTransformation = transformations.stream()
+                .filter(t -> t.getStatus() == 0)
+                .filter(t -> t instanceof SingleTransformation)
+                .map(t -> (SingleTransformation) t)
+                .filter(t -> t.classLocationName().equals("com.google.common.collect.HashMultimap"))
+                .collect(Collectors.toSet());
+        write.writeTransformation(fileName +"_sosie_HashMultimap.json",singleTransformation);
+
+        singleTransformation = transformations.stream()
+                .filter(t -> t.getStatus() == 0)
+                .filter(t -> t instanceof SingleTransformation)
+                .map(t -> (SingleTransformation) t)
+                .filter(t -> t.classLocationName().equals("com.google.common.collect.HashMultiset"))
+                .collect(Collectors.toSet());
+        write.writeTransformation(fileName +"_sosie_HashMultiset.json",singleTransformation);
+
+        singleTransformation = transformations.stream()
+                .filter(t -> t.getStatus() == 0)
+                .filter(t -> t instanceof SingleTransformation)
+                .map(t -> (SingleTransformation) t)
+                .filter(t -> t.classLocationName().equals("com.google.common.collect.Iterators"))
+                .collect(Collectors.toSet());
+        write.writeTransformation(fileName +"_sosie_Iterators.json",singleTransformation);
+
+        singleTransformation = transformations.stream()
+                .filter(t -> t.getStatus() == 0)
+                .filter(t -> t instanceof SingleTransformation)
+                .map(t -> (SingleTransformation) t)
+                .filter(t -> t.classLocationName().equals("com.google.common.collect.LinkedHashMultimap"))
+                .collect(Collectors.toSet());
+        write.writeTransformation(fileName +"_sosie_LinkedHashMultimap.json",singleTransformation);
+
+        singleTransformation = transformations.stream()
+                .filter(t -> t.getStatus() == 0)
+                .filter(t -> t instanceof SingleTransformation)
+                .map(t -> (SingleTransformation) t)
+                .filter(t -> t.classLocationName().equals("com.google.common.collect.LinkedHashMultiset"))
+                .collect(Collectors.toSet());
+        write.writeTransformation(fileName +"_sosie_LinkedHashMultiset.json",singleTransformation);
+
+        singleTransformation = transformations.stream()
+                .filter(t -> t.getStatus() == 0)
+                .filter(t -> t instanceof SingleTransformation)
+                .map(t -> (SingleTransformation) t)
+                .filter(t -> t.classLocationName().equals("com.google.common.collect.LinkedListMultimap"))
+                .collect(Collectors.toSet());
+        write.writeTransformation(fileName +"_sosie_LinkedListMultimap.json",singleTransformation);
+
+        singleTransformation = transformations.stream()
+                .filter(t -> t.getStatus() == 0)
+                .filter(t -> t instanceof SingleTransformation)
+                .map(t -> (SingleTransformation) t)
+                .filter(t -> t.classLocationName().equals("com.google.common.collect.Lists"))
+                .collect(Collectors.toSet());
+        write.writeTransformation(fileName +"_sosie_Lists.json",singleTransformation);
+
+        singleTransformation = transformations.stream()
+                .filter(t -> t.getStatus() == 0)
+                .filter(t -> t instanceof SingleTransformation)
+                .map(t -> (SingleTransformation) t)
+                .filter(t -> t.classLocationName().equals("com.google.common.collect.Maps"))
+                .collect(Collectors.toSet());
+        write.writeTransformation(fileName +"_sosie_Maps.json",singleTransformation);
+
+
 
         CVLMetric cvlMetric = new CVLMetric(inputProgram);
         cvlMetric.printMetrics(fileName + "_cvlMetric.csv");

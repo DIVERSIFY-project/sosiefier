@@ -13,6 +13,8 @@ public class LogTestComparator {
     protected List<Test> originalTests;
     protected List<Test> sosieTests;
 
+    public int nbPointFix = 0;
+    public int nbPointNotFix = 0;
 
 
     public LogTestComparator(Collection<Test> original, Collection<Test> test) {
@@ -25,10 +27,17 @@ public class LogTestComparator {
         for(Test original : originalTests) {
             for (Test sosie : sosieTests) {
                 if(original.getSignature().equals(sosie.getSignature())) {
+                    SingleMonitoringPoint.initPoint();
                     TestDiff testdiff = compareTest(original, sosie);
                     if(testdiff.size() != 0) {
                         result.add(testdiff);
                     }
+//                    Log.info("point fix: {}", SingleMonitoringPoint.nbOfFixPoint());
+//                    Log.info("point non fix: {}",SingleMonitoringPoint.nbOfNotFixPoint());
+                    nbPointFix += SingleMonitoringPoint.nbOfFixPoint();
+                    nbPointNotFix += SingleMonitoringPoint.nbOfNotFixPoint();
+//                    Log.info("total point fix: {}", nbPointFix);
+//                    Log.info("total point non fix: {}",nbPointNotFix);
                     break;
                 }
             }
