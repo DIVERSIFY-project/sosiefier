@@ -122,11 +122,13 @@ public abstract class Transformation {
             return array;
         }
         for(String failure : failures) {
-            if(!failuresDico.containsKey(failure)) {
-                failuresDico.put(failure,id);
-                id++;
+            if(failure != null) {
+                if (!failuresDico.containsKey(failure)) {
+                    failuresDico.put(failure, id);
+                    id++;
+                }
+                array.put(failuresDico.get(failure));
             }
-            array.put(failuresDico.get(failure));
         }
         return array;
     }
