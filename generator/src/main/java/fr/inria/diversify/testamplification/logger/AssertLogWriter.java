@@ -26,7 +26,8 @@ public class AssertLogWriter extends LogWriter {
     private Map<Class, Field[]> fields;
     private Map<Class, String> classToId;
     private static int testCount = 0;
-    private static int monitoringCount = 0;
+    private static long monitoringCount = 0;
+    private static long assertCount = 0;
 
     private static int count = 0;
 
@@ -88,6 +89,10 @@ public class AssertLogWriter extends LogWriter {
         }
     }
 
+    public void assertCount(String signature) {
+        assertCount++;
+
+    }
 
     protected String observe(Thread thread, Object object) throws IOException, InterruptedException {
         Class objectClass;
@@ -117,7 +122,7 @@ public class AssertLogWriter extends LogWriter {
             }
             j++;
         }
-
+        monitoringCount += results.length;
         StringBuilder sameValue = new StringBuilder();
         List<String> result = new ArrayList<String>();
         boolean sameValues = true;
@@ -207,11 +212,9 @@ public class AssertLogWriter extends LogWriter {
     public void logAssertArgument(Thread thread, int idAssertTarget, Object target,  int idAssertInvocation, Object invocation) {
         logAssertArgument(thread, idAssertTarget, target);
         logAssertArgument(thread, idAssertInvocation, invocation);
-        monitoringCount--;
     }
 
     public void logAssertArgument(Thread thread, int idAssert, Object invocation) {
-        monitoringCount++;
         String semaphore = "";
         if (getLogMethod(thread)) {
             try {
@@ -241,15 +244,13 @@ public class AssertLogWriter extends LogWriter {
     }
 
     public void close() {
+        printCount();
         for (Thread thread : fileWriters.keySet()) {
             String semaphore = "";
             try {
                 PrintWriter flw = getFileWriter(thread);
                 semaphore = flw.toString() + flw.hashCode();
                 flw.close();
-                if(thread.getName().contains("main")) {
-                    printCount();
-                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -263,6 +264,7 @@ public class AssertLogWriter extends LogWriter {
             PrintWriter f = new PrintWriter(new FileWriter(countFileName));
             f.append("test count: "+testCount);
             f.append("\nmonitoring point count: "+monitoringCount);
+            f.append("\nassert count: "+assertCount);
             f.close();
         } catch (IOException e) {
             e.printStackTrace();

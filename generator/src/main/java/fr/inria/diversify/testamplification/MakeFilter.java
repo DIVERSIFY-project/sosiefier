@@ -6,6 +6,7 @@ import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.sosie.logger.Instru;
 import fr.inria.diversify.testamplification.compare.LogTestComparator;
 import fr.inria.diversify.testamplification.compare.LogTestReader;
+import fr.inria.diversify.testamplification.compare.SingleMonitoringPoint;
 import fr.inria.diversify.testamplification.compare.Test;
 import fr.inria.diversify.testamplification.compare.diff.Diff;
 import fr.inria.diversify.testamplification.compare.diff.Filter;
@@ -101,6 +102,7 @@ public class MakeFilter {
         Log.info("total point fix: {}", comparator.nbPointFix);
         Log.info("total point non fix: {}",comparator.nbPointNotFix);
         Log.info("total point: {}",comparator.nbPointNotFix +comparator.nbPointFix);
+        Log.info("total executed point: {}", SingleMonitoringPoint.executedPoint);
         return  diff;
     }
 

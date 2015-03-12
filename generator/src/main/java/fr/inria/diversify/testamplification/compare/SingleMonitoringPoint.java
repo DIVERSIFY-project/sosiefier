@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
  * Time: 12:27
  */
 public class SingleMonitoringPoint extends AbstractMonitoringPoint {
+    public static int executedPoint = 0;
     String[] methods;
     Object[] values;
     protected String className;
@@ -43,6 +44,7 @@ public class SingleMonitoringPoint extends AbstractMonitoringPoint {
                 return diff;
             } else {
                 for (int i = 0; i < methods.length; i++)  {
+                    executedPoint++;
                     String mth = methods[i];
                     Object oValue = this.getValues()[i];
                     Object sValue = otherCast.getValues()[otherCast.indexOfMethod(mth)];

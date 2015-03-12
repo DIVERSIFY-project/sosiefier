@@ -60,7 +60,7 @@ public class SinglePointDiversify extends AbstractDiversify {
     protected void run(Transformation trans) throws Exception {
         Log.info("trial {}", trial);
         Log.debug("output dir: " + tmpDir + "/" + sourceDir);
-        writePosition(tmpDir + "/transplant.json", (ASTTransformation) trans);
+//        writePosition(tmpDir + "/transplant.json", (ASTTransformation) trans);
 
         try {
             applyTransformation(trans);
@@ -87,8 +87,6 @@ public class SinglePointDiversify extends AbstractDiversify {
         } catch (ApplyTransformationException e) {
             tryRestore(trans,e);
         } catch (BuildTransplantException e) {}
-//        Integer result = runTest(tmpDir);
-//        Log.debug("run after restore: " +result);
     }
 
 

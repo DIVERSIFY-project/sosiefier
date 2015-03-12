@@ -58,7 +58,10 @@ public class TestCaseProcessor extends TestProcessor {
             List<CtAssignment> assignments = Query.getElements(method, new TypeFilter(CtAssignment.class));
             for (CtAssignment assignment : assignments) {
                 if(!(assignment.getParent() instanceof CtLoop)){
-                    assignment.insertAfter(logAssignment(assignment.getAssigned()));
+                    try {
+                        assignment.insertAfter(logAssignment(assignment.getAssigned()));
+                    } catch (Exception e) {}
+
                 }
             }
 
