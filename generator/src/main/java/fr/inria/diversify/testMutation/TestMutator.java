@@ -11,7 +11,6 @@ public class TestMutator extends AbstractAnnotationProcessor<org.junit.Test, CtM
 
     @Override
     public void process(Test test, CtMethod ctMethod) {
-        //Google with its ultra hupa dupa "know what you want" seach engine has decide I'm taking my first step to learn Spanish!!
-        //Yipiii!! I mean... learning Spanish has always been my life's dream. Now I can finally start reading reading "El Quijote"... again.
+
     }
 }

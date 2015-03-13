@@ -1,13 +1,15 @@
 package fr.inria.diversify;
 
-import com.fasterxml.uuid.Generators;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.persistence.json.input.JsonAstTransformationInput;
 import fr.inria.diversify.persistence.json.input.JsonSosiesInput;
-import fr.inria.diversify.persistence.json.output.*;
+import fr.inria.diversify.persistence.json.output.JsonFailuresOutput;
+import fr.inria.diversify.persistence.json.output.JsonHeaderOutput;
+import fr.inria.diversify.persistence.json.output.JsonSectionOutput;
+import fr.inria.diversify.persistence.json.output.JsonSosiesOutput;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
@@ -29,7 +31,10 @@ public class FromISSTAToTestEyeFormat {
 
 
     //private static final String CONF_PATH = "C:\\MarcelStuff\\data\\DIVERSE\\input_configurations\\IsstaToTestEye-CommonColl.properties";
-    private static final String CONF_PATH = "C:\\MarcelStuff\\data\\DIVERSE\\input_configurations\\IsstaToTestEye-gson.properties";
+    //private static final String CONF_PATH = "C:\\MarcelStuff\\data\\DIVERSE\\input_configurations\\IsstaToTestEye-gson.properties";
+    private static final String CONF_PATH = "C:\\MarcelStuff\\DATA\\DIVERSE\\input_configurations\\IsstaToTestEye-CommonCodec.properties";
+    //private static final String CONF_PATH = "C:\\MarcelStuff\\data\\DIVERSE\\input_configurations\\IsstaToTestEye-CommonLang.properties";
+    //private static final String CONF_PATH = "C:\\MarcelStuff\\data\\DIVERSE\\input_configurations\\IsstaToTestEye-CommonIO.properties";
     //private static final String CONF_PATH = "C:\\MarcelStuff\\data\\DIVERSE\\input_configurations\\IsstaToTestEye-CommonMath.properties";
 
     public static void main(String[] args) throws Exception {
@@ -111,28 +116,7 @@ public class FromISSTAToTestEyeFormat {
         for (File f : files) {
             JSONArray a = getArray(f);
             for (int i = 0; i < a.length() - 2; i++) {
-                try {
-                    JSONObject tObj = a.getJSONObject(i);
-                    if (tObj.has(JsonSectionOutput.TINDEX)) {
-                        UUID uuid = JsonAstTransformationInput.getValidUUI(tObj.getString(JsonSectionOutput.TINDEX));
-                        tObj.put(JsonSectionOutput.TINDEX, uuid);
-                    }
-                    if (tObj.has("variableMapping")) {
-                        tObj.put(JsonSectionOutput.VARIABLE_MAP, tObj.get("variableMapping"));
-                        tObj.remove("variableMapping");
-                    }
-                    if (tObj.has(JsonSectionOutput.TRANSPLANT)) {
-                        correctSource(tObj.getJSONObject(JsonSectionOutput.TRANSPLANT));
-                    }
-                    if (tObj.has(JsonSectionOutput.TRANSPLANT_POINT)) {
-                        correctSource(tObj.getJSONObject(JsonSectionOutput.TRANSPLANT_POINT));
-                    }
-                    if (tObj.has(JsonSectionOutput.STATUS) && tObj.getInt(JsonSectionOutput.STATUS) == 0) {
-                        transformations.put(tObj);
-                    }
-                } catch (JSONException e) {
-                    System.out.println("Error! ... And that's all I'm telling: " + e.getMessage());
-                }
+                correctTransformation(a.getJSONObject(i), transformations);
             }
         }
 
@@ -140,6 +124,37 @@ public class FromISSTAToTestEyeFormat {
         FileWriter fw = new FileWriter(inputConfiguration.getResultPath());
         result.write(fw);
         fw.close();
+    }
+
+    private static void correctTransformation(JSONObject tObj, JSONArray transformations) {
+        try {
+            if ( tObj.has(JsonSectionOutput.NAME) && tObj.getString(JsonSectionOutput.NAME).equals("multi") ) {
+                JSONArray a = tObj.getJSONArray("transformations");
+                for (int i = 0; i < a.length(); i++) {
+                    correctTransformation(a.getJSONObject(i), transformations);
+                }
+            } else {
+                if (tObj.has(JsonSectionOutput.TINDEX)) {
+                    UUID uuid = JsonAstTransformationInput.getValidUUI(tObj.getString(JsonSectionOutput.TINDEX));
+                    tObj.put(JsonSectionOutput.TINDEX, uuid);
+                }
+                if (tObj.has("variableMapping")) {
+                    tObj.put(JsonSectionOutput.VARIABLE_MAP, tObj.get("variableMapping"));
+                    tObj.remove("variableMapping");
+                }
+                if (tObj.has(JsonSectionOutput.TRANSPLANT)) {
+                    correctSource(tObj.getJSONObject(JsonSectionOutput.TRANSPLANT));
+                }
+                if (tObj.has(JsonSectionOutput.TRANSPLANT_POINT)) {
+                    correctSource(tObj.getJSONObject(JsonSectionOutput.TRANSPLANT_POINT));
+                }
+                if (tObj.has(JsonSectionOutput.STATUS) && tObj.getInt(JsonSectionOutput.STATUS) == 0) {
+                    transformations.put(tObj);
+                }
+            }
+        } catch (JSONException e) {
+            System.out.println("Error! ... And that's all I'm telling: " + e.getMessage());
+        }
     }
 
     private static void correctSource(JSONObject o) throws JSONException {
