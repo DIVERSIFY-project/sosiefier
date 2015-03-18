@@ -17,19 +17,6 @@ import java.util.*;
  */
 public class CompareAmpliTest {
 
-    public static void main(String[] args) throws IOException, JSONException {
-        Log.DEBUG();
-        CompareAmpliTest cat = new CompareAmpliTest();
-
-        Diff diff = cat.compare(args[0], args[1]);
-        diff.setSosie(null);
-        cat.print(diff.toJson(), args[2]);
-        cat.buildAndPrintFilter(diff, args[3]);
-        Filter filter = new Filter(args[3]);
-        diff.filter(filter);
-        cat.print(diff.toJson(),args[2]+".json");
-    }
-
     public Diff compare(String dirOriginalLog, String dirSosieLog) throws JSONException, IOException {
         LogTestReader reader = new LogTestReader();
 
@@ -54,5 +41,15 @@ public class CompareAmpliTest {
             fw.append(f + "\n");
         }
         fw.close();
+    }
+
+    public static void main(String[] args) throws IOException, JSONException {
+        Log.DEBUG();
+        CompareAmpliTest cat = new CompareAmpliTest();
+
+        Diff diff = cat.compare(args[0], args[1]);
+        diff.setSosie(null);
+        cat.print(diff.toJson(), args[2]);
+        cat.buildAndPrintFilter(diff, args[3]);
     }
 }

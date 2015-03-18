@@ -4,24 +4,19 @@ import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.buildSystem.ant.AntBuilder;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
-import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.coverage.CoverageReport;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.coverage.MultiCoverageReport;
 import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.diversification.*;
-import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.statistic.CVLMetric;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.query.*;
 import fr.inria.diversify.util.Log;
+import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
-import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Level;
 import org.json.JSONException;
-import spoon.Launcher;
-import spoon.reflect.factory.Factory;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,10 +49,10 @@ public class DiversifyMain {
 
         inputConfiguration = new InputConfiguration(propertiesFile);
 
-        initLogLevel();
-        initDependency();
-        initInputProgram();
-        initSpoon();
+        InitUtils.initLogLevel(inputConfiguration);
+        InitUtils.initDependency(inputConfiguration);
+        inputProgram = InitUtils.initInputProgram(inputConfiguration);
+        InitUtils.initSpoon(inputProgram);
         TransformationQuery query = initTransformationQuery();
 
         AbstractDiversify runner = initRunner();
@@ -78,32 +73,6 @@ public class DiversifyMain {
             }
     }
 
-    protected void initDependency() throws Exception, InvalidSdkException {
-        MavenDependencyResolver t = new MavenDependencyResolver();
-        String builder = inputConfiguration.getProperty("builder");
-
-        String dependencyPom = inputConfiguration.getProperty("dependencyPom");
-        if (builder.equals("maven") && dependencyPom != null) {
-            File pom = new File(inputConfiguration.getProperty("project") + "/pom.xml");
-            File originalPom = new File(inputConfiguration.getProperty("project") + "/_originalPom.xml");
-            FileUtils.copyFile(pom, originalPom);
-
-            if(dependencyPom != null) {
-                FileUtils.copyFile(new File(inputConfiguration.getProperty("project") + "/" +dependencyPom), pom);
-            }
-
-            t.DependencyResolver(inputConfiguration.getProperty("project") + "/pom.xml");
-
-            FileUtils.copyFile(originalPom, pom);
-            FileUtils.forceDelete(originalPom);
-        }
-
-        String androidSdk = inputConfiguration.getProperty("AndroidSdk");
-        if(androidSdk != null) {
-            t.resolveAndroidDependencies(androidSdk);
-        }
-    }
-
     protected AbstractDiversify initRunner() throws Exception {
         AbstractDiversify abstractDiversify = null;
         String runner = inputConfiguration.getProperty("runner", "simple");
@@ -116,6 +85,9 @@ public class DiversifyMain {
         switch (runner) {
             case "simple":
                 abstractDiversify = new SinglePointDiversify(inputConfiguration, project, src);
+                break;
+            case "dumpfailure":
+                abstractDiversify = new DumpFailure(inputConfiguration, project, src);
                 break;
             case "multi": {
                 int multiTransformationSize = Integer.parseInt(inputConfiguration.getProperty("multiTransformation.size"));
@@ -208,37 +180,6 @@ public class DiversifyMain {
         } else {
             rb.setTimeOut(t);
         }
-    }
-
-    /**
-     * Initializes the InputProgram dataset
-     */
-    protected void  initInputProgram() throws IOException, InterruptedException {
-        inputProgram = new InputProgram();
-        inputConfiguration.setInputProgram(inputProgram);
-        inputProgram.setProgramDir(inputConfiguration.getProperty("project"));
-        inputProgram.setRelativeSourceCodeDir(inputConfiguration.getRelativeSourceCodeDir());
-
-        if(inputConfiguration.getProperty("externalSrc") != null) {
-            List<String> list = Arrays.asList(inputConfiguration.getProperty("externalSrc").split(System.getProperty("path.separator")));
-            String sourcesDir = list.stream()
-                                    .map(src -> inputProgram.getProgramDir() + "/" + src)
-                                    .collect(Collectors.joining(System.getProperty("path.separator")));
-            inputProgram.setExternalSourceCodeDir(sourcesDir);
-        }
-//        inputProgram.setCoverageReport(initCoverageReport());
-
-        inputProgram.setTransformationPerRun(
-                Integer.parseInt(inputConfiguration.getProperty("transformation.size", "1")));
-
-        //Path to pervious transformations made to this input program
-        inputProgram.setPreviousTransformationsPath(
-                inputConfiguration.getProperty("transformation.directory"));
-
-        inputProgram.setClassesDir(inputConfiguration.getProperty("project") + "/" +
-                                           inputConfiguration.getProperty("classes"));
-
-        inputProgram.setCoverageDir(inputConfiguration.getProperty("jacoco"));
     }
 
     protected TransformationQuery initTransformationQuery() throws ClassNotFoundException, NotFoundException, TransformationParserException, IOException, JSONException {
@@ -368,19 +309,6 @@ public class DiversifyMain {
         return icr;
     }
 
-
-    protected void initSpoon() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
-        String sourcesDir = inputProgram.getAbsoluteSourceCodeDir();
-        if(inputProgram.getExternalSourceCodeDir() != null) {
-            sourcesDir += System.getProperty("path.separator") + inputProgram.getExternalSourceCodeDir();
-        }
-
-        Factory factory = new SpoonMetaFactory().buildNewFactory(
-                sourcesDir,
-                Integer.parseInt(inputConfiguration.getProperty("javaVersion")));
-        inputProgram.setFactory(factory);
-    }
-
     protected void computeStatistic() throws Exception {
         String out = inputConfiguration.getProperty("result");
 //        computeCodeFragmentStatistic(out);
@@ -394,16 +322,27 @@ public class DiversifyMain {
 
     protected void computeDiversifyStat(String transDir, String fileName) throws Exception {
         TransformationParser tf = new TransformationParser(true, inputProgram);
-//        TransformationOldParser tf = new TransformationOldParser(true);
           Collection<Transformation> transformations = tf.parse(transDir);
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
+
+        List<String> badFailure = new ArrayList<>();
+        badFailure.add("org.eclipse.jgit.api.MergeCommandTest.testFileModeMergeWithDirtyWorkTree");
+        badFailure.add("org.eclipse.jgit.internal.storage.file.T0003_BasicTest.test002_WriteEmptyTree");
+        badFailure.add("org.eclipse.jgit.lib.DirCacheCheckoutTest.testFileModeChangeAndContentChangeConflict");
+        badFailure.add("org.eclipse.jgit.api.CommitAndLogCommandTest.testModeChange");
+        badFailure.add("org.eclipse.jgit.lib.DirCacheCheckoutTest.testFileModeChangeWithNoContentChangeUpdate");
+        badFailure.add("org.eclipse.jgit.lib.DirCacheCheckoutTest.testDirtyFileModeEqualHeadMerge");
+        transformations.stream()
+                .forEach(t -> {
+                    t.getFailures().removeAll(badFailure);
+                    if(t.getStatus() != -2 && t.getFailures().isEmpty()) {
+                        t.setStatus(0);
+                    }
+                });
 
 
         Log.debug("all transformation type : {}", getAllTransformationType(transformations));
         write.writeAllTransformation(null);
-//        StatisticDiversification sd = new StatisticDiversification(transformations);
-//        sd.writeStat(fileName);
-
 
         for (String type : getAllTransformationType(transformations))
             write.writeAllTransformation(type);
@@ -412,80 +351,6 @@ public class DiversifyMain {
 
         for (String type : getAllTransformationType(transformations))
             write.writeSosie(type);
-
-        Set<Transformation> singleTransformation = transformations.stream()
-                .filter(t -> t.getStatus() == 0)
-                .filter(t -> t instanceof SingleTransformation)
-                .map(t -> (SingleTransformation) t)
-                .filter(t -> t.classLocationName().equals("com.google.common.collect.HashBiMap"))
-                .collect(Collectors.toSet());
-        write.writeTransformation(fileName +"_sosie_HashBiMap.json",singleTransformation);
-
-        singleTransformation = transformations.stream()
-                .filter(t -> t.getStatus() == 0)
-                .filter(t -> t instanceof SingleTransformation)
-                .map(t -> (SingleTransformation) t)
-                .filter(t -> t.classLocationName().equals("com.google.common.collect.HashMultimap"))
-                .collect(Collectors.toSet());
-        write.writeTransformation(fileName +"_sosie_HashMultimap.json",singleTransformation);
-
-        singleTransformation = transformations.stream()
-                .filter(t -> t.getStatus() == 0)
-                .filter(t -> t instanceof SingleTransformation)
-                .map(t -> (SingleTransformation) t)
-                .filter(t -> t.classLocationName().equals("com.google.common.collect.HashMultiset"))
-                .collect(Collectors.toSet());
-        write.writeTransformation(fileName +"_sosie_HashMultiset.json",singleTransformation);
-
-        singleTransformation = transformations.stream()
-                .filter(t -> t.getStatus() == 0)
-                .filter(t -> t instanceof SingleTransformation)
-                .map(t -> (SingleTransformation) t)
-                .filter(t -> t.classLocationName().equals("com.google.common.collect.Iterators"))
-                .collect(Collectors.toSet());
-        write.writeTransformation(fileName +"_sosie_Iterators.json",singleTransformation);
-
-        singleTransformation = transformations.stream()
-                .filter(t -> t.getStatus() == 0)
-                .filter(t -> t instanceof SingleTransformation)
-                .map(t -> (SingleTransformation) t)
-                .filter(t -> t.classLocationName().equals("com.google.common.collect.LinkedHashMultimap"))
-                .collect(Collectors.toSet());
-        write.writeTransformation(fileName +"_sosie_LinkedHashMultimap.json",singleTransformation);
-
-        singleTransformation = transformations.stream()
-                .filter(t -> t.getStatus() == 0)
-                .filter(t -> t instanceof SingleTransformation)
-                .map(t -> (SingleTransformation) t)
-                .filter(t -> t.classLocationName().equals("com.google.common.collect.LinkedHashMultiset"))
-                .collect(Collectors.toSet());
-        write.writeTransformation(fileName +"_sosie_LinkedHashMultiset.json",singleTransformation);
-
-        singleTransformation = transformations.stream()
-                .filter(t -> t.getStatus() == 0)
-                .filter(t -> t instanceof SingleTransformation)
-                .map(t -> (SingleTransformation) t)
-                .filter(t -> t.classLocationName().equals("com.google.common.collect.LinkedListMultimap"))
-                .collect(Collectors.toSet());
-        write.writeTransformation(fileName +"_sosie_LinkedListMultimap.json",singleTransformation);
-
-        singleTransformation = transformations.stream()
-                .filter(t -> t.getStatus() == 0)
-                .filter(t -> t instanceof SingleTransformation)
-                .map(t -> (SingleTransformation) t)
-                .filter(t -> t.classLocationName().equals("com.google.common.collect.Lists"))
-                .collect(Collectors.toSet());
-        write.writeTransformation(fileName +"_sosie_Lists.json",singleTransformation);
-
-        singleTransformation = transformations.stream()
-                .filter(t -> t.getStatus() == 0)
-                .filter(t -> t instanceof SingleTransformation)
-                .map(t -> (SingleTransformation) t)
-                .filter(t -> t.classLocationName().equals("com.google.common.collect.Maps"))
-                .collect(Collectors.toSet());
-        write.writeTransformation(fileName +"_sosie_Maps.json",singleTransformation);
-
-
 
         CVLMetric cvlMetric = new CVLMetric(inputProgram);
         cvlMetric.printMetrics(fileName + "_cvlMetric.csv");
@@ -522,12 +387,5 @@ public class DiversifyMain {
         } else {
             runner.printResultInGitRepo(inputConfiguration.getProperty("result"), repo);
         }
-    }
-
-    protected void initLogLevel() {
-        Launcher.logger.setLevel(Level.OFF);
-        int level = Integer.parseInt(inputConfiguration.getProperty("logLevel"));
-        Log.set(level);
-
     }
 }

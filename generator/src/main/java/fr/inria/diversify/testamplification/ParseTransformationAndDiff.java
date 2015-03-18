@@ -8,6 +8,7 @@ import fr.inria.diversify.testamplification.compare.diff.Filter;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.transformation.TransformationsWriter;
+import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,12 +26,17 @@ public class ParseTransformationAndDiff {
     Filter filter;
     protected InputProgram inputProgram;
 
+    int rm = 0;
+    int add = 0;
+    int commit =0;
+
 
     public static void main(String[] args) throws IOException, InterruptedException, JSONException, TransformationParserException, IllegalAccessException, ClassNotFoundException, InstantiationException {
         InputConfiguration inputConfiguration = new InputConfiguration(args[0]);
-        InputProgram inputProgram = initInputProgram(inputConfiguration);
+        InputProgram inputProgram = InitUtils.initInputProgram(inputConfiguration);
         ParseTransformationAndDiff p = new ParseTransformationAndDiff(inputProgram);
-        p.initSpoon(inputConfiguration);
+        InitUtils.initSpoon(inputProgram);
+
         p.parseDir(args[1]);
         p.loadFilter(inputConfiguration.getProperty("compare.filter"));
 //        p.loadFilter(inputConfiguration.getProperty("compare.filter"));
@@ -49,7 +55,15 @@ public class ParseTransformationAndDiff {
         int count = 0;
         for (Transformation transformation : diffs.keySet()) {
            int sum = diffs.get(transformation).size();
-
+            if(diffs.get(transformation).toString().contains("RmCommand")) {
+                rm++;
+            }
+            if(diffs.get(transformation).toString().contains("AddCommand")) {
+                add++;
+            }
+            if(diffs.get(transformation).toString().contains("Commit")) {
+                commit++;
+            }
             if(sum != 0) {
                 Log.info("{} \nnb: {}\n",transformation, sum);
                 count++;
@@ -120,54 +134,12 @@ public class ParseTransformationAndDiff {
         diffs.put(diff.getSosie(), diff);
     }
 
-
-
     public Map<Transformation,Diff> getDiffs() {
         return diffs;
     }
 
-    /**
-     * Initializes the InputProgram dataset
-     */
-    protected static InputProgram initInputProgram(InputConfiguration inputConfiguration) throws IOException, InterruptedException {
-        InputProgram inputProgram = new InputProgram();
-        inputConfiguration.setInputProgram(inputProgram);
-        inputProgram.setProgramDir(inputConfiguration.getProperty("project"));
-        inputProgram.setRelativeSourceCodeDir(inputConfiguration.getRelativeSourceCodeDir());
-
-        if (inputConfiguration.getProperty("externalSrc") != null) {
-            List<String> list = Arrays.asList(inputConfiguration.getProperty("externalSrc").split(System.getProperty("path.separator")));
-            String sourcesDir = list.stream().map(src -> inputProgram.getProgramDir() + "/" + src).collect(Collectors.joining(System.getProperty("path.separator")));
-            inputProgram.setExternalSourceCodeDir(sourcesDir);
-        }
-
-
-        inputProgram.setTransformationPerRun(Integer.parseInt(inputConfiguration.getProperty("transformation.size", "1")));
-
-        //Path to pervious transformations made to this input program
-        inputProgram.setPreviousTransformationsPath(inputConfiguration.getProperty("transformation.directory"));
-
-        inputProgram.setClassesDir(inputConfiguration.getProperty("project") + "/" +
-                                           inputConfiguration.getProperty("classes"));
-
-        inputProgram.setCoverageDir(inputConfiguration.getProperty("jacoco"));
-
-        return inputProgram;
-    }
 
     public void loadFilter(String file) throws IOException {
        filter = new Filter(file);
-    }
-
-    protected void initSpoon(InputConfiguration inputConfiguration) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
-        String sourcesDir = inputProgram.getAbsoluteSourceCodeDir();
-        if(inputProgram.getExternalSourceCodeDir() != null) {
-            sourcesDir += System.getProperty("path.separator") + inputProgram.getExternalSourceCodeDir();
-        }
-
-        Factory factory = new SpoonMetaFactory().buildNewFactory(
-                sourcesDir,
-                Integer.parseInt(inputConfiguration.getProperty("javaVersion")));
-        inputProgram.setFactory(factory);
     }
 }

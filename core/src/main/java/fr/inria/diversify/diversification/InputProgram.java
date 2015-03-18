@@ -74,13 +74,17 @@ public class InputProgram {
      */
     private String sourceCodeDir;
 
-
     private String externalSourceCodeDir = "";
 
     /**
      * Path to the test source code of the input program
      */
     private String testSourceCodeDir;
+
+    /**
+     * java version of this program
+     */
+    private int javaVersion;
 
     /**
      * Path to the built classes
@@ -555,6 +559,14 @@ public class InputProgram {
 
     public void setProgramDir(String programDir) {
         this.programDir = programDir;
+    }
+
+    public void setJavaVersion(int javaVersion) {
+        this.javaVersion = javaVersion;
+    }
+
+    public int getJavaVersion() {
+        return javaVersion;
     }
 
     /**

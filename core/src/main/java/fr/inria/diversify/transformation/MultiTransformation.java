@@ -102,4 +102,13 @@ public class MultiTransformation extends Transformation {
                 failures.equals(otherMulti.failures) &&
                 transformations.equals(otherMulti.transformations);
     }
+
+    public String toString() {
+        String ret = "";
+
+        for(Transformation transformation : transformations) {
+            ret += transformations.toString() +"\n";
+        }
+        return ret;
+    }
 }

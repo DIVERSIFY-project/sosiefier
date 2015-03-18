@@ -3,7 +3,6 @@ package fr.inria.diversify.testamplification;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.sosie.logger.Instru;
 import fr.inria.diversify.testamplification.compare.LogTestComparator;
 import fr.inria.diversify.testamplification.compare.LogTestReader;
 import fr.inria.diversify.testamplification.compare.SingleMonitoringPoint;
@@ -11,7 +10,6 @@ import fr.inria.diversify.testamplification.compare.Test;
 import fr.inria.diversify.testamplification.compare.diff.Diff;
 import fr.inria.diversify.testamplification.compare.diff.Filter;
 import fr.inria.diversify.testamplification.compare.diff.Pool;
-import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
@@ -104,35 +102,5 @@ public class MakeFilter {
         Log.info("total point: {}",comparator.nbPointNotFix +comparator.nbPointFix);
         Log.info("total executed point: {}", SingleMonitoringPoint.executedPoint);
         return  diff;
-    }
-
-    /**
-     * Initializes the InputProgram dataset
-     */
-    protected void  initInputProgram(InputConfiguration inputConfiguration) throws IOException, InterruptedException {
-        inputProgram = new InputProgram();
-        inputConfiguration.setInputProgram(inputProgram);
-        inputProgram.setProgramDir(inputConfiguration.getProperty("project"));
-        inputProgram.setRelativeSourceCodeDir(inputConfiguration.getRelativeSourceCodeDir());
-
-        if(inputConfiguration.getProperty("externalSrc") != null) {
-            List<String> list = Arrays.asList(inputConfiguration.getProperty("externalSrc").split(System.getProperty("path.separator")));
-            String sourcesDir = list.stream()
-                    .map(src -> inputProgram.getProgramDir() + "/" + src)
-                    .collect(Collectors.joining(System.getProperty("path.separator")));
-            inputProgram.setExternalSourceCodeDir(sourcesDir);
-        }
-
-        inputProgram.setTransformationPerRun(
-                Integer.parseInt(inputConfiguration.getProperty("transformation.size", "1")));
-
-        //Path to pervious transformations made to this input program
-        inputProgram.setPreviousTransformationsPath(
-                inputConfiguration.getProperty("transformation.directory"));
-
-        inputProgram.setClassesDir(inputConfiguration.getProperty("project") + "/" +
-                inputConfiguration.getProperty("classes"));
-
-        inputProgram.setCoverageDir(inputConfiguration.getProperty("jacoco"));
     }
 }

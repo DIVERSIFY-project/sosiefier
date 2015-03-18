@@ -51,7 +51,7 @@ public class TestLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMetho
     public void process(CtMethod element) {
         String testName =  element.getPosition().getCompilationUnit().getMainType().getQualifiedName()
                 + "." + element.getSimpleName();
-        idFor(testName, "TEST"); //Save the id of the test to be able to count all processed tests
+        idFor(testName, "TEST"); //Save the id of the test to be able to staticCount all processed tests
 
         String snippet = getLogName() + ".writeTestStart(Thread.currentThread(),\"" + testName + "\")";
         CtCodeSnippetStatement snippetStatement = new CtCodeSnippetStatementImpl();

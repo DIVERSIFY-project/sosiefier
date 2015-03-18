@@ -1,62 +1,46 @@
 package fr.inria.diversify.testamplification;
 
-import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
+import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.diversification.InputConfiguration;
-import fr.inria.diversify.factories.SpoonMetaFactory;
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.testamplification.processor.*;
-import fr.inria.diversify.util.DiversifyPrettyPrinter;
-import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
 import fr.inria.diversify.util.Log;
-import org.apache.commons.io.FileUtils;
-import spoon.compiler.Environment;
-import spoon.processing.AbstractProcessor;
+import fr.inria.diversify.util.InitUtils;
+import fr.inria.diversify.util.LoggerUtils;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.factory.Factory;
 import spoon.support.QueueProcessingManager;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Simon on 03/12/14.
  */
 public class CountTestAndAssert {
 
-    private String projectDirectory;
-    private String srcDirectory;
-    private String testDirectory;
-    private int javaVersion;
+    private String outputDirectory;
+    private InputProgram inputProgram;
 
-    public CountTestAndAssert(String propertiesFile) throws Exception {
+    public CountTestAndAssert(String propertiesFile) throws Exception, InvalidSdkException {
         Log.DEBUG();
         InputConfiguration inputConfiguration = new InputConfiguration(propertiesFile);
+        inputProgram = InitUtils.initInputProgram(inputConfiguration);
+        InitUtils.initDependency(inputConfiguration);
+        outputDirectory = inputConfiguration.getProperty("outputDirectory");
 
-        //Configuration
-        projectDirectory = inputConfiguration.getProperty("project");
-        srcDirectory = inputConfiguration.getProperty("src");
-        testDirectory = inputConfiguration.getProperty("testSrc");
-        javaVersion = Integer.parseInt(inputConfiguration.getProperty("javaVersion", "5"));
-
-        MavenDependencyResolver t = new MavenDependencyResolver();
-        t.DependencyResolver(projectDirectory + "/pom.xml");
-
-        count();
+        if(Boolean.parseBoolean(inputConfiguration.getProperty("staticCount","true"))) {
+            staticCount();
+        } else {
+            dynamicCount();
+        }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception, InvalidSdkException {
         new CountTestAndAssert(args[0]);
     }
 
-
-
-
-    protected void count() {
-        String src = projectDirectory + "/" + srcDirectory;
-        String test = projectDirectory + "/" + testDirectory;
-
-        Factory factory = initSpoon(src+":"+test);
+    protected void staticCount() {
+        Factory factory = InitUtils.initSpoon(inputProgram);
 
         CountProcessor processor = new CountProcessor();
         ProcessingManager pm = new QueueProcessingManager(factory);
@@ -68,12 +52,18 @@ public class CountTestAndAssert {
         Log.info("number of monitoring point: {}", processor.getMonitoringPointCount());
     }
 
+    protected void dynamicCount()  {
+        String test = inputProgram.getAbsoluteTestSourceCodeDir();
 
-    protected Factory initSpoon(String srcDirectory) {
-        try {
-            return new SpoonMetaFactory().buildNewFactory(srcDirectory, javaVersion);
-        } catch (ClassNotFoundException  | IllegalAccessException | InstantiationException e) {
-            throw new RuntimeException(e);
-        }
+        Factory factory = InitUtils.initSpoon(inputProgram);
+
+        AssertCountInstrumenter a = new AssertCountInstrumenter();
+        ProcessingManager pm = new QueueProcessingManager(factory);
+        pm.addProcessor(a);
+        pm.process();
+
+        File fileFrom = new File(test);
+        File out = new File(outputDirectory + "/" + inputProgram.getRelativeTestSourceCodeDir());
+        LoggerUtils.writeJavaClass(factory, out, fileFrom);
     }
 }

@@ -1,28 +1,20 @@
 package fr.inria.diversify.testamplification;
 
-import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
+import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.diversification.InputConfiguration;
-import fr.inria.diversify.factories.SpoonMetaFactory;
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.testamplification.compare.diff.Filter;
+import fr.inria.diversify.testamplification.logger.AssertLogWriter;
 import fr.inria.diversify.testamplification.processor.*;
 import fr.inria.diversify.testamplification.processor.TestLoggingInstrumenter;
 import fr.inria.diversify.testamplification.processor.TestProcessor;
-import fr.inria.diversify.util.DiversifyPrettyPrinter;
-import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
-import fr.inria.diversify.util.Log;
+import fr.inria.diversify.util.*;
 import org.apache.commons.io.FileUtils;
-import spoon.compiler.Environment;
-import spoon.processing.AbstractProcessor;
-import spoon.processing.ProcessingManager;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.factory.Factory;
-import spoon.support.QueueProcessingManager;
 
 
 import java.io.*;
-import java.lang.ClassNotFoundException;
-import java.lang.IllegalAccessException;
-import java.lang.InstantiationException;
 import java.lang.String;
 import java.util.*;
 
@@ -30,15 +22,11 @@ import java.util.*;
  * Created by Simon on 03/12/14.
  */
 public class MakeAmpliTest {
+    protected InputProgram inputProgram;
 
     private final boolean makeHarmanFilter;
     private final String filterFile;
     private String outputDirectory;
-    private String projectDirectory;
-    private String srcDirectory;
-    private Factory sourceFactory;
-    private String testDirectory;
-    private int javaVersion;
 
     boolean dataMutator;
     boolean removeAssert;
@@ -48,16 +36,13 @@ public class MakeAmpliTest {
     boolean logNewTest;
 
 
-    public MakeAmpliTest(String propertiesFile) throws Exception {
-        Log.DEBUG();
+    public MakeAmpliTest(String propertiesFile) throws Exception, InvalidSdkException {
         InputConfiguration inputConfiguration = new InputConfiguration(propertiesFile);
+        InitUtils.initLogLevel(inputConfiguration);
+        InitUtils.initDependency(inputConfiguration);
+        inputProgram = InitUtils.initInputProgram(inputConfiguration);
 
-        //Configuration
-        projectDirectory = inputConfiguration.getProperty("project");
-        srcDirectory = inputConfiguration.getProperty("src");
-        testDirectory = inputConfiguration.getProperty("testSrc");
         outputDirectory = inputConfiguration.getProperty("outputDirectory");
-        javaVersion = Integer.parseInt(inputConfiguration.getProperty("javaVersion", "5"));
 
         dataMutator = Boolean.parseBoolean(inputConfiguration.getProperty("dataMutator", "false"));
         removeAssert = Boolean.parseBoolean(inputConfiguration.getProperty("removeAssert", "false"));
@@ -68,68 +53,68 @@ public class MakeAmpliTest {
         makeHarmanFilter = Boolean.parseBoolean(inputConfiguration.getProperty("makeHarmanFilter", "false"));
         filterFile = inputConfiguration.getProperty("compare.filter", "'");
 
-        MavenDependencyResolver t = new MavenDependencyResolver();
-        t.DependencyResolver(projectDirectory + "/pom.xml");
-
         if(!makeHarmanFilter) {
             initOutputDirectory();
+            LoggerUtils.copyLogger(inputProgram, outputDirectory, AssertLogWriter.class);
+            LoggerUtils.writeId(outputDirectory);
         }
+
         transform();
 
-        copyLogger();
-        writeId();
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception, InvalidSdkException {
         new MakeAmpliTest(args[0]);
     }
 
     protected void initOutputDirectory() throws IOException {
         File dir = new File(outputDirectory);
         dir.mkdirs();
-        FileUtils.copyDirectory(new File(projectDirectory), dir);
+        FileUtils.copyDirectory(new File(inputProgram.getProgramDir()), dir);
     }
 
 
     protected void transform() throws IOException {
-        String src = projectDirectory + "/" + srcDirectory;
-        String test = projectDirectory + "/" + testDirectory;
+        String test = inputProgram.getAbsoluteTestSourceCodeDir();
 
-        if ( sourceFactory == null ) {
-            sourceFactory = initSpoon(src+":"+test);
-        }
+        Factory factory = InitUtils.initSpoon(inputProgram);
 
         if(dataMutator) {
             TestDataMutator m = new TestDataMutator();
-            applyProcessor(sourceFactory, m);
+            LoggerUtils.applyProcessor(factory, m);
         }
         if(methodCallAdder) {
             TestMethodCallAdder v = new TestMethodCallAdder();
-            applyProcessor(sourceFactory, v);
+            LoggerUtils.applyProcessor(factory, v);
         }
         if(methodCallRemover) {
             TestMethodCallRemover e = new TestMethodCallRemover();
-            applyProcessor(sourceFactory, e);
+            LoggerUtils.applyProcessor(factory, e);
         }
         if(removeNotClone) {
             RemoveNotCloneProcessor p = new RemoveNotCloneProcessor();
-            applyProcessor(sourceFactory, p);
+//           GuavaProcessor p = new GuavaProcessor(testDirectory);
+            LoggerUtils.applyProcessor(factory, p);
         }
         if(logNewTest) {
             TestLoggingInstrumenter m = new TestLoggingInstrumenter();
-            applyProcessor(sourceFactory, m);
+            LoggerUtils.applyProcessor(factory, m);
         }
         if(removeAssert) {
-            TestCaseProcessor tc = new TestCaseProcessor(testDirectory);
-            applyProcessor(sourceFactory, tc);
-
+            TestCaseProcessor tc = new TestCaseProcessor(inputProgram.getRelativeTestSourceCodeDir());
+            LoggerUtils.applyProcessor(factory, tc);
         }
+//        GuavaProcessor p = new GuavaProcessor(testDirectory);
+//        applyProcessor(sourceFactory, p);
         if(makeHarmanFilter) {
             makeHarmanFilter();
         } else {
             File fileFrom = new File(test);
-            File out = new File(outputDirectory + "/" + testDirectory);
-            writeJavaClass(sourceFactory, out, fileFrom);
+            File out = new File(outputDirectory + "/" + inputProgram.getRelativeTestSourceCodeDir());
+//            for(CtClass cl : GuavaProcessor.ampclasses) {
+//                printJavaFile(out, cl);
+//            }
+            LoggerUtils.writeJavaClass(factory, out, fileFrom);
         }
         Log.info("number of new test: {}", TestProcessor.getCount());
         Log.info("number of data test: {}", TestDataMutator.dataCount);
@@ -158,63 +143,4 @@ public class MakeAmpliTest {
         }
         harmanTestHarmanMonitor.print(outputDirectory + "/filterHarmanTestHarmanMonitor");
     }
-
-    protected void writeJavaClass(Factory factory, File out, File fileFrom) {
-        Environment env = factory.getEnvironment();
-        AbstractProcessor processor = new JavaOutputProcessorWithFilter(out, new DiversifyPrettyPrinter(env), allClassesName(fileFrom));
-        try {
-            applyProcessor(factory, processor);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.debug("");
-        }
-
-    }
-
-    protected Factory initSpoon(String srcDirectory) {
-        try {
-            return new SpoonMetaFactory().buildNewFactory(srcDirectory, javaVersion);
-        } catch (ClassNotFoundException  | IllegalAccessException | InstantiationException e) {
-            throw new java.lang.RuntimeException(e);
-        }
-
-    }
-
-    protected void applyProcessor(Factory factory, AbstractProcessor processor) {
-        ProcessingManager pm = new QueueProcessingManager(factory);
-        pm.addProcessor(processor);
-        pm.process();
-    }
-
-    protected List<String> allClassesName(File dir) {
-        List<String> list = new ArrayList<>();
-
-        for(File file : dir.listFiles())
-            if(file.isDirectory())
-                list.addAll(allClassesName(file));
-            else {
-                String name = file.getName();
-                if(name.endsWith(".java")) {
-                    String[] tmp = name.substring(0, name.length() - 5).split("/");
-                    list.add(tmp[tmp.length - 1]);
-                }
-            }
-        return list;
-    }
-
-    protected void copyLogger() throws IOException {
-        File dir = new File(outputDirectory+"/"+srcDirectory+ "/fr/inria/diversify/testamplification/logger");
-        FileUtils.forceMkdir(dir);
-
-        String packagePath = System.getProperty("user.dir") + "/generator/src/main/java/fr/inria/diversify/testamplification/logger/";
-        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.Logger.class.getSimpleName() + ".java"), dir);
-        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.ShutdownHookLog.class.getSimpleName() + ".java"), dir);
-        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.LogWriter.class.getSimpleName() + ".java"),dir);
-        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.AssertLogWriter.class.getSimpleName() + ".java"),dir);
-    }
-
-    protected void writeId() throws IOException {
-        fr.inria.diversify.testamplification.processor.TestProcessor.writeIdFile(outputDirectory);
-    }
-
 }

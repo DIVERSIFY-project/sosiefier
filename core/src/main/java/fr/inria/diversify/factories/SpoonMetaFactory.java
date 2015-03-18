@@ -1,5 +1,6 @@
 package fr.inria.diversify.factories;
 
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.util.Log;
 import spoon.compiler.SpoonCompiler;
 import spoon.reflect.factory.Factory;
@@ -16,7 +17,15 @@ import java.util.Collection;
 /**
  * Created by marodrig on 16/06/2014.
  */
-public class SpoonMetaFactory{
+public class SpoonMetaFactory {
+
+    public Factory buildNewFactory(InputProgram inputProgram) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        ArrayList<String> a = new ArrayList<String>();
+        a.add(inputProgram.getAbsoluteSourceCodeDir());
+        a.add(inputProgram.getAbsoluteTestSourceCodeDir());
+        a.add(inputProgram.getExternalSourceCodeDir());
+        return buildNewFactory(a, inputProgram.getJavaVersion());
+    }
 
     public Factory buildNewFactory(String srcDirectory, int javaVersion) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         ArrayList<String> a = new ArrayList<String>();
@@ -24,8 +33,6 @@ public class SpoonMetaFactory{
         return buildNewFactory(a, javaVersion);
     }
     public Factory buildNewFactory(Collection<String> srcDirectory, int javaVersion) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        //String srcDirectory = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("src");
-
         StandardEnvironment env = new StandardEnvironment();
         env.setComplianceLevel(javaVersion);
         env.setVerbose(false);
@@ -56,6 +63,4 @@ public class SpoonMetaFactory{
 
         return factory;
     }
-
-
 }
