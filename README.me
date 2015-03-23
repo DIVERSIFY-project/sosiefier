@@ -1,0 +1,12 @@
+# DSpot: A tool to measure black-box computational diversity
+
+DSpot is a tool for assessing the presence of black-box computational diversity. DSpot takes as input a test suite and a set of N program variants for assessment of computational diversity. The N variants have the same application programming interface (API) and they all pass the same test suite. The considered programs are standard object-oriented ones, written in Java and the test suites are built using standard testing idioms such JUnit. DSpot consists of two steps: (i) automatically augment the test suite; and (ii) run this larger test suite on all variants to reveal visible differences in the computation. The first step is called \emph{test suite amplification}. It automatically applies mutations to the JUnit test code to enter the unspecified input domain. In parallel, it analyzes the assertions of the test suite to retrieve as many observation points on the public API as possible, on which it will look for dissimilarities between the N programs. This amplification step combines the automatic exploration of the input domain with the systematic sensing of the observation domain. The second step looks for diversity among the set of program variants. DSpot runs the augmented test suite on each variant. The observation points introduced during amplification generate traces of observable states. If there exist a difference between the traces of a pair of variants, we say that these variants are computationally diverse. In other words, two variants are considered diverse if there exists at least one input outside the specified domain that can trigger different behaviors on the variants and these different behaviors can be observed through the public API.
+
+
+Example
+--------------
+sosie generation:
+java -Djava.library.path=lib -Xmx2g -cp generator/target/generator-1.0.0-jar-with-dependencies.jar fr.inria.diversify.Main example/sosie.properties
+
+test suite augmentation:
+java -Djava.library.path=lib -Xmx2g -cp generator/target/generator-1.0.0-jar-with-dependencies.jar fr.inria.diversify.testamplification.MakeAmpliTest example/makeTest.properties
