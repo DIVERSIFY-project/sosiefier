@@ -81,13 +81,10 @@ public class TransformationsWriter {
         JSONObject dico = new JSONObject();
         dico.put("failureDictionary", Transformation.failuresDico);
         obj.put(dico);
-        obj.put(new SystemInformation().toJson());
+//        obj.put(new SystemInformation().toJson());
         obj.write(out);
         out.newLine();
         out.close();
         return  fileName;
     }
-
-
-
 }

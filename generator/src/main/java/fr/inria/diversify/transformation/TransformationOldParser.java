@@ -93,7 +93,7 @@ public class TransformationOldParser {
             } catch (Exception e) {
                 countError++;
                 Log.warn("Error during the parsing of "+ array.getJSONObject(i), e);
-                //Log.debug("{} {} ", count, countError);
+                //Log.debug("{} {} ", staticCount, countError);
             }
         }
 

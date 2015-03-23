@@ -2,7 +2,6 @@ package fr.inria.diversify.testamplification.compare;
 
 import fr.inria.diversify.testamplification.compare.diff.MonitoringPointDiff;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;

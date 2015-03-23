@@ -45,7 +45,7 @@ public class ParseTransformationAndDiff {
         p.applyFilter();
         List<Transformation> transformations = p.stat();
 
-        p.writeTransformations(inputConfiguration.getProperty("result"), transformations);
+        p.writeTransformations(args[1], transformations);
 
     }
 
