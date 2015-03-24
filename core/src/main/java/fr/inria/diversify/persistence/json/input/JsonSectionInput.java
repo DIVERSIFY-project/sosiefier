@@ -4,13 +4,9 @@ import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by marodrig on 12/01/2015.
@@ -71,7 +67,7 @@ public abstract class JsonSectionInput {
         this.jsonObject = jsonObject;
     }
 
-    public abstract void read(HashMap<UUID, Transformation> transformations);
+    public abstract void read(Map<UUID, Transformation> transformations);
 
     /**
      * Input program where the code fragments of the transformations are

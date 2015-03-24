@@ -5,12 +5,10 @@ import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
-import fr.inria.diversify.transformation.ast.ASTDelete;
-import fr.inria.diversify.transformation.ast.ASTTransformation;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
@@ -18,7 +16,7 @@ import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
 /**
  * Created by marodrig on 12/01/2015.
  */
-public class JsonAstAddInput extends JsonAstTransformationInput {
+public class JsonAstAddInput extends JsonTransformationInput {
 
     public JsonAstAddInput(InputProgram inputProgram, JSONObject jsonObject) {
         super(inputProgram, jsonObject);
@@ -30,12 +28,12 @@ public class JsonAstAddInput extends JsonAstTransformationInput {
 
 
     @Override
-    protected ASTTransformation build() {
+    protected Transformation build() {
         return new ASTAdd();
     }
 
     @Override
-    public void read(HashMap<UUID, Transformation> transformations) {
+    public void read(Map<UUID, Transformation> transformations) {
 
         try {
             if ( getJsonObject() == null ) throw new PersistenceException("JSON object unset");

@@ -29,7 +29,9 @@ public class JsonFailuresOutput extends JsonSectionOutput {
         for (Transformation t : getTransformations()) {
             if (t.getFailures() != null && t.getFailures().size() > 0) {
                 for (String s : t.getFailures())
-                    if (!failuresDict.containsKey(s)) failuresDict.put(s, id++);
+                    if (!failuresDict.containsKey(s) && s != null) {
+                        failuresDict.put(s, id++);
+                    }
             }
         }
         try {

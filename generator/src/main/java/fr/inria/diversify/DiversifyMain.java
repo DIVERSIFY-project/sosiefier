@@ -9,6 +9,8 @@ import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.coverage.MultiCoverageReport;
 import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.diversification.*;
+import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
+import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
 import fr.inria.diversify.statistic.CVLMetric;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.query.*;
@@ -320,40 +322,18 @@ public class DiversifyMain {
 //        computeOtherStat();
     }
 
-    protected void computeDiversifyStat(String transDir, String fileName) throws Exception {
+    protected void computeDiversifyStat(String transDir, String output) throws Exception {
         TransformationParser tf = new TransformationParser(true, inputProgram);
-          Collection<Transformation> transformations = tf.parse(transDir);
-        TransformationsWriter write = new TransformationsWriter(transformations, fileName);
+        Collection<Transformation> transformations = tf.parse(transDir);
+//        JsonTransformationLoader loader = new JsonTransformationLoader(inputProgram);
+//          Collection<Transformation> transformations = loader.load(transDir, true);
+//        TransformationsWriter write = new TransformationsWriter(transformations, fileName);
+        JsonTransformationWriter writer = new JsonTransformationWriter();
 
-        List<String> badFailure = new ArrayList<>();
-        badFailure.add("org.eclipse.jgit.api.MergeCommandTest.testFileModeMergeWithDirtyWorkTree");
-        badFailure.add("org.eclipse.jgit.internal.storage.file.T0003_BasicTest.test002_WriteEmptyTree");
-        badFailure.add("org.eclipse.jgit.lib.DirCacheCheckoutTest.testFileModeChangeAndContentChangeConflict");
-        badFailure.add("org.eclipse.jgit.api.CommitAndLogCommandTest.testModeChange");
-        badFailure.add("org.eclipse.jgit.lib.DirCacheCheckoutTest.testFileModeChangeWithNoContentChangeUpdate");
-        badFailure.add("org.eclipse.jgit.lib.DirCacheCheckoutTest.testDirtyFileModeEqualHeadMerge");
-        transformations.stream()
-                .forEach(t -> {
-                    t.getFailures().removeAll(badFailure);
-                    if(t.getStatus() != -2 && t.getFailures().isEmpty()) {
-                        t.setStatus(0);
-                    }
-                });
-
-
-        Log.debug("all transformation type : {}", getAllTransformationType(transformations));
-        write.writeAllTransformation(null);
-
-        for (String type : getAllTransformationType(transformations))
-            write.writeAllTransformation(type);
-
-        write.writeSosie(null);
-
-        for (String type : getAllTransformationType(transformations))
-            write.writeSosie(type);
+       writer.write(transformations, output+".json", inputProgram.getProgramDir() + "/pom.xml");
 
         CVLMetric cvlMetric = new CVLMetric(inputProgram);
-        cvlMetric.printMetrics(fileName + "_cvlMetric.csv");
+        cvlMetric.printMetrics(output + "_cvlMetric.csv");
 
 //        visu(transformations);
 //        FailureMatrix matrix = new FailureMatrix(transformations,inputConfiguration.getProperty("allTestFile"));

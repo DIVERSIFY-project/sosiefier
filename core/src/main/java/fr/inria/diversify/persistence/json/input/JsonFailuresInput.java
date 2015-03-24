@@ -1,13 +1,13 @@
 package fr.inria.diversify.persistence.json.input;
 
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.UUID;
 
 import static fr.inria.diversify.persistence.json.output.JsonFailuresOutput.FAILURES_DICTIONARY;
@@ -17,14 +17,14 @@ import static fr.inria.diversify.persistence.json.output.JsonFailuresOutput.FAIL
  */
 public class JsonFailuresInput extends JsonSectionInput {
 
-    private HashMap<Integer, String> failures;
+    private Map<Integer, String> failures;
 
     public JsonFailuresInput(InputProgram inputProgram, JSONObject jsonObject) {
         super(inputProgram, jsonObject);
     }
 
     @Override
-    public void read(HashMap<UUID, Transformation> transformations) {
+    public void read(Map<UUID, Transformation> transformations) {
 
         failures = new HashMap<>();
         try {
@@ -41,7 +41,7 @@ public class JsonFailuresInput extends JsonSectionInput {
         }
     }
 
-    public HashMap<Integer, String> getFailures() {
+    public Map<Integer, String> getFailures() {
         return failures;
     }
 }

@@ -30,14 +30,14 @@ public class JsonSosiesInputTest {
 
     public static class CustomSectionInput1 extends JsonSectionInput {
         @Override
-        public void read(HashMap<UUID, Transformation> transformations) {     }
+        public void read(Map<UUID, Transformation> transformations) {     }
     }
     public static class CustomSectionInput extends JsonSectionInput {
 
         public boolean readMethodCalled;
 
         @Override
-        public void read(HashMap<UUID, Transformation> transformations) {
+        public void read(Map<UUID, Transformation> transformations) {
             readMethodCalled = getJsonObject().has("theObjectName") && getJsonObject().has("theObjectName11");
         }
     }

@@ -3,7 +3,6 @@ package fr.inria.diversify.persistence.json.input;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.Header;
 import fr.inria.diversify.persistence.MavenHeader;
-import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
@@ -13,7 +12,7 @@ import org.json.JSONObject;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -38,7 +37,7 @@ public class JsonHeaderInput extends JsonSectionInput {
 
 
     @Override
-    public void read(HashMap<UUID, Transformation> transformations) {
+    public void read(Map<UUID, Transformation> transformations) {
 
         //Indicate that an exception must be raised because of mismatch in the src
         boolean raise = false;

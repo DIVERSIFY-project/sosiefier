@@ -24,6 +24,12 @@ public class MultiTransformation extends Transformation {
         failures = new ArrayList<>();
     }
 
+    public MultiTransformation() {
+        type = "multi";
+        name= "multi";
+        transformations = new HashSet<>();
+    }
+
     @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = super.toJSONObject();
@@ -65,6 +71,10 @@ public class MultiTransformation extends Transformation {
 
     public void add(Transformation transformation) {
         transformations.add(transformation);
+    }
+
+    public void addAll(Collection<Transformation> transformations) {
+        this.transformations.addAll(transformations);
     }
 
     public boolean remove(Transformation transformation) {

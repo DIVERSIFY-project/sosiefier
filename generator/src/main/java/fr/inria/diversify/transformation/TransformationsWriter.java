@@ -1,6 +1,5 @@
 package fr.inria.diversify.transformation;
 
-import fr.inria.diversify.statistic.SystemInformation;
 import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,6 +17,7 @@ import java.util.stream.Collectors;
  * Date: 9/12/13
  * Time: 2:03 PM
  */
+@Deprecated
 public class TransformationsWriter {
 
     protected String directoryName;

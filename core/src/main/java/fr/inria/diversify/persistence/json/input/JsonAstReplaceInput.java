@@ -4,11 +4,10 @@ import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTReplace;
-import fr.inria.diversify.transformation.ast.ASTTransformation;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
@@ -16,7 +15,7 @@ import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
 /**
  * Created by marodrig on 12/01/2015.
  */
-public class JsonAstReplaceInput extends JsonAstTransformationInput {
+public class JsonAstReplaceInput extends JsonTransformationInput {
 
     public JsonAstReplaceInput(InputProgram inputProgram, JSONObject jsonObject) {
         super(inputProgram, jsonObject);
@@ -27,12 +26,12 @@ public class JsonAstReplaceInput extends JsonAstTransformationInput {
     }
 
     @Override
-    protected ASTTransformation build() {
+    protected Transformation build() {
         return new ASTReplace();
     }
 
     @Override
-    public void read(HashMap<UUID, Transformation> transformations) {
+    public void read(Map<UUID, Transformation> transformations) {
 
         ASTReplace transf = null;
         try {

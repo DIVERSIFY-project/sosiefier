@@ -32,11 +32,6 @@ public abstract class Transformation {
     //status of the transformation when the transformation has not been tested
     public static int NOT_TESTED = -3;
 
-
-
-
-
-
     public UUID getIndex() {
         if ( index == null ) index = Generators.timeBasedGenerator().generate();
         return index;
@@ -71,7 +66,6 @@ public abstract class Transformation {
     //List of test failures  as result of transforming the source code using the current transformation
     protected List<String> failures;
 
-    @Deprecated
     protected static Map<String,Integer> failuresDico = new HashMap<>();
 
     //Name of the current transformation. More like a subtype
@@ -93,7 +87,7 @@ public abstract class Transformation {
 
 
 
-    @Deprecated
+
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
         object.put("type", type);
@@ -114,7 +108,7 @@ public abstract class Transformation {
     }
 
 
-    @Deprecated
+
     protected JSONArray failuresToJSON() {
 
         JSONArray array = new JSONArray();
@@ -218,4 +212,8 @@ public abstract class Transformation {
         return name;
     }
 
+
+    public static void setFailuresDico(Map<String, Integer> failuresDico) {
+        Transformation.failuresDico = failuresDico;
+    }
 }

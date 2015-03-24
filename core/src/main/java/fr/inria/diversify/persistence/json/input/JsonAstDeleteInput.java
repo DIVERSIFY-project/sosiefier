@@ -5,11 +5,10 @@ import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTDelete;
-import fr.inria.diversify.transformation.ast.ASTTransformation;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
@@ -17,7 +16,7 @@ import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
 /**
  * Created by marodrig on 12/01/2015.
  */
-public class JsonAstDeleteInput extends JsonAstTransformationInput {
+public class JsonAstDeleteInput extends JsonTransformationInput {
 
     public JsonAstDeleteInput(InputProgram inputProgram, JSONObject jsonObject) {
         super(inputProgram, jsonObject);
@@ -28,7 +27,7 @@ public class JsonAstDeleteInput extends JsonAstTransformationInput {
     }
 
     @Override
-    protected ASTTransformation build() {
+    protected Transformation build() {
         return new ASTDelete();
     }
 
@@ -38,7 +37,7 @@ public class JsonAstDeleteInput extends JsonAstTransformationInput {
      * @param transformations Transformation to be modified by the reader. May increase size after method call.
      */
     @Override
-    public void read(HashMap<UUID, Transformation> transformations) {
+    public void read(Map<UUID, Transformation> transformations) {
         try {
             ASTDelete transf = (ASTDelete)get(transformations); //add the transformation to the transformations map if not present
             JSONObject cfJson = getJsonObject().getJSONObject(TRANSPLANT_POINT);

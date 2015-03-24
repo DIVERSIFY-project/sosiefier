@@ -7,10 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.NAME;
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TINDEX;
@@ -23,14 +20,14 @@ import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TRANS
  */
 public class JsonAstTransformationCollectionInput extends JsonSectionInput {
 
-    private HashMap<Integer, String> failures;
+    private Map<Integer, String> failures;
 
     public JsonAstTransformationCollectionInput(InputProgram inputProgram, JSONObject jsonObject) {
         super(inputProgram, jsonObject);
     }
 
     @Override
-    public void read(HashMap<UUID, Transformation> transformations) {
+    public void read(Map<UUID, Transformation> transformations) {
 
         JSONArray tr = null;
         try {
@@ -38,7 +35,7 @@ public class JsonAstTransformationCollectionInput extends JsonSectionInput {
         } catch (JSONException e) {
             throwError("Unable to obtain the transformations object", e, true);
         }
-        Collection<JsonAstTransformationInput> sections = buildSections();
+        Collection<JsonTransformationInput> sections = buildSections();
 
         for (int i = 0; i < tr.length(); i++) {
             checkToManyErrors();
@@ -50,7 +47,7 @@ public class JsonAstTransformationCollectionInput extends JsonSectionInput {
                 } catch (IllegalArgumentException e) {
                     throwWarning("Invalid index. ", e, false);
                 }
-                for (JsonAstTransformationInput si : sections) {
+                for (JsonTransformationInput si : sections) {
                     if (si.canRead(TRANSFORMATIONS + "." + obj.getString(NAME))) {
                         si.setJsonObject(obj);
                         si.setFailures(getFailures());
@@ -83,19 +80,20 @@ public class JsonAstTransformationCollectionInput extends JsonSectionInput {
      *
      * @return
      */
-    private Collection<JsonAstTransformationInput> buildSections() {
-        ArrayList<JsonAstTransformationInput> sections = new ArrayList<>();
+    protected Collection<JsonTransformationInput> buildSections() {
+        ArrayList<JsonTransformationInput> sections = new ArrayList<>();
         sections.add(new JsonAstAddInput(getInputProgram()));
         sections.add(new JsonAstReplaceInput(getInputProgram()));
         sections.add(new JsonAstDeleteInput(getInputProgram()));
+        sections.add(new JsonMultiTransformationInput(getInputProgram()));
         return sections;
     }
 
-    public HashMap<Integer, String> getFailures() {
+    public Map<Integer, String> getFailures() {
         return failures;
     }
 
-    public void setFailures(HashMap<Integer, String> failures) {
+    public void setFailures(Map<Integer, String> failures) {
         this.failures = failures;
     }
 }

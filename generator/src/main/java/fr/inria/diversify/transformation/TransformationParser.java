@@ -15,6 +15,7 @@ import java.util.List;
  * Date: 5/28/13
  * Time: 11:38 AM
  */
+@Deprecated
 public class  TransformationParser {
 
     TransformationJsonParser parser;

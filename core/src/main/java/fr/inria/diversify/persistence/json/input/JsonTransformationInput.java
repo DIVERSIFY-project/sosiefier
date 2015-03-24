@@ -5,7 +5,6 @@ import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.ast.ASTTransformation;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,19 +18,19 @@ import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
 /**
  * Created by marodrig on 12/01/2015.
  */
-public abstract class JsonAstTransformationInput extends JsonSectionInput {
+public abstract class JsonTransformationInput extends JsonSectionInput {
 
-    private HashMap<Integer, String> failures;
+    private Map<Integer, String> failures;
 
-    public JsonAstTransformationInput(InputProgram inputProgram) {
+    public JsonTransformationInput(InputProgram inputProgram) {
         super(inputProgram, null);
     }
 
-    public JsonAstTransformationInput(InputProgram inputProgram, JSONObject jsonObject) {
+    public JsonTransformationInput(InputProgram inputProgram, JSONObject jsonObject) {
         super(inputProgram, jsonObject);
     }
 
-    protected abstract ASTTransformation build();
+    protected abstract Transformation build();
 
     /**
      * Prepend the error message with the transformation index
@@ -40,7 +39,7 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
      * @param s      Error message
      * @return
      */
-    protected String getTransformationErrorString(ASTTransformation transf, String s) {
+    protected String getTransformationErrorString(Transformation transf, String s) {
         if (transf != null) return "Transformation " + transf.getIndex() + " " + s;
         return s;
     }
@@ -53,7 +52,7 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
      * @param src
      * @param pos
      */
-    protected void logCfStatus(ASTTransformation ast, CodeFragment cf, String pos, String src) {
+    protected void logCfStatus(Transformation ast, CodeFragment cf, String pos, String src) {
         StringBuilder sb = new StringBuilder("");
         if (ast != null) sb.append("Transf ").append(ast.getIndex()).append(". ");
 
@@ -99,12 +98,12 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
     /**
      * gets data from the JSON  object into the transformation object
      */
-    protected ASTTransformation get(HashMap<UUID, Transformation> t) throws JSONException {
+    protected Transformation get(Map<UUID, Transformation> t) throws JSONException {
 
-        HashMap<Integer, String> failures = getFailures();
+//        HashMap<Integer, String> failures = getFailures();
         UUID index = getValidUUI(getJsonObject().getString(TINDEX));
-        ASTTransformation astt;
-        if (t.containsKey(index)) astt = (ASTTransformation) t.get(index);
+        Transformation astt;
+        if (t.containsKey(index)) astt = t.get(index);
         else {
             astt = build();
             astt.setIndex(index);
@@ -119,7 +118,7 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
      * @param t    Transformation's dictionary
      * @param astt AST Transformation
      */
-    protected void addTransformation(HashMap<UUID, Transformation> t, ASTTransformation astt) {
+    protected void addTransformation(Map<UUID, Transformation> t, Transformation astt) {
         t.put(astt.getIndex(), astt);
     }
 
@@ -128,12 +127,12 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
      *
      * @param transformation
      */
-    protected void putTransformation(ASTTransformation transformation) {
+    protected void putTransformation(Transformation transformation) {
 
     }
 
     @Override
-    public void read(HashMap<UUID, Transformation> transformations) {
+    public void read(Map<UUID, Transformation> transformations) {
         try {
             get(transformations);
         } catch (JSONException e) {
@@ -164,11 +163,11 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
      *
      * @return The failures dictionary
      */
-    public HashMap<Integer, String> getFailures() {
+    public Map<Integer, String> getFailures() {
         return failures;
     }
 
-    public void setFailures(HashMap<Integer, String> failures) {
+    public void setFailures(Map<Integer, String> failures) {
         this.failures = failures;
     }
 }

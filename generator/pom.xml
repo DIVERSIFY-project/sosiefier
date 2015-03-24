@@ -12,33 +12,6 @@
     <artifactId>generator</artifactId>
 
     <dependencies>
-
-        <!--
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-core</artifactId>
-            <version>3.1.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.maven.shared</groupId>
-            <artifactId>maven-invoker</artifactId>
-            <version>2.1.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.kevoree</groupId>
-            <artifactId>org.kevoree.maven.resolver</artifactId>
-            <version>3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.android.tools</groupId>
-            <artifactId>sdklib</artifactId>
-            <version>${android.tools.version}</version>
-        </dependency>
-        -->
-
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
@@ -51,22 +24,11 @@
             <version>1.0.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>fr.inria.gforge.spoon</groupId>
-            <artifactId>spoon-core</artifactId>
-            <version>2.4</version>
-        </dependency>
 
         <dependency>
             <groupId>javassist</groupId>
             <artifactId>javassist</artifactId>
             <version>3.12.1.GA</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20090211</version>
         </dependency>
 
         <dependency>
@@ -102,6 +64,14 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <includes>
+                    <include>pom.xml</include>
+                </includes>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
