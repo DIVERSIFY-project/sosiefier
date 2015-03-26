@@ -2,6 +2,7 @@
 cd  /root/redis-stable/src/
 ./redis-server &
 unset http_proxy
-sh /root/SMART-GH/run_hooper.sh
+cd /root/diversify-statements
+sh /root/SMART-GH/run_hopper.sh
 sh /root/SMART-GH/run_web.sh &
 
