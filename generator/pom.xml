@@ -64,13 +64,13 @@
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <includes>
-                    <include>pom.xml</include>
-                </includes>
-            </resource>
-        </resources>
+        <!--<resources>-->
+            <!--<resource>-->
+                <!--<includes>-->
+                    <!--<include>pom.xml</include>-->
+                <!--</includes>-->
+            <!--</resource>-->
+        <!--</resources>-->
 
         <plugins>
             <plugin>
