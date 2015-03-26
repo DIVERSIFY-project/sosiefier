@@ -88,6 +88,9 @@ public class DiversifyMain {
             case "simple":
                 abstractDiversify = new SinglePointDiversify(inputConfiguration, project, src);
                 break;
+            case "gh":
+                abstractDiversify = new GHDiversify(inputConfiguration, project, src, inputConfiguration.getProperty("testScripBefore"), inputConfiguration.getProperty("testScriptAfter") ,inputConfiguration.getProperty("testProject"));
+                break;
             case "dumpfailure":
                 abstractDiversify = new DumpFailure(inputConfiguration, project, src);
                 break;
@@ -155,7 +158,7 @@ public class DiversifyMain {
             if (!pomFile.equals("")) {
                 rb.initPom(pomFile);
             }
-//
+
 //            rb.copyClasses(inputConfiguration.getProperty("classes"));
 //            rb.initTimeOut();
         } else { //builder == ant
