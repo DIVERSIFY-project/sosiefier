@@ -50,6 +50,8 @@ public class InitUtils {
 
             FileUtils.copyFile(originalPom, pom);
             FileUtils.forceDelete(originalPom);
+        } else {
+            t.DependencyResolver(inputConfiguration.getProperty("project") + "/pom.xml");
         }
 
         String androidSdk = inputConfiguration.getProperty("AndroidSdk");

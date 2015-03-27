@@ -27,7 +27,6 @@ public class SingleMonitoringPoint extends AbstractMonitoringPoint {
         } else {
             this.methods = methods;
         }
-
     }
 
 

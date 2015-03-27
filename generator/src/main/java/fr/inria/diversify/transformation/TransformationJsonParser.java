@@ -43,6 +43,7 @@ import java.util.*;
  * Created by Simmon
  * Modified by Marcelino
  */
+@Deprecated
 public class TransformationJsonParser {
 
     private Properties filterProperties;

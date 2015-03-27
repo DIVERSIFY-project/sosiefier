@@ -5,6 +5,7 @@ import org.json.JSONObject;
 /**
  * Created by marodrig on 11/06/2014.
  */
+@Deprecated
 public class TransformationParserException extends Exception {
 
     public TransformationParserException(String message, Object object) {

@@ -22,6 +22,7 @@ import java.util.*;
  * Date: 5/28/13
  * Time: 11:38 AM
  */
+@Deprecated
 public class TransformationOldParser {
     private int countError = 0;
     private int count = 0;
