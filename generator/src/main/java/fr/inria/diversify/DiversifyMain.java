@@ -91,9 +91,9 @@ public class DiversifyMain {
             case "gh":
                 abstractDiversify = new GHDiversify(inputConfiguration, project, src, inputConfiguration.getProperty("testScripBefore"), inputConfiguration.getProperty("testScriptAfter") ,inputConfiguration.getProperty("testProject"));
                 break;
-            case "dumpfailure":
-                abstractDiversify = new DumpFailure(inputConfiguration, project, src);
-                break;
+//            case "dumpfailure":
+//                abstractDiversify = new DumpFailure(inputConfiguration, project, src);
+//                break;
             case "multi": {
                 int multiTransformationSize = Integer.parseInt(inputConfiguration.getProperty("multiTransformation.size"));
                 MultiTransformationGenerator multi = new MultiTransformationGenerator(inputConfiguration, project, src);
