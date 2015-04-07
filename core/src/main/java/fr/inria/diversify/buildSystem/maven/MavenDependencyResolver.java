@@ -63,7 +63,7 @@ public class MavenDependencyResolver {
     }
 
     protected void addApplicationClasses(File pomFile) throws MalformedURLException {
-        jarURL.add(new URL("file://" + pomFile.getParent() + "/target/classes/"));
+        jarURL.add((new File( pomFile.getParent() + "/target/classes/").toURL()));
         URLClassLoader child = new URLClassLoader(jarURL.toArray(new URL[jarURL.size()]), Thread.currentThread().getContextClassLoader());
         Thread.currentThread().setContextClassLoader(child);
     }
