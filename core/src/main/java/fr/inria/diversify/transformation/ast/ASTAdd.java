@@ -36,7 +36,7 @@ public class ASTAdd extends ASTTransformation {
 
         object.put("transplantationPoint", transplantationPoint.toJSONObject());
         object.put("transplant", transplant.toJSONObject());
-        object.put("variableMapping", variableMapping);
+        object.put("variableMap", variableMapping);
 
         return object;
     }

@@ -120,7 +120,7 @@ public class ASTReplace extends ASTTransformation {
 
         object.put("transplantationPoint", transplantationPoint.toJSONObject());
         object.put("transplant", getTransplant().toJSONObject());
-        object.put("variableMapping", variableMapping);
+        object.put("variableMap", variableMapping);
 
         return object;
     }

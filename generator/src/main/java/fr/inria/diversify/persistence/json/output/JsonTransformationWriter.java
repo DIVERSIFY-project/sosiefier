@@ -97,11 +97,12 @@ public class JsonTransformationWriter {
     }
 
     protected String getGeneratorVersion() {
-        if(getClass().getResource("pom.xml") != null) {
-            return getClass().getResource("pom.xml").getFile().toString();
-        } else {
-            return getClass().getResource("./../../../../../..").getFile().toString() + "../../pom.xml";
-        }
+        return "1.0";
+//        if(getClass().getResource("pom.xml") != null) {
+//            return getClass().getResource("pom.xml").getFile().toString();
+//        } else {
+//            return getClass().getResource("./../../../../../..").getFile().toString() + "../../pom.xml";
+//        }
     }
 
     /**

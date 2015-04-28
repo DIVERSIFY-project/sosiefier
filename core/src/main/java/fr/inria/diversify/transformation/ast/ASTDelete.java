@@ -48,12 +48,12 @@ public class ASTDelete extends ASTTransformation {
      * @return The resulting CtElement after the transformation
      * @throws Exception
      * @Note: Renamed after buildCopyElement.
-     */
+     **/
     @Override
     protected CtCodeElement buildReplacementElement() {
         Factory factory = transplantationPoint.getCtCodeFragment().getFactory();
         CtCodeSnippetStatement snippetStatement = factory.Core().createCodeSnippetStatement();
-        snippetStatement.setValue("//TRANSFORMATION. FRAGMENT DELETED!");
+        snippetStatement.setValue("/** TRANSFORMATION FRAGMENT DELETED:\n"+ transplantationPoint.getCodeFragmentType().toString() + "\n**/");
         return snippetStatement;
     }
 

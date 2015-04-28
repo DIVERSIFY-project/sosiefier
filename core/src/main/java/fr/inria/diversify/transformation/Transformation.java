@@ -64,7 +64,7 @@ public abstract class Transformation {
     protected Integer status = NOT_TESTED;
 
     //List of test failures  as result of transforming the source code using the current transformation
-    protected List<String> failures;
+    protected List<String> failures = new ArrayList<>();
 
     protected static Map<String,Integer> failuresDico = new HashMap<>();
 

@@ -103,8 +103,9 @@ public abstract class JsonTransformationInput extends JsonSectionInput {
 //        HashMap<Integer, String> failures = getFailures();
         UUID index = getValidUUI(getJsonObject().getString(TINDEX));
         Transformation astt;
-        if (t.containsKey(index)) astt = t.get(index);
-        else {
+        if (t.containsKey(index)) {
+            astt = t.get(index);
+        } else {
             astt = build();
             astt.setIndex(index);
             astt.setStatus(getJsonObject().getInt(STATUS));

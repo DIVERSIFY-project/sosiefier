@@ -4,6 +4,7 @@ import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.Header;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -84,8 +85,9 @@ public class JsonTransformationLoader {
     protected void open() {
         BufferedReader br = null;
         try {
-            if ( getStreamReader() == null ) setStreamReader(new FileReader(getJsonPath()));
-            br = new BufferedReader(getStreamReader());
+//            if ( getStreamReader() == null ) setStreamReader(new FileReader(getJsonPath()));
+            br = new BufferedReader(new FileReader(getJsonPath()));
+//            br = new BufferedReader(getStreamReader());
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
             while (line != null) {
@@ -144,8 +146,8 @@ public class JsonTransformationLoader {
         failures.setLoadMessages(getLoadMessages());
         failures.read(result);
 
-        JsonAstTransformationCollectionInput asts = (JsonAstTransformationCollectionInput)
-                getSection(JsonAstTransformationCollectionInput.class);
+        JsonTransformationCollectionInput asts = (JsonTransformationCollectionInput)
+                getSection(JsonTransformationCollectionInput.class);
         asts.setJsonObject(jsonObject);
         asts.setInputProgram(inputProgram);
         asts.setLoadMessages(getLoadMessages());
@@ -173,8 +175,13 @@ public class JsonTransformationLoader {
 
         if(file.isDirectory()) {
             for(File f: file.listFiles()) {
-                jsonPath = f.getAbsolutePath();
-                transformations.addAll(read());
+                try {
+                    jsonPath = f.getAbsolutePath();
+                    transformations.addAll(read());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.debug("");
+                }
             }
         }  else {
             jsonPath = dirOrFile;

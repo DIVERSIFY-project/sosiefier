@@ -67,6 +67,7 @@ public class InitUtils {
         inputConfiguration.setInputProgram(inputProgram);
         inputProgram.setProgramDir(inputConfiguration.getProperty("project"));
         inputProgram.setRelativeSourceCodeDir(inputConfiguration.getRelativeSourceCodeDir());
+        inputProgram.setRelativeTestSourceCodeDir(inputConfiguration.getRelativeTestSourceCodeDir());
 
         if(inputConfiguration.getProperty("externalSrc") != null) {
             List<String> list = Arrays.asList(inputConfiguration.getProperty("externalSrc").split(System.getProperty("path.separator")));

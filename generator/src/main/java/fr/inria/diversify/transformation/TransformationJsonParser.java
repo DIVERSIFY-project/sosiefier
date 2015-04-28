@@ -639,8 +639,16 @@ public class TransformationJsonParser {
     protected CodeFragment findCodeFragment(JSONObject jsonObject) throws TransformationParserException {
 
         CodeFragment cf = null;
-        //String position = jsonObject.getString("position");
-        //String sourceCode = jsonObject.getString("sourceCode");
+//        String position = null;
+//        String sourceCode = null;
+//        try {
+//            position = jsonObject.getString("position");
+//             sourceCode = jsonObject.getString("sourcecode");
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+////        String sourceCode = jsonObject.getString("sourceCode");
+//        cf  =inputProgram.getCodeFragment(position, sourceCode);
         cf = inputProgram.getCodeFragment(jsonObject);
 
         if (cf == null) {
