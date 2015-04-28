@@ -1,5 +1,6 @@
 package fr.inria.diversify.diversification;
 
+import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
 import fr.inria.diversify.sosie.logger.Instru;
 import fr.inria.diversify.statistic.AbstractSessionResults;
 import fr.inria.diversify.buildSystem.AbstractBuilder;
@@ -130,8 +131,6 @@ public abstract class AbstractDiversify {
      */
     public abstract void run(int n) throws Exception;
 
-    //protected abstract void run(Collection<Transformation> trans) throws Exception;
-
     /**
      *
      * @param output
@@ -181,8 +180,11 @@ public abstract class AbstractDiversify {
         if (transformations.isEmpty())
             return "";
 
-        TransformationsWriter write = new TransformationsWriter(transformations, fileName);
-        return write.writeAllTransformation(null);
+//        TransformationsWriter write = new TransformationsWriter(transformations, fileName);
+//        return write.writeAllTransformation(null);
+        JsonTransformationWriter writer = new JsonTransformationWriter();
+        writer.write(transformations, fileName + ".json", inputConfiguration.getInputProgram().getProgramDir() + "/pom.xml");
+        return fileName + ".json";
     }
 
     protected void mkDirResult(String output) {

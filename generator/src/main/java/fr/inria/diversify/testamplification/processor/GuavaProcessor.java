@@ -45,7 +45,7 @@ public class GuavaProcessor extends AbstractProcessor<CtClass> {
         if(!map.isEmpty()) {
             Log.debug("GuavaProcessor: {}", element.getSimpleName());
         }
-        while (!map.isEmpty() && count < 101) {
+        while (!map.isEmpty() && count < 151) {
             CtClass ampClass = this.getFactory().Core().clone(element);
             ampClass.setSimpleName("Test_"+count+"_"+element.getSimpleName());
             count++;

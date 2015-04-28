@@ -10,6 +10,7 @@ import fr.inria.diversify.testamplification.processor.TestLoggingInstrumenter;
 import fr.inria.diversify.testamplification.processor.TestProcessor;
 import fr.inria.diversify.util.*;
 import org.apache.commons.io.FileUtils;
+import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.factory.Factory;
 
@@ -22,6 +23,7 @@ import java.util.*;
  * Created by Simon on 03/12/14.
  */
 public class MakeAmpliTest {
+    private final boolean guavaTestlib;
     protected InputProgram inputProgram;
 
     private final boolean makeHarmanFilter;
@@ -52,6 +54,7 @@ public class MakeAmpliTest {
         logNewTest  = Boolean.parseBoolean(inputConfiguration.getProperty("logNewTest", "false"));
         makeHarmanFilter = Boolean.parseBoolean(inputConfiguration.getProperty("makeHarmanFilter", "false"));
         filterFile = inputConfiguration.getProperty("compare.filter", "'");
+        guavaTestlib =  Boolean.parseBoolean(inputConfiguration.getProperty("guavaTestlib", "false"));
 
         if(!makeHarmanFilter) {
             initOutputDirectory();
@@ -59,13 +62,15 @@ public class MakeAmpliTest {
             LoggerUtils.writeId(outputDirectory);
         }
 
-        transform();
+        if(guavaTestlib) {
+            transform();
+        } else {
+            transformGuava();
+        }
 
     }
 
-    public static void main(String[] args) throws Exception, InvalidSdkException {
-        new MakeAmpliTest(args[0]);
-    }
+
 
     protected void initOutputDirectory() throws IOException {
         File dir = new File(outputDirectory);
@@ -75,6 +80,56 @@ public class MakeAmpliTest {
 
 
     protected void transform() throws IOException {
+        String test = inputProgram.getAbsoluteTestSourceCodeDir();
+
+        Factory factory = InitUtils.initSpoon(inputProgram);
+
+        if(dataMutator) {
+            TestDataMutator m = new TestDataMutator();
+            m.setGuavaTestlib(guavaTestlib);
+            LoggerUtils.applyProcessor(factory, m);
+        }
+        if(methodCallAdder) {
+            TestMethodCallAdder v = new TestMethodCallAdder();
+            v.setGuavaTestlib(guavaTestlib);
+            LoggerUtils.applyProcessor(factory, v);
+        }
+        if(methodCallRemover) {
+            TestMethodCallRemover e = new TestMethodCallRemover();
+            e.setGuavaTestlib(guavaTestlib);
+            LoggerUtils.applyProcessor(factory, e);
+        }
+        if(removeNotClone) {
+            RemoveNotCloneProcessor p = new RemoveNotCloneProcessor();
+            LoggerUtils.applyProcessor(factory, p);
+        }
+        if(logNewTest) {
+            TestLoggingInstrumenter m = new TestLoggingInstrumenter();
+            LoggerUtils.applyProcessor(factory, m);
+        }
+        if(removeAssert) {
+            TestCaseProcessor tc = null;
+            if(guavaTestlib) {
+                tc = new TestCaseProcessor(inputProgram.getRelativeTestSourceCodeDir(), false);
+            } else {
+                tc = new TestCaseProcessor(inputProgram.getRelativeTestSourceCodeDir(), true);
+            }
+            LoggerUtils.applyProcessor(factory, tc);
+        }
+
+        if(makeHarmanFilter) {
+            makeHarmanFilter();
+        } else {
+            File fileFrom = new File(test);
+            File out = new File(outputDirectory + "/" + inputProgram.getRelativeTestSourceCodeDir());
+            LoggerUtils.writeJavaClass(factory, out, fileFrom);
+        }
+        Log.info("number of new test: {}", TestProcessor.getCount());
+        Log.info("number of data test: {}", TestDataMutator.dataCount);
+        Log.info("number of monitoring point {}:",TestCaseProcessor.monitorPointCount);
+    }
+
+    protected void transformGuava() throws IOException {
         String test = inputProgram.getAbsoluteTestSourceCodeDir();
 
         Factory factory = InitUtils.initSpoon(inputProgram);
@@ -92,8 +147,7 @@ public class MakeAmpliTest {
             LoggerUtils.applyProcessor(factory, e);
         }
         if(removeNotClone) {
-            RemoveNotCloneProcessor p = new RemoveNotCloneProcessor();
-//           GuavaProcessor p = new GuavaProcessor(testDirectory);
+           GuavaProcessor p = new GuavaProcessor(test);
             LoggerUtils.applyProcessor(factory, p);
         }
         if(logNewTest) {
@@ -101,21 +155,17 @@ public class MakeAmpliTest {
             LoggerUtils.applyProcessor(factory, m);
         }
         if(removeAssert) {
-            TestCaseProcessor tc = new TestCaseProcessor(inputProgram.getRelativeTestSourceCodeDir());
+            TestCaseProcessor tc = new TestCaseProcessor(inputProgram.getRelativeTestSourceCodeDir(), false);
             LoggerUtils.applyProcessor(factory, tc);
         }
-//        GuavaProcessor p = new GuavaProcessor(testDirectory);
-//        applyProcessor(sourceFactory, p);
-        if(makeHarmanFilter) {
-            makeHarmanFilter();
-        } else {
-            File fileFrom = new File(test);
-            File out = new File(outputDirectory + "/" + inputProgram.getRelativeTestSourceCodeDir());
-//            for(CtClass cl : GuavaProcessor.ampclasses) {
-//                printJavaFile(out, cl);
-//            }
-            LoggerUtils.writeJavaClass(factory, out, fileFrom);
+        GuavaProcessor p = new GuavaProcessor(test);
+        LoggerUtils.applyProcessor(factory, p);
+
+        File out = new File(outputDirectory + "/" + inputProgram.getRelativeTestSourceCodeDir());
+        for(CtClass cl : GuavaProcessor.ampclasses) {
+            LoggerUtils.printJavaFile(out, cl);
         }
+
         Log.info("number of new test: {}", TestProcessor.getCount());
         Log.info("number of data test: {}", TestDataMutator.dataCount);
         Log.info("number of monitoring point {}:",TestCaseProcessor.monitorPointCount);
@@ -142,5 +192,9 @@ public class MakeAmpliTest {
             harmanTestHarmanMonitor.addTest(test.getSimpleName());
         }
         harmanTestHarmanMonitor.print(outputDirectory + "/filterHarmanTestHarmanMonitor");
+    }
+
+    public static void main(String[] args) throws InvalidSdkException, Exception {
+        new MakeAmpliTest(args[0]);
     }
 }

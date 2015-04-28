@@ -1,6 +1,5 @@
 package fr.inria.diversify.testamplification.processor;
 
-import fr.inria.diversify.util.Log;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtMethod;
@@ -16,6 +15,7 @@ public class TestCaseProcessor extends TestProcessor {
     protected String testDir;
     public static int monitorPointCount = 0;
     public static List<String> NotHarmanMonitorPoint = new ArrayList<>();
+    protected boolean logAssert;
 
 	/*
 	 * This processor removes all the assertions from a test case
@@ -24,8 +24,9 @@ public class TestCaseProcessor extends TestProcessor {
 	 * */
 
 
-    public TestCaseProcessor(String testDir) {
+    public TestCaseProcessor(String testDir, boolean logAssert) {
         this.testDir = testDir;
+        this.logAssert = logAssert;
     }
 
 	public boolean isToBeProcessed(CtMethod candidate) {
@@ -42,37 +43,65 @@ public class TestCaseProcessor extends TestProcessor {
                         CtCase ctCase = (CtCase) invocation.getParent();
                         int index = ctCase.getStatements().indexOf(invocation);
                         getArgs(invocation).stream()
-                                           .forEach(arg -> ctCase.getStatements().add(index, buildLogStatement(arg)));
+                                           .forEach(arg -> {
+                                               if(logAssert) {
+                                                   ctCase.getStatements().add(index, buildLogStatement(arg));
+//                                                   invocation.insertBefore(buildLogStatement(arg));
+                                               } else {
+                                                   if(!(arg instanceof CtVariableAccess) && !(arg instanceof CtFieldAccess)) {
+                                                       ctCase.getStatements().add(index, buildVarStatement(arg));
+                                                   }
+                                               }
+                                           });
                         ctCase.getStatements().remove(invocation);
                     } else {
                         CtBlock block = (CtBlock) invocation.getParent();
+
                         getArgs(invocation).stream()
-                                           .forEach(arg -> invocation.insertBefore(buildLogStatement(arg)));
+                                           .forEach(arg -> {
+                                               if(logAssert) {
+                                                   invocation.insertBefore(buildLogStatement(arg));
+                                               } else {
+                                                   if(!(arg instanceof CtVariableAccess) && !(arg instanceof CtFieldAccess)) {
+                                                       invocation.insertBefore(buildVarStatement(arg));
+                                                   }
+                                               }
+                                           });
                         block.removeStatement(invocation);
                     }
                 }
             } catch (Exception e) {}
 
         }
-        if(!method.getModifiers().contains(ModifierKind.STATIC)) {
-            List<CtAssignment> assignments = Query.getElements(method, new TypeFilter(CtAssignment.class));
-            for (CtAssignment assignment : assignments) {
-                if(!(assignment.getParent() instanceof CtLoop)){
-                    try {
-                        assignment.insertAfter(logAssignment(assignment.getAssigned()));
-                    } catch (Exception e) {}
+        if(logAssert) {
+            if (!method.getModifiers().contains(ModifierKind.STATIC)) {
+                List<CtAssignment> assignments = Query.getElements(method, new TypeFilter(CtAssignment.class));
+                for (CtAssignment assignment : assignments) {
+                    if (!(assignment.getParent() instanceof CtLoop)) {
+                        try {
+                            assignment.insertAfter(logAssignment(assignment.getAssigned()));
+                        } catch (Exception e) {
+                        }
 
+                    }
                 }
-            }
 
-            List<CtLocalVariable> vars = Query.getElements(method, new TypeFilter(CtLocalVariable.class));
-            for (CtLocalVariable var : vars) {
+                List<CtLocalVariable> vars = Query.getElements(method, new TypeFilter(CtLocalVariable.class));
+                for (CtLocalVariable var : vars) {
 
-                if (var.getDefaultExpression() != null && !(var.getParent() instanceof CtLoop)) {
-                    var.insertAfter(logLocalVar(var));
+                    if (var.getDefaultExpression() != null && !(var.getParent() instanceof CtLoop)) {
+                        var.insertAfter(logLocalVar(var));
+                    }
                 }
             }
         }
+    }
+
+    protected CtCodeSnippetStatement buildVarStatement(CtElement arg) {
+        CtCodeSnippetStatement stmt = new CtCodeSnippetStatementImpl();
+        stmt.setValue("Object o" + monitorPointCount +  " = " + arg.toString());
+        monitorPointCount++;
+        return stmt;
     }
 
     protected CtCodeSnippetStatement logLocalVar(CtLocalVariable var) {

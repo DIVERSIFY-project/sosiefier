@@ -25,6 +25,8 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
     protected static int count = 0;
     protected static Map<String, String> idMap = new HashMap();
 
+    protected boolean guavaTestlib = false;
+
     protected int cloneNumber = 1;
 
     @Override
@@ -39,11 +41,22 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
                 || candidate.getBody().getStatements().size() == 0) {
             return false;
         }
+        if(!guavaTestlib) {
+            return candidate.getSimpleName().contains("test")
+                    || candidate.getAnnotations().stream()
+                    .map(annotation -> annotation.toString())
+                    .anyMatch(annotation -> annotation.startsWith("@org.junit.Test"));
+        } else {
+            return  candidate.getDeclaringType().getSimpleName().endsWith("Tester")
+                    && (candidate.getSimpleName().contains("test")
+                    || candidate.getAnnotations().stream()
+                    .map(annotation -> annotation.toString())
+                    .anyMatch(annotation -> annotation.startsWith("@org.junit.Test")));
+        }
+    }
 
-        return candidate.getSimpleName().contains("test")
-                || candidate.getAnnotations().stream()
-                            .map(annotation -> annotation.toString())
-                            .anyMatch(annotation -> annotation.startsWith("@org.junit.Test"));
+    public void setGuavaTestlib(boolean guavaTestlib) {
+        this.guavaTestlib = guavaTestlib;
     }
 
     protected CtMethod cloneMethod(CtMethod method, String suffix) {

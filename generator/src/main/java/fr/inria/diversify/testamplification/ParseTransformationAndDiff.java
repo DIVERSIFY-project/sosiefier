@@ -2,21 +2,18 @@ package fr.inria.diversify.testamplification;
 
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.factories.SpoonMetaFactory;
+import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
 import fr.inria.diversify.testamplification.compare.diff.Diff;
 import fr.inria.diversify.testamplification.compare.diff.Filter;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParserException;
-import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
-import spoon.reflect.factory.Factory;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Created by Simon on 27/01/15.
@@ -28,7 +25,7 @@ public class ParseTransformationAndDiff {
 
     int rm = 0;
     int add = 0;
-    int commit =0;
+    int commit = 0;
 
 
     public static void main(String[] args) throws IOException, InterruptedException, JSONException, TransformationParserException, IllegalAccessException, ClassNotFoundException, InstantiationException {
@@ -40,7 +37,6 @@ public class ParseTransformationAndDiff {
         p.parseDir(args[1]);
         p.loadFilter(inputConfiguration.getProperty("compare.filter"));
 //        p.loadFilter(inputConfiguration.getProperty("compare.filter"));
-
 
         p.applyFilter();
         List<Transformation> transformations = p.stat();
@@ -82,8 +78,11 @@ public class ParseTransformationAndDiff {
         if (transformations.isEmpty())
             return "";
 
-        TransformationsWriter write = new TransformationsWriter(transformations, fileName);
-        return write.writeAllTransformation(null);
+//        TransformationsWriter write = new TransformationsWriter(transformations, fileName);
+//        return write.writeAllTransformation(null);
+        JsonTransformationWriter writer = new JsonTransformationWriter();
+        writer.write(transformations, fileName + ".json", inputProgram.getProgramDir() + "/pom.xml");
+        return fileName + ".json";
     }
 
     public void applyFilter() {
@@ -96,7 +95,7 @@ public class ParseTransformationAndDiff {
         this.inputProgram = inputProgram;
     }
 
-    public void parseDir(String dirName) throws IOException, JSONException, TransformationParserException {
+    public void parseDir(String dirName) throws IOException, JSONException {
         diffs = new HashMap<>();
         File dir = new File(dirName);
 
@@ -110,7 +109,6 @@ public class ParseTransformationAndDiff {
                 }
             }
         }
-        Log.debug("");
     }
 
     protected void parseFile(File file) throws IOException, JSONException, TransformationParserException {
