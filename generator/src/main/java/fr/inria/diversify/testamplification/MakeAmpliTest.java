@@ -12,6 +12,7 @@ import fr.inria.diversify.util.*;
 import org.apache.commons.io.FileUtils;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtMethod;
+import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.factory.Factory;
 
 
@@ -62,6 +63,7 @@ public class MakeAmpliTest {
             LoggerUtils.writeId(outputDirectory);
         }
 
+
         if(guavaTestlib) {
             transform();
         } else {
@@ -105,6 +107,7 @@ public class MakeAmpliTest {
         }
         if(logNewTest) {
             TestLoggingInstrumenter m = new TestLoggingInstrumenter();
+            m.setLogName("fr.inria.diversify.testamplification.branchcoverage.logger.Logger");
             LoggerUtils.applyProcessor(factory, m);
         }
         if(removeAssert) {
@@ -120,9 +123,14 @@ public class MakeAmpliTest {
         if(makeHarmanFilter) {
             makeHarmanFilter();
         } else {
-            File fileFrom = new File(test);
             File out = new File(outputDirectory + "/" + inputProgram.getRelativeTestSourceCodeDir());
-            LoggerUtils.writeJavaClass(factory, out, fileFrom);
+            for(CtSimpleType cl : TestCaseProcessor.ampclasses) {
+                LoggerUtils.printJavaFile(out, cl);
+            }
+
+//            File fileFrom = new File(test);
+//            File out = new File(outputDirectory + "/" + inputProgram.getRelativeTestSourceCodeDir());
+//            LoggerUtils.writeJavaClass(factory, out, fileFrom);
         }
         Log.info("number of new test: {}", TestProcessor.getCount());
         Log.info("number of data test: {}", TestDataMutator.dataCount);
@@ -152,6 +160,7 @@ public class MakeAmpliTest {
         }
         if(logNewTest) {
             TestLoggingInstrumenter m = new TestLoggingInstrumenter();
+            m.setLogName("fr.inria.diversify.testamplification.branchcoverage.logger.Logger");
             LoggerUtils.applyProcessor(factory, m);
         }
         if(removeAssert) {

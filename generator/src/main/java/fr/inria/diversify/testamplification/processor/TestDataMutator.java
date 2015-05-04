@@ -53,7 +53,8 @@ public class TestDataMutator extends TestProcessor {
 		}
 	}
 
-    protected void createNumberMutant(CtMethod method, CtLiteral literal, int lit_index) {
+    protected List<CtMethod> createNumberMutant(CtMethod method, CtLiteral literal, int lit_index) {
+        List<CtMethod> mutants = new ArrayList<>();
         for(Number literalMutated : literalMutated(literal)) {
             dataCount++;
             //clone the method
@@ -86,11 +87,13 @@ public class TestDataMutator extends TestProcessor {
                 }
             }
             toReplace.replace(newLiteral);
+            mutants.add(cloned_method);
         }
+        return mutants;
     }
 
-    protected void createStringMutant(CtMethod method, CtLiteral literal, int lit_index) {
-
+    protected List<CtMethod> createStringMutant(CtMethod method, CtLiteral literal, int lit_index) {
+        List<CtMethod> mutants = new ArrayList<>();
         String string = ((String) literal.getValue());
         Random r = new Random();
         String[] array = new String[3];
@@ -115,7 +118,9 @@ public class TestDataMutator extends TestProcessor {
 
             newLiteral.setValue(literalMutated);
             notHarmanTest.add(cloned_method);
+            mutants.add(cloned_method);
         }
+        return mutants;
     }
 
 
@@ -172,4 +177,39 @@ public class TestDataMutator extends TestProcessor {
 	protected boolean isCase(CtLiteral literal) {
 		return literal.getParent(CtCase.class) != null;
 	}
+
+
+    public List<CtMethod> apply(CtMethod method) {
+        List<CtMethod> methods = new ArrayList<>();
+        try{
+            //get the list of literals in the method
+            List<CtLiteral> l = Query.getElements(method, new TypeFilter(CtLiteral.class));
+            //this index serves to replace ith literal is replaced by zero in the ith clone of the method
+            int lit_index = 0;
+            for(CtLiteral lit : l) {
+                if (!literalInAssert(lit) && !isCase(lit)) {
+                    if (lit.getValue() instanceof Number) {
+                        methods.addAll(createNumberMutant(method, lit, lit_index));
+                    } if(lit.getValue() instanceof String) {
+                        methods.addAll(createStringMutant(method, lit, lit_index));
+                    } else {
+                        dataCount++;
+                        //clone the method
+                        CtMethod cloned_method = cloneMethod(method, "_literalMutation");
+
+                        //get the lit_indexth literal of the cloned method
+                        CtLiteral literal = Query.getElements(cloned_method, new TypeFilter<CtLiteral>(CtLiteral.class))
+                                .get(lit_index);
+                        //set the value of the selected literal
+                        replaceByRandom(literal);
+                        methods.add(cloned_method);
+                    }
+                }
+                lit_index++;
+            }
+        }
+        catch(Exception e){}
+        return methods;
+    }
+
 }

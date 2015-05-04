@@ -53,7 +53,7 @@ public class BranchCoverageMain {
     }
 
     public void copyLogger() throws IOException {
-        File dir = new File(outputDirectory + "/" + inputProgram.getRelativeSourceCodeDir() + "/fr/inria/diversify/testamplification/branchcoverage.logger");
+        File dir = new File(outputDirectory + "/" + inputProgram.getRelativeSourceCodeDir() + "/fr/inria/diversify/testamplification/branchcoverage/logger");
 
         String packagePath = System.getProperty("user.dir") + "/generator/src/main/java/fr/inria/diversify/testamplification/branchcoverage/logger/";
         FileUtils.copyFileToDirectory(new File(packagePath + Logger.class.getSimpleName() + ".java"), dir);

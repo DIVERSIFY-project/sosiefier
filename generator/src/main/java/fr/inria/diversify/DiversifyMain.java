@@ -327,18 +327,25 @@ public class DiversifyMain {
 
     protected void computeDiversifyStat(String transDir, String output) throws Exception {
         TransformationParser tf = new TransformationParser(true, inputProgram);
-        Collection<Transformation> transformations = tf.parse(transDir);
-//        JsonTransformationLoader loader = new JsonTransformationLoader(inputProgram);
-//          Collection<Transformation> transformations = loader.load(transDir, true);
+//        Collection<Transformation> transformations = tf.parse(transDir);
+        JsonTransformationLoader loader = new JsonTransformationLoader(inputProgram);
+          Collection<Transformation> transformations = loader.load(transDir, false);
 //        TransformationsWriter write = new TransformationsWriter(transformations, fileName);
         JsonTransformationWriter writer = new JsonTransformationWriter();
-
-       writer.write(transformations, output+".json", inputProgram.getProgramDir() + "/pom.xml");
+        File out = new File(output);
+        if(!out.exists()) {
+            out.mkdirs();
+        }
+        writer.write(transformations, output+".json", inputProgram.getProgramDir() + "/pom.xml");
+        Set<Transformation> sosies = transformations.stream()
+                .filter(t -> t.isSosie())
+                .collect(Collectors.toSet());
+        writer.write(sosies, output+"_sosie.json", inputProgram.getProgramDir() + "/pom.xml");
 
         CVLMetric cvlMetric = new CVLMetric(inputProgram);
         cvlMetric.printMetrics(output + "_cvlMetric.csv");
 
-//        visu(transformations);
+//        visu(sosies);
 //        FailureMatrix matrix = new FailureMatrix(transformations,inputConfiguration.getProperty("allTestFile"));
 //        matrix.printAllMatrix(fileName);
     }

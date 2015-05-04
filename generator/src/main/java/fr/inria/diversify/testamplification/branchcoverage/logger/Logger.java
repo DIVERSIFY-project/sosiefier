@@ -33,17 +33,29 @@ public class Logger {
     }
 
     public static void branch(Thread thread, String id) {
-        getLog().branch(id);
+        getLog(thread).branch(id);
     }
 
     public static void methodIn(Thread thread, String id) {
-        getLog().methodIn(id);
+        getLog(thread).methodIn(id);
     }
 
     public static void methodOut(Thread thread, String id) {
-        getLog().methodOut(id);
+        getLog(thread).methodOut(id);
     }
 
+
+    public static void writeTestStart(Thread thread, Object receiver, String testName) {
+        getLog(thread).writeTestStart(testName, receiver);
+    }
+
+    public static void writeTestStart(Thread thread , String testName) {
+        getLog(thread).writeTestStart(testName);
+    }
+
+    public static void writeTestFinish(Thread thread) {
+        getLog(thread).writeTestFinish();
+    }
 
     public  static void close() {
         for ( LogWriter l : logs.values() ) {

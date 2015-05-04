@@ -2,19 +2,14 @@ package fr.inria.diversify.testamplification.processor;
 
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtInvocation;
-import spoon.reflect.declaration.CtAnnotation;
-import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.ModifierKind;
+import spoon.reflect.declaration.*;
 import spoon.reflect.reference.CtPackageReference;
 import spoon.reflect.reference.CtTypeReference;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Simon on 03/12/14.
@@ -24,6 +19,10 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
     protected static List<CtMethod> mutatedMethod = new LinkedList<>();
     protected static int count = 0;
     protected static Map<String, String> idMap = new HashMap();
+
+    protected String logName = "fr.inria.diversify.testamplification.logger.Logger";
+
+    public static Set<CtSimpleType> ampclasses = new HashSet<>();
 
     protected boolean guavaTestlib = false;
 
@@ -81,27 +80,28 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
     protected CtMethod cloneMethodTest(CtMethod method, String suffix, int timeOut) {
         CtMethod cloned_method = cloneMethod(method,suffix);
 
-        CtAnnotation testAnnotation = cloned_method.getAnnotations().stream()
-                .filter(annotation -> annotation.toString().contains("Test"))
-                .findFirst().orElse(null);
+//        CtAnnotation testAnnotation = cloned_method.getAnnotations().stream()
+//                .filter(annotation -> annotation.toString().contains("Test"))
+//                .findFirst().orElse(null);
+//
+//        if(testAnnotation == null) {
+//            testAnnotation = getFactory().Core().createAnnotation();
+//            CtTypeReference<Object> ref = getFactory().Core().createTypeReference();
+//            ref.setSimpleName("Test");
+//
+//            CtPackageReference refPackage = getFactory().Core().createPackageReference();
+//            refPackage.setSimpleName("org.junit");
+//            ref.setPackage(refPackage);
+//            testAnnotation.setAnnotationType(ref);
+//            Map<String, Object> elementValue = new HashMap<String, Object>();
+//            testAnnotation.setElementValues(elementValue);
+//        }
+//
+//        testAnnotation.getElementValues().put("timeout", timeOut);
 
-        if(testAnnotation == null) {
-            testAnnotation = getFactory().Core().createAnnotation();
-            CtTypeReference<Object> ref = getFactory().Core().createTypeReference();
-            ref.setSimpleName("Test");
+//        cloned_method.addAnnotation(testAnnotation);
 
-            CtPackageReference refPackage = getFactory().Core().createPackageReference();
-            refPackage.setSimpleName("org.junit");
-            ref.setPackage(refPackage);
-            testAnnotation.setAnnotationType(ref);
-            Map<String, Object> elementValue = new HashMap<String, Object>();
-            testAnnotation.setElementValues(elementValue);
-        }
-
-        testAnnotation.getElementValues().put("timeout", timeOut);
-
-        cloned_method.addAnnotation(testAnnotation);
-
+        ampclasses.add(cloned_method.getDeclaringType());
         return cloned_method;
     }
 
@@ -156,6 +156,10 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
 
 
     protected String getLogName() {
-        return "fr.inria.diversify.testamplification.logger.Logger";
+        return logName;
+    }
+
+    public void setLogName(String logName) {
+        this.logName = logName;
     }
 }

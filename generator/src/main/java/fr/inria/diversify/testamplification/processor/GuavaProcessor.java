@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  */
 public class GuavaProcessor extends AbstractProcessor<CtClass> {
     String testDirectory;
-    public  static List<CtClass> ampclasses = new ArrayList<>();
+    public static Set<CtClass> ampclasses = new HashSet<>();
 
 
     public GuavaProcessor(String testDirectory) {

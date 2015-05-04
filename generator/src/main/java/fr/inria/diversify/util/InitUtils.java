@@ -9,6 +9,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Level;
 import spoon.Launcher;
 import spoon.reflect.factory.Factory;
+import spoon.support.StandardEnvironment;
 
 import java.io.File;
 import java.io.IOException;

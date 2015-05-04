@@ -1,8 +1,6 @@
 package fr.inria.diversify.testamplification.branchcoverage.load;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * User: Simon
@@ -12,7 +10,7 @@ import java.util.Set;
 public class MethodCoverage {
     final String methodName;
     final Set<String> allBranch;
-    Set<String[]> allPath;
+    Set<List<String>> allPath;
     Set<String> branchCoverage;
 
     public MethodCoverage(String methodName, String[] allBranch) {
@@ -23,8 +21,21 @@ public class MethodCoverage {
         branchCoverage = new HashSet<>();
     }
 
+    public MethodCoverage(String methodName, Set<String> allBranch) {
+        this.methodName = methodName;
+        this.allBranch = new HashSet<>(allBranch);
+        allPath = new HashSet<>();
+        branchCoverage = new HashSet<>();
+    }
+
     public void addPath(String[] path) {
-        allPath.add(path);
+        List<String> compressPath = new ArrayList<>();
+        for(String p : path) {
+            if(!compressPath.contains(p)) {
+                compressPath.add(p);
+            }
+        }
+        allPath.add(compressPath);
         Collections.addAll(branchCoverage, path);
     }
 
@@ -53,5 +64,28 @@ public class MethodCoverage {
             }
         }
         return d;
+    }
+
+    public int nbDiffPath(MethodCoverage other) {
+        int count = 0;
+
+        for(List<String> path : allPath) {
+            if(!other.allPath.contains(path)) {
+                count++;
+            }
+        }
+
+        for(List<String> path : other.allPath) {
+            if(!allPath.contains(path)) {
+                count++;
+            }
+        }
+
+        return count++;
+    }
+
+    public void merge(MethodCoverage other) {
+        this.allPath.addAll(other.allPath);
+        this.branchCoverage.addAll(other.branchCoverage);
     }
 }

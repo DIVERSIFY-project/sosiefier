@@ -6,6 +6,7 @@ import spoon.compiler.Environment;
 import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.declaration.CtClass;
+import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
 import spoon.support.JavaOutputProcessor;
@@ -71,7 +72,7 @@ public class LoggerUtils {
         }
     }
 
-    public static void printJavaFile(File directory, CtClass type) throws IOException {
+    public static void printJavaFile(File directory, CtSimpleType type) throws IOException {
         try {
             Factory factory = type.getFactory();
             Environment env = factory.getEnvironment();

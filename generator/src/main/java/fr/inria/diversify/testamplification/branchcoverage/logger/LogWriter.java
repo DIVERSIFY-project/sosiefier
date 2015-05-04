@@ -47,7 +47,6 @@ public class LogWriter {
         }
         currentPaths = new Stack<StringBuilder>();
         previousBranchs = new Stack<String>();
-//        logMethod = new HashMap<Thread, Boolean>();
 
         ShutdownHookLog shutdownHook = new ShutdownHookLog();
         Runtime.getRuntime().addShutdownHook(shutdownHook);
@@ -135,11 +134,33 @@ public class LogWriter {
             paths.add(path);
             try {
                 PrintWriter fileWriter = getFileWriter();
-                fileWriter.append(id + " " + path + "\n");
+                fileWriter.append("P "+ id + " " + path + "\n");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void writeTestStart(String testName, Object receiver) {
+        try {
+            PrintWriter fileWriter = getFileWriter();
+            fileWriter.append(receiver.getClass().getCanonicalName() +"."+testName + "\n");
+        } catch (Exception e) {}
+    }
+
+    public void writeTestStart(String testName) {
+        try {
+            PrintWriter fileWriter = getFileWriter();
+            fileWriter.append(testName + "\n");
+        } catch (Exception e) {}
+    }
+
+    public void writeTestFinish() {
+        try {
+            allPath.clear();
+            PrintWriter fileWriter = getFileWriter();
+            fileWriter.append("TN\n");
+        } catch (Exception e) {}
     }
 
     protected synchronized PrintWriter getFileWriter() throws IOException, InterruptedException {
@@ -149,5 +170,6 @@ public class LogWriter {
         }
         return fileWriter;
     }
+
 
 }
