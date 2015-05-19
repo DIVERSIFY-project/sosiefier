@@ -19,10 +19,12 @@ import java.util.Collection;
  */
 public class SpoonMetaFactory {
 
-    public Factory buildNewFactory(InputProgram inputProgram) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public Factory buildNewFactory(InputProgram inputProgram, boolean withTest) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         ArrayList<String> a = new ArrayList<String>();
         a.add(inputProgram.getAbsoluteSourceCodeDir());
-        a.add(inputProgram.getAbsoluteTestSourceCodeDir());
+        if(withTest) {
+            a.add(inputProgram.getAbsoluteTestSourceCodeDir());
+        }
         a.add(inputProgram.getExternalSourceCodeDir());
         return buildNewFactory(a, inputProgram.getJavaVersion());
     }
@@ -32,6 +34,7 @@ public class SpoonMetaFactory {
         a.add(srcDirectory);
         return buildNewFactory(a, javaVersion);
     }
+
     public Factory buildNewFactory(Collection<String> srcDirectory, int javaVersion) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         StandardEnvironment env = new StandardEnvironment();
         env.setComplianceLevel(javaVersion);

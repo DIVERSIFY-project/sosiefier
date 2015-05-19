@@ -32,7 +32,7 @@ public class ParseTransformationAndDiff {
         InputConfiguration inputConfiguration = new InputConfiguration(args[0]);
         InputProgram inputProgram = InitUtils.initInputProgram(inputConfiguration);
         ParseTransformationAndDiff p = new ParseTransformationAndDiff(inputProgram);
-        InitUtils.initSpoon(inputProgram);
+        InitUtils.initSpoon(inputProgram, false);
 
         p.parseDir(args[1]);
         p.loadFilter(inputConfiguration.getProperty("compare.filter"));

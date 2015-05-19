@@ -5,7 +5,6 @@ import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.Log;
-import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtSimpleType;
 
 import java.util.HashSet;
@@ -26,7 +25,7 @@ public class Main {
         InputConfiguration inputConfiguration = new InputConfiguration(propertiesFile);
         inputProgram = InitUtils.initInputProgram(inputConfiguration);
         InitUtils.initDependency(inputConfiguration);
-        InitUtils.initSpoon(inputProgram);
+        InitUtils.initSpoon(inputProgram, false);
 
         FindValue findValue = new FindValue();
         findValue.init(getAllClass());

@@ -40,7 +40,7 @@ public class CountTestAndAssert {
     }
 
     protected void staticCount() {
-        Factory factory = InitUtils.initSpoon(inputProgram);
+        Factory factory = InitUtils.initSpoon(inputProgram, false);
 
         CountProcessor processor = new CountProcessor();
         ProcessingManager pm = new QueueProcessingManager(factory);
@@ -55,7 +55,7 @@ public class CountTestAndAssert {
     protected void dynamicCount()  {
         String test = inputProgram.getAbsoluteTestSourceCodeDir();
 
-        Factory factory = InitUtils.initSpoon(inputProgram);
+        Factory factory = InitUtils.initSpoon(inputProgram, false);
 
         AssertCountInstrumenter a = new AssertCountInstrumenter();
         ProcessingManager pm = new QueueProcessingManager(factory);

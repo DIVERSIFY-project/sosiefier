@@ -96,8 +96,12 @@ public class InitUtils {
     }
 
     public static Factory initSpoon(InputProgram inputProgram) {
+        return initSpoon(inputProgram,true);
+    }
+
+    public static Factory initSpoon(InputProgram inputProgram, boolean withTest) {
         try {
-            Factory factory =  new SpoonMetaFactory().buildNewFactory(inputProgram);
+            Factory factory =  new SpoonMetaFactory().buildNewFactory(inputProgram, withTest);
             inputProgram.setFactory(factory);
             return factory;
         } catch (ClassNotFoundException  | IllegalAccessException | InstantiationException e) {

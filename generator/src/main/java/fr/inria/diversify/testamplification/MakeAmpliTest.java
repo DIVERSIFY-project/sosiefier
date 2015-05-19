@@ -18,7 +18,6 @@ import spoon.reflect.factory.Factory;
 
 import java.io.*;
 import java.lang.String;
-import java.util.*;
 
 /**
  * Created by Simon on 03/12/14.
@@ -84,7 +83,7 @@ public class MakeAmpliTest {
     protected void transform() throws IOException {
         String test = inputProgram.getAbsoluteTestSourceCodeDir();
 
-        Factory factory = InitUtils.initSpoon(inputProgram);
+        Factory factory = InitUtils.initSpoon(inputProgram, false);
 
         if(dataMutator) {
             TestDataMutator m = new TestDataMutator();
@@ -102,7 +101,7 @@ public class MakeAmpliTest {
             LoggerUtils.applyProcessor(factory, e);
         }
         if(removeNotClone) {
-            RemoveNotCloneProcessor p = new RemoveNotCloneProcessor();
+            RemoveOriginalTestProcessor p = new RemoveOriginalTestProcessor();
             LoggerUtils.applyProcessor(factory, p);
         }
         if(logNewTest) {
@@ -140,7 +139,7 @@ public class MakeAmpliTest {
     protected void transformGuava() throws IOException {
         String test = inputProgram.getAbsoluteTestSourceCodeDir();
 
-        Factory factory = InitUtils.initSpoon(inputProgram);
+        Factory factory = InitUtils.initSpoon(inputProgram, false);
 
         if(dataMutator) {
             TestDataMutator m = new TestDataMutator();

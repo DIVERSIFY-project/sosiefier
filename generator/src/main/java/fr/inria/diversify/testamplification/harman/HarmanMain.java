@@ -26,7 +26,7 @@ public class HarmanMain {
         inputConfiguration = new InputConfiguration(propertiesFile);
         inputProgram = InitUtils.initInputProgram(inputConfiguration);
         InitUtils.initDependency(inputConfiguration);
-        factory = InitUtils.initSpoon(inputProgram);
+        factory = InitUtils.initSpoon(inputProgram, false);
 
         transform();
     }

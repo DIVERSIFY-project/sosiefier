@@ -7,7 +7,7 @@ import spoon.reflect.declaration.CtSimpleType;
 /**
  * Created by Simon on 17/12/14.
  */
-public class RemoveNotCloneProcessor extends TestProcessor {
+public class RemoveOriginalTestProcessor extends TestProcessor {
 
     @Override
     public boolean isToBeProcessed(CtMethod method) {

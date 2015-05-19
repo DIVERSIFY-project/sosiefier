@@ -1,5 +1,6 @@
-package fr.inria.diversify.testamplification.processor;
+package fr.inria.diversify.processor.test;
 
+import fr.inria.diversify.processor.ProcessorUtil;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtMethod;
@@ -14,7 +15,6 @@ import java.util.List;
 public class TestCaseProcessor extends TestProcessor {
     protected String testDir;
     public static int monitorPointCount = 0;
-    public static List<String> NotHarmanMonitorPoint = new ArrayList<>();
     protected boolean logAssert;
 
 	/*
@@ -44,7 +44,7 @@ public class TestCaseProcessor extends TestProcessor {
                         int index = ctCase.getStatements().indexOf(invocation);
                         getArgs(invocation).stream()
                                            .forEach(arg -> {
-                                               if(logAssert) {
+                                               if(logAssert && !isArrayAccess(arg)) {
                                                    ctCase.getStatements().add(index, buildLogStatement(arg));
                                                } else {
                                                    if(!(arg instanceof CtVariableAccess) && !(arg instanceof CtFieldAccess)) {
@@ -58,7 +58,7 @@ public class TestCaseProcessor extends TestProcessor {
 
                         getArgs(invocation).stream()
                                            .forEach(arg -> {
-                                               if(logAssert) {
+                                               if(logAssert && !isArrayAccess(arg)) {
                                                    invocation.insertBefore(buildLogStatement(arg));
                                                } else {
                                                    if(!(arg instanceof CtVariableAccess) && !(arg instanceof CtFieldAccess)) {
@@ -76,7 +76,7 @@ public class TestCaseProcessor extends TestProcessor {
             if (!method.getModifiers().contains(ModifierKind.STATIC)) {
                 List<CtAssignment> assignments = Query.getElements(method, new TypeFilter(CtAssignment.class));
                 for (CtAssignment assignment : assignments) {
-                    if (!(assignment.getParent() instanceof CtLoop)) {
+                    if (!(assignment.getParent() instanceof CtLoop) && !isArrayAccess(assignment.getAssigned())) {
                         try {
                             assignment.insertAfter(logAssignment(assignment.getAssigned()));
                         } catch (Exception e) {
@@ -104,19 +104,17 @@ public class TestCaseProcessor extends TestProcessor {
     }
 
     protected CtCodeSnippetStatement logLocalVar(CtLocalVariable var) {
-        String id = idFor(var.getPosition().getLine() + "_" + var.getReference());
-        NotHarmanMonitorPoint.add(id);
+        int id = ProcessorUtil.idFor(var.getPosition().getLine() + "_" + var.getReference());
         return buildSnippet(id, var.getSimpleName());
     }
 
 
     protected CtCodeSnippetStatement logAssignment(CtElement expression) {
-        String id = idFor(expression.getPosition().getLine()+"_"+expression.toString(), "ASSIGNMENT");
-        NotHarmanMonitorPoint.add(id);
+        int id = ProcessorUtil.idFor(expression.getPosition().getLine() + "_" + expression.toString());
         return buildSnippet(id, expression.toString());
     }
 
-    protected CtCodeSnippetStatement buildSnippet(String id, String expression) {
+    protected CtCodeSnippetStatement buildSnippet(int id, String expression) {
         monitorPointCount++;
         CtCodeSnippetStatement stmt = new CtCodeSnippetStatementImpl();
         String snippet = getLogName() + ".logAssertArgument(Thread.currentThread()," + id + ","+ expression + ")";
@@ -136,8 +134,12 @@ public class TestCaseProcessor extends TestProcessor {
 		return list;
 	}
 
+    protected boolean isArrayAccess(CtElement element) {
+        return element instanceof CtArrayAccess;
+    }
+
     protected CtCodeSnippetStatement buildLogStatement(CtElement arg) {
-        String id = idFor(arg.getPosition().getLine()+"_"+arg.toString(), "ASSERT_I");
+        int id = ProcessorUtil.idFor(arg.getPosition().getLine() + "_" + arg.toString());
 
         return buildSnippet(id, arg.toString());
     }

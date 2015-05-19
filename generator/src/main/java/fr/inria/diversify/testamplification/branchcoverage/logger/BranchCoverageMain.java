@@ -42,7 +42,7 @@ public class BranchCoverageMain {
     protected void transform() throws IOException {
         String test = inputProgram.getAbsoluteSourceCodeDir();
 
-        Factory factory = InitUtils.initSpoon(inputProgram);
+        Factory factory = InitUtils.initSpoon(inputProgram, false);
 
         BranchCoverageProcessor m = new BranchCoverageProcessor(outputDirectory);
         LoggerUtils.applyProcessor(factory, m);

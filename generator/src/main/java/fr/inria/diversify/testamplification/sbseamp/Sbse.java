@@ -48,7 +48,9 @@ public class Sbse {
 
         outputDirectory = inputConfiguration.getProperty("outputDirectory");
 
-        ampTestsNames = inputConfiguration.getProperty("ampTestsNames").split(";");
+        if(inputConfiguration.getProperty("ampTestsNames") != null) {
+            ampTestsNames = inputConfiguration.getProperty("ampTestsNames").split(";");
+        }
 
         goodTest = new ArrayList<>();
         ampTests = new ArrayList<>();
@@ -59,6 +61,7 @@ public class Sbse {
         init();
         ampCoverage = loadCoverageInfo();
         Log.info("current coverage: {}", coverage());
+        globalCoverage.info();
         initAmpTest();
 
         while(count < maxIteration) {
@@ -97,7 +100,6 @@ public class Sbse {
             }
         }
     }
-
         return select;
     }
 
@@ -131,7 +133,6 @@ public class Sbse {
                 FileUtils.forceDelete(file);
             }
         }
-
         return result;
     }
 
@@ -141,7 +142,7 @@ public class Sbse {
         dir.mkdirs();
         FileUtils.copyDirectory(new File(inputProgram.getProgramDir()), dir);
 
-        InitUtils.initSpoon(inputProgram);
+        InitUtils.initSpoon(inputProgram, false);
         initBuilder();
     }
 
@@ -152,7 +153,7 @@ public class Sbse {
 
 
     protected void initBuilder() throws InterruptedException, IOException {
-        String[] phases  = new String[]{"clean", "test" };
+        String[] phases  = new String[]{"clean", "test"};
         builder = new MavenBuilder(outputDirectory);
 
         builder.setGoals(phases);
@@ -296,9 +297,12 @@ public class Sbse {
 
     protected double coverage() {
         Set<String> set = new HashSet<>();
-        for(String ampTest : ampTestsNames) {
-            set.addAll(getSuperClasses(ampTest));
-
+        if(ampTestsNames == null) {
+           return globalCoverage.coverage();
+        } else {
+            for (String ampTest : ampTestsNames) {
+                set.addAll(getSuperClasses(ampTest));
+            }
         }
         globalCoverage.getCoverageBranch(set);
         return globalCoverage.coverage(set);
@@ -323,7 +327,6 @@ public class Sbse {
                 superCl = null;
             }
         }
-
         return set;
     }
 

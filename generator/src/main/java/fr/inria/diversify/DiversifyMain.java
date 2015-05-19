@@ -54,7 +54,7 @@ public class DiversifyMain {
         InitUtils.initLogLevel(inputConfiguration);
         InitUtils.initDependency(inputConfiguration);
         inputProgram = InitUtils.initInputProgram(inputConfiguration);
-        InitUtils.initSpoon(inputProgram);
+        InitUtils.initSpoon(inputProgram, false);
         TransformationQuery query = initTransformationQuery();
 
         AbstractDiversify runner = initRunner();

@@ -28,7 +28,7 @@ public class WriteSosie {
         InitUtils.initLogLevel(inputConfiguration);
         InitUtils.initDependency(inputConfiguration);
         inputProgram = InitUtils.initInputProgram(inputConfiguration);
-        InitUtils.initSpoon(inputProgram);
+        InitUtils.initSpoon(inputProgram, false);
 
         outputDirectory = inputConfiguration.getProperty("outputDirectory");
 
