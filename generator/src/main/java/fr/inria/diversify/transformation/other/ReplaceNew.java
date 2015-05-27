@@ -1,30 +1,21 @@
 package fr.inria.diversify.transformation.other;
 
-import fr.inria.diversify.transformation.SpoonTransformation;
+import fr.inria.diversify.transformation.RefactorSpoonTransformation;
 import spoon.reflect.code.CtNewClass;
-import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
-import spoon.reflect.cu.SourcePosition;
+import spoon.reflect.factory.Factory;
 
 /**
  * Created by Simon on 19/03/14.
  */
-public class ReplaceNew extends SpoonTransformation<CtNewClass, CtNewClass> {
+public class ReplaceNew extends RefactorSpoonTransformation<CtNewClass, CtNewClass> {
 
 
-    public void addSourceCode() {
-        logInfo();
+    @Override
+    protected CtNewClass buildReplacementElement() {
+        Factory factory = transplantationPoint.getFactory();
 
-        SourcePosition sp = transformationPoint.getPosition();
-        CompilationUnit compileUnit = sp.getCompilationUnit();
-
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+transplant.toString(), 0));
+        return factory.Core().clone(transplant);
     }
 
-    public void removeSourceCode() {
-        CompilationUnit compileUnit = transformationPoint.getPosition().getCompilationUnit();
-        compileUnit.getSourceCodeFragments().clear();
-    }
 }
 

@@ -21,7 +21,6 @@ public class OtherQuery extends TransformationQuery {
 
     public OtherQuery(InputProgram inputProgram) {
         super(inputProgram);
-        this.coverageReport = inputProgram.getCoverageReport();
     }
 
     @Override
@@ -37,7 +36,7 @@ public class OtherQuery extends TransformationQuery {
         Random r  = new Random();
 
         CtElement literal = literals.get(r.nextInt(size));
-        while (coverageReport.elementCoverage(literal) == 0) {
+        while (inputProgram.getCoverageReport().elementCoverage(literal) == 0) {
             literal = literals.get(r.nextInt(size));
         }
         rl.setTransplantationPoint((CtLiteral)literal);
@@ -57,7 +56,7 @@ public class OtherQuery extends TransformationQuery {
         while (coverageReport.elementCoverage(newClass) == 0) {
             newClass = newClasses.get(r.nextInt(size));
         }
-        rn.setTransformationPoint((CtNewClass) newClass);
+        rn.setTransplantationPoint((CtNewClass) newClass);
         rn.setTransplant((CtNewClass)newClasses.get(r.nextInt(size)));
 
         return null;
@@ -72,7 +71,7 @@ public class OtherQuery extends TransformationQuery {
 
         CtMethod method = (CtMethod) methods.get(r.nextInt(size));
 
-        while (coverageReport.elementCoverage(method) == 0
+        while (inputProgram.getCoverageReport().elementCoverage(method) == 0
                 || method.getBody() == null
                 || method.getBody().getStatements() == null
                 || method.getBody().getStatements().isEmpty()
@@ -80,7 +79,7 @@ public class OtherQuery extends TransformationQuery {
             method = (CtMethod) methods.get(r.nextInt(size));
         }
 
-        emb.setTransformationPoint(method);
+        emb.setTransplantationPoint(method);
 
         return emb;
     }

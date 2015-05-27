@@ -1,12 +1,9 @@
 package fr.inria.diversify.transformation.other;
 
-import fr.inria.diversify.transformation.SpoonTransformation;
+import fr.inria.diversify.transformation.RefactorSpoonTransformation;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtCodeSnippetExpression;
 import spoon.reflect.code.CtReturn;
-import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
-import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtAnnotation;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtMethod;
@@ -18,24 +15,24 @@ import java.util.ArrayList;
 /**
  * Created by Simon on 09/04/14.
  */
-public class EmptyMethodBody extends SpoonTransformation<CtMethod, CtElement> {
+public class EmptyMethodBody extends RefactorSpoonTransformation<CtMethod, CtElement> {
 
-    @Override
-    public void addSourceCode() throws Exception {
-        logInfo();
+//    @Override
+//    public void addSourceCode() throws Exception {
+//        applyInfo();
+//
+//        SourcePosition sp = transformationPoint.getPosition();
+//        CompilationUnit compileUnit = sp.getCompilationUnit();
+//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**", 0));
+//        sp = transformationPoint.getBody().getPosition();
+//        compileUnit = sp.getCompilationUnit();
+//
+//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n"+newMethod().toString()+"\n", 0));
+//    }
 
-        SourcePosition sp = transformationPoint.getPosition();
-        CompilationUnit compileUnit = sp.getCompilationUnit();
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**", 0));
-        sp = transformationPoint.getBody().getPosition();
-        compileUnit = sp.getCompilationUnit();
-
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n"+newMethod().toString()+"\n", 0));
-    }
-
-    protected CtMethod newMethod() {
-        Factory factory = transformationPoint.getFactory();
-        CtMethod newMethod = factory.Core().clone(transformationPoint);
+    protected CtElement buildReplacementElement() {
+        Factory factory = transplantationPoint.getFactory();
+        CtMethod newMethod = factory.Core().clone(transplantationPoint);
 
         newMethod.setAnnotations(new ArrayList<CtAnnotation<? extends Annotation>>());
 

@@ -72,7 +72,7 @@ public class DiversifyMain {
             runner.run(n);
             writeResult(runner);
             runner.deleteTmpFiles();
-            }
+        }
     }
 
     protected AbstractDiversify initRunner() throws Exception {
