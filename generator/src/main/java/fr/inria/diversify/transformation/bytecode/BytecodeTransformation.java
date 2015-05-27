@@ -7,6 +7,8 @@ import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.bytecode.*;
 import org.apache.commons.io.FileUtils;
+import spoon.reflect.cu.SourcePosition;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 
 import java.io.File;
@@ -130,4 +132,8 @@ public abstract class BytecodeTransformation extends SingleTransformation {
 
     }
 
+    @Override
+    public SourcePosition getPosition() {
+        throw new NotImplementedException();
+    }
 }

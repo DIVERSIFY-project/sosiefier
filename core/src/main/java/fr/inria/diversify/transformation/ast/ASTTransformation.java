@@ -6,6 +6,7 @@ import fr.inria.diversify.transformation.ast.exception.ApplyTransformationExcept
 import fr.inria.diversify.util.Log;
 import spoon.compiler.Environment;
 import spoon.reflect.code.*;
+import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.factory.Factory;
@@ -227,6 +228,10 @@ public abstract class ASTTransformation extends SingleTransformation {
     }
 
 
+    @Override
+    public SourcePosition getPosition() {
+        return transplantationPoint.getCtCodeFragment().getPosition();
+    }
 }
 
 

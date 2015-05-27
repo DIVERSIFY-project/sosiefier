@@ -5,6 +5,7 @@ import fr.inria.diversify.diversification.InputProgram;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import spoon.reflect.cu.SourcePosition;
 
 import java.io.IOException;
 import java.util.List;
@@ -216,4 +217,6 @@ public abstract class Transformation {
     public static void setFailuresDico(Map<String, Integer> failuresDico) {
         Transformation.failuresDico = failuresDico;
     }
+
+    public abstract SourcePosition getPosition();
 }

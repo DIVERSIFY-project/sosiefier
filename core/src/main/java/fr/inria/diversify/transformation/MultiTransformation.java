@@ -3,6 +3,8 @@ package fr.inria.diversify.transformation;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import spoon.reflect.cu.SourcePosition;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.*;
 
@@ -120,5 +122,10 @@ public class MultiTransformation extends Transformation {
             ret += transformations.toString() +"\n";
         }
         return ret;
+    }
+
+    @Override
+    public SourcePosition getPosition() {
+        throw new NotImplementedException();
     }
 }

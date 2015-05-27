@@ -90,4 +90,9 @@ public class ReplaceLiteral extends SourceCodeTransformation {
     public CtLiteral getTransplant() {
         return transplant;
     }
+
+    @Override
+    public SourcePosition getPosition() {
+        return transplantationPoint.getPosition();
+    }
 }

@@ -3,6 +3,7 @@ package fr.inria.diversify.transformation;
 import fr.inria.diversify.util.Log;
 import spoon.compiler.Environment;
 import spoon.reflect.code.CtFor;
+import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
@@ -89,5 +90,10 @@ public class LoopPerforation extends SingleTransformation {
             Log.debug("");
         }
         printJavaFile(srcDir);
+    }
+
+    @Override
+    public SourcePosition getPosition() {
+        return loop.getPosition();
     }
 }

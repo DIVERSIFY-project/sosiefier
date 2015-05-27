@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.compiler.Environment;
 import spoon.reflect.cu.CompilationUnit;
+import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtPackage;
@@ -146,5 +147,10 @@ public abstract class SpoonTransformation<P extends CtElement, T extends CtEleme
             Log.debug("transplant:\n {}", transplant);
             Log.debug("--------------------\nposition: {}", transplant.getPosition());
         }
+    }
+
+    @Override
+    public SourcePosition getPosition() {
+        return transformationPoint.getPosition();
     }
 }
