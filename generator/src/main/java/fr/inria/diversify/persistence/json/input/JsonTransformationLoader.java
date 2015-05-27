@@ -48,6 +48,8 @@ public class JsonTransformationLoader {
     private HashMap<String, JsonSectionInput> sections;
 
     public JsonTransformationLoader(InputProgram inputProgram) {
+        assert inputProgram.getFactory() != null;
+
         this.inputProgram = inputProgram;
         initSections();
     }
