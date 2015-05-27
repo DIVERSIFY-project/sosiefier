@@ -33,6 +33,8 @@ public class MavenDependencyResolver {
     Set<String> dependencyResolve = new HashSet<>();
     Properties properties;
     String baseDir;
+    MavenResolver resolver;
+    ArrayList<String> repositoriesUrls;
 
 
     public void DependencyResolver(String pomFile) throws Exception {
@@ -43,6 +45,7 @@ public class MavenDependencyResolver {
             baseDir += split[i] + "/";
         }
         MavenProject project = loadProject(new File(pomFile));
+        initMavenResolver();
         resolveAllDependencies(project);
         addApplicationClasses(new File(pomFile));
     }
@@ -68,28 +71,41 @@ public class MavenDependencyResolver {
         Thread.currentThread().setContextClassLoader(child);
     }
 
-    public void resolveAllDependencies(MavenProject project) throws MalformedURLException {
-        MavenResolver resolver = new MavenResolver();
+
+    protected void initMavenResolver() {
+        resolver = new MavenResolver();
         resolver.setBasePath(System.getProperty("user.home") + File.separator + ".m2/repository");
 
-        List<String> urls = new ArrayList<>(project.getDependencies().size());
-        for (Repository repo : project.getRepositories()) {
-            urls.add(repo.getUrl());
-        }
-        urls.add("http://repo1.maven.org/maven2/");
+        repositoriesUrls = new ArrayList<>();
+        repositoriesUrls.add("http://repo1.maven.org/maven2/");
+    }
 
+    protected void updateRepositoriesUrl(MavenProject project) {
+        for (Repository repo : project.getRepositories()) {
+            repositoriesUrls.add(repo.getUrl());
+        }
+    }
+
+    public void resolveAllDependencies(MavenProject project) throws MalformedURLException {
+        updateRepositoriesUrl(project);
         updateProperties(project.getProperties());
+
         for (Dependency dependency : project.getDependencies()) {
             try {
                 String artifactId = "mvn:" + resolveName(dependency.getGroupId(), properties) +
                         ":" + resolveName(dependency.getArtifactId(), properties) +
                         ":" + resolveName(dependency.getVersion(), properties);
 
-                File cachedFile = resolver.resolve(artifactId + ":" + resolveName(dependency.getType(), properties), urls);
+                File cachedFile;
+                if(dependency.getScope().equals("system")) {
+                    cachedFile = new File(resolveName(dependency.getSystemPath(), properties));
+                } else {
+                    cachedFile = resolver.resolve(artifactId + ":" + resolveName(dependency.getType(), properties), repositoriesUrls);
+                }
                 jarURL.add(cachedFile.toURI().toURL());
                 Log.debug("resolve artifact: {}", artifactId);
 
-                File pomD = resolver.resolve(artifactId + ":pom", urls);
+                File pomD = resolver.resolve(artifactId + ":pom", repositoriesUrls);
                 if(!dependencyResolve.contains(pomD.getAbsolutePath())) {
                     dependencyResolve.add(pomD.getAbsolutePath());
                     resolveAllDependencies(loadProject(pomD));
@@ -113,6 +129,7 @@ public class MavenDependencyResolver {
     protected void updateProperties(Properties properties) {
         if(this.properties == null) {
             this.properties = new Properties(properties);
+            properties.setProperty("basedir", baseDir);
         } else {
             for (Object key : properties.keySet()) {
                 this.properties.put(key, properties.get(key));
