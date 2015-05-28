@@ -13,7 +13,7 @@ import org.jacoco.core.data.ExecutionDataReader;
 import org.jacoco.core.data.ExecutionDataStore;
 import org.jacoco.core.data.SessionInfoStore;
 import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -73,7 +73,7 @@ public class CoverageReport implements ICoverageReport {
 
     public double codeFragmentCoverage(CodeFragment stmt) {
         IClassCoverage classCoverage = null;
-        CtSimpleType<?> cl = stmt.getSourceClass();
+        CtType<?> cl = stmt.getSourceClass();
 
         if(classToCover != null && !cl.getQualifiedName().equals(classToCover)) {
             return 0d;
@@ -98,7 +98,7 @@ public class CoverageReport implements ICoverageReport {
 
     public double elementCoverage(CtElement operator) {
         IClassCoverage classCoverage = null;
-        CtSimpleType<?> cl = operator.getParent(CtSimpleType.class);
+        CtType<?> cl = operator.getParent(CtType.class);
 
         if(classToCover != null && !cl.getQualifiedName().equals(classToCover)) {
             return 0d;

@@ -1,7 +1,7 @@
 package fr.inria.diversify.util;
 
-import spoon.reflect.declaration.CtSimpleType;
 
+import spoon.reflect.declaration.CtType;
 import spoon.reflect.visitor.PrettyPrinter;
 import spoon.support.JavaOutputProcessor;
 
@@ -24,7 +24,7 @@ public class JavaOutputProcessorWithFilter extends JavaOutputProcessor
     }
 
     @Override
-    public boolean isToBeProcessed(CtSimpleType<?> candidate) {
+    public boolean isToBeProcessed(CtType<?> candidate) {
         return classes.contains(candidate.getSimpleName());
     }
 }

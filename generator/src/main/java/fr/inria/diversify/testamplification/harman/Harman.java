@@ -4,7 +4,6 @@ import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.util.DiversifyPrettyPrinter;
 import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
 import spoon.compiler.Environment;
 import spoon.processing.AbstractProcessor;
@@ -14,6 +13,7 @@ import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.ModifierKind;
 import spoon.reflect.factory.Factory;
+import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
 import spoon.support.QueueProcessingManager;
 
 import java.io.File;
@@ -131,7 +131,7 @@ public class Harman {
         File fileFrom = new File(inputProgram.getAbsoluteTestSourceCodeDir());
         File out = new File(tmpDir + "/" + inputProgram.getRelativeTestSourceCodeDir());
         Environment env = inputProgram.getFactory().getEnvironment();
-        AbstractProcessor processor = new JavaOutputProcessorWithFilter(out, new DiversifyPrettyPrinter(env), allClassesName(fileFrom));
+        AbstractProcessor processor = new JavaOutputProcessorWithFilter(out, new DefaultJavaPrettyPrinter(env), allClassesName(fileFrom));
         applyProcessor(inputProgram.getFactory(), processor);
     }
 

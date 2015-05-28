@@ -31,7 +31,8 @@ public class FieldReferenceVisitor extends CtScanner {
         super.visitCtAssignment(assignement);
     }
 
-    public <T> void visitCtTargetedAccess(CtTargetedAccess<T> targetedAccess) {
+    @Override
+    public <T> void visitCtFieldAccess(CtFieldAccess<T> targetedAccess) {
         if(targetedAccess.getTarget() != null && !(targetedAccess.getTarget() instanceof CtThisAccess)) {
             if(targetedAccess.getTarget().getType() == null)
                 Log.debug("");
@@ -42,8 +43,23 @@ public class FieldReferenceVisitor extends CtScanner {
         if(!targetedAccess.toString().startsWith("super"))
             fields.put(((CtFieldReference)targetedAccess.getVariable()),targetedAccess.toString());
 
-        super.visitCtTargetedAccess(targetedAccess);
+        super.visitCtFieldAccess(targetedAccess);
     }
+
+
+//    public <T> void visitCtTargetedAccess(CtTargetedAccess<T> targetedAccess) {
+//        if(targetedAccess.getTarget() != null && !(targetedAccess.getTarget() instanceof CtThisAccess)) {
+//            if(targetedAccess.getTarget().getType() == null)
+//                Log.debug("");
+//            if(targetedAccess.getTarget().getType() != null && targetedAccess.getTarget().getType().isPrimitive()) {
+//                Log.debug("");
+//            }
+//        }
+//        if(!targetedAccess.toString().startsWith("super"))
+//            fields.put(((CtFieldReference)targetedAccess.getVariable()),targetedAccess.toString());
+//
+//        super.visitCtTargetedAccess(targetedAccess);
+//    }
 
     public <R> void visitCtReturn(CtReturn<R> returnStatement) {
         super.visitCtReturn(returnStatement);

@@ -6,7 +6,7 @@ import spoon.reflect.code.CtFor;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtPackage;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
 import spoon.support.JavaOutputProcessor;
@@ -23,7 +23,7 @@ public class LoopPerforation extends SingleTransformation {
 
     @Override
     public String classLocationName() {
-        return loop.getParent(CtSimpleType.class).getSimpleName();
+        return loop.getParent(CtType.class).getSimpleName();
     }
 
     @Override
@@ -47,7 +47,7 @@ public class LoopPerforation extends SingleTransformation {
 
     @Override
     public void printJavaFile(String srcDir) throws IOException {
-        CtSimpleType<?> type = loop.getParent(CtSimpleType.class);
+        CtType<?> type = loop.getParent(CtType.class);
         Factory factory = type.getFactory();
         Environment env = factory.getEnvironment();
 

@@ -7,7 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtConstructor;
 import spoon.reflect.declaration.CtElement;
@@ -18,6 +17,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Simon on 02/04/14.
  */
+@Deprecated
 public class ShuffleStmtTransformation extends SpoonTransformation<CtBlock, CtElement> {
     List<CtStatement> newOrderStmt;
 
@@ -38,10 +38,10 @@ public class ShuffleStmtTransformation extends SpoonTransformation<CtBlock, CtEl
 
         SourcePosition sp = transformationPoint.getStatement(0).getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
-        if(transformationPoint.getParent() instanceof CtConstructor)
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceStart()), "/**", 0));
-        else
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**", 0));
+//        if(transformationPoint.getParent() instanceof CtConstructor)
+//            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceStart()), "/**", 0));
+//        else
+//            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**", 0));
 
 
         String stmtsString = newOrderStmt.stream()
@@ -52,8 +52,8 @@ public class ShuffleStmtTransformation extends SpoonTransformation<CtBlock, CtEl
 
         sp = transformationPoint.getLastStatement().getPosition();
         compileUnit = sp.getCompilationUnit();
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(
-                compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n"+stmtsString+";\n", 0));
+//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(
+//                compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n"+stmtsString+";\n", 0));
     }
 
 

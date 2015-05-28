@@ -4,7 +4,6 @@ import fr.inria.diversify.transformation.SpoonTransformation;
 import spoon.reflect.code.CtLiteral;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 /**
@@ -12,6 +11,7 @@ import spoon.reflect.declaration.CtElement;
  * Date: 17/02/14
  * Time: 17:29
  */
+@Deprecated
 public class ReturnValueMutation extends SpoonTransformation<CtReturn, CtElement> {
 
     public  ReturnValueMutation() {
@@ -44,7 +44,7 @@ public class ReturnValueMutation extends SpoonTransformation<CtReturn, CtElement
 
         SourcePosition sp = literal.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+newLiteral, 0));
+//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
+//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+newLiteral, 0));
     }
 }

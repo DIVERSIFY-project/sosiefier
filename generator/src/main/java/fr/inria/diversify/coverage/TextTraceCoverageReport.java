@@ -3,7 +3,7 @@ package fr.inria.diversify.coverage;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import spoon.reflect.declaration.CtConstructor;
 import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -78,7 +78,7 @@ public class TextTraceCoverageReport extends TraceCoverageReport {
         }
 
         if (foundMethod ) {
-            String className = stmt.getCtCodeFragment().getParent(CtSimpleType.class).getQualifiedName();
+            String className = stmt.getCtCodeFragment().getParent(CtType.class).getQualifiedName();
             return methodSignatures.contains(className + "." + e.getSignature()) ? 1.0 : 0.0;
         }
         return 0.0;

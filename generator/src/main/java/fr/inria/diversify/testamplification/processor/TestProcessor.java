@@ -3,8 +3,7 @@ package fr.inria.diversify.testamplification.processor;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtInvocation;
 import spoon.reflect.declaration.*;
-import spoon.reflect.reference.CtPackageReference;
-import spoon.reflect.reference.CtTypeReference;
+
 
 import java.io.File;
 import java.io.FileWriter;
@@ -22,7 +21,7 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
 
     protected String logName = "fr.inria.diversify.testamplification.logger.Logger";
 
-    public static Set<CtSimpleType> ampclasses = new HashSet<>();
+    public static Set<CtType> ampclasses = new HashSet<>();
 
     protected boolean guavaTestlib = false;
 

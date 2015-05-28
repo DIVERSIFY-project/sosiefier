@@ -2,10 +2,7 @@ package fr.inria.diversify.testMutation;
 
 import fr.inria.diversify.util.Log;
 import spoon.processing.AbstractProcessor;
-import spoon.reflect.code.CtLiteral;
-import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
-import spoon.reflect.cu.SourcePosition;
+import spoon.reflect.code.CtLiteral;;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.reference.CtTypeReference;
 

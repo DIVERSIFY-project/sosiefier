@@ -22,7 +22,7 @@ import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtPackage;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
@@ -361,7 +361,7 @@ public class InputProgram {
             } catch (NotFoundException e) {
                 throw new RuntimeException("Cannot find classesDir " + classesDir, e);
             }
-            for (CtSimpleType cl : getCodeFragments().getAllClasses()) {
+            for (CtType cl : getCodeFragments().getAllClasses()) {
                 CtClass cc;
                 try {
                     cc = pool.get(cl.getQualifiedName());

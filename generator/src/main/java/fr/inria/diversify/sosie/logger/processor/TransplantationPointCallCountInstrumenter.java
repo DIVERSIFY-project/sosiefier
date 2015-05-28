@@ -8,7 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
 
@@ -20,6 +19,7 @@ import java.util.*;
 /**
  * Created by marodrig on 05/08/2014.
  */
+@Deprecated
 public class TransplantationPointCallCountInstrumenter extends AbstractLoggingInstrumenter<CtStatement> {
 
     protected Set<String> alreadyVisited;
@@ -93,18 +93,18 @@ public class TransplantationPointCallCountInstrumenter extends AbstractLoggingIn
                     if (e.getParent() instanceof CtClass) {
                         stop = true;
                     } else if (e instanceof CtBreak) {
-                        cu.addSourceCodeFragment(new SourceCodeFragment(e.getPosition().getSourceStart(), probeStr + ";", 0));
+//                        cu.addSourceCodeFragment(new SourceCodeFragment(e.getPosition().getSourceStart(), probeStr + ";", 0));
                     } else if (e instanceof CtBlock) {
                         e = e.getParent();
                         stop = false;
                     } else if (e.getParent() instanceof CtBlock) {
                         int b = cu.beginOfLineIndex(e.getPosition().getSourceStart());
-                        cu.addSourceCodeFragment(new SourceCodeFragment(b, probeStr + ";", 0));
+//                        cu.addSourceCodeFragment(new SourceCodeFragment(b, probeStr + ";", 0));
                     } else if (e instanceof CtIf) {
                         CtExpression c = ((CtIf)e).getCondition();
-                        cu.addSourceCodeFragment(new SourceCodeFragment(c.getPosition().getSourceStart(),
-                                "(" + probeStr + "||", 0));
-                        cu.addSourceCodeFragment(new SourceCodeFragment(c.getPosition().getSourceEnd() + 1, ")", 0));
+//                        cu.addSourceCodeFragment(new SourceCodeFragment(c.getPosition().getSourceStart(),
+//                                "(" + probeStr + "||", 0));
+//                        cu.addSourceCodeFragment(new SourceCodeFragment(c.getPosition().getSourceEnd() + 1, ")", 0));
                         //System.out.println("Parent if");
                     } else {
                         e = e.getParent();

@@ -60,7 +60,7 @@ public class ListTestMain {
             try {
                 Log.debug("add {} to classpath",dir);
                 compiler.addInputSource(new File(dir));
-            } catch (IOException e) {
+            } catch (Exception e) {
                 Log.error("error in initSpoon", e);
             }
         try {

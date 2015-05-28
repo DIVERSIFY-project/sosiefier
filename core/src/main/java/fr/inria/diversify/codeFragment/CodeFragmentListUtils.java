@@ -1,8 +1,6 @@
 package fr.inria.diversify.codeFragment;
 
 import fr.inria.diversify.util.Log;
-import spoon.reflect.declaration.CtPackage;
-import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.reference.CtTypeReference;
 
 import java.util.*;
@@ -125,46 +123,4 @@ public class CodeFragmentListUtils {
     public List<CodeFragment> getCodeFragments() {
         return  codeFragments;
     }
-
-//    public List<CtSimpleType> getAllClasses() {
-//        List<CtSimpleType> classes = new ArrayList<CtSimpleType>();
-//
-//        for(CodeFragment cf: codeFragments)
-//            if(!classes.contains(cf.getSourceClass()))
-//                classes.add(cf.getSourceClass());
-//        return classes;
-//    }
-
-//    public Map<CtSimpleType, List<CodeFragment>> getCodeFragmentsByClass() {
-//        Map<CtSimpleType, List<CodeFragment>> map = new HashMap<CtSimpleType, List<CodeFragment>>();
-//        for(CodeFragment cf : codeFragments) {
-//            CtSimpleType cl = cf.getSourceClass();
-//            if(!map.containsKey(cl))
-//                map.putDataToJSON(cl, new ArrayList<CodeFragment>());
-//            map.get(cl).add(cf);
-//        }
-//        return map;
-//    }
-//
-//    public Map<CtPackage, List<CodeFragment>> getCodeFragmentsByPackage() {
-//        Map<CtPackage, List<CodeFragment>> map = new HashMap<CtPackage, List<CodeFragment>>();
-//        for(CodeFragment cf : codeFragments) {
-//            CtPackage cl = cf.getSourceClass().getPackage();
-//            if(!map.containsKey(cl))
-//                map.putDataToJSON(cl, new ArrayList<CodeFragment>());
-//            map.get(cl).add(cf);
-//        }
-//        return map;
-//    }
-//
-//    public Map<Class, List<CodeFragment>> getCodeFragmentsByStmtType() {
-//        Map<Class, List<CodeFragment>> map = new HashMap<Class, List<CodeFragment>>();
-//        for(CodeFragment cf : codeFragments) {
-//            Class cl = cf.getCodeFragmentType();
-//            if(!map.containsKey(cl))
-//                map.putDataToJSON(cl, new ArrayList<CodeFragment>());
-//            map.get(cl).add(cf);
-//        }
-//        return map;
-//    }
 }

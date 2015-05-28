@@ -2,7 +2,6 @@ package fr.inria.diversify.transformation.mutation;
 
 import spoon.reflect.code.CtLiteral;
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.factory.Factory;
 
@@ -11,6 +10,7 @@ import spoon.reflect.factory.Factory;
  * Date: 13/02/14
  * Time: 14:45
  */
+@Deprecated
 public class RemoveConditionalMutation extends BinaryOperatorMutation {
 
     public RemoveConditionalMutation() {
@@ -31,7 +31,7 @@ public class RemoveConditionalMutation extends BinaryOperatorMutation {
         logInfo();
         SourcePosition sp = transformationPoint.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/true", 0));
+//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
+//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/true", 0));
     }
 }

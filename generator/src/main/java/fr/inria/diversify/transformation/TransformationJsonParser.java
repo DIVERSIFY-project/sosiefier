@@ -25,7 +25,7 @@ import spoon.reflect.code.CtReturn;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtPackage;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 import spoon.reflect.reference.CtTypeReference;
 
 import java.awt.event.ActionEvent;
@@ -527,7 +527,7 @@ public class TransformationJsonParser {
         Object jsonPosition = jsonObject.get("position");
         for (CtElement ret : inputProgram.getAllElement(CtBinaryOperator.class)) {
             String position = ret.getParent(CtPackage.class).getQualifiedName()
-                    + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine();
+                    + "." + ret.getParent(CtType.class).getSimpleName() + ":" + ret.getPosition().getLine();
             if (position.equals(jsonPosition)) {
                 p = (CtBinaryOperator) ret;
                 break;
@@ -549,7 +549,7 @@ public class TransformationJsonParser {
 
         for (CtReturn<?> ret : inputProgram.getReturns()) {
             String position = ret.getParent(CtPackage.class).getQualifiedName()
-                    + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine();
+                    + "." + ret.getParent(CtType.class).getSimpleName() + ":" + ret.getPosition().getLine();
             if (position.equals(jsonPosition)) {
                 p = ret;
                 break;
@@ -576,7 +576,7 @@ public class TransformationJsonParser {
         CtLocalVariable p = null;
         for (CtLocalVariable<?> ret : inputProgram.getInlineConstant()) {
             String position = ret.getParent(CtPackage.class).getQualifiedName()
-                    + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine();
+                    + "." + ret.getParent(CtType.class).getSimpleName() + ":" + ret.getPosition().getLine();
             if (position.equals(jsonPos)) {
                 p = ret;
                 break;

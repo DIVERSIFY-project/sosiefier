@@ -4,7 +4,6 @@ import fr.inria.diversify.transformation.Transformation;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtConstructor;
 import spoon.reflect.declaration.CtExecutable;
@@ -14,6 +13,7 @@ import java.util.List;
 /**
  * Created by marodrig on 25/11/2014.
  */
+@Deprecated
 public class DepthOnlyMethodInstrumenter extends AbstractLoggingInstrumenter<CtExecutable> {
 
     public DepthOnlyMethodInstrumenter(List<Transformation> transformations) {
@@ -49,11 +49,11 @@ public class DepthOnlyMethodInstrumenter extends AbstractLoggingInstrumenter<CtE
         } else {
             index = compileUnit.beginOfLineIndex(sp.getSourceStart());
         }
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
 
         sp = body.getLastStatement().getPosition();
         compileUnit = sp.getCompilationUnit();
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+2 ,
-                "\n" + "\t}\n\tfinally{"+getLogName()+".methodOut(Thread.currentThread()); }", 0));
+//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+2 ,
+//                "\n" + "\t}\n\tfinally{"+getLogName()+".methodOut(Thread.currentThread()); }", 0));
     }
 }

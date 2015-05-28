@@ -9,9 +9,9 @@ import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtPackage;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.Factory;
-import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
+import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
 import spoon.support.JavaOutputProcessor;
 
 import java.io.File;
@@ -20,6 +20,7 @@ import java.io.IOException;
 /**
  * Created by Simon on 02/04/14.
  */
+@Deprecated
 public abstract class SpoonTransformation<P extends CtElement, T extends CtElement> extends SourceCodeTransformation {
     protected P transformationPoint;
     protected T transplant;
@@ -28,8 +29,8 @@ public abstract class SpoonTransformation<P extends CtElement, T extends CtEleme
         printJavaFile(directory, null);
     }
 
-    protected void printJavaFile(String directory, CtSimpleType<?> cl) throws IOException {
-        CtSimpleType<?> type;
+    protected void printJavaFile(String directory, CtType<?> cl) throws IOException {
+        CtType<?> type;
         if(cl == null)
             type = getOriginalClass();
         else
@@ -37,21 +38,21 @@ public abstract class SpoonTransformation<P extends CtElement, T extends CtEleme
         Factory factory = type.getFactory();
         Environment env = factory.getEnvironment();
 
-        JavaOutputProcessor processor = new JavaOutputProcessor(new File(directory), new FragmentDrivenJavaPrettyPrinter(env));
+        JavaOutputProcessor processor = new JavaOutputProcessor(new File(directory), new DefaultJavaPrettyPrinter(env));
         processor.setFactory(factory);
 
         processor.createJavaFile(type);
         Log.debug("copy file: " + directory + " " + type.getQualifiedName());
     }
 
-    public CtSimpleType<?> getOriginalClass() {
+    public CtType<?> getOriginalClass() {
         return transformationPoint.getPosition().getCompilationUnit().getMainType();
     }
 
     public String classLocationName() {
-        CtSimpleType c = transformationPoint.getParent(CtSimpleType.class);
-        if(c == null && transformationPoint instanceof CtSimpleType)
-            c = (CtSimpleType) transformationPoint;
+        CtType c = transformationPoint.getParent(CtType.class);
+        if(c == null && transformationPoint instanceof CtType)
+            c = (CtType) transformationPoint;
         if(c == null)
             return "null";
 
@@ -79,8 +80,8 @@ public abstract class SpoonTransformation<P extends CtElement, T extends CtEleme
 
     public void removeSourceCode() {
         CompilationUnit compileUnit = transformationPoint.getPosition().getCompilationUnit();
-        if(compileUnit.getSourceCodeFragments() != null)
-            compileUnit.getSourceCodeFragments().clear();
+//        if(compileUnit.getSourceCodeFragments() != null)
+//            compileUnit.getSourceCodeFragments().clear();
     }
 
 

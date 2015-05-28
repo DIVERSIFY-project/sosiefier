@@ -4,7 +4,6 @@ import fr.inria.diversify.util.Log;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtLiteral;
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.reference.CtTypeReference;
@@ -14,6 +13,7 @@ import java.util.Random;
 /**
  * Created by marodrig on 25/07/2014.
  */
+@Deprecated
 public class LiteralProcessor extends AbstractProcessor {
 
     @Override
@@ -155,7 +155,7 @@ public class LiteralProcessor extends AbstractProcessor {
 
             int sourceLength = sp.getSourceEnd() - sp.getSourceStart() + 1;
             //sourceLength += sourceLengthOff;
-            cu.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), subsString, sourceLength));
+//            cu.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), subsString, sourceLength));
         }
         //cu.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd() + 2, " } catch (AssertionError e) { e.printStackTrace() }", 0));
     }

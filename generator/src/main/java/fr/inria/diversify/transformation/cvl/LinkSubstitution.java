@@ -3,7 +3,6 @@ package fr.inria.diversify.transformation.cvl;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
@@ -14,6 +13,7 @@ import spoon.reflect.reference.CtTypeReference;
  * Date: 25/02/14
  * Time: 15:09
  */
+@Deprecated
 public class LinkSubstitution extends CVLTransformation {
     protected CtTypeReference classOrInterfaceSubstitution;
     public LinkSubstitution() {
@@ -29,14 +29,14 @@ public class LinkSubstitution extends CVLTransformation {
         CompilationUnit compileUnit = sp.getCompilationUnit();
 
         if (transformationPoint instanceof CtField) {
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()),  "/** nodeType: "+transformationPoint.getClass()+"  \n", 0));
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), " **/\n"+
-                    transplant.toString(), 0));
+//            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()),  "/** nodeType: "+transformationPoint.getClass()+"  \n", 0));
+//            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), " **/\n"+
+//                    transplant.toString(), 0));
         }
-        if(transformationPoint instanceof CtSimpleType) {
+        if(transformationPoint instanceof CtType) {
             Factory factory = transformationPoint.getFactory();
             CtClass classClone = factory.Core().clone((CtClass)transformationPoint);
-            CtTypeReference<?> newRef = ((CtSimpleType)transplant).getReference();
+            CtTypeReference<?> newRef = ((CtType)transplant).getReference();
             String ollRefName = classOrInterfaceSubstitution.getSimpleName();
 
             if(classClone.getSuperclass() != null && classClone.getSuperclass().getSimpleName().equals(ollRefName))
@@ -56,13 +56,14 @@ public class LinkSubstitution extends CVLTransformation {
             for(int i = 0; i < compileUnit.getOriginalSourceCode().length()-1; i++) {
                 if(compileUnit.beginOfLineIndex(i) != beginLine) {
                     beginLine = compileUnit.beginOfLineIndex(i);
-                    if(!isPackage(i, compileUnit.getOriginalSourceCode()))
-                        compileUnit.addSourceCodeFragment(new SourceCodeFragment(beginLine,  "// ", 0));
+                    if(!isPackage(i, compileUnit.getOriginalSourceCode())) {
+//                        compileUnit.addSourceCodeFragment(new SourceCodeFragment(beginLine, "// ", 0));
+                    }
                 }
 
             }
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(compileUnit.getOriginalSourceCode().length()-1), "\n"+
-                    classClone.toString(), 0));
+//            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(compileUnit.getOriginalSourceCode().length()-1), "\n"+
+//                    classClone.toString(), 0));
         }
     }
 

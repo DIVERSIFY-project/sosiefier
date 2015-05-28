@@ -4,12 +4,10 @@ import fr.inria.diversify.util.Log;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtCodeSnippetExpression;
 import spoon.reflect.code.CtFieldAccess;
-import spoon.reflect.code.CtLiteral;
 import spoon.reflect.declaration.*;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
 
-import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -98,7 +96,7 @@ public class GuavaProcessor extends AbstractProcessor<CtClass> {
         if(TestProcessor.mutatedMethod.contains(method)) {
             return new ArrayList<>();
         }
-        CtSimpleType<?> type = method.getDeclaringType();
+        CtType<?> type = method.getDeclaringType();
         String methodName = method.getSimpleName();
 
         try {

@@ -3,11 +3,10 @@ package fr.inria.diversify.transformation.cvl;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtField;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.reference.CtTypeReference;
 
@@ -16,6 +15,7 @@ import spoon.reflect.reference.CtTypeReference;
  * Date: 25/02/14
  * Time: 15:09
  */
+@Deprecated
 public class LinkExistence extends CVLTransformation {
 
     private CtTypeReference classOrInterfaceExistence;
@@ -33,10 +33,10 @@ public class LinkExistence extends CVLTransformation {
         CompilationUnit compileUnit = sp.getCompilationUnit();
 
         if (transformationPoint instanceof CtField) {
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()),  "/** nodeType: "+transformationPoint.getClass()+"  \n", 0));
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), " **/\n", 0));
+//            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()),  "/** nodeType: "+transformationPoint.getClass()+"  \n", 0));
+//            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), " **/\n", 0));
         }
-        if(transformationPoint instanceof CtSimpleType) {
+        if(transformationPoint instanceof CtType) {
             Factory factory = transformationPoint.getFactory();
             CtClass classClone = factory.Core().clone((CtClass) transformationPoint);
             String ollRefName = classOrInterfaceExistence.getSimpleName();
@@ -57,13 +57,14 @@ public class LinkExistence extends CVLTransformation {
             for(int i = 0; i < compileUnit.getOriginalSourceCode().length()-1; i++) {
                 if(compileUnit.beginOfLineIndex(i) != beginLine) {
                     beginLine = compileUnit.beginOfLineIndex(i);
-                    if(!isPackageOrImport(i, compileUnit.getOriginalSourceCode()))
-                        compileUnit.addSourceCodeFragment(new SourceCodeFragment(beginLine,  "// ", 0));
+                    if(!isPackageOrImport(i, compileUnit.getOriginalSourceCode())) {
+//                        compileUnit.addSourceCodeFragment(new SourceCodeFragment(beginLine,  "// ", 0));
+                    }
                 }
 
             }
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(compileUnit.getOriginalSourceCode().length()-1), "\n"+
-                    classClone.toString(), 0));
+//            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(compileUnit.getOriginalSourceCode().length()-1), "\n"+
+//                    classClone.toString(), 0));
         }
     }
 

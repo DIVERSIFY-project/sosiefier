@@ -2,10 +2,8 @@ package fr.inria.diversify.testMutation;
 
 import fr.inria.diversify.util.Log;
 import spoon.processing.AbstractProcessor;
-import spoon.reflect.code.CtLiteral;
 import spoon.reflect.code.CtVariableAccess;
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.reference.CtTypeReference;
@@ -62,7 +60,7 @@ public class VariableAccessProcessor extends AbstractProcessor {
             SourcePosition sp = ctElement.getPosition();
             CompilationUnit cu = sp.getCompilationUnit();
             int sourceLength = sp.getSourceEnd() - sp.getSourceStart();
-            cu.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), subsString, sourceLength));
+//            cu.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), subsString, sourceLength));
         }
     }
 }

@@ -8,7 +8,7 @@ import spoon.compiler.Environment;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtExecutable;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
 import spoon.support.JavaOutputProcessor;
@@ -78,7 +78,7 @@ public abstract class ASTTransformation extends SingleTransformation {
      * @throws IOException
      */
     public void printJavaFile(String directory) throws IOException {
-        CtSimpleType<?> type = getOriginalClass(transplantationPoint);
+        CtType<?> type = getOriginalClass(transplantationPoint);
         Factory factory = type.getFactory();
         Environment env = factory.getEnvironment();
 
@@ -162,7 +162,7 @@ public abstract class ASTTransformation extends SingleTransformation {
 
     public abstract void updateStatementList();
 
-    public CtSimpleType<?> getOriginalClass(CodeFragment cf) {
+    public CtType<?> getOriginalClass(CodeFragment cf) {
         return cf.getCompilationUnit().getMainType();
     }
 

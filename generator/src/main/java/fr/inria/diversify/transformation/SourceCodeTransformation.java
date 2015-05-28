@@ -4,7 +4,6 @@ import spoon.compiler.Environment;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
-import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -12,6 +11,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Simon on 30/10/14.
  */
+@Deprecated
 public abstract class SourceCodeTransformation extends SingleTransformation {
 
 
@@ -68,22 +68,23 @@ public abstract class SourceCodeTransformation extends SingleTransformation {
     }
 
     protected String getTransformationString(CtElement transplantPoint) throws Exception {
-        CtElement parentMethod = getParentMethod(transplantPoint);
-        SourcePosition sp = parentMethod.getPosition();
-        CompilationUnit compileUnit = sp.getCompilationUnit();
-        Environment env = compileUnit.getFactory().getEnvironment();
-        addSourceCode();
-
-        FragmentDrivenJavaPrettyPrinter printer = new FragmentDrivenJavaPrettyPrinter(env);
-        printer.calculate(compileUnit,null);
-        String[] code = printer.getResult().split("\n");
-        removeSourceCode();
-
-        int begin = sp.getLine() - 1;
-        int end = getLineEnd(parentMethod) + code.length - printer.getResult().split("\n").length;
-
-        return Arrays.stream(code, begin, end)
-                     .collect(Collectors.joining("\n"));
+//        CtElement parentMethod = getParentMethod(transplantPoint);
+//        SourcePosition sp = parentMethod.getPosition();
+//        CompilationUnit compileUnit = sp.getCompilationUnit();
+//        Environment env = compileUnit.getFactory().getEnvironment();
+//        addSourceCode();
+//
+//        FragmentDrivenJavaPrettyPrinter printer = new FragmentDrivenJavaPrettyPrinter(env);
+//        printer.calculate(compileUnit,null);
+//        String[] code = printer.getResult().split("\n");
+//        removeSourceCode();
+//
+//        int begin = sp.getLine() - 1;
+//        int end = getLineEnd(parentMethod) + code.length - printer.getResult().split("\n").length;
+//
+//        return Arrays.stream(code, begin, end)
+//                     .collect(Collectors.joining("\n"));
+        return null;
     }
 
 }

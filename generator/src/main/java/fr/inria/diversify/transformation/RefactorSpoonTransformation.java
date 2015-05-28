@@ -7,7 +7,7 @@ import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtPackage;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
 import spoon.support.JavaOutputProcessor;
@@ -85,7 +85,7 @@ public abstract class RefactorSpoonTransformation<P extends CtElement, T extends
      * @throws IOException
      */
     public void printJavaFile(String directory) throws IOException {
-        CtSimpleType<?> type = getOriginalClass(transplantationPoint);
+        CtType<?> type = getOriginalClass(transplantationPoint);
         Factory factory = type.getFactory();
         Environment env = factory.getEnvironment();
 
@@ -96,14 +96,14 @@ public abstract class RefactorSpoonTransformation<P extends CtElement, T extends
         Log.debug("write type {} in directory {}", type.getQualifiedName(), directory);
     }
 
-    public CtSimpleType<?> getOriginalClass(CtElement element) {
+    public CtType<?> getOriginalClass(CtElement element) {
         return element.getPosition().getCompilationUnit().getMainType();
     }
 
     public String classLocationName() {
-        CtSimpleType c = transplantationPoint.getParent(CtSimpleType.class);
-        if(c == null && transplantationPoint instanceof CtSimpleType)
-            c = (CtSimpleType) transplantationPoint;
+        CtType c = transplantationPoint.getParent(CtType.class);
+        if(c == null && transplantationPoint instanceof CtType)
+            c = (CtType) transplantationPoint;
         if(c == null)
             return "null";
 

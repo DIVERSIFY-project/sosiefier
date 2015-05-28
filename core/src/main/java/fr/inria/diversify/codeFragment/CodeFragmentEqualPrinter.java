@@ -2,7 +2,7 @@ package fr.inria.diversify.codeFragment;
 
 import spoon.compiler.Environment;
 import spoon.reflect.code.*;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.reference.CtLocalVariableReference;
 import spoon.reflect.reference.CtTypeReference;
@@ -99,22 +99,13 @@ public class CodeFragmentEqualPrinter extends DefaultJavaPrettyPrinter {
 	return this;
 }
 
-//	public <T> void visitCtFieldAccess(CtFieldAccess<T> fieldAccess) {
-//		enterCtExpression(fieldAccess);
-//
-//		context.ignoreGenerics = true;
-//		scan(fieldAccess.getVariable());
-//		context.ignoreGenerics = false;
-//		context.ignoreStaticAccess = false;
-//		exitCtExpression(fieldAccess);
-//	}
 
 	private class PrintingContext {
 		boolean noTypeDecl = false;
 
 		Stack<CtTypeReference<?>> currentThis = new Stack<>();
 
-		CtSimpleType<?> currentTopLevel;
+		CtType<?> currentTopLevel;
 
 		boolean ignoreGenerics = false;
 

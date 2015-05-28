@@ -5,7 +5,7 @@ import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.Log;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,9 +37,9 @@ public class Main {
         Set<Class<?>> classes = new HashSet<>();
 
         ClassLoader classLoader =  Thread.currentThread().getContextClassLoader();
-        for(Object c : inputProgram.getAllElement(CtSimpleType.class)) {
+        for(Object c : inputProgram.getAllElement(CtType.class)) {
             try {
-                Class<?> cl = classLoader.loadClass(((CtSimpleType) c).getQualifiedName());
+                Class<?> cl = classLoader.loadClass(((CtType) c).getQualifiedName());
                 classes.add(cl);
             } catch (ClassNotFoundException e) {}
         }

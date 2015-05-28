@@ -7,7 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 
 import java.io.*;
 import java.util.*;
@@ -82,7 +82,7 @@ public class Visu {
 
     JSONObject JSONClass(String packageName, String className, Set<SingleTransformation> transformations) throws Exception {
         JSONObject object = new JSONObject();
-        CtSimpleType cl = getClass(packageName, className);
+        CtType cl = getClass(packageName, className);
         object.put("name", cl.getSimpleName());
 
         JSONArray array = new JSONArray();
@@ -120,10 +120,10 @@ public class Visu {
         return l;
     }
 
-    protected CtSimpleType getClass(String packageName, String className) {
+    protected CtType getClass(String packageName, String className) {
 
-        for(CtElement elem : inputProgram.getAllElement(CtSimpleType.class)) {
-            CtSimpleType cl = (CtSimpleType) elem;
+        for(CtElement elem : inputProgram.getAllElement(CtType.class)) {
+            CtType cl = (CtType) elem;
             try {
             if(cl.getPackage().getQualifiedName().endsWith(packageName) && cl.getQualifiedName().equals(className))
                 return cl;
@@ -132,7 +132,7 @@ public class Visu {
         return null;
     }
 
-    protected int getSize(CtSimpleType cl) throws IOException {
+    protected int getSize(CtType cl) throws IOException {
         BufferedReader out = new BufferedReader(new FileReader(cl.getPosition().getFile()));
         int count = 0;
         while (out.readLine() != null) {
@@ -146,7 +146,7 @@ public class Visu {
     BufferedReader currentFile;
     Pattern singleLineComment = Pattern.compile("\\s*//.*");
     Pattern commentStart = Pattern.compile("\\s*/\\*.*");
-    protected void initCurrentFile(CtSimpleType cl) throws FileNotFoundException {
+    protected void initCurrentFile(CtType cl) throws FileNotFoundException {
         currentFile = new BufferedReader(new FileReader(cl.getPosition().getFile()));
         currentPositionInFile = 0;
         currentEmptyLine = 0;

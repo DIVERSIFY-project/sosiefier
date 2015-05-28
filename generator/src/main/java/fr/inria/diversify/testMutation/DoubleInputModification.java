@@ -1,7 +1,6 @@
 package fr.inria.diversify.testMutation;
 
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.reference.CtTypeReference;
@@ -12,6 +11,7 @@ import java.util.Random;
  *
  * Created by marodrig on 28/07/2014.
  */
+@Deprecated
 public class DoubleInputModification extends LiteralInputModification {
 
     @Override
@@ -53,7 +53,7 @@ public class DoubleInputModification extends LiteralInputModification {
             SourcePosition sp = ctElement.getPosition();
             CompilationUnit cu = sp.getCompilationUnit();
             int sourceLength = sp.getSourceEnd() - sp.getSourceStart() + 1;
-            cu.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), subsString, sourceLength));
+//            cu.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), subsString, sourceLength));
         }
     }
 }

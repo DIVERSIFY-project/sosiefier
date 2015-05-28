@@ -1,6 +1,6 @@
 package fr.inria.diversify.codeFragment;
 
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 
 import java.util.*;
 
@@ -25,8 +25,8 @@ public class CodeFragmentList extends LinkedList<CodeFragment> {
         idToCodeFragment = new HashMap<Integer,CodeFragment>();
     }
 
-    public List<CtSimpleType> getAllClasses() {
-        List<CtSimpleType> classes = new ArrayList<CtSimpleType>();
+    public List<CtType> getAllClasses() {
+        List<CtType> classes = new ArrayList<CtType>();
 
         for(CodeFragment cf: this)
             if(!classes.contains(cf.getSourceClass()))

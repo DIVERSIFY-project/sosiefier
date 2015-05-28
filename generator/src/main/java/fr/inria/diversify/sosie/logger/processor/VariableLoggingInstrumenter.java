@@ -4,7 +4,6 @@ package fr.inria.diversify.sosie.logger.processor;
 import fr.inria.diversify.transformation.Transformation;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
 import spoon.reflect.visitor.CtAbstractVisitor;
@@ -20,6 +19,7 @@ import java.util.*;
  * Use basic scope inference (the real one is hard due to the complex semantics of "static" and "final"
  * (w.r.t. init, anonymous classes, etc.)
  */
+@Deprecated
 public class VariableLoggingInstrumenter extends AbstractLoggingInstrumenter<CtStatement> {
     protected int tmpVarCount = 0;
 
@@ -122,16 +122,16 @@ public class VariableLoggingInstrumenter extends AbstractLoggingInstrumenter<CtS
                     ((CtIfImpl) statement.getParent()).getElseStatement().equals(statement);
             if (isElseIfSpecialCase) {
                 //Open the bracket at the "else"
-                compileUnit.addSourceCodeFragment(new SourceCodeFragment(index - 1, "{", 0));
+//                compileUnit.addSourceCodeFragment(new SourceCodeFragment(index - 1, "{", 0));
             }
 
             //Insert the snippet
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+//            compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
 
             if (isElseIfSpecialCase) {
                 //Close the previously inserted "else" bracket
                 int endIndex = sp.getSourceEnd();
-                compileUnit.addSourceCodeFragment(new SourceCodeFragment(endIndex, "}", 0));
+//                compileUnit.addSourceCodeFragment(new SourceCodeFragment(endIndex, "}", 0));
             }
         }
     }
@@ -183,7 +183,7 @@ public class VariableLoggingInstrumenter extends AbstractLoggingInstrumenter<CtS
                         && !(el instanceof CtAnonymousExecutable)
 
                         //  Cannot refer to a non-final variable initial inside an inner class defined in a different method
-                        && !(el instanceof CtSimpleType && el.getParent() instanceof CtBlock)
+                        && !(el instanceof CtType && el.getParent() instanceof CtBlock)
 
                 ) {
             // here is the recursion

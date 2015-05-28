@@ -77,7 +77,11 @@ public abstract class CodeFragment {
         if (codeFragment instanceof CtTypedElement) {
             return ((CtTypedElement<?>) codeFragment).getType();
         } else
-            return FactoryImpl.getLauchingFactory().Type().createReference(void.class);
+            return getFactory().Type().createReference(void.class);
+    }
+
+    protected Factory getFactory() {
+        return codeFragment.getFactory();
     }
 
     protected InputContext initInputContext() {
@@ -100,7 +104,7 @@ public abstract class CodeFragment {
     public String equalString() {
         if (equalString != null)
             return equalString;
-        CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(codeFragment.getFactory().getEnvironment());
+        CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(getFactory().getEnvironment());
         codeFragment.accept(pp);
         equalString = pp.toString();
         return equalString;
@@ -206,7 +210,7 @@ public abstract class CodeFragment {
         return codeFragment.getClass();
     }
 
-    public CtSimpleType<?> getSourceClass() {
+    public CtType<?> getSourceClass() {
         return getCompilationUnit().getMainType();
     }
 

@@ -6,7 +6,6 @@ import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.factory.FactoryImpl;
-import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
 import spoon.support.DefaultCoreFactory;
 import spoon.support.QueueProcessingManager;
 import spoon.support.StandardEnvironment;
@@ -23,6 +22,7 @@ import java.util.List;
  * <p/>
  * Created by marodrig on 25/07/2014.
  */
+@Deprecated
 public class SourceCodeModifier {
 
     //Root of the source code
@@ -107,35 +107,35 @@ public class SourceCodeModifier {
      * Applies the processors over the source code
      */
     public void modify() {
-        StandardEnvironment env = new StandardEnvironment();
-        env.setComplianceLevel(5);
-        env.setVerbose(true);
-        env.setDebug(true);
-
-        DefaultCoreFactory f = new DefaultCoreFactory();
-        Factory factory = new FactoryImpl(f, env);
-        SpoonCompiler compiler = new JDTBasedSpoonCompiler(factory);
-        for (String dir : testDirectory.split(System.getProperty("path.separator")))
-            try {
-                compiler.addInputSource(new File(dir));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        try {
-            compiler.build();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        for (AbstractProcessor p : processors) {
-            applyProcessor(factory, p);
-        }
-
-
-        applyProcessor(factory, new JavaOutputProcessorWithFilter(
-                new File(getOutputDirectory()),
-                new FragmentDrivenJavaPrettyPrinter(env), allClassesName(new File(testDirectory))));
+//        StandardEnvironment env = new StandardEnvironment();
+//        env.setComplianceLevel(5);
+//        env.setVerbose(true);
+//        env.setDebug(true);
+//
+//        DefaultCoreFactory f = new DefaultCoreFactory();
+//        Factory factory = new FactoryImpl(f, env);
+//        SpoonCompiler compiler = new JDTBasedSpoonCompiler(factory);
+//        for (String dir : testDirectory.split(System.getProperty("path.separator")))
+//            try {
+//                compiler.addInputSource(new File(dir));
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//        try {
+//            compiler.build();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        for (AbstractProcessor p : processors) {
+//            applyProcessor(factory, p);
+//        }
+//
+//
+//        applyProcessor(factory, new JavaOutputProcessorWithFilter(
+//                new File(getOutputDirectory()),
+//                new FragmentDrivenJavaPrettyPrinter(env), allClassesName(new File(testDirectory))));
     }
 }

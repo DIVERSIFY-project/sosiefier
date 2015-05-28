@@ -72,7 +72,7 @@ public class VariableVisitor extends CtScanner {
 	protected CtVariableReference<?> getThis(){
 		CtVariableReference thisVariable = new CtLocalVariableReferenceImpl();
 		thisVariable.setType(refThis);
-        thisVariable.setFactory(FactoryImpl.getLauchingFactory());
+        thisVariable.setFactory(refThis.getFactory());
 		thisVariable.setSimpleName("this");
 		return thisVariable;
 	}

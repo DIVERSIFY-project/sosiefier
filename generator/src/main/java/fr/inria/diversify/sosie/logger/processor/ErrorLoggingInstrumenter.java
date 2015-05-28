@@ -113,8 +113,8 @@ public class ErrorLoggingInstrumenter extends AbstractLoggingInstrumenter<CtStat
         return count.get(parent);
     }
 
-    protected CtSimpleType<?> getClass(CtStatement stmt) {
-        return stmt.getParent(CtSimpleType.class);
+    protected CtType<?> getClass(CtStatement stmt) {
+        return stmt.getParent(CtType.class);
     }
 
     protected CtExecutable<?> getMethod(CtStatement stmt) {

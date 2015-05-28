@@ -3,11 +3,10 @@ package fr.inria.diversify.transformation.cvl;
 import spoon.reflect.code.CtExpression;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtPackage;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 
 import java.io.*;
 
@@ -16,6 +15,7 @@ import java.io.*;
  * Date: 25/02/14
  * Time: 15:05
  */
+@Deprecated
 public class ObjectExistence extends CVLTransformation {
 
     public ObjectExistence() {
@@ -27,7 +27,7 @@ public class ObjectExistence extends CVLTransformation {
 
         if(transformationPoint instanceof CtPackage)
             applyToPackage(srcDir);
-        else if(transformationPoint instanceof CtSimpleType)
+        else if(transformationPoint instanceof CtType)
             applyToClass(srcDir, transformationPoint);
         else {
             addSourceCode();
@@ -44,13 +44,13 @@ public class ObjectExistence extends CVLTransformation {
         CompilationUnit compileUnit = sp.getCompilationUnit();
 
         if(transformationPoint instanceof CtStatement && !(transformationPoint instanceof CtExpression))  {
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/** nodeType: "+transformationPoint.getClass()+"  \n", 0));
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n", 0));
+//            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/** nodeType: "+transformationPoint.getClass()+"  \n", 0));
+//            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n", 0));
         }
         else {
             int[] index = findIndex();
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(index[0], "/**", 0));
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(index[1] + 1, "**/", 0));
+//            compileUnit.addSourceCodeFragment(new SourceCodeFragment(index[0], "/**", 0));
+//            compileUnit.addSourceCodeFragment(new SourceCodeFragment(index[1] + 1, "**/", 0));
         }
 
     }
@@ -130,15 +130,15 @@ public class ObjectExistence extends CVLTransformation {
         SourcePosition sp = cl.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
 
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/", 0));
+//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
+//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/", 0));
 
         printJavaFile(srcDir);
         removeSourceCode();
     }
 
     protected void applyToPackage(String srcDir) throws IOException {
-        for(CtSimpleType<?> cl : ((CtPackage) transformationPoint).getTypes()) {
+        for(CtType<?> cl : ((CtPackage) transformationPoint).getTypes()) {
             applyToClass(srcDir, cl);
             printJavaFile(srcDir);
             removeSourceCode(cl);
@@ -149,8 +149,8 @@ public class ObjectExistence extends CVLTransformation {
     public void restore(String srcDir) throws Exception {
         if(transformationPoint instanceof CtPackage)
             restorePackage(srcDir);
-        else if(transformationPoint instanceof CtSimpleType)
-            restoreClass(srcDir, (CtSimpleType)transformationPoint);
+        else if(transformationPoint instanceof CtType)
+            restoreClass(srcDir, (CtType)transformationPoint);
         else {
             removeSourceCode();
             printJavaFile(srcDir);
@@ -158,20 +158,20 @@ public class ObjectExistence extends CVLTransformation {
     }
 
     protected void restorePackage(String srcDir) throws IOException {
-        for(CtSimpleType<?> cl : ((CtPackage) transformationPoint).getTypes()) {
+        for(CtType<?> cl : ((CtPackage) transformationPoint).getTypes()) {
             restoreClass(srcDir, cl);
             printJavaFile(srcDir,cl);
         }
     }
 
-    protected void restoreClass(String srcDir, CtSimpleType cl) throws IOException {
+    protected void restoreClass(String srcDir, CtType cl) throws IOException {
         printJavaFile(srcDir,cl);
     }
 
-    protected void   removeSourceCode(CtSimpleType cl) {
+    protected void   removeSourceCode(CtType cl) {
           CompilationUnit compileUnit = cl.getPosition().getCompilationUnit();
-              if(compileUnit.getSourceCodeFragments() != null)
-                    compileUnit.getSourceCodeFragments().clear();
+//              if(compileUnit.getSourceCodeFragments() != null)
+//                    compileUnit.getSourceCodeFragments().clear();
     }
 
     public boolean equals(Object other) {

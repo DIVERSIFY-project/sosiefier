@@ -3,7 +3,6 @@ package fr.inria.diversify.sosie.logger;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.sosie.logger.processor.*;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.util.DiversifyPrettyPrinter;
 import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
 import org.apache.commons.io.FileUtils;
 import spoon.compiler.Environment;
@@ -11,8 +10,8 @@ import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.factory.Factory;
 
-import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
 
+import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
 import spoon.support.QueueProcessingManager;
 
 import java.io.File;
@@ -184,14 +183,7 @@ public class Instru {
 
     protected void writeJavaClass(Factory factory, File out, File fileFrom) {
         Environment env = factory.getEnvironment();
-        AbstractProcessor processor;
-        if(useSourceCodeFragments) {
-            env.useSourceCodeFragments(true);
-            processor = new JavaOutputProcessorWithFilter(out, new FragmentDrivenJavaPrettyPrinter(env), allClassesName(fileFrom));
-
-        } else {
-            processor = new JavaOutputProcessorWithFilter(out, new DiversifyPrettyPrinter(env), allClassesName(fileFrom));
-        }
+        AbstractProcessor processor = new JavaOutputProcessorWithFilter(out, new DefaultJavaPrettyPrinter(env), allClassesName(fileFrom));
         applyProcessor(factory, processor);
     }
 

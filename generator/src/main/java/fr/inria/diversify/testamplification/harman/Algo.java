@@ -2,7 +2,6 @@ package fr.inria.diversify.testamplification.harman;
 
 import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.util.DiversifyPrettyPrinter;
 import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
@@ -14,6 +13,7 @@ import spoon.reflect.declaration.CtAnnotation;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.factory.Factory;
+import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.QueueProcessingManager;
@@ -232,7 +232,7 @@ public class Algo {
         File fileFrom = new File(inputProgram.getAbsoluteTestSourceCodeDir());
         File out = new File(tmpDir + "/" + inputProgram.getRelativeTestSourceCodeDir());
         Environment env = inputProgram.getFactory().getEnvironment();
-        AbstractProcessor processor = new JavaOutputProcessorWithFilter(out, new DiversifyPrettyPrinter(env), allClassesName(fileFrom));
+        AbstractProcessor processor = new JavaOutputProcessorWithFilter(out, new DefaultJavaPrettyPrinter(env), allClassesName(fileFrom));
         applyProcessor(inputProgram.getFactory(), processor);
     }
 

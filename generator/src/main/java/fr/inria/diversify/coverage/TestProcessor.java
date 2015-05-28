@@ -3,7 +3,7 @@ package fr.inria.diversify.coverage;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.declaration.CtAnnotation;
 import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -43,7 +43,7 @@ public class TestProcessor extends AbstractProcessor<CtMethod> {
 
     @Override
     public void process(CtMethod element) {
-        CtSimpleType<?> cl = element.getPosition().getCompilationUnit().getMainType();
+        CtType<?> cl = element.getPosition().getCompilationUnit().getMainType();
         try {
             bw.write(cl.getQualifiedName()+"#"+element.getSimpleName()+"\n");
         } catch (IOException e) {

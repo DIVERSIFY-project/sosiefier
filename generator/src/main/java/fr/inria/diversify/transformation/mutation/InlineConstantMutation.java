@@ -4,7 +4,6 @@ import fr.inria.diversify.transformation.SpoonTransformation;
 import spoon.reflect.code.CtLiteral;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 
@@ -13,6 +12,7 @@ import spoon.reflect.declaration.CtElement;
  * Date: 17/02/14
  * Time: 17:30
  */
+@Deprecated
 public class InlineConstantMutation extends SpoonTransformation<CtLocalVariable, CtElement> {
 
     public InlineConstantMutation() {
@@ -45,8 +45,8 @@ public class InlineConstantMutation extends SpoonTransformation<CtLocalVariable,
 
         SourcePosition sp = literal.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+newLiteral, 0));
+//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
+//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+newLiteral, 0));
     }
 
     public boolean equals(Object other) {

@@ -26,14 +26,25 @@ public class ReplaceVariableVisitor extends CtScanner {
         super.visitCtVariableAccess(variableAccess);
     }
 
-    public <T> void visitCtTargetedAccess(CtTargetedAccess<T> targetedAccess) {
-            if(targetedAccess.getVariable().equals(oldVar)) {
-                CodeFactory codeFactory = targetedAccess.getFactory().Code();
-                CtVariableAccess variableAccess = codeFactory.createVariableAccess(newVar, false);
-                targetedAccess.replace(variableAccess);
-            }
-            super.visitCtTargetedAccess(targetedAccess);
+    @Override
+    public <T> void visitCtFieldAccess(CtFieldAccess<T> fieldAccess) {
+        if(fieldAccess.getVariable().equals(oldVar)) {
+            CodeFactory codeFactory = fieldAccess.getFactory().Code();
+            CtVariableAccess variableAccess = codeFactory.createVariableAccess(newVar, false);
+            fieldAccess.replace(variableAccess);
+        }
+        super.visitCtFieldAccess(fieldAccess);
     }
+
+
+//    public <T> void visitCtTargetedAccess(CtTargetedAccess<T> targetedAccess) {
+//            if(targetedAccess.getVariable().equals(oldVar)) {
+//                CodeFactory codeFactory = targetedAccess.getFactory().Code();
+//                CtVariableAccess variableAccess = codeFactory.createVariableAccess(newVar, false);
+//                targetedAccess.replace(variableAccess);
+//            }
+//            super.visitCtTargetedAccess(targetedAccess);
+//    }
 
     public <T> void visitCtThisAccess(CtThisAccess<T> thisAccess) {
         if(oldVar.getSimpleName().equals("this")) {

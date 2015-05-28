@@ -12,7 +12,7 @@ import fr.inria.diversify.util.*;
 import org.apache.commons.io.FileUtils;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.Factory;
 
 
@@ -123,7 +123,7 @@ public class MakeAmpliTest {
             makeHarmanFilter();
         } else {
             File out = new File(outputDirectory + "/" + inputProgram.getRelativeTestSourceCodeDir());
-            for(CtSimpleType cl : TestCaseProcessor.ampclasses) {
+            for(CtType cl : TestCaseProcessor.ampclasses) {
                 LoggerUtils.printJavaFile(out, cl);
             }
 

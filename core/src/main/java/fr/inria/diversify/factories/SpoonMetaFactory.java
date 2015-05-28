@@ -52,7 +52,7 @@ public class SpoonMetaFactory {
                     if (dirFile.isDirectory()) {
                         compiler.addInputSource(dirFile);
                     }
-                } catch (IOException e) {
+                } catch (Exception e) {
                     Log.error("error in initSpoon", e);
                     throw new RuntimeException(e);
                 }

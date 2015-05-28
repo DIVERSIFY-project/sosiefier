@@ -5,7 +5,6 @@ import fr.inria.diversify.transformation.SpoonTransformation;
 
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 
@@ -14,6 +13,7 @@ import spoon.reflect.declaration.CtElement;
  * Date: 13/02/14
  * Time: 14:40
  */
+@Deprecated
 public abstract class BinaryOperatorMutation extends SpoonTransformation<CtBinaryOperator, CtElement> {
 
 
@@ -23,8 +23,8 @@ public abstract class BinaryOperatorMutation extends SpoonTransformation<CtBinar
         SourcePosition sp = transformationPoint.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
 
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+mutant.toString(), 0));
+//            compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
+//            compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+mutant.toString(), 0));
     }
 
     protected abstract CtElement getMutantOperator();

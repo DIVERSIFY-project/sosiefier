@@ -4,7 +4,6 @@ import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.factory.Factory;
@@ -14,6 +13,7 @@ import spoon.reflect.factory.Factory;
  *
  * Created by marodrig on 25/07/2014.
  */
+@Deprecated
 public class ConditionalOperatorProcessor extends AbstractProcessor {
 
     int i = 0;
@@ -69,9 +69,9 @@ public class ConditionalOperatorProcessor extends AbstractProcessor {
 
             //String s = mutant.getLeftHandOperand().toString() + " " + mutant.getKind().toString() + " " + mutant.toString();
 
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
+//            compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
             try {
-                compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd() + 1, "**/" + mutant.toString(), 0));
+//                compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd() + 1, "**/" + mutant.toString(), 0));
             } catch (NullPointerException e) {
                 e.printStackTrace();
             }

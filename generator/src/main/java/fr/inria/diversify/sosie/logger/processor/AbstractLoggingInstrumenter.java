@@ -111,8 +111,7 @@ public abstract class AbstractLoggingInstrumenter<E extends CtElement> extends A
         if(transformations == null) {
             return false;
         }
-
-        String methodSignature = method.getDeclaringType().getQualifiedName() +"."+ method.getSimpleName();
+        String methodSignature =  method.getReference().getDeclaringType().getQualifiedName() +"."+ method.getSimpleName();
         for (Transformation trans : transformations) {
             SingleTransformation singleTrans = (SingleTransformation) trans;
             String transSignature = singleTrans.classLocationName() +"."+ singleTrans.methodLocationName();

@@ -3,7 +3,7 @@ package fr.inria.diversify.coverage;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.sosie.logger.BinaryLogReader;
 import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,7 +40,7 @@ public class BinaryTraceCoverageReport extends TraceCoverageReport {
         }
 
         if ( e != null && e instanceof spoon.reflect.declaration.CtMethod) {
-            String className = stmt.getCtCodeFragment().getParent(CtSimpleType.class).getQualifiedName();
+            String className = stmt.getCtCodeFragment().getParent(CtType.class).getQualifiedName();
             spoon.reflect.declaration.CtMethod m = (spoon.reflect.declaration.CtMethod)e;
             String[] signatureParts = m.getSignature().split(" ");
             String k = signatureParts[0] + " " + className + "." + signatureParts[1];

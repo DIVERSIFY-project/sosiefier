@@ -5,8 +5,7 @@ import org.apache.commons.io.FileUtils;
 import spoon.compiler.Environment;
 import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
-import spoon.reflect.declaration.CtClass;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
 import spoon.support.JavaOutputProcessor;
@@ -73,7 +72,7 @@ public class LoggerUtils {
 
     public static void writeJavaClass(Factory factory, File out, File fileFrom) {
         Environment env = factory.getEnvironment();
-        AbstractProcessor processor = new JavaOutputProcessorWithFilter(out, new DiversifyPrettyPrinter(env), allClassesName(fileFrom));
+        AbstractProcessor processor = new JavaOutputProcessorWithFilter(out, new DefaultJavaPrettyPrinter(env), allClassesName(fileFrom));
         try {
             applyProcessor(factory, processor);
         } catch (Exception e) {
@@ -82,7 +81,7 @@ public class LoggerUtils {
         }
     }
 
-    public static void printJavaFile(File directory, CtSimpleType type) throws IOException {
+    public static void printJavaFile(File directory, CtType type) throws IOException {
         try {
             Factory factory = type.getFactory();
             Environment env = factory.getEnvironment();

@@ -4,7 +4,6 @@ import fr.inria.diversify.transformation.Transformation;
 import spoon.reflect.code.*;
 
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
 import spoon.reflect.reference.CtExecutableReference;
@@ -20,6 +19,7 @@ import java.util.Map;
  * Date: 25/02/14
  * Time: 11:32
  */
+@Deprecated
 public class AssertInstrumenter extends AbstractLoggingInstrumenter<CtInvocation<?>> {
     protected static Map<CtExecutable, Integer> count = new HashMap();
     protected static Map<Integer,String> idMap = new HashMap();
@@ -112,8 +112,8 @@ public class AssertInstrumenter extends AbstractLoggingInstrumenter<CtInvocation
             snippet += ");\n";
         }
 
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd() + 1, "**/\n" + snippet, 0));
+//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
+//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd() + 1, "**/\n" + snippet, 0));
     }
 
     protected int getCount(CtInvocation stmt) {
@@ -125,8 +125,8 @@ public class AssertInstrumenter extends AbstractLoggingInstrumenter<CtInvocation
         return count.get(parent);
     }
 
-    protected CtSimpleType<?> getClass(CtStatement stmt) {
-        return stmt.getParent(CtSimpleType.class);
+    protected CtType<?> getClass(CtStatement stmt) {
+        return stmt.getParent(CtType.class);
     }
 
     protected CtExecutable<?> getMethod(CtStatement stmt) {
