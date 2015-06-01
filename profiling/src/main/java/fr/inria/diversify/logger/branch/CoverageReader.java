@@ -135,10 +135,23 @@ public class CoverageReader {
         BufferedReader br = new BufferedReader(new FileReader(file));
 
         String line = br.readLine();
+        String logEntry = "";
         while (line != null) {
-            parseCoverageLine(line, idToMethod);
             line = br.readLine();
+            logEntry = logEntry + line;
+            if (logEntry.endsWith("$$")) {
+                logEntry = logEntry.substring(0, logEntry.length() - 2);
+                if(logEntry.startsWith("P;")) {
+                    parseCoverageLine(logEntry, idToMethod);
+                }
+                logEntry = "";
+            }
         }
+//        String line = br.readLine();
+//        while (line != null) {
+//            parseCoverageLine(line, idToMethod);
+//            line = br.readLine();
+//        }
     }
 
     protected void parseCoverageLine(String line, Map<Integer, MethodCoverage> idToMethod) {

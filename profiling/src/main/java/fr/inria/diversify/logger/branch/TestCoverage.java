@@ -1,11 +1,13 @@
 package fr.inria.diversify.logger.branch;
 
 
+import fr.inria.diversify.transformation.Transformation;
+import spoon.reflect.cu.SourcePosition;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * User: Simon
@@ -45,15 +47,73 @@ public class TestCoverage {
         return coverage;
     }
 
-    public void csv(PrintWriter fileWriter) throws IOException {
+    public void csv(PrintWriter fileWriter, Collection<Transformation> transformations, Map<String, SourcePosition> positions, Map<String, String> conditionsType) throws IOException {
 
         for (MethodCoverage mc : coverage.getMethodCoverages()) {
-            for (Branch branch : mc.getBranchCoverage()) {
+            for (Branch branch : mc.getCoveredBranchs()) {
                 for (int deep : branch.deeps) {
-                    fileWriter.append(testName + ";" + mc.getDeclaringClass() + ";" + mc.getMethodName() + ";" + branch.getId() + ";" + mc.getMethodId() + "." + branch.getId() + ";" + deep + "\n");
+                    String branchId = mc.getMethodId() + "." + branch.getId();
+                    Set<Transformation> trans = transformationForThisBranch(branchId, transformations , positions);
+                    long sosie = trans.stream()
+                            .filter(t -> t.isSosie())
+                            .count();
+                    long compile = trans.stream()
+                            .filter(t -> t.getStatus() >= -1)
+                            .count();
+                    fileWriter.append(testName + ";"
+                            + mc.getDeclaringClass() + ";"
+                            + mc.getMethodName() + ";" + branch.getId() + ";"
+                            + mc.getMethodId() + "." + branch.getId() + ";"
+                            + deep + ";"
+                            + trans.size()  + ";"
+                            + sosie  + ";"
+                            + compile + ";"
+                            + conditionTypeForThisBranch(branchId, conditionsType) + "\n");
 
                 }
             }
         }
+    }
+
+    protected String conditionTypeForThisBranch(String branchId, Map<String, String> conditionsType) {
+        return conditionsType.getOrDefault(branchId, "none");
+
+    }
+
+    protected Set<Transformation> transformationForThisBranch(String branchId, Collection<Transformation> transformations, Map<String, SourcePosition> positions) {
+        SourcePosition branchPosition = positions.get(branchId);
+        if(branchPosition == null) {
+            return new HashSet<>();
+        }
+        return transformations.parallelStream()
+                .filter(transformation -> {
+                    SourcePosition transPosition = transformation.getPosition();
+                    return branchPosition.getCompilationUnit().equals(transPosition.getCompilationUnit())
+                            && branchPosition.getSourceStart() <= transPosition.getSourceStart()
+                            && branchPosition.getSourceEnd() >= transPosition.getSourceEnd();
+                })
+                .collect(Collectors.toSet());
+    }
+
+    public Set<String> getAllBranch() {
+        Set<String> branchs = new HashSet<>();
+
+        for (MethodCoverage mc : coverage.getMethodCoverages()) {
+            for (Branch branch : mc.getCoveredBranchs()) {
+                branchs.add(mc.getMethodId() + "." + branch.getId());
+            }
+        }
+        return branchs;
+    }
+
+    public Set<String> getCoveredBranchId() {
+        Set<String> branchs = new HashSet<>();
+
+        for (MethodCoverage mc : coverage.getMethodCoverages()) {
+            for (String branch : mc.getAllBranch()) {
+                branchs.add(mc.getMethodId() + "." + branch);
+            }
+        }
+        return branchs;
     }
 }

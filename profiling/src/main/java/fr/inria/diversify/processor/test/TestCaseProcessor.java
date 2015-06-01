@@ -1,6 +1,7 @@
 package fr.inria.diversify.processor.test;
 
 import fr.inria.diversify.processor.ProcessorUtil;
+import fr.inria.diversify.util.Log;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtMethod;
@@ -30,11 +31,13 @@ public class TestCaseProcessor extends TestProcessor {
     }
 
 	public boolean isToBeProcessed(CtMethod candidate) {
-        return  candidate.getPosition().toString().contains(testDir);
+        return candidate.getPosition().toString().contains(testDir);
     }
 
     @Override
     public void process(CtMethod method) {
+        Log.debug(method.toString());
+
         List<CtInvocation> stmts = Query.getElements(method, new TypeFilter(CtInvocation.class));
         for(CtInvocation invocation: stmts){
             try {

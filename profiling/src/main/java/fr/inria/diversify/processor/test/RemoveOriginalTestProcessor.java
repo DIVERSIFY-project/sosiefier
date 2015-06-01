@@ -2,7 +2,7 @@ package fr.inria.diversify.processor.test;
 
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 
 /**
  * Created by Simon on 17/12/14.
@@ -29,7 +29,7 @@ public class RemoveOriginalTestProcessor extends TestProcessor {
     }
 
     protected CtMethod findCandidateForReplace(CtMethod method) {
-        CtSimpleType<?> type = method.getDeclaringType();
+        CtType<?> type = method.getDeclaringType();
         String methodName = method.getSimpleName();
 
             return mutatedMethod.stream()

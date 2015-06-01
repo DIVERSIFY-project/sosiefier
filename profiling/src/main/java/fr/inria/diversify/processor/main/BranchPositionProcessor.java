@@ -1,0 +1,149 @@
+package fr.inria.diversify.processor.main;
+
+import fr.inria.diversify.processor.ProcessorUtil;
+import spoon.processing.AbstractProcessor;
+import spoon.reflect.code.*;
+import spoon.reflect.cu.SourcePosition;
+import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtMethod;
+import spoon.reflect.declaration.ModifierKind;
+import spoon.reflect.reference.CtExecutableReference;
+import spoon.reflect.visitor.Query;
+import spoon.reflect.visitor.filter.TypeFilter;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * User: Simon
+ * Date: 21/05/15
+ * Time: 14:31
+ */
+public class BranchPositionProcessor extends AbstractProcessor<CtMethod> {
+    List<String> methodsId;
+    Map<Integer, Integer> blockIds;
+    Map<String,SourcePosition> branchPosition;
+    Map<String, String> branchConditionType;
+
+    public BranchPositionProcessor() {
+        branchPosition = new HashMap<>();
+        branchConditionType = new HashMap<>();
+        methodsId = new ArrayList<>();
+        blockIds = new HashMap<>();
+    }
+
+    @Override
+    public boolean isToBeProcessed(CtMethod method) {
+        return method.getBody() != null;
+    }
+
+    @Override
+    public void process(CtMethod method) {
+        int methodId = ProcessorUtil.idFor(method.getDeclaringType().getQualifiedName() + "." + method.getSignature());
+
+        addBranch(methodId, "b", method.getBody());
+        branchConditionType.put(methodId+".b", methodVisibility(method));
+
+        for(Object object : Query.getElements(method, new TypeFilter(CtIf.class))) {
+            CtIf ctIf = (CtIf) object;
+            int branchId = idBranch(methodId);
+
+            addBranch(methodId, "t" + branchId, ctIf.getThenStatement());
+            updateBranchConditionType(ctIf, methodId+".t" + branchId);
+            conditionType(ctIf.getCondition());
+            if (ctIf.getElseStatement() == null) {
+                addBranch(methodId, "e" + branchId, ctIf.getParent(CtBlock.class));
+                updateBranchConditionType(ctIf,  methodId+".e" + branchId);
+            } else {
+                addBranch(methodId, "e" + branchId, ctIf.getElseStatement());
+                updateBranchConditionType(ctIf,  methodId+".e" + branchId);
+            }
+        }
+
+        for(Object object : Query.getElements(method, new TypeFilter(CtLoop.class))) {
+            CtLoop ctLoop = (CtLoop) object;
+            int branchId = idBranch(methodId);
+
+            updateBranchConditionType(ctLoop,  "l" + branchId);
+            addBranch(methodId, "l" + branchId, ctLoop.getBody());
+        }
+
+        for(Object object : Query.getElements(method, new TypeFilter(CtCatch.class))) {
+            CtCatch ctCatch = (CtCatch) object;
+            int branchId = idBranch(methodId);
+            addBranch(methodId, methodId+".c" + branchId, ctCatch.getBody());
+        }
+    }
+
+    protected void addBranch(int methodId, String branchId, CtStatement blockOrStmt) {
+        branchPosition.put(methodId + "." + branchId, blockOrStmt.getPosition());
+    }
+
+    protected int idBranch(int methodId) {
+        if(!blockIds.containsKey(methodId)) {
+            blockIds.put(methodId, 0);
+        }
+        blockIds.put(methodId, blockIds.get(methodId) + 1);
+        return blockIds.get(methodId);
+    }
+
+
+    protected void updateBranchConditionType(CtElement element, String branchId) {
+        if(element instanceof CtIf) {
+            branchConditionType.put(branchId, conditionType(((CtIf) element).getCondition()));
+        }
+        if(element instanceof CtWhile) {
+            branchConditionType.put(branchId, conditionType(((CtWhile) element).getLoopingExpression()));
+        }
+        if(element instanceof CtDo) {
+            branchConditionType.put(branchId, conditionType(((CtDo) element).getLoopingExpression()));
+        }
+    }
+
+    protected String conditionType(CtExpression condition) {
+        List<CtBinaryOperator> binaryOperators = Query.getElements(condition, new TypeFilter(CtBinaryOperator.class));
+        List<CtInvocation> methodCall = Query.getElements(condition, new TypeFilter(CtInvocation.class));
+
+        if(binaryOperators.isEmpty()) {
+            if(methodCall.isEmpty()) {
+                return "boolean";
+            } else {
+                if(methodCall.contains("equal(")) {
+                    return "equal";
+                } else {
+                    return "methodCall";
+                }
+            }
+        } else {
+            if(binaryOperators.size() == 1) {
+                return binaryOperators.get(0).getKind().toString();
+            } else {
+                return "binaryOperator" + binaryOperators.size();
+            }
+        }
+    }
+
+    protected String methodVisibility(CtMethod method) {
+        if(method.getModifiers().contains(ModifierKind.PRIVATE)) {
+            return "private";
+        }
+        if(method.getModifiers().contains(ModifierKind.PROTECTED)) {
+            return "protected";
+        }
+        if(method.getModifiers().contains(ModifierKind.PUBLIC)) {
+            return "public";
+        }
+        return "package-private";
+    }
+
+    public Map<String, SourcePosition> getBranchPosition() {
+        return branchPosition;
+    }
+
+    public Map<String, String> getBranchConditionType() {
+        return branchConditionType;
+    }
+}

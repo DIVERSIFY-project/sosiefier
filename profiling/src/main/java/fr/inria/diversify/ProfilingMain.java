@@ -127,6 +127,14 @@ public class ProfilingMain {
             LoggerUtils.applyProcessor(factory, tc);
         }
 
+        condition = Boolean.parseBoolean(inputConfiguration.getProperty("profiling.test.evosuite", "false"));
+        transform = transform || condition;
+        if(condition) {
+            EvosuiteProcessor tc = new EvosuiteProcessor();
+//            tc.setLogger(logger+".Logger");
+            LoggerUtils.applyProcessor(factory, tc);
+        }
+
         if(transform) {
             File fileFrom = new File(inputProgram.getAbsoluteTestSourceCodeDir());
             File out = new File(outputDirectory + "/" + testSrc);

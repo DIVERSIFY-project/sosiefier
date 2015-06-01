@@ -4,12 +4,10 @@ import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtInvocation;
 import spoon.reflect.declaration.CtAnnotation;
 import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 import spoon.reflect.declaration.ModifierKind;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+
 import java.util.*;
 
 /**
@@ -23,7 +21,7 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
 
     protected String logName = "fr.inria.diversify.testamplification.logger.Logger";
 
-    public static Set<CtSimpleType> ampclasses = new HashSet<>();
+    public static Set<CtType> ampclasses = new HashSet<>();
 
     protected boolean guavaTestlib = false;
 

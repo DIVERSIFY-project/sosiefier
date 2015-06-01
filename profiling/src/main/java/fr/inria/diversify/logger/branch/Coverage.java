@@ -1,9 +1,15 @@
 package fr.inria.diversify.logger.branch;
 
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
+import spoon.reflect.cu.SourcePosition;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -25,7 +31,7 @@ public class Coverage {
 
         for(MethodCoverage mc : methodCoverages) {
             allBranch += mc.getAllBranch().size();
-            branch += mc.getBranchCoverage().size();
+            branch += mc.getCoveredBranchs().size();
         }
 
         return branch/allBranch;
@@ -36,9 +42,13 @@ public class Coverage {
         double branch = 0;
 
         for(MethodCoverage mc : methodCoverages) {
-            if (classes.stream().anyMatch(cl -> mc.getMethodName().startsWith(cl))) {
+            if (classes.stream().anyMatch(cl -> mc.getMethodName().startsWith(cl+"_"))) {
                 allBranch += mc.getAllBranch().size();
-                branch += mc.getBranchCoverage().size();
+                branch += mc.getCoveredBranchs().size();
+
+                if(!mc.getNotCoveredBranchId().isEmpty()) {
+                    Log.info("{} {} {}", mc.getMethodId(), mc.getMethodName(), mc.getNotCoveredBranchId());
+                }
             }
         }
 
@@ -95,7 +105,7 @@ public class Coverage {
     public Set<String> getCoverageBranch() {
         Set<String> set = new HashSet<>();
         for(MethodCoverage mc : methodCoverages) {
-            for(Branch branch : mc.branchCoverage) {
+            for(Branch branch : mc.coveredBranchs) {
                 set.add(mc.getMethodName()+ "." +branch.getId());
             }
         }
@@ -103,11 +113,11 @@ public class Coverage {
     }
 
 
-    public Set<String> getCoverageBranch(Set<String> classes) {
+    public Set<String> getCoverageBranch(Collection<String> classes) {
         Set<String> set = new HashSet<>();
         for(MethodCoverage mc : methodCoverages) {
-            if (classes.stream().anyMatch(cl -> mc.getMethodName().startsWith(cl))) {
-                for (Branch branch : mc.branchCoverage) {
+            if (classes.stream().anyMatch(cl -> mc.getMethodName().startsWith(cl +"_"))) {
+                for (Branch branch : mc.coveredBranchs) {
                     set.add(mc.getMethodName() + "." + branch.getId());
                 }
             }
@@ -125,6 +135,41 @@ public class Coverage {
         }
 
         return set;
+    }
+
+    public Set<String> getAllBranch(Collection<String> classes) {
+        Set<String> set = new HashSet<>();
+        for(MethodCoverage mc : methodCoverages) {
+            if (classes.stream().anyMatch(cl -> mc.getMethodName().startsWith(cl+"_"))) {
+                for (String branch : mc.allBranch) {
+                    set.add(mc.getMethodName() + "." + branch);
+                }
+            }
+        }
+
+        return set;
+    }
+
+
+    public void csv(String fileName) throws IOException {
+        PrintWriter fileWriter = new PrintWriter(new FileWriter(fileName));
+        fileWriter.append("class;method;branch;branchId;deep;nbOfPath\n");
+
+        for (MethodCoverage mc : methodCoverages) {
+            for (Branch branch : mc.getCoveredBranchs()) {
+                for (int deep : branch.deeps) {
+
+                    fileWriter.append(mc.getDeclaringClass() + ";"
+                            + mc.getMethodName() + ";" + branch.getId() + ";"
+                            + mc.getMethodId() + "." + branch.getId() + ";"
+                            + deep +  ";"
+                            + mc.getAllBranch().size()
+                            +"\n");
+
+                }
+            }
+        }
+        fileWriter.close();
     }
 
     public Collection<MethodCoverage> getMethodCoverages() {

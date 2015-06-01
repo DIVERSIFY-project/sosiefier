@@ -3,16 +3,13 @@ package fr.inria.diversify.processor.main;
 import fr.inria.diversify.processor.ProcessorUtil;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.*;
-import spoon.reflect.declaration.CtMethod;
+import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
-import spoon.support.reflect.code.CtCodeSnippetStatementImpl;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,10 +20,9 @@ import java.util.Map;
  * User: Simon
  * Date: 09/04/15
  */
-public class BranchCoverageProcessor extends AbstractProcessor<CtMethod> {
+public class BranchCoverageProcessor extends AbstractProcessor<CtExecutable> {
     List<String> methodsId;
     Map<Integer, Integer> blockIds;
-//    PrintWriter infoFile;
     String logger;
 
 
@@ -35,13 +31,12 @@ public class BranchCoverageProcessor extends AbstractProcessor<CtMethod> {
         if(!file.exists()) {
             file.mkdirs();
         }
-//        this.infoFile = new PrintWriter(new FileWriter(outputDir + "/log/info"));
         methodsId = new ArrayList<>();
         blockIds = new HashMap<>();
     }
 
     @Override
-    public boolean isToBeProcessed(CtMethod method) {
+    public boolean isToBeProcessed(CtExecutable method) {
         return method.getBody() != null;
 //                && Query.getElements(method, new TypeFilter(CtIf.class)).size()
 //                    + Query.getElements(method, new TypeFilter(CtLoop.class)).size()
@@ -50,9 +45,9 @@ public class BranchCoverageProcessor extends AbstractProcessor<CtMethod> {
     }
 
     @Override
-    public void process(CtMethod method) {
-        int methodId = ProcessorUtil.idFor(method.getDeclaringType().getQualifiedName() + "." +method.getSignature());
-        String info = methodId + " " + method.getDeclaringType().getQualifiedName() + "_" + method.getSignature().replace(" ", "_");
+    public void process(CtExecutable method) {
+        int methodId = ProcessorUtil.idFor(method.getReference().getDeclaringType().getQualifiedName() + "." +method.getSignature());
+        String info = methodId + " " + method.getReference().getDeclaringType().getQualifiedName() + "_" + method.getSignature().replace(" ", "_");
 
         addBranchLogger(method.getBody(),"b");
         info += " b";
@@ -84,6 +79,13 @@ public class BranchCoverageProcessor extends AbstractProcessor<CtMethod> {
             }
             addBranchLogger(ctIf.getElseStatement(), "e" + branchId);
             info += " e" + branchId;
+        }
+
+        for(Object object : Query.getElements(method, new TypeFilter(CtCase.class))) {
+            CtCase ctCase = (CtCase) object;
+            int branchId = idBranch(methodId);
+            addBranchLogger(ctCase, "l" + branchId);
+            info += " s" + branchId;
         }
 
         for(Object object : Query.getElements(method, new TypeFilter(CtLoop.class))) {
@@ -118,29 +120,43 @@ public class BranchCoverageProcessor extends AbstractProcessor<CtMethod> {
         ProcessorUtil.addInfo(info);
     }
 
+    protected void addBranchLogger(CtStatementList stmts, String idBranch) {
+        String snippet = getLogName() + ".branch(Thread.currentThread(),\"" + idBranch + "\")";
+
+        CtCodeSnippetStatement beginStmt = getFactory().Core().createCodeSnippetStatement();
+        beginStmt.setValue(snippet);
+
+        if(stmts.getStatements().isEmpty()) {
+            stmts.addStatement(beginStmt);
+        }  else {
+            stmts.getStatements().add(0,beginStmt);
+        }
+    }
+
     protected void addBranchLogger(CtBlock block, String idBranch) {
         String snippet = getLogName() + ".branch(Thread.currentThread(),\"" + idBranch + "\")";
 
-        CtCodeSnippetStatement beginStmt = new CtCodeSnippetStatementImpl();
+        CtCodeSnippetStatement beginStmt = getFactory().Core().createCodeSnippetStatement();
         beginStmt.setValue(snippet);
         block.insertBegin(beginStmt);
     }
 
-    protected void addInOut(CtMethod method, int id) {
-
+    protected void addInOut(CtExecutable method, int id) {
         Factory factory = method.getFactory();
+        CtStatement thisStatement = getThisOrSuperCall(method.getBody());
 
         CtTry ctTry = factory.Core().createTry();
         ctTry.setBody(method.getBody());
 
         String snippet = getLogName() + ".methodIn(Thread.currentThread(),\"" + id + "\")";
 
-        CtCodeSnippetStatement beginStmt = new CtCodeSnippetStatementImpl();
+        CtCodeSnippetStatement beginStmt = factory.Core().createCodeSnippetStatement();
         beginStmt.setValue(snippet);
 
         ctTry.getBody().insertBegin(beginStmt);
 
-        CtCodeSnippetStatement stmt = new CtCodeSnippetStatementImpl();
+
+        CtCodeSnippetStatement stmt = factory.Core().createCodeSnippetStatement();
         stmt.setValue(getLogName()+".methodOut(Thread.currentThread(),\"" + id + "\")");
 
         CtBlock finalizerBlock = factory.Core().createBlock();
@@ -150,6 +166,21 @@ public class BranchCoverageProcessor extends AbstractProcessor<CtMethod> {
         CtBlock methodBlock = factory.Core().createBlock();
         methodBlock.addStatement(ctTry);
         method.setBody(methodBlock);
+
+        if(thisStatement != null) {
+            ctTry.getBody().removeStatement(thisStatement);
+            method.getBody().getStatements().add(0,thisStatement);
+        }
+    }
+
+    protected CtStatement getThisOrSuperCall(CtBlock block) {
+        if(!block.getStatements().isEmpty()) {
+            CtStatement stmt = block.getStatement(0);
+            if(stmt.toString().startsWith("this(") || stmt.toString().startsWith("super(")) {
+                return stmt;
+            }
+        }
+        return null;
     }
 
     protected int idBranch(int methodId) {
@@ -159,11 +190,6 @@ public class BranchCoverageProcessor extends AbstractProcessor<CtMethod> {
         blockIds.put(methodId, blockIds.get(methodId) + 1);
         return blockIds.get(methodId);
     }
-
-
-//    public void processingDone() {
-//        infoFile.close();
-//    }
 
     public String getLogName() {
         return logger;

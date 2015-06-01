@@ -1,6 +1,9 @@
 package fr.inria.diversify.logger.branch;
 
+import fr.inria.diversify.util.Log;
+
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * User: Simon
@@ -12,7 +15,7 @@ public class MethodCoverage {
     final String methodName;
     final Set<String> allBranch;
     Set<List<String>> allPath;
-    Set<Branch> branchCoverage;
+    Set<Branch> coveredBranchs;
 
     public MethodCoverage(Integer methodId, String methodName, String[] allBranch) {
         this.methodId = methodId;
@@ -20,7 +23,7 @@ public class MethodCoverage {
         Collections.addAll( this.allBranch, allBranch);
         this.methodName = methodName;
         allPath = new HashSet<>();
-        branchCoverage = new HashSet<>();
+        coveredBranchs = new HashSet<>();
     }
 
     public MethodCoverage(Integer methodId, String methodName, Set<String> allBranch) {
@@ -28,7 +31,7 @@ public class MethodCoverage {
         this.methodName = methodName;
         this.allBranch = new HashSet<>(allBranch);
         allPath = new HashSet<>();
-        branchCoverage = new HashSet<>();
+        coveredBranchs = new HashSet<>();
     }
 
     public void addPath(int methodDeep, String[] path) {
@@ -42,7 +45,7 @@ public class MethodCoverage {
 
         for(String id : compressPath) {
             Branch existing = null;
-            for(Branch branch : branchCoverage) {
+            for(Branch branch : coveredBranchs) {
                 if(branch.getId().equals(id)) {
                     existing = branch;
                     break;
@@ -50,7 +53,7 @@ public class MethodCoverage {
             }
             if(existing == null) {
                 existing = new Branch(id,methodDeep);
-                branchCoverage.add(existing);
+                coveredBranchs.add(existing);
             } else {
                 existing.addDeep(methodDeep);
             }
@@ -58,7 +61,17 @@ public class MethodCoverage {
     }
 
     public double coverage() {
-        return ((double) branchCoverage.size()) / ((double) allBranch.size());
+        return ((double) coveredBranchs.size()) / ((double) allBranch.size());
+    }
+
+    public Set<String> getNotCoveredBranchId() {
+        Set<String> coveredBranchId = coveredBranchs.stream()
+                .map(b -> b.getId())
+                .collect(Collectors.toSet());
+
+        return allBranch.stream()
+                .filter(branchId -> !coveredBranchId.contains(branchId))
+                .collect(Collectors.toSet());
     }
 
     public String getMethodName() {
@@ -69,15 +82,22 @@ public class MethodCoverage {
         return allBranch;
     }
 
-    public Set<Branch> getBranchCoverage() {
-        return branchCoverage;
+    public Set<Branch> getCoveredBranchs() {
+        return coveredBranchs;
+    }
+
+    public Set<String> getCoveredBranchId() {
+        return coveredBranchs.stream()
+                .map(b -> b.getId())
+                .collect(Collectors.toSet());
     }
 
     public int distance(MethodCoverage other) {
         int d = 0;
         for(String branch : allBranch) {
-            if(branchCoverage.contains(branch) != other.branchCoverage.contains(branch)) {
+            if(getCoveredBranchId().contains(branch) != other.getCoveredBranchId().contains(branch)) {
                 d++;
+                Log.info("{} {} {}, this {}, other {}",getMethodId(), getMethodName(), branch, getNotCoveredBranchId() ,other.getNotCoveredBranchId());
             }
         }
         return d;
@@ -103,13 +123,12 @@ public class MethodCoverage {
 
     public void merge(MethodCoverage other) {
         this.allPath.addAll(other.allPath);
-        this.branchCoverage.addAll(other.branchCoverage);
+        this.coveredBranchs.addAll(other.coveredBranchs);
     }
 
     public Integer getMethodId() {
         return methodId;
     }
-
 
     public String getDeclaringClass() {
         return methodName.split("_")[0];
