@@ -23,6 +23,8 @@ import org.json.JSONException;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -153,6 +155,11 @@ public class DiversifyMain {
             rb.setGoals(phases);
 
             initTimeOut(rb);
+
+            URL[] URL = new URL[1];
+            URL[0] = new File(inputProgram.getClassesDir()).toURI().toURL();
+            URLClassLoader child = new URLClassLoader(URL, Thread.currentThread().getContextClassLoader());
+            Thread.currentThread().setContextClassLoader(child);
 
             String pomFile = inputConfiguration.getProperty("newPomFile");
             if (!pomFile.equals("")) {

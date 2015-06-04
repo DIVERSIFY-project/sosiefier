@@ -97,7 +97,7 @@ public class MavenDependencyResolver {
                         ":" + resolveName(dependency.getVersion(), properties);
 
                 File cachedFile;
-                if(dependency.getScope().equals("system")) {
+                if(dependency.getScope() != null && dependency.getScope().equals("system")) {
                     cachedFile = new File(resolveName(dependency.getSystemPath(), properties));
                 } else {
                     cachedFile = resolver.resolve(artifactId + ":" + resolveName(dependency.getType(), properties), repositoriesUrls);

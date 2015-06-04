@@ -36,27 +36,19 @@ public class InitUtils {
         MavenDependencyResolver t = new MavenDependencyResolver();
         String builder = inputConfiguration.getProperty("builder");
 
-        String dependencyPom = inputConfiguration.getProperty("dependencyPom");
-        if (builder.equals("maven") && dependencyPom != null) {
-            File pom = new File(inputConfiguration.getProperty("project") + "/pom.xml");
-            File originalPom = new File(inputConfiguration.getProperty("project") + "/_originalPom.xml");
-            FileUtils.copyFile(pom, originalPom);
+        if(builder.equals("maven")) {
+            t.DependencyResolver(inputConfiguration.getProperty("project") + "/pom.xml");
 
-            if(dependencyPom != null) {
-                FileUtils.copyFile(new File(inputConfiguration.getProperty("project") + "/" +dependencyPom), pom);
+            String dependencyPom = inputConfiguration.getProperty("dependencyPom");
+            if (dependencyPom != null) {
+                t.DependencyResolver(inputConfiguration.getProperty("project") + "/pom.xml");
+                t.DependencyResolver(inputConfiguration.getProperty("project") + "/" + dependencyPom);
             }
 
-            t.DependencyResolver(inputConfiguration.getProperty("project") + "/pom.xml");
-
-            FileUtils.copyFile(originalPom, pom);
-            FileUtils.forceDelete(originalPom);
-        } else {
-            t.DependencyResolver(inputConfiguration.getProperty("project") + "/pom.xml");
-        }
-
-        String androidSdk = inputConfiguration.getProperty("AndroidSdk");
-        if(androidSdk != null) {
-            t.resolveAndroidDependencies(androidSdk);
+            String androidSdk = inputConfiguration.getProperty("AndroidSdk");
+            if (androidSdk != null) {
+                t.resolveAndroidDependencies(androidSdk);
+            }
         }
     }
 

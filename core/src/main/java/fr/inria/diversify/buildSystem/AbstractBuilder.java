@@ -115,7 +115,7 @@ public abstract class AbstractBuilder {
 
 
     public void initTimeOut() throws InterruptedException {
-        timeOut = runGoals(goals, true) * 6;
+        timeOut = runGoals(goals, true) * 4;
         Log.debug("timeOut init: " + timeOut);
     }
 
