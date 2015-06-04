@@ -77,8 +77,7 @@ public class InitUtils {
         inputProgram.setPreviousTransformationsPath(
                 inputConfiguration.getProperty("transformation.directory"));
 
-        inputProgram.setClassesDir(inputConfiguration.getProperty("project") + "/" +
-                inputConfiguration.getProperty("classes"));
+        inputProgram.setClassesDir(inputConfiguration.getProperty("classes"));
 
         inputProgram.setCoverageDir(inputConfiguration.getProperty("jacoco"));
 

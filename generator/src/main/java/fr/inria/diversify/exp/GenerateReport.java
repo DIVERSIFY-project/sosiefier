@@ -59,8 +59,7 @@ public class GenerateReport {
         inputProgram = new InputProgram();
         inputProgram.setFactory(factory);
 
-        inputProgram.setClassesDir(inputConfiguration.getProperty("project") + "/" +
-                inputConfiguration.getProperty("classes"));
+        inputProgram.setClassesDir(inputConfiguration.getProperty("classes"));
     }
 
     protected void buildReport() throws Exception {

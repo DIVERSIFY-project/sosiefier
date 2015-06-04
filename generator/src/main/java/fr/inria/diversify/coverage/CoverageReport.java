@@ -12,6 +12,8 @@ import org.jacoco.core.analysis.ICounter;
 import org.jacoco.core.data.ExecutionDataReader;
 import org.jacoco.core.data.ExecutionDataStore;
 import org.jacoco.core.data.SessionInfoStore;
+import spoon.reflect.code.CtIf;
+import spoon.reflect.code.CtLoop;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtType;
 
@@ -70,40 +72,35 @@ public class CoverageReport implements ICoverageReport {
         return coverageBuilder;
     }
 
-
     public double codeFragmentCoverage(CodeFragment stmt) {
-        IClassCoverage classCoverage = null;
-        CtType<?> cl = stmt.getSourceClass();
-
-        if(classToCover != null && !cl.getQualifiedName().equals(classToCover)) {
-            return 0d;
-        }
-        if(!(cl == null || cl.getPackage() == null || cl.getPackage().getSignature() == null)) {
-            String name =  cl.getPackage().getSignature().replace(".","/")+"/"+cl.getSimpleName();
-            for (IClassCoverage cc : coverageBuilder.getClasses()) {
-                if(name.equals(cc.getName())) {
-                    classCoverage = cc;
-                    break;
-                }
-            }
-        }
-        if(classCoverage == null)
-            return 0d;
-        double ret = 0d;
-        for (int i = stmt.getStartLine(); i <= stmt.getEndLine(); i++)
-             if(classCoverage.getLine(i).getStatus() == ICounter.FULLY_COVERED)
-                ret++;
-        return ret/(double)(stmt.getEndLine()- stmt.getStartLine() + 1);
+        return elementCoverage(stmt.getCtCodeFragment());
     }
 
-    public double elementCoverage(CtElement operator) {
-        IClassCoverage classCoverage = null;
+    public double elementCoverage(CtElement elem) {
+        if(elem instanceof CtIf) {
+            CtIf ctIf = (CtIf) elem;
+            if(ctIf.getElseStatement() != null) {
+                return coverage(ctIf.getThenStatement()) * coverage(ctIf.getElseStatement());
+            } else {
+                return coverage(ctIf.getThenStatement());
+            }
+        }
+
+        if(elem instanceof CtLoop) {
+            return coverage(((CtLoop) elem).getBody());
+        }
+
+        return coverage(elem);
+    }
+
+    protected double coverage(CtElement operator) {
         CtType<?> cl = operator.getParent(CtType.class);
 
         if(classToCover != null && !cl.getQualifiedName().equals(classToCover)) {
             return 0d;
         }
 
+        IClassCoverage classCoverage = null;
         if(!(cl == null || cl.getPackage() == null || cl.getPackage().getSignature() == null)) {
             String name =  cl.getPackage().getSignature().replace(".","/")+"/"+cl.getSimpleName();
             for (IClassCoverage cc : coverageBuilder.getClasses()) {
@@ -113,14 +110,18 @@ public class CoverageReport implements ICoverageReport {
                 }
             }
         }
-        if(classCoverage == null)
+        if(classCoverage == null) {
             return 0;
+        }
+
         double ret = 0;
         int start = operator.getPosition().getLine();
         int end = operator.getPosition().getEndLine();
-        for (int i = start; i <= end; i++)
-            if(classCoverage.getLine(i).getStatus() == ICounter.FULLY_COVERED)
+        for (int i = start; i <= end; i++) {
+            if (classCoverage.getLine(i).getStatus() == ICounter.FULLY_COVERED) {
                 ret++;
+            }
+        }
         return ret/(double)(start - end + 1);
     }
 

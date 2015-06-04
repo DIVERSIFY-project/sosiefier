@@ -160,7 +160,7 @@ public class InputConfiguration {
      * @return String with the path
      */
     public String getClassesDir() {
-        return prop.getProperty("project") + "/" + prop.getProperty("classes");
+        return  prop.getProperty("classes");
     }
 
     /**

@@ -38,7 +38,7 @@ public class CoverageByTest {
         for(File file: jacocoDir.listFiles()) {
             if(file.getName().endsWith(".exec")) {
                 String testName = file.getName().substring(0, file.getName().length() - 5);
-                String dir = inputProgram.getClassesDir();
+                String dir = inputProgram.getProgramDir() + "/" + inputProgram.getClassesDir();
                 CoverageInfo coverageInfo = new CoverageInfo(dir, file);
                 coverageInfo.create();
 
@@ -102,8 +102,7 @@ public class CoverageByTest {
         inputProgram.setPreviousTransformationsPath(
                 inputConfiguration.getProperty("transformation.directory"));
 
-        inputProgram.setClassesDir(inputConfiguration.getProperty("project") + "/" +
-                                           inputConfiguration.getProperty("classes"));
+        inputProgram.setClassesDir(inputConfiguration.getProperty("classes"));
 
         inputProgram.setCoverageDir(inputConfiguration.getProperty("jacoco"));
     }

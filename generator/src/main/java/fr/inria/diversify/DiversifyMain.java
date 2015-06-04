@@ -157,7 +157,7 @@ public class DiversifyMain {
             initTimeOut(rb);
 
             URL[] URL = new URL[1];
-            URL[0] = new File(inputProgram.getClassesDir()).toURI().toURL();
+            URL[0] = new File(directory +  "/"+ inputProgram.getClassesDir()).toURI().toURL();
             URLClassLoader child = new URLClassLoader(URL, Thread.currentThread().getContextClassLoader());
             Thread.currentThread().setContextClassLoader(child);
 
@@ -166,8 +166,6 @@ public class DiversifyMain {
                 rb.initPom(pomFile);
             }
 
-//            rb.copyClasses(inputConfiguration.getProperty("classes"));
-//            rb.initTimeOut();
         } else { //builder == ant
             rb = new AntBuilder(directory, inputConfiguration.getProperty("builder.testTarget"));
             rb.setGoals(new String[]{"clean", inputConfiguration.getProperty("builder.testTarget")});
@@ -268,7 +266,7 @@ public class DiversifyMain {
 
     protected ICoverageReport initCoverageReport(String tmpDir) {
         String jacocoFile = inputConfiguration.getProperty("jacoco");
-        String classes = tmpDir + "/" + inputConfiguration.getProperty("classes");
+        String classes = tmpDir + "/" + inputProgram.getClassesDir();
 
         ICoverageReport icr = null;
         if (jacocoFile != null) {

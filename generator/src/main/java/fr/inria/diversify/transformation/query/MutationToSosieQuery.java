@@ -28,7 +28,7 @@ public class MutationToSosieQuery extends TransformationQuery {
 
     public MutationToSosieQuery(InputProgram inputProgram) throws TransformationParserException {
         super(inputProgram);
-        this.classesDir = inputProgram.getClassesDir();
+        this.classesDir = inputProgram.getProgramDir() + "/" + inputProgram.getClassesDir();
         this.jacocoDir = new File(inputProgram.getCoverageDir());
         init(inputProgram.getPreviousTransformationsPath());
     }
