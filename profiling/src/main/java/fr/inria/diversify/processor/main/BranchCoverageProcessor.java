@@ -84,7 +84,7 @@ public class BranchCoverageProcessor extends AbstractProcessor<CtExecutable> {
         for(Object object : Query.getElements(method, new TypeFilter(CtCase.class))) {
             CtCase ctCase = (CtCase) object;
             int branchId = idBranch(methodId);
-            addBranchLogger(ctCase, "l" + branchId);
+            addBranchLogger(ctCase, "s" + branchId);
             info += " s" + branchId;
         }
 

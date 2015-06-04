@@ -4,9 +4,7 @@ import fr.inria.diversify.processor.ProcessorUtil;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.SourcePosition;
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.ModifierKind;
+import spoon.reflect.declaration.*;
 import spoon.reflect.reference.CtExecutableReference;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
@@ -22,7 +20,7 @@ import java.util.Map;
  * Date: 21/05/15
  * Time: 14:31
  */
-public class BranchPositionProcessor extends AbstractProcessor<CtMethod> {
+public class BranchPositionProcessor extends AbstractProcessor<CtExecutable> {
     List<String> methodsId;
     Map<Integer, Integer> blockIds;
     Map<String,SourcePosition> branchPosition;
@@ -36,13 +34,13 @@ public class BranchPositionProcessor extends AbstractProcessor<CtMethod> {
     }
 
     @Override
-    public boolean isToBeProcessed(CtMethod method) {
+    public boolean isToBeProcessed(CtExecutable method) {
         return method.getBody() != null;
     }
 
     @Override
-    public void process(CtMethod method) {
-        int methodId = ProcessorUtil.idFor(method.getDeclaringType().getQualifiedName() + "." + method.getSignature());
+    public void process(CtExecutable method) {
+        int methodId = ProcessorUtil.idFor(method.getReference().getDeclaringType().getQualifiedName() + "." + method.getSignature());
 
         addBranch(methodId, "b", method.getBody());
         branchConditionType.put(methodId+".b", methodVisibility(method));
@@ -63,11 +61,20 @@ public class BranchPositionProcessor extends AbstractProcessor<CtMethod> {
             }
         }
 
+        for(Object object : Query.getElements(method, new TypeFilter(CtCase.class))) {
+            CtCase ctCase = (CtCase) object;
+            int branchId = idBranch(methodId);
+
+//            updateBranchConditionType(ctCase, "s" + branchId);
+            addBranch(methodId, "s" + branchId, ctCase);
+
+        }
+
         for(Object object : Query.getElements(method, new TypeFilter(CtLoop.class))) {
             CtLoop ctLoop = (CtLoop) object;
             int branchId = idBranch(methodId);
 
-            updateBranchConditionType(ctLoop,  "l" + branchId);
+//            updateBranchConditionType(ctLoop,  "l" + branchId);
             addBranch(methodId, "l" + branchId, ctLoop.getBody());
         }
 
@@ -126,17 +133,22 @@ public class BranchPositionProcessor extends AbstractProcessor<CtMethod> {
         }
     }
 
-    protected String methodVisibility(CtMethod method) {
-        if(method.getModifiers().contains(ModifierKind.PRIVATE)) {
-            return "private";
+    protected String methodVisibility(CtExecutable executable) {
+        if(executable instanceof CtModifiable) {
+            CtModifiable modifiable = (CtModifiable) executable;
+            if(modifiable.getModifiers().contains(ModifierKind.PRIVATE)) {
+                return "private";
+            }
+            if(modifiable.getModifiers().contains(ModifierKind.PROTECTED)) {
+                return "protected";
+            }
+            if(modifiable.getModifiers().contains(ModifierKind.PUBLIC)) {
+                return "public";
+            }
+            return "package-private";
+        } else {
+            return "none";
         }
-        if(method.getModifiers().contains(ModifierKind.PROTECTED)) {
-            return "protected";
-        }
-        if(method.getModifiers().contains(ModifierKind.PUBLIC)) {
-            return "public";
-        }
-        return "package-private";
     }
 
     public Map<String, SourcePosition> getBranchPosition() {

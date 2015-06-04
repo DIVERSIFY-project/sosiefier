@@ -98,6 +98,12 @@ public class CoverageReader {
                 }
                 logEntry = "";
             }
+            if(logEntry.startsWith("TE") && currentTest != null) {
+                parseCoverage(currentTestCoverage, idToMethod);
+                testCoverages.add(new TestCoverage(currentTest, idToMethod));
+                currentTest = null;
+                resetIdMethod(idToMethod);
+            }
         }
 
         return testCoverages;
@@ -147,11 +153,6 @@ public class CoverageReader {
                 logEntry = "";
             }
         }
-//        String line = br.readLine();
-//        while (line != null) {
-//            parseCoverageLine(line, idToMethod);
-//            line = br.readLine();
-//        }
     }
 
     protected void parseCoverageLine(String line, Map<Integer, MethodCoverage> idToMethod) {
@@ -162,7 +163,7 @@ public class CoverageReader {
             MethodCoverage methodCoverage = idToMethod.get(methodId);
 
             String[] path = Arrays.copyOfRange(split, 3, split.length);
-            methodCoverage.addPath(methodDeep, path);
+             methodCoverage.addPath(methodDeep, path);
         }
     }
 

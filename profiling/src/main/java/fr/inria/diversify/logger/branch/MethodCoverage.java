@@ -20,7 +20,7 @@ public class MethodCoverage {
     public MethodCoverage(Integer methodId, String methodName, String[] allBranch) {
         this.methodId = methodId;
         this.allBranch = new HashSet<>();
-        Collections.addAll( this.allBranch, allBranch);
+        Collections.addAll(this.allBranch, allBranch);
         this.methodName = methodName;
         allPath = new HashSet<>();
         coveredBranchs = new HashSet<>();
@@ -35,7 +35,7 @@ public class MethodCoverage {
     }
 
     public void addPath(int methodDeep, String[] path) {
-        List<String> compressPath = new ArrayList<>();
+        List<String> compressPath = new ArrayList<>(path.length);
         for(String p : path) {
             if(!compressPath.contains(p)) {
                 compressPath.add(p);
@@ -80,6 +80,10 @@ public class MethodCoverage {
 
     public Set<String> getAllBranch() {
         return allBranch;
+    }
+
+    public Set<List<String>> getAllPath() {
+        return allPath;
     }
 
     public Set<Branch> getCoveredBranchs() {

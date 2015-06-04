@@ -12,25 +12,26 @@ import java.util.*;
 /**
  * Created by Simon on 15/01/15.
  */
-public class LogTestReader {
+public class TestLogVariableReader {
     Set<String> testToExclude;
-    Map<String, TestLog> traceByTest;
+    Map<String, TestLogVariable> traceByTest;
     Map<Integer, String> idToClass;
     Map<Integer,  String[]> getters;
     private Map<Integer, Object[]> previousValues;
     static Map<Integer, String> idMap;
 
 
-    public Collection<TestLog> loadLog(String dir) throws IOException {
+    public Collection<TestLogVariable> loadLog(String dir) throws IOException {
         File file = new File(dir);
         loadIdMap(dir + "/info");
 
+        Collection<TestLogVariable> testLogVariables = new LinkedList<>();
         Log.debug("load trace in directory: {}", file.getAbsolutePath());
         for (File f : file.listFiles()) {
-            if (f.isFile() && f.getName().startsWith("logmain")) {
+            if (f.isFile() && f.getName().startsWith("log")) {
             try {
                 Log.debug("parse file: {}", f.getAbsoluteFile());
-                splitByTest(f);
+                testLogVariables.addAll(splitByTest(f));
             } catch (Exception e) {
                 Log.debug("error for: {}", f.getAbsoluteFile());
                 e.printStackTrace();
@@ -38,9 +39,10 @@ public class LogTestReader {
         }
 
         }
-        Log.debug("number of test: {}",traceByTest.size());
+        Log.debug("number of test: {}", testLogVariables.size());
         MultiMonitoringPoint.dico.putAll(idToClass);
-        return traceByTest.values();
+
+        return testLogVariables;
     }
 
     int count = 0;
@@ -136,7 +138,7 @@ public class LogTestReader {
         return Pool.getCanonicalVersion(value);
     }
 
-    protected void splitByTest(File file) throws Exception {
+    protected Collection<TestLogVariable> splitByTest(File file) throws Exception {
         reset();
         List<AbstractMonitoringPoint> monitoringPoint = new LinkedList();
         String currentTest = null;
@@ -200,18 +202,24 @@ public class LogTestReader {
                     logEntry = "";
                 }
             }
+            if(logEntry.startsWith("TE") && currentTest != null) {
+                addTest(currentTest, monitoringPoint);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         for(String test: testToExclude)
             traceByTest.remove(test);
+
+        return traceByTest.values();
     }
 
 
 
     protected void addTest(String testName, List<AbstractMonitoringPoint> assertLogs) {
         if(!traceByTest.containsKey(testName)) {
-            traceByTest.put(testName, new TestLog(testName));
+            traceByTest.put(testName, new TestLogVariable(testName));
         }
         traceByTest.get(testName).addAllMonitoringPoint(assertLogs);
     }

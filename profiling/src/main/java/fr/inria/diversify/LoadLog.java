@@ -6,8 +6,8 @@ import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.logger.branch.CoverageReader;
 import fr.inria.diversify.logger.branch.TestCoverage;
-import fr.inria.diversify.logger.logvariable.LogTestReader;
-import fr.inria.diversify.logger.logvariable.TestLog;
+import fr.inria.diversify.logger.logvariable.TestLogVariableReader;
+import fr.inria.diversify.logger.logvariable.TestLogVariable;
 import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.processor.main.BranchPositionProcessor;
 import fr.inria.diversify.transformation.Transformation;
@@ -47,16 +47,16 @@ public class LoadLog {
         logDir = inputConfiguration.getProperty("logDir");
     }
 
-    protected  List<TestCoverage> loadCoverageInfo() throws IOException {
+    protected  List<TestCoverage> loadTestCoverage() throws IOException {
         CoverageReader reader = new CoverageReader(logDir);
         List<TestCoverage> result = reader.loadTest();
 
         return result;
     }
 
-    protected Collection<TestLog> loadTestInfo() throws IOException {
-        LogTestReader reader = new LogTestReader();
-        Collection<TestLog> result = reader.loadLog(logDir);
+    protected Collection<TestLogVariable> loadTestLogVariable() throws IOException {
+        TestLogVariableReader reader = new TestLogVariableReader();
+        Collection<TestLogVariable> result = reader.loadLog(logDir);
 
         return result;
     }
@@ -108,9 +108,9 @@ public class LoadLog {
     }
 
     public static void main(String args[]) throws Exception, InvalidSdkException {
-        LoadLog load = new LoadLog(args[0]);
-        load.loadTestInfo();
-        List<TestCoverage> testCoverage = load.loadCoverageInfo();
+        LoadLog  load = new LoadLog(args[0]);
+//        load.loadTestLogVariable();
+        List<TestCoverage> testCoverage = load.loadTestCoverage();
         Collection<Transformation> transformations = load.loadTransformation();
         load.intBranch();
         load.write(testCoverage, transformations, load.branchPosition, load.branchConditionType);

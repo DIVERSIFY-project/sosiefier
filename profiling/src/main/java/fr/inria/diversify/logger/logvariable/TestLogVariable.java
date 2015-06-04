@@ -7,13 +7,13 @@ import java.util.stream.Collectors;
 /**
  * Created by Simon on 15/01/15.
  */
-public class TestLog {
+public class TestLogVariable {
     protected String signature;
     protected List<AbstractMonitoringPoint> monitoringPoints;
 //    protected int index;
 
 
-    public TestLog(String signature) {
+    public TestLogVariable(String signature) {
         this.signature = signature;
         monitoringPoints = new ArrayList<>();
     }

@@ -11,23 +11,23 @@ import java.util.*;
 /**
  * Created by Simon on 15/01/15.
  */
-public class LogTestComparator {
-    protected List<TestLog> originalTests;
-    protected List<TestLog> sosieTests;
+public class TestLogVariableComparator {
+    protected List<TestLogVariable> originalTests;
+    protected List<TestLogVariable> sosieTests;
 
     public int nbPointFix = 0;
     public int nbPointNotFix = 0;
 
 
-    public LogTestComparator(Collection<TestLog> original, Collection<TestLog> test) {
+    public TestLogVariableComparator(Collection<TestLogVariable> original, Collection<TestLogVariable> test) {
         originalTests = new ArrayList<>(original);
         sosieTests = new ArrayList<>(test);
     }
 
     public Diff compare() throws JSONException {
         Diff result = new Diff();
-        for(TestLog original : originalTests) {
-            for (TestLog sosie : sosieTests) {
+        for(TestLogVariable original : originalTests) {
+            for (TestLogVariable sosie : sosieTests) {
                 if(original.getSignature().equals(sosie.getSignature())) {
                     SingleMonitoringPoint.initPoint();
                     TestDiff testdiff = compareTest(original, sosie);
@@ -47,7 +47,7 @@ public class LogTestComparator {
         return result;
     }
 
-    protected TestDiff compareTest(TestLog original, TestLog sosie) {
+    protected TestDiff compareTest(TestLogVariable original, TestLogVariable sosie) {
         TestDiff result = new TestDiff(original.getSignature());
         Log.trace("compare test {}", original.getSignature());
 

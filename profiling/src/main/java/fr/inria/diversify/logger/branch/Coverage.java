@@ -163,7 +163,7 @@ public class Coverage {
                             + mc.getMethodName() + ";" + branch.getId() + ";"
                             + mc.getMethodId() + "." + branch.getId() + ";"
                             + deep +  ";"
-                            + mc.getAllBranch().size()
+                            + mc.getAllPath().size()
                             +"\n");
 
                 }

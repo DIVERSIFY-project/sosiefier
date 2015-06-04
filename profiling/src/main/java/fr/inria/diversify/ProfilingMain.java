@@ -9,6 +9,7 @@ import fr.inria.diversify.processor.test.*;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.LoggerUtils;
 import org.apache.commons.io.FileUtils;
+import spoon.processing.Processor;
 import spoon.reflect.factory.Factory;
 
 import java.io.File;
@@ -130,8 +131,10 @@ public class ProfilingMain {
         condition = Boolean.parseBoolean(inputConfiguration.getProperty("profiling.test.evosuite", "false"));
         transform = transform || condition;
         if(condition) {
-            EvosuiteProcessor tc = new EvosuiteProcessor();
-//            tc.setLogger(logger+".Logger");
+            Processor tc = new EvosuiteMethodProcessor();
+            LoggerUtils.applyProcessor(factory, tc);
+
+            tc = new EvosuiteClassProcessor();
             LoggerUtils.applyProcessor(factory, tc);
         }
 
