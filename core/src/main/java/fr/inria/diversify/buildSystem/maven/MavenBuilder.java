@@ -52,7 +52,10 @@ public class MavenBuilder extends AbstractBuilder {
             mvnHome = new File("/usr/local/Cellar/maven/3.2.3/libexec/");
         if (!mvnHome.exists())
             //win
-            mvnHome = new File(System.getenv("M2_HOME"));
+            //mvnHome = new File(System.getenv("M2_HOME"));
+        if (!mvnHome.exists())
+            //ubuntu
+            mvnHome = new File("/usr/share/apache-maven-3.3.3");
 
         invoker.setMavenHome(mvnHome);
         invoker.setTimeOut(timeOut);
