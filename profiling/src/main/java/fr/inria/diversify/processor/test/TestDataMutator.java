@@ -131,7 +131,7 @@ public class TestDataMutator extends TestProcessor {
         values.add(value - 1);
 
         values.add(value / 2);
-        values.add(value * 2);
+//        values.add(value * 2);
 
         return values;
     }

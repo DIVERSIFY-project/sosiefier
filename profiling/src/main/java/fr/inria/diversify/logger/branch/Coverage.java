@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * User: Simon
@@ -47,7 +48,7 @@ public class Coverage {
                 branch += mc.getCoveredBranchs().size();
 
                 if(!mc.getNotCoveredBranchId().isEmpty()) {
-                    Log.info("{} {} {}", mc.getMethodId(), mc.getMethodName(), mc.getNotCoveredBranchId());
+                    Log.debug("{} {} {}", mc.getMethodId(), mc.getMethodName(), mc.getNotCoveredBranchId());
                 }
             }
         }
@@ -137,6 +138,13 @@ public class Coverage {
         return set;
     }
 
+    public Set<String> allBranchWithout(Coverage other) {
+        Set<String> otherBranchs = other.getAllBranch();
+        return getAllBranch().stream()
+                .filter(b -> !otherBranchs.contains(b))
+                .collect(Collectors.toSet());
+    }
+
     public Set<String> getAllBranch(Collection<String> classes) {
         Set<String> set = new HashSet<>();
         for(MethodCoverage mc : methodCoverages) {
@@ -161,11 +169,10 @@ public class Coverage {
 
                     fileWriter.append(mc.getDeclaringClass() + ";"
                             + mc.getMethodName() + ";" + branch.getId() + ";"
-                            + mc.getMethodId() + "." + branch.getId() + ";"
+                            + mc.getMethodName() + "." + branch.getId() + ";"
                             + deep +  ";"
                             + mc.getAllPath().size()
                             +"\n");
-
                 }
             }
         }

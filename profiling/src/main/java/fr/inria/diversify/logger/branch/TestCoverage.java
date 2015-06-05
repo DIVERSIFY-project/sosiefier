@@ -63,7 +63,7 @@ public class TestCoverage {
                     fileWriter.append(testName + ";"
                             + mc.getDeclaringClass() + ";"
                             + mc.getMethodName() + ";" + branch.getId() + ";"
-                            + mc.getMethodId() + "." + branch.getId() + ";"
+                            + mc.getMethodName() + "." + branch.getId() + ";"
                             + deep + ";"
                             + trans.size()  + ";"
                             + sosie  + ";"

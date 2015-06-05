@@ -64,7 +64,10 @@ public class TestMethodCallRemover extends TestProcessor {
             //this index serves to replace ith literal is replaced by zero in the ith clone of the method
             int lit_index=0;
             for(CtInvocation invocation : invocations){
-                if(toRemove(invocation) && !isAssert(invocation) && !inWhileLoop(invocation) && !containsIteratorNext(invocation)) {
+                if(toRemove(invocation)
+						&& !isAssert(invocation)
+						&& !inWhileLoop(invocation)
+						&& !containsIteratorNext(invocation)) {
                     //clone the method
                     CtMethod cloned_method = cloneMethodTest(method, "_remove",1000);
                     //add the cloned method in the same class as the original method

@@ -40,7 +40,9 @@ public class ProfilingMain {
         transformMain();
         transformTest();
 
-        LoggerUtils.copyLoggerFile(inputProgram, outputDirectory, logger);
+        if(logger != null) {
+            LoggerUtils.copyLoggerFile(inputProgram, outputDirectory, logger);
+        }
 
         ProcessorUtil.writeInfoFile(outputDirectory);
     }
@@ -84,7 +86,7 @@ public class ProfilingMain {
         transform = transform || condition;
         if(condition) {
             TestDataMutator m = new TestDataMutator();
-            m.setLogger(logger+".Logger");
+//            m.setLogger(logger+".Logger");
             LoggerUtils.applyProcessor(factory, m);
         }
 
@@ -92,7 +94,7 @@ public class ProfilingMain {
         transform = transform || condition;
         if(condition) {
             TestMethodCallAdder v = new TestMethodCallAdder();
-            v.setLogger(logger+".Logger");
+//            v.setLogger(logger+".Logger");
             LoggerUtils.applyProcessor(factory, v);
         }
 
@@ -100,7 +102,7 @@ public class ProfilingMain {
         transform = transform || condition;
         if(condition) {
             TestMethodCallRemover e = new TestMethodCallRemover();
-            e.setLogger(logger+".Logger");
+//            e.setLogger(logger+".Logger");
             LoggerUtils.applyProcessor(factory, e);
         }
 

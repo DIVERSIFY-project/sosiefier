@@ -2,11 +2,13 @@ package fr.inria.diversify.processor.test;
 
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtInvocation;
+import spoon.reflect.code.CtNewClass;
 import spoon.reflect.declaration.CtAnnotation;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.declaration.ModifierKind;
-
+import spoon.reflect.reference.CtPackageReference;
+import spoon.reflect.reference.CtTypeReference;
 
 import java.util.*;
 
@@ -29,7 +31,9 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
 
     @Override
     public boolean isToBeProcessed(CtMethod candidate) {
-        return isTest(candidate) && !mutatedMethod.contains(candidate);
+        return isTest(candidate)
+                && !mutatedMethod.contains(candidate)
+                && !testWhitThread(candidate);
     }
 
     protected boolean isTest(CtMethod candidate) {
@@ -78,27 +82,27 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
 
     protected CtMethod cloneMethodTest(CtMethod method, String suffix, int timeOut) {
         CtMethod cloned_method = cloneMethod(method,suffix);
+        CtAnnotation testAnnotation = cloned_method.getAnnotations().stream()
+                .filter(annotation -> annotation.toString().contains("Test"))
+                .findFirst().orElse(null);
 
-//        CtAnnotation testAnnotation = cloned_method.getAnnotations().stream()
-//                .filter(annotation -> annotation.toString().contains("Test"))
-//                .findFirst().orElse(null);
-//
-//        if(testAnnotation == null) {
-//            testAnnotation = getFactory().Core().createAnnotation();
-//            CtTypeReference<Object> ref = getFactory().Core().createTypeReference();
-//            ref.setSimpleName("Test");
-//
-//            CtPackageReference refPackage = getFactory().Core().createPackageReference();
-//            refPackage.setSimpleName("org.junit");
-//            ref.setPackage(refPackage);
-//            testAnnotation.setAnnotationType(ref);
-//            Map<String, Object> elementValue = new HashMap<String, Object>();
-//            testAnnotation.setElementValues(elementValue);
-//        }
-//
-//        testAnnotation.getElementValues().put("timeout", timeOut);
+        if(testAnnotation != null) {
+            cloned_method.removeAnnotation(testAnnotation);
+        }
 
-//        cloned_method.addAnnotation(testAnnotation);
+        testAnnotation = getFactory().Core().createAnnotation();
+        CtTypeReference<Object> ref = getFactory().Core().createTypeReference();
+        ref.setSimpleName("Test");
+
+        CtPackageReference refPackage = getFactory().Core().createPackageReference();
+        refPackage.setSimpleName("org.junit");
+        ref.setPackage(refPackage);
+        testAnnotation.setAnnotationType(ref);
+        Map<String, Object> elementValue = new HashMap<String, Object>();
+        elementValue.put("timeout", timeOut);
+        testAnnotation.setElementValues(elementValue);
+
+        cloned_method.addAnnotation(testAnnotation);
 
         ampclasses.add(cloned_method.getDeclaringType());
         return cloned_method;
@@ -128,6 +132,10 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
 
     public static int getCount() {
         return count;
+    }
+
+    protected boolean testWhitThread(CtMethod method) {
+        return method.toString().contains("Thread");
     }
 
     protected String getLogName() {

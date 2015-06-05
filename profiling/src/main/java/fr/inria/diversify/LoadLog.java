@@ -32,10 +32,11 @@ public class LoadLog {
     protected final InputProgram inputProgram;
     protected final InputConfiguration inputConfiguration;
     protected final String logDir;
-    private final Factory factory;
-
-    Map<String, SourcePosition> branchPosition;
-    Map<String, String> branchConditionType;
+    protected final String result;
+    protected final Factory factory;
+    protected Map<String, SourcePosition> branchPosition;
+    protected Map<String, String> branchConditionType;
+    protected Collection<Transformation> transformations;
 
 
     public LoadLog(String propertiesFile) throws Exception, InvalidSdkException {
@@ -45,6 +46,7 @@ public class LoadLog {
         inputProgram = InitUtils.initInputProgram(inputConfiguration);
         factory = InitUtils.initSpoon(inputProgram, false);
         logDir = inputConfiguration.getProperty("logDir");
+        result = inputConfiguration.getProperty("result");
     }
 
     protected  List<TestCoverage> loadTestCoverage() throws IOException {
@@ -61,22 +63,21 @@ public class LoadLog {
         return result;
     }
 
-    protected void write(List<TestCoverage> testCoverage, Collection<Transformation> transformations, Map<String, SourcePosition> position, Map<String, String> conditionsType) throws IOException {
-
-        PrintWriter fileWriter = new PrintWriter(new BufferedWriter(new FileWriter("coverage.csv")));
+    protected void write(List<TestCoverage> testCoverage) throws IOException {
+        PrintWriter fileWriter = new PrintWriter(new BufferedWriter(new FileWriter(result + "_coverage.csv")));
 
         fileWriter.append("test;class;method;branch;branchGlobalId;deep;transformation;sosie;compile;branchConditionType\n");
         for(TestCoverage tc : testCoverage) {
-            tc.csv(fileWriter, transformations, position, conditionsType);
+            tc.csv(fileWriter, transformations, branchPosition, branchConditionType);
         }
 
         fileWriter.close();
     }
 
-    protected Collection<Transformation> loadTransformation() {
+    protected void initTransformation() {
         JsonTransformationLoader loader = new JsonTransformationLoader(inputProgram);
         String transDir = inputConfiguration.getProperty("transformation.directory");
-        return loader.load(transDir, true);
+        transformations = loader.load(transDir, true);
     }
 
     protected void intBranch() {
@@ -90,7 +91,7 @@ public class LoadLog {
 
 
     public void printNotCoveredBranch(List<TestCoverage> testCoverage) throws IOException {
-        PrintWriter fileWriter = new PrintWriter(new BufferedWriter(new FileWriter("notCoveredBranch.csv")));
+        PrintWriter fileWriter = new PrintWriter(new BufferedWriter(new FileWriter(result + "_notCoveredBranch.csv")));
         Set<String> covered = new HashSet<>();
         Set<String> allBranch = new HashSet<>();
 
@@ -111,9 +112,9 @@ public class LoadLog {
         LoadLog  load = new LoadLog(args[0]);
 //        load.loadTestLogVariable();
         List<TestCoverage> testCoverage = load.loadTestCoverage();
-        Collection<Transformation> transformations = load.loadTransformation();
+        load.initTransformation();
         load.intBranch();
-        load.write(testCoverage, transformations, load.branchPosition, load.branchConditionType);
+        load.write(testCoverage);
         load.printNotCoveredBranch(testCoverage);
     }
 }
