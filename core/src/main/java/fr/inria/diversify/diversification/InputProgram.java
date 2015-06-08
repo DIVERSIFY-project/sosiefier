@@ -335,7 +335,7 @@ public class InputProgram {
                 @Override
                 public void process(CtPackage element) {
                     CtElement root = element;
-                    while (root.getParent() != null) {
+                    while (root.getParent() != null && !root.getParent().toString().equals("")) {
                         root = root.getParent();
                     }
                     roots.add(root);

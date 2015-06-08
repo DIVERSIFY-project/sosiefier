@@ -53,7 +53,7 @@ public class ASTDelete extends ASTTransformation {
     protected CtCodeElement buildReplacementElement() {
         Factory factory = transplantationPoint.getCtCodeFragment().getFactory();
         CtCodeSnippetStatement snippetStatement = factory.Core().createCodeSnippetStatement();
-        snippetStatement.setValue("/** TRANSFORMATION FRAGMENT DELETED:\n"+ transplantationPoint.getCodeFragmentType().toString() + "\n**/");
+        snippetStatement.setValue("/** TRANSFORMATION FRAGMENT DELETED:\n"+ transplantationPoint.getCtCodeFragment().toString() + "\n**/");
         return snippetStatement;
     }
 

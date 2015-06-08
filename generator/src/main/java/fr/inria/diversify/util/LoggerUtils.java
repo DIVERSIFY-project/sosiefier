@@ -3,8 +3,8 @@ package fr.inria.diversify.util;
 import fr.inria.diversify.diversification.InputProgram;
 import org.apache.commons.io.FileUtils;
 import spoon.compiler.Environment;
-import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
+import spoon.processing.Processor;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
@@ -64,7 +64,7 @@ public class LoggerUtils {
         fr.inria.diversify.testamplification.processor.TestProcessor.writeIdFile(outputDirectory);
     }
 
-    public static void applyProcessor(Factory factory, AbstractProcessor processor) {
+    public static void applyProcessor(Factory factory, Processor processor) {
         ProcessingManager pm = new QueueProcessingManager(factory);
         pm.addProcessor(processor);
         pm.process();
@@ -72,7 +72,7 @@ public class LoggerUtils {
 
     public static void writeJavaClass(Factory factory, File out, File fileFrom) {
         Environment env = factory.getEnvironment();
-        AbstractProcessor processor = new JavaOutputProcessorWithFilter(out, new DefaultJavaPrettyPrinter(env), allClassesName(fileFrom));
+        Processor processor = new JavaOutputProcessorWithFilter(out, new DefaultJavaPrettyPrinter(env), allClassesName(fileFrom));
         try {
             applyProcessor(factory, processor);
         } catch (Exception e) {

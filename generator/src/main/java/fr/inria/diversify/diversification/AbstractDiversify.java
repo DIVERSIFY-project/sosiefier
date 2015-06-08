@@ -247,7 +247,6 @@ public abstract class AbstractDiversify {
         Log.info("status: " + builder.getStatus() + ", compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", nb error: " + builder.getTestFail().size());
         status = builder.getStatus();
 
-
         return status;
     }
 

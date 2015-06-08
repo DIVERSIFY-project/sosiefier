@@ -80,7 +80,7 @@ public class CoverageReport implements ICoverageReport {
         if(elem instanceof CtIf) {
             CtIf ctIf = (CtIf) elem;
             if(ctIf.getElseStatement() != null) {
-                return coverage(ctIf.getThenStatement()) * coverage(ctIf.getElseStatement());
+                return (coverage(ctIf.getThenStatement()) + coverage(ctIf.getElseStatement())) / 2d;
             } else {
                 return coverage(ctIf.getThenStatement());
             }
@@ -122,7 +122,7 @@ public class CoverageReport implements ICoverageReport {
                 ret++;
             }
         }
-        return ret/(double)(start - end + 1);
+        return ret/(double)(end - start + 1);
     }
 
     @Override

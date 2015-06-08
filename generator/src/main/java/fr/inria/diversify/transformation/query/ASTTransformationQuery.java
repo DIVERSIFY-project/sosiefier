@@ -8,6 +8,7 @@ import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
+import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.factory.Factory;
@@ -73,9 +74,9 @@ public class ASTTransformationQuery extends TransformationQuery {
             switch (i) {
                 case 0:
                 case 1:
+                case 2:
                     t = replace(subType);
                     break;
-                case 2:
                 case 3:
                     t = add(subType);
                     break;
@@ -272,9 +273,11 @@ public class ASTTransformationQuery extends TransformationQuery {
     protected ASTDelete delete() throws Exception {
         ASTDelete tf = new ASTDelete();
         CodeFragment transplantationPoint = null;
+
         while (transplantationPoint == null) {
             transplantationPoint = findRandomFragmentToReplace(true);
-            if (transplantationPoint.getCtCodeFragment() instanceof CtReturn)
+            if (transplantationPoint.getCtCodeFragment() instanceof CtReturn
+                    && transplantationPoint.getCtCodeFragment() instanceof CtLocalVariable)
                 transplantationPoint = null;
         }
         tf.setTransplantationPoint(transplantationPoint);
