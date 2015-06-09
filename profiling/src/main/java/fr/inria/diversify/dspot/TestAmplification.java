@@ -1,20 +1,16 @@
-package fr.inria.diversify.testamplification.sbseamp;
+package fr.inria.diversify.dspot;
 
-import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
-import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.testamplification.branchcoverage.load.Coverage;
-import fr.inria.diversify.testamplification.branchcoverage.load.CoverageReader;
-import fr.inria.diversify.testamplification.branchcoverage.load.TestCoverage;
-import fr.inria.diversify.testamplification.processor.*;
 
-import fr.inria.diversify.util.InitUtils;
+import fr.inria.diversify.logger.branch.CoverageReader;
+import fr.inria.diversify.logger.branch.TestCoverage;
+import fr.inria.diversify.processor.test.*;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
 import org.apache.commons.io.FileUtils;
 import spoon.reflect.declaration.*;
-
+import spoon.reflect.reference.CtTypeReference;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,65 +22,92 @@ import java.util.stream.Collectors;
  * Date: 28/04/15
  * Time: 16:00
  */
-public class Sbse {
+public class TestAmplification {
+    //current amp test
+    //Todo rename
     protected List<CtMethod> ampTests;
 
-    protected List<CtMethod> goodTest;
+    //original test + good amp test
+    protected Set<CtMethod> goodTest;
     protected List<TestCoverage> ampCoverage;
-    protected Coverage globalCoverage;
     protected MavenBuilder builder;
     protected InputProgram inputProgram;
     protected String outputDirectory;
     protected boolean guavaTestlib = false;
+    protected String logger;
 
-    protected String[] ampTestsNames;
 
+    public TestAmplification(InputProgram inputProgram, MavenBuilder builder, String outputDirectory) {
+        this.inputProgram = inputProgram;
+        this.builder = builder;
+        this.outputDirectory = outputDirectory;
 
-    public Sbse(String propertiesFile) throws Exception, InvalidSdkException {
-        InputConfiguration inputConfiguration = new InputConfiguration(propertiesFile);
-        InitUtils.initLogLevel(inputConfiguration);
-        InitUtils.initDependency(inputConfiguration);
-        inputProgram = InitUtils.initInputProgram(inputConfiguration);
-
-        outputDirectory = inputConfiguration.getProperty("outputDirectory");
-
-        if(inputConfiguration.getProperty("ampTestsNames") != null) {
-            ampTestsNames = inputConfiguration.getProperty("ampTestsNames").split(";");
-        }
-
-        goodTest = new ArrayList<>();
+        logger = "fr.inria.diversify.logger.logger";
+        goodTest = new HashSet<>();
         ampTests = new ArrayList<>();
     }
 
-    public void sbse(int maxIteration) throws IOException, InterruptedException {
-        int count = 0;
-        init();
-        ampCoverage = loadCoverageInfo();
-        Log.info("current coverage: {}", coverage());
-        globalCoverage.info();
-        initAmpTest();
-
-        while(count < maxIteration) {
-            run();
-            ampCoverage = loadCoverageInfo();
-            Log.info("iteration {}: current coverage: {}", count, coverage());
-
-            count++;
-            List<CtMethod> testToAmp = selectTestToAmp();
-            removeBadAmpTest();
-            makeAndWriteAmpTest(testToAmp);
+    public void amplification(CtClass classTest, int maxIteration) throws IOException, InterruptedException {
+        int nbTest = getAllTest(classTest).size();
+        if(nbTest == 0) {
+            return;
         }
+        Log.info("amplification of {} ({} test)", classTest.getQualifiedName(), nbTest);
+
+        run(classTest);
+        deleteLogFile();
+        List<CtMethod> instruTests = initAmpTest(classTest);
+
+        int nbAmpTest = 0;
+        for(int i = 0; i < maxIteration; i++) {
+            Log.debug("iteration {}", i);
+            run(classTest);
+            ampCoverage = loadCoverageInfo();
+
+            List<CtMethod> testToAmp = selectTestToAmp();
+            nbAmpTest += testToAmp.size();
+            if(testToAmp.isEmpty()) {
+                break;
+            }
+            removeTests(instruTests);
+            instruTests = makeAndWriteAmpTest(testToAmp);
+        }
+        Log.info("{} tests amplified", nbAmpTest);
+        removeTests(instruTests);
+        makeDSpotClassTest();
     }
 
-    private void removeBadAmpTest() {
-        for(CtMethod test : ampTests) {
-            String name = test.getSimpleName();
-            boolean b = goodTest.stream()
-                    .noneMatch(gt -> gt.getSimpleName().equals(name));
-            if(b) {
-                ((CtClass) test.getDeclaringType()).removeMethod(test);
-            }
+    protected void run(CtClass classTest) throws InterruptedException {
+        String goals = "test -Dmaven.compiler.useIncrementalCompilation=false -Dmaven.main.skip=true -Dtest=";
+        if(classTest.getModifiers().contains(ModifierKind.ABSTRACT)) {
+            goals += inputProgram.getAllElement(CtClass.class).stream()
+                        .map(elem -> (CtClass) elem)
+                        .filter(cl -> !cl.getModifiers().contains(ModifierKind.ABSTRACT))
+                        .filter(cl -> {
+                            CtTypeReference superClass = cl.getSuperclass();
+                            while (superClass != null && superClass.getDeclaration() != null) {
+                                if (superClass.getDeclaration() == classTest) {
+                                    return true;
+                                }
+                                superClass = superClass.getSuperclass();
+                            }
+                            return false;
+                        })
+                        .map(CtClass::getQualifiedName)
+                        .collect(Collectors.joining(","));
+        } else {
+            goals += classTest.getQualifiedName();
         }
+
+        builder.runGoals(new String[]{goals}, true);
+    }
+
+    protected void removeTests(Collection<CtMethod> tests) {
+        tests.stream()
+                .forEach(test -> {
+                    CtClass cl = (CtClass) test.getDeclaringType();
+                    cl.removeMethod(test);
+                });
     }
 
     protected List<CtMethod> selectTestToAmp() {
@@ -124,64 +147,44 @@ public class Sbse {
         CoverageReader reader = new CoverageReader(outputDirectory+ "/log");
         List<TestCoverage> result = reader.loadTest();
 
-        reader = new CoverageReader(outputDirectory+ "/log");
-        globalCoverage = reader.load();
+        deleteLogFile();
 
+        return result;
+    }
+
+    protected void deleteLogFile() throws IOException {
         File dir = new File(outputDirectory+ "/log");
         for(File file : dir.listFiles()) {
             if(!file.getName().equals("info")) {
                 FileUtils.forceDelete(file);
             }
         }
-        return result;
     }
 
-
-    protected void init() throws IOException, InterruptedException {
-        File dir = new File(outputDirectory);
-        dir.mkdirs();
-        FileUtils.copyDirectory(new File(inputProgram.getProgramDir()), dir);
-
-        InitUtils.initSpoon(inputProgram, false);
-        initBuilder();
+    protected List<CtMethod> initAmpTest(CtClass classTest) {
+        goodTest = getAllTest(classTest);
+        return makeAndWriteAmpTest(goodTest);
     }
 
-
-    protected void run() throws InterruptedException {
-        builder.runBuilder();
-    }
-
-
-    protected void initBuilder() throws InterruptedException, IOException {
-        String[] phases  = new String[]{"clean", "test"};
-        builder = new MavenBuilder(outputDirectory);
-
-        builder.setGoals(phases);
-        builder.initTimeOut();
-    }
-
-    protected void initAmpTest() {
-        goodTest = getAllTest();
-        makeAndWriteAmpTest(goodTest);
-    }
-
-    protected void makeAndWriteAmpTest(List<CtMethod> tests) {
+    protected List<CtMethod> makeAndWriteAmpTest(Collection<CtMethod> tests) {
         ampTests.clear();
+        removeTests(goodTest);
 
         File out = new File(outputDirectory + "/" + inputProgram.getRelativeTestSourceCodeDir());
-        List<CtMethod>  testToInstru = tests.stream()
+        List<CtMethod>  currentAmpTests = tests.stream()
                 .flatMap(test -> ampTests(test).stream())
                 .collect(Collectors.toList());
 
-        ampTests.addAll(testToInstru);
-        testToInstru.addAll(goodTest);
+        ampTests.addAll(currentAmpTests);
+        currentAmpTests.addAll(goodTest);
 
+        currentAmpTests.stream()
+                .forEach(test -> test.getDeclaringType().removeMethod(test));
 
-        List<CtClass> classesInstru = testToInstru.stream()
+        List<CtClass> classesInstru = currentAmpTests.stream()
                 .map(ampTest -> instruMethod(ampTest))
                 .map(instruTest -> {
                     CtClass cl = (CtClass) instruTest.getDeclaringType();
-                    cl.removeMethod(instruTest);
                     cl.addMethod(instruTest);
 
                     return cl;
@@ -190,6 +193,25 @@ public class Sbse {
                 .collect(Collectors.toList());
 
         classesInstru.stream()
+                .forEach(cl -> {
+                            try {
+                                LoggerUtils.printJavaFile(out, cl);
+                            } catch (Exception e) {
+                            }
+                        }
+                );
+        return currentAmpTests;
+    }
+
+    protected void makeDSpotClassTest() {
+        File out = new File(outputDirectory + "/" + inputProgram.getRelativeTestSourceCodeDir());
+        goodTest.stream()
+//                .map(ampTest -> instruMethod(ampTest))
+                .forEach(test -> test.getDeclaringType().addMethod(test));
+
+        goodTest.stream()
+                .map(test -> test.getDeclaringType())
+                .distinct()
                 .forEach(cl -> {
                             try {
                                 LoggerUtils.printJavaFile(out, cl);
@@ -221,12 +243,12 @@ public class Sbse {
         CtMethod clone = cloneMethod(method);
 
         TestCaseProcessor testCase = new TestCaseProcessor(inputProgram.getAbsoluteTestSourceCodeDir(), false);
-        testCase.setLogName("fr.inria.diversify.testamplification.branchcoverage.logger.Logger");
+        testCase.setLogger(logger + ".Logger");
         testCase.setFactory(inputProgram.getFactory());
         testCase.process(clone);
 
         TestLoggingInstrumenter logging = new TestLoggingInstrumenter();
-        logging.setLogName("fr.inria.diversify.testamplification.branchcoverage.logger.Logger");
+        logging.setLogger(logger + ".Logger");
         logging.setFactory(inputProgram.getFactory());
         logging.process(clone);
 
@@ -248,12 +270,10 @@ public class Sbse {
         return cloned_method;
     }
 
-    protected List<CtMethod> getAllTest() {
-        return inputProgram.getAllElement(CtMethod.class).stream()
-                .map(elem -> (CtMethod)elem)
+    protected Set<CtMethod> getAllTest(CtClass classTest) {
+        return new ArrayList<CtMethod>(classTest.getMethods()).stream()
                 .filter(mth -> isTest(mth))
-                .distinct()
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     protected boolean isTest(CtMethod candidate) {
@@ -293,45 +313,5 @@ public class Sbse {
             }
         } catch (Exception e) {}
         return false;
-    }
-
-    protected double coverage() {
-        Set<String> set = new HashSet<>();
-        if(ampTestsNames == null) {
-           return globalCoverage.coverage();
-        } else {
-            for (String ampTest : ampTestsNames) {
-                set.addAll(getSuperClasses(ampTest));
-            }
-        }
-        globalCoverage.getCoverageBranch(set);
-        return globalCoverage.coverage(set);
-    }
-
-    protected Set<String> getSuperClasses(String className) {
-        CtClass cl = inputProgram.getAllElement(CtClass.class).stream()
-                .map(c -> (CtClass) c)
-                .filter(c -> c.getQualifiedName().contains("." + className))
-                .findFirst()
-                .orElse(null);
-
-        Set<String> set = new HashSet<>();
-        CtClass superCl = cl;
-        while (superCl != null) {
-            try {
-                set.add(superCl.getQualifiedName());
-
-                superCl = (CtClass) superCl.getSuperclass().getDeclaration();
-
-            } catch (Exception e) {
-                superCl = null;
-            }
-        }
-        return set;
-    }
-
-    public static void main(String[] args) throws Exception, InvalidSdkException {
-        Sbse sbse = new Sbse(args[0]);
-        sbse.sbse(10);
     }
 }

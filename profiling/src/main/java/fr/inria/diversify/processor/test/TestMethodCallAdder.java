@@ -2,7 +2,6 @@ package fr.inria.diversify.processor.test;
 
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtInvocation;
-import spoon.reflect.code.CtNewArray;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.visitor.Query;

@@ -1,5 +1,7 @@
 package fr.inria.diversify.logger.branch;
 
+import fr.inria.diversify.util.Log;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -114,7 +116,7 @@ public class CoverageReader {
         for(Integer key : idToMethod.keySet()) {
             MethodCoverage mc = idToMethod.get(key);
             if(mc.allPath.size() != 0) {
-                idToMethod.put(key, new MethodCoverage(key, mc.getMethodName(), mc.getAllBranch()));
+                idToMethod.put(key, new MethodCoverage(Pool.get(key), mc.getMethodName(), mc.getAllBranch()));
             }
         }
     }
@@ -159,10 +161,14 @@ public class CoverageReader {
         String[] split = line.split(";");
         if(split.length != 1) {
             int methodId = Integer.parseInt(split[1]);
-            int methodDeep = Integer.parseInt(split[2]);
+            int methodDeep = Pool.get(Integer.parseInt(split[2]));
             MethodCoverage methodCoverage = idToMethod.get(methodId);
 
-            String[] path = Arrays.copyOfRange(split, 3, split.length);
+            String[] path = new String[ split.length - 3];
+            for(int i = 3; i < split.length; i++) {
+                path[i - 3] = Pool.get(split[i]);
+            }
+
              methodCoverage.addPath(methodDeep, path);
         }
     }
@@ -177,7 +183,11 @@ public class CoverageReader {
             if(!line.startsWith("id")) {
                 String[] split = line.split(" ");
                 Integer methodId = Integer.parseInt(split[0]);
-                MethodCoverage methodCoverage = new MethodCoverage(methodId, split[1], Arrays.copyOfRange(split, 2, split.length));
+                String[] branches = new String[split.length - 2];
+                for(int i = 2; i < split.length; i++) {
+                    branches[i - 2] = Pool.get(split[i]);
+                }
+                MethodCoverage methodCoverage = new MethodCoverage(methodId, split[1], branches);
                 idToMethod.put(methodId, methodCoverage);
             }
             line = br.readLine();

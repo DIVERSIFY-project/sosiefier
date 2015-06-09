@@ -2,7 +2,6 @@ package fr.inria.diversify.processor.test;
 
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtInvocation;
-import spoon.reflect.code.CtNewClass;
 import spoon.reflect.declaration.CtAnnotation;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtType;
@@ -19,7 +18,6 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
     public static List<CtMethod> notHarmanTest = new LinkedList<>();
     protected static List<CtMethod> mutatedMethod = new LinkedList<>();
     protected static int count = 0;
-//    protected static Map<String, String> idMap = new HashMap();
 
     protected String logName = "fr.inria.diversify.testamplification.logger.Logger";
 

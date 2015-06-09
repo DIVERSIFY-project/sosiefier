@@ -4,6 +4,7 @@ package fr.inria.diversify;
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.logger.branch.Coverage;
 import fr.inria.diversify.logger.branch.CoverageReader;
 import fr.inria.diversify.logger.branch.TestCoverage;
 import fr.inria.diversify.logger.logvariable.TestLogVariableReader;
@@ -56,6 +57,13 @@ public class LoadLog {
         return result;
     }
 
+    protected Coverage loadGlobalCoverage() throws IOException {
+        CoverageReader reader = new CoverageReader(logDir);
+
+        return reader.load();
+    }
+
+
     protected Collection<TestLogVariable> loadTestLogVariable() throws IOException {
         TestLogVariableReader reader = new TestLogVariableReader();
         Collection<TestLogVariable> result = reader.loadLog(logDir);
@@ -73,6 +81,11 @@ public class LoadLog {
 
         fileWriter.close();
     }
+
+    protected void write(Coverage coverage) throws IOException {
+        coverage.csv(result + "_coverage.csv", transformations, branchPosition, branchConditionType);
+    }
+
 
     protected void initTransformation() {
         JsonTransformationLoader loader = new JsonTransformationLoader(inputProgram);
@@ -111,10 +124,14 @@ public class LoadLog {
     public static void main(String args[]) throws Exception, InvalidSdkException {
         LoadLog  load = new LoadLog(args[0]);
 //        load.loadTestLogVariable();
-        List<TestCoverage> testCoverage = load.loadTestCoverage();
+//        List<TestCoverage> testCoverage = load.loadTestCoverage();
+        Coverage coverage = load.loadGlobalCoverage();
+
         load.initTransformation();
         load.intBranch();
-        load.write(testCoverage);
-        load.printNotCoveredBranch(testCoverage);
+        load.write(coverage);
+
+//        load.write(testCoverage);
+//        load.printNotCoveredBranch(testCoverage);
     }
 }
