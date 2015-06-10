@@ -9,6 +9,7 @@ import java.util.*;
 /**
  * Created by Simon on 15/01/15.
  */
+@Deprecated
 public class LogTestComparator {
     protected List<Test> originalTests;
     protected List<Test> sosieTests;

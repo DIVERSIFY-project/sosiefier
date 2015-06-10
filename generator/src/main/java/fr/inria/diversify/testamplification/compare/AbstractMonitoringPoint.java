@@ -10,6 +10,7 @@ import java.util.Map;
  * Date: 06/03/15
  * Time: 12:28
  */
+@Deprecated
 public abstract class AbstractMonitoringPoint {
 
     static Map<Integer, String> dico = new HashMap<>();

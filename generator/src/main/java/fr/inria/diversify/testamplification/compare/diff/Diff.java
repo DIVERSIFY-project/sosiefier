@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Simon on 13/02/15.
  */
+@Deprecated
 public class Diff {
 
     List<TestDiff> testDiffs;

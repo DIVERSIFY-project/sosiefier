@@ -10,6 +10,7 @@ import java.util.List;
  * Date: 06/03/15
  * Time: 12:27
  */
+@Deprecated
 public class MultiMonitoringPoint extends AbstractMonitoringPoint {
     List<SingleMonitoringPoint> monitoringPoints;
 

@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Simon on 19/01/15.
  */
+@Deprecated
 public class TestDiff {
     List<MonitoringPointDiff> diff;
     String signature;

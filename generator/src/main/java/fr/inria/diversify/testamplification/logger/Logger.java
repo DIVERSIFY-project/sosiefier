@@ -8,6 +8,7 @@ import java.util.HashMap;
  * Date: 7/23/13
  * Time: 10:07 AM
  */
+@Deprecated
 public class Logger {
 
     private static HashMap<Thread, LogWriter> logs = null;

@@ -12,6 +12,7 @@ import java.util.concurrent.Semaphore;
  * <p/>
  * Created by marodrig on 25/06/2014.
  */
+@Deprecated
 public abstract class LogWriter {
 
     //Thread containing the test

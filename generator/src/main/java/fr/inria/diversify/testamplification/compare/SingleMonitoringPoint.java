@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
  * Date: 06/03/15
  * Time: 12:27
  */
+@Deprecated
 public class SingleMonitoringPoint extends AbstractMonitoringPoint {
     public static int executedPoint = 0;
     String[] methods;

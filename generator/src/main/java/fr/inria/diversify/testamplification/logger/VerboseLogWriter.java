@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
  * <p/>
  * Created by marodrig on 25/06/2014.
  */
+@Deprecated
 public class VerboseLogWriter extends LogWriter {
     ///File writer for each thread. Each one saved in a different file
     private Map<Thread, PrintWriter> fileWriters;

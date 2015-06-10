@@ -8,6 +8,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * Created by Simon on 27/01/15.
  */
+@Deprecated
 public class Pool {
     private static Map<String,String> StringPool =
             new HashMap<String,String>(20000);

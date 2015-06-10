@@ -13,6 +13,7 @@ import java.util.*;
  * Date: 06/03/15
  * Time: 13:30
  */
+@Deprecated
 public class MonitoringPointDiff {
     protected int id;
     protected List<String> methodsDiff;

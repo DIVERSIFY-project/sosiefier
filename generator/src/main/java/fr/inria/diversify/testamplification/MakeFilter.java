@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Simon on 03/02/15.
  */
+@Deprecated
 public class MakeFilter {
     InputProgram inputProgram;
 

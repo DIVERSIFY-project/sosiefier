@@ -15,6 +15,7 @@ import java.util.*;
 /**
  * Created by Simon on 15/01/15.
  */
+@Deprecated
 public class CompareAmpliTest {
 
     public Diff compare(String dirOriginalLog, String dirSosieLog) throws JSONException, IOException {

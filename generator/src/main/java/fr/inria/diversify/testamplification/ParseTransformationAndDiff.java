@@ -18,6 +18,7 @@ import java.util.*;
 /**
  * Created by Simon on 27/01/15.
  */
+@Deprecated
 public class ParseTransformationAndDiff {
     protected Map<Transformation, Diff> diffs;
     Filter filter;

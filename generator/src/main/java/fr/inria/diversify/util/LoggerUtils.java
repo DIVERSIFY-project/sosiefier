@@ -60,9 +60,9 @@ public class LoggerUtils {
         FileUtils.copyDirectory(srcDir, destDir);
     }
 
-    public static void writeId(String outputDirectory) throws IOException {
-        fr.inria.diversify.testamplification.processor.TestProcessor.writeIdFile(outputDirectory);
-    }
+//    public static void writeId(String outputDirectory) throws IOException {
+//        fr.inria.diversify.testamplification.processor.TestProcessor.writeIdFile(outputDirectory);
+//    }
 
     public static void applyProcessor(Factory factory, Processor processor) {
         ProcessingManager pm = new QueueProcessingManager(factory);

@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 /**
  * Created by Simon on 18/12/14.
  */
+@Deprecated
 public class FormatLog {
     protected Map<String, List<Integer>> deepsByTest;
     protected Map<String, List<String>> numberOfTest;

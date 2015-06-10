@@ -14,6 +14,7 @@ import java.util.Set;
  * Date: 05/03/15
  * Time: 14:06
  */
+@Deprecated
 public class Filter {
     Set<String> testToExclude;
     Set<Integer> monitorPointToExclude;

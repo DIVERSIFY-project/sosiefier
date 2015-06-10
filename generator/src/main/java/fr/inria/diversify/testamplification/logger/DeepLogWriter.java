@@ -10,6 +10,7 @@ import java.util.*;
 /**
  * Created by Simon on 17/12/14.
  */
+@Deprecated
 public class DeepLogWriter extends LogWriter {
     protected static Map<String, List<Integer>> deepCallByMethod = new HashMap<String, List<Integer>>();
     protected static List<Integer> deepCallForCurrentTest;

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Simon on 15/01/15.
  */
+@Deprecated
 public class Test {
     protected String signature;
     protected List<AbstractMonitoringPoint> monitoringPoints;
