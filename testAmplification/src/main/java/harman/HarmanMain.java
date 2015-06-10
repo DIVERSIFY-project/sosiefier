@@ -1,10 +1,12 @@
-package fr.inria.diversify.testamplification.harman;
+package harman;
 
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
-import fr.inria.diversify.util.*;
+import fr.inria.diversify.util.InitUtils;
+import fr.inria.diversify.util.Log;
+import fr.inria.diversify.util.LoggerUtils;
 import org.apache.commons.io.FileUtils;
 import spoon.reflect.factory.Factory;
 

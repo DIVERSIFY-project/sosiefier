@@ -1,4 +1,4 @@
-package fr.inria.diversify.testamplification.harman;
+package harman;
 
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
@@ -6,7 +6,6 @@ import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
-import spoon.reflect.declaration.CtClass;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package fr.inria.diversify.testamplification.harman;
+package harman;
 
 
 import org.jacoco.core.analysis.Analyzer;
@@ -8,10 +8,7 @@ import org.jacoco.core.analysis.ICounter;
 import org.jacoco.core.data.ExecutionDataReader;
 import org.jacoco.core.data.ExecutionDataStore;
 import org.jacoco.core.data.SessionInfoStore;
-import spoon.reflect.code.CtBlock;
 import spoon.reflect.declaration.CtClass;
-import spoon.reflect.declaration.CtMethod;
-
 
 import java.io.File;
 import java.io.FileInputStream;

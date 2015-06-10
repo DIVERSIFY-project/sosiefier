@@ -1,4 +1,4 @@
-package fr.inria.diversify.testamplification.harman;
+package harman;
 
 import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.diversification.InputProgram;
