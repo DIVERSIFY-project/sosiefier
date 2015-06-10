@@ -30,26 +30,17 @@ public class ReplaceVariableVisitor extends CtScanner {
     public <T> void visitCtFieldAccess(CtFieldAccess<T> fieldAccess) {
         if(fieldAccess.getVariable().equals(oldVar)) {
             CodeFactory codeFactory = fieldAccess.getFactory().Code();
-            CtVariableAccess variableAccess = codeFactory.createVariableAccess(newVar, false);
+            codeFactory.createVariableRead(newVar, false);
+            CtVariableAccess variableAccess = codeFactory.createVariableRead(newVar, false);
             fieldAccess.replace(variableAccess);
         }
         super.visitCtFieldAccess(fieldAccess);
     }
 
-
-//    public <T> void visitCtTargetedAccess(CtTargetedAccess<T> targetedAccess) {
-//            if(targetedAccess.getVariable().equals(oldVar)) {
-//                CodeFactory codeFactory = targetedAccess.getFactory().Code();
-//                CtVariableAccess variableAccess = codeFactory.createVariableAccess(newVar, false);
-//                targetedAccess.replace(variableAccess);
-//            }
-//            super.visitCtTargetedAccess(targetedAccess);
-//    }
-
     public <T> void visitCtThisAccess(CtThisAccess<T> thisAccess) {
         if(oldVar.getSimpleName().equals("this")) {
             CodeFactory codeFactory = thisAccess.getFactory().Code();
-            CtVariableAccess variableAccess = codeFactory.createVariableAccess(newVar, false);
+            CtVariableAccess variableAccess = codeFactory.createVariableRead(newVar, false);
             thisAccess.replace(variableAccess);
         }
 
@@ -60,7 +51,7 @@ public class ReplaceVariableVisitor extends CtScanner {
 
         if (invocation.getTarget() == null && oldVarIsThis()) {
             CodeFactory codeFactory = invocation.getFactory().Code();
-            CtVariableAccess variableAccess = codeFactory.createVariableAccess(newVar, false);
+            CtVariableAccess variableAccess = codeFactory.createVariableRead(newVar, false);
             invocation.setTarget(variableAccess);
         }
         super.visitCtInvocation(invocation);
