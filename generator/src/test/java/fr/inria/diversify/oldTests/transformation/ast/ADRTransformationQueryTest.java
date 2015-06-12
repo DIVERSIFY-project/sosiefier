@@ -6,7 +6,7 @@ import org.junit.Test;
 /**
  * Created by marcel on 5/06/14.
  */
-public class ASTTransformationQueryTest {
+public class ADRTransformationQueryTest {
 
 
 

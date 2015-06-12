@@ -45,7 +45,7 @@ public class DSpot {
 
         for (CtClass cl : getAllTestClasses()) {
 
-            testAmplification.amplification(cl, 10);
+            testAmplification.amplification(cl, 5);
         }
     }
 

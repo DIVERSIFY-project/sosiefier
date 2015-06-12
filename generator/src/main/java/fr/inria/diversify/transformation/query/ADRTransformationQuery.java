@@ -24,7 +24,7 @@ import java.util.*;
  * Date: 7/9/13
  * Time: 10:02 AM
  */
-public class ASTTransformationQuery extends TransformationQuery {
+public class ADRTransformationQuery extends TransformationQuery {
     /**
      * Class of the code fragment. Defaults to Statement
      */
@@ -45,7 +45,7 @@ public class ASTTransformationQuery extends TransformationQuery {
      *
      * @param inputProgram Input program over the queries are going to be made
      */
-    public ASTTransformationQuery(InputProgram inputProgram) {
+    public ADRTransformationQuery(InputProgram inputProgram) {
         //This we assume be defect
         super(inputProgram);
         codeFragmentClass = Statement.class;
@@ -57,7 +57,7 @@ public class ASTTransformationQuery extends TransformationQuery {
      * @param fragmentClass Class of the fragments
      * @param isStupid Is this a stupid transformation?
      */
-    public ASTTransformationQuery(InputProgram inputProgram, Class fragmentClass, boolean subType, boolean isStupid) {
+    public ADRTransformationQuery(InputProgram inputProgram, Class fragmentClass, boolean subType, boolean isStupid) {
         super(inputProgram);
         codeFragmentClass = fragmentClass;
         stupid = isStupid;

@@ -26,5 +26,7 @@ public class Branch {
         deeps.add(deep);
     }
 
-
+    public Set<Integer> getDeeps() {
+        return deeps;
+    }
 }

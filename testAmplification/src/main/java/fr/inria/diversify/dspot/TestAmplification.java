@@ -43,30 +43,42 @@ public class TestAmplification {
         this.outputDirectory = outputDirectory;
 
         logger = "fr.inria.diversify.logger.logger";
+
+    }
+
+    protected void init() {
         goodTest = new HashSet<>();
         ampTests = new ArrayList<>();
     }
 
     public void amplification(CtClass classTest, int maxIteration) throws IOException, InterruptedException {
+        init();
         int nbTest = getAllTest(classTest).size();
         if(nbTest == 0) {
             return;
         }
         Log.info("amplification of {} ({} test)", classTest.getQualifiedName(), nbTest);
 
+        int nbAmpTest = 0;
         run(classTest);
+
         deleteLogFile();
         List<CtMethod> instruTests = initAmpTest(classTest);
 
-        int nbAmpTest = 0;
-        for(int i = 0; i < maxIteration; i++) {
-            Log.debug("iteration {}", i);
-            run(classTest);
+        for (int i = 0; i < maxIteration; i++) {
+            Log.info("iteration {}:", i);
+            Log.info("{} new tests generated", instruTests.size() - nbTest);
+
+            int status = run(classTest);
+            if(status < -1) {
+                break;
+            }
             ampCoverage = loadCoverageInfo();
 
-            List<CtMethod> testToAmp = selectTestToAmp();
+            Collection<CtMethod> testToAmp = selectTestToAmp(nbTest);
+            Log.info("{} tests selected", testToAmp.size());
             nbAmpTest += testToAmp.size();
-            if(testToAmp.isEmpty()) {
+            if (testToAmp.isEmpty()) {
                 break;
             }
             removeTests(instruTests);
@@ -77,7 +89,7 @@ public class TestAmplification {
         makeDSpotClassTest();
     }
 
-    protected void run(CtClass classTest) throws InterruptedException {
+    protected int run(CtClass classTest) throws InterruptedException {
         String goals = "test -Dmaven.compiler.useIncrementalCompilation=false -Dmaven.main.skip=true -Dtest=";
         if(classTest.getModifiers().contains(ModifierKind.ABSTRACT)) {
             goals += inputProgram.getAllElement(CtClass.class).stream()
@@ -99,7 +111,8 @@ public class TestAmplification {
             goals += classTest.getQualifiedName();
         }
 
-        builder.runGoals(new String[]{goals}, true);
+        builder.runBuilder(new String[]{goals});
+        return builder.getStatus();
     }
 
     protected void removeTests(Collection<CtMethod> tests) {
@@ -110,20 +123,49 @@ public class TestAmplification {
                 });
     }
 
-    protected List<CtMethod> selectTestToAmp() {
-        List<CtMethod> select = new ArrayList<>();
+    protected Collection<CtMethod> selectTestToAmp(int reduceThreshold) {
+        Map<CtMethod, Set<String>> select = new HashMap<>();
 
-    for (CtMethod ampTest : ampTests) {
-        for (TestCoverage tc : getTestCoverageFor(ampTest)) {
-            TestCoverage parentTc = getParentTestCoverageFor(tc);
-            if (parentTc != null && tc.containsAllBranch(parentTc) && !parentTc.containsAllBranch(tc)) {
-                select.add(ampTest);
-                goodTest.add(ampTest);
-                break;
+        for (CtMethod ampTest : ampTests) {
+            for (TestCoverage tc : getTestCoverageFor(ampTest)) {
+                TestCoverage parentTc = getParentTestCoverageFor(tc);
+                if (parentTc != null && tc.containsAllBranch(parentTc) && !parentTc.containsAllBranch(tc)) {
+                    Set<String> branches = tc.getCoveredBranch();
+                    branches.removeAll(parentTc.getCoveredBranch());
+                    select.put(ampTest, branches);
+                    goodTest.add(ampTest);
+                    break;
+                }
             }
         }
+        if(select.size() > reduceThreshold) {
+            return reduceSelectedTest(select);
+        } else {
+            return select.keySet();
+        }
     }
-        return select;
+
+    protected Collection<CtMethod> reduceSelectedTest(Map<CtMethod, Set<String>> selected) {
+        Map<Set<String>, List<CtMethod>> map = selected.keySet().stream()
+                .collect(Collectors.groupingBy(mth -> selected.get(mth)));
+
+        List<Set<String>> sortedKey = map.keySet().stream()
+                .sorted((l1, l2) -> Integer.compare(l2.size(), l1.size()))
+                .collect(Collectors.toList());
+
+        Set<String> branches = sortedKey.stream()
+                .flatMap(list -> list.stream())
+                .collect(Collectors.toSet());
+
+        List<CtMethod> methods = new ArrayList<>();
+
+        while(!branches.isEmpty()) {
+            Set<String> key = sortedKey.remove(0);
+            branches.removeAll(key);
+            methods.add(map.get(key).stream().findAny().get());
+        }
+
+        return methods;
     }
 
     protected List<TestCoverage> getTestCoverageFor(CtMethod ampTest) {

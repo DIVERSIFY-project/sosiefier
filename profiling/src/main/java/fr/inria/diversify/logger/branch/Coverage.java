@@ -183,13 +183,6 @@ public class Coverage {
                             + sosie  + ";"
                             + compile + ";"
                             + conditionTypeForThisBranch(branchId, conditionsType) + "\n");
-//
-//                    fileWriter.append(mc.getDeclaringClass() + ";"
-//                            + mc.getMethodName() + ";" + branch.getId() + ";"
-//                            + mc.getMethodName() + "." + branch.getId() + ";"
-//                            + deep +  ";"
-//                            + mc.getAllPath().size()
-//                            +"\n");
                 }
             }
         }
