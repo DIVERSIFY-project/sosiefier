@@ -11,6 +11,7 @@ import java.util.Map;
  *
  * Created by marodrig on 01/07/2014.
  */
+@Deprecated
 public abstract class StackElementReader {
 
     private Map<Integer, String> idMap;

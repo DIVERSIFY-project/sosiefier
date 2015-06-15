@@ -18,6 +18,7 @@ import java.util.Map;
 /**
  * Created by marodrig on 27/06/2014.
  */
+@Deprecated
 public abstract class AbstractLoggingInstrumenter<E extends CtElement> extends AbstractProcessor<E> {
     protected static Map<String, String> idMap = new HashMap();
     protected static Map<CtExecutable, Integer> count = new HashMap();

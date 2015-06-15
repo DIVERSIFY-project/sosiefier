@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
  * Date: 06/01/14
  * Time: 10:04
  */
+@Deprecated
 public class MethodLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMethod> {
     protected List<CtMethod> methods;
 

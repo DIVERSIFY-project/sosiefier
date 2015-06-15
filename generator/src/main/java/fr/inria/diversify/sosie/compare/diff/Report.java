@@ -8,6 +8,7 @@ import java.util.*;
 /**
  * Created by Simon on 03/07/14.
  */
+@Deprecated
 public class Report {
     Map<String,TestReport> testReports;
 

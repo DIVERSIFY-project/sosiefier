@@ -11,6 +11,7 @@ import java.util.*;
 /**
  * Created by Simon on 18/04/14.
  */
+@Deprecated
 public class CompareAllStackTrace {
     protected List<StackTrace> originalStackTraces;
     protected List<StackTrace> sosieStackTraces;

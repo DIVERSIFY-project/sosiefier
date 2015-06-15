@@ -10,6 +10,7 @@ import java.util.*;
 /**
  * Created by Simon on 23/07/14.
  */
+@Deprecated
 public abstract class  AbstractCompareStackTrace {
     protected StackTrace originalStackTrace;
     protected StackTrace sosieStackTrace;

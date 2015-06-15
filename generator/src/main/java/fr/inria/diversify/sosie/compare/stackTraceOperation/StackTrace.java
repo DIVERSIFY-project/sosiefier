@@ -9,6 +9,7 @@ import java.util.*;
 /**
  * Created by Simon on 17/04/14.
  */
+@Deprecated
 public class StackTrace {
     private List<StackTraceOperation> stackTraceOperations;
     protected Stack<StackTraceCall> stackTraceCalls;

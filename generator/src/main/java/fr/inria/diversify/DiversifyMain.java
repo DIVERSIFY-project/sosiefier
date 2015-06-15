@@ -14,6 +14,7 @@ import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
 import fr.inria.diversify.statistic.CVLMetric;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.query.*;
+import fr.inria.diversify.transformatonSelection.TestAndBranchSelection;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.visu.Visu;
@@ -218,11 +219,11 @@ public class DiversifyMain {
                 return new ByteCodeTransformationQuery(inputProgram);
             case "adr": {
                 Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
-                return new ASTTransformationQuery(inputProgram, cl, subType, false);
+                return new ADRTransformationQuery(inputProgram, cl, subType, false);
             }
             case "adrstupid": {
                 Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
-                return new ASTTransformationQuery(inputProgram, cl, subType, true);
+                return new ADRTransformationQuery(inputProgram, cl, subType, true);
             }
             case "fromlist": {
                 int rangeMin = Integer.parseInt(inputConfiguration.getProperty("transformation.range.min", "-1"));
@@ -246,10 +247,16 @@ public class DiversifyMain {
             }
             case "fse":{
                 Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
-                return new ASTTransformationQuery(inputProgram, cl, subType, false);
+                return new ADRTransformationQuery(inputProgram, cl, subType, false);
             }
-            case "issta": {
+            case "issta2": {
+                Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
+                ADRTransformationQuery query = new ADRTransformationQuery(inputProgram, cl, subType, false);
+                String branchInformation = inputConfiguration.getProperty("branchInformation");
+                TestAndBranchSelection functionEval = new TestAndBranchSelection(branchInformation);
+                query.setEvalFunction(functionEval);
 
+                return query;
             }
             default:
                 //Try to construct the executeQuery from the explicit class

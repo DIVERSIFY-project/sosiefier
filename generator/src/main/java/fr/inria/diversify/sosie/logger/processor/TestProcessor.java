@@ -8,6 +8,7 @@ import spoon.reflect.declaration.CtMethod;
 /**
  * Created by Simon on 04/12/14.
  */
+@Deprecated
 public abstract class TestProcessor extends AbstractLoggingInstrumenter<CtMethod> {
 
 

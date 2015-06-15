@@ -21,12 +21,12 @@ public class CompositeQuery extends TransformationQuery  {
     /**
      * Ast executeQuery of the composite
      */
-    protected ASTTransformationQuery ast;
+    protected ADRTransformationQuery ast;
 
 
     public CompositeQuery(InputProgram inputProgram) {
         super(inputProgram);
-        ast = new ASTTransformationQuery(inputProgram);
+        ast = new ADRTransformationQuery(inputProgram);
         mutation = new MutationQuery(inputProgram);
     }
 
@@ -55,11 +55,11 @@ public class CompositeQuery extends TransformationQuery  {
 
     class T extends Thread {
         public Transformation trans;
-        ASTTransformationQuery query;
+        ADRTransformationQuery query;
         MutationQuery mutation;
         double r;
 
-        public T(ASTTransformationQuery query,  MutationQuery mutation, double r) {
+        public T(ADRTransformationQuery query,  MutationQuery mutation, double r) {
             this.query = query;
             this.mutation = mutation;
             this.r = r;

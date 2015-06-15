@@ -16,6 +16,7 @@ import java.util.*;
 /**
  * Created by Simon on 16/07/14.
  */
+@Deprecated
 public class FieldUsedInstrumenter extends AbstractLoggingInstrumenter<CtStatement> {
 
     protected Set<CtStatement> alreadyInstrument;

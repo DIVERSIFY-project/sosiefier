@@ -8,6 +8,7 @@ import java.util.*;
 /**
  * Created by Simon on 17/04/14.
  */
+@Deprecated
 public class ComparePartialStackTrace  extends  AbstractCompareStackTrace {
 
     public ComparePartialStackTrace(StackTrace st1, StackTrace st2) {

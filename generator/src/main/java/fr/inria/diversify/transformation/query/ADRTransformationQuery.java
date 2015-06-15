@@ -14,6 +14,8 @@ import spoon.reflect.declaration.CtElement;
 import spoon.reflect.factory.Factory;
 
 import java.util.*;
+import java.util.function.ToDoubleFunction;
+import java.util.stream.Collectors;
 
 
 /**
@@ -40,6 +42,8 @@ public class ADRTransformationQuery extends TransformationQuery {
      */
     protected boolean subType = true;
 
+    protected ToDoubleFunction<Transformation> evalFunction;
+
     /**
      * Short constructor assuming the fragment class to be statement and the transformation to be stupid
      *
@@ -64,9 +68,16 @@ public class ADRTransformationQuery extends TransformationQuery {
         this.subType = subType;
     }
 
-
     @Override
     public Transformation query() throws QueryException {
+        if(evalFunction == null) {
+            return pQuery();
+        } else {
+            return query(evalFunction);
+        }
+    }
+
+    public Transformation pQuery() throws QueryException {
         try {
             Random r = new Random();
             ASTTransformation t = null;
@@ -118,6 +129,25 @@ public class ADRTransformationQuery extends TransformationQuery {
         }
     }
 
+    protected Transformation query(ToDoubleFunction<Transformation> eval) throws QueryException {
+        try {
+            Set<Transformation> set = new HashSet<>();
+
+            while (set.size() < 10) {
+                set.add(pQuery());
+            }
+
+            return set.stream()
+                    .sorted((cf1, cf2) -> Double.compare(eval.applyAsDouble(cf2), eval.applyAsDouble(cf1)))
+                    .findFirst()
+                    .get();
+
+        } catch (Exception e) {
+            throw new QueryException(e);
+        }
+    }
+
+
     /**
      *
      * @return
@@ -129,7 +159,7 @@ public class ADRTransformationQuery extends TransformationQuery {
         CodeFragment transplant = null;
 
         while (transplant == null) {
-            transplantationPoint = findRandomFragmentToReplace(true);
+            transplantationPoint = findRandomFragment(true);
             transplant = findRandomFragmentCandidate(transplantationPoint, false, subType);
         }
         tf.setTransplantationPoint(transplantationPoint);
@@ -161,7 +191,7 @@ public class ADRTransformationQuery extends TransformationQuery {
         CodeFragment transplantationPoint = null;
 
         while (transplantationPoint == null) {
-            transplant = findRandomFragmentToReplace(true);
+            transplant = findRandomFragment(true);
             transplantationPoint = findRandomFragmentCandidate(transplant, true, false);
         }
         tf.setName("replaceWittgenstein");
@@ -174,8 +204,8 @@ public class ADRTransformationQuery extends TransformationQuery {
 
     protected ASTReplace replaceRandom() throws Exception {
         ASTReplace tf = new ASTReplace();
-        tf.setTransplantationPoint(findRandomFragmentToReplace(true));
-        tf.setTransplant(findRandomFragmentToReplace(false));
+        tf.setTransplantationPoint(findRandomFragment(true));
+        tf.setTransplant(findRandomFragment(false));
         tf.setName("replaceRandom");
         tf.setSubType(subType);
 
@@ -184,8 +214,8 @@ public class ADRTransformationQuery extends TransformationQuery {
 
     protected ASTAdd addRandom() throws Exception {
         ASTAdd tf = new ASTAdd();
-        tf.setTransplantationPoint(findRandomFragmentToReplace(true));
-        tf.setTransplant(findRandomFragmentToReplace(false));
+        tf.setTransplantationPoint(findRandomFragment(true));
+        tf.setTransplant(findRandomFragment(false));
         tf.setName("addRandom");
         tf.setSubType(subType);
 
@@ -212,7 +242,7 @@ public class ADRTransformationQuery extends TransformationQuery {
         CodeFragment transplant = null;
 
         while (transplant == null) {
-            transplantationPoint = findRandomFragmentToReplace(true);
+            transplantationPoint = findRandomFragment(true);
             transplant = findRandomFragmentCandidate(transplantationPoint, true, false);
         }
 
@@ -230,7 +260,7 @@ public class ADRTransformationQuery extends TransformationQuery {
         CodeFragment transplant = null;
 
         while (transplant == null) {
-            transplantationPoint = findRandomFragmentToReplace(true);
+            transplantationPoint = findRandomFragment(true);
             transplant = findRandomFragmentCandidate(transplantationPoint, false, subType);
         }
         tf.setTransplantationPoint(transplantationPoint);
@@ -275,7 +305,7 @@ public class ADRTransformationQuery extends TransformationQuery {
         CodeFragment transplantationPoint = null;
 
         while (transplantationPoint == null) {
-            transplantationPoint = findRandomFragmentToReplace(true);
+            transplantationPoint = findRandomFragment(true);
             if (transplantationPoint.getCtCodeFragment() instanceof CtReturn
                     && transplantationPoint.getCtCodeFragment() instanceof CtLocalVariable)
                 transplantationPoint = null;
@@ -298,7 +328,7 @@ public class ADRTransformationQuery extends TransformationQuery {
      * @param withCoverage Indicates if the transplantation points must have coverage by the test suite.
      * @return
      */
-    protected CodeFragment findRandomFragmentToReplace(boolean withCoverage) {
+    protected CodeFragment findRandomFragment(boolean withCoverage) {
         Random r = new Random();
         int size = getInputProgram().getCodeFragments().size();
         CodeFragment stmt = getInputProgram().getCodeFragments().get(r.nextInt(size));
@@ -365,7 +395,7 @@ public class ADRTransformationQuery extends TransformationQuery {
             try {
                 ASTReplace replaceRandom = new ASTReplace();
                 replaceRandom.setTransplantationPoint(replace.getTransplantationPoint());
-                replaceRandom.setTransplant(findRandomFragmentToReplace(false));
+                replaceRandom.setTransplant(findRandomFragment(false));
                 replaceRandom.setName("replaceRandom");
                 transformations.add(replaceRandom);
             } catch (Exception e) {}
@@ -389,7 +419,7 @@ public class ADRTransformationQuery extends TransformationQuery {
             try {
                 ASTAdd addRandom = new ASTAdd();
                 addRandom.setTransplantationPoint(replace.getTransplantationPoint());
-                addRandom.setTransplant(findRandomFragmentToReplace(false));
+                addRandom.setTransplant(findRandomFragment(false));
                 addRandom.setName("addRandom");
                 transformations.add(addRandom);
             } catch (Exception e) {}
@@ -403,4 +433,7 @@ public class ADRTransformationQuery extends TransformationQuery {
         return transformations;
     }
 
+    public void setEvalFunction(ToDoubleFunction<Transformation> evalFunction) {
+        this.evalFunction = evalFunction;
+    }
 }

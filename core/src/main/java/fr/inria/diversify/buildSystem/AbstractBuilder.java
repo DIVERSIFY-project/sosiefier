@@ -100,11 +100,15 @@ public abstract class AbstractBuilder {
     }
 
     public void runBuilder() throws InterruptedException {
+        runBuilder(null);
+    }
+
+    public void runBuilder(final String[] goals) throws InterruptedException {
         initThreadGroup();
         reset();
         Thread thread = new Thread() {
             public void run() {
-                runPrivate(null, true);
+                runPrivate(goals, true);
             }
         };
         thread.start();
@@ -112,6 +116,7 @@ public abstract class AbstractBuilder {
         thread.interrupt();
         killUselessThread();
     }
+
 
 
     public void initTimeOut() throws InterruptedException {

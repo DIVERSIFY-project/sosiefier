@@ -16,6 +16,7 @@ import java.util.Map;
  * <p/>
  * Created by marodrig on 01/07/2014.
  */
+@Deprecated
 public class StackElementBinaryReader extends StackElementReader {
 
     //Map bein readed

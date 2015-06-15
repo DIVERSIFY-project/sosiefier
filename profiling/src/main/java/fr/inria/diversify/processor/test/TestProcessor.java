@@ -96,6 +96,8 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
         refPackage.setSimpleName("org.junit");
         ref.setPackage(refPackage);
         testAnnotation.setAnnotationType(ref);
+
+
         Map<String, Object> elementValue = new HashMap<String, Object>();
         elementValue.put("timeout", timeOut);
         testAnnotation.setElementValues(elementValue);

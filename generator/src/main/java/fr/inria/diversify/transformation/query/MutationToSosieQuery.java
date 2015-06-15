@@ -58,7 +58,7 @@ public class MutationToSosieQuery extends TransformationQuery {
                     }
                 }
 
-                T thread = new T(new ASTTransformationQuery(inputProgram, Statement.class, subType, false));
+                T thread = new T(new ADRTransformationQuery(inputProgram, Statement.class, subType, false));
 
                 thread.start();
                 int count = 0;
@@ -87,9 +87,9 @@ public class MutationToSosieQuery extends TransformationQuery {
 
     class T extends Thread {
         public ASTTransformation trans;
-        ASTTransformationQuery query;
+        ADRTransformationQuery query;
 
-        public T(ASTTransformationQuery query) {
+        public T(ADRTransformationQuery query) {
             this.query = query;
         }
         public void run() {

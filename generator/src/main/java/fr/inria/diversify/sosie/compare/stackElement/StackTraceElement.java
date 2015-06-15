@@ -6,6 +6,7 @@ import java.util.Map;
 /**
  * Created by Simon on 17/04/14.
  */
+@Deprecated
 public class StackTraceElement {
     protected static Map<Integer, String> dico = new HashMap<>();
     //Depth in wich this stack element was logged

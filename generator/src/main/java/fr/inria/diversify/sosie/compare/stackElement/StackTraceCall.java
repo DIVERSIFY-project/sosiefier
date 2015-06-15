@@ -5,7 +5,8 @@ import java.util.Map;
 /**
  * Created by Simon on 24/04/14.
  */
-public class   StackTraceCall extends StackTraceElement {
+@Deprecated
+public class StackTraceCall extends StackTraceElement {
     protected String className;
 
 

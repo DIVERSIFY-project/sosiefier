@@ -13,6 +13,7 @@ import java.util.Set;
 /**
  * Created by Simon on 16/10/14.
  */
+@Deprecated
 public class FieldReferenceVisitor extends CtScanner {
 
     protected Map<CtFieldReference,String> fields;

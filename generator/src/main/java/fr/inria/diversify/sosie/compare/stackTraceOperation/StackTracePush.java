@@ -6,6 +6,7 @@ import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
 /**
  * Created by Simon on 17/04/14.
  */
+@Deprecated
 public class StackTracePush implements StackTraceOperation {
     protected StackTraceCall elem;
 

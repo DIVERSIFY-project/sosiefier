@@ -8,6 +8,7 @@ import java.util.Stack;
 /**
  * Created by Simon on 17/04/14.
  */
+@Deprecated
 public class StackTracePop implements StackTraceOperation {
     protected int pop;
     protected LinkedList<StackTraceCall> callsPop;

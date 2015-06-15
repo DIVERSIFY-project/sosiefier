@@ -4,9 +4,7 @@ package fr.inria.diversify;
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.logger.branch.Coverage;
-import fr.inria.diversify.logger.branch.CoverageReader;
-import fr.inria.diversify.logger.branch.TestCoverage;
+import fr.inria.diversify.logger.branch.*;
 import fr.inria.diversify.logger.logvariable.TestLogVariableReader;
 import fr.inria.diversify.logger.logvariable.TestLogVariable;
 import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
@@ -94,7 +92,6 @@ public class LoadLog {
     }
 
     protected void intBranch() {
-
         BranchPositionProcessor processor = new BranchPositionProcessor();
         LoggerUtils.applyProcessor(factory, processor);
 
@@ -102,6 +99,38 @@ public class LoadLog {
         branchConditionType = processor.getBranchConditionType();
     }
 
+    public void printBranchesInfo(List<TestCoverage> testCoverage) throws IOException {
+        PrintWriter fileWriter = new PrintWriter(new BufferedWriter(new FileWriter(result + "_branchesInfo.csv")));
+        Map<String, Integer> nbTest = new HashMap<>();
+        Map<String, List<Integer>> deep = new HashMap<>();
+        for(TestCoverage tc : testCoverage) {
+            for(MethodCoverage mth : tc.getCoverage().getMethodCoverages()) {
+                for(Branch branch : mth.getCoveredBranchs()) {
+                    String key = mth.getMethodId() + "." + branch.getId();
+                    if (!nbTest.containsKey(key)) {
+                        nbTest.put(key, 0);
+                        deep.put(key, new ArrayList<>());
+                    }
+                    nbTest.put(key, nbTest.get(key) + 1);
+                    deep.get(key).addAll(branch.getDeeps());
+                }
+            }
+        }
+        fileWriter.append("branch;nbTest;maxDeep;meanDeep;line;lineEnd\n");
+        for(String branch : nbTest.keySet()) {
+            if(branchPosition.get(branch) != null) {
+                fileWriter.append(branch + ";");
+                fileWriter.append(nbTest.get(branch) + ";");
+                fileWriter.append(deep.get(branch).stream().mapToInt(i -> i).max().getAsInt() + ";");
+                fileWriter.append(deep.get(branch).stream().mapToDouble(i -> i).sum() / deep.get(branch).size() + ";");
+                fileWriter.append(branchPosition.get(branch).getCompilationUnit().getMainType().getQualifiedName() + ";");
+                fileWriter.append(branchPosition.get(branch).getLine() + ";");
+                fileWriter.append(branchPosition.get(branch).getEndLine() + "\n");
+            }
+        }
+
+        fileWriter.close();
+    }
 
     public void printNotCoveredBranch(List<TestCoverage> testCoverage) throws IOException {
         PrintWriter fileWriter = new PrintWriter(new BufferedWriter(new FileWriter(result + "_notCoveredBranch.csv")));
@@ -109,7 +138,7 @@ public class LoadLog {
         Set<String> allBranch = new HashSet<>();
 
         for(TestCoverage tc : testCoverage) {
-            covered.addAll(tc.getCoveredBranchId());
+            covered.addAll(tc.getCoveredBranch());
             allBranch.addAll(tc.getAllBranch());
         }
         allBranch.removeAll(covered);
@@ -124,12 +153,13 @@ public class LoadLog {
     public static void main(String args[]) throws Exception, InvalidSdkException {
         LoadLog  load = new LoadLog(args[0]);
 //        load.loadTestLogVariable();
-//        List<TestCoverage> testCoverage = load.loadTestCoverage();
-        Coverage coverage = load.loadGlobalCoverage();
+        List<TestCoverage> testCoverage = load.loadTestCoverage();
+//        Coverage coverage = load.loadGlobalCoverage();
 
-        load.initTransformation();
+//        load.initTransformation();
         load.intBranch();
-        load.write(coverage);
+        load.printBranchesInfo(testCoverage);
+//        load.write(coverage);
 
 //        load.write(testCoverage);
 //        load.printNotCoveredBranch(testCoverage);

@@ -15,6 +15,7 @@ import java.util.*;
  * <p/>
  * Created by marodrig on 01/07/2014.
  */
+@Deprecated
 public class StackElementTextReader extends StackElementReader {
     Set<String> testToExclude;
     Map<String, List<String>> traceByTest;

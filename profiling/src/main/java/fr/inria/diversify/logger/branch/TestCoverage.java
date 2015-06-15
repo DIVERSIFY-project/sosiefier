@@ -106,14 +106,7 @@ public class TestCoverage {
         return branchs;
     }
 
-    public Set<String> getCoveredBranchId() {
-        Set<String> branchs = new HashSet<>();
-
-        for (MethodCoverage mc : coverage.getMethodCoverages()) {
-            for (String branch : mc.getAllBranch()) {
-                branchs.add(mc.getMethodId() + "." + branch);
-            }
-        }
-        return branchs;
+    public Set<String> getCoveredBranch() {
+        return coverage.getCoverageBranch();
     }
 }

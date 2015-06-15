@@ -7,7 +7,7 @@ import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.reflect.code.CtCodeSnippetStatementImpl;
-
+@Deprecated
 public class AssertCountInstrumenter extends TestProcessor {
     protected int staticCount = 0;
 

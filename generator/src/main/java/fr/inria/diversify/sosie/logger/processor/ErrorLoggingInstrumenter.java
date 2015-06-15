@@ -15,6 +15,7 @@ import java.util.*;
  * Date: 25/02/14
  * Time: 11:32
  */
+@Deprecated
 public class ErrorLoggingInstrumenter extends AbstractLoggingInstrumenter<CtStatement> {
 
     public ErrorLoggingInstrumenter(List<Transformation> transformations) {

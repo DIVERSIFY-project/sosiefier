@@ -10,6 +10,7 @@ import java.util.Map;
  *
  * Created by Simon on 24/04/14.
  */
+@Deprecated
 public class StackTraceVariableObservation implements StackTraceOperation {
     /**
      * Observed variables

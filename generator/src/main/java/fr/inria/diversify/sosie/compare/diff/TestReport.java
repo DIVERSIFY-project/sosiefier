@@ -10,6 +10,7 @@ import java.util.*;
 /**
  * Created by Simon on 26/06/14.
  */
+@Deprecated
 public class TestReport {
 
     protected Set<String> methodCall;

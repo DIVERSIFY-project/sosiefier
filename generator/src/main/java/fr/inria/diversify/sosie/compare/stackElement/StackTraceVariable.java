@@ -6,6 +6,7 @@ import java.util.*;
 /**
  * Created by Simon on 24/04/14.
  */
+@Deprecated
 public class StackTraceVariable extends StackTraceElement {
     protected Map<String,Long> vars;
     protected static Map<Long, Object> idToVar = new HashMap<>();

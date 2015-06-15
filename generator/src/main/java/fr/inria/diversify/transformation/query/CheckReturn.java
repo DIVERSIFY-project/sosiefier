@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Simon on 22/08/14.
  */
-public class CheckReturn extends ASTTransformationQuery {
+public class CheckReturn extends ADRTransformationQuery {
     protected List<CodeFragment> returns;
     protected List<CodeFragment> checks;
 
