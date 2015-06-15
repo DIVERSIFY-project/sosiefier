@@ -21,13 +21,10 @@ public class LogWriter {
     private String simpleSeparator = ";";
     private String end = "$$\n";
 
-    private Map<Class, String[]> previousValues;
+    private Map<Class, String[]> previousObservation;
     private Map<Class, Method[]> getters;
     private Map<Class, Field[]> fields;
     private Map<Class, String> classToId;
-    private static int testCount = 0;
-    private static long monitoringCount = 0;
-    private static long assertCount = 0;
 
     private boolean isObserve = false;
 
@@ -52,7 +49,7 @@ public class LogWriter {
 
 
     ///Previous logs of variables status. Useful to validate whether they have change
-    protected Map<Thread, Map<String, String>> previousVarLog;
+    protected Map<String, String> previousVars;
 
 
     /**
@@ -65,7 +62,9 @@ public class LogWriter {
         currentPaths = new Stack<StringBuilder>();
         previousBranchs = new Stack<String>();
 
-        previousValues = new HashMap<Class, String[]>();
+        previousObservation = new HashMap<Class, String[]>();
+
+        previousVars = new HashMap<String, String>();
         getters = new HashMap<Class, Method[]>();
         fields = new HashMap<Class, Field[]>();
         classToId = new HashMap<Class, String>();
@@ -215,6 +214,66 @@ public class LogWriter {
         }
     }
 
+    public void writeVar(int  methodId, int localPositionId, Object... var) {
+        if(!isObserve) {
+            isObserve = true;
+            try {
+                StringBuilder string = new StringBuilder();
+                string.append("$$$\n");
+                string.append("V");
+                string.append(deep);
+                string.append(simpleSeparator);
+                string.append(localPositionId + "");
+                string.append(simpleSeparator);
+                string.append(methodId);
+
+                String varsString = buildVars(methodId, localPositionId, var);
+                if(varsString.isEmpty())
+                    return;
+
+                string.append(varsString);
+
+                PrintWriter fileWriter = getFileWriter();
+                fileWriter.append(string.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                isObserve = false;
+            }
+        }
+    }
+
+
+    protected String buildVars(int methodId, int localPositionId,Object[] vars) {
+        String positionId = methodId + "." + localPositionId;
+        StringBuilder varsString = new StringBuilder();
+
+        for (int i = 0; i < vars.length / 2; i = i + 2) {
+            try {
+                String varName = vars[i].toString();
+                String value;
+                if (vars[i + 1] == null) {
+                    value = "null";
+                } else {
+                    value = vars[i + 1].toString();
+                }
+                if(value.length() > 1000) {
+                    value = vars[i + 1].getClass().getCanonicalName() + value.length();
+                }
+                String varId = positionId + ":" + varName;
+                String previousValue = previousVars.get(varId);
+                if (!value.equals(previousValue)) {
+                    previousVars.put(varId, value);
+                    varsString.append(separator);
+                    varsString.append(varName);
+                    varsString.append(simpleSeparator);
+                    varsString.append(value);
+                }
+            } catch (Exception e) {
+            }
+        }
+        return varsString.toString();
+    }
 
     public void logAssertArgument(int idAssertTarget, Object target,  int idAssertInvocation, Object invocation) {
         logAssertArgument(idAssertTarget, target);
@@ -274,12 +333,11 @@ public class LogWriter {
             }
             j++;
         }
-        monitoringCount += results.length;
         StringBuilder sameValue = new StringBuilder();
         List<String> result = new ArrayList<String>();
         boolean sameValues = true;
-        if(previousValues.containsKey(objectClass)) {
-            String[] pValues = previousValues.get(objectClass);
+        if(previousObservation.containsKey(objectClass)) {
+            String[] pValues = previousObservation.get(objectClass);
             for (i = 0; i < results.length; i++) {
                 if (pValues[i].equals(results[i])) {
                     sameValue.append("0");
@@ -298,7 +356,7 @@ public class LogWriter {
                 result.add(results[i]);
                 pValues[i] = results[i];
             }
-            previousValues.put(objectClass, pValues);
+            previousObservation.put(objectClass, pValues);
         }
 
         String classId = getClassId(objectClass);

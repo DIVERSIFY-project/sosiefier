@@ -20,10 +20,9 @@ import java.util.Map;
  * User: Simon
  * Date: 09/04/15
  */
-public class BranchCoverageProcessor extends AbstractProcessor<CtExecutable> {
+public class BranchCoverageProcessor extends AbstractLoggingInstrumenter<CtExecutable> {
     List<String> methodsId;
     Map<Integer, Integer> blockIds;
-    String logger;
 
 
     public BranchCoverageProcessor(String outputDir) throws IOException {
@@ -38,15 +37,11 @@ public class BranchCoverageProcessor extends AbstractProcessor<CtExecutable> {
     @Override
     public boolean isToBeProcessed(CtExecutable method) {
         return method.getBody() != null;
-//                && Query.getElements(method, new TypeFilter(CtIf.class)).size()
-//                    + Query.getElements(method, new TypeFilter(CtLoop.class)).size()
-//                    + Query.getElements(method, new TypeFilter(CtCatch.class)).size()
-//                    != 0 ;
     }
 
     @Override
     public void process(CtExecutable method) {
-        int methodId = ProcessorUtil.idFor(method.getReference().getDeclaringType().getQualifiedName() + "." +method.getSignature());
+        int methodId = methodId(method);
         String info = methodId + " " + method.getReference().getDeclaringType().getQualifiedName() + "_" + method.getSignature().replace(" ", "_");
 
         addBranchLogger(method.getBody(),"b");
@@ -121,7 +116,7 @@ public class BranchCoverageProcessor extends AbstractProcessor<CtExecutable> {
     }
 
     protected void addBranchLogger(CtStatementList stmts, String idBranch) {
-        String snippet = getLogName() + ".branch(Thread.currentThread(),\"" + idBranch + "\")";
+        String snippet = getLogger() + ".branch(Thread.currentThread(),\"" + idBranch + "\")";
 
         CtCodeSnippetStatement beginStmt = getFactory().Core().createCodeSnippetStatement();
         beginStmt.setValue(snippet);
@@ -134,7 +129,7 @@ public class BranchCoverageProcessor extends AbstractProcessor<CtExecutable> {
     }
 
     protected void addBranchLogger(CtBlock block, String idBranch) {
-        String snippet = getLogName() + ".branch(Thread.currentThread(),\"" + idBranch + "\")";
+        String snippet = getLogger() + ".branch(Thread.currentThread(),\"" + idBranch + "\")";
 
         CtCodeSnippetStatement beginStmt = getFactory().Core().createCodeSnippetStatement();
         beginStmt.setValue(snippet);
@@ -148,7 +143,7 @@ public class BranchCoverageProcessor extends AbstractProcessor<CtExecutable> {
         CtTry ctTry = factory.Core().createTry();
         ctTry.setBody(method.getBody());
 
-        String snippet = getLogName() + ".methodIn(Thread.currentThread(),\"" + id + "\")";
+        String snippet = getLogger() + ".methodIn(Thread.currentThread(),\"" + id + "\")";
 
         CtCodeSnippetStatement beginStmt = factory.Core().createCodeSnippetStatement();
         beginStmt.setValue(snippet);
@@ -157,7 +152,7 @@ public class BranchCoverageProcessor extends AbstractProcessor<CtExecutable> {
 
 
         CtCodeSnippetStatement stmt = factory.Core().createCodeSnippetStatement();
-        stmt.setValue(getLogName()+".methodOut(Thread.currentThread(),\"" + id + "\")");
+        stmt.setValue(getLogger() +".methodOut(Thread.currentThread(),\"" + id + "\")");
 
         CtBlock finalizerBlock = factory.Core().createBlock();
         finalizerBlock.addStatement(stmt);
@@ -189,13 +184,5 @@ public class BranchCoverageProcessor extends AbstractProcessor<CtExecutable> {
         }
         blockIds.put(methodId, blockIds.get(methodId) + 1);
         return blockIds.get(methodId);
-    }
-
-    public String getLogName() {
-        return logger;
-    }
-
-    public void setLogger(String logger) {
-        this.logger = logger;
     }
 }

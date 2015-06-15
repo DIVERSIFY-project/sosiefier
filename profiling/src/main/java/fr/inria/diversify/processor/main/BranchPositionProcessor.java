@@ -20,7 +20,7 @@ import java.util.Map;
  * Date: 21/05/15
  * Time: 14:31
  */
-public class BranchPositionProcessor extends AbstractProcessor<CtExecutable> {
+public class BranchPositionProcessor extends AbstractLoggingInstrumenter<CtExecutable> {
     List<String> methodsId;
     Map<Integer, Integer> blockIds;
     Map<String,SourcePosition> branchPosition;
@@ -40,7 +40,7 @@ public class BranchPositionProcessor extends AbstractProcessor<CtExecutable> {
 
     @Override
     public void process(CtExecutable method) {
-        int methodId = ProcessorUtil.idFor(method.getReference().getDeclaringType().getQualifiedName() + "." + method.getSignature());
+        int methodId = methodId(method);
 
         addBranch(methodId, "b", method.getBody());
         branchConditionType.put(methodId+".b", methodVisibility(method));
@@ -64,8 +64,6 @@ public class BranchPositionProcessor extends AbstractProcessor<CtExecutable> {
         for(Object object : Query.getElements(method, new TypeFilter(CtCase.class))) {
             CtCase ctCase = (CtCase) object;
             int branchId = idBranch(methodId);
-
-//            updateBranchConditionType(ctCase, "s" + branchId);
             addBranch(methodId, "s" + branchId, ctCase);
 
         }
@@ -73,8 +71,6 @@ public class BranchPositionProcessor extends AbstractProcessor<CtExecutable> {
         for(Object object : Query.getElements(method, new TypeFilter(CtLoop.class))) {
             CtLoop ctLoop = (CtLoop) object;
             int branchId = idBranch(methodId);
-
-//            updateBranchConditionType(ctLoop,  "l" + branchId);
             addBranch(methodId, "l" + branchId, ctLoop.getBody());
         }
 

@@ -49,6 +49,9 @@ public class Logger {
         getLog(thread).methodOut(id);
     }
 
+    public static void writeField(Thread thread, int methodId, int localPositionId, int varId, Object var) {
+        getLog(thread).writeVar(methodId, varId, localPositionId, var);
+    }
 
     public static void writeTestStart(Thread thread, Object receiver, String testName) {
         getLog(thread).writeTestStart(testName, receiver);
