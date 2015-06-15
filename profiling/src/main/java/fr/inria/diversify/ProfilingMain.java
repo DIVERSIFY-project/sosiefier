@@ -69,6 +69,14 @@ public class ProfilingMain {
             LoggerUtils.applyProcessor(factory, m);
         }
 
+        condition = Boolean.parseBoolean(inputConfiguration.getProperty("profiling.main.field", "false"));
+        transform = transform || condition;
+        if(condition) {
+            FieldUsedInstrumenter m = new FieldUsedInstrumenter(outputDirectory);
+            m.setLogger(logger+".Logger");
+            LoggerUtils.applyProcessor(factory, m);
+        }
+
         if(transform) {
             File fileFrom = new File(inputProgram.getAbsoluteSourceCodeDir());
             File out = new File(outputDirectory + "/" + mainSrc);
@@ -86,7 +94,6 @@ public class ProfilingMain {
         transform = transform || condition;
         if(condition) {
             TestDataMutator m = new TestDataMutator();
-//            m.setLogger(logger+".Logger");
             LoggerUtils.applyProcessor(factory, m);
         }
 
@@ -94,7 +101,6 @@ public class ProfilingMain {
         transform = transform || condition;
         if(condition) {
             TestMethodCallAdder v = new TestMethodCallAdder();
-//            v.setLogger(logger+".Logger");
             LoggerUtils.applyProcessor(factory, v);
         }
 
@@ -102,7 +108,6 @@ public class ProfilingMain {
         transform = transform || condition;
         if(condition) {
             TestMethodCallRemover e = new TestMethodCallRemover();
-//            e.setLogger(logger+".Logger");
             LoggerUtils.applyProcessor(factory, e);
         }
 
