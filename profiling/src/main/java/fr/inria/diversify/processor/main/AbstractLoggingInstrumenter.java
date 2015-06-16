@@ -1,5 +1,6 @@
 package fr.inria.diversify.processor.main;
 
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.processor.ProcessorUtil;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtBreak;
@@ -16,7 +17,13 @@ import java.util.Map;
 public abstract class AbstractLoggingInstrumenter<E extends CtElement> extends AbstractProcessor<E> {
     protected static Map<CtExecutable, Integer> localId = new HashMap();
 
+    protected InputProgram inputProgram;
+
     protected String logger;
+
+    public  AbstractLoggingInstrumenter(InputProgram inputProgram) {
+        this.inputProgram = inputProgram;
+    }
 
     public String getLogger() {
         return logger;

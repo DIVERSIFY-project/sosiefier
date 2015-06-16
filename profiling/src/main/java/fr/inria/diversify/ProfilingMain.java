@@ -64,7 +64,7 @@ public class ProfilingMain {
         Boolean condition = Boolean.parseBoolean(inputConfiguration.getProperty("profiling.main.branch", "false"));
         transform = transform || condition;
         if(condition) {
-            BranchCoverageProcessor m = new BranchCoverageProcessor(outputDirectory);
+            BranchCoverageProcessor m = new BranchCoverageProcessor(inputProgram, outputDirectory);
             m.setLogger(logger+".Logger");
             LoggerUtils.applyProcessor(factory, m);
         }
@@ -72,7 +72,15 @@ public class ProfilingMain {
         condition = Boolean.parseBoolean(inputConfiguration.getProperty("profiling.main.field", "false"));
         transform = transform || condition;
         if(condition) {
-            FieldUsedInstrumenter m = new FieldUsedInstrumenter(outputDirectory);
+            FieldUsedInstrumenter m = new FieldUsedInstrumenter(inputProgram, outputDirectory);
+            m.setLogger(logger+".Logger");
+            LoggerUtils.applyProcessor(factory, m);
+        }
+
+        condition = Boolean.parseBoolean(inputConfiguration.getProperty("profiling.main.methodCall", "false"));
+        transform = transform || condition;
+        if(condition) {
+            MethodCallInstrumenter m = new MethodCallInstrumenter(inputProgram);
             m.setLogger(logger+".Logger");
             LoggerUtils.applyProcessor(factory, m);
         }

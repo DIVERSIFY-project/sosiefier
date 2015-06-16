@@ -1,7 +1,7 @@
 package fr.inria.diversify.processor.main;
 
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.processor.ProcessorUtil;
-import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.factory.Factory;
@@ -25,7 +25,8 @@ public class BranchCoverageProcessor extends AbstractLoggingInstrumenter<CtExecu
     Map<Integer, Integer> blockIds;
 
 
-    public BranchCoverageProcessor(String outputDir) throws IOException {
+    public BranchCoverageProcessor(InputProgram inputProgram, String outputDir) throws IOException {
+        super(inputProgram);
         File file = new File(outputDir + "/log/");
         if(!file.exists()) {
             file.mkdirs();

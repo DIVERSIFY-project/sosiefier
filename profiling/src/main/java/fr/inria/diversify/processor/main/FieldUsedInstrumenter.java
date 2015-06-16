@@ -1,13 +1,11 @@
 package fr.inria.diversify.processor.main;
 
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.processor.ProcessorUtil;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtCodeSnippetStatement;
 import spoon.reflect.code.CtLoop;
 import spoon.reflect.code.CtStatement;
-import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourcePosition;
-import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
@@ -25,7 +23,8 @@ public class FieldUsedInstrumenter extends AbstractLoggingInstrumenter<CtStateme
 
     protected Set<CtStatement> alreadyInstrument;
 
-    public FieldUsedInstrumenter(String outputDir) {
+    public FieldUsedInstrumenter(InputProgram inputProgram, String outputDir) {
+        super(inputProgram);
         File file = new File(outputDir + "/log/");
         if(!file.exists()) {
             file.mkdirs();

@@ -1,15 +1,12 @@
 package fr.inria.diversify.processor.main;
 
-import fr.inria.diversify.processor.ProcessorUtil;
-import spoon.processing.AbstractProcessor;
+import fr.inria.diversify.diversification.InputProgram;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
-import spoon.reflect.reference.CtExecutableReference;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +23,9 @@ public class BranchPositionProcessor extends AbstractLoggingInstrumenter<CtExecu
     Map<String,SourcePosition> branchPosition;
     Map<String, String> branchConditionType;
 
-    public BranchPositionProcessor() {
+    public BranchPositionProcessor(InputProgram inputProgram) {
+        super(inputProgram);
+
         branchPosition = new HashMap<>();
         branchConditionType = new HashMap<>();
         methodsId = new ArrayList<>();
