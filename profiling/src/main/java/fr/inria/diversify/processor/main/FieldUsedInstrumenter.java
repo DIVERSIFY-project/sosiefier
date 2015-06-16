@@ -78,20 +78,6 @@ public class FieldUsedInstrumenter extends AbstractLoggingInstrumenter<CtStateme
         return match;
     }
 
-//    protected boolean ok(CtStatement statement) {
-//        if(statement instanceof CtBlock)
-//            return false;
-//        CtStatement parent = statement.getParent(CtStatement.class);
-//        if(parent instanceof CtBlock) {
-//            return !statement.toString().startsWith("this(")
-//                    && !statement.toString().startsWith("super(");
-//        }
-////                    && !oneLineMethod(statement);
-//        else {
-//            return false;
-//        }
-//    }
-
     protected boolean ok(CtStatement statement) {
         if(statement instanceof CtBlock
                 || statement instanceof CtLoop) {
@@ -100,16 +86,6 @@ public class FieldUsedInstrumenter extends AbstractLoggingInstrumenter<CtStateme
         return !statement.toString().startsWith("this(")
                 && !statement.toString().startsWith("super(");
     }
-
-//    protected boolean oneLineMethod(CtStatement statement) {
-//        SourcePosition sp = statement.getPosition();
-//        CompilationUnit stmtCompileUnit = sp.getCompilationUnit();
-//
-//        SourcePosition sp2 = statement.getParent(CtExecutable.class).getPosition();
-//        CompilationUnit mthCompileUnit = sp2.getCompilationUnit();
-//
-//        return  stmtCompileUnit.beginOfLineIndex(sp.getSourceEnd()) ==  mthCompileUnit.beginOfLineIndex(sp2.getSourceEnd());
-//    }
 
     protected FieldReferenceVisitor getFieldUsed(CtStatement statement) {
         FieldReferenceVisitor scanner = new FieldReferenceVisitor();

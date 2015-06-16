@@ -1,10 +1,8 @@
 package fr.inria.diversify.processor.main;
 
-import fr.inria.diversify.util.Log;
 import spoon.reflect.code.CtAssignment;
 import spoon.reflect.code.CtFieldAccess;
 import spoon.reflect.code.CtReturn;
-import spoon.reflect.code.CtThisAccess;
 import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.visitor.CtScanner;
 
@@ -26,7 +24,6 @@ public class FieldReferenceVisitor extends CtScanner {
         after = new HashSet<>();
     }
 
-
     public <T, A extends T> void visitCtAssignment(CtAssignment<T, A> assignement) {
         if(assignement.getAssigned() instanceof CtFieldAccess)
             after.add(((CtFieldAccess) assignement.getAssigned()).getVariable());
@@ -36,33 +33,12 @@ public class FieldReferenceVisitor extends CtScanner {
 
     @Override
     public <T> void visitCtFieldAccess(CtFieldAccess<T> targetedAccess) {
-        if(targetedAccess.getTarget() != null && !(targetedAccess.getTarget() instanceof CtThisAccess)) {
-            if(targetedAccess.getTarget().getType() == null)
-                Log.debug("");
-            if(targetedAccess.getTarget().getType() != null && targetedAccess.getTarget().getType().isPrimitive()) {
-                Log.debug("");
-            }
+        if(!targetedAccess.toString().startsWith("super")) {
+            fields.put(((CtFieldReference) targetedAccess.getVariable()), targetedAccess.toString());
         }
-        if(!targetedAccess.toString().startsWith("super"))
-            fields.put(((CtFieldReference)targetedAccess.getVariable()),targetedAccess.toString());
 
         super.visitCtFieldAccess(targetedAccess);
     }
-
-
-//    public <T> void visitCtTargetedAccess(CtTargetedAccess<T> targetedAccess) {
-//        if(targetedAccess.getTarget() != null && !(targetedAccess.getTarget() instanceof CtThisAccess)) {
-//            if(targetedAccess.getTarget().getType() == null)
-//                Log.debug("");
-//            if(targetedAccess.getTarget().getType() != null && targetedAccess.getTarget().getType().isPrimitive()) {
-//                Log.debug("");
-//            }
-//        }
-//        if(!targetedAccess.toString().startsWith("super"))
-//            fields.put(((CtFieldReference)targetedAccess.getVariable()),targetedAccess.toString());
-//
-//        super.visitCtTargetedAccess(targetedAccess);
-//    }
 
     public <R> void visitCtReturn(CtReturn<R> returnStatement) {
         super.visitCtReturn(returnStatement);
