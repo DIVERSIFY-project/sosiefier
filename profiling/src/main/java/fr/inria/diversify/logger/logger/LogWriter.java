@@ -1,56 +1,32 @@
 package fr.inria.diversify.logger.logger;
 
 
-
 import java.io.*;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.*;
 
 
-/**
- * Abstract classes for all loggers
- * <p/>
- * Created by marodrig on 25/06/2014.
- */
 public class LogWriter {
     private PrintWriter fileWriter;
 
-    private String separator = ":;:";
-    private String simpleSeparator = ";";
-    private String end = "$$\n";
-
-    private Map<Class, String[]> previousObservation;
-    private Map<Class, Method[]> getters;
-    private Map<Class, Field[]> fields;
-    private Map<Class, String> classToId;
+    private Map<Class, ClassObserver> classesObservers;
 
     private boolean isObserve = false;
 
-    private static int count = 0;
+    private boolean logMethodCall = true;
 
     //Thread containing the test
     private final Thread thread;
 
-    private Stack<StringBuilder> currentPaths;
-
-    private Stack<String> previousBranchs;
-
     //current deep in the heap
     private int deep;
 
-    //string : method id
-    //Set<String> set of path
-    private Map<String, Set<String>> allPath;
+    private PathBuilder pathBuilder;
 
     ///Directory where the log is being stored
     protected File dir = null;
 
-
     ///Previous logs of variables status. Useful to validate whether they have change
     protected Map<String, String> previousVars;
-
 
     /**
      * Constructor for the logger
@@ -59,19 +35,12 @@ public class LogWriter {
         if (dir == null) {
             initDir();
         }
-        currentPaths = new Stack<StringBuilder>();
-        previousBranchs = new Stack<String>();
-
-        previousObservation = new HashMap<Class, String[]>();
-
         previousVars = new HashMap<String, String>();
-        getters = new HashMap<Class, Method[]>();
-        fields = new HashMap<Class, Field[]>();
-        classToId = new HashMap<Class, String>();
+        pathBuilder = new PathBuilder();
+        classesObservers = new HashMap<Class, ClassObserver>();
 
         ShutdownHookLog shutdownHook = new ShutdownHookLog();
         Runtime.getRuntime().addShutdownHook(shutdownHook);
-        allPath = new HashMap<String, Set<String>>();
         this.thread = thread;
     }
 
@@ -122,7 +91,6 @@ public class LogWriter {
         return "log" + thread.getName();
     }
 
-
     //Thread containing the test
     public Thread getThread() {
         return thread;
@@ -130,48 +98,36 @@ public class LogWriter {
 
     public void branch(String id) {
         if(!isObserve) {
-            if (previousBranchs.size() == 0 || previousBranchs.peek() != id) {
-                currentPaths.peek().append(simpleSeparator);
-                currentPaths.peek().append(id);
-            }
-            previousBranchs.pop();
-            previousBranchs.push(id);
+            pathBuilder.addbranch(id);
         }
     }
 
     public void methodIn(String id) {
         if(!isObserve) {
             deep++;
-            previousBranchs.push(null);
-            currentPaths.push(new StringBuilder());
+            if(logMethodCall) {
+                try {
+                    PrintWriter fileWriter = getFileWriter();
+                    fileWriter.append(KeyWord.endLine);
+                    fileWriter.append(KeyWord.methodCallObservation);
+                    fileWriter.append(KeyWord.simpleSeparator);
+                    fileWriter.append(id);
+                    fileWriter.append(KeyWord.simpleSeparator);
+                    fileWriter.append(deep + "");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            pathBuilder.newPath();
         }
     }
 
     public void methodOut(String id) {
         if(!isObserve) {
-            String path = deep + currentPaths.pop().toString();
+            try {
+                pathBuilder.printPath(id, deep, getFileWriter());
+            } catch (Exception e) {}
             deep--;
-            previousBranchs.pop();
-
-            if (!allPath.containsKey(id)) {
-                allPath.put(id, new HashSet<String>());
-            }
-            Set<String> paths = allPath.get(id);
-
-            if (!paths.contains(path)) {
-                paths.add(path);
-                try {
-                    PrintWriter fileWriter = getFileWriter();
-                    fileWriter.append(end);
-                    fileWriter.append("P");
-                    fileWriter.append(simpleSeparator);
-                    fileWriter.append(id);
-                    fileWriter.append(simpleSeparator);
-                    fileWriter.append(path);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
@@ -180,9 +136,9 @@ public class LogWriter {
             try {
                 deep = 0;
                 PrintWriter fileWriter = getFileWriter();
-                fileWriter.append(end);
-                fileWriter.append("TS");
-                fileWriter.append(simpleSeparator);
+                fileWriter.append(KeyWord.endLine);
+                fileWriter.append(KeyWord.testStartObservation);
+                fileWriter.append(KeyWord.simpleSeparator);
                 fileWriter.append(receiver.getClass().getCanonicalName());
                 fileWriter.append(".");
                 fileWriter.append(testName);
@@ -195,7 +151,7 @@ public class LogWriter {
         if(!isObserve) {
             try {
                 PrintWriter fileWriter = getFileWriter();
-                fileWriter.append(end);
+                fileWriter.append(KeyWord.endLine);
                 fileWriter.append(testName);
             } catch (Exception e) {
             }
@@ -205,10 +161,10 @@ public class LogWriter {
     public void writeTestFinish() {
         if(!isObserve) {
             try {
-                allPath.clear();
+                pathBuilder.clear();
                 PrintWriter fileWriter = getFileWriter();
-                fileWriter.append(end);
-                fileWriter.append("TE");
+                fileWriter.append(KeyWord.endLine);
+                fileWriter.append(KeyWord.testEndObservation);
             } catch (Exception e) {
             }
         }
@@ -219,12 +175,12 @@ public class LogWriter {
             isObserve = true;
             try {
                 StringBuilder string = new StringBuilder();
-                string.append("$$$\n");
-                string.append("V");
+                string.append(KeyWord.endLine);
+                string.append(KeyWord.variableObservation);
                 string.append(deep);
-                string.append(simpleSeparator);
+                string.append(KeyWord.simpleSeparator);
                 string.append(localPositionId + "");
-                string.append(simpleSeparator);
+                string.append(KeyWord.simpleSeparator);
                 string.append(methodId);
 
                 String varsString = buildVars(methodId, localPositionId, var);
@@ -264,9 +220,9 @@ public class LogWriter {
                 String previousValue = previousVars.get(varId);
                 if (!value.equals(previousValue)) {
                     previousVars.put(varId, value);
-                    varsString.append(separator);
+                    varsString.append(KeyWord.separator);
                     varsString.append(varName);
-                    varsString.append(simpleSeparator);
+                    varsString.append(KeyWord.simpleSeparator);
                     varsString.append(value);
                 }
             } catch (Exception e) {
@@ -285,17 +241,15 @@ public class LogWriter {
             isObserve = true;
             try {
                 StringBuilder string = new StringBuilder();
-                string.append(end);
-                string.append("As");
-                string.append(simpleSeparator);
+                string.append(KeyWord.endLine);
+                string.append(KeyWord.assertObservation);
+                string.append(KeyWord.simpleSeparator);
                 string.append(idAssert + "");
 
-                String varsString = observe(invocation);
-
-                string.append(simpleSeparator);
-                string.append(varsString);
-
                 PrintWriter fileWriter = getFileWriter();
+                string.append(KeyWord.simpleSeparator);
+                observe(invocation, fileWriter);
+
                 fileWriter.append(string.toString());
             } catch (Exception e) {
                 e.printStackTrace();
@@ -305,211 +259,17 @@ public class LogWriter {
         }
     }
 
-    protected String observe(Object object) throws IOException, InterruptedException {
+    protected void observe(Object object, PrintWriter writer) throws IOException, InterruptedException {
         Class objectClass;
         if(object == null) {
             objectClass = null;
         } else {
             objectClass = object.getClass();
         }
-        Method[] classGetters = getGetters(objectClass);
-        Field[] classPublicFields = getPublicFields(objectClass);
-        String[] results = new String[classGetters.length + classPublicFields.length];
-
-        int i = 0;
-        for(; i < classGetters.length ; i++) {
-            try {
-                results[i] = formatVar(classGetters[i].invoke(object));
-            } catch (Exception e) {
-                results[i] = "null";
-            }
+        if(!classesObservers.containsKey(objectClass)) {
+            classesObservers.put(objectClass, new ClassObserver(objectClass));
         }
-        int j= 0;
-        for(; i < results.length ; i++) {
-            try {
-                results[i] = formatVar(classPublicFields[j].get(object));
-            } catch (Exception e) {
-                results[i] = "null";
-            }
-            j++;
-        }
-        StringBuilder sameValue = new StringBuilder();
-        List<String> result = new ArrayList<String>();
-        boolean sameValues = true;
-        if(previousObservation.containsKey(objectClass)) {
-            String[] pValues = previousObservation.get(objectClass);
-            for (i = 0; i < results.length; i++) {
-                if (pValues[i].equals(results[i])) {
-                    sameValue.append("0");
-                } else {
-                    sameValues = false;
-                    sameValue.append("1");
-                    result.add(results[i]);
-                    pValues[i] = results[i];
-                }
-            }
-        } else {
-            sameValues = false;
-            String[] pValues = new String[results.length];
-            for (i = 0; i < results.length; i++) {
-                sameValue.append("1");
-                result.add(results[i]);
-                pValues[i] = results[i];
-            }
-            previousObservation.put(objectClass, pValues);
-        }
-
-        String classId = getClassId(objectClass);
-
-        if(sameValues) {
-            return classId;
-        } else {
-            return classId + simpleSeparator + sameValue.toString() + separator + join(result, separator);
-        }
-    }
-
-    protected String getClassId(Class objectClass) throws IOException, InterruptedException {
-        String className;
-        if(objectClass == null) {
-            className = "NullClass";
-        } else {
-            className = objectClass.getName();
-        }
-
-        if(!classToId.containsKey(objectClass)) {
-            classToId.put(objectClass, count + "");
-
-            PrintWriter fileWriter = getFileWriter();
-            fileWriter.append(end + "Cl" + simpleSeparator + className + simpleSeparator + count);
-            count++;
-        }
-        return classToId.get(objectClass);
-    }
-
-    protected String join(List<String> list, String conjunction)
-    {
-        StringBuilder sb = new StringBuilder();
-        boolean first = true;
-        for (String item : list)
-        {
-            if (first)
-                first = false;
-            else
-                sb.append(conjunction);
-            sb.append(item);
-        }
-        return sb.toString();
-    }
-
-    protected String formatVar(Object object) {
-        if (object == null) {
-            return "null";
-        }
-        String string;
-        if (object.getClass().isArray()) {
-            string = Arrays.toString((Object[]) object);
-        } else {
-            string = object + "";
-        }
-        if(string.length() > 1000)
-            string = string.length() + "";
-
-        return string;
-    }
-
-    protected Field[] getPublicFields(Class aClass) throws IOException, InterruptedException {
-        return fields.get(aClass);
-    }
-
-    protected Method[] getGetters(Class aClass) throws IOException, InterruptedException {
-        if(!getters.containsKey(aClass)) {
-            intGettersAndFields(aClass);
-        }
-        return getters.get(aClass);
-    }
-
-
-    protected void intGettersAndFields(Class aClass) throws IOException, InterruptedException {
-        Method[] methods;
-        Field[] publicFields;
-
-        if(aClass == null) {
-            methods = new Method[0];
-            publicFields = new Field[0];
-        } else {
-            methods = findGetters(aClass);
-            publicFields = findFields(aClass);
-        }
-        fields.put(aClass,publicFields);
-        getters.put(aClass, methods);
-
-        String classId = getClassId(aClass);
-
-        PrintWriter fileWriter = getFileWriter();
-
-        fileWriter.append(end + "Gt" + simpleSeparator + classId);
-        for(Method method : methods) {
-            fileWriter.append(simpleSeparator + method.getName());
-        }
-        for(Field field : publicFields) {
-            fileWriter.append(simpleSeparator + field.getName());
-        }
-    }
-
-    protected Field[] findFields(Class aClass) {
-        List<Field> fields = new ArrayList<Field>();
-        for(Field field : aClass.getFields()) {
-            if(Modifier.isPublic(field.getModifiers())) {
-                fields.add(field);
-            }
-        }
-        Field[] ret = new Field[fields.size()];
-        for(int i = 0; i < fields.size(); i++) {
-            ret[i] = fields.get(i);
-        }
-        return ret;
-    }
-
-    protected Method[] findGetters(Class aClass){
-        List<Method> getters = new ArrayList<Method>();
-        for(Method method : aClass.getMethods()){
-            if((isGetter(method) || isIs(method)) && !methodDefinedInObject(method)) {
-                getters.add(method);
-            }
-        }
-
-        try {
-            Method toStringMethod = aClass.getMethod("toString");
-            if(!methodDefinedInObject(toStringMethod)) {
-                getters.add(toStringMethod);
-            }
-        } catch (NoSuchMethodException e) {}
-
-        Method[] ret = new Method[getters.size()];
-
-        for(int i = 0; i< ret.length; i++ ) {
-            ret[i] = getters.get(i);
-        }
-        return ret;
-    }
-
-    protected boolean isIs(Method method) {
-        return method.getName().startsWith("is")
-                && method.getParameterTypes().length == 0;
-    }
-
-    protected boolean isGetter(Method method) {
-        return method.getName().startsWith("get")
-                && method.getParameterTypes().length == 0;
-    }
-
-    protected boolean methodDefinedInObject(Method method) {
-        for(Method objectMethod : Object.class.getMethods()) {
-            if(objectMethod.equals(method)) {
-                return true;
-            }
-        }
-        return false;
+        classesObservers.get(objectClass).observe(object,writer);
     }
 
     protected synchronized PrintWriter getFileWriter() throws IOException, InterruptedException {
