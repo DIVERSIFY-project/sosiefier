@@ -1,0 +1,37 @@
+package fr.inria.diversify.processor.main;
+
+import fr.inria.diversify.diversification.InputProgram;
+import spoon.reflect.code.CtCase;
+import spoon.reflect.code.CtCatch;
+import spoon.reflect.code.CtCodeSnippetStatement;
+
+/**
+ * User: Simon
+ * Date: 17/06/15
+ * Time: 10:05
+ */
+public class CatchProcessor extends AbstractLoggingInstrumenter<CtCatch> {
+
+    public CatchProcessor(InputProgram inputProgram) {
+        super(inputProgram);
+    }
+
+    @Override
+    public boolean isToBeProcessed(CtCatch candidate) {
+        return candidate.getParent(CtCase.class) != null
+                && getMethod(candidate) != null;
+    }
+
+    @Override
+    public void process(CtCatch element) {
+        int methodId = methodId(getMethod(element));
+        int localId = getLocalId(element);
+
+        String snippet = getLogger() + ".writeCatch(Thread.currentThread(),\"" + methodId + "\",\""
+                + localId + "\"," + element.getParameter().getSimpleName() + ")";
+
+        CtCodeSnippetStatement snippetStmt = getFactory().Code().createCodeSnippetStatement(snippet);
+
+       element.getBody().insertBefore(snippetStmt);
+    }
+}

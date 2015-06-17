@@ -279,4 +279,54 @@ public class LogWriter {
         }
         return fileWriter;
     }
+
+    public void writeCatch(String methodId, String localPositionId, Object exception) {
+        if(!isObserve) {
+            isObserve = true;
+            try {
+                PrintWriter fileWriter = getFileWriter();
+
+                fileWriter.append(KeyWord.endLine);
+                fileWriter.append(KeyWord.catchObservation);
+                fileWriter.append(KeyWord.simpleSeparator);
+                fileWriter.append(deep + "");
+                fileWriter.append(KeyWord.simpleSeparator);
+                fileWriter.append(methodId);
+                fileWriter.append(KeyWord.simpleSeparator);
+                fileWriter.append(localPositionId);
+                fileWriter.append(KeyWord.simpleSeparator);
+                fileWriter.append(exception.toString());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                isObserve = false;
+            }
+        }
+    }
+
+    public void writeThrow(String methodId, String localPositionId, Object exception) {
+        if(!isObserve) {
+            isObserve = true;
+            try {
+                PrintWriter fileWriter = getFileWriter();
+
+                fileWriter.append(KeyWord.endLine);
+                fileWriter.append(KeyWord.throwObservation);
+                fileWriter.append(KeyWord.simpleSeparator);
+                fileWriter.append(deep + "");
+                fileWriter.append(KeyWord.simpleSeparator);
+                fileWriter.append(methodId);
+                fileWriter.append(KeyWord.simpleSeparator);
+                fileWriter.append(localPositionId);
+                fileWriter.append(KeyWord.simpleSeparator);
+                fileWriter.append(exception.toString());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                isObserve = false;
+            }
+        }
+    }
 }

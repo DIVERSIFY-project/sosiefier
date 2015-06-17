@@ -85,6 +85,22 @@ public class ProfilingMain {
             LoggerUtils.applyProcessor(factory, m);
         }
 
+        condition = Boolean.parseBoolean(inputConfiguration.getProperty("profiling.main.catch", "false"));
+        transform = transform || condition;
+        if(condition) {
+            CatchProcessor m = new CatchProcessor(inputProgram);
+            m.setLogger(logger+".Logger");
+            LoggerUtils.applyProcessor(factory, m);
+        }
+
+        condition = Boolean.parseBoolean(inputConfiguration.getProperty("profiling.main.throw", "false"));
+        transform = transform || condition;
+        if(condition) {
+            ThrowProcessor m = new ThrowProcessor(inputProgram);
+            m.setLogger(logger+".Logger");
+            LoggerUtils.applyProcessor(factory, m);
+        }
+
         if(transform) {
             File fileFrom = new File(inputProgram.getAbsoluteSourceCodeDir());
             File out = new File(outputDirectory + "/" + mainSrc);

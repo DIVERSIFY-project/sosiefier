@@ -57,12 +57,20 @@ public class Logger {
         getLog(thread).writeTestStart(testName, receiver);
     }
 
-    public static void writeTestStart(Thread thread , String testName) {
+    public static void writeTestStart(Thread thread, String testName) {
         getLog(thread).writeTestStart(testName);
     }
 
     public static void writeTestFinish(Thread thread) {
         getLog(thread).writeTestFinish();
+    }
+
+    public static void writeCatch(Thread thread, String methodId, String localPositionId, Object exception) {
+        getLog(thread).writeCatch(methodId, localPositionId, exception);
+    }
+
+    public static void writeThrow(Thread thread, String methodId, String localPositionId, Object exception) {
+        getLog(thread).writeThrow(methodId, localPositionId, exception);
     }
 
     public  static void close() {

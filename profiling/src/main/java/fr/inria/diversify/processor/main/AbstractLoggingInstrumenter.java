@@ -3,7 +3,7 @@ package fr.inria.diversify.processor.main;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.processor.ProcessorUtil;
 import spoon.processing.AbstractProcessor;
-import spoon.reflect.code.CtBreak;
+import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;
 import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
@@ -67,5 +67,26 @@ public abstract class AbstractLoggingInstrumenter<E extends CtElement> extends A
 
     protected int methodId(CtExecutable method) {
         return ProcessorUtil.idFor(method.getReference().getDeclaringType().getQualifiedName() + "." + method.getSignature());
+    }
+
+    protected boolean blockNeed(CtStatement statement) {
+        return statement.getParent() instanceof CtLoop
+                || statement.getParent() instanceof CtIf;
+    }
+
+    protected void insertInBlock(CtStatement statement, CtStatement snippetStmt)  {
+        CtBlock<Object> block = getFactory().Core().createBlock();
+        block.setParent(statement.getParent());
+        block.addStatement(snippetStmt);
+        block.addStatement(statement);
+
+        if (statement.getParent() instanceof CtLoop) {
+            CtLoop loop = (CtLoop) statement.getParent();
+            loop.setBody(block);
+        }
+        if (statement.getParent() instanceof CtIf) {
+            CtIf ctIf = (CtIf) statement.getParent();
+            ctIf.setThenStatement(block);
+        }
     }
 }

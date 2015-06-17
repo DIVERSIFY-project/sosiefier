@@ -16,8 +16,11 @@ public class KeyWord {
     public static final String assertObservation = "As";
     public static final String testStartObservation = "TS";
     public static final String testEndObservation = "TE";
+    public static final String catchObservation = "C";
+    public static final String throwObservation = "T";
 
     //for class observation
     public static final String getterKeyWord = "Gt";
     public static final String classKeyWord = "Cl";
+
 }
