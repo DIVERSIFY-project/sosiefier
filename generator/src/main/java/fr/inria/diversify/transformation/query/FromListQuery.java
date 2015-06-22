@@ -1,11 +1,9 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.TransformationJsonParser;
-import fr.inria.diversify.transformation.TransformationParserException;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -20,29 +18,20 @@ public class FromListQuery extends TransformationQuery {
     boolean removeAfterQuery = true;
     boolean shuffle = false;
 
-    public FromListQuery(InputProgram inputProgram) throws TransformationParserException {
+    public FromListQuery(InputProgram inputProgram) {
         super(inputProgram);
-        TransformationJsonParser parser = new TransformationJsonParser(false, getInputProgram());
-        File f = new File(getInputProgram().getPreviousTransformationsPath());
-        Collection<Transformation> ts;
-        if (f.isDirectory()) {
-            ts = parser.parseDir(f.getAbsolutePath());
-        } else {
-            ts = parser.parseFile(f);
-        }
+        JsonTransformationLoader parser = new JsonTransformationLoader(getInputProgram());
+
+        Collection<Transformation> ts = parser.load(getInputProgram().getPreviousTransformationsPath(), true);
         transformations = new ArrayList(ts);
     }
 
-    public FromListQuery(InputProgram inputProgram, int rangeMin, int rangeMax) throws TransformationParserException {
+    public FromListQuery(InputProgram inputProgram, int rangeMin, int rangeMax)  {
         super(inputProgram);
-        TransformationJsonParser parser = new TransformationJsonParser(false, getInputProgram());
-        File f = new File(getInputProgram().getPreviousTransformationsPath());
-        Collection<Transformation> ts;
-        if (f.isDirectory()) {
-            ts = parser.parseDir(f.getAbsolutePath());
-        } else {
-            ts = parser.parseFile(f);
-        }
+
+        JsonTransformationLoader parser = new JsonTransformationLoader(getInputProgram());
+
+        Collection<Transformation> ts = parser.load(getInputProgram().getPreviousTransformationsPath(), true);
         ArrayList<Transformation> tmp = new ArrayList(ts);
         transformations = new ArrayList<>();
         for(int i = rangeMin; i < Math.min(rangeMax, tmp.size())  ; i++) {

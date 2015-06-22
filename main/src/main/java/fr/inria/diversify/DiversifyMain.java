@@ -9,6 +9,8 @@ import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.coverage.MultiCoverageReport;
 import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.diversification.*;
+import fr.inria.diversify.issta2.BranchComparator;
+import fr.inria.diversify.issta2.Compare;
 import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
 import fr.inria.diversify.statistic.CVLMetric;
@@ -120,6 +122,11 @@ public class DiversifyMain {
                 abstractDiversify = dac;
                 break;
             }
+            case "compareBranch": {
+                BranchComparator branchComparator = new BranchComparator(inputProgram);
+                abstractDiversify = new Compare(inputConfiguration, project, src, branchComparator);
+                break;
+            }
             case "android": {
                 abstractDiversify = new SinglePointDiversify(inputConfiguration, project, src);
                 abstractDiversify.setAndroid(true);
@@ -128,9 +135,8 @@ public class DiversifyMain {
 
         }
         abstractDiversify.setSosieSourcesDir(sosieDir);
-      abstractDiversify.init(project, inputConfiguration.getProperty("tmpDir"));
+        abstractDiversify.init(project, inputConfiguration.getProperty("tmpDir"));
 
-//        abstractDiversify.setBuilder(initBuilder(tmpDir));
         abstractDiversify.setResultDir(resultDir);
 
         return abstractDiversify;
@@ -338,7 +344,7 @@ public class DiversifyMain {
     }
 
     protected void computeDiversifyStat(String transDir, String output) throws Exception {
-        TransformationParser tf = new TransformationParser(true, inputProgram);
+//        TransformationParser tf = new TransformationParser(true, inputProgram);
 //        Collection<Transformation> transformations = tf.parse(transDir);
         JsonTransformationLoader loader = new JsonTransformationLoader(inputProgram);
           Collection<Transformation> transformations = loader.load(transDir, false);
@@ -353,6 +359,10 @@ public class DiversifyMain {
                 .filter(t -> t.isSosie())
                 .collect(Collectors.toSet());
         writer.write(sosies, output+"_sosie.json", inputProgram.getProgramDir() + "/pom.xml");
+
+        Log.info("nb transformation: {}", transformations.size());
+        Log.info("nb compile: {}", transformations.stream().filter(t -> t.getStatus() >= -1).count());
+        Log.info("nb sosie: {}", sosies.size());
 
         CVLMetric cvlMetric = new CVLMetric(inputProgram);
         cvlMetric.printMetrics(output + "_cvlMetric.csv");

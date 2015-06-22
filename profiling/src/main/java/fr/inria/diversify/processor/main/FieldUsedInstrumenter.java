@@ -47,13 +47,13 @@ public class FieldUsedInstrumenter extends AbstractLoggingInstrumenter<CtStateme
                     if (!var.getSimpleName().equals("class")) {
                         try {
                             alreadyInstrument.add(statement);
-                            String snippet = getLogger() + ".writeField(Thread.currentThread()," +
-                                    methodId + "," +
-                                    getLocalId(statement) + "," +
-                                    ProcessorUtil.idFor(var.getSimpleName()) + "," +
+                            String snippet = getLogger() + ".writeField(Thread.currentThread(),\"" +
+                                    methodId + "\",\"" +
+                                    getLocalId(statement) + "\",\"" +
+                                    ProcessorUtil.idFor(var.getSimpleName()) + "\"," +
                                     fieldUsed.get(var) + ")";
 
-                            if (fieldUsed.get(var).contains(".")) {
+                            if (fieldUsed.get(var).contains(".") && !fieldUsed.get(var).contains("this.")) {
                                 snippet = "try {\n\t" + snippet + ";\n} catch (Exception eeee) {}";
                             }
                             CtCodeSnippetStatement snippetStatement = getFactory().Code().createCodeSnippetStatement(snippet);

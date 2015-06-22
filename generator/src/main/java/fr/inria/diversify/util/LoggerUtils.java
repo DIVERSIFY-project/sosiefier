@@ -52,17 +52,17 @@ public class LoggerUtils {
     }
 
     public static void copyLoggerFile(InputProgram inputProgram, String outputDirectory, String loggerPackage) throws IOException {
+        copyLoggerFile(inputProgram.getRelativeSourceCodeDir(), outputDirectory, loggerPackage);
+    }
+
+    public static void copyLoggerFile(String mainSrc, String outputDirectory, String loggerPackage) throws IOException {
         File srcDir = new File(System.getProperty("user.dir") + "/profiling/src/main/java/"  + loggerPackage.replace(".","/"));
 
-        File destDir = new File(outputDirectory + "/" + inputProgram.getRelativeSourceCodeDir() + "/" + loggerPackage.replace(".","/"));
+        File destDir = new File(outputDirectory + "/" + mainSrc + "/" + loggerPackage.replace(".","/"));
         FileUtils.forceMkdir(destDir);
 
         FileUtils.copyDirectory(srcDir, destDir);
     }
-
-//    public static void writeId(String outputDirectory) throws IOException {
-//        fr.inria.diversify.testamplification.processor.TestProcessor.writeIdFile(outputDirectory);
-//    }
 
     public static void applyProcessor(Factory factory, Processor processor) {
         ProcessingManager pm = new QueueProcessingManager(factory);

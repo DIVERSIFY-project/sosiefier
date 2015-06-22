@@ -102,7 +102,7 @@ public class LogWriter {
         }
     }
 
-    public void methodIn(String id) {
+    public void methodIn(String methodId) {
         if(!isObserve) {
             deep++;
             if(logMethodCall) {
@@ -111,9 +111,9 @@ public class LogWriter {
                     fileWriter.append(KeyWord.endLine);
                     fileWriter.append(KeyWord.methodCallObservation);
                     fileWriter.append(KeyWord.simpleSeparator);
-                    fileWriter.append(id);
-                    fileWriter.append(KeyWord.simpleSeparator);
                     fileWriter.append(deep + "");
+                    fileWriter.append(KeyWord.simpleSeparator);
+                    fileWriter.append(methodId);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -170,18 +170,19 @@ public class LogWriter {
         }
     }
 
-    public void writeVar(int  methodId, int localPositionId, Object... var) {
+    public void writeVar(String  methodId, String localPositionId, Object... var) {
         if(!isObserve) {
             isObserve = true;
             try {
                 StringBuilder string = new StringBuilder();
                 string.append(KeyWord.endLine);
                 string.append(KeyWord.variableObservation);
-                string.append(deep);
                 string.append(KeyWord.simpleSeparator);
-                string.append(localPositionId + "");
+                string.append(deep + "");
                 string.append(KeyWord.simpleSeparator);
                 string.append(methodId);
+                string.append(KeyWord.simpleSeparator);
+                string.append(localPositionId);
 
                 String varsString = buildVars(methodId, localPositionId, var);
                 if(varsString.isEmpty())
@@ -200,7 +201,7 @@ public class LogWriter {
     }
 
 
-    protected String buildVars(int methodId, int localPositionId,Object[] vars) {
+    protected String buildVars(String methodId, String localPositionId, Object[] vars) {
         String positionId = methodId + "." + localPositionId;
         StringBuilder varsString = new StringBuilder();
 

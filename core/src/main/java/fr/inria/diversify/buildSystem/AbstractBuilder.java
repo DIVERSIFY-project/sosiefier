@@ -299,7 +299,12 @@ public abstract class AbstractBuilder {
         this.setting = setting;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+//    public void setStatus(int status) {
+//        this.status = status;
+//    }
+
+
+    public String getDirectory() {
+        return directory;
     }
 }

@@ -4,6 +4,7 @@ import fr.inria.diversify.diversification.InputProgram;
 import spoon.reflect.code.CtCase;
 import spoon.reflect.code.CtCatch;
 import spoon.reflect.code.CtCodeSnippetStatement;
+import spoon.reflect.declaration.CtExecutable;
 
 /**
  * User: Simon
@@ -18,8 +19,7 @@ public class CatchProcessor extends AbstractLoggingInstrumenter<CtCatch> {
 
     @Override
     public boolean isToBeProcessed(CtCatch candidate) {
-        return candidate.getParent(CtCase.class) != null
-                && getMethod(candidate) != null;
+        return candidate.getParent(CtExecutable.class) != null;
     }
 
     @Override
@@ -31,7 +31,6 @@ public class CatchProcessor extends AbstractLoggingInstrumenter<CtCatch> {
                 + localId + "\"," + element.getParameter().getSimpleName() + ")";
 
         CtCodeSnippetStatement snippetStmt = getFactory().Code().createCodeSnippetStatement(snippet);
-
-       element.getBody().insertBefore(snippetStmt);
+        element.getBody().insertBegin(snippetStmt);
     }
 }

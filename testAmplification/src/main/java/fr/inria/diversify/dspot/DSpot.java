@@ -83,7 +83,7 @@ public class DSpot {
 
         Factory factory = InitUtils.initSpoon(inputProgram, false);
 
-        BranchCoverageProcessor m = new BranchCoverageProcessor(outputDirectory);
+        BranchCoverageProcessor m = new BranchCoverageProcessor(inputProgram, outputDirectory);
         m.setLogger(logger+".Logger");
         LoggerUtils.applyProcessor(factory, m);
 

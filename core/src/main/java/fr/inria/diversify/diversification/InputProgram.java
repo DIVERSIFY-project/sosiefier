@@ -616,4 +616,17 @@ public class InputProgram {
         if (codeFragmentsByClass == null) processCodeFragments();
         return codeFragmentsByClass;
     }
+
+    public InputProgram clone() {
+        InputProgram clone = new InputProgram();
+        clone.programDir = programDir;
+        clone.sourceCodeDir = sourceCodeDir;
+        clone.externalSourceCodeDir = externalSourceCodeDir;
+        clone.testSourceCodeDir = testSourceCodeDir;
+        clone.javaVersion = javaVersion;
+        clone.coverageDir = coverageDir;
+        clone.classesDir = classesDir;
+
+        return clone;
+    }
 }

@@ -5,6 +5,7 @@ import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtCase;
 import spoon.reflect.code.CtCodeSnippetStatement;
 import spoon.reflect.code.CtThrow;
+import spoon.reflect.declaration.CtExecutable;
 
 /**
  * User: Simon
@@ -19,8 +20,7 @@ public class ThrowProcessor extends AbstractLoggingInstrumenter<CtThrow> {
 
     @Override
     public boolean isToBeProcessed(CtThrow candidate) {
-        return candidate.getParent(CtCase.class) != null
-                && getMethod(candidate) != null;
+        return candidate.getParent(CtExecutable.class) != null;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class ThrowProcessor extends AbstractLoggingInstrumenter<CtThrow> {
         String snippet = throwStmt.getThrownExpression().getType() + " " + localVar + " = " + throwStmt.getThrownExpression();
         CtCodeSnippetStatement var = getFactory().Code().createCodeSnippetStatement(snippet);
 
-        snippet =  getLogger()+".writeException(Thread.currentThread(),\"" + methodId + "\",\""
+        snippet =  getLogger()+".writeThrow(Thread.currentThread(),\"" + methodId + "\",\""
                 + localId + "\"," + localVar + ")";
         CtCodeSnippetStatement log = getFactory().Code().createCodeSnippetStatement(snippet);
 
