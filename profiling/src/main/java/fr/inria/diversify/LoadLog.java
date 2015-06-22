@@ -20,6 +20,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * User: Simon
@@ -92,7 +93,7 @@ public class LoadLog {
     }
 
     protected void intBranch() {
-        BranchPositionProcessor processor = new BranchPositionProcessor();
+        BranchPositionProcessor processor = new BranchPositionProcessor(inputProgram);
         LoggerUtils.applyProcessor(factory, processor);
 
         branchPosition = processor.getBranchPosition();
