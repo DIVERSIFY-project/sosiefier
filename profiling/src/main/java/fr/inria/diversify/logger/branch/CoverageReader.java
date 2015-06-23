@@ -1,5 +1,6 @@
 package fr.inria.diversify.logger.branch;
 
+import fr.inria.diversify.logger.logger.KeyWord;
 import fr.inria.diversify.util.Log;
 
 import java.io.BufferedReader;
@@ -79,12 +80,12 @@ public class CoverageReader {
                 logEntry = logEntry.substring(0, logEntry.length() - 2);
                 String[] split = logEntry.split(";");
                 switch (split[0]) {
-                    case "TS":
+                    case KeyWord.testStartObservation:
                         currentTest = split[1];
                         currentTestCoverage = "";
                         resetIdMethod(idToMethod);
                         break;
-                    case "TE":
+                    case KeyWord.testEndObservation:
                         if (currentTest != null) {
                             parseCoverage(currentTestCoverage, idToMethod);
                             testCoverages.add(new TestCoverage(currentTest, idToMethod));
@@ -92,7 +93,7 @@ public class CoverageReader {
                             resetIdMethod(idToMethod);
                         }
                         break;
-                    case "P":
+                    case KeyWord.branchObservation:
                         currentTestCoverage += logEntry + "\n";
                         break;
                     default:
@@ -100,7 +101,7 @@ public class CoverageReader {
                 }
                 logEntry = "";
             }
-            if(logEntry.startsWith("TE") && currentTest != null) {
+            if(logEntry.startsWith(KeyWord.testEndObservation) && currentTest != null) {
                 parseCoverage(currentTestCoverage, idToMethod);
                 testCoverages.add(new TestCoverage(currentTest, idToMethod));
                 currentTest = null;
@@ -181,7 +182,7 @@ public class CoverageReader {
         String line = br.readLine();
         while (line != null) {
             if(!line.startsWith("id")) {
-                String[] split = line.split(" ");
+                String[] split = line.split(";");
                 Integer methodId = Integer.parseInt(split[0]);
                 String[] branches = new String[split.length - 2];
                 for(int i = 2; i < split.length; i++) {

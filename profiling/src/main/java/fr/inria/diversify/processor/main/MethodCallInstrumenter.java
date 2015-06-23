@@ -2,6 +2,7 @@ package fr.inria.diversify.processor.main;
 
 
 import fr.inria.diversify.diversification.InputProgram;;
+import fr.inria.diversify.processor.ProcessorUtil;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtCodeSnippetStatement;
 import spoon.reflect.code.CtInvocation;

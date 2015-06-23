@@ -2,61 +2,79 @@ package fr.inria.diversify.logger.graph;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.io.Writer;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * User: Simon
- * Date: 20/05/15
- * Time: 12:50
+ * Date: 23/06/15
+ * Time: 10:16
  */
 public class Graph {
     String name;
-    Collection<Node> nodes;
-    Collection<Edge> edges;
+    Map<String, Node> nodes;
 
-
-
-    public Graph(String name, Collection<Node> nodes, Collection<Edge> edges) {
+    public Graph(String name) {
         this.name = name;
-        this.nodes = new ArrayList<>(nodes);
-        this.edges = new ArrayList<>(edges);
+        nodes = new HashMap<>();
     }
 
-    public void toDot(String file) throws IOException {
-        PrintWriter fileWriter = new PrintWriter(new FileWriter(file));
+    public void addCall(String caller, String call) {
+        getNodeOrBuild(caller).addCall(getNodeOrBuild(call));
+    }
 
-        fileWriter.write("digraph g {\n");
-
-        for(Node node : nodes) {
-            fileWriter.write(node.toDot() + "\n");
+    protected Node getNodeOrBuild(String name) {
+        if(!nodes.containsKey(name)) {
+            nodes.put(name, new Node(name));
         }
+        return nodes.get(name);
+    }
 
-        for(Edge edge : edges) {
-            fileWriter.write(edge.toDot() + "\n");
+    protected Map<String, Set<String>> callMinus(Graph graph,  Map<String, Set<String>> diff) throws Exception {
+        for(String nodeName : nodes.keySet()) {
+            Node node = nodes.get(nodeName);
+            Node other;
+            if(!graph.nodes.containsKey(nodeName)) {
+                other = new Node(nodeName);
+                diff.put(nodeName, node.callMinus(other));
+            } else {
+                other = graph.nodes.get(nodeName);
+                Set<String> set = node.callMinus(other);
+                if(!set.isEmpty()) {
+                    diff.put(nodeName, node.callMinus(other));
+                }
+            }
         }
-
-        fileWriter.write("}");
-        fileWriter.close();
+        return diff;
     }
 
+    public Map<String, Set<String>> diff(Graph graph) throws Exception {
+        Map<String, Set<String>> diff = new HashMap<>();
 
-    public  boolean isEmpty() {
-        return nodes.isEmpty();
+        this.callMinus(graph, diff);
+        graph.callMinus(this, diff);
+
+        return diff;
     }
 
-    public Graph intersection(Graph other) {
-        List<Node> interNode = nodes.stream()
-                .filter(node -> other.nodes.contains(node))
-                .collect(Collectors.toList());
+    public void addNode(String name) {
+        getNodeOrBuild(name);
+    }
 
-        List<Edge> interEdge = edges.stream()
-                .filter(edge -> interNode.contains(edge.origin) && interNode.contains(edge.target))
-                .collect(Collectors.toList());
+    public void toDot(String fileName) throws IOException {
+        Writer writer = new FileWriter(fileName);
 
-        return new Graph("intersection", interNode,interEdge);
+        writer.append("digraph g {\n");
+        for (Node node : nodes.values()) {
+            node.toDot(writer);
+        }
+        writer.append("\n}");
+        writer.close();
+    }
+
+    public String getName() {
+        return name;
     }
 }

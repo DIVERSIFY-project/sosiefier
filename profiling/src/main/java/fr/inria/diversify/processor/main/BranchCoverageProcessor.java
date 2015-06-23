@@ -43,10 +43,10 @@ public class BranchCoverageProcessor extends AbstractLoggingInstrumenter<CtExecu
     @Override
     public void process(CtExecutable method) {
         int methodId = methodId(method);
-        String info = methodId + " " + method.getReference().getDeclaringType().getQualifiedName() + "_" + method.getSignature().replace(" ", "_");
+        String info = methodId + ";" + method.getReference().getDeclaringType().getQualifiedName() + "_" + method.getSignature().replace(" ", "_");
 
         addBranchLogger(method.getBody(),"b");
-        info += " b";
+        info += ";b";
 
         for(Object object : Query.getElements(method, new TypeFilter(CtIf.class))) {
             CtIf ctIf = (CtIf) object;
@@ -74,14 +74,14 @@ public class BranchCoverageProcessor extends AbstractLoggingInstrumenter<CtExecu
                 }
             }
             addBranchLogger(ctIf.getElseStatement(), "e" + branchId);
-            info += " e" + branchId;
+            info += ";e" + branchId;
         }
 
         for(Object object : Query.getElements(method, new TypeFilter(CtCase.class))) {
             CtCase ctCase = (CtCase) object;
             int branchId = idBranch(methodId);
             addBranchLogger(ctCase, "s" + branchId);
-            info += " s" + branchId;
+            info += ";s" + branchId;
         }
 
         for(Object object : Query.getElements(method, new TypeFilter(CtLoop.class))) {
@@ -95,7 +95,7 @@ public class BranchCoverageProcessor extends AbstractLoggingInstrumenter<CtExecu
             }
             int branchId = idBranch(methodId);
             addBranchLogger((CtBlock)ctLoop.getBody(), "l" + branchId);
-            info += " l" + branchId;
+            info += ";l" + branchId;
         }
         for(Object object : Query.getElements(method, new TypeFilter(CtCatch.class))) {
             CtCatch ctCatch = (CtCatch) object;
@@ -108,7 +108,7 @@ public class BranchCoverageProcessor extends AbstractLoggingInstrumenter<CtExecu
             }
             int branchId = idBranch(methodId);
             addBranchLogger((CtBlock)ctCatch.getBody(), "c" +branchId );
-            info += " c" + branchId;
+            info += ";c" + branchId;
         }
 
 
