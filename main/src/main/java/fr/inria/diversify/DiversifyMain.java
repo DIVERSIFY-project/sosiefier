@@ -9,7 +9,6 @@ import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.coverage.MultiCoverageReport;
 import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.diversification.*;
-import fr.inria.diversify.issta2.BranchComparator;
 import fr.inria.diversify.issta2.Compare;
 import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
@@ -123,8 +122,8 @@ public class DiversifyMain {
                 break;
             }
             case "compareBranch": {
-                BranchComparator branchComparator = new BranchComparator(inputProgram);
-                abstractDiversify = new Compare(inputConfiguration, project, src, branchComparator);
+//                BranchComparator branchComparator = new BranchComparator(inputProgram);
+                abstractDiversify = new Compare(inputConfiguration, project, src, null);
                 break;
             }
             case "android": {

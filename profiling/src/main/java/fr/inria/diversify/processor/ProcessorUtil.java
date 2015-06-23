@@ -31,7 +31,7 @@ public class ProcessorUtil {
         FileWriter fw = new FileWriter(file.getAbsoluteFile() + "/info");
 
         for(int i = 0; i < ids.size(); i++) {
-            fw.append("id " + i + " " + ids.get(i) + "\n");
+            fw.append("id;" + i + ";" + ids.get(i) + "\n");
         }
 
         for(String s : otherInfo) {

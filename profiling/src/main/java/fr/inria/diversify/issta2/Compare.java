@@ -2,6 +2,8 @@ package fr.inria.diversify.issta2;
 
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.SinglePointDiversify;
+import fr.inria.diversify.logger.branch.BranchComparator;
+import fr.inria.diversify.logger.graph.GraphComparator;
 import fr.inria.diversify.statistic.SinglePointSessionResults;
 import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
@@ -9,8 +11,6 @@ import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
 import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
 import fr.inria.diversify.util.Log;
-
-import java.io.IOException;
 
 /**
  * Created by Simon on 21/01/15.
@@ -20,7 +20,10 @@ public class Compare extends SinglePointDiversify {
 
     public Compare(InputConfiguration inputConfiguration, String projectDir, String srcDir, SosieComparator sosieComparator) {
         super(inputConfiguration, projectDir, srcDir);
-        this.comparator = sosieComparator;
+//        this.comparator = sosieComparator;
+        comparator = new SosieComparator(inputConfiguration.getInputProgram());
+        comparator.addComparator(new BranchComparator());
+        comparator.addComparator(new GraphComparator());
     }
 
     @Override
