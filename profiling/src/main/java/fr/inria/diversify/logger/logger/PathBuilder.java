@@ -9,24 +9,27 @@ import java.util.*;
  * Time: 13:57
  */
 public class PathBuilder {
-    private Stack<StringBuilder> currentPaths;
-
-    private Stack<String> previousBranchs;
+    protected Stack<StringBuilder> currentPaths;
+    protected Stack<String> previousBranchs;
+    protected boolean fullPath;
 
     //string : method id
     //Set<String> set of path
-    private Map<String, Set<String>> allPath;
+    protected Map<String, Set<String>> allPath;
 
-    public PathBuilder() {
+    public PathBuilder(boolean fullPath) {
+        this.fullPath = fullPath;
         currentPaths = new Stack<StringBuilder>();
         previousBranchs = new Stack<String>();
         allPath = new HashMap<String, Set<String>>();
     }
 
     public void addbranch(String id) {
-        if (previousBranchs.size() == 0 || previousBranchs.peek() != id) {
-            currentPaths.peek().append(KeyWord.simpleSeparator);
-            currentPaths.peek().append(id);
+        if (previousBranchs.size() == 0 ) {
+            if(fullPath || previousBranchs.peek() != id) {
+                currentPaths.peek().append(KeyWord.simpleSeparator);
+                currentPaths.peek().append(id);
+            }
         }
         previousBranchs.pop();
         previousBranchs.push(id);

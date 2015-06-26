@@ -3,9 +3,9 @@ package fr.inria.diversify.logger.branch;
 import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.logger.Comparator;
+import fr.inria.diversify.logger.Diff;
 import fr.inria.diversify.processor.main.BranchPositionProcessor;
 import fr.inria.diversify.transformation.SingleTransformation;
-import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
 import spoon.reflect.cu.SourcePosition;
 
@@ -29,11 +29,11 @@ public class BranchComparator implements Comparator {
     }
 
     @Override
-    public Object compare(SingleTransformation transformation, String originalLogDir, String sosieLogDir) throws Exception {
+    public Diff compare(SingleTransformation transformation, String originalLogDir, String sosieLogDir) throws Exception {
         List<TestCoverage> sosieCoverage = loadTestCoverage(sosieLogDir);
         List<TestCoverage> originalCoverage = loadTestCoverage(originalLogDir);
 
-        Map<String, Set<String>> diff = new HashMap<>();
+        BranchDiff diff = new BranchDiff();
         for(TestCoverage originalTestCoverage : originalCoverage) {
             TestCoverage sosieTestCoverage = sosieCoverage.stream()
                     .filter(tc -> tc.getTestName().equals(originalTestCoverage.getTestName()))
@@ -59,7 +59,7 @@ public class BranchComparator implements Comparator {
                 d1.addAll(d2);
 
                 if(!d1.isEmpty()) {
-                    diff.put(originalTestCoverage.getTestName(), d1);
+                    diff.addBranchDiff(originalTestCoverage.getTestName(), d1);
                 }
             }
         }
@@ -113,6 +113,11 @@ public class BranchComparator implements Comparator {
                 .filter(branch -> testsByBranch.containsKey(branch))
                 .flatMap(branch -> testsByBranch.get(branch).stream())
                 .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Diff getEmptyDiff() {
+        return new BranchDiff();
     }
 
     //true if oThis include in oOther

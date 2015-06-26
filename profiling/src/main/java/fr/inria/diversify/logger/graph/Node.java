@@ -41,7 +41,15 @@ public class Node {
                 .map(n -> n.name)
                 .collect(Collectors.toSet()));
 
-        return set;
+        return set.stream()
+                .map(n -> name + " -> " + n)
+                .collect(Collectors.toSet());
+    }
+
+    public Set<String> getEdges() {
+        return call.stream()
+                .map(node -> name + " -> " + node.getName())
+                .collect(Collectors.toSet());
     }
 
     public void toDot(Writer writer) throws IOException {

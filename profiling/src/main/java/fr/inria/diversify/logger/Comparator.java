@@ -5,7 +5,6 @@ import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.SingleTransformation;
 import spoon.reflect.cu.SourcePosition;
 
-import java.io.IOException;
 import java.util.Collection;
 
 /**
@@ -17,7 +16,9 @@ public interface Comparator {
 
     void init(InputProgram originalInputProgram, AbstractBuilder originalBuilder) throws Exception;
 
-    Object compare(SingleTransformation transformation, String originalLogDir, String sosieLogDir) throws Exception;
+    Diff compare(SingleTransformation transformation, String originalLogDir, String sosieLogDir) throws Exception;
 
     Collection<String> selectTest(SourcePosition position);
+
+    Diff getEmptyDiff();
 }

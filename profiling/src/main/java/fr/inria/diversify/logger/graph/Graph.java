@@ -32,26 +32,26 @@ public class Graph {
         return nodes.get(name);
     }
 
-    protected Map<String, Set<String>> callMinus(Graph graph,  Map<String, Set<String>> diff) throws Exception {
+    protected void callMinus(Graph graph,  GraphsDiff diff) throws Exception {
+
         for(String nodeName : nodes.keySet()) {
             Node node = nodes.get(nodeName);
             Node other;
             if(!graph.nodes.containsKey(nodeName)) {
-                other = new Node(nodeName);
-                diff.put(nodeName, node.callMinus(other));
+                diff.addNode(name, nodeName);
+                diff.addAllEdge(name, node.getEdges());
             } else {
                 other = graph.nodes.get(nodeName);
                 Set<String> set = node.callMinus(other);
                 if(!set.isEmpty()) {
-                    diff.put(nodeName, node.callMinus(other));
+                    diff.addAllEdge(nodeName, node.callMinus(other));
                 }
             }
         }
-        return diff;
     }
 
-    public Map<String, Set<String>> diff(Graph graph) throws Exception {
-        Map<String, Set<String>> diff = new HashMap<>();
+    public GraphsDiff diff(Graph graph) throws Exception {
+        GraphsDiff diff = new GraphsDiff();
 
         this.callMinus(graph, diff);
         graph.callMinus(this, diff);

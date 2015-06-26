@@ -6,6 +6,7 @@ import java.util.*;
 
 
 public class LogWriter {
+    private boolean fullPath = false;
     private PrintWriter fileWriter;
 
     private Map<Class, ClassObserver> classesObservers;
@@ -35,13 +36,27 @@ public class LogWriter {
         if (dir == null) {
             initDir();
         }
+        initOptions();
         previousVars = new HashMap<String, String>();
-        pathBuilder = new PathBuilder();
+        pathBuilder = new PathBuilder(fullPath);
         classesObservers = new HashMap<Class, ClassObserver>();
 
         ShutdownHookLog shutdownHook = new ShutdownHookLog();
         Runtime.getRuntime().addShutdownHook(shutdownHook);
         this.thread = thread;
+    }
+
+    protected void initOptions() {
+        try {
+            File propertiesFile = new File(dir.getAbsolutePath() + "/options");
+            if(propertiesFile.exists()) {
+                Properties properties = new Properties();
+                properties.load(new FileInputStream(propertiesFile));
+                fullPath = Boolean.parseBoolean((String) properties.getOrDefault("fullPath,", "false"));
+            }
+        } catch (IOException e) {
+            System.err.println("fr.inria.logger: error with properties file");
+        }
     }
 
     /**
@@ -296,8 +311,9 @@ public class LogWriter {
                 fileWriter.append(KeyWord.simpleSeparator);
                 fileWriter.append(localPositionId);
                 fileWriter.append(KeyWord.simpleSeparator);
+                fileWriter.append(exception.getClass().getCanonicalName());
+                fileWriter.append(KeyWord.simpleSeparator);
                 fileWriter.append(exception.toString());
-
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -320,6 +336,8 @@ public class LogWriter {
                 fileWriter.append(methodId);
                 fileWriter.append(KeyWord.simpleSeparator);
                 fileWriter.append(localPositionId);
+                fileWriter.append(KeyWord.simpleSeparator);
+                fileWriter.append(exception.getClass().getCanonicalName());
                 fileWriter.append(KeyWord.simpleSeparator);
                 fileWriter.append(exception.toString());
 

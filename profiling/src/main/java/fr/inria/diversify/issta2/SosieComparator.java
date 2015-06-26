@@ -5,6 +5,7 @@ import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.logger.Comparator;
+import fr.inria.diversify.logger.Diff;
 import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
@@ -26,13 +27,14 @@ public class SosieComparator {
     String tmpSosieDir;
 
     Set<Comparator> comparators;
-//    Map<Class, Diff> filter;
+    Map<Class, Diff> filter;
     Set<String> filterForTest;
 
     public SosieComparator(InputProgram inputProgram) {
         this.inputProgram = inputProgram;
         comparators = new HashSet<>();
         filterForTest = new HashSet<>();
+        filter = new HashMap<>();
     }
 
     public void init(String tmpDir) throws Exception {
@@ -44,7 +46,9 @@ public class SosieComparator {
         for(Comparator comparator : comparators) {
             comparator.init(inputProgram, originalBuilder);
             //filter result
+            filter.put(comparator.getClass(), comparator.getEmptyDiff());
         }
+
 
         tmpSosieDir = tmpDir + "_sosie";
     }
@@ -82,10 +86,8 @@ public class SosieComparator {
             run(originalBuilder, tests);
 
             for(Comparator comparator : comparators) {
-                Object diff = comparator.compare(null, originalBuilder.getDirectory() + "/oldLog/", originalBuilder.getDirectory() + "/log/");
-                if(((Map)diff).size() != 0) {
-//                  ((Map) diff).put()
-                }
+                Diff diff = comparator.compare(null, originalBuilder.getDirectory() + "/oldLog/", originalBuilder.getDirectory() + "/log/");
+                filter.get(comparator.getClass()).merge(diff);
             }
            FileUtils.forceDelete(oldLog);
         }
@@ -104,14 +106,15 @@ public class SosieComparator {
         run(originalBuilder, testToRun);
 
         for(Comparator comparator : comparators) {
-            Object diff = comparator.compare(trans, tmpSosieDir + "/log", originalBuilder.getDirectory() + "/log");
-            if(((Map)diff).size() != 0) {
+            Diff diff = comparator.compare(trans, tmpSosieDir + "/log", originalBuilder.getDirectory() + "/log");
+            diff.filter(filter.get(comparator.getClass()));
+            if(diff.size() != 0) {
                 Log.info("{} diff", comparator.getClass().toString());
             }
         }
     }
 
-    private int run(AbstractBuilder builder, Collection<String> testToRun) throws InterruptedException, IOException {
+    protected int run(AbstractBuilder builder, Collection<String> testToRun) throws InterruptedException, IOException {
         String goals = "test -Dmaven.compiler.useIncrementalCompilation=false -Dmaven.test.useIncrementalCompilation=false -Dtest="
                 + testToRun.stream()
                 .collect(Collectors.joining(","));

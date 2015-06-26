@@ -1,5 +1,7 @@
 package fr.inria.diversify.logger.exception;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -9,6 +11,71 @@ import java.util.Set;
  * Time: 10:48
  */
 public class ExceptionPosition {
+    private final String name;
     Map<String, Set<String>> throwPosition;
     Map<String, Set<String>> catchPosition;
+
+    public ExceptionPosition(String name) {
+        this.name = name;
+        throwPosition = new HashMap<>();
+        catchPosition = new HashMap<>();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void addThrow(String methodName, String localPosition, String type, String value) {
+        String key = methodName + "." + localPosition;
+
+        if(!throwPosition.containsKey(key)) {
+            throwPosition.put(key, new HashSet<>());
+        }
+        throwPosition.get(key).add(type);
+    }
+
+    public void addCatch(String methodName, String localPosition, String type, String value) {
+        String key = methodName + "." + localPosition;
+
+        if(!catchPosition.containsKey(key)) {
+            catchPosition.put(key, new HashSet<>());
+        }
+        catchPosition.get(key).add(type);
+    }
+
+    protected void diff(ExceptionPosition graph,  ExceptionDiff diff) throws Exception {
+
+        for(String position : throwPosition.keySet()) {
+            if(!graph.throwPosition.containsKey(position)) {
+                diff.addAllThrows(name, throwPosition.get(position));
+            } else {
+                Set<String> set = new HashSet<>(graph.throwPosition.get(position));
+                set.removeAll(throwPosition.get(position));
+                if(!set.isEmpty()) {
+                    diff.addAllThrows(name + ":" + position, set);
+                }
+            }
+        }
+
+        for(String position : catchPosition.keySet()) {
+            if(!graph.catchPosition.containsKey(position)) {
+                diff.addAllThrows(name, catchPosition.get(position));
+            } else {
+                Set<String> set = new HashSet<>(graph.catchPosition.get(position));
+                set.removeAll(catchPosition.get(position));
+                if(!set.isEmpty()) {
+                    diff.addAllCatchs(name + ":" + position, set);
+                }
+            }
+        }
+    }
+
+    public ExceptionDiff diff(ExceptionPosition other) throws Exception {
+        ExceptionDiff diff = new ExceptionDiff();
+
+        this.diff(other, diff);
+        other.diff(this, diff);
+
+        return diff;
+    }
 }
