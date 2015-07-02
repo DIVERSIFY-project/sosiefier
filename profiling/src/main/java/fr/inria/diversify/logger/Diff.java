@@ -1,5 +1,6 @@
 package fr.inria.diversify.logger;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -10,8 +11,8 @@ import org.json.JSONObject;
 public interface Diff {
 
     void filter(Diff filter);
-    JSONObject toJSON();
+    JSONObject toJSON() throws JSONException;
     int size();
-    void parse(JSONObject jsonObject);
+    void parse(JSONObject jsonObject) throws JSONException;
     void merge(Diff other);
 }

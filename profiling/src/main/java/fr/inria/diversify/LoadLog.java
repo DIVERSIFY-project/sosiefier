@@ -5,8 +5,6 @@ import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.logger.branch.*;
-import fr.inria.diversify.logger.logvariable.TestLogVariableReader;
-import fr.inria.diversify.logger.logvariable.TestLogVariable;
 import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.processor.main.BranchPositionProcessor;
 import fr.inria.diversify.transformation.Transformation;
@@ -20,7 +18,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * User: Simon
@@ -63,12 +60,12 @@ public class LoadLog {
     }
 
 
-    protected Collection<TestLogVariable> loadTestLogVariable() throws IOException {
-        TestLogVariableReader reader = new TestLogVariableReader();
-        Collection<TestLogVariable> result = reader.loadLog(logDir);
-
-        return result;
-    }
+//    protected Collection<MethodLogVariable> loadTestLogVariable() throws IOException {
+//        MethodLogVariableReader reader = new MethodLogVariableReader();
+//        Collection<MethodLogVariable> result = reader.loadLog(logDir);
+//
+//        return result;
+//    }
 
     protected void write(List<TestCoverage> testCoverage) throws IOException {
         PrintWriter fileWriter = new PrintWriter(new BufferedWriter(new FileWriter(result + "_coverage.csv")));
