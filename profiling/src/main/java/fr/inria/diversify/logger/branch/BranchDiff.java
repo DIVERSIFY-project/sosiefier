@@ -1,6 +1,7 @@
 package fr.inria.diversify.logger.branch;
 
 import fr.inria.diversify.logger.Diff;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -30,8 +31,11 @@ public class BranchDiff implements Diff {
     }
 
     @Override
-    public JSONObject toJSON() {
-        return null;
+    public JSONObject toJSON() throws JSONException {
+        JSONObject object = new JSONObject();
+        object.put("branches", diff);
+        object.put("type","branch");
+        return object;
     }
 
     @Override

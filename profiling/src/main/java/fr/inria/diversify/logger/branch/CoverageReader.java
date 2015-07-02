@@ -1,7 +1,7 @@
 package fr.inria.diversify.logger.branch;
 
+import fr.inria.diversify.logger.Pool;
 import fr.inria.diversify.logger.logger.KeyWord;
-import fr.inria.diversify.util.Log;
 
 import java.io.BufferedReader;
 import java.io.File;

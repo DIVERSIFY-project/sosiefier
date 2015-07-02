@@ -45,7 +45,6 @@ public class SosieComparator {
 
         for(Comparator comparator : comparators) {
             comparator.init(inputProgram, originalBuilder);
-            //filter result
             filter.put(comparator.getClass(), comparator.getEmptyDiff());
         }
 
@@ -53,7 +52,7 @@ public class SosieComparator {
         tmpSosieDir = tmpDir + "_sosie";
     }
 
-    public void compare(SingleTransformation trans) throws Exception {
+    public Set<Diff> compare(SingleTransformation trans) throws Exception {
         try {
             Collection<String> testToRun = selectTest(trans.getPosition());
             updateFilter(testToRun);
@@ -63,8 +62,7 @@ public class SosieComparator {
             instru(tmpSosieDir);
             AbstractBuilder sosieBuilder = new MavenBuilder(tmpSosieDir);
 
-
-            runAndCompare(sosieBuilder, trans, testToRun);
+            return runAndCompare(sosieBuilder, trans, testToRun);
         } finally {
             trans.restore(tmpSosieDir);
         }
@@ -100,7 +98,8 @@ public class SosieComparator {
                 .collect(Collectors.toSet());
     }
 
-    protected void runAndCompare(AbstractBuilder sosieBuilder, SingleTransformation trans, Collection<String> testToRun) throws Exception {
+    protected Set<Diff> runAndCompare(AbstractBuilder sosieBuilder, SingleTransformation trans, Collection<String> testToRun) throws Exception {
+        Set<Diff> diffs = new HashSet<>();
 
         run(sosieBuilder, testToRun);
         run(originalBuilder, testToRun);
@@ -110,8 +109,10 @@ public class SosieComparator {
             diff.filter(filter.get(comparator.getClass()));
             if(diff.size() != 0) {
                 Log.info("{} diff", comparator.getClass().toString());
+                diffs.add(diff);
             }
         }
+        return diffs;
     }
 
     protected int run(AbstractBuilder builder, Collection<String> testToRun) throws InterruptedException, IOException {
@@ -126,7 +127,7 @@ public class SosieComparator {
             }
         }
 
-        builder.runGoals(new String[]{goals}, true);
+        builder.runGoals(new String[]{goals}, false);
         return builder.getStatus();
     }
 
@@ -141,7 +142,10 @@ public class SosieComparator {
 
     protected void instru(String outputDirectory) throws Exception {
         Properties properties = new Properties();
+        properties.put("profiling.main.field", "true");
         properties.put("profiling.main.branch", "true");
+        properties.put("profiling.main.catch", "true");
+        properties.put("profiling.main.throw", "true");
         properties.put("profiling.main.methodCall", "true");
         properties.put("profiling.test.logTest", "true");
 

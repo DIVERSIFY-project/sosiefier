@@ -1,6 +1,7 @@
 package fr.inria.diversify.logger.graph;
 
 import fr.inria.diversify.logger.Diff;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -44,8 +45,13 @@ public class GraphsDiff implements Diff {
     }
 
     @Override
-    public JSONObject toJSON() {
-        return null;
+    public JSONObject toJSON() throws JSONException {
+        JSONObject object = new JSONObject();
+        object.put("nodes", nodeDiff);
+        object.put("edges", edgeDiff);
+        object.put("graph","branch");
+
+        return object;
     }
 
     @Override

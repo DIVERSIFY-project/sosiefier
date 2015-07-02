@@ -25,11 +25,9 @@ public class PathBuilder {
     }
 
     public void addbranch(String id) {
-        if (previousBranchs.size() == 0 ) {
-            if(fullPath || previousBranchs.peek() != id) {
-                currentPaths.peek().append(KeyWord.simpleSeparator);
-                currentPaths.peek().append(id);
-            }
+        if (fullPath || previousBranchs.size() == 0 || previousBranchs.peek() != id) {
+            currentPaths.peek().append(KeyWord.simpleSeparator);
+            currentPaths.peek().append(id);
         }
         previousBranchs.pop();
         previousBranchs.push(id);

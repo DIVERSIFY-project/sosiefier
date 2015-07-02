@@ -1,6 +1,7 @@
 package fr.inria.diversify.logger.exception;
 
 import fr.inria.diversify.logger.Diff;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -45,8 +46,12 @@ public class ExceptionDiff implements Diff {
     }
 
     @Override
-    public JSONObject toJSON() {
-        return null;
+    public JSONObject toJSON() throws JSONException {
+        JSONObject object = new JSONObject();
+        object.put("throws", throwsByTest);
+        object.put("catchs", catchByTest);
+        object.put("type","exception");
+        return object;
     }
 
     @Override
@@ -80,17 +85,17 @@ public class ExceptionDiff implements Diff {
         }
     }
 
-    public void addAllThrows(String key, Set<String> strings) {
+    public void addThrows(String key, String strings) {
         if(!throwsByTest.containsKey(key)) {
             throwsByTest.put(key, new HashSet<>());
         }
-        throwsByTest.get(key).addAll(strings);
+        throwsByTest.get(key).add(strings);
     }
 
-    public void addAllCatchs(String key, Set<String> strings) {
+    public void addCatchs(String key, String strings) {
         if(!catchByTest.containsKey(key)) {
             catchByTest.put(key, new HashSet<>());
         }
-        catchByTest.get(key).addAll(strings);
+        catchByTest.get(key).add(strings);
     }
 }

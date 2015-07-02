@@ -12,6 +12,8 @@ import fr.inria.diversify.diversification.*;
 import fr.inria.diversify.issta2.Compare;
 import fr.inria.diversify.issta2.SosieComparator;
 import fr.inria.diversify.logger.branch.BranchComparator;
+import fr.inria.diversify.logger.variable.LogVariableComparator;
+import fr.inria.diversify.logger.exception.ExceptionComparator;
 import fr.inria.diversify.logger.graph.GraphsComparator;
 import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
@@ -128,6 +130,8 @@ public class DiversifyMain {
                 SosieComparator comparator = new SosieComparator(inputConfiguration.getInputProgram());
                 comparator.addComparator(new BranchComparator());
                 comparator.addComparator(new GraphsComparator());
+                comparator.addComparator(new ExceptionComparator());
+                comparator.addComparator(new LogVariableComparator());
                 abstractDiversify = new Compare(inputConfiguration, project, src, comparator);
                 break;
             }

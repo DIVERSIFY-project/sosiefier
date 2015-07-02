@@ -6,9 +6,13 @@ import fr.inria.diversify.logger.Comparator;
 import fr.inria.diversify.logger.Diff;
 import fr.inria.diversify.processor.main.BranchPositionProcessor;
 import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
+import org.apache.commons.io.FileUtils;
 import spoon.reflect.cu.SourcePosition;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -24,6 +28,7 @@ public class BranchComparator implements Comparator {
 
     @Override
     public void init(InputProgram  originalInputProgram, AbstractBuilder originalBuilder) throws Exception {
+        Log.debug("init BranchComparator");
         initTestByBranch(originalBuilder);
         intBranch(originalInputProgram);
     }
@@ -68,7 +73,11 @@ public class BranchComparator implements Comparator {
 
     protected void initTestByBranch(AbstractBuilder originalBuilder) throws InterruptedException, IOException {
         testsByBranch = new HashMap<>();
-        originalBuilder.runGoals(new String[]{"clean", "test"}, true);
+
+        writePropertiesFile(originalBuilder.getDirectory() + "/log");
+        originalBuilder.runGoals(new String[]{"clean", "test"}, false);
+        deletePropertiesFile(originalBuilder.getDirectory() + "/log");
+
         List<TestCoverage> testCoverage = loadTestCoverage(originalBuilder.getDirectory() + "/log");
 
         for(TestCoverage tc : testCoverage) {
@@ -85,6 +94,19 @@ public class BranchComparator implements Comparator {
                 }
             }
         }
+    }
+
+    protected void writePropertiesFile(String fileName) throws IOException {
+        FileWriter writer = new FileWriter(fileName + "/options");
+        writer.write("fullPath=false\n");
+        writer.write("writeVar=false\n");
+        writer.write("logMethodCall=false\n");
+        writer.close();
+    }
+
+    protected void deletePropertiesFile(String fileName) throws IOException {
+        File file = new File(fileName + "/options");
+        FileUtils.forceDelete(file);
     }
 
     protected void intBranch(InputProgram  originalInputProgram) {

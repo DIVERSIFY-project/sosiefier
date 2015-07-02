@@ -15,6 +15,8 @@ public class LogWriter {
 
     private boolean logMethodCall = true;
 
+    private boolean writeVar = true;
+
     //Thread containing the test
     private final Thread thread;
 
@@ -52,7 +54,9 @@ public class LogWriter {
             if(propertiesFile.exists()) {
                 Properties properties = new Properties();
                 properties.load(new FileInputStream(propertiesFile));
-                fullPath = Boolean.parseBoolean((String) properties.getOrDefault("fullPath,", "false"));
+                fullPath = Boolean.parseBoolean((String) properties.getOrDefault("fullPath", "false"));
+                logMethodCall = Boolean.parseBoolean((String) properties.getOrDefault("logMethodCall", "true"));
+                writeVar = Boolean.parseBoolean((String) properties.getOrDefault("writeVar", "true"));
             }
         } catch (IOException e) {
             System.err.println("fr.inria.logger: error with properties file");
@@ -186,7 +190,7 @@ public class LogWriter {
     }
 
     public void writeVar(String  methodId, String localPositionId, Object... var) {
-        if(!isObserve) {
+        if(!isObserve && writeVar) {
             isObserve = true;
             try {
                 StringBuilder string = new StringBuilder();
@@ -238,13 +242,13 @@ public class LogWriter {
                     previousVars.put(varId, value);
                     varsString.append(KeyWord.separator);
                     varsString.append(varName);
-                    varsString.append(KeyWord.simpleSeparator);
+                    varsString.append(KeyWord.separator);
                     varsString.append(value);
                 }
             } catch (Exception e) {
             }
         }
-        return varsString.toString();
+        return KeyWord.simpleSeparator + varsString.substring(KeyWord.separator.length(), varsString.length());
     }
 
     public void logAssertArgument(int idAssertTarget, Object target,  int idAssertInvocation, Object invocation) {

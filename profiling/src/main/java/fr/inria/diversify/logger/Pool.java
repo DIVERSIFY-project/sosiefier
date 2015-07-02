@@ -1,10 +1,12 @@
-package fr.inria.diversify.logger.logvariable.diff;
+package fr.inria.diversify.logger;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Simon on 27/01/15.
+ * User: Simon
+ * Date: 05/06/15
+ * Time: 12:59
  */
 public class Pool {
     private static Map<String,String> StringPool =
@@ -16,16 +18,16 @@ public class Pool {
     private static Map<Object,Object> ObjectPool =
             new HashMap<Object,Object>(20000);
 
-    public static String getCanonicalVersion(String str) {
+    public static String get(String str) {
         String canon = StringPool.putIfAbsent(str, str);
         return (canon == null) ? str : canon;
     }
 
-    public static Integer getCanonicalVersion(Integer str) {
+    public static Integer get(Integer str) {
         Integer canon = IntegerPool.putIfAbsent(str, str);
         return (canon == null) ? str : canon;
     }
-    public static Object getCanonicalVersion(Object str) {
+    public static Object get(Object str) {
         Object canon = ObjectPool.putIfAbsent(str, str);
         return (canon == null) ? str : canon;
     }
@@ -36,3 +38,4 @@ public class Pool {
         ObjectPool.clear();
     }
 }
+

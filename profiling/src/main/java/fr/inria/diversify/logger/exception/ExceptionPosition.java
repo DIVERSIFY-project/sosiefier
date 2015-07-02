@@ -47,24 +47,24 @@ public class ExceptionPosition {
 
         for(String position : throwPosition.keySet()) {
             if(!graph.throwPosition.containsKey(position)) {
-                diff.addAllThrows(name, throwPosition.get(position));
+                diff.addThrows(name, position);
             } else {
                 Set<String> set = new HashSet<>(graph.throwPosition.get(position));
                 set.removeAll(throwPosition.get(position));
                 if(!set.isEmpty()) {
-                    diff.addAllThrows(name + ":" + position, set);
+                    diff.addThrows(name, position);
                 }
             }
         }
 
         for(String position : catchPosition.keySet()) {
             if(!graph.catchPosition.containsKey(position)) {
-                diff.addAllThrows(name, catchPosition.get(position));
+                diff.addCatchs(name, position);
             } else {
                 Set<String> set = new HashSet<>(graph.catchPosition.get(position));
                 set.removeAll(catchPosition.get(position));
                 if(!set.isEmpty()) {
-                    diff.addAllCatchs(name + ":" + position, set);
+                    diff.addCatchs(name, position);
                 }
             }
         }

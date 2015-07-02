@@ -6,7 +6,7 @@ package fr.inria.diversify.logger.logger;
  * Time: 13:33
  */
 public class KeyWord {
-    public static final String separator = ":;:";
+    public static final String separator = ":':";
     public static final String simpleSeparator = ";";
     public static final String endLine = "$$\n";
 

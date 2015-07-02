@@ -85,7 +85,6 @@ public class ExceptionReader {
 
         for(String exception : exceptions) {
             String[] split = exception.split(KeyWord.simpleSeparator);
-//            int deep = Integer.parseInt(split[1]);
             String methodName = idToMethod.get(split[2]);
             String localPosition = idToMethod.get(split[3]);
             String exceptionType = split[4];
