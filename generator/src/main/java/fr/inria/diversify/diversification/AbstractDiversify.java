@@ -1,9 +1,11 @@
 package fr.inria.diversify.diversification;
 
+import fr.inria.diversify.bytecode.CompareBytecode;
 import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
 import fr.inria.diversify.sosie.logger.Instru;
 import fr.inria.diversify.statistic.AbstractSessionResults;
 import fr.inria.diversify.buildSystem.AbstractBuilder;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.transformation.query.TransformationQuery;
@@ -12,6 +14,7 @@ import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.json.JSONException;
+import spoon.reflect.declaration.CtType;
 
 import java.io.*;
 import java.util.List;
@@ -131,6 +134,22 @@ public abstract class AbstractDiversify {
      */
     public abstract void run(int n) throws Exception;
 
+    protected boolean compareByteCode(Transformation transformation) throws Exception {
+        if(transformation instanceof SingleTransformation) {
+            SingleTransformation singleTransformation = (SingleTransformation) transformation;
+            CtType mainType = singleTransformation.getPosition().getCompilationUnit().getMainType();
+
+            InputProgram inputProgram = inputConfiguration.getInputProgram();
+
+            String originalClass = inputProgram.getProgramDir() + "/" + inputProgram.getClassesDir() + "/" + mainType.getQualifiedName().replace(".", "/") + ".class";
+            String sosieClass = tmpDir + "/" + inputProgram.getClassesDir() + "/" + mainType.getQualifiedName().replace(".", "/") + ".class";
+
+            CompareBytecode compareBytecode = new CompareBytecode(originalClass, sosieClass);
+            return compareBytecode.equals(singleTransformation.methodLocationName());
+        }
+        return true;
+    }
+
     /**
      *
      * @param output
@@ -180,8 +199,6 @@ public abstract class AbstractDiversify {
         if (transformations.isEmpty())
             return "";
 
-//        TransformationsWriter write = new TransformationsWriter(transformations, fileName);
-//        return write.writeAllTransformation(null);
         JsonTransformationWriter writer = new JsonTransformationWriter();
         writer.write(transformations, fileName + ".json", inputConfiguration.getInputProgram().getProgramDir() + "/pom.xml");
         return fileName + ".json";

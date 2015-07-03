@@ -147,7 +147,7 @@ public abstract class AbstractBuilder {
         thread.start();
 
         int time = 0;
-        while (status == -3) {
+        while (status == -3 && thread.isAlive()) {
             time++;
             Thread.sleep(1000);
         }

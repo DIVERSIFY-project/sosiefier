@@ -30,26 +30,28 @@ public class JsonTransformationWriter {
     protected Map<Class<? extends JsonSectionOutput>, JsonSectionOutput> sections;
 
     /**
-     * Saves the sosies with version information
-     *
-     * @param transformations Transformations to be stored
-     * @param outPutPath      Path where the sosies are going to be stored
-     * @param srcPOM          POM's path for the project where the sosies are extracted
-     * @param generatorVersion    POM of the sosies generator
-     */
-    public JsonTransformationWriter(Collection<Transformation> transformations, String outPutPath,
-                            String srcPOM, String generatorVersion) {
-        assert outPutPath != null;
-        assert srcPOM != null;
-        assert generatorVersion != null;
+//     * Saves the sosies with version information
+//     *
+//     * @param transformations Transformations to be stored
+//     * @param outPutPath      Path where the sosies are going to be stored
+//     * @param srcPOM          POM's path for the project where the sosies are extracted
+//     * @param generatorVersion    POM of the sosies generator
+//     */
+//    public JsonTransformationWriter(Collection<Transformation> transformations, String outPutPath,
+//                            String srcPOM, String generatorVersion) {
+//        assert outPutPath != null;
+//        assert srcPOM != null;
+//        assert generatorVersion != null;
+//
+//        this.transformations = transformations;
+//        this.outputPath = outPutPath;
+//        outputObject = new JSONObject();
+//        initSections(srcPOM, generatorVersion);
+//    }
 
-        this.transformations = transformations;
-        this.outputPath = outPutPath;
-        outputObject = new JSONObject();
-        initSections(srcPOM, generatorVersion);
+    public JsonTransformationWriter() {
+        sections = new HashMap<>();
     }
-
-    public JsonTransformationWriter() {}
 
     /**
      * Init sections
@@ -57,7 +59,7 @@ public class JsonTransformationWriter {
      * @param generatorVersion
      */
     private void initSections(String srcPOM, String generatorVersion) {
-        sections = new HashMap<>();
+
 
         JsonHeaderOutput s = new JsonHeaderOutput(srcPOM, generatorVersion);
         s.setTransformations(transformations);
@@ -73,17 +75,8 @@ public class JsonTransformationWriter {
      * There is only one section per class in the output object
      * @param section Output Section to be set
      */
-    public void setSection(Class<? extends JsonSectionOutput> aClass, JsonSectionOutput section) {
+    public void addSection(Class<? extends JsonSectionOutput> aClass, JsonSectionOutput section) {
         sections.put(aClass, section);
-    }
-
-    /**
-     * Get the section from the list
-     * @param aClass
-     * @return
-     */
-    public JsonSectionOutput getSection(Class<? extends JsonSectionOutput> aClass){
-        return sections.get(aClass.getClass());
     }
 
     public void write(Collection<Transformation> transformations, String outPutPath,
