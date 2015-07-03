@@ -23,9 +23,10 @@ import java.util.Map;
 public class BranchCoverageProcessor extends AbstractLoggingInstrumenter<CtExecutable> {
     List<String> methodsId;
     Map<Integer, Integer> blockIds;
+    boolean addBodyBranch;
 
 
-    public BranchCoverageProcessor(InputProgram inputProgram, String outputDir) throws IOException {
+    public BranchCoverageProcessor(InputProgram inputProgram, String outputDir, boolean addBodyBranch) throws IOException {
         super(inputProgram);
         File file = new File(outputDir + "/log/");
         if(!file.exists()) {
@@ -33,6 +34,7 @@ public class BranchCoverageProcessor extends AbstractLoggingInstrumenter<CtExecu
         }
         methodsId = new ArrayList<>();
         blockIds = new HashMap<>();
+        this.addBodyBranch = addBodyBranch;
     }
 
     @Override
@@ -45,8 +47,10 @@ public class BranchCoverageProcessor extends AbstractLoggingInstrumenter<CtExecu
         int methodId = methodId(method);
         String info = methodId + ";" + method.getReference().getDeclaringType().getQualifiedName() + "_" + method.getSignature().replace(" ", "_");
 
+        if(addBodyBranch) {
         addBranchLogger(method.getBody(),"b");
         info += ";b";
+        }
 
         for(Object object : Query.getElements(method, new TypeFilter(CtIf.class))) {
             CtIf ctIf = (CtIf) object;

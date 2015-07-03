@@ -10,6 +10,7 @@ import spoon.reflect.cu.SourcePosition;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * User: Simon
@@ -24,24 +25,34 @@ public class LogVariableComparator implements Comparator {
 
     @Override
     public Diff compare(SingleTransformation transformation, String originalLogDir, String sosieLogDir) throws Exception {
-        LogTestReader builder = new LogTestReader();
-        Collection<Test> originalVariables = builder.loadLog(originalLogDir);
+        try {
+            LogTestReader builder = new LogTestReader();
+            Collection<Test> originalVariables = builder.loadLog(originalLogDir);
 
-        builder = new LogTestReader();
-        Collection<Test> sosieVariables = builder.loadLog(sosieLogDir);
+            builder = new LogTestReader();
+            Collection<Test> sosieVariables = builder.loadLog(sosieLogDir);
 
-        VariableDiff diff = new VariableDiff();
-        for(Test oVars : originalVariables) {
-            Test sVars = sosieVariables.stream()
-                    .filter(g -> g.getSignature().equals(oVars.getSignature()))
-                    .findFirst()
-                    .get();
-            Set<String> gDiff = oVars.diff(sVars);
-            if(gDiff.size() != 0) {
-                diff.add(oVars.getSignature(), gDiff);
+            VariableDiff diff = new VariableDiff();
+            for (Test oVars : originalVariables) {
+                Test sVars = sosieVariables.stream()
+                        .filter(g -> g.getSignature().equals(oVars.getSignature()))
+                        .findFirst()
+                        .get();
+                Set<String> gDiff = oVars.diff(sVars).stream()
+                        .filter(position -> !(position.contains(transformation.classLocationName())
+                            && position.contains(transformation.methodLocationName())))
+                            .collect(Collectors.toSet());
+                if (gDiff.size() != 0) {
+                    diff.add(oVars.getSignature(), gDiff);
+                }
             }
+
+
+            return diff;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return getEmptyDiff();
         }
-        return diff;
     }
 
     @Override

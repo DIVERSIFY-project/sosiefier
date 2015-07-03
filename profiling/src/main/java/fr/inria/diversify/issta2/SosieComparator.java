@@ -144,6 +144,7 @@ public class SosieComparator {
         Properties properties = new Properties();
         properties.put("profiling.main.field", "true");
         properties.put("profiling.main.branch", "true");
+        properties.put("profiling.main.branch.addBodyBranch", "true");
         properties.put("profiling.main.catch", "true");
         properties.put("profiling.main.throw", "true");
         properties.put("profiling.main.methodCall", "true");
