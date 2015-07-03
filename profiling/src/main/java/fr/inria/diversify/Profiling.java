@@ -36,7 +36,6 @@ public class Profiling {
     }
 
     public void apply() throws Exception {
-//        initOutputDirectory();
         MavenDependencyResolver t = new MavenDependencyResolver();
         t.DependencyResolver(inputProgram.getProgramDir() + "/pom.xml");
         if(transformation != null) {
@@ -76,7 +75,8 @@ public class Profiling {
         condition = Boolean.parseBoolean(properties.getProperty("profiling.main.branch", "false"));
         transform = transform || condition;
         if(condition) {
-            BranchCoverageProcessor m = new BranchCoverageProcessor(inputProgram, inputProgram.getProgramDir());
+            boolean addBodyBranch =  Boolean.parseBoolean(properties.getProperty("profiling.main.branch.addBodyBranch", "true"));
+            BranchCoverageProcessor m = new BranchCoverageProcessor(inputProgram, inputProgram.getProgramDir(), addBodyBranch);
             m.setLogger(logger+".Logger");
             LoggerUtils.applyProcessor(factory, m);
         }

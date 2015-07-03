@@ -64,7 +64,7 @@ public class ProfilingMain {
         Boolean condition = Boolean.parseBoolean(inputConfiguration.getProperty("profiling.main.branch", "false"));
         transform = transform || condition;
         if(condition) {
-            BranchCoverageProcessor m = new BranchCoverageProcessor(inputProgram, outputDirectory);
+            BranchCoverageProcessor m = new BranchCoverageProcessor(inputProgram, outputDirectory , true);
             m.setLogger(logger+".Logger");
             LoggerUtils.applyProcessor(factory, m);
         }
