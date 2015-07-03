@@ -31,14 +31,14 @@ public class LogVariableComparator implements Comparator {
         Collection<Test> sosieVariables = builder.loadLog(sosieLogDir);
 
         VariableDiff diff = new VariableDiff();
-        for(Test oGraph : originalVariables) {
-            Test sGraph = sosieVariables.stream()
-                    .filter(g -> g.getSignature().equals(oGraph.getSignature()))
+        for(Test oVars : originalVariables) {
+            Test sVars = sosieVariables.stream()
+                    .filter(g -> g.getSignature().equals(oVars.getSignature()))
                     .findFirst()
                     .get();
-            Set<String> gDiff = oGraph.diff(sGraph);
+            Set<String> gDiff = oVars.diff(sVars);
             if(gDiff.size() != 0) {
-                diff.add(oGraph.getSignature(), gDiff);
+                diff.add(oVars.getSignature(), gDiff);
             }
         }
         return diff;

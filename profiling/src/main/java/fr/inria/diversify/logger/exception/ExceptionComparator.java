@@ -31,12 +31,12 @@ public class ExceptionComparator implements Comparator {
         Collection<ExceptionPosition> sosieExceptions = builder.load();
 
         ExceptionDiff diff = new ExceptionDiff();
-        for(ExceptionPosition oGraph : originalExceptions) {
-            ExceptionPosition sGraph = sosieExceptions.stream()
-                    .filter(g -> g.getName().equals(oGraph.getName()))
+        for(ExceptionPosition oException : originalExceptions) {
+            ExceptionPosition sException = sosieExceptions.stream()
+                    .filter(g -> g.getName().equals(oException.getName()))
                     .findFirst()
                     .get();
-            ExceptionDiff gDiff = oGraph.diff(sGraph);
+            ExceptionDiff gDiff = oException.diff(sException);
             if(gDiff.size() != 0) {
                 diff.merge(gDiff);
             }

@@ -48,7 +48,7 @@ public class LogTestReader {
 
         String[] split = assertLog.split(";");
         String methodId = idMap.get(split[2]);
-        String localId = idMap.get(split[3]);
+        String localId = idMap.get(split[3]).split(":")[0];
         monitoringPoint = new SingleMonitoringPoint(methodId, localId);
 
         String[] vars;
@@ -63,7 +63,7 @@ public class LogTestReader {
             vars = new String[size];
             values = new Object[size];
             for (int i = 0; i < size; i+=2) {
-                vars[i] = vv[i];
+                vars[i] = idMap.get(vv[i]);
                 if(vv.length <= i + 1) {
                     values[i] = "";
                 } else {

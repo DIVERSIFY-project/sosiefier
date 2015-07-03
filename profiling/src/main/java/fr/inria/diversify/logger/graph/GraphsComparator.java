@@ -22,10 +22,10 @@ public class GraphsComparator implements Comparator {
 
     @Override
     public Diff compare(SingleTransformation transformation, String originalLogDir, String sosieLogDir) throws Exception {
-        BuildGraph builder = new BuildGraph(originalLogDir);
+        GraphReader builder = new GraphReader(originalLogDir);
         Collection<Graph> originalGraphs = builder.load();
 
-        builder = new BuildGraph(sosieLogDir);
+        builder = new GraphReader(sosieLogDir);
         Collection<Graph> sosieGraphs = builder.load();
 
         GraphsDiff diff = new GraphsDiff();

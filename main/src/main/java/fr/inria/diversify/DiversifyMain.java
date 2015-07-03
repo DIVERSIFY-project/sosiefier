@@ -126,7 +126,7 @@ public class DiversifyMain {
                 abstractDiversify = dac;
                 break;
             }
-            case "compareBranch": {
+            case "compare": {
                 SosieComparator comparator = new SosieComparator(inputConfiguration.getInputProgram());
                 comparator.addComparator(new BranchComparator());
                 comparator.addComparator(new GraphsComparator());

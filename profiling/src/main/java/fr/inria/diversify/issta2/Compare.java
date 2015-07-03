@@ -61,7 +61,6 @@ public class Compare extends SinglePointDiversify {
 
                 trans.setStatus(status);
                 trans.setFailures(builder.getTestFail());
-
                 // error during runTest
             } catch (Exception e) {
                 trans.setStatus(-2);
