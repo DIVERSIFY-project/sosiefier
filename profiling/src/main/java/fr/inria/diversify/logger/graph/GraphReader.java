@@ -14,12 +14,12 @@ import java.util.*;
  * Date: 23/06/15
  * Time: 10:51
  */
-public class BuildGraph {
+public class GraphReader {
     Map<String, Graph> graphByTest;
     Map<String, String> idToMethod;
     String directory;
 
-    public BuildGraph(String directory) {
+    public GraphReader(String directory) {
         this.directory = directory;
         graphByTest= new HashMap<>();
 
