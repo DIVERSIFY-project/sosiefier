@@ -44,7 +44,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>fr.inria.diversify.ProfilingMain</mainClass>
+                            <mainClass>fr.inria.diversify.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
