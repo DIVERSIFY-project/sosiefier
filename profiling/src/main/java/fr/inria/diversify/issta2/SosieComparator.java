@@ -55,6 +55,10 @@ public class SosieComparator {
     public Set<Diff> compare(SingleTransformation trans) throws Exception {
         try {
             Collection<String> testToRun = selectTest(trans.getPosition());
+            if(testToRun.isEmpty()) {
+                return new HashSet<>();
+            }
+
             updateFilter(testToRun);
 
             copyDir(tmpSosieDir.substring(0, tmpSosieDir.length() - 6), tmpSosieDir);
