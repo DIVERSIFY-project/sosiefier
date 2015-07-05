@@ -48,8 +48,8 @@ public class BranchCoverageProcessor extends AbstractLoggingInstrumenter<CtExecu
         String info = methodId + ";" + method.getReference().getDeclaringType().getQualifiedName() + "_" + method.getSignature().replace(" ", "_");
 
         if(addBodyBranch) {
-        addBranchLogger(method.getBody(),"b");
-        info += ";b";
+            addBranchLogger(method.getBody(),"b");
+            info += ";b";
         }
 
         for(Object object : Query.getElements(method, new TypeFilter(CtIf.class))) {
