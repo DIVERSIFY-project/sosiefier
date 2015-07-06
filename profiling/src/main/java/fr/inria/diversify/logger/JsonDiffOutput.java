@@ -15,8 +15,8 @@ import java.util.Set;
  * Time: 10:05
  */
 public class JsonDiffOutput extends JsonSectionOutput {
-    private static final String TRANSFORMATION = "TRANSFORMATION";
-    private static final String DIFFS = "DIFFS";
+    private static final String TRANSFORMATION = "transformation";
+    private static final String DIFFS = "diffs";
 
 
     Map<Transformation, Set<Diff>> diffs;
