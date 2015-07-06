@@ -47,7 +47,7 @@ public class ExceptionPosition {
 
         for(String position : throwPosition.keySet()) {
             if(!graph.throwPosition.containsKey(position)) {
-                diff.addThrows(name, position);
+//                diff.addThrows(name, position);
             } else {
                 Set<String> set = new HashSet<>(graph.throwPosition.get(position));
                 set.removeAll(throwPosition.get(position));
@@ -59,7 +59,7 @@ public class ExceptionPosition {
 
         for(String position : catchPosition.keySet()) {
             if(!graph.catchPosition.containsKey(position)) {
-                diff.addCatchs(name, position);
+//                diff.addCatchs(name, position);
             } else {
                 Set<String> set = new HashSet<>(graph.catchPosition.get(position));
                 set.removeAll(catchPosition.get(position));

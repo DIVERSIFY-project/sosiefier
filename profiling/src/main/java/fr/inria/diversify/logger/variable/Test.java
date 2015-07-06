@@ -53,9 +53,13 @@ public class Test {
                 .filter(id -> {
                     AbstractMonitoringPoint p1 = geMonitoringPoint(id);
                     AbstractMonitoringPoint p2 = other.geMonitoringPoint(id);
-                    return p1 == null || p2 == null || !p1.equals(p2);
+                    if (p1 != null && p2 != null) {
+                        return !p1.equals(p2);
+                    } else {
+                        return false;
+                    }
+//                    return p1 == null || p2 == null || !p1.equals(p2);
                 })
-//                .map(id -> AbstractMonitoringPoint.getStringPosition(id))
                 .collect(Collectors.toSet());
     }
 }
