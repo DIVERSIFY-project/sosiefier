@@ -20,7 +20,8 @@ public class ThrowProcessor extends AbstractLoggingInstrumenter<CtThrow> {
 
     @Override
     public boolean isToBeProcessed(CtThrow candidate) {
-        return candidate.getParent(CtExecutable.class) != null;
+        return candidate.getParent(CtExecutable.class) != null
+                && !getMethod(candidate).getThrownTypes().isEmpty();
     }
 
     @Override

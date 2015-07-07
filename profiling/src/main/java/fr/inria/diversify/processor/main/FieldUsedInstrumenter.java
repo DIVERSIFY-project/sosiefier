@@ -2,10 +2,7 @@ package fr.inria.diversify.processor.main;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.processor.ProcessorUtil;
-import spoon.reflect.code.CtBlock;
-import spoon.reflect.code.CtCodeSnippetStatement;
-import spoon.reflect.code.CtLoop;
-import spoon.reflect.code.CtStatement;
+import spoon.reflect.code.*;
 import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
@@ -79,7 +76,9 @@ public class FieldUsedInstrumenter extends AbstractLoggingInstrumenter<CtStateme
 
     protected boolean ok(CtStatement statement) {
         if(statement instanceof CtBlock
-                || statement instanceof CtLoop) {
+                || statement instanceof CtLoop
+                || statement instanceof CtTry
+                || statement instanceof CtCatch) {
             return false;
         }
         return !statement.toString().startsWith("this(")

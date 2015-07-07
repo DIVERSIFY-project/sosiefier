@@ -69,20 +69,22 @@ public class ExceptionComparator implements Comparator {
         keys.addAll(map2.keySet());
 
         for(String key : keys) {
-            Set<String> set1 = map1.get(key);
-            Set<String> set2 = map2.get(key);
+            if(map1.containsKey(key) && map2.containsKey(key)) {
+                Set<String> set1 = map1.get(key);
+                Set<String> set2 = map2.get(key);
 
-            Set<String> diff1 = new HashSet<>();
-            diff1.addAll(set1);
-            diff1.removeAll(set2);
+                Set<String> diff1 = new HashSet<>();
+                diff1.addAll(set1);
+                diff1.removeAll(set2);
 
-            Set<String> diff2 = new HashSet<>();
-            diff2.addAll(set2);
-            diff2.removeAll(set1);
+                Set<String> diff2 = new HashSet<>();
+                diff2.addAll(set2);
+                diff2.removeAll(set1);
 
-            if(!diff1.isEmpty() || !diff2.isEmpty()) {
-                map.put(key, diff1);
-                diff1.addAll(diff2);
+                if (!diff1.isEmpty() || !diff2.isEmpty()) {
+                    map.put(key, diff1);
+                    diff1.addAll(diff2);
+                }
             }
         }
 
