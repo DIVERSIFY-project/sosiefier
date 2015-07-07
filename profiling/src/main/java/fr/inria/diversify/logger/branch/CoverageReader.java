@@ -68,7 +68,7 @@ public class CoverageReader {
     protected List<TestCoverage> parseTestCoverageFile(File file, Map<Integer, MethodCoverage> idToMethod) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(file));
         List<TestCoverage> testCoverages = new ArrayList<>();
-        String currentTestCoverage = "";
+        StringBuilder currentTestCoverage = new StringBuilder();
         String currentTest = null;
 
         String line = br.readLine();
@@ -82,19 +82,20 @@ public class CoverageReader {
                 switch (split[0]) {
                     case KeyWord.testStartObservation:
                         currentTest = split[1];
-                        currentTestCoverage = "";
+                        currentTestCoverage = new StringBuilder();
                         resetIdMethod(idToMethod);
                         break;
                     case KeyWord.testEndObservation:
                         if (currentTest != null) {
-                            parseCoverage(currentTestCoverage, idToMethod);
+                            parseCoverage(currentTestCoverage.toString(), idToMethod);
                             testCoverages.add(new TestCoverage(currentTest, idToMethod));
                             currentTest = null;
                             resetIdMethod(idToMethod);
                         }
                         break;
                     case KeyWord.branchObservation:
-                        currentTestCoverage += logEntry + "\n";
+                        currentTestCoverage.append(logEntry);
+                        currentTestCoverage.append("\n");
                         break;
                     default:
                         break;
@@ -102,7 +103,7 @@ public class CoverageReader {
                 logEntry = "";
             }
             if(logEntry.startsWith(KeyWord.testEndObservation) && currentTest != null) {
-                parseCoverage(currentTestCoverage, idToMethod);
+                parseCoverage(currentTestCoverage.toString(), idToMethod);
                 testCoverages.add(new TestCoverage(currentTest, idToMethod));
                 currentTest = null;
                 resetIdMethod(idToMethod);
