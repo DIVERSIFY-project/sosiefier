@@ -1,13 +1,11 @@
 package fr.inria.diversify.logger.exception;
 
 import fr.inria.diversify.logger.Diff;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * User: Simon
@@ -21,6 +19,12 @@ public class ExceptionDiff implements Diff {
     public ExceptionDiff() {
         throwsByTest = new HashMap<>();
         catchByTest = new HashMap<>();
+    }
+
+    public ExceptionDiff(JSONObject diff) throws JSONException {
+        throwsByTest = new HashMap<>();
+        catchByTest = new HashMap<>();
+        parse(diff);
     }
 
     @Override
@@ -60,8 +64,30 @@ public class ExceptionDiff implements Diff {
     }
 
     @Override
-    public void parse(JSONObject jsonObject) {
+    public void parse(JSONObject jsonObject) throws JSONException {
+        JSONObject throwss = jsonObject.getJSONObject("throws");
+        Iterator it = throwss.keys();
+        while (it.hasNext()) {
+            String key = (String) it.next();
+            JSONArray array = throwss.getJSONArray(key);
+            Set<String> set = new HashSet<>();
+            for(int i = 0; i < array.length(); i++) {
+                set.add(array.getString(i));
+            }
+            throwsByTest.put(key, set);
+        }
 
+        JSONObject catchs = jsonObject.getJSONObject("catchs");
+        it = throwss.keys();
+        while (it.hasNext()) {
+            String key = (String) it.next();
+            JSONArray array = catchs.getJSONArray(key);
+            Set<String> set = new HashSet<>();
+            for(int i = 0; i < array.length(); i++) {
+                set.add(array.getString(i));
+            }
+            catchByTest.put(key, set);
+        }
     }
 
     @Override

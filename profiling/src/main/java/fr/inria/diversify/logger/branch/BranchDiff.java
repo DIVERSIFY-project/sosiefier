@@ -1,12 +1,11 @@
 package fr.inria.diversify.logger.branch;
 
 import fr.inria.diversify.logger.Diff;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * User: Simon
@@ -14,7 +13,16 @@ import java.util.Set;
  * Time: 11:17
  */
 public class BranchDiff implements Diff {
-    Map<String, Set<String>> diff = new HashMap<>();
+    Map<String, Set<String>> diff;
+
+    public BranchDiff() {
+        diff = new HashMap<>();
+    }
+
+    public BranchDiff(JSONObject object) throws JSONException {
+        diff = new HashMap<>();
+        parse(object);
+    }
 
     @Override
     public void filter(Diff filter) {
@@ -44,8 +52,18 @@ public class BranchDiff implements Diff {
     }
 
     @Override
-    public void parse(JSONObject jsonObject) {
-
+    public void parse(JSONObject jsonObject) throws JSONException {
+        JSONObject branches = jsonObject.getJSONObject("branches");
+        Iterator it = branches.keys();
+        while (it.hasNext()) {
+            String key = (String) it.next();
+            JSONArray array = branches.getJSONArray(key);
+            Set<String> set = new HashSet<>();
+            for(int i = 0; i < array.length(); i++) {
+                set.add(array.getString(i));
+            }
+            diff.put(key, set);
+        }
     }
 
     @Override

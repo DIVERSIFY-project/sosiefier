@@ -26,8 +26,8 @@ public class ExceptionPosition {
     }
 
     public void addThrow(String methodName, String localPosition, String type, String value) {
-        String key = methodName + "." + localPosition;
-
+//        String key = methodName + "." + localPosition;
+        String key = methodName;
         if(!throwPosition.containsKey(key)) {
             throwPosition.put(key, new HashSet<>());
         }
@@ -35,21 +35,21 @@ public class ExceptionPosition {
     }
 
     public void addCatch(String methodName, String localPosition, String type, String value) {
-        String key = methodName + "." + localPosition;
-
+//        String key = methodName + "." + localPosition;
+        String key = methodName;
         if(!catchPosition.containsKey(key)) {
             catchPosition.put(key, new HashSet<>());
         }
         catchPosition.get(key).add(type);
     }
 
-    protected void diff(ExceptionPosition graph,  ExceptionDiff diff) throws Exception {
+    protected void diff(ExceptionPosition exceptionPosition,  ExceptionDiff diff) throws Exception {
 
         for(String position : throwPosition.keySet()) {
-            if(!graph.throwPosition.containsKey(position)) {
-//                diff.addThrows(name, position);
+            if(!exceptionPosition.throwPosition.containsKey(position)) {
+                diff.addThrows(name, position);
             } else {
-                Set<String> set = new HashSet<>(graph.throwPosition.get(position));
+                Set<String> set = new HashSet<>(exceptionPosition.throwPosition.get(position));
                 set.removeAll(throwPosition.get(position));
                 if(!set.isEmpty()) {
                     diff.addThrows(name, position);
@@ -58,10 +58,10 @@ public class ExceptionPosition {
         }
 
         for(String position : catchPosition.keySet()) {
-            if(!graph.catchPosition.containsKey(position)) {
-//                diff.addCatchs(name, position);
+            if(!exceptionPosition.catchPosition.containsKey(position)) {
+                diff.addCatchs(name, position);
             } else {
-                Set<String> set = new HashSet<>(graph.catchPosition.get(position));
+                Set<String> set = new HashSet<>(exceptionPosition.catchPosition.get(position));
                 set.removeAll(catchPosition.get(position));
                 if(!set.isEmpty()) {
                     diff.addCatchs(name, position);

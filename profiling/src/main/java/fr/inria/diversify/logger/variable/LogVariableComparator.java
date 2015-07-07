@@ -46,8 +46,6 @@ public class LogVariableComparator implements Comparator {
                     diff.add(oVars.getSignature(), gDiff);
                 }
             }
-
-
             return diff;
         }catch (Exception e) {
             e.printStackTrace();

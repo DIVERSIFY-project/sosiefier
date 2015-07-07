@@ -1,13 +1,11 @@
 package fr.inria.diversify.logger.variable;
 
 import fr.inria.diversify.logger.Diff;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * User: Simon
@@ -19,6 +17,11 @@ public class VariableDiff implements Diff {
 
     public VariableDiff() {
         diffs = new HashMap<>();
+    }
+
+    public VariableDiff(JSONObject diff) throws JSONException {
+        diffs = new HashMap<>();
+        parse(diff);
     }
 
     @Override
@@ -51,7 +54,17 @@ public class VariableDiff implements Diff {
 
     @Override
     public void parse(JSONObject jsonObject) throws JSONException {
-
+        JSONObject vars = jsonObject.getJSONObject("variables");
+        Iterator it = vars.keys();
+        while (it.hasNext()) {
+            String key = (String) it.next();
+            JSONArray array = vars.getJSONArray(key);
+            Set<String> set = new HashSet<>();
+            for(int i = 0; i < array.length(); i++) {
+                set.add(array.getString(i));
+            }
+            diffs.put(key, set);
+        }
     }
 
     @Override

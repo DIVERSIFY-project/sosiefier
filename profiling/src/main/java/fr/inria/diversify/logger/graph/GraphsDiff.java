@@ -1,13 +1,11 @@
 package fr.inria.diversify.logger.graph;
 
 import fr.inria.diversify.logger.Diff;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * User: Simon
@@ -22,6 +20,13 @@ public class GraphsDiff implements Diff {
         nodeDiff = new HashMap<>();
         edgeDiff = new HashMap<>();
     }
+
+    public GraphsDiff(JSONObject diff) throws JSONException {
+        nodeDiff = new HashMap<>();
+        edgeDiff = new HashMap<>();
+        parse(diff);
+    }
+
     @Override
     public void filter(Diff filter) {
         GraphsDiff gDiff = (GraphsDiff) filter;
@@ -49,7 +54,7 @@ public class GraphsDiff implements Diff {
         JSONObject object = new JSONObject();
         object.put("nodes", nodeDiff);
         object.put("edges", edgeDiff);
-        object.put("graph","branch");
+        object.put("type","graph");
 
         return object;
     }
@@ -61,8 +66,30 @@ public class GraphsDiff implements Diff {
     }
 
     @Override
-    public void parse(JSONObject jsonObject) {
+    public void parse(JSONObject jsonObject) throws JSONException {
+        JSONObject node = jsonObject.getJSONObject("nodes");
+        Iterator it = node.keys();
+        while (it.hasNext()) {
+            String key = (String) it.next();
+            JSONArray array = node.getJSONArray(key);
+            Set<String> set = new HashSet<>();
+            for(int i = 0; i < array.length(); i++) {
+                set.add(array.getString(i));
+            }
+            nodeDiff.put(key, set);
+        }
 
+        JSONObject edge = jsonObject.getJSONObject("edges");
+        it = edge.keys();
+        while (it.hasNext()) {
+            String key = (String) it.next();
+            JSONArray array = edge.getJSONArray(key);
+            Set<String> set = new HashSet<>();
+            for(int i = 0; i < array.length(); i++) {
+                set.add(array.getString(i));
+            }
+            edgeDiff.put(key, set);
+        }
     }
 
     @Override

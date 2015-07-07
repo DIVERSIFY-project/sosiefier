@@ -39,12 +39,14 @@ public class Graph {
             Node other;
             if(!graph.nodes.containsKey(nodeName)) {
                 diff.addNode(name, nodeName);
-                diff.addAllEdge(name, node.getEdges());
+                if(!node.getEdges().isEmpty()) {
+                    diff.addAllEdge(name, node.getEdges());
+                }
             } else {
                 other = graph.nodes.get(nodeName);
                 Set<String> set = node.callMinus(other);
                 if(!set.isEmpty()) {
-                    diff.addAllEdge(nodeName, node.callMinus(other));
+                    diff.addAllEdge(name, node.callMinus(other));
                 }
             }
         }

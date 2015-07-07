@@ -1,7 +1,6 @@
 package fr.inria.diversify.logger.exception;
 
 
-import fr.inria.diversify.logger.graph.Graph;
 import fr.inria.diversify.logger.logger.KeyWord;
 
 import java.io.BufferedReader;
@@ -18,11 +17,15 @@ import java.util.*;
 public class ExceptionReader {
     Map<String, ExceptionPosition> exceptionPositionByTest;
     Map<String, String> idToMethod;
+    Map<String, Set<String>> methodCallByTest;
     String directory;
+
+
 
     public ExceptionReader(String directory) {
         this.directory = directory;
         exceptionPositionByTest = new HashMap<>();
+        methodCallByTest = new HashMap<>();
 
     }
 
@@ -69,6 +72,11 @@ public class ExceptionReader {
                     case KeyWord.throwObservation:
                         exceptions.add(logEntry);
                         break;
+                    case KeyWord.methodCallObservation:
+                        if(currentTest != null) {
+                            addMethodCall(currentTest, logEntry);
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -78,6 +86,16 @@ public class ExceptionReader {
                 buildExceptionPosition(currentTest, exceptions);
             }
         }
+    }
+
+    protected void addMethodCall(String currentTest, String logEntry) {
+        String[] split = logEntry.split(KeyWord.simpleSeparator);
+        String methodName = idToMethod.get(split[2]);
+
+        if(!methodCallByTest.containsKey(currentTest)) {
+            methodCallByTest.put(currentTest, new HashSet<>());
+        }
+        methodCallByTest.get(currentTest).add(methodName);
     }
 
     protected void buildExceptionPosition(String currentTest, List<String> exceptions) {
