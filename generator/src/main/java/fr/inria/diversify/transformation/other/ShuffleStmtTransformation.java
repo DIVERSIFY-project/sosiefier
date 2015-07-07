@@ -60,6 +60,7 @@ public class ShuffleStmtTransformation extends SpoonTransformation<CtBlock, CtEl
     public void buildNewOrder() {
         newOrderStmt = new ArrayList<>();
         List<CtStatement> stmts = new ArrayList<CtStatement>(transformationPoint.getStatements());
+        Collections.shuffle(stmts);
         Set<String> localVar = getLocalVariableName(transformationPoint.getStatements());
 
         CtStatement ret = stmts.stream()
