@@ -70,7 +70,7 @@ public class JsonTransformationLoader {
      * There is only one section per class in the output object
      * @param section Output Section to be set
      */
-    public void setSection(Class<? extends JsonSectionInput> aClass, JsonSectionInput section) {
+    public void addSection(Class<? extends JsonSectionInput> aClass, JsonSectionInput section) {
         sections.put(aClass.getName(), section);
     }
 
@@ -120,10 +120,10 @@ public class JsonTransformationLoader {
      */
     private void initSections() {
         sections = new HashMap<>();
-        setSection(JsonFailuresInput.class, new JsonFailuresInput(inputProgram, jsonObject));
-        setSection(JsonTransformationCollectionInput.class,
+        addSection(JsonFailuresInput.class, new JsonFailuresInput(inputProgram, jsonObject));
+        addSection(JsonTransformationCollectionInput.class,
                 new JsonTransformationCollectionInput(inputProgram, jsonObject));
-        setSection(JsonHeaderInput.class, new JsonHeaderInput(inputProgram, jsonObject));
+        addSection(JsonHeaderInput.class, new JsonHeaderInput(inputProgram, jsonObject));
     }
 
     /**
