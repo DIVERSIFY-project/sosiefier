@@ -236,15 +236,15 @@ public class LogWriter {
                 if(value.length() > 1000) {
                     value = vars[i + 1].getClass().getCanonicalName() + value.length();
                 }
-                String varId = positionId + ":" + varName;
-                String previousValue = previousVars.get(varId);
-                if (!value.equals(previousValue)) {
-                    previousVars.put(varId, value);
+//                String varId = positionId + ":" + varName;
+//                String previousValue = previousVars.get(varId);
+//                if (!value.equals(previousValue)) {
+//                    previousVars.put(varId, value);
                     varsString.append(KeyWord.separator);
                     varsString.append(varName);
                     varsString.append(KeyWord.separator);
                     varsString.append(value);
-                }
+//                }
             } catch (Exception e) {
             }
         }
