@@ -63,7 +63,7 @@ public class BranchCoverageProcessor extends AbstractLoggingInstrumenter<CtExecu
                 ctIf.setThenStatement(block);
             }
             addBranchLogger(ctIf.getThenStatement(),"t" + branchId);
-            info += " t" + branchId;
+            info += ";t" + branchId;
             if (ctIf.getElseStatement() == null) {
                 CtBlock block = getFactory().Core().createBlock();
                 block.setParent(stmt.getParent());
