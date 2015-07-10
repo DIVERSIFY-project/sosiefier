@@ -16,8 +16,8 @@ import java.util.*;
 public class LogTestReader {
     Set<String> testToExclude;
     Map<String, Test> traceByTest;
-    private Map<String, String[]> previousVars;
-    private Map<String, Object[]> previousValues;
+//    private Map<String, String[]> previousVars;
+//    private Map<String, Object[]> previousValues;
     Map<String, String> idMap;
 
 
@@ -39,43 +39,25 @@ public class LogTestReader {
 
         }
         Log.debug("number of test: {}", traceByTest.size());
-//        AbstractMonitoringPoint.dico.putAll(idMap);
         return traceByTest.values();
     }
 
     protected SingleMonitoringPoint parseMonitoringPoint(String assertLog) {
-        SingleMonitoringPoint monitoringPoint;
-
         String[] split = assertLog.split(";");
         String methodId = idMap.get(split[2]);
-        String localId = idMap.get(split[3]).split(":")[0];
-        monitoringPoint = new SingleMonitoringPoint(methodId, localId);
 
-        String[] vars;
-        Object[] values;
-        String key = methodId + localId;
-        if(split.length == 4) {
-            vars = previousVars.get(key);
-            values = previousValues.get(key);
+        String[] vv = split[3].split(KeyWord.separator);
+
+        String var = idMap.get(vv[0]);
+        Object value;
+        if(vv.length == 1) {
+            value = "";
         } else {
-            String[] vv = split[4].split(KeyWord.separator);
-            int size = (vv.length / 2);
-            vars = new String[size];
-            values = new Object[size];
-            for (int i = 0; i < size; i+=2) {
-                vars[i] = idMap.get(vv[i]);
-                if(vv.length <= i + 1) {
-                    values[i] = "";
-                } else {
-                    values[i] = parseValue(vv[i+1]);
-                }
-            }
-            previousVars.put(key, vars);
-            previousValues.put(key, values);
+            value = parseValue(vv[1]);
         }
 
-        monitoringPoint.setVars(vars);
-        monitoringPoint.setValues(values);
+        SingleMonitoringPoint monitoringPoint = new SingleMonitoringPoint(methodId, var);
+        monitoringPoint.addValue(value);
 
         return monitoringPoint;
     }
@@ -125,7 +107,7 @@ public class LogTestReader {
 
     protected void splitByTest(File file) throws Exception {
         reset();
-        List<AbstractMonitoringPoint> monitoringPoint = new LinkedList();
+        List<SingleMonitoringPoint> monitoringPoint = new LinkedList();
         String currentTest = null;
         BufferedReader reader = new BufferedReader(new FileReader(file));
 
@@ -157,19 +139,12 @@ public class LogTestReader {
                             break;
                         case KeyWord.variableObservation :
                             SingleMonitoringPoint point = parseMonitoringPoint(logEntry);
-                            AbstractMonitoringPoint previous = monitoringPoint.stream()
+                            SingleMonitoringPoint previous = monitoringPoint.stream()
                                     .filter(p -> p.getId() == point.getId())
                                     .findFirst()
                                     .orElse(null);
                             if(previous != null) {
-                                if(previous instanceof SingleMonitoringPoint) {
-                                    MultiMonitoringPoint multi = previous.toMulti();
-                                    if(point.getValues() != null) {
-                                        multi.add(point);
-                                    }
-                                    monitoringPoint.remove(previous);
-                                    monitoringPoint.add(multi);
-                                }
+                                previous.addAllValue(point.getValues());
                             } else {
                                 monitoringPoint.add(point);
                             }
@@ -187,7 +162,7 @@ public class LogTestReader {
             traceByTest.remove(test);
     }
 
-    protected void addTest(String testName, List<AbstractMonitoringPoint> assertLogs) {
+    protected void addTest(String testName, List<SingleMonitoringPoint> assertLogs) {
         if(!traceByTest.containsKey(testName)) {
             traceByTest.put(testName, new Test(testName));
         }
@@ -222,8 +197,8 @@ public class LogTestReader {
     }
 
     protected void reset() {
-        previousValues = new HashMap<>();
-        previousVars = new HashMap<>();
+//        previousValues = new HashMap<>();
+//        previousVars = new HashMap<>();
         traceByTest = new HashMap();
         testToExclude = new HashSet();
     }

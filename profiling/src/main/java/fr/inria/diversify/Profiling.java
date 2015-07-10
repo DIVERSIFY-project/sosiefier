@@ -35,12 +35,18 @@ public class Profiling {
         this.logger = logger;
     }
 
+    public Profiling(InputProgram originalProgram, String outputDirectory, String logger, Properties properties, Transformation transformation) {
+        this.inputProgram = originalProgram.clone();
+        this.inputProgram.setProgramDir(outputDirectory);
+        this.properties = properties;
+        this.logger = logger;
+        this.transformation = transformation;
+    }
+
     public void apply() throws Exception {
         MavenDependencyResolver t = new MavenDependencyResolver();
         t.DependencyResolver(inputProgram.getProgramDir() + "/pom.xml");
-        if(transformation != null) {
-            transformation.apply(inputProgram.getRelativeSourceCodeDir());
-        }
+
         transformTest();
         transformMain();
         if(logger != null) {
@@ -59,12 +65,21 @@ public class Profiling {
     }
 
     protected void transformMain() throws IOException {
+        AbstractLoggingInstrumenter.reset();
         boolean transform = false;
         String mainSrc = inputProgram.getRelativeSourceCodeDir();
 
         Factory factory = InitUtils.initSpoon(inputProgram, false);
 
-        Boolean condition = Boolean.parseBoolean(properties.getProperty("profiling.main.field", "false"));
+        Boolean condition = true;
+        transform = transform || condition;
+        if(condition && transformation != null) {
+            TransformationUsedProcessor transformationUsedProcessor = new TransformationUsedProcessor(inputProgram, transformation);
+            transformationUsedProcessor.setLogger(logger + ".Logger");
+            transformationUsedProcessor.process();
+        }
+
+        condition = Boolean.parseBoolean(properties.getProperty("profiling.main.field", "false"));
         transform = transform || condition;
         if(condition) {
             FieldUsedInstrumenter m = new FieldUsedInstrumenter(inputProgram, inputProgram.getProgramDir());

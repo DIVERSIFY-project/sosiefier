@@ -38,6 +38,8 @@ public class BranchComparator implements Comparator {
         List<TestCoverage> sosieCoverage = loadTestCoverage(sosieLogDir);
         List<TestCoverage> originalCoverage = loadTestCoverage(originalLogDir);
 
+        boolean filterTransformationPosition = filterTransformationPosition(transformation, originalCoverage, sosieCoverage);
+
         BranchDiff diff = new BranchDiff();
         for(TestCoverage originalTestCoverage : originalCoverage) {
             TestCoverage sosieTestCoverage = sosieCoverage.stream()
@@ -51,13 +53,13 @@ public class BranchComparator implements Comparator {
 
                 Set<String> d1 = originalBranches.stream()
                         .filter(branch -> !sosieBranches.contains(branch))
-                        .filter(branch -> transformation == null || !(branch.contains(transformation.classLocationName())
+                        .filter(branch -> !filterTransformationPosition || !(branch.contains(transformation.classLocationName())
                                 && branch.contains(transformation.methodLocationName())))
                         .collect(Collectors.toSet());
 
                 Set<String> d2 = sosieBranches.stream()
                         .filter(branch -> !originalBranches.contains(branch))
-                        .filter(branch -> transformation == null || !(branch.contains(transformation.classLocationName())
+                        .filter(branch -> !filterTransformationPosition || !(branch.contains(transformation.classLocationName())
                                 && branch.contains(transformation.methodLocationName())))
                         .collect(Collectors.toSet());
 
@@ -69,6 +71,30 @@ public class BranchComparator implements Comparator {
             }
         }
         return diff;
+    }
+
+    protected boolean filterTransformationPosition(SingleTransformation transformation, List<TestCoverage> originalCoverage, List<TestCoverage> sosieCoverage) {
+        if(transformation == null) {
+            return false;
+        }
+        String className = transformation.classLocationName();
+        String methodName = transformation.methodLocationName();
+
+        Set<String> originalBranches = allBranchesOf(originalCoverage, className, methodName);
+        Set<String> sosieBranches = allBranchesOf(sosieCoverage, className, methodName);
+
+        return !originalBranches.equals(sosieBranches);
+
+    }
+
+    protected Set<String> allBranchesOf(List<TestCoverage> testCoverages, String className, String methodName) {
+        return testCoverages.stream()
+                .flatMap(coverage -> coverage.getCoverage().getMethodCoverages().stream())
+                .filter(methodCoverage -> methodCoverage.getMethodName().contains("_" + methodName)
+                        && methodCoverage.getMethodName().contains(className+ "_"))
+                .findFirst()
+                .map(methodCoverage -> methodCoverage.allBranch)
+                .orElse(new HashSet<>());
     }
 
     protected void initTestByBranch(AbstractBuilder originalBuilder) throws InterruptedException, IOException {
@@ -90,6 +116,7 @@ public class BranchComparator implements Comparator {
                     String testName = tc.getTestName();
                     int ind = testName.lastIndexOf(".");
                     testName = new StringBuilder(testName).replace(ind, ind + 1, "#").toString();
+//                    testName = testName.substring(0, ind);
                     testsByBranch.get(key).add(testName);
                 }
             }
@@ -149,4 +176,32 @@ public class BranchComparator implements Comparator {
                 && oThis.getEndLine() >= oOther.getEndLine();
 
     }
+
+
+//    public String branchFor(CtElement element) {
+//        String info = "";
+//        int branchId = 0;
+//        for(Object object : Query.getElements(element, new TypeFilter(CtIf.class))) {
+//            info += ";t" + branchId;
+//            info += ";e" + branchId;
+//            branchId++;
+//        }
+//
+//        for(Object object : Query.getElements(element, new TypeFilter(CtCase.class))) {
+//            info += ";s" + branchId;
+//            branchId++;
+//        }
+//
+//        for(Object object : Query.getElements(element, new TypeFilter(CtLoop.class))) {
+//
+//            info += ";l" + branchId;
+//            branchId++;
+//        }
+//        for(Object object : Query.getElements(element, new TypeFilter(CtCatch.class))) {
+//            info += ";c" + branchId;
+//            branchId++;
+//        }
+//
+//        return info;
+//    }
 }

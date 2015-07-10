@@ -37,11 +37,12 @@ public class MethodCallInstrumenter extends AbstractLoggingInstrumenter<CtMethod
 
     @Override
     public void process(CtMethod candidate) {
+        CtTry ctTry = tryFinallyBody(candidate);
         int methodId = methodId(candidate);
         Factory factory = candidate.getFactory();
 
-        CtTry ctTry = factory.Core().createTry();
-        ctTry.setBody(candidate.getBody());
+//        CtTry ctTry = factory.Core().createTry();
+//        ctTry.setBody(candidate.getBody());
 
         String snippet = getLogger() + ".methodIn(Thread.currentThread(),\"" + methodId + "\")";
         CtCodeSnippetStatement beginStmt = getFactory().Code().createCodeSnippetStatement(snippet);
@@ -51,13 +52,13 @@ public class MethodCallInstrumenter extends AbstractLoggingInstrumenter<CtMethod
         snippet = getLogger() + ".methodOut(Thread.currentThread(),\"" + methodId + "\")";
         CtCodeSnippetStatement endStmt = getFactory().Code().createCodeSnippetStatement(snippet);
 
-        CtBlock finalizerBlock = factory.Core().createBlock();
-        finalizerBlock.addStatement(endStmt);
-        ctTry.setFinalizer(finalizerBlock);
+//        CtBlock finalizerBlock = factory.Core().createBlock();
+        ctTry.getFinalizer().addStatement(endStmt);
+//        ctTry.setFinalizer(finalizerBlock);
 
-        CtBlock methodBlock = factory.Core().createBlock();
-        methodBlock.addStatement(ctTry);
-        candidate.setBody(methodBlock);
+//        CtBlock methodBlock = factory.Core().createBlock();
+//        methodBlock.addStatement(ctTry);
+//        candidate.setBody(methodBlock);
     }
 
     protected boolean hasCall(CtMethod method) {

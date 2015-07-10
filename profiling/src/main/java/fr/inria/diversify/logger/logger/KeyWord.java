@@ -18,6 +18,7 @@ public class KeyWord {
     public static final String testEndObservation = "TE";
     public static final String catchObservation = "C";
     public static final String throwObservation = "T";
+    public static final String logTransformation = "LT";
 
     //for class observation
     public static final String getterKeyWord = "Gt";

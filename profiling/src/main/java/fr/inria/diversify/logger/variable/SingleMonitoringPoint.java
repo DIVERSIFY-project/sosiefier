@@ -1,53 +1,47 @@
 package fr.inria.diversify.logger.variable;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * User: Simon
  * Date: 06/03/15
  * Time: 12:27
  */
-public class SingleMonitoringPoint extends AbstractMonitoringPoint {
-    String[] vars;
-    Object[] values;
+public class SingleMonitoringPoint{
+    protected String var;
+    protected Set<Object> values;
+    protected String methodId;
 
 
-    public SingleMonitoringPoint(String methodId, String localId) {
+    public SingleMonitoringPoint(String methodId, String var) {
         this.methodId = methodId;
-        this.localId = localId;
+        this.var = var;
+        values = new HashSet<>();
     }
 
-    public boolean equals(AbstractMonitoringPoint other) {
-        if(!methodId.equals(other.methodId) || !localId.equals(other.localId)) {
+    public boolean equals(SingleMonitoringPoint other) {
+        if(!methodId.equals(other.methodId) || !var.equals(other.var)) {
             return false;
         }
-        if(other instanceof MultiMonitoringPoint) {
-            return false;
-        }
-        SingleMonitoringPoint sOther = (SingleMonitoringPoint) other;
-        for(int i = 0; i < values.length; i++) {
-            if(!values[i].equals(sOther.values[i])) {
-                return false;
-            }
-        }
-        return true;
+
+        return values.equals(other.values);
     }
 
-    public void setValues(Object[] values) {
-        this.values = values;
-    }
-
-    public void setVars(String[] vars) {
-        this.vars = vars;
-    }
-
-    public MultiMonitoringPoint toMulti() {
-        MultiMonitoringPoint multi = new MultiMonitoringPoint(methodId, localId);
-        multi.add(this);
-        return multi;
-    }
-
-    public Object[] getValues() {
+    public Set<Object> getValues() {
         return values;
     }
 
+    public String getId() {
+        return methodId + "_" + var;
+    }
+
+    public void addAllValue(Set<Object> values) {
+        this.values.addAll(values);
+    }
+
+    public void addValue(Object value) {
+        this.values.add(value);
+    }
 }

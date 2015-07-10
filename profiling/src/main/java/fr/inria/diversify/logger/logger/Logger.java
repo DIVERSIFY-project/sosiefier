@@ -41,6 +41,10 @@ public class Logger {
         getLog(thread).branch(id);
     }
 
+    public static void logTransformation(Thread thread) {
+        getLog(thread).logTransformation();
+    }
+
     public static void methodIn(Thread thread, String id) {
         getLog(thread).methodIn(id);
     }
@@ -49,8 +53,8 @@ public class Logger {
         getLog(thread).methodOut(id);
     }
 
-    public static void writeField(Thread thread, String methodId, String localPositionId, String varId, Object var) {
-        getLog(thread).writeVar(methodId, localPositionId, varId, var);
+    public static void writeField(Thread thread, String methodId, String varId, Object var) {
+        getLog(thread).writeVar(methodId, varId, var);
     }
 
     public static void writeTestStart(Thread thread, Object receiver, String testName) {

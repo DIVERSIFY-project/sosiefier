@@ -211,4 +211,17 @@ public class Coverage {
     public Collection<MethodCoverage> getMethodCoverages() {
         return methodCoverages;
     }
+
+    public Branch getBranch(String branch) {
+        String[] split = branch.split("\\.");
+
+        Integer methodId = Integer.parseInt(split[0]);
+
+       return methodCoverages.stream()
+                   .filter(mtc -> mtc.getMethodId().equals(methodId))
+                   .map(mtc -> mtc.getBranch(split[1]))
+                   .filter(br -> br != null)
+                   .findFirst()
+                   .orElse(null);
+    }
 }

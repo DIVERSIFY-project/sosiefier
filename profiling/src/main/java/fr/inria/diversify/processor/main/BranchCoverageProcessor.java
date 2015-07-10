@@ -47,12 +47,13 @@ public class BranchCoverageProcessor extends AbstractLoggingInstrumenter<CtExecu
         int methodId = methodId(method);
         String info = methodId + ";" + method.getReference().getDeclaringType().getQualifiedName() + "_" + method.getSignature().replace(" ", "_");
 
+
         if(addBodyBranch) {
-            addBranchLogger(method.getBody(),"b");
+            addBranchLogger(tryFinallyBody(method).getBody(),"b");
             info += ";b";
         }
 
-        for(Object object : Query.getElements(method, new TypeFilter(CtIf.class))) {
+        for(Object object : Query.getElements(tryFinallyBody(method), new TypeFilter(CtIf.class))) {
             CtIf ctIf = (CtIf) object;
             int branchId = idBranch(methodId);
             CtStatement stmt = ctIf.getThenStatement();
@@ -81,14 +82,14 @@ public class BranchCoverageProcessor extends AbstractLoggingInstrumenter<CtExecu
             info += ";e" + branchId;
         }
 
-        for(Object object : Query.getElements(method, new TypeFilter(CtCase.class))) {
+        for(Object object : Query.getElements(tryFinallyBody(method), new TypeFilter(CtCase.class))) {
             CtCase ctCase = (CtCase) object;
             int branchId = idBranch(methodId);
             addBranchLogger(ctCase, "s" + branchId);
             info += ";s" + branchId;
         }
 
-        for(Object object : Query.getElements(method, new TypeFilter(CtLoop.class))) {
+        for(Object object : Query.getElements(tryFinallyBody(method), new TypeFilter(CtLoop.class))) {
             CtLoop ctLoop = (CtLoop) object;
             CtStatement stmt = ctLoop.getBody();
             if (!(stmt instanceof CtBlock)) {
@@ -101,7 +102,7 @@ public class BranchCoverageProcessor extends AbstractLoggingInstrumenter<CtExecu
             addBranchLogger((CtBlock)ctLoop.getBody(), "l" + branchId);
             info += ";l" + branchId;
         }
-        for(Object object : Query.getElements(method, new TypeFilter(CtCatch.class))) {
+        for(Object object : Query.getElements(tryFinallyBody(method), new TypeFilter(CtCatch.class))) {
             CtCatch ctCatch = (CtCatch) object;
             CtStatement stmt = ctCatch.getBody();
             if (!(stmt instanceof CtBlock)) {
@@ -142,11 +143,8 @@ public class BranchCoverageProcessor extends AbstractLoggingInstrumenter<CtExecu
     }
 
     protected void addInOut(CtExecutable method, int id) {
+        CtTry ctTry = tryFinallyBody(method);
         Factory factory = method.getFactory();
-        CtStatement thisStatement = getThisOrSuperCall(method.getBody());
-
-        CtTry ctTry = factory.Core().createTry();
-        ctTry.setBody(method.getBody());
 
         String snippet = getLogger() + ".methodIn(Thread.currentThread(),\"" + id + "\")";
 
@@ -157,31 +155,12 @@ public class BranchCoverageProcessor extends AbstractLoggingInstrumenter<CtExecu
 
 
         CtCodeSnippetStatement stmt = factory.Core().createCodeSnippetStatement();
-        stmt.setValue(getLogger() +".methodOut(Thread.currentThread(),\"" + id + "\")");
+        stmt.setValue(getLogger() + ".methodOut(Thread.currentThread(),\"" + id + "\")");
 
-        CtBlock finalizerBlock = factory.Core().createBlock();
-        finalizerBlock.addStatement(stmt);
-        ctTry.setFinalizer(finalizerBlock);
-
-        CtBlock methodBlock = factory.Core().createBlock();
-        methodBlock.addStatement(ctTry);
-        method.setBody(methodBlock);
-
-        if(thisStatement != null) {
-            ctTry.getBody().removeStatement(thisStatement);
-            method.getBody().getStatements().add(0,thisStatement);
-        }
+        ctTry.getFinalizer().addStatement(stmt);
     }
 
-    protected CtStatement getThisOrSuperCall(CtBlock block) {
-        if(!block.getStatements().isEmpty()) {
-            CtStatement stmt = block.getStatement(0);
-            if(stmt.toString().startsWith("this(") || stmt.toString().startsWith("super(")) {
-                return stmt;
-            }
-        }
-        return null;
-    }
+
 
     protected int idBranch(int methodId) {
         if(!blockIds.containsKey(methodId)) {

@@ -27,6 +27,10 @@ public class ExceptionComparator implements Comparator {
         ExceptionReader originalBuilder = new ExceptionReader(originalLogDir);
         Collection<ExceptionPosition> originalExceptions = originalBuilder.load();
 
+        if(originalExceptions.size() == 0) {
+            return getEmptyDiff();
+        }
+
         ExceptionReader sosieBuilder = new ExceptionReader(sosieLogDir);
         Collection<ExceptionPosition> sosieExceptions = sosieBuilder.load();
 

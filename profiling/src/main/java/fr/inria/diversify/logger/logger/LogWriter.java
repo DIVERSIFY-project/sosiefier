@@ -29,7 +29,7 @@ public class LogWriter {
     protected File dir = null;
 
     ///Previous logs of variables status. Useful to validate whether they have change
-    protected Map<String, String> previousVars;
+//    protected Map<String, String> previousVars;
 
     /**
      * Constructor for the logger
@@ -39,7 +39,7 @@ public class LogWriter {
             initDir();
         }
         initOptions();
-        previousVars = new HashMap<String, String>();
+//        previousVars = new HashMap<String, String>();
         pathBuilder = new PathBuilder(fullPath);
         classesObservers = new HashMap<Class, ClassObserver>();
 
@@ -74,6 +74,7 @@ public class LogWriter {
     }
 
     public void close(){
+        fileWriter.append(KeyWord.endLine);
         fileWriter.close();
     }
 
@@ -189,7 +190,7 @@ public class LogWriter {
         }
     }
 
-    public void writeVar(String  methodId, String localPositionId, Object... var) {
+    public void writeVar(String  methodId, Object... var) {
         if(!isObserve && writeVar) {
             isObserve = true;
             try {
@@ -200,10 +201,10 @@ public class LogWriter {
                 string.append(deep + "");
                 string.append(KeyWord.simpleSeparator);
                 string.append(methodId);
-                string.append(KeyWord.simpleSeparator);
-                string.append(localPositionId);
+//                string.append(KeyWord.simpleSeparator);
+//                string.append(localPositionId);
 
-                String varsString = buildVars(methodId, localPositionId, var);
+                String varsString = buildVars(var);
                 if(varsString.isEmpty())
                     return;
 
@@ -220,8 +221,7 @@ public class LogWriter {
     }
 
 
-    protected String buildVars(String methodId, String localPositionId, Object[] vars) {
-        String positionId = methodId + "." + localPositionId;
+    protected String buildVars(Object[] vars) {
         StringBuilder varsString = new StringBuilder();
 
         for (int i = 0; i < vars.length / 2; i = i + 2) {
@@ -349,6 +349,19 @@ public class LogWriter {
                 e.printStackTrace();
             } finally {
                 isObserve = false;
+            }
+        }
+    }
+
+    public void logTransformation() {
+        if (!isObserve) {
+            try {
+                PrintWriter fileWriter = getFileWriter();
+                fileWriter.append(KeyWord.endLine);
+                fileWriter.append(KeyWord.logTransformation);
+                fileWriter.append(KeyWord.simpleSeparator);
+                fileWriter.append(deep + "");
+            } catch (Exception e) {
             }
         }
     }

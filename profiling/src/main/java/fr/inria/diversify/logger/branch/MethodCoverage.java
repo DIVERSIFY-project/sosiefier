@@ -137,4 +137,11 @@ public class MethodCoverage {
     public String getDeclaringClass() {
         return methodName.split("_")[0];
     }
+
+    public Branch getBranch(String branchId) {
+        return coveredBranchs.stream()
+                .filter(branch -> branch.getId().equals(branchId))
+                .findFirst()
+                .orElse(null);
+    }
 }

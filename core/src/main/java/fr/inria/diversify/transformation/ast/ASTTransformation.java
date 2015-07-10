@@ -232,6 +232,10 @@ public abstract class ASTTransformation extends SingleTransformation {
     public SourcePosition getPosition() {
         return transplantationPoint.getCtCodeFragment().getPosition();
     }
+
+    public CtCodeElement getCopyTransplant() {
+        return copyTransplant;
+    }
 }
 
 

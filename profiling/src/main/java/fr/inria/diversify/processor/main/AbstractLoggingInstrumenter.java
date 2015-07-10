@@ -5,6 +5,7 @@ import fr.inria.diversify.processor.ProcessorUtil;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;
+import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
@@ -20,6 +21,8 @@ import java.util.Set;
 public abstract class AbstractLoggingInstrumenter<E extends CtElement> extends AbstractProcessor<E> {
     protected static Map<CtExecutable, Integer> localId = new HashMap();
 
+    protected static Map<Integer, CtTry> tryBodyMethod;
+
     protected InputProgram inputProgram;
 
     protected String logger;
@@ -30,6 +33,10 @@ public abstract class AbstractLoggingInstrumenter<E extends CtElement> extends A
 
     public String getLogger() {
         return logger;
+    }
+
+    public static void reset() {
+        tryBodyMethod = new HashMap<>();
     }
 
     public void setLogger(String logger) {
@@ -110,4 +117,40 @@ public abstract class AbstractLoggingInstrumenter<E extends CtElement> extends A
             ctIf.setThenStatement(block);
         }
     }
+
+
+    protected CtTry tryFinallyBody(CtExecutable method) {
+        if(!tryBodyMethod.containsKey(methodId(method))) {
+            Factory factory = method.getFactory();
+            CtStatement thisStatement = getThisOrSuperCall(method.getBody());
+
+            CtTry ctTry = factory.Core().createTry();
+            ctTry.setBody(method.getBody());
+
+            CtBlock finalizerBlock = factory.Core().createBlock();
+            ctTry.setFinalizer(finalizerBlock);
+
+            CtBlock methodBlock = factory.Core().createBlock();
+            methodBlock.addStatement(ctTry);
+            method.setBody(methodBlock);
+
+            if (thisStatement != null) {
+                ctTry.getBody().removeStatement(thisStatement);
+                method.getBody().getStatements().add(0, thisStatement);
+            }
+            tryBodyMethod.put(methodId(method), ctTry);
+        }
+        return tryBodyMethod.get(methodId(method)) ;
+    }
+
+    protected CtStatement getThisOrSuperCall(CtBlock block) {
+        if(!block.getStatements().isEmpty()) {
+            CtStatement stmt = block.getStatement(0);
+            if(stmt.toString().startsWith("this(") || stmt.toString().startsWith("super(")) {
+                return stmt;
+            }
+        }
+        return null;
+    }
+
 }

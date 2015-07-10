@@ -162,7 +162,7 @@ public abstract class CodeFragment {
         return varMap;
     }
 
-    @Deprecated
+
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
         object.put("position", positionString());

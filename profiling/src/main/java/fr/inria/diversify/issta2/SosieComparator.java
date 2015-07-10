@@ -40,7 +40,7 @@ public class SosieComparator {
     public void init(String tmpDir) throws Exception {
         String dir = tmpDir + "_original";
         copyDir(inputProgram.getProgramDir(), dir);
-        instru(dir);
+        instru(dir, null);
         originalBuilder = new MavenBuilder(dir);
 
         for(Comparator comparator : comparators) {
@@ -63,7 +63,7 @@ public class SosieComparator {
 
             copyDir(tmpSosieDir.substring(0, tmpSosieDir.length() - 6), tmpSosieDir);
             trans.applyWithParent(tmpSosieDir + "/" + inputProgram.getRelativeSourceCodeDir());
-            instru(tmpSosieDir);
+            instru(tmpSosieDir, trans);
             AbstractBuilder sosieBuilder = new MavenBuilder(tmpSosieDir);
 
             return runAndCompare(sosieBuilder, trans, testToRun);
@@ -144,17 +144,17 @@ public class SosieComparator {
         FileUtils.copyDirectory(new File(src), dir);
     }
 
-    protected void instru(String outputDirectory) throws Exception {
+    protected void instru(String outputDirectory, SingleTransformation transformation) throws Exception {
         Properties properties = new Properties();
         properties.put("profiling.main.field", "true");
         properties.put("profiling.main.branch", "true");
         properties.put("profiling.main.branch.addBodyBranch", "true");
         properties.put("profiling.main.catch", "true");
         properties.put("profiling.main.throw", "true");
-        properties.put("profiling.main.methodCall", "true");
+        properties.put("profiling.main.methodCall", "false");
         properties.put("profiling.test.logTest", "true");
 
-        Profiling profiling = new Profiling(inputProgram, outputDirectory, "fr.inria.diversify.logger.logger", properties);
+        Profiling profiling = new Profiling(inputProgram, outputDirectory, "fr.inria.diversify.logger.logger", properties, transformation);
         profiling.apply();
     }
 

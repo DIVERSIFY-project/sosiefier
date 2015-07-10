@@ -17,9 +17,7 @@ public abstract class SingleTransformation extends Transformation {
     public abstract String classLocationName();
     public abstract String packageLocationName();
     public abstract String methodLocationName();
-//    public abstract String stmtType();
 
-    //public default String getTransformationString() throws Exception {return "";}
     public abstract String getTransformationString() throws Exception;
 
     public abstract int line();
@@ -27,22 +25,22 @@ public abstract class SingleTransformation extends Transformation {
     public abstract void printJavaFile(String srcDir) throws IOException;
 
 
-    /**
-     * gets the parent method of an element
-     * @param son
-     * @return
-     */
-    protected CtElement getParentMethod(CtElement son) {
-        CtElement parent = son.getParent();
-
-        while(parent != null && !(parent instanceof CtExecutable) ) {
-            parent = parent.getParent();
-        }
-        if(parent == null)
-            return son.getParent();
-        else
-            return parent;
-    }
+//    /**
+//     * gets the parent method of an element
+//     * @param son
+//     * @return
+//     */
+//    protected CtElement getParentMethod(CtElement son) {
+//        CtElement parent = son.getParent();
+//
+//        while(parent != null && !(parent instanceof CtExecutable) ) {
+//            parent = parent.getParent();
+//        }
+//        if(parent == null)
+//            return son.getParent();
+//        else
+//            return parent;
+//    }
 
     /**
      * Gets the line's end  of the source position of an element

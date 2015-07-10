@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * Date: 29/06/15
  * Time: 13:48
  */
-public class LogVariableComparator implements Comparator {
+public class  LogVariableComparator implements Comparator {
     @Override
     public void init(InputProgram originalInputProgram, AbstractBuilder originalBuilder) throws Exception {
 
@@ -28,6 +28,10 @@ public class LogVariableComparator implements Comparator {
         try {
             LogTestReader builder = new LogTestReader();
             Collection<Test> originalVariables = builder.loadLog(originalLogDir);
+
+            if(originalVariables.size() == 0) {
+                return getEmptyDiff();
+            }
 
             builder = new LogTestReader();
             Collection<Test> sosieVariables = builder.loadLog(sosieLogDir);

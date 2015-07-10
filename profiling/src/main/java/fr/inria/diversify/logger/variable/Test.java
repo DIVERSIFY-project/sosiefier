@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  */
 public class Test {
     protected String signature;
-    protected List<AbstractMonitoringPoint> monitoringPoints;
+    protected List<SingleMonitoringPoint> monitoringPoints;
 
 
     public Test(String signature) {
@@ -23,7 +23,7 @@ public class Test {
     }
 
 
-    public void addAllMonitoringPoint(List<AbstractMonitoringPoint> monitoringPoints) {
+    public void addAllMonitoringPoint(List<SingleMonitoringPoint> monitoringPoints) {
         this.monitoringPoints.addAll(monitoringPoints);
     }
 
@@ -31,7 +31,7 @@ public class Test {
         return monitoringPoints.size();
     }
 
-    public AbstractMonitoringPoint geMonitoringPoint(String id) {
+    public SingleMonitoringPoint geMonitoringPoint(String id) {
         return monitoringPoints.stream()
                 .filter(m -> id.equals(m.getId()))
                 .findFirst()
@@ -51,8 +51,8 @@ public class Test {
 
         return ids.stream()
                 .filter(id -> {
-                    AbstractMonitoringPoint p1 = geMonitoringPoint(id);
-                    AbstractMonitoringPoint p2 = other.geMonitoringPoint(id);
+                    SingleMonitoringPoint p1 = geMonitoringPoint(id);
+                    SingleMonitoringPoint p2 = other.geMonitoringPoint(id);
                     if (p1 != null && p2 != null) {
                         return !p1.equals(p2);
                     } else {
