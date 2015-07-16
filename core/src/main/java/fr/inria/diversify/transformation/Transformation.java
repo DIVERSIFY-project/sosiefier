@@ -49,6 +49,9 @@ public abstract class Transformation {
     //sosie status for a transformation
     public static int SOSIE = 0;
 
+    //sosie status for a transformation and transformation code executed
+    public static int EXE = 1;
+
     /**
      * An index to identify the transformation in the storage
      */

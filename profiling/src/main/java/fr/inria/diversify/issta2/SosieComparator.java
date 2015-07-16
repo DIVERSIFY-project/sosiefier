@@ -8,6 +8,7 @@ import fr.inria.diversify.logger.Comparator;
 import fr.inria.diversify.logger.Diff;
 import fr.inria.diversify.logger.transformationUsed.TransformationUsed;
 import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 import spoon.reflect.cu.SourcePosition;
@@ -48,8 +49,6 @@ public class SosieComparator {
             comparator.init(inputProgram, originalBuilder);
             filter.put(comparator.getClass(), comparator.getEmptyDiff());
         }
-
-
         tmpSosieDir = tmpDir + "_sosie";
     }
 
@@ -118,7 +117,9 @@ public class SosieComparator {
             }
         }
         TransformationUsed tu = new TransformationUsed();
-        boolean used = tu.transformationUsed(tmpSosieDir + "/log");
+        if(tu.transformationUsed(tmpSosieDir + "/log")) {
+            trans.setStatus(Transformation.EXE);
+        }
         return diffs;
     }
 
