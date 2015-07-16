@@ -118,7 +118,7 @@ public class CoverageReader {
         for(Integer key : idToMethod.keySet()) {
             MethodCoverage mc = idToMethod.get(key);
             if(mc.allPath.size() != 0) {
-                idToMethod.put(key, new MethodCoverage(Pool.get(key), mc.getMethodName(), mc.getAllBranch()));
+                idToMethod.put(key, new MethodCoverage(Pool.get(key), mc.getMethodName(), mc.getAllBranchId()));
             }
         }
     }

@@ -71,12 +71,12 @@ public class Profiling {
 
         Factory factory = InitUtils.initSpoon(inputProgram, false);
 
-        Boolean condition = true;
+        Boolean  condition = Boolean.parseBoolean(properties.getProperty("profiling.main.transformationUsed", "false"));
         transform = transform || condition;
         if(condition && transformation != null) {
             TransformationUsedProcessor transformationUsedProcessor = new TransformationUsedProcessor(inputProgram, transformation);
             transformationUsedProcessor.setLogger(logger + ".Logger");
-            transformationUsedProcessor.process();
+            LoggerUtils.applyProcessor(factory, transformationUsedProcessor);
         }
 
         condition = Boolean.parseBoolean(properties.getProperty("profiling.main.field", "false"));

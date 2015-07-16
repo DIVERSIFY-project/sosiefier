@@ -80,6 +80,7 @@ public class BranchComparator implements Comparator {
         String className = transformation.classLocationName();
         String methodName = transformation.methodLocationName();
 
+
         Set<String> originalBranches = allBranchesOf(originalCoverage, className, methodName);
         Set<String> sosieBranches = allBranchesOf(sosieCoverage, className, methodName);
 
@@ -92,9 +93,9 @@ public class BranchComparator implements Comparator {
                 .flatMap(coverage -> coverage.getCoverage().getMethodCoverages().stream())
                 .filter(methodCoverage -> methodCoverage.getMethodName().contains("_" + methodName)
                         && methodCoverage.getMethodName().contains(className+ "_"))
-                .findFirst()
-                .map(methodCoverage -> methodCoverage.allBranch)
-                .orElse(new HashSet<>());
+                .flatMap(methodCoverage -> methodCoverage.getAllBranch().stream())
+
+                .collect(Collectors.toSet());
     }
 
     protected void initTestByBranch(AbstractBuilder originalBuilder) throws InterruptedException, IOException {

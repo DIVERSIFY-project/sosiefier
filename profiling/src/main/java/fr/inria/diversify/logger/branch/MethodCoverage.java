@@ -78,8 +78,14 @@ public class MethodCoverage {
         return methodName;
     }
 
-    public Set<String> getAllBranch() {
+    public Set<String> getAllBranchId() {
         return allBranch;
+    }
+
+    public Set<String> getAllBranch() {
+        return allBranch.stream()
+                .map(branch -> methodId +"."+branch)
+                .collect(Collectors.toSet());
     }
 
     public Set<List<String>> getAllPath() {

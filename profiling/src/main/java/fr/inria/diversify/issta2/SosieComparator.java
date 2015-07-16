@@ -6,6 +6,7 @@ import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.logger.Comparator;
 import fr.inria.diversify.logger.Diff;
+import fr.inria.diversify.logger.transformationUsed.TransformationUsed;
 import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
@@ -116,6 +117,8 @@ public class SosieComparator {
                 diffs.add(diff);
             }
         }
+        TransformationUsed tu = new TransformationUsed();
+        boolean used = tu.transformationUsed(tmpSosieDir + "/log");
         return diffs;
     }
 
@@ -131,7 +134,7 @@ public class SosieComparator {
             }
         }
 
-        builder.runGoals(new String[]{goals}, false);
+        builder.runGoals(new String[]{goals}, true);
         return builder.getStatus();
     }
 
@@ -146,6 +149,7 @@ public class SosieComparator {
 
     protected void instru(String outputDirectory, SingleTransformation transformation) throws Exception {
         Properties properties = new Properties();
+        properties.put("profiling.main.transformationUsed", "true");
         properties.put("profiling.main.field", "true");
         properties.put("profiling.main.branch", "true");
         properties.put("profiling.main.branch.addBodyBranch", "true");

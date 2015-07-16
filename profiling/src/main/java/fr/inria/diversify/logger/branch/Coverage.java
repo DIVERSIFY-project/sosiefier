@@ -31,7 +31,7 @@ public class Coverage {
         double branch = 0;
 
         for(MethodCoverage mc : methodCoverages) {
-            allBranch += mc.getAllBranch().size();
+            allBranch += mc.getAllBranchId().size();
             branch += mc.getCoveredBranchs().size();
         }
 
@@ -44,7 +44,7 @@ public class Coverage {
 
         for(MethodCoverage mc : methodCoverages) {
             if (classes.stream().anyMatch(cl -> mc.getMethodName().startsWith(cl+"_"))) {
-                allBranch += mc.getAllBranch().size();
+                allBranch += mc.getAllBranchId().size();
                 branch += mc.getCoveredBranchs().size();
 
                 if(!mc.getNotCoveredBranchId().isEmpty()) {

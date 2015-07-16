@@ -3,8 +3,10 @@ package fr.inria.diversify.processor.main;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
+import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.SourcePosition;
+import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.factory.Factory;
 
 
@@ -14,7 +16,7 @@ import spoon.reflect.factory.Factory;
  * Date: 10/07/15
  * Time: 11:01
  */
-public class TransformationUsedProcessor {
+public class TransformationUsedProcessor extends AbstractProcessor<CtStatement> {
     ASTTransformation transformation;
     InputProgram inputProgram;
     private String logger;
@@ -24,23 +26,23 @@ public class TransformationUsedProcessor {
         this.transformation = (ASTTransformation) transformation;
     }
 
+    @Override
+    public boolean isToBeProcessed(CtStatement candidate) {
+        return !transformation.getName().equals("delete")
+        && transformation.getCopyTransplant().toString().equals(candidate.toString());
+    }
 
-    public void process() {
+    public void process(CtStatement stmtTrans) {
         String transformationName = transformation.getName();
-        if(transformationName.equals("delete")) {
-            return;
-        }
-        CtStatement stmtTrans = null;
+
         if(transformationName.equals("add")) {
-            CtIf ctIf = (CtIf) transformation.getCopyTransplant();
+            CtIf ctIf = (CtIf) stmtTrans;
             stmtTrans = ((CtBlock)ctIf.getThenStatement()).getLastStatement();
 
         }
-        if(transformationName.equals("replace")) {
-            stmtTrans = (CtStatement) transformation.getCopyTransplant();
-        }
 
-        CtCodeSnippetStatement snippet = getFactory().Code().createCodeSnippetStatement(getLogger() + ".logTransformation(Thread.currentThread())");
+        CtCodeSnippetStatement snippet = getFactory().Code().createCodeSnippetStatement(
+                "System.out.println(\"\\nlogTransformation\\n\");"+getLogger() + ".logTransformation(Thread.currentThread())");
         if(stmtTrans instanceof CtIf) {
             CtIf ctIf = (CtIf) stmtTrans;
 
@@ -91,15 +93,6 @@ public class TransformationUsedProcessor {
     protected void addSnippet(CtCodeSnippetStatement snippet, CtStatement stmt) {
         CtBlock block = (CtBlock) stmt;
         block.insertBegin(snippet);
-    }
-
-
-    protected boolean sameStart(SourcePosition oThis, SourcePosition oOther) {
-        return oThis.getSourceStart() == oOther.getSourceStart();
-    }
-
-    protected Factory getFactory() {
-        return inputProgram.getFactory();
     }
 
     public String getLogger() {
