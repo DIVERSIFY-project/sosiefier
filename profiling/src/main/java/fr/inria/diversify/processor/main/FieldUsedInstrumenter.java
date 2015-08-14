@@ -2,7 +2,6 @@ package fr.inria.diversify.processor.main;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.processor.ProcessorUtil;
-import fr.inria.diversify.util.Log;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.reference.CtFieldReference;
@@ -31,44 +30,6 @@ public class FieldUsedInstrumenter extends AbstractLoggingInstrumenter<CtExecuta
         }
         alreadyInstrument = new HashSet<>();
     }
-
-
-//    public void process(CtStatement statement) {
-//        try {
-//            if (!alreadyInstrumented(statement)
-//                    && getMethod(statement) != null
-//                    && ok(statement)) {
-//                int methodId = methodId(getMethod(statement));
-//                FieldReferenceVisitor scanner = getFieldUsed(statement);
-//                Map<CtFieldReference, String> fieldUsed = scanner.getFields();
-//                Set<CtFieldReference> after = scanner.getAfter();
-//
-//                for (CtFieldReference<?> var : fieldUsed.keySet()) {
-//                    if (!var.getSimpleName().equals("class")) {
-//                        try {
-//                            alreadyInstrument.add(statement);
-//                            String snippet = getLogger() + ".writeField(Thread.currentThread(),\"" +
-//                                    methodId + "\",\"" +
-//                                    getLocalId(statement) + "\",\"" +
-//                                    ProcessorUtil.idFor(var.getSimpleName()) + "\"," +
-//                                    fieldUsed.get(var) + ")";
-//
-//                            if (fieldUsed.get(var).contains(".") && !fieldUsed.get(var).contains("this.")) {
-//                                snippet = "try {\n\t" + snippet + ";\n} catch (Exception eeee) {}";
-//                            }
-//                            CtCodeSnippetStatement snippetStatement = getFactory().Code().createCodeSnippetStatement(snippet);
-//
-//                            if (!after.contains(var)) {
-//                                statement.insertBefore(snippetStatement);
-//                            } else {
-//                                statement.insertAfter(snippetStatement);
-//                            }
-//                        } catch (Exception e) {}
-//                    }
-//                }
-//            }
-//        } catch (Exception e) {}
-//    }
 
     public void process(CtExecutable mth) {
         try {
@@ -107,26 +68,6 @@ public class FieldUsedInstrumenter extends AbstractLoggingInstrumenter<CtExecuta
 
     protected void addAlwayLog(Map<CtFieldReference, String> fieldUsed) {
 
-    }
-
-    protected boolean alreadyInstrumented(CtStatement statement) {
-        boolean match = getSubStatement(statement).stream().anyMatch(stmt -> alreadyInstrument.contains(stmt));
-
-
-        return match;
-    }
-
-
-
-    protected boolean ok(CtStatement statement) {
-        if(statement instanceof CtBlock
-                || statement instanceof CtLoop
-                || statement instanceof CtTry
-                || statement instanceof CtCatch) {
-            return false;
-        }
-        return !statement.toString().startsWith("this(")
-                && !statement.toString().startsWith("super(");
     }
 
     protected FieldReferenceVisitor getFieldUsed(CtExecutable mth) {

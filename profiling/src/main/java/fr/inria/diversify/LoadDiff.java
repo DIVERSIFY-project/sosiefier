@@ -15,12 +15,16 @@ import fr.inria.diversify.logger.variable.VariableDiff;
 import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
 import fr.inria.diversify.processor.main.BranchPositionProcessor;
+import fr.inria.diversify.processor.test.CountProcessor;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
 import org.apache.commons.io.FileUtils;
 import spoon.reflect.cu.SourcePosition;
+import spoon.reflect.declaration.*;
+import spoon.reflect.factory.Factory;
+import spoon.reflect.reference.CtTypeReference;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -44,6 +48,7 @@ public class LoadDiff {
     private Map<String, SourcePosition> branchPosition;
     Map<String, Set<String>> testsByBranch;
     Coverage globalCoverage;
+    private Map<String, Integer> assertPerTest;
 
     public LoadDiff(String propertiesFile) throws Exception, InvalidSdkException {
 
@@ -58,11 +63,11 @@ public class LoadDiff {
         String out = inputConfiguration.getProperty("result");
 
         init();
-
-        computeDiversifyStat(transDir, out);
-
-        witeCSV(out + ".csv");
-        witeCSVStatement(out + "_stmt.csv");
+        if(transDir != null) {
+            computeDiversifyStat(transDir, out);
+            writeCSV(out + ".csv");
+        }
+        writeCSVStatement(out + "_stmt.csv");
     }
 
     protected void computeDiversifyStat(String transDir, String output) throws Exception {
@@ -92,14 +97,15 @@ public class LoadDiff {
 //        Log.info("nb sosie: {}", sosies.size());
     }
 
-    protected void witeCSV(String out) throws IOException {
+    protected void writeCSV(String out) throws IOException {
         FileWriter writer = new FileWriter(new File(out));
 
-        writer.append("uuid;type;name;status;diff;graphDiff;branchDiff;variableDiff;exceptionDiff;nbTest;maxDeep;meanDeep\n");
+        writer.append("uuid;type;name;position;status;diff;graphDiff;branchDiff;variableDiff;exceptionDiff;nbTest;maxDeep;meanDeep\n");
         for(Transformation transformation: transformations) {
             writer.append(transformation.getIndex() + ";");
             writer.append(transformation.getType() + ";");
             writer.append(transformation.getName() + ";");
+            writer.append(formatPosition(transformation.getPosition())+";");
             writer.append(transformation.getStatus() + ";");
             if(transToDiffs.containsKey(transformation)) {
                 writer.append(transToDiffs.get(transformation).size() + ";");
@@ -125,26 +131,39 @@ public class LoadDiff {
         writer.close();
     }
 
-    protected void witeCSVStatement(String out) throws IOException {
+    protected void writeCSVStatement(String out) throws IOException {
+        StatementInfo stmtInfo = new StatementInfo(inputProgram);
         FileWriter writer = new FileWriter(new File(out));
 
-        writer.append("nbTrial;nbCompile;nbSosie;nbTest;maxDeep;meanDeep\n");
+        writer.append("position;isCandidate;nbTrial;nbCompile;nbSosie;nbTest;nbAssert;maxDeep;meanDeep;minDeep;methodNameInTests;methodClassTargetByTests\n");
         for(CodeFragment stmt: inputProgram.getCodeFragments()) {
             SourcePosition position = stmt.getCtCodeFragment().getPosition();
             List<Transformation> transInThisStmt = transformations.stream()
                     .filter(trans -> include(position, trans.getPosition()))
                     .collect(Collectors.toList());
 
+            writer.append( stmt.positionString() + ";");
+
+            writer.append(stmtInfo.isTransformable(stmt) + ";");
+
             writer.append(transInThisStmt.size() + ";");
             writer.append(transInThisStmt.stream()
                     .filter(trans -> trans.getStatus() >= -1)
                     .count() + ";");
             writer.append(transInThisStmt.stream()
-                    .filter(trans -> trans.getStatus() == 0)
+                    .filter(trans -> trans.getStatus() >= 0)
                     .count() + ";");
+            Collection<String> coveredTests = coveredTests(position);
             writer.append(coveredTests(position).size() + ";");
+            writer.append(nbAssertFor(coveredTests) + ";");
+
             writer.append(deepMax(position) + ";");
-            writer.append(deepMean(position) + "\n");
+            writer.append(deepMean(position) + ";");
+            writer.append(deepMin(position) + ";");
+
+            writer.append(methodNameContainedInTests(stmt.getCtCodeFragment(), coveredTests) + ";");
+            writer.append(methodClassTargetByTests(stmt.getCtCodeFragment(), coveredTests) + "\n");
+
         }
         writer.close();
     }
@@ -160,6 +179,13 @@ public class LoadDiff {
         intBranch();
         globalCoverage = loadGlobalCoverage(builder.getDirectory() + "/log");
 
+        initAssertCount();
+
+        transformations = new LinkedList<>();
+    }
+
+    protected String formatPosition(SourcePosition position) {
+        return position.getCompilationUnit().getMainType().getQualifiedName() + ":" + position.getLine();
     }
 
     protected void copyDir(String src, String dest) throws IOException {
@@ -222,40 +248,144 @@ public class LoadDiff {
         }
     }
 
+    protected void initAssertCount() {
+        Factory factory = InitUtils.initSpoon(inputProgram, true);
+
+        CountProcessor m = new CountProcessor();
+        LoggerUtils.applyProcessor(factory, m);
+        assertPerTest = m.getAssertPerTest();
+    }
+
+
+    protected String smallBranchContaining(SourcePosition sourcePosition) {
+        List<String> branches = branchPosition.keySet().stream()
+                .filter(branch -> include(branchPosition.get(branch), sourcePosition))
+//                .filter(branch -> testsByBranch.containsKey(branch))
+                .collect(Collectors.toList());
+
+        if(branches.isEmpty()) {
+            return "";
+        }
+        int minBranchSize = 10000;
+        String minBranch = "";
+        for (String branch : branches) {
+            int size =  branchPosition.get(branch).getEndLine() - branchPosition.get(branch).getLine();
+            if(size < minBranchSize) {
+                minBranchSize = size;
+                minBranch = branch;
+            }
+        }
+        return minBranch;
+    }
+
     protected int deepMax(SourcePosition sourcePosition) {
-        return branches(sourcePosition).stream()
-                .flatMap(branch -> deeps(branch).stream())
+        String branchName = smallBranchContaining(sourcePosition);
+        if(branchName.isEmpty()) {
+            return 0;
+        }
+        Branch branch = globalCoverage.getBranch(branchName);
+        if(branch == null) {
+            return 0;
+        }
+        return branch.getDeeps().stream()
                 .mapToInt(i -> i)
                 .max()
                 .orElse(0);
     }
 
-    protected Set<Integer> deeps(Branch b) {
-        return  b.getDeeps();
-    }
-
     protected double deepMean(SourcePosition sourcePosition) {
-        Collection<Branch> branches = branches(sourcePosition);
-        return branches.stream()
-                .flatMap(branch -> branch.getDeeps().stream())
+        String branchName = smallBranchContaining(sourcePosition);
+        if(branchName.isEmpty()) {
+            return 0;
+        }
+        Branch branch = globalCoverage.getBranch(branchName);
+        if(branch == null) {
+            return 0;
+        }
+        return branch.getDeeps().stream()
                 .mapToDouble(i -> i)
-                .sum() / branches.stream().flatMap(branch -> branch.getDeeps().stream()).count();
+                .sum() / branch.getDeeps().size();
     }
 
-    protected Collection<Branch> branches(SourcePosition sourcePosition) {
-        return branchPosition.keySet().stream()
-                .filter(branch -> include(branchPosition.get(branch), sourcePosition))
-                .map(branch -> globalCoverage.getBranch(branch))
-                .filter(branch -> branch != null)
-                .collect(Collectors.toSet());
+    protected double deepMin(SourcePosition sourcePosition) {
+        String branchName = smallBranchContaining(sourcePosition);
+        if(branchName.isEmpty()) {
+            return 0;
+        }
+        Branch branch = globalCoverage.getBranch(branchName);
+        if(branch == null) {
+            return 0;
+        }
+        return branch.getDeeps().stream()
+                .mapToInt(i -> i)
+                .min()
+                .orElse(0);
+    }
+    protected int nbAssertFor(Collection<String> tests) {
+        return tests.stream()
+                .filter(test -> assertPerTest.containsKey(test))
+                .mapToInt(test -> assertPerTest.get(test))
+                .sum();
     }
 
     protected Collection<String> coveredTests(SourcePosition sourcePosition) {
-        return branchPosition.keySet().stream()
-                .filter(branch -> include(branchPosition.get(branch), sourcePosition))
-                .filter(branch -> testsByBranch.containsKey(branch))
-                .flatMap(branch -> testsByBranch.get(branch).stream())
-                .collect(Collectors.toSet());
+        String branch = smallBranchContaining(sourcePosition);
+
+        if(testsByBranch.containsKey(branch)) {
+            return testsByBranch.get(branch);
+        } else {
+            return new LinkedList<>();
+        }
+    }
+
+    protected double methodNameContainedInTests(CtElement element, Collection<String> tests) {
+        CtExecutable exe = getMethodOrConstructorContaining(element);
+        if(exe == null) {
+            return 0;
+        } else {
+            String name = exe.getSimpleName().toLowerCase();
+            return tests.stream()
+                    .map(test -> test.split("#")[1].toLowerCase())
+                    .filter(test -> test.contains(name))
+                    .count() / (double)tests.size();
+        }
+    }
+
+    protected double methodClassTargetByTests(CtElement element, Collection<String> tests) {
+        CtExecutable exe = getMethodOrConstructorContaining(element);
+        if(exe == null) {
+            return 0;
+        } else {
+            String className =  exe.getReference().getDeclaringType().getQualifiedName();
+            return tests.stream()
+                    .map(test -> test.split("#")[0])
+                    .map(test -> test.substring(0, test.length() - 4))
+                    .filter(testClass -> getSuperClasses(testClass).contains(className))
+                    .count() / (double)tests.size();
+        }
+    }
+
+    protected Collection<String> getSuperClasses(String className) {
+        Collection<String> classes = new HashSet<>();
+
+        classes.add(className);
+        try {
+        Class cl = Class.forName(className);
+
+            while (cl.getSuperclass() != null) {
+                cl = cl.getSuperclass();
+                classes.add(cl.getCanonicalName());
+            }
+        } catch (Exception e) {}
+        return classes;
+    }
+
+    protected CtExecutable getMethodOrConstructorContaining(CtElement element) {
+        CtExecutable exe = element.getParent(CtMethod.class);
+        if(exe == null) {
+            exe = element.getParent(CtConstructor.class);
+        }
+        return exe;
     }
 
     //true if oThis include in oOther
