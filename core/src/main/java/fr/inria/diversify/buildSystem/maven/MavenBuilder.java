@@ -49,7 +49,7 @@ public class MavenBuilder extends AbstractBuilder {
             mvnHome = new File("/opt/maven");
         if (!mvnHome.exists())
             //osx
-            mvnHome = new File("/usr/local/Cellar/maven/3.2.3/libexec/");
+            mvnHome = new File("/usr/local/Cellar/maven/3.3.3/libexec/");
         if (!mvnHome.exists())
             //win
             //mvnHome = new File(System.getenv("M2_HOME"));

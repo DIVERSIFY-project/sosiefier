@@ -307,7 +307,7 @@ public class ADRTransformationQuery extends TransformationQuery {
         while (transplantationPoint == null) {
             transplantationPoint = findRandomFragment(true);
             if (transplantationPoint.getCtCodeFragment() instanceof CtReturn
-                    && transplantationPoint.getCtCodeFragment() instanceof CtLocalVariable)
+                    || transplantationPoint.getCtCodeFragment() instanceof CtLocalVariable)
                 transplantationPoint = null;
         }
         tf.setTransplantationPoint(transplantationPoint);
