@@ -57,10 +57,10 @@ public class ASTDelete extends ASTTransformation {
         return snippetStatement;
     }
 
-
     public  int hashCode() {
         return super.hashCode() * transplantationPoint.getCompilationUnit().hashCode() * transplantationPoint.getStartLine();
     }
+
     public boolean equals(Object other) {
         if(other == null)
             return false;
