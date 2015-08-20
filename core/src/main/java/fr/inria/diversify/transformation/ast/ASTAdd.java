@@ -117,7 +117,7 @@ public class ASTAdd extends ASTTransformation {
         return status == otherASTAdd.status &&
                 name.equals(otherASTAdd.name) &&
                 failures.equals(otherASTAdd.failures) &&
-                (variableMapping == null || variableMapping.equals(otherASTAdd.variableMapping)) &&
+                ((variableMapping == null && otherASTAdd.variableMapping == null) || variableMapping.equals(otherASTAdd.variableMapping)) &&
                 transplantationPoint.getCtCodeFragment().equals(otherASTAdd.transplantationPoint.getCtCodeFragment()) &&
                 transplant.getCtCodeFragment().getPosition().equals(otherASTAdd.transplant.getCtCodeFragment().getPosition());
     }

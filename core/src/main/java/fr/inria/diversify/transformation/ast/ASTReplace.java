@@ -109,7 +109,7 @@ public class ASTReplace extends ASTTransformation {
 
         return status == otherReplace.status &&
                 failures.equals(otherReplace.failures) &&
-                (variableMapping == null || variableMapping.equals(otherReplace.variableMapping)) &&
+                ((variableMapping == null && otherReplace.variableMapping == null) || variableMapping.equals(otherReplace.variableMapping)) &&
                 transplantationPoint.getCtCodeFragment().getPosition().equals(otherReplace.transplantationPoint.getCtCodeFragment().getPosition()) &&
                 getTransplant().getCtCodeFragment().getPosition().equals(otherReplace.getTransplant().getCtCodeFragment().getPosition());
     }
