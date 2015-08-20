@@ -53,7 +53,6 @@ public class LoopPerforation extends SingleTransformation {
 
         JavaOutputProcessor processor = new JavaOutputProcessor(new File(srcDir), new DefaultJavaPrettyPrinter(env));
         processor.setFactory(factory);
-
         processor.createJavaFile(type);
         Log.debug("write type {} in directory {}", type.getQualifiedName(), srcDir);
     }

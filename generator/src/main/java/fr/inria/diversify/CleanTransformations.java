@@ -30,7 +30,7 @@ public class CleanTransformations {
      */
     private boolean different(JSONObject a, JSONObject b) throws JSONException {
         boolean result = a.get("position").equals(b.get("position")) &&
-                a.get("sourceCode").equals(b.get("sourceCode")) &&
+                a.get("sourcecode").equals(b.get("sourcecode")) &&
                 a.get("type").equals(b.get("type"));
 
         return !result;

@@ -13,6 +13,7 @@ import spoon.reflect.factory.Factory;
 import spoon.support.reflect.code.CtCodeSnippetStatementImpl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by marodrig on 20/01/2015.
@@ -43,6 +44,6 @@ public class ASTDeleteTest {
         //Test that the replacement was properly built
         ASTDeleteForTest a = new ASTDeleteForTest();
         a.setTransplantationPoint(p.getCodeFragments().get(0));
-        assertEquals(snippetStatement.getValue(), ((CtCodeSnippetStatement)a.buildReplacement()).getValue());
+        assertTrue(((CtCodeSnippetStatement) a.buildReplacement()).getValue().contains("TRANSFORMATION FRAGMENT DELETED"));
     }
 }
