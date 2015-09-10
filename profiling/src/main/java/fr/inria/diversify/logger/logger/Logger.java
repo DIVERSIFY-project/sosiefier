@@ -41,8 +41,8 @@ public class Logger {
         getLog(thread).branch(id);
     }
 
-    public static void logTransformation(Thread thread) {
-        getLog(thread).logTransformation();
+    public static void logTransformation(Thread thread, String id) {
+        getLog(thread).logTransformation(id);
     }
 
     public static void methodIn(Thread thread, String id) {

@@ -52,8 +52,8 @@ public class BranchPositionProcessor extends AbstractLoggingInstrumenter<CtExecu
             updateBranchConditionType(ctIf, methodId+".t" + branchId);
             conditionType(ctIf.getCondition());
             if (ctIf.getElseStatement() == null) {
-                addBranch(methodId, "e" + branchId, ctIf.getParent(CtBlock.class));
-                updateBranchConditionType(ctIf,  methodId+".e" + branchId);
+//                addBranch(methodId, "e" + branchId, ctIf.getParent(CtBlock.class));
+//                updateBranchConditionType(ctIf,  methodId+".e" + branchId);
             } else {
                 addBranch(methodId, "e" + branchId, ctIf.getElseStatement());
                 updateBranchConditionType(ctIf,  methodId+".e" + branchId);

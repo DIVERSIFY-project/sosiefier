@@ -86,7 +86,7 @@ public class GraphReader {
             int deep = Integer.parseInt(split[1]);
             String name = idToMethod.get(split[2]);
 
-            while(stack.size() >= deep) {
+             while(stack.size() >= deep) {
                 stack.pop();
             }
 
@@ -98,7 +98,6 @@ public class GraphReader {
             stack.push(name);
         }
     }
-
     protected Graph getOrBuildGraph(String name) {
         if (!graphByTest.containsKey(name)) {
             graphByTest.put(name, new Graph(name));

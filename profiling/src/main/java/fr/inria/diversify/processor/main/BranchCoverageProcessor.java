@@ -94,12 +94,16 @@ public class BranchCoverageProcessor extends AbstractLoggingInstrumenter<CtExecu
             CtStatement stmt = ctLoop.getBody();
             if (!(stmt instanceof CtBlock)) {
                 CtBlock block = getFactory().Core().createBlock();
-                block.setParent(stmt.getParent());
-                block.addStatement(stmt);
+                if (stmt != null) {
+                    block.setParent(stmt.getParent());
+                    block.addStatement(stmt);
+                } else {
+                    block.setParent(ctLoop);
+                }
                 ctLoop.setBody(block);
             }
             int branchId = idBranch(methodId);
-            addBranchLogger((CtBlock)ctLoop.getBody(), "l" + branchId);
+            addBranchLogger((CtBlock) ctLoop.getBody(), "l" + branchId);
             info += ";l" + branchId;
         }
         for(Object object : Query.getElements(tryFinallyBody(method), new TypeFilter(CtCatch.class))) {

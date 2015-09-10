@@ -6,7 +6,7 @@ import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.logger.Comparator;
 import fr.inria.diversify.logger.Diff;
-import fr.inria.diversify.logger.transformationUsed.TransformationUsed;
+import fr.inria.diversify.logger.transformationUsed.TransformationUsedReader;
 import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
@@ -116,8 +116,8 @@ public class SosieComparator {
                 diffs.add(diff);
             }
         }
-        TransformationUsed tu = new TransformationUsed();
-        if(tu.transformationUsed(tmpSosieDir + "/log")) {
+        TransformationUsedReader tu = new TransformationUsedReader(tmpSosieDir + "/log");
+        if (!tu.load().isEmpty()) {
             trans.setStatus(Transformation.EXE);
         }
         return diffs;
@@ -151,11 +151,11 @@ public class SosieComparator {
     protected void instru(String outputDirectory, SingleTransformation transformation) throws Exception {
         Properties properties = new Properties();
         properties.put("profiling.main.transformationUsed", "true");
-        properties.put("profiling.main.field", "true");
+//        properties.put("profiling.main.field", "true");
         properties.put("profiling.main.branch", "true");
-        properties.put("profiling.main.branch.addBodyBranch", "true");
-        properties.put("profiling.main.catch", "true");
-        properties.put("profiling.main.throw", "true");
+//        properties.put("profiling.main.branch.addBodyBranch", "true");
+//        properties.put("profiling.main.catch", "true");
+//        properties.put("profiling.main.throw", "true");
         properties.put("profiling.main.methodCall", "false");
         properties.put("profiling.test.logTest", "true");
 

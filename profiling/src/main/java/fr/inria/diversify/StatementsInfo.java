@@ -11,12 +11,16 @@ import fr.inria.diversify.logger.JsonDiffOutput;
 import fr.inria.diversify.logger.branch.*;
 import fr.inria.diversify.logger.exception.ExceptionDiff;
 import fr.inria.diversify.logger.graph.GraphsDiff;
+import fr.inria.diversify.logger.transformationUsed.StaticDiff;
 import fr.inria.diversify.logger.variable.VariableDiff;
 import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
 import fr.inria.diversify.processor.main.BranchPositionProcessor;
 import fr.inria.diversify.processor.test.CountProcessor;
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.ast.ASTAdd;
+import fr.inria.diversify.transformation.ast.ASTReplace;
+import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
@@ -24,7 +28,6 @@ import org.apache.commons.io.FileUtils;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
-import spoon.reflect.reference.CtTypeReference;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -37,20 +40,22 @@ import java.util.stream.Collectors;
  * Date: 07/07/15
  * Time: 10:33
  */
-public class LoadDiff {
+public class StatementsInfo {
 
 
-    private final InputConfiguration inputConfiguration;
-    private final InputProgram inputProgram;
-    Map<Transformation, Set<Diff>> transToDiffs;
-    Collection<Transformation> transformations;
+    protected final InputConfiguration inputConfiguration;
+    protected final InputProgram inputProgram;
+    protected Map<Transformation, Set<Diff>> transToDiffs;
+    protected Collection<Transformation> transformations;
 
-    private Map<String, SourcePosition> branchPosition;
-    Map<String, Set<String>> testsByBranch;
-    Coverage globalCoverage;
-    private Map<String, Integer> assertPerTest;
+    protected Map<String, SourcePosition> branchPosition;
+    protected Map<String, Set<String>> testsByBranch;
+    protected Coverage globalCoverage;
+    protected Map<String, Integer> assertPerTest;
+    protected StaticDiff staticDiff;
+    protected Set<String> transformationWithStaticDiff;
 
-    public LoadDiff(String propertiesFile) throws Exception, InvalidSdkException {
+    public StatementsInfo(String propertiesFile) throws Exception, InvalidSdkException {
 
         inputConfiguration = new InputConfiguration(propertiesFile);
 
@@ -65,6 +70,8 @@ public class LoadDiff {
         init();
         if(transDir != null) {
             computeDiversifyStat(transDir, out);
+            staticDiff = new StaticDiff(branchPosition, testsByBranch);
+            transformationWithStaticDiff = new HashSet<>();
             writeCSV(out + ".csv");
         }
         writeCSVStatement(out + "_stmt.csv");
@@ -75,32 +82,24 @@ public class LoadDiff {
         JsonDiffInput jsonDiffInput = new JsonDiffInput();
         loader.addSection(jsonDiffInput.getClass(), jsonDiffInput);
 
-        transformations = loader.load(transDir, true);
+        transformations = loader.load(transDir, true).stream()
+            .collect(Collectors.toList());
+
         transToDiffs = jsonDiffInput.getTransToDiffs();
 
         JsonTransformationWriter writer = new JsonTransformationWriter();
         writer.addSection(JsonDiffOutput.class, new JsonDiffOutput(transToDiffs));
 
-
-//        File out = new File(output);
-//        if(!out.exists()) {
-//            out.mkdirs();
-//        }
-//        writer.write(transformations, output + ".json", inputProgram.getProgramDir() + "/pom.xml");
-//        Set<Transformation> sosies = transformations.stream().keySet().stream()
-//                .filter(t -> t.isSosie())
-//                .collect(Collectors.toSet());
-////        writer.write(sosies, output+"_sosie.json", inputProgram.getProgramDir() + "/pom.xml");
-//
-//        Log.info("nb transformation: {}", transformations.size());
-//        Log.info("nb compile: {}", transformations.stream().filter(t -> t.getStatus() >= -1).count());
-//        Log.info("nb sosie: {}", sosies.size());
+        Set<Transformation> sosies = transformations.stream()
+                .filter(t -> t.getStatus() >= 0)
+                .collect(Collectors.toSet());
+        writer.write(sosies, output + "_sosie.json", inputProgram.getProgramDir() + "/pom.xml");
     }
 
     protected void writeCSV(String out) throws IOException {
         FileWriter writer = new FileWriter(new File(out));
 
-        writer.append("uuid;type;name;position;status;diff;graphDiff;branchDiff;variableDiff;exceptionDiff;nbTest;maxDeep;meanDeep\n");
+        writer.append("uuid;type;name;position;status;diff;graphDiff;branchDiff;variableDiff;exceptionDiff;nbTest;maxDeep;meanDeep;medianDeep;minDeep;nodeTransplantationPoint;nodeTransplant\n");
         for(Transformation transformation: transformations) {
             writer.append(transformation.getIndex() + ";");
             writer.append(transformation.getType() + ";");
@@ -111,31 +110,56 @@ public class LoadDiff {
                 writer.append(transToDiffs.get(transformation).size() + ";");
                 writer.append(transToDiffs.get(transformation).stream()
                         .filter(d -> d instanceof GraphsDiff)
-                        .count()+ ";");
+                        .mapToInt(d -> d.size())
+                        .sum()+ ";");
                 writer.append(transToDiffs.get(transformation).stream()
                         .filter(d -> d instanceof BranchDiff)
-                        .count()+ ";");
+                        .mapToInt(d -> d.size())
+                        .sum()+ ";");
                 writer.append(transToDiffs.get(transformation).stream()
                         .filter(d -> d instanceof VariableDiff)
-                        .count()+ ";");
+                        .mapToInt(d -> d.size())
+                        .sum()+ ";");
                 writer.append(transToDiffs.get(transformation).stream()
                         .filter(d -> d instanceof ExceptionDiff)
-                        .count() + ";");
+                        .mapToInt(d -> d.size())
+                        .sum()+ ";");
             } else {
                 writer.append("0;0;0;0;0;");
             }
             writer.append(coveredTests(transformation.getPosition()).size() + ";");
             writer.append(deepMax(transformation.getPosition()) + ";");
-            writer.append(deepMean(transformation.getPosition()) + "\n");
+            writer.append(deepMean(transformation.getPosition()) + ";");
+            writer.append(deepMedian(transformation.getPosition()) + ";");
+            writer.append(deepMin(transformation.getPosition()) + ";");
+
+            writer.append(nodeTransplantationPoint(transformation) + ";");
+            writer.append(nodeTransplant(transformation) + "\n");
         }
         writer.close();
+    }
+
+    protected String nodeTransplantationPoint(Transformation trans) {
+        return ((ASTTransformation) trans).getTransplantationPoint().getCodeFragmentTypeSimpleName();
+    }
+
+    protected String nodeTransplant(Transformation trans) {
+        if(trans instanceof ASTReplace) {
+            return ((ASTReplace) trans).getTransplant().getCodeFragmentTypeSimpleName();
+        }
+        if(trans instanceof ASTAdd) {
+            return ((ASTAdd) trans).getTransplant().getCodeFragmentTypeSimpleName();
+        }
+        return "NA";
     }
 
     protected void writeCSVStatement(String out) throws IOException {
         StatementInfo stmtInfo = new StatementInfo(inputProgram);
         FileWriter writer = new FileWriter(new File(out));
 
-        writer.append("position;isCandidate;nbTrial;nbCompile;nbSosie;nbTest;nbAssert;maxDeep;meanDeep;minDeep;methodNameInTests;methodClassTargetByTests\n");
+        InitUtils.initSpoon(inputProgram, false);
+
+        writer.append("position;isCandidate;isCandidateDelete;nbTrial;nbCompile;nbSosie;nbTest;nbAssert;maxDeep;meanDeep;medianDeep;minDeep\n");
         for(CodeFragment stmt: inputProgram.getCodeFragments()) {
             SourcePosition position = stmt.getCtCodeFragment().getPosition();
             List<Transformation> transInThisStmt = transformations.stream()
@@ -145,6 +169,7 @@ public class LoadDiff {
             writer.append( stmt.positionString() + ";");
 
             writer.append(stmtInfo.isTransformable(stmt) + ";");
+            writer.append(stmtInfo.delete(stmt) + ";");
 
             writer.append(transInThisStmt.size() + ";");
             writer.append(transInThisStmt.stream()
@@ -159,11 +184,8 @@ public class LoadDiff {
 
             writer.append(deepMax(position) + ";");
             writer.append(deepMean(position) + ";");
-            writer.append(deepMin(position) + ";");
-
-            writer.append(methodNameContainedInTests(stmt.getCtCodeFragment(), coveredTests) + ";");
-            writer.append(methodClassTargetByTests(stmt.getCtCodeFragment(), coveredTests) + "\n");
-
+            writer.append(deepMedian(position) + ";");
+            writer.append(deepMin(position) + "\n");
         }
         writer.close();
     }
@@ -256,11 +278,9 @@ public class LoadDiff {
         assertPerTest = m.getAssertPerTest();
     }
 
-
     protected String smallBranchContaining(SourcePosition sourcePosition) {
         List<String> branches = branchPosition.keySet().stream()
                 .filter(branch -> include(branchPosition.get(branch), sourcePosition))
-//                .filter(branch -> testsByBranch.containsKey(branch))
                 .collect(Collectors.toList());
 
         if(branches.isEmpty()) {
@@ -321,6 +341,25 @@ public class LoadDiff {
                 .min()
                 .orElse(0);
     }
+
+    protected double deepMedian(SourcePosition sourcePosition) {
+        String branchName = smallBranchContaining(sourcePosition);
+        if(branchName.isEmpty()) {
+            return 0;
+        }
+        Branch branch = globalCoverage.getBranch(branchName);
+        if(branch == null) {
+            return 0;
+        }
+        List<Integer> sorted = branch.getDeeps().stream()
+                .mapToInt(i -> i)
+                .sorted()
+                .boxed()
+                .collect(Collectors.toList());
+
+        return sorted.get(sorted.size()/2);
+    }
+
     protected int nbAssertFor(Collection<String> tests) {
         return tests.stream()
                 .filter(test -> assertPerTest.containsKey(test))
@@ -397,7 +436,7 @@ public class LoadDiff {
     }
 
     public static void main(String args[]) throws InvalidSdkException, Exception {
-        new LoadDiff(args[0]);
+        new StatementsInfo(args[0]);
     }
 
 }

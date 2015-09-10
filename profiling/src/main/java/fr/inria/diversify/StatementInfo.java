@@ -23,7 +23,7 @@ public class StatementInfo {
         return delete(stmt) || replaceOrAdd(stmt);
     }
 
-    protected boolean replaceOrAdd(CodeFragment stmt) {
+    public boolean replaceOrAdd(CodeFragment stmt) {
         String cfString = stmt.equalString();
         for(CodeFragment codeFragment : getAllUniqueCodeFragments()) {
             if(stmt.isReplaceableBy(codeFragment, false, true) && !codeFragment.equalString().equals(cfString)) {
@@ -33,9 +33,9 @@ public class StatementInfo {
         return false;
     }
 
-    protected boolean delete(CodeFragment stmt) {
-        return stmt.getCtCodeFragment() instanceof CtReturn
-                    && stmt.getCtCodeFragment() instanceof CtLocalVariable;
+    public boolean delete(CodeFragment stmt) {
+        return !(stmt.getCtCodeFragment() instanceof CtReturn
+                    || stmt.getCtCodeFragment() instanceof CtLocalVariable);
 
     }
 

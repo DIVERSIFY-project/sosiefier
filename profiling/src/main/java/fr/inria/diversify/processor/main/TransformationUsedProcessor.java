@@ -3,12 +3,9 @@ package fr.inria.diversify.processor.main;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
-import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.*;
-import spoon.reflect.cu.SourcePosition;
-import spoon.reflect.declaration.CtExecutable;
-import spoon.reflect.factory.Factory;
-
+import spoon.reflect.visitor.Query;
+import spoon.reflect.visitor.filter.TypeFilter;
 
 
 /**
@@ -16,13 +13,11 @@ import spoon.reflect.factory.Factory;
  * Date: 10/07/15
  * Time: 11:01
  */
-public class TransformationUsedProcessor extends AbstractProcessor<CtStatement> {
-    ASTTransformation transformation;
-    InputProgram inputProgram;
-    private String logger;
+public class TransformationUsedProcessor extends AbstractLoggingInstrumenter<CtStatement> {
+    protected ASTTransformation transformation;
 
     public TransformationUsedProcessor(InputProgram inputProgram, Transformation transformation) {
-        this.inputProgram = inputProgram;
+        super(inputProgram);
         this.transformation = (ASTTransformation) transformation;
     }
 
@@ -37,15 +32,19 @@ public class TransformationUsedProcessor extends AbstractProcessor<CtStatement> 
 
         if(transformationName.equals("add")) {
             CtIf ctIf = (CtIf) stmtTrans;
-            stmtTrans = ((CtBlock)ctIf.getThenStatement()).getLastStatement();
-
+            pprocess(((CtBlock) ctIf.getThenStatement()).getLastStatement());
+        } else {
+            pprocess(stmtTrans);
         }
 
-        CtCodeSnippetStatement snippet = getFactory().Code().createCodeSnippetStatement(
-                "System.out.println(\"\\nlogTransformation\\n\");"+getLogger() + ".logTransformation(Thread.currentThread())");
-        if(stmtTrans instanceof CtIf) {
-            CtIf ctIf = (CtIf) stmtTrans;
 
+    }
+
+    protected void pprocess(CtStatement stmtTrans) {
+        int count = 0;
+        for(Object object : Query.getElements(stmtTrans, new TypeFilter(CtIf.class))) {
+            CtIf ctIf = (CtIf) object;
+//            int branchId = idBranch(methodId);
             CtStatement stmt = ctIf.getThenStatement();
             if (!(stmt instanceof CtBlock)) {
                 CtBlock block = getFactory().Core().createBlock();
@@ -53,7 +52,8 @@ public class TransformationUsedProcessor extends AbstractProcessor<CtStatement> 
                 block.addStatement(stmt);
                 ctIf.setThenStatement(block);
             }
-            addSnippet(snippet, stmt);
+            addBlockSnippet(ctIf.getThenStatement(), "t" + count);
+            count++;
             if (ctIf.getElseStatement() != null) {
                 stmt = ctIf.getElseStatement();
                 if (!(stmt instanceof CtBlock)) {
@@ -62,44 +62,57 @@ public class TransformationUsedProcessor extends AbstractProcessor<CtStatement> 
                     block.addStatement(stmt);
                     ctIf.setElseStatement(block);
                 }
-                addSnippet(snippet, stmt);
+                addBlockSnippet(ctIf.getElseStatement(), "e" + count);
+                count++;
             }
-        } else if(stmtTrans instanceof CtLoop) {
-            CtLoop ctLoop = (CtLoop) stmtTrans;
+        }
+
+        for(Object object : Query.getElements(stmtTrans, new TypeFilter(CtLoop.class))) {
+            CtLoop ctLoop = (CtLoop) object;
             CtStatement stmt = ctLoop.getBody();
             if (!(stmt instanceof CtBlock)) {
                 CtBlock block = getFactory().Core().createBlock();
-                block.setParent(stmt.getParent());
-                block.addStatement(stmt);
+                if (stmt != null) {
+                    block.setParent(stmt.getParent());
+                    block.addStatement(stmt);
+                } else {
+                    block.setParent(ctLoop);
+                }
                 ctLoop.setBody(block);
             }
-            addSnippet(snippet, stmt);
-        } else if(stmtTrans instanceof CtTry) {
-            CtTry ctTry = (CtTry) stmtTrans;
-            CtStatement stmt = ctTry.getBody();
+            addBlockSnippet(ctLoop.getBody(), "l" + count);
+            count++;
+        }
+
+        for(Object object : Query.getElements(stmtTrans, new TypeFilter(CtCatch.class))) {
+            CtCatch ctCatch = (CtCatch) object;
+            CtStatement stmt = ctCatch.getBody();
             if (!(stmt instanceof CtBlock)) {
                 CtBlock block = getFactory().Core().createBlock();
                 block.setParent(stmt.getParent());
                 block.addStatement(stmt);
-                ctTry.setBody(block);
+                ctCatch.setBody(block);
             }
 
-        } else {
-            stmtTrans.insertBefore(snippet);
+            addBlockSnippet(ctCatch.getBody(), "c" + count);
+            count++;
         }
 
+        if(count == 0) {
+            stmtTrans.insertBefore(getFactory().Code().createCodeSnippetStatement(getLogger() + ".logTransformation(Thread.currentThread(),\"b\");"));
+        }
     }
 
-    protected void addSnippet(CtCodeSnippetStatement snippet, CtStatement stmt) {
-        CtBlock block = (CtBlock) stmt;
-        block.insertBegin(snippet);
+    protected void addBlockSnippet(CtStatement ctBlock, String branchId) {
+        CtCodeSnippetStatement snippet = getFactory().Code().createCodeSnippetStatement(getLogger() + ".logTransformation(Thread.currentThread(),\""+branchId+"\")");
+        ((CtBlock) ctBlock).insertBegin(snippet);
     }
 
-    public String getLogger() {
-        return logger;
-    }
-
-    public void setLogger(String logger) {
-        this.logger = logger;
-    }
+//    protected int idBranch(int methodId) {
+//        if(!blockIds.containsKey(methodId)) {
+//            blockIds.put(methodId, 0);
+//        }
+//        blockIds.put(methodId, blockIds.get(methodId) + 1);
+//        return blockIds.get(methodId);
+//    }
 }

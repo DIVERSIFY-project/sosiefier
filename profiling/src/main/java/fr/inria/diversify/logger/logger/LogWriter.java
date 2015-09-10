@@ -353,14 +353,17 @@ public class LogWriter {
         }
     }
 
-    public void logTransformation() {
+    public void logTransformation(String id) {
         if (!isObserve) {
             try {
+                System.out.println("log transformation: "+id);
                 PrintWriter fileWriter = getFileWriter();
                 fileWriter.append(KeyWord.endLine);
                 fileWriter.append(KeyWord.logTransformation);
                 fileWriter.append(KeyWord.simpleSeparator);
                 fileWriter.append(deep + "");
+                fileWriter.append(KeyWord.simpleSeparator);
+                fileWriter.append(id);
             } catch (Exception e) {
             }
         }
