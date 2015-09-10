@@ -1,4 +1,4 @@
-package fr.inria.diversify;
+package fr.inria.diversify.info;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.InputProgram;

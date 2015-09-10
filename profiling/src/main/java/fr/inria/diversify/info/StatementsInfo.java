@@ -1,5 +1,6 @@
-package fr.inria.diversify;
+package fr.inria.diversify.info;
 
+import fr.inria.diversify.Profiling;
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.codeFragment.CodeFragment;
