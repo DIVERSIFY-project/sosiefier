@@ -18,6 +18,7 @@ import fr.inria.diversify.logger.graph.GraphsComparator;
 import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
 import fr.inria.diversify.statistic.CVLMetric;
+import fr.inria.diversify.switchsosie.SwitchQuery;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.query.*;
 import fr.inria.diversify.transformatonSelection.TestAndBranchSelection;
@@ -247,6 +248,19 @@ public class DiversifyMain {
                     query = new FromListQuery(inputProgram);
                 } else {
                     query = new FromListQuery(inputProgram, rangeMin, rangeMax);
+                }
+                query.setShuffle(true);
+                query.setRemoveAfterQuery(true);
+                return query;
+            }
+            case "switch": {
+                int rangeMin = Integer.parseInt(inputConfiguration.getProperty("transformation.range.min", "-1"));
+                int rangeMax = Integer.parseInt(inputConfiguration.getProperty("transformation.range.max", "-1"));
+                SwitchQuery query;
+                if(rangeMax == -1 || rangeMin == -1) {
+                    query = new SwitchQuery(inputProgram);
+                } else {
+                    query = new SwitchQuery(inputProgram, rangeMin, rangeMax);
                 }
                 query.setShuffle(true);
                 query.setRemoveAfterQuery(true);

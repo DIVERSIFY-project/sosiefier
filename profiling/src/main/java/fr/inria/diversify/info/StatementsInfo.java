@@ -71,7 +71,7 @@ public class StatementsInfo {
         init();
         if(transDir != null) {
             computeDiversifyStat(transDir, out);
-            staticDiff = new StaticDiff(branchPosition, testsByBranch);
+//            staticDiff = new StaticDiff(branchPosition, testsByBranch);
             transformationWithStaticDiff = new HashSet<>();
             writeCSV(out + ".csv");
         }

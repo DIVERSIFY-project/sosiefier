@@ -14,9 +14,9 @@ import java.util.Random;
  */
 public class FromListQuery extends TransformationQuery {
 
-    private final List<Transformation> transformations;
-    boolean removeAfterQuery = true;
-    boolean shuffle = false;
+    protected List<Transformation> transformations;
+    protected boolean removeAfterQuery = true;
+    protected boolean shuffle = false;
 
     public FromListQuery(InputProgram inputProgram) {
         super(inputProgram);

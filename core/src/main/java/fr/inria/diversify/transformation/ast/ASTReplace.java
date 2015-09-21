@@ -67,7 +67,7 @@ public class ASTReplace extends ASTTransformation {
         Log.debug("replace by: ({})\n{}", getTransplant().getCodeFragmentType(), getTransplant());
     }
 
-    protected CtCodeElement buildReplacementElement() {
+    public CtCodeElement buildReplacementElement() {
         try {
             CodeFragment stmt = transplant.clone();
             if (withVarMapping()) {

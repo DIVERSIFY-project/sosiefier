@@ -112,20 +112,8 @@ public abstract class ASTTransformation extends SingleTransformation {
         } catch (Exception e) {
             throw new ApplyTransformationException("", e);
         }
-
     }
 
-    /**
-     * Applies the transformation having into consideration the parent transformation
-     *
-     * @param srcDir Path of the output directory
-     * @throws Exception
-     */
-    @Override
-    public void applyWithParent(String srcDir) throws Exception {
-        if (parent != null) parent.apply(srcDir);
-        apply(srcDir);
-    }
 
     /**
      * All AST transformations takes the transplantation point (TP) and replaces it by :
@@ -139,7 +127,7 @@ public abstract class ASTTransformation extends SingleTransformation {
      * @throws Exception
      * @Note: Renamed after buildCopyElement.
      */
-    protected abstract CtCodeElement buildReplacementElement();
+    public abstract CtCodeElement buildReplacementElement();
 
     /**
      * Undo the transformation. After the transformation is restored, the result will be copy to the output directory

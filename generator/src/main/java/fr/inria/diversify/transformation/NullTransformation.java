@@ -31,7 +31,7 @@ public class NullTransformation extends ASTTransformation {
     }
 
     @Override
-    protected CtCodeElement buildReplacementElement() {
+    public CtCodeElement buildReplacementElement() {
         return null;
     }
 

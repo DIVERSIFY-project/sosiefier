@@ -25,6 +25,21 @@ public abstract class SingleTransformation extends Transformation {
     public abstract void printJavaFile(String srcDir) throws IOException;
 
 
+    /**
+     * Applies the transformation having into consideration the parent transformation
+     *
+     * @param srcDir Path of the output directory
+     * @throws Exception
+     */
+    @Override
+    public void applyWithParent(String srcDir) throws Exception {
+        if (parent != null) {
+            parent.apply(srcDir);
+        }
+        apply(srcDir);
+    }
+
+
 //    /**
 //     * gets the parent method of an element
 //     * @param son

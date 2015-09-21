@@ -49,7 +49,7 @@ public class ASTAdd extends ASTTransformation {
         Log.debug("transplant: ({})\n{}", getTransplant().getCodeFragmentType(), getTransplant());
     }
 
-    protected CtCodeElement buildReplacementElement() {
+    public CtCodeElement buildReplacementElement() {
         try {
             CodeFragment stmtToAdd = transplant.clone();
             if (withVarMapping()) {

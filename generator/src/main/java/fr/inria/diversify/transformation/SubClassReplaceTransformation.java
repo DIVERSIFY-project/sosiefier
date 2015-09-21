@@ -22,7 +22,7 @@ public class SubClassReplaceTransformation extends ASTReplace {
     }
 
     @Override
-    protected CtCodeElement buildReplacementElement() {
+    public CtCodeElement buildReplacementElement() {
         try {
             CodeFragment ifStatement = transplant.clone();
             if (withVarMapping()) {
