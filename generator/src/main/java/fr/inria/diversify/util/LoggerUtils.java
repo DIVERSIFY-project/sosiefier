@@ -39,18 +39,6 @@ public class LoggerUtils {
         return list;
     }
 
-    @Deprecated
-    public static void copyLogger(InputProgram inputProgram, String outputDirectory, Class classLogger) throws IOException {
-        File dir = new File(outputDirectory + "/" + inputProgram.getRelativeTestSourceCodeDir() + "/fr/inria/diversify/testamplification/logger");
-        FileUtils.forceMkdir(dir);
-
-        String packagePath = System.getProperty("user.dir") + "/profiling/src/main/java/fr/inria/diversify/testamplification/logger/";
-        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.Logger.class.getSimpleName() + ".java"), dir);
-        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.ShutdownHookLog.class.getSimpleName() + ".java"), dir);
-        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.LogWriter.class.getSimpleName() + ".java"),dir);
-        FileUtils.copyFileToDirectory(new File(packagePath + classLogger.getSimpleName() + ".java"),dir);
-    }
-
     public static void copyLoggerFile(InputProgram inputProgram, String outputDirectory, String loggerPackage) throws IOException {
         copyLoggerFile(inputProgram.getRelativeSourceCodeDir(), outputDirectory, loggerPackage);
     }

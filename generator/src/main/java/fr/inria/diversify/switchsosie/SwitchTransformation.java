@@ -4,6 +4,7 @@ import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
 import fr.inria.diversify.util.Log;
+import org.apache.commons.io.FileUtils;
 import spoon.compiler.Environment;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtCodeElement;
@@ -18,6 +19,7 @@ import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
 import spoon.support.JavaOutputProcessor;
+import sun.reflect.misc.FieldUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -59,14 +61,13 @@ public class SwitchTransformation extends SingleTransformation {
 
 
     protected  CtCodeElement buildReplacementElement() {
-        addField();
         CtCodeElement transplantationPoint = transformation.getTransplantationPoint().getCtCodeFragment();
         CtCodeElement copyTransplant = transformation.buildReplacementElement();
 
         Factory factory = copyTransplant.getFactory();
 
         CtFieldReference<Boolean> fieldRef = factory.Core().createFieldReference();
-        fieldRef.setSimpleName("switchTransformation");
+        fieldRef.setSimpleName("fr.inria.diversify.switchsosie.Switch.switchTransformation");
 
         CtIf stmtIf = factory.Core().createIf();
         stmtIf.setParent(transplantationPoint.getParent());
@@ -93,40 +94,39 @@ public class SwitchTransformation extends SingleTransformation {
         try {
             copyTransplant = buildReplacementElement();
             transformation.getTransplantationPoint().getCtCodeFragment().replace(copyTransplant);
+            copySwitch(srcDir);
             printJavaFile(srcDir);
         } catch (Exception e) {
             throw new ApplyTransformationException("", e);
         }
     }
 
+    protected void copySwitch(String copyDirName) throws IOException {
+        File srcFile = new File(System.getProperty("user.dir") + "/generator/src/main/java/fr/inria/diversify/switchsosie/Switch.java");
+        File destFile = new File(copyDirName  + "/fr/inria/diversify/switchsosie/Switch.java");
 
-    protected CtField<Boolean> addField() {
-        CtType<?> cl = transformation.getOriginalClass(transformation.getTransplantationPoint());
-        Factory factory = cl.getFactory();
-
-        CtTypeReference<Boolean> typeRef = factory.Core().createTypeReference();
-        typeRef.setSimpleName("boolean");
-
-        CtField<Boolean> field = factory.Core().createField();
-        field.setType(typeRef);
-        field.setSimpleName("switchTransformation");
-        field.setDefaultExpression(factory.Code().createLiteral(true));
-
-        Set<ModifierKind> modifiers = new HashSet<>();
-        modifiers.add(ModifierKind.STATIC);
-        modifiers.add(ModifierKind.PUBLIC);
-        field.setModifiers(modifiers);
-
-        field.setParent(cl);
-        cl.addField(field);
-
-        return field;
+        FileUtils.copyFile(srcFile, destFile);
     }
 
+    protected void deleteSwitch(String copyDirName) throws IOException {
+        File delete = new File(copyDirName  + "/fr/inria/diversify/switchsosie/Switch.java");
+
+        FileUtils.forceDelete(delete);
+    }
 
     @Override
     public void restore(String srcDir) throws Exception {
-
+        deleteSwitch(srcDir);
+        if (parent != null) {
+            parent.restore(srcDir);
+        }
+        try {
+            copyTransplant.replace(transformation.getTransplantationPoint().getCtCodeFragment());
+        } catch (Throwable e) {
+            e.printStackTrace();
+            Log.debug("");
+        }
+        printJavaFile(srcDir);
     }
 
     @Override
