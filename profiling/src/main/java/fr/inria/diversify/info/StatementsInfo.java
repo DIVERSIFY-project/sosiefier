@@ -1,8 +1,6 @@
 package fr.inria.diversify.info;
 
-import fr.inria.diversify.Profiling;
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
-import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
@@ -25,7 +23,6 @@ import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
-import org.apache.commons.io.FileUtils;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
@@ -50,8 +47,7 @@ public class StatementsInfo {
     protected Collection<Transformation> transformations;
 
     protected Map<String, SourcePosition> branchPosition;
-    protected Map<String, Set<String>> testsByBranch;
-    protected Coverage globalCoverage;
+    protected CoverageInfo coverageInfo;
     protected Map<String, Integer> assertPerTest;
     protected StaticDiff staticDiff;
     protected Set<String> transformationWithStaticDiff;
@@ -192,32 +188,14 @@ public class StatementsInfo {
     }
 
     public void init() throws Exception {
-        Log.debug("init BranchComparator");
-        String tmpDir = inputConfiguration.getProperty("tmpDir") + "/tmp_" + System.currentTimeMillis();
-        copyDir(inputProgram.getProgramDir(), tmpDir);
-        instru(tmpDir);
-        MavenBuilder builder = new MavenBuilder(tmpDir);
-        builder.runGoals(new String[]{"clean", "test"}, true);
-        initTestByBranch(builder.getDirectory() + "/log");
+        coverageInfo = new CoverageInfo(inputProgram);
+        coverageInfo.init(inputConfiguration.getProperty("tmpDir"));
+
         intBranch();
-        globalCoverage = loadGlobalCoverage(builder.getDirectory() + "/log");
 
         initAssertCount();
 
         transformations = new LinkedList<>();
-    }
-
-    protected String formatPosition(SourcePosition position) {
-        return position.getCompilationUnit().getMainType().getQualifiedName() + ":" + position.getLine();
-    }
-
-    protected void copyDir(String src, String dest) throws IOException {
-        File dir = new File(dest);
-        if(dir.exists()) {
-            FileUtils.forceDelete(dir);
-        }
-        dir.mkdirs();
-        FileUtils.copyDirectory(new File(src), dir);
     }
 
     protected void intBranch() {
@@ -227,48 +205,8 @@ public class StatementsInfo {
         branchPosition = processor.getBranchPosition();
     }
 
-    protected List<TestCoverage> loadTestCoverage(String logDir) throws IOException {
-        CoverageReader reader = new CoverageReader(logDir);
-        List<TestCoverage> result = reader.loadTest();
-
-        return result;
-    }
-
-    protected Coverage loadGlobalCoverage(String logDir) throws IOException {
-        CoverageReader reader = new CoverageReader(logDir);
-
-        return reader.load();
-    }
-
-    protected void instru(String outputDirectory) throws Exception {
-        Properties properties = new Properties();
-        properties.put("profiling.main.branch", "true");
-        properties.put("profiling.main.branch.addBodyBranch", "true");
-        properties.put("profiling.test.logTest", "true");
-
-        Profiling profiling = new Profiling(inputProgram, outputDirectory, "fr.inria.diversify.logger.logger", properties);
-        profiling.apply();
-    }
-
-    protected void initTestByBranch(String logDir) throws InterruptedException, IOException {
-        testsByBranch = new HashMap<>();
-
-        List<TestCoverage> testCoverage = loadTestCoverage(logDir);
-
-        for(TestCoverage tc : testCoverage) {
-            for(MethodCoverage mth : tc.getCoverage().getMethodCoverages()) {
-                for(Branch branch : mth.getCoveredBranchs()) {
-                    String key = mth.getMethodId() + "." + branch.getId();
-                    if (!testsByBranch.containsKey(key)) {
-                        testsByBranch.put(key, new HashSet<>());
-                    }
-                    String testName = tc.getTestName();
-                    int ind = testName.lastIndexOf(".");
-                    testName = new StringBuilder(testName).replace(ind, ind + 1, "#").toString();
-                    testsByBranch.get(key).add(testName);
-                }
-            }
-        }
+    protected String formatPosition(SourcePosition position) {
+        return position.getCompilationUnit().getMainType().getQualifiedName() + ":" + position.getLine();
     }
 
     protected void initAssertCount() {
@@ -304,7 +242,7 @@ public class StatementsInfo {
         if(branchName.isEmpty()) {
             return 0;
         }
-        Branch branch = globalCoverage.getBranch(branchName);
+        Branch branch = coverageInfo.getBranch(branchName);
         if(branch == null) {
             return 0;
         }
@@ -319,7 +257,7 @@ public class StatementsInfo {
         if(branchName.isEmpty()) {
             return 0;
         }
-        Branch branch = globalCoverage.getBranch(branchName);
+        Branch branch = coverageInfo.getBranch(branchName);
         if(branch == null) {
             return 0;
         }
@@ -333,7 +271,7 @@ public class StatementsInfo {
         if(branchName.isEmpty()) {
             return 0;
         }
-        Branch branch = globalCoverage.getBranch(branchName);
+        Branch branch = coverageInfo.getBranch(branchName);
         if(branch == null) {
             return 0;
         }
@@ -348,7 +286,7 @@ public class StatementsInfo {
         if(branchName.isEmpty()) {
             return 0;
         }
-        Branch branch = globalCoverage.getBranch(branchName);
+        Branch branch = coverageInfo.getBranch(branchName);
         if(branch == null) {
             return 0;
         }
@@ -371,8 +309,8 @@ public class StatementsInfo {
     protected Collection<String> coveredTests(SourcePosition sourcePosition) {
         String branch = smallBranchContaining(sourcePosition);
 
-        if(testsByBranch.containsKey(branch)) {
-            return testsByBranch.get(branch);
+        if(coverageInfo.containsTestForBranch(branch)) {
+            return coverageInfo.getTestForBranch(branch);
         } else {
             return new LinkedList<>();
         }
@@ -439,5 +377,4 @@ public class StatementsInfo {
     public static void main(String args[]) throws InvalidSdkException, Exception {
         new StatementsInfo(args[0]);
     }
-
 }
