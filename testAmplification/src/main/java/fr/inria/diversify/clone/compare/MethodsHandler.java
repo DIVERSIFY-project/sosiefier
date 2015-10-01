@@ -48,7 +48,7 @@ public class MethodsHandler {
         List<Method> objectMethods = new LinkedList<Method>(cache.get(o.getClass()));
         List<Method> randomMethods = new ArrayList<Method>(nbMethod);
         if (objectMethods.isEmpty()) {
-            return null;
+            return new LinkedList<Method>();
         }
         while (randomMethods.size() < nbMethod && !objectMethods.isEmpty()) {
             int randomIndex = random.nextInt(objectMethods.size());
@@ -84,7 +84,7 @@ public class MethodsHandler {
     }
 
     protected boolean isVoid(Class<?> type) {
-        return !type.equals(Void.class) && !type.equals(void.class);
+        return type.equals(Void.class) || type.equals(void.class);
     }
 
 }

@@ -4,20 +4,14 @@ import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.dspot.TestAmplification;
-import fr.inria.diversify.processor.ProcessorUtil;
-import fr.inria.diversify.processor.main.BranchCoverageProcessor;
 import fr.inria.diversify.util.InitUtils;
-import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
 import org.apache.commons.io.FileUtils;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.factory.Factory;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -33,7 +27,7 @@ public class CloneMain {
     protected MavenBuilder builder;
     protected String outputDirectory;
 
-    protected String logger = "fr.inria.diversify.logger.logger";
+//    protected String logger = "fr.inria.diversify.logger.logger";
 
     public CloneMain(String propertiesFile) throws InvalidSdkException, Exception {
         InputConfiguration inputConfiguration = new InputConfiguration(propertiesFile);
@@ -41,7 +35,7 @@ public class CloneMain {
         InitUtils.initDependency(inputConfiguration);
         inputProgram = InitUtils.initInputProgram(inputConfiguration);
 
-        outputDirectory = inputConfiguration.getProperty("tmpDir") + "/tmp" + System.currentTimeMillis();
+        outputDirectory = inputConfiguration.getProperty("tmpDir") + "/tmp_" + System.currentTimeMillis();
     }
 
     protected void generateTest() throws IOException, InterruptedException {
@@ -54,16 +48,17 @@ public class CloneMain {
         for (CtClass cl : getAllTestClasses()) {
             Set<CtMethod> methods = new HashSet<>(cl.getMethods());
             for(CtMethod test : methods) {
-                if(test.getSimpleName().contains("test")) {
-                    try {
-                        builder.builder(test);
-                    } catch (Exception e) {
-                        Log.error("error {}", test.getSignature());
-                    }
+                if(isTestMethod(test)) {
+                    builder.builder(test);
                 }
             }
             LoggerUtils.printJavaFile(output, cl);
         }
+    }
+
+    protected boolean isTestMethod(CtMethod method) {
+        String type = method.getType().getSimpleName();
+        return method.getSimpleName().contains("test") && (type.equals("Void") || type.equals("void")) && method.getParameters().isEmpty();
     }
 
     protected Collection<CtClass> getAllTestClasses() {
@@ -80,8 +75,6 @@ public class CloneMain {
         File dir = new File(outputDirectory);
         dir.mkdirs();
         FileUtils.copyDirectory(new File(inputProgram.getProgramDir()), dir);
-//
-//        addBranchLogger();
 
         InitUtils.initSpoon(inputProgram, true);
         initBuilder();
@@ -93,23 +86,6 @@ public class CloneMain {
 
         builder.setGoals(phases);
         builder.initTimeOut();
-    }
-
-    protected void addBranchLogger() throws IOException {
-        String mainSrc = inputProgram.getRelativeSourceCodeDir();
-
-        Factory factory = InitUtils.initSpoon(inputProgram, false);
-
-        BranchCoverageProcessor m = new BranchCoverageProcessor(inputProgram, outputDirectory ,true);
-        m.setLogger(logger+".Logger");
-        LoggerUtils.applyProcessor(factory, m);
-
-        File fileFrom = new File(inputProgram.getAbsoluteSourceCodeDir());
-        File out = new File(outputDirectory + "/" + mainSrc);
-        LoggerUtils.writeJavaClass(factory, out, fileFrom);
-
-        LoggerUtils.copyLoggerFile(inputProgram, outputDirectory, logger);
-        ProcessorUtil.writeInfoFile(outputDirectory);
     }
 
     public void addCompareFile(String mainSrc, String outputDirectory) throws IOException {
@@ -125,6 +101,4 @@ public class CloneMain {
         CloneMain clone = new CloneMain(args[0]);
         clone.generateTest();
     }
-
-
 }

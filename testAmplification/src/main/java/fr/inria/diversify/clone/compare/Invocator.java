@@ -26,17 +26,10 @@ public class Invocator {
 
             invocation.setResult(result);
 
-        } catch (InterruptedException e1) {
-            e1.printStackTrace();
-            return;
-        } catch (ExecutionException e1) {
-            e1.printStackTrace();
-            return;
-        } catch (TimeoutException e1) {
-            e1.printStackTrace();
+        } catch (Throwable e1) {
+            invocation.setError(e1);
             return;
         }
-
     }
 
     protected <T> T timedCall(Callable<T> c, long timeout, TimeUnit timeUnit)

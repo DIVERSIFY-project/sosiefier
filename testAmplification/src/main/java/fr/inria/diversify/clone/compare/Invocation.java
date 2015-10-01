@@ -12,7 +12,6 @@ public class Invocation {
     protected final Method target;
     protected Object result;
     protected Throwable error;
-    protected boolean timeOutException = false;
 
     public Invocation(Object receiver, Method target) {
         this.receiver = receiver;
@@ -35,15 +34,16 @@ public class Invocation {
         return error;
     }
 
-    public boolean getTimeOutException() {
-        return timeOutException;
-    }
 
     public boolean sameStatus(Invocation other) {
         if(error != null && other.error != null) {
             return error.getClass().equals(other.getError().getClass());
         } else {
-            return timeOutException == other.timeOutException && (error != null) == (other.error != null);
+            return (error != null) == (other.error != null);
         }
+    }
+
+    public String toString() {
+        return receiver + "." + target;
     }
 }
