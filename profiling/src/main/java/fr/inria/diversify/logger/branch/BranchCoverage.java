@@ -8,11 +8,11 @@ import java.util.Set;
  * Date: 12/05/15
  * Time: 15:00
  */
-public class Branch {
+public class BranchCoverage {
     Set<Integer> deeps;
     String id;
 
-    public Branch(String id, int deep) {
+    public BranchCoverage(String id, int deep) {
         this.id = id;
         deeps = new HashSet<>();
         deeps.add(deep);

@@ -15,7 +15,7 @@ public class MethodCoverage {
     final String methodName;
     final Set<String> allBranch;
     Set<List<String>> allPath;
-    Set<Branch> coveredBranchs;
+    Set<BranchCoverage> coveredBranchCoverages;
 
     public MethodCoverage(Integer methodId, String methodName, String[] allBranch) {
         this.methodId = methodId;
@@ -23,7 +23,7 @@ public class MethodCoverage {
         Collections.addAll(this.allBranch, allBranch);
         this.methodName = methodName;
         allPath = new HashSet<>();
-        coveredBranchs = new HashSet<>();
+        coveredBranchCoverages = new HashSet<>();
     }
 
     public MethodCoverage(Integer methodId, String methodName, Set<String> allBranch) {
@@ -31,7 +31,7 @@ public class MethodCoverage {
         this.methodName = methodName;
         this.allBranch = new HashSet<>(allBranch);
         allPath = new HashSet<>();
-        coveredBranchs = new HashSet<>();
+        coveredBranchCoverages = new HashSet<>();
     }
 
     public void addPath(int methodDeep, String[] path) {
@@ -44,16 +44,16 @@ public class MethodCoverage {
         allPath.add(compressPath);
 
         for(String id : compressPath) {
-            Branch existing = null;
-            for(Branch branch : coveredBranchs) {
-                if(branch.getId().equals(id)) {
-                    existing = branch;
+            BranchCoverage existing = null;
+            for(BranchCoverage branchCoverage : coveredBranchCoverages) {
+                if(branchCoverage.getId().equals(id)) {
+                    existing = branchCoverage;
                     break;
                 }
             }
             if(existing == null) {
-                existing = new Branch(id,methodDeep);
-                coveredBranchs.add(existing);
+                existing = new BranchCoverage(id,methodDeep);
+                coveredBranchCoverages.add(existing);
             } else {
                 existing.addDeep(methodDeep);
             }
@@ -61,11 +61,11 @@ public class MethodCoverage {
     }
 
     public double coverage() {
-        return ((double) coveredBranchs.size()) / ((double) allBranch.size());
+        return ((double) coveredBranchCoverages.size()) / ((double) allBranch.size());
     }
 
     public Set<String> getNotCoveredBranchId() {
-        Set<String> coveredBranchId = coveredBranchs.stream()
+        Set<String> coveredBranchId = coveredBranchCoverages.stream()
                 .map(b -> b.getId())
                 .collect(Collectors.toSet());
 
@@ -92,12 +92,12 @@ public class MethodCoverage {
         return allPath;
     }
 
-    public Set<Branch> getCoveredBranchs() {
-        return coveredBranchs;
+    public Set<BranchCoverage> getCoveredBranchCoverages() {
+        return coveredBranchCoverages;
     }
 
     public Set<String> getCoveredBranchId() {
-        return coveredBranchs.stream()
+        return coveredBranchCoverages.stream()
                 .map(b -> b.getId())
                 .collect(Collectors.toSet());
     }
@@ -133,7 +133,7 @@ public class MethodCoverage {
 
     public void merge(MethodCoverage other) {
         this.allPath.addAll(other.allPath);
-        this.coveredBranchs.addAll(other.coveredBranchs);
+        this.coveredBranchCoverages.addAll(other.coveredBranchCoverages);
     }
 
     public Integer getMethodId() {
@@ -144,8 +144,8 @@ public class MethodCoverage {
         return methodName.split("_")[0];
     }
 
-    public Branch getBranch(String branchId) {
-        return coveredBranchs.stream()
+    public BranchCoverage getBranch(String branchId) {
+        return coveredBranchCoverages.stream()
                 .filter(branch -> branch.getId().equals(branchId))
                 .findFirst()
                 .orElse(null);

@@ -109,8 +109,8 @@ public class BranchComparator implements Comparator {
 
         for(TestCoverage tc : testCoverage) {
             for(MethodCoverage mth : tc.getCoverage().getMethodCoverages()) {
-                for(Branch branch : mth.getCoveredBranchs()) {
-                    String key = mth.getMethodId() + "." + branch.getId();
+                for(BranchCoverage branchCoverage : mth.getCoveredBranchCoverages()) {
+                    String key = mth.getMethodId() + "." + branchCoverage.getId();
                     if (!testsByBranch.containsKey(key)) {
                         testsByBranch.put(key, new HashSet<>());
                     }

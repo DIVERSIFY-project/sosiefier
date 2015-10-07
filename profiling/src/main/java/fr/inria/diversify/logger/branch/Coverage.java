@@ -32,7 +32,7 @@ public class Coverage {
 
         for(MethodCoverage mc : methodCoverages) {
             allBranch += mc.getAllBranchId().size();
-            branch += mc.getCoveredBranchs().size();
+            branch += mc.getCoveredBranchCoverages().size();
         }
 
         return branch/allBranch;
@@ -45,7 +45,7 @@ public class Coverage {
         for(MethodCoverage mc : methodCoverages) {
             if (classes.stream().anyMatch(cl -> mc.getMethodName().startsWith(cl+"_"))) {
                 allBranch += mc.getAllBranchId().size();
-                branch += mc.getCoveredBranchs().size();
+                branch += mc.getCoveredBranchCoverages().size();
 
                 if(!mc.getNotCoveredBranchId().isEmpty()) {
                     Log.debug("{} {} {}", mc.getMethodId(), mc.getMethodName(), mc.getNotCoveredBranchId());
@@ -106,8 +106,8 @@ public class Coverage {
     public Set<String> getCoverageBranch() {
         Set<String> set = new HashSet<>();
         for(MethodCoverage mc : methodCoverages) {
-            for(Branch branch : mc.coveredBranchs) {
-                set.add(mc.getMethodName()+ "." +branch.getId());
+            for(BranchCoverage branchCoverage : mc.coveredBranchCoverages) {
+                set.add(mc.getMethodName()+ "." + branchCoverage.getId());
             }
         }
         return set;
@@ -118,8 +118,8 @@ public class Coverage {
         Set<String> set = new HashSet<>();
         for(MethodCoverage mc : methodCoverages) {
             if (classes.stream().anyMatch(cl -> mc.getMethodName().startsWith(cl +"_"))) {
-                for (Branch branch : mc.coveredBranchs) {
-                    set.add(mc.getMethodName() + "." + branch.getId());
+                for (BranchCoverage branchCoverage : mc.coveredBranchCoverages) {
+                    set.add(mc.getMethodName() + "." + branchCoverage.getId());
                 }
             }
         }
@@ -164,9 +164,9 @@ public class Coverage {
         fileWriter.append("class;method;branch;branchGlobalId;deep;nbOfPath;transformation;sosie;compile;branchConditionType\n");
 
         for (MethodCoverage mc : methodCoverages) {
-            for (Branch branch : mc.getCoveredBranchs()) {
-                for (int deep : branch.deeps) {
-                    String branchId = mc.getMethodId() + "." + branch.getId();
+            for (BranchCoverage branchCoverage : mc.getCoveredBranchCoverages()) {
+                for (int deep : branchCoverage.deeps) {
+                    String branchId = mc.getMethodId() + "." + branchCoverage.getId();
                     Set<Transformation> trans = transformationForThisBranch(branchId, transformations , positions);
                     long sosie = trans.stream()
                             .filter(t -> t.isSosie())
@@ -175,8 +175,8 @@ public class Coverage {
                             .filter(t -> t.getStatus() >= -1)
                             .count();
                     fileWriter.append(mc.getDeclaringClass() + ";"
-                            + mc.getMethodName() + ";" + branch.getId() + ";"
-                            + mc.getMethodName() + "." + branch.getId() + ";"
+                            + mc.getMethodName() + ";" + branchCoverage.getId() + ";"
+                            + mc.getMethodName() + "." + branchCoverage.getId() + ";"
                             + deep + ";"
                             + mc.getAllPath().size()
                             + trans.size()  + ";"
@@ -212,7 +212,7 @@ public class Coverage {
         return methodCoverages;
     }
 
-    public Branch getBranch(String branch) {
+    public BranchCoverage getBranch(String branch) {
         String[] split = branch.split("\\.");
 
         Integer methodId = Integer.parseInt(split[0]);

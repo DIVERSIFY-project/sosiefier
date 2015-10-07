@@ -50,9 +50,9 @@ public class TestCoverage {
     public void csv(PrintWriter fileWriter, Collection<Transformation> transformations, Map<String, SourcePosition> positions, Map<String, String> conditionsType) throws IOException {
 
         for (MethodCoverage mc : coverage.getMethodCoverages()) {
-            for (Branch branch : mc.getCoveredBranchs()) {
-                for (int deep : branch.deeps) {
-                    String branchId = mc.getMethodId() + "." + branch.getId();
+            for (BranchCoverage branchCoverage : mc.getCoveredBranchCoverages()) {
+                for (int deep : branchCoverage.deeps) {
+                    String branchId = mc.getMethodId() + "." + branchCoverage.getId();
                     Set<Transformation> trans = transformationForThisBranch(branchId, transformations , positions);
                     long sosie = trans.stream()
                             .filter(t -> t.isSosie())
@@ -62,8 +62,8 @@ public class TestCoverage {
                             .count();
                     fileWriter.append(testName + ";"
                             + mc.getDeclaringClass() + ";"
-                            + mc.getMethodName() + ";" + branch.getId() + ";"
-                            + mc.getMethodName() + "." + branch.getId() + ";"
+                            + mc.getMethodName() + ";" + branchCoverage.getId() + ";"
+                            + mc.getMethodName() + "." + branchCoverage.getId() + ";"
                             + deep + ";"
                             + trans.size()  + ";"
                             + sosie  + ";"
@@ -99,8 +99,8 @@ public class TestCoverage {
         Set<String> branchs = new HashSet<>();
 
         for (MethodCoverage mc : coverage.getMethodCoverages()) {
-            for (Branch branch : mc.getCoveredBranchs()) {
-                branchs.add(mc.getMethodId() + "." + branch.getId());
+            for (BranchCoverage branchCoverage : mc.getCoveredBranchCoverages()) {
+                branchs.add(mc.getMethodId() + "." + branchCoverage.getId());
             }
         }
         return branchs;

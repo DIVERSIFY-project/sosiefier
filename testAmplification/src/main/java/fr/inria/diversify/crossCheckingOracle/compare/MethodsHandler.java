@@ -1,4 +1,4 @@
-package fr.inria.diversify.clone.compare;
+package fr.inria.diversify.crossCheckingOracle.compare;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;

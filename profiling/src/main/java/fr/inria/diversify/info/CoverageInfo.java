@@ -31,7 +31,6 @@ public class CoverageInfo {
 
     public void init(String tmpDir) throws Exception {
         Log.debug("init BranchComparator");
-//        String tmpDir = inputConfiguration.getProperty("tmpDir") + "/tmp_" + System.currentTimeMillis();
         copyDir(inputProgram.getProgramDir(), tmpDir);
         instru(tmpDir);
         MavenBuilder builder = new MavenBuilder(tmpDir);
@@ -46,7 +45,7 @@ public class CoverageInfo {
         return globalCoverage;
     }
 
-    public Branch getBranch(String branch) {
+    public BranchCoverage getBranch(String branch) {
         return getGlobalCoverage().getBranch(branch);
     }
 
@@ -75,8 +74,6 @@ public class CoverageInfo {
     protected void intBranch() {
         BranchPositionProcessor processor = new BranchPositionProcessor(inputProgram);
         LoggerUtils.applyProcessor(inputProgram.getFactory(), processor);
-
-//        branchPosition = processor.getBranchPosition();
     }
 
     protected List<TestCoverage> loadTestCoverage(String logDir) throws IOException {
@@ -109,8 +106,8 @@ public class CoverageInfo {
 
         for(TestCoverage tc : testCoverage) {
             for(MethodCoverage mth : tc.getCoverage().getMethodCoverages()) {
-                for(Branch branch : mth.getCoveredBranchs()) {
-                    String key = mth.getMethodId() + "." + branch.getId();
+                for(BranchCoverage branchCoverage : mth.getCoveredBranchCoverages()) {
+                    String key = mth.getMethodId() + "." + branchCoverage.getId();
                     if (!testsByBranch.containsKey(key)) {
                         testsByBranch.put(key, new HashSet<>());
                     }

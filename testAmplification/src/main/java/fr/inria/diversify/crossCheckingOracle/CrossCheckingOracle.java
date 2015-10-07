@@ -1,10 +1,6 @@
-package fr.inria.diversify.clone;
+package fr.inria.diversify.crossCheckingOracle;
 
-import fr.inria.diversify.buildSystem.android.InvalidSdkException;
-import fr.inria.diversify.buildSystem.maven.MavenBuilder;
-import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.LoggerUtils;
 import org.apache.commons.io.FileUtils;
 import spoon.reflect.declaration.CtClass;
@@ -22,25 +18,19 @@ import java.util.stream.Collectors;
  * Date: 24/09/15
  * Time: 10:30
  */
-public class CloneMain {
+public class CrossCheckingOracle {
     protected InputProgram inputProgram;
-    protected MavenBuilder builder;
     protected String outputDirectory;
 
-//    protected String logger = "fr.inria.diversify.logger.logger";
 
-    public CloneMain(String propertiesFile) throws InvalidSdkException, Exception {
-        InputConfiguration inputConfiguration = new InputConfiguration(propertiesFile);
-        InitUtils.initLogLevel(inputConfiguration);
-        InitUtils.initDependency(inputConfiguration);
-        inputProgram = InitUtils.initInputProgram(inputConfiguration);
-
-        outputDirectory = inputConfiguration.getProperty("tmpDir") + "/tmp_" + System.currentTimeMillis();
+    public CrossCheckingOracle(InputProgram inputProgram, String outputDirectory) {
+        this.inputProgram = inputProgram;
+        this.outputDirectory = outputDirectory;
     }
 
-    protected void generateTest() throws IOException, InterruptedException {
+    public String generateTest() throws IOException {
         init();
-        CloneTestBuilder builder = new CloneTestBuilder();
+        CrossCheckingOracleBuilder builder = new CrossCheckingOracleBuilder();
 
         addCompareFile(inputProgram.getRelativeTestSourceCodeDir(), outputDirectory);
         File output = new File(outputDirectory + "/" + inputProgram.getRelativeTestSourceCodeDir());
@@ -54,6 +44,8 @@ public class CloneMain {
             }
             LoggerUtils.printJavaFile(output, cl);
         }
+
+        return outputDirectory;
     }
 
     protected boolean isTestMethod(CtMethod method) {
@@ -71,34 +63,17 @@ public class CloneMain {
                 .collect(Collectors.toSet());
     }
 
-    protected void init() throws IOException, InterruptedException {
+    protected void init() throws IOException {
         File dir = new File(outputDirectory);
         dir.mkdirs();
         FileUtils.copyDirectory(new File(inputProgram.getProgramDir()), dir);
-
-        InitUtils.initSpoon(inputProgram, true);
-        initBuilder();
-    }
-
-    protected void initBuilder() throws InterruptedException, IOException {
-        String[] phases  = new String[]{"clean", "test"};
-        builder = new MavenBuilder(outputDirectory);
-
-        builder.setGoals(phases);
-        builder.initTimeOut();
     }
 
     public void addCompareFile(String mainSrc, String outputDirectory) throws IOException {
-        File srcDir = new File(System.getProperty("user.dir") + "/testAmplification/src/main/java/fr/inria/diversify/clone/compare/");
+        File srcDir = new File(System.getProperty("user.dir") + "/testAmplification/src/main/java/fr/inria/diversify/crossCheckingOracle/compare/");
 
-        File destDir = new File(outputDirectory + "/" + mainSrc + "/fr/inria/diversify/clone/compare/");
+        File destDir = new File(outputDirectory + "/" + mainSrc + "/fr/inria/diversify/crossCheckingOracle/compare/");
         FileUtils.forceMkdir(destDir);
-
         FileUtils.copyDirectory(srcDir, destDir);
-    }
-
-    public static void main(String[] args) throws Exception, InvalidSdkException {
-        CloneMain clone = new CloneMain(args[0]);
-        clone.generateTest();
     }
 }

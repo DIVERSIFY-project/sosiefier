@@ -21,7 +21,6 @@ import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.InitUtils;
-import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
@@ -242,11 +241,11 @@ public class StatementsInfo {
         if(branchName.isEmpty()) {
             return 0;
         }
-        Branch branch = coverageInfo.getBranch(branchName);
-        if(branch == null) {
+        BranchCoverage branchCoverage = coverageInfo.getBranch(branchName);
+        if(branchCoverage == null) {
             return 0;
         }
-        return branch.getDeeps().stream()
+        return branchCoverage.getDeeps().stream()
                 .mapToInt(i -> i)
                 .max()
                 .orElse(0);
@@ -257,13 +256,13 @@ public class StatementsInfo {
         if(branchName.isEmpty()) {
             return 0;
         }
-        Branch branch = coverageInfo.getBranch(branchName);
-        if(branch == null) {
+        BranchCoverage branchCoverage = coverageInfo.getBranch(branchName);
+        if(branchCoverage == null) {
             return 0;
         }
-        return branch.getDeeps().stream()
+        return branchCoverage.getDeeps().stream()
                 .mapToDouble(i -> i)
-                .sum() / branch.getDeeps().size();
+                .sum() / branchCoverage.getDeeps().size();
     }
 
     protected double deepMin(SourcePosition sourcePosition) {
@@ -271,11 +270,11 @@ public class StatementsInfo {
         if(branchName.isEmpty()) {
             return 0;
         }
-        Branch branch = coverageInfo.getBranch(branchName);
-        if(branch == null) {
+        BranchCoverage branchCoverage = coverageInfo.getBranch(branchName);
+        if(branchCoverage == null) {
             return 0;
         }
-        return branch.getDeeps().stream()
+        return branchCoverage.getDeeps().stream()
                 .mapToInt(i -> i)
                 .min()
                 .orElse(0);
@@ -286,11 +285,11 @@ public class StatementsInfo {
         if(branchName.isEmpty()) {
             return 0;
         }
-        Branch branch = coverageInfo.getBranch(branchName);
-        if(branch == null) {
+        BranchCoverage branchCoverage = coverageInfo.getBranch(branchName);
+        if(branchCoverage == null) {
             return 0;
         }
-        List<Integer> sorted = branch.getDeeps().stream()
+        List<Integer> sorted = branchCoverage.getDeeps().stream()
                 .mapToInt(i -> i)
                 .sorted()
                 .boxed()
@@ -371,7 +370,6 @@ public class StatementsInfo {
         return oThis.getCompilationUnit().getMainType().getQualifiedName().equals(oOther.getCompilationUnit().getMainType().getQualifiedName())
                 && oThis.getLine() <= oOther.getLine()
                 && oThis.getEndLine() >= oOther.getEndLine();
-
     }
 
     public static void main(String args[]) throws InvalidSdkException, Exception {

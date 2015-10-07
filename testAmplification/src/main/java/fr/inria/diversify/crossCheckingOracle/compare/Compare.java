@@ -1,4 +1,4 @@
-package fr.inria.diversify.clone.compare;
+package fr.inria.diversify.crossCheckingOracle.compare;
 
 
 //import com.rits.cloning.Cloner;
@@ -85,7 +85,7 @@ public class Compare {
         if(isCollection(o1) && isCollection(o2)) {
             int count = 0;
             boolean success = false;
-            while(count < 5 && !success) {
+            while(count < 8 && !success) {
                 success = compareNotNullCollection((Collection<?>) o1, (Collection<?>) o2, nbCompare);
                 count++;
             }

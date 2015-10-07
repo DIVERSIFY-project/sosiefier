@@ -1,4 +1,4 @@
-package fr.inria.diversify.clone;
+package fr.inria.diversify.crossCheckingOracle;
 
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * User: Simon
  * Date: 22/09/15
  */
-public class CloneTestBuilder {
+public class CrossCheckingOracleBuilder {
 
     public CtMethod builder(CtMethod originalTest) {
         Factory factory = originalTest.getFactory();
@@ -36,6 +36,7 @@ public class CloneTestBuilder {
         CtMethod runMethod = buildRunMethod(originalTest, thrownTypes, localVar);
 
         CtBlock<Object> body = factory.Core().createBlock();
+        switchToSosie(body, false);
         addLocalListDeclaration(body, "objects1");
         addLocalListDeclaration(body, "objects2");
 
@@ -51,18 +52,20 @@ public class CloneTestBuilder {
         addSetUpStatement(originalTest, body);
 
         addLocalListDeclaration(body, "objects3");
+        addLocalListDeclaration(body, "objects4");
+
         body.addStatement(factory.Code().createCodeSnippetStatement(runMethod.getSimpleName() + "(objects3)"));
 
         addTeardownStatement(originalTest, body);
         addSetUpStatement(originalTest, body);
 
-        addLocalListDeclaration(body, "objects4");
+        switchToSosie(body, true);
+
         body.addStatement(factory.Code().createCodeSnippetStatement(runMethod.getSimpleName() + "(objects4)"));
 
         addCompare(body, "objects3", "objects4", "filter");
 
-
-            CtMethod cloneMethod = factory.Method().create(declaringClass,
+        CtMethod cloneMethod = factory.Method().create(declaringClass,
                     originalTest.getModifiers(),
                     originalTest.getType(),
                     originalTest.getSimpleName() + "_clone",
@@ -160,13 +163,13 @@ public class CloneTestBuilder {
     protected void addFilter(CtBlock<Object> body, String originalsObjects, String sosiesObjects, String filterName) {
         Factory factory = body.getFactory();
         CtCodeSnippetStatement stmt = factory.Code().createCodeSnippetStatement("java.util.List<Boolean> " + filterName
-                + " = fr.inria.diversify.clone.compare.Compare.getSingleton().buildFilter(" + originalsObjects + "," + sosiesObjects + ")");
+                + " = fr.inria.diversify.crossCheckingOracle.compare.Compare.getSingleton().buildFilter(" + originalsObjects + "," + sosiesObjects + ")");
         body.addStatement(stmt);
     }
 
     protected void addCompare(CtBlock<Object> body, String originalsObjects, String sosiesObjects, String filter) {
         Factory factory = body.getFactory();
-        CtCodeSnippetStatement stmt = factory.Code().createCodeSnippetStatement("org.junit.Assert.assertTrue(fr.inria.diversify.clone.compare.Compare.getSingleton().compare("
+        CtCodeSnippetStatement stmt = factory.Code().createCodeSnippetStatement("org.junit.Assert.assertTrue(fr.inria.diversify.crossCheckingOracle.compare.Compare.getSingleton().compare("
                 + originalsObjects + "," + sosiesObjects + ", "+ filter + "))");
         body.addStatement(stmt);
     }
@@ -189,14 +192,15 @@ public class CloneTestBuilder {
         }
     }
 
-    protected CtStatement switchToSosie() {
-        return null;
+    protected void switchToSosie(CtBlock<Object> body, boolean sosie) {
+        Factory factory = body.getFactory();
+        body.addStatement(factory.Code().createCodeSnippetStatement("fr.inria.diversify.switchsosie.Switch.switchTransformation = " + sosie));
     }
 
     protected void addSetUpStatement(CtMethod mth, CtBlock body) {
         if(!mth.getModifiers().contains(ModifierKind.STATIC)) {
             CtCodeSnippetStatement stmt =
-                    mth.getFactory().Code().createCodeSnippetStatement("fr.inria.diversify.clone.compare.TestUtils.runTearDown(this)");
+                    mth.getFactory().Code().createCodeSnippetStatement("fr.inria.diversify.crossCheckingOracle.compare.TestUtils.runTearDown(this)");
             body.addStatement(stmt);
         }
     }
@@ -209,7 +213,7 @@ public class CloneTestBuilder {
 //        }
         if(!mth.getModifiers().contains(ModifierKind.STATIC)) {
             CtCodeSnippetStatement stmt =
-                    mth.getFactory().Code().createCodeSnippetStatement("fr.inria.diversify.clone.compare.TestUtils.runSetUp(this)");
+                    mth.getFactory().Code().createCodeSnippetStatement("fr.inria.diversify.crossCheckingOracle.compare.TestUtils.runSetUp(this)");
             body.addStatement(stmt);
         }
     }

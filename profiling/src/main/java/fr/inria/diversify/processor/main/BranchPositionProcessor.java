@@ -34,7 +34,8 @@ public class BranchPositionProcessor extends AbstractLoggingInstrumenter<CtExecu
 
     @Override
     public boolean isToBeProcessed(CtExecutable method) {
-        return method.getBody() != null;
+        return method.getBody() != null
+                && method.getPosition() != null;
     }
 
     @Override
@@ -76,7 +77,7 @@ public class BranchPositionProcessor extends AbstractLoggingInstrumenter<CtExecu
         for(Object object : Query.getElements(method, new TypeFilter(CtCatch.class))) {
             CtCatch ctCatch = (CtCatch) object;
             int branchId = idBranch(methodId);
-            addBranch(methodId, methodId+".c" + branchId, ctCatch.getBody());
+            addBranch(methodId, "c" + branchId, ctCatch.getBody());
         }
     }
 
