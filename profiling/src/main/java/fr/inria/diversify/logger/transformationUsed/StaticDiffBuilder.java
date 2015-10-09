@@ -1,6 +1,11 @@
 package fr.inria.diversify.logger.transformationUsed;
 
 
+import fr.inria.diversify.buildSystem.AbstractBuilder;
+import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.logger.*;
+import fr.inria.diversify.logger.Comparator;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import spoon.reflect.code.*;
@@ -9,10 +14,7 @@ import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -20,74 +22,90 @@ import java.util.stream.Collectors;
  * Date: 08/09/15
  * Time: 11:20
  */
-public class StaticDiffBuilder {
-    protected Map<String, SourcePosition> branchPosition;
-    protected Map<String, Set<String>> testsByBranch;
+public class StaticDiffBuilder implements Comparator {
+//    protected Map<String, SourcePosition> branchPosition;
+//    protected Map<String, Set<String>> testsByBranch;
 
-    public StaticDiffBuilder(Map<String, SourcePosition> branchPosition, Map<String, Set<String>> testsByBranch) {
-        this.branchPosition = branchPosition;
-        this.testsByBranch = testsByBranch;
-    }
+//    public StaticDiffBuilder(Map<String, SourcePosition> branchPosition, Map<String, Set<String>> testsByBranch) {
+//        this.branchPosition = branchPosition;
+//        this.testsByBranch = testsByBranch;
+//    }
 
     public StaticDiff buildDiff(ASTTransformation transformation, Map<String, Set<String>> branchesUsedByTest) {
-        return new StaticDiff(branchDiff(transformation, branchesUsedByTest),
-                methodDiff(transformation, branchesUsedByTest));
+        Set<String> branchesUsed = branchesUsedByTest.values().stream()
+                .flatMap(branches -> branches.stream())
+                .collect(Collectors.toSet());
+
+        return new StaticDiff(branchDiff(transformation, branchesUsed),
+                methodDiff(transformation, branchesUsed));
     }
 
 
-    public Map<String, Set<String>> methodDiff(ASTTransformation transformation, Map<String, Set<String>> branchesUsedByTest) {
+    public Map<String, Set<String>> methodDiff(ASTTransformation transformation, Set<String> branchesUsed) {
         Map<String, Set<String>> methodDiffs = new HashMap<>();
-        Map<String, CtStatement> add = getAddBranches(transformation);
-        Map<String, CtStatement> delete = getDeleteBranches(transformation);
+        Map<String, Set<String>> add = getAddMethodCall(transformation);
+        Map<String,Set<String>> delete = getDeleteMethodCall(transformation);
+        Set<String> newAddExecuted = new HashSet<>();
 
-//        Query.getElements(transformation.getTransplantationPoint().getCtCodeFragment(), new TypeFilter(CtInvocation.class));
-
-        for(String test : branchesUsedByTest.keySet()) {
-            for(String branch : branchesUsedByTest.get(test)) {
-                if(add.containsKey(branch)) {
-                    if(!methodDiffs.containsKey(test)) {
-                        methodDiffs.put(test, new HashSet<>());
-                    }
-                    methodDiffs.get(test).add(branch);
-                }
+        for(String branchFullName : branchesUsed) {
+            String branch = branchFullName.split("\\.")[1];
+            if(add.containsKey(branch)) {
+                newAddExecuted.addAll(add.get(branch));
                 if(delete.containsKey(branch)) {
-                    if(!methodDiffs.containsKey(test)) {
-                        methodDiffs.put(test, new HashSet<>());
+                    add.get(branch).remove(delete.get(branch));
+                }
+                if(!add.get(branch).isEmpty()) {
+                    if (!methodDiffs.containsKey("add")) {
+                        methodDiffs.put("add", new HashSet<>());
                     }
-                    methodDiffs.get(test).add(branch);
+                    methodDiffs.get("add").addAll(add.get(branch));
                 }
             }
+        }
+
+        for(String branch : delete.keySet()) {
+           delete.get(branch).removeAll(newAddExecuted);
+           if(!delete.get(branch).isEmpty()) {
+               if(!methodDiffs.containsKey("delete")) {
+                   methodDiffs.put("delete", new HashSet<>());
+               }
+               methodDiffs.get("delete").addAll(delete.get(branch));
+           }
         }
         return methodDiffs;
     }
 
-    public Map<String, Set<String>> branchDiff(ASTTransformation transformation, Map<String, Set<String>> branchesUsedByTest) {
+    public Map<String, Set<String>> branchDiff(ASTTransformation transformation, Set<String> branchesUsed) {
         Map<String, Set<String>> branchesDiff = new HashMap<>();
         Map<String, CtStatement> add = getAddBranches(transformation);
         add.remove("b");
         Map<String, CtStatement> delete = getDeleteBranches(transformation);
         delete.remove("b");
+        Set<String> newBranchUsed = new HashSet<>();
 
         if(add.isEmpty() && delete.isEmpty()) {
             return branchesDiff;
         }
 
-        for(String test : branchesUsedByTest.keySet()) {
-            for(String branch : branchesUsedByTest.get(test)) {
-                if(add.containsKey(branch)) {
-                    if(!branchesDiff.containsKey(test)) {
-                        branchesDiff.put(test, new HashSet<>());
-                    }
-                    branchesDiff.get(test).add(branch);
+        for(String branchFullName : branchesUsed) {
+            String branch = branchFullName.split("\\.")[1];
+            if(add.containsKey(branch) && !delete.containsKey(branch)) {
+                if(!branchesDiff.containsKey("add") ) {
+                    branchesDiff.put("add", new HashSet<>());
                 }
-                if(delete.containsKey(branch)) {
-                    if(!branchesDiff.containsKey(test)) {
-                        branchesDiff.put(test, new HashSet<>());
-                    }
-                    branchesDiff.get(test).add(branch);
-                }
+                newBranchUsed.add(branch);
+                branchesDiff.get("add").add(branch);
             }
         }
+        for(String branch : delete.keySet()) {
+            if(!newBranchUsed.contains(branch)) {
+                if(!branchesDiff.containsKey("delete") ) {
+                    branchesDiff.put("delete", new HashSet<>());
+                }
+                branchesDiff.get("delete").add(branch);
+            }
+        }
+
         return branchesDiff;
     }
 
@@ -123,18 +141,28 @@ public class StaticDiffBuilder {
         return new HashMap<>();
     }
 
-    protected Set<CtInvocation> getAddMethodCall(ASTTransformation transformation) {
+    protected Map<String, Set<String>> getAddMethodCall(ASTTransformation transformation) {
         Map<String, CtStatement> branches = getAddBranches(transformation);
-        return (Set<CtInvocation>) branches.values().stream()
-                .flatMap(stmt ->  Query.getElements(stmt, new TypeFilter(CtInvocation.class)).stream())
-                .collect(Collectors.toSet());
+        Map<String, Set<String>> methodsByBranch = new HashMap<>();
+        for(String key : branches.keySet()) {
+            methodsByBranch.put(key,
+                    (Set<String>) Query.getElements(branches.get(key), new TypeFilter(CtInvocation.class)).stream()
+                            .map(invocation -> ((CtInvocation) invocation).getExecutable().toString())
+                            .collect(Collectors.toSet()));
+        }
+        return methodsByBranch;
     }
 
-    protected Set<CtInvocation> getDeleteMethodCall(ASTTransformation transformation) {
+    protected Map<String, Set<String>> getDeleteMethodCall(ASTTransformation transformation) {
         Map<String, CtStatement> branches = getDeleteBranches(transformation);
-        return (Set<CtInvocation>) branches.values().stream()
-                .flatMap(stmt ->  Query.getElements(stmt, new TypeFilter(CtInvocation.class)).stream())
-                .collect(Collectors.toSet());
+        Map<String, Set<String>> methodsByBranch = new HashMap<>();
+        for(String key : branches.keySet()) {
+            methodsByBranch.put(key,
+                    (Set<String>) Query.getElements(branches.get(key), new TypeFilter(CtInvocation.class)).stream()
+                            .map(invocation -> ((CtInvocation) invocation).getExecutable().toString())
+                            .collect(Collectors.toSet()));
+        }
+        return methodsByBranch;
     }
 
     protected Map<String, CtStatement> getBranches(CtElement stmt) {
@@ -143,7 +171,7 @@ public class StaticDiffBuilder {
         int count = 0;
         for(Object object : Query.getElements(stmt, new TypeFilter(CtIf.class))) {
             CtIf ctIf = (CtIf) object;
-            branches.put("t" + count, ctIf.getElseStatement());
+            branches.put("t" + count, ctIf.getThenStatement());
             count++;
             if (ctIf.getElseStatement() != null) {
                 branches.put("e" + count, ctIf.getElseStatement());
@@ -170,4 +198,27 @@ public class StaticDiffBuilder {
         return branches;
     }
 
+    @Override
+    public void init(InputProgram originalInputProgram, AbstractBuilder originalBuilder) throws Exception {
+
+    }
+
+    @Override
+    public Diff compare(SingleTransformation transformation, String originalLogDir, String sosieLogDir) throws Exception {
+        if(transformation == null) {
+            return getEmptyDiff();
+        }
+        TransformationUsedReader tu = new TransformationUsedReader(sosieLogDir);
+        return buildDiff((ASTTransformation) transformation, tu.load());
+    }
+
+    @Override
+    public Collection<String> selectTest(SourcePosition position) {
+        return new ArrayList<>();
+    }
+
+    @Override
+    public Diff getEmptyDiff() {
+        return new StaticDiff();
+    }
 }

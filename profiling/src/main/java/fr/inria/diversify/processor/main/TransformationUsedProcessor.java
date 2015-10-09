@@ -44,7 +44,6 @@ public class TransformationUsedProcessor extends AbstractLoggingInstrumenter<CtS
         int count = 0;
         for(Object object : Query.getElements(stmtTrans, new TypeFilter(CtIf.class))) {
             CtIf ctIf = (CtIf) object;
-//            int branchId = idBranch(methodId);
             CtStatement stmt = ctIf.getThenStatement();
             if (!(stmt instanceof CtBlock)) {
                 CtBlock block = getFactory().Core().createBlock();
@@ -99,7 +98,7 @@ public class TransformationUsedProcessor extends AbstractLoggingInstrumenter<CtS
         }
 
         if(count == 0) {
-            stmtTrans.insertBefore(getFactory().Code().createCodeSnippetStatement(getLogger() + ".logTransformation(Thread.currentThread(),\"b\");"));
+            stmtTrans.insertBefore(getFactory().Code().createCodeSnippetStatement(getLogger() + ".logTransformation(Thread.currentThread(),\"b\")"));
         }
     }
 
@@ -107,12 +106,4 @@ public class TransformationUsedProcessor extends AbstractLoggingInstrumenter<CtS
         CtCodeSnippetStatement snippet = getFactory().Code().createCodeSnippetStatement(getLogger() + ".logTransformation(Thread.currentThread(),\""+branchId+"\")");
         ((CtBlock) ctBlock).insertBegin(snippet);
     }
-
-//    protected int idBranch(int methodId) {
-//        if(!blockIds.containsKey(methodId)) {
-//            blockIds.put(methodId, 0);
-//        }
-//        blockIds.put(methodId, blockIds.get(methodId) + 1);
-//        return blockIds.get(methodId);
-//    }
 }

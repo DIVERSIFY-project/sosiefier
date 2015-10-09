@@ -15,6 +15,7 @@ import java.util.*;
  * Time: 10:51
  */
 public class TransformationUsedReader {
+    protected Map<Integer, String> methodDeep;
     protected Map<String, Set<String>> branchesUsedByTest;
     String directory;
 
@@ -38,7 +39,7 @@ public class TransformationUsedReader {
     protected void parseFile(File file) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(file));
         String currentTest = null;
-
+        methodDeep = new HashMap<>();
 
         String line = br.readLine();
         String logEntry = "";
@@ -55,6 +56,10 @@ public class TransformationUsedReader {
                     case KeyWord.testEndObservation:
                         currentTest = null;
                         break;
+                    case KeyWord.methodCallObservation:
+                        addMethodCall(logEntry);
+                       // methodsCall.add(logEntry);
+                        break;
                     case KeyWord.logTransformation:
                         addBranch(currentTest, logEntry);
                         break;
@@ -67,11 +72,18 @@ public class TransformationUsedReader {
 
     }
 
+    protected void addMethodCall(String logEntry) {
+        String[] tmp = logEntry.split(";");
+        Integer deep = Integer.parseInt(tmp[1]);
+        methodDeep.put(deep, tmp[2]);
+    }
+
     protected void addBranch(String currentTest, String logEntry) {
         if(!branchesUsedByTest.containsKey(currentTest)) {
             branchesUsedByTest.put(currentTest, new HashSet<>());
         }
         String[] tmp = logEntry.split(";");
-        branchesUsedByTest.get(currentTest).add(tmp[2]);
+        Integer deep = Integer.parseInt(tmp[1]);
+        branchesUsedByTest.get(currentTest).add(methodDeep.get(deep) + "." + tmp[2]);
     }
 }

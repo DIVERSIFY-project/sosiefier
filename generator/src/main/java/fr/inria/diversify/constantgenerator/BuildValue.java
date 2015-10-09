@@ -1,4 +1,4 @@
-package fr.inria.diversify.constantgenertor;
+package fr.inria.diversify.constantgenerator;
 
 import org.apache.commons.math3.primes.Primes;
 

@@ -101,5 +101,4 @@ public class Compare extends SinglePointDiversify {
         writer.write(transformations, fileName + ".json", inputConfiguration.getInputProgram().getProgramDir() + "/pom.xml");
         return fileName + ".json";
     }
-
 }

@@ -1,4 +1,4 @@
-package fr.inria.diversify.constantgenertor;
+package fr.inria.diversify.constantgenerator;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

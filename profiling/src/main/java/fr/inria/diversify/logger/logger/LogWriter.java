@@ -356,7 +356,6 @@ public class LogWriter {
     public void logTransformation(String id) {
         if (!isObserve) {
             try {
-                System.out.println("log transformation: "+id);
                 PrintWriter fileWriter = getFileWriter();
                 fileWriter.append(KeyWord.endLine);
                 fileWriter.append(KeyWord.logTransformation);

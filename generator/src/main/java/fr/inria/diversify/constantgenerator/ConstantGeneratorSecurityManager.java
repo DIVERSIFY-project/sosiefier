@@ -1,4 +1,4 @@
-package fr.inria.diversify.constantgenertor;
+package fr.inria.diversify.constantgenerator;
 
 import sun.reflect.CallerSensitive;
 import sun.security.util.SecurityConstants;

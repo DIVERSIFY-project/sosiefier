@@ -6,9 +6,12 @@ import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.logger.Comparator;
 import fr.inria.diversify.logger.Diff;
+import fr.inria.diversify.logger.transformationUsed.StaticDiff;
+import fr.inria.diversify.logger.transformationUsed.StaticDiffBuilder;
 import fr.inria.diversify.logger.transformationUsed.TransformationUsedReader;
 import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 import spoon.reflect.cu.SourcePosition;
@@ -116,10 +119,7 @@ public class SosieComparator {
                 diffs.add(diff);
             }
         }
-        TransformationUsedReader tu = new TransformationUsedReader(tmpSosieDir + "/log");
-        if (!tu.load().isEmpty()) {
-            trans.setStatus(Transformation.EXE);
-        }
+
         return diffs;
     }
 

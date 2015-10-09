@@ -151,12 +151,6 @@ public class BranchComparator implements Comparator {
         return result;
     }
 
-    protected boolean branchContainsIn(SingleTransformation trans, Set<String> branches) {
-        return branches.stream()
-                .filter(branch -> !(branch.contains(trans.classLocationName()) && branch.contains(trans.methodLocationName())))
-                .count() == 0;
-    }
-
     public Collection<String> selectTest(SourcePosition sourcePosition) {
         return branchPosition.keySet().stream()
                 .filter(branch -> include(branchPosition.get(branch),sourcePosition))
@@ -177,32 +171,4 @@ public class BranchComparator implements Comparator {
                 && oThis.getEndLine() >= oOther.getEndLine();
 
     }
-
-
-//    public String branchFor(CtElement element) {
-//        String info = "";
-//        int branchId = 0;
-//        for(Object object : Query.getElements(element, new TypeFilter(CtIf.class))) {
-//            info += ";t" + branchId;
-//            info += ";e" + branchId;
-//            branchId++;
-//        }
-//
-//        for(Object object : Query.getElements(element, new TypeFilter(CtCase.class))) {
-//            info += ";s" + branchId;
-//            branchId++;
-//        }
-//
-//        for(Object object : Query.getElements(element, new TypeFilter(CtLoop.class))) {
-//
-//            info += ";l" + branchId;
-//            branchId++;
-//        }
-//        for(Object object : Query.getElements(element, new TypeFilter(CtCatch.class))) {
-//            info += ";c" + branchId;
-//            branchId++;
-//        }
-//
-//        return info;
-//    }
 }

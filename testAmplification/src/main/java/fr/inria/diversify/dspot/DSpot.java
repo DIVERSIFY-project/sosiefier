@@ -5,6 +5,7 @@ import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.processor.ProcessorUtil;
+import fr.inria.diversify.processor.main.AbstractLoggingInstrumenter;
 import fr.inria.diversify.processor.main.BranchCoverageProcessor;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.LoggerUtils;
@@ -85,6 +86,7 @@ public class DSpot {
 
         BranchCoverageProcessor m = new BranchCoverageProcessor(inputProgram, outputDirectory ,true);
         m.setLogger(logger+".Logger");
+        AbstractLoggingInstrumenter.reset();
         LoggerUtils.applyProcessor(factory, m);
 
         File fileFrom = new File(inputProgram.getAbsoluteSourceCodeDir());

@@ -1,4 +1,4 @@
-package fr.inria.diversify.constantgenertor;
+package fr.inria.diversify.constantgenerator;
 
 import fr.inria.diversify.util.Log;
 
