@@ -91,6 +91,12 @@ public class InputProgram {
      */
     private String classesDir;
 
+
+    /**
+     * Path to the test built classes
+     */
+    private String testClassesDir = "target/test-classes";
+
     /**
      * Path to the coverage information
      */
@@ -574,6 +580,14 @@ public class InputProgram {
      */
     public String getClassesDir() {
         return classesDir;
+    }
+
+
+    /**
+     * Path to the built test classes
+     */
+    public String getTestClassesDir() {
+        return testClassesDir;
     }
 
     public void setClassesDir(String classesDir) {

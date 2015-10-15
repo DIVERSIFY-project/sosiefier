@@ -44,9 +44,8 @@ public class InstruTestAndMethod {
         int javaVersion = Integer.parseInt(inputConfiguration.getProperty("javaVersion", "5"));
         boolean useSourceCodeFragments = Boolean.parseBoolean(inputConfiguration.getProperty("useSourceCodeFragments", "false"));
 
-
         MavenDependencyResolver t = new MavenDependencyResolver();
-        t.DependencyResolver(project + "/pom.xml");
+        t.resolveDependencies(inputConfiguration.getInputProgram());
 
         Instru instru;
         if ( onlyUpdateLoggerCode ) {

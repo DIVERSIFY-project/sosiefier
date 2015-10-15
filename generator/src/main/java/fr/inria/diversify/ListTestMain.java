@@ -38,7 +38,7 @@ public class ListTestMain {
         initLogLevel();
         if(inputConfigureation.getProperty("builder").equals("maven")) {
             MavenDependencyResolver t = new MavenDependencyResolver();
-            t.DependencyResolver(inputConfigureation.getProperty("project") + "/pom.xml");
+            t.resolveDependencies(inputConfigureation.getInputProgram());
         }
         initSpoon();
     }

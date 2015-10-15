@@ -45,7 +45,7 @@ public class Profiling {
 
     public void apply() throws Exception {
         MavenDependencyResolver t = new MavenDependencyResolver();
-        t.DependencyResolver(inputProgram.getProgramDir() + "/pom.xml");
+        t.resolveDependencies(inputProgram);
 
         transformTest();
         transformMain();

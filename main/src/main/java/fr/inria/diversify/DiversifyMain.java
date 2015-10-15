@@ -63,8 +63,8 @@ public class DiversifyMain {
         inputConfiguration = new InputConfiguration(propertiesFile);
 
         InitUtils.initLogLevel(inputConfiguration);
-        InitUtils.initDependency(inputConfiguration);
         inputProgram = InitUtils.initInputProgram(inputConfiguration);
+        InitUtils.initDependency(inputConfiguration);
         InitUtils.initSpoon(inputProgram, false);
         TransformationQuery query = initTransformationQuery();
 

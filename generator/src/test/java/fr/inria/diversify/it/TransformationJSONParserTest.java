@@ -7,6 +7,7 @@ import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
+import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.Log;
 import org.junit.Test;
 import spoon.reflect.factory.Factory;
@@ -49,7 +50,8 @@ public class TransformationJSONParserTest extends SosieGeneratorIntegrationTests
         Factory factory = null;
         try {
             MavenDependencyResolver resolver = new MavenDependencyResolver();
-            resolver.DependencyResolver(c.getProjectPath() + "/pom.xml");
+            resolver.resolveDependencies(InitUtils.initInputProgram(c));
+
             factory = new SpoonMetaFactory().buildNewFactory(c.getProjectPath() + "/" +c.getRelativeSourceCodeDir(), 7);
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
             throw new RuntimeException(e);

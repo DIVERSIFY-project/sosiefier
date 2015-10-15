@@ -25,8 +25,9 @@ public class OltToNewJsonTransformationFormat {
 
     public OltToNewJsonTransformationFormat(String propertiesFile) throws Exception, InvalidSdkException {
         inputConfiguration = new InputConfiguration(propertiesFile);
-        InitUtils.initDependency(inputConfiguration);
         inputProgram = InitUtils.initInputProgram(inputConfiguration);
+        InitUtils.initDependency(inputConfiguration);
+
         InitUtils.initSpoon(inputProgram, false);
 
         String transDir = inputConfiguration.getProperty("transformation.directory");

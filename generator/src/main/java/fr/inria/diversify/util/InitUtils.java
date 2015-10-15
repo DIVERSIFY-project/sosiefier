@@ -4,14 +4,12 @@ import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.factories.DiversityCompiler;
 import fr.inria.diversify.factories.SpoonMetaFactory;
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Level;
 import spoon.Launcher;
 import spoon.reflect.factory.Factory;
-import spoon.support.StandardEnvironment;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -37,13 +35,13 @@ public class InitUtils {
         String builder = inputConfiguration.getProperty("builder");
 
         if(builder.equals("maven")) {
-            t.DependencyResolver(inputConfiguration.getProperty("project") + "/pom.xml");
+            t.resolveDependencies(inputConfiguration.getInputProgram());
 
-            String dependencyPom = inputConfiguration.getProperty("dependencyPom");
-            if (dependencyPom != null) {
-                t.DependencyResolver(inputConfiguration.getProperty("project") + "/pom.xml");
-                t.DependencyResolver(inputConfiguration.getProperty("project") + "/" + dependencyPom);
-            }
+//            String dependencyPom = inputConfiguration.getProperty("dependencyPom");
+//            if (dependencyPom != null) {
+//                t.DependencyResolver(inputConfiguration.getProperty("project") + "/pom.xml");
+//                t.DependencyResolver(inputConfiguration.getProperty("project") + "/" + dependencyPom);
+//            }
 
             String androidSdk = inputConfiguration.getProperty("AndroidSdk");
             if (androidSdk != null) {
@@ -95,6 +93,16 @@ public class InitUtils {
             Factory factory =  new SpoonMetaFactory().buildNewFactory(inputProgram, withTest);
             inputProgram.setFactory(factory);
             return factory;
+        } catch (ClassNotFoundException  | IllegalAccessException | InstantiationException e) {
+            throw new java.lang.RuntimeException(e);
+        }
+    }
+
+    public static DiversityCompiler initSpoonCompiler(InputProgram inputProgram, boolean withTest) {
+        try {
+            DiversityCompiler compiler = new SpoonMetaFactory().buildSpoonCompiler(inputProgram, withTest);
+            inputProgram.setFactory(compiler.getFactory());
+            return compiler;
         } catch (ClassNotFoundException  | IllegalAccessException | InstantiationException e) {
             throw new java.lang.RuntimeException(e);
         }

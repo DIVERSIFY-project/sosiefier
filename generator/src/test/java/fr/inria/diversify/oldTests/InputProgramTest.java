@@ -20,9 +20,11 @@ public class InputProgramTest {
     @Test
     public void testGetCodeFragments() throws Exception {
 
-        MavenDependencyResolver dr = new MavenDependencyResolver();
-        dr.DependencyResolver(getResourcePath("easymock-light-3.2/pom.xml"));
+
         InputProgram inputProgram = new InputProgram();
+        inputProgram.setProgramDir(getResourcePath("easymock-light-3.2"));
+        MavenDependencyResolver dr = new MavenDependencyResolver();
+        dr.resolveDependencies(inputProgram);
         inputProgram.setFactory(new SpoonMetaFactory().buildNewFactory(getResourcePath("easymock-light-3.2/src/main"), 5));
         inputProgram.setRelativeSourceCodeDir(getResourcePath("easymock-light-3.2"));
         Assert.assertTrue(inputProgram.getCodeFragments().size() > 0);
@@ -32,25 +34,27 @@ public class InputProgramTest {
     @Ignore
     public void testGetCodeFragmentsJunit() throws Exception {
 
-        MavenDependencyResolver dr = new MavenDependencyResolver();
-        dr.DependencyResolver(getResourcePath("junit/pom.xml"));
+
         InputProgram inputProgram = new InputProgram();
+        inputProgram.setProgramDir(getResourcePath("junit"));
+        MavenDependencyResolver dr = new MavenDependencyResolver();
+        dr.resolveDependencies(inputProgram);
         inputProgram.setFactory(new SpoonMetaFactory().buildNewFactory(getResourcePath("junit/src/main/java"), 5));
         //inputProgram.setSourceCodeDir(getResourcePath("easymock-light-3.2"));
 
         Assert.assertTrue(inputProgram.getCodeFragments().size() > 0);
     }
 
-    @Test
-    @Ignore
-    public void testGetCodeFragmentsCollection() throws Exception {
-
-        MavenDependencyResolver dr = new MavenDependencyResolver();
-        dr.DependencyResolver("C:\\MarcelStuff\\projects\\DIVERSE\\programs\\input-programs\\commons-collections-trunk\\pom.xml");
-        InputProgram inputProgram = new InputProgram();
-        inputProgram.setFactory(new SpoonMetaFactory().buildNewFactory("C:\\MarcelStuff\\projects\\DIVERSE\\programs\\input-programs\\commons-collections-trunk\\src", 5));
-        //inputProgram.setSourceCodeDir(getResourcePath("easymock-light-3.2"));
-
-        Assert.assertTrue(inputProgram.getCodeFragments().size() > 0);
-    }
+//    @Test
+//    @Ignore
+//    public void testGetCodeFragmentsCollection() throws Exception {
+//
+//        MavenDependencyResolver dr = new MavenDependencyResolver();
+//        dr.resolveDependencies("C:\\MarcelStuff\\projects\\DIVERSE\\programs\\input-programs\\commons-collections-trunk\\pom.xml");
+//        InputProgram inputProgram = new InputProgram();
+//        inputProgram.setFactory(new SpoonMetaFactory().buildNewFactory("C:\\MarcelStuff\\projects\\DIVERSE\\programs\\input-programs\\commons-collections-trunk\\src", 5));
+//        //inputProgram.setSourceCodeDir(getResourcePath("easymock-light-3.2"));
+//
+//        Assert.assertTrue(inputProgram.getCodeFragments().size() > 0);
+//    }
 }

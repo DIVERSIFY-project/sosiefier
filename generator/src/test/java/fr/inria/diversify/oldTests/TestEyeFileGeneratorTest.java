@@ -26,9 +26,10 @@ public class TestEyeFileGeneratorTest {
     }
 
     private InputProgram getSosieInputProgram() throws Exception {
-        MavenDependencyResolver dr = new MavenDependencyResolver();
-        dr.DependencyResolver(getResourcePath("easymock-light-3.2/pom.xml"));
         InputProgram inputProgram = new InputProgram();
+        inputProgram.setProgramDir(getResourcePath("easymock-light-3.2"));
+        MavenDependencyResolver dr = new MavenDependencyResolver();
+        dr.resolveDependencies(inputProgram);
         inputProgram.setFactory(new SpoonMetaFactory().buildNewFactory(getResourcePath("easymock-light-3.2/src/main"), 5));
         inputProgram.setRelativeSourceCodeDir(getResourcePath("easymock-light-3.2"));
         return inputProgram;

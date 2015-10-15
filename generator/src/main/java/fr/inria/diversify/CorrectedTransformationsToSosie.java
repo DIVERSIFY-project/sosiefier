@@ -172,7 +172,7 @@ public class CorrectedTransformationsToSosie {
     private ArrayList<Transformation> loadWithSosiesInput(
             InputConfiguration inputConfiguration, String transfPath) throws Exception {
         MavenDependencyResolver dr = new MavenDependencyResolver();
-        dr.DependencyResolver(inputConfiguration.getProjectPath() + "\\pom.xml");
+        dr.resolveDependencies(inputConfiguration.getInputProgram());
 
         InputProgram p = new InputProgram();
         p.configure(inputConfiguration);

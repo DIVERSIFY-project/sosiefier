@@ -29,8 +29,8 @@ public class ProfilingMain {
     public ProfilingMain(String propertiesFile) throws Exception, InvalidSdkException {
         inputConfiguration = new InputConfiguration(propertiesFile);
         InitUtils.initLogLevel(inputConfiguration);
-        InitUtils.initDependency(inputConfiguration);
         inputProgram = InitUtils.initInputProgram(inputConfiguration);
+        InitUtils.initDependency(inputConfiguration);
 
         outputDirectory = inputConfiguration.getProperty("outputDirectory");
         logger = inputConfiguration.getProperty("logger");

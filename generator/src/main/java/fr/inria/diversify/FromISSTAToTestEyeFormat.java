@@ -8,6 +8,7 @@ import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.persistence.json.input.JsonSosiesInput;
 import fr.inria.diversify.persistence.json.output.*;
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,8 +58,7 @@ public class FromISSTAToTestEyeFormat {
      */
     private static Collection<Transformation> loadWithSosiesInput(InputConfiguration inputConfiguration) throws Exception {
         MavenDependencyResolver dr = new MavenDependencyResolver();
-        dr.DependencyResolver(inputConfiguration.getProjectPath() + "\\pom.xml");
-
+        dr.resolveDependencies(InitUtils.initInputProgram(inputConfiguration));
         InputProgram p = new InputProgram();
         p.configure(inputConfiguration);
 

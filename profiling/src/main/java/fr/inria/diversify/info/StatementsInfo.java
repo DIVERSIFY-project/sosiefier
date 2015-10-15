@@ -56,8 +56,8 @@ public class StatementsInfo {
         inputConfiguration = new InputConfiguration(propertiesFile);
 
         InitUtils.initLogLevel(inputConfiguration);
-        InitUtils.initDependency(inputConfiguration);
         inputProgram = InitUtils.initInputProgram(inputConfiguration);
+        InitUtils.initDependency(inputConfiguration);
         InitUtils.initSpoon(inputProgram, false);
 
         String transDir = inputConfiguration.getProperty("transformation.directory");

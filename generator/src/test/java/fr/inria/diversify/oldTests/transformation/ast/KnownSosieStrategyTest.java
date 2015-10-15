@@ -7,6 +7,7 @@ import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.KnownSosieQuery;
 import fr.inria.diversify.transformation.query.QueryException;
 import fr.inria.diversify.transformation.query.SeveralTriesUnsuccessful;
+import fr.inria.diversify.util.InitUtils;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -33,12 +34,13 @@ public class KnownSosieStrategyTest {
     @Before
     public void setUp() throws Exception {
         if (inputProgram == null) {
-            MavenDependencyResolver dr = new MavenDependencyResolver();
-            dr.DependencyResolver(getResourcePath("easymock-light-3.2/pom.xml"));
             Factory factory = new SpoonMetaFactory().buildNewFactory(getResourcePath("easymock-light-3.2"), 5);
             inputProgram = new InputProgram();
             inputProgram.setFactory(factory);
+            inputProgram.setProgramDir(getResourcePath("easymock-light-3.2"));
             inputProgram.setRelativeSourceCodeDir(getResourcePath("easymock-light-3.2"));
+            MavenDependencyResolver dr = new MavenDependencyResolver();
+            dr.resolveDependencies(inputProgram);
             inputProgram.setPreviousTransformationsPath(getResourcePath("easymock3.2-non-rep-index.json"));
             inputProgram.setTransformationPerRun(5);
             inputProgram.processCodeFragments();

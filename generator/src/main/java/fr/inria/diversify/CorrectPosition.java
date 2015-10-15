@@ -39,8 +39,8 @@ public class CorrectPosition {
         String out = prop.getProperty("outputDirectory");
         String prevTransfPath = prop.getProperty("transformation.directory");
 
-        MavenDependencyResolver resolver = new MavenDependencyResolver();
-        resolver.DependencyResolver(project + "/pom.xml");
+//        MavenDependencyResolver resolver = new MavenDependencyResolver();
+//        resolver.DependencyResolver(project + "/pom.xml");
 
         Factory factory = new SpoonMetaFactory().buildNewFactory(project + "/" + src, 7);
         InputProgram inputProgram = new InputProgram();

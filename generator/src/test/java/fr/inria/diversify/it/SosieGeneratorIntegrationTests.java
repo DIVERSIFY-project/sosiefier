@@ -40,19 +40,21 @@ public class SosieGeneratorIntegrationTests {
         path += getProperties().getProperty("input.configurations", "/input_configurations") + "/" + s + ".properties";
         InputConfiguration c = new InputConfiguration(path);
 
+
+
+        InputProgram inputProgram = new InputProgram();
+        inputProgram.configure(c);
+
         Factory factory = null;
         try {
             MavenDependencyResolver resolver = new MavenDependencyResolver();
-            resolver.DependencyResolver(c.getProjectPath() + "/pom.xml");
+            resolver.resolveDependencies(inputProgram);
             factory = new SpoonMetaFactory().buildNewFactory(c.getRelativeSourceCodeDir(), 7);
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
             throw new RuntimeException(e);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-        InputProgram inputProgram = new InputProgram();
-        inputProgram.configure(c);
         inputProgram.setFactory(factory);
         inputProgram.setRelativeSourceCodeDir(c.getRelativeSourceCodeDir());
         inputProgram.setPreviousTransformationsPath(c.getPreviousTransformationPath());

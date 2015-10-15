@@ -1,8 +1,10 @@
 package fr.inria.diversify.buildSystem.maven;
 
 
+import fr.inria.diversify.buildSystem.DependencyResolver;
 import fr.inria.diversify.buildSystem.android.AndroidSdk;
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.util.Log;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
@@ -28,29 +30,36 @@ import java.util.*;
  * Date: 6/12/13
  * Time: 3:47 PM
  */
-public class MavenDependencyResolver {
-    Set<URL> jarURL = new HashSet<>();
-    Set<String> dependencyResolve = new HashSet<>();
+public class MavenDependencyResolver implements DependencyResolver {
+    List<URL> dependenciesURL;
     Properties properties;
     String baseDir;
     MavenResolver resolver;
     ArrayList<String> repositoriesUrls;
 
 
-    public void DependencyResolver(String pomFile) throws Exception {
-        Log.debug("Resolve dependency of {}", pomFile);
-        String[] split = pomFile.split("/");
-        baseDir = "";
-        for(int i = 0;  i <  split.length - 1; i++) {
-            baseDir += split[i] + "/";
-        }
-        MavenProject project = loadProject(new File(pomFile));
-        initMavenResolver();
-        resolveAllDependencies(project);
-        addApplicationClasses(new File(pomFile));
+    public MavenDependencyResolver() {
+        dependenciesURL = new ArrayList<>();
+        resolver = new MavenResolver();
+        resolver.setBasePath(System.getProperty("user.home") + File.separator + ".m2/repository");
+
+        repositoriesUrls = new ArrayList<>();
+        repositoriesUrls.add("http://repo1.maven.org/maven2/");
     }
 
-    public MavenProject loadProject(File pomFile) throws IOException, XmlPullParserException {
+    public void resolveDependencies(InputProgram inputProgram) throws Exception {
+        File pomFile = new File(inputProgram.getProgramDir() + "/pom.xml");
+        Log.info("resolve dependencies of {}", pomFile);
+        baseDir = inputProgram.getProgramDir();
+
+        MavenProject project = loadProject(pomFile);
+        resolveAllDependencies(project, new HashSet<String>());
+
+        addApplicationClasses(inputProgram);
+        loadDependencies();
+    }
+
+    protected MavenProject loadProject(File pomFile) throws IOException, XmlPullParserException {
         MavenProject ret;
         MavenXpp3Reader mavenReader = new MavenXpp3Reader();
 
@@ -65,20 +74,12 @@ public class MavenDependencyResolver {
         return ret;
     }
 
-    protected void addApplicationClasses(File pomFile) throws MalformedURLException {
-        jarURL.add((new File( pomFile.getParent() + "/target/classes/").toURL()));
-        URLClassLoader child = new URLClassLoader(jarURL.toArray(new URL[jarURL.size()]), Thread.currentThread().getContextClassLoader());
-        Thread.currentThread().setContextClassLoader(child);
+    protected void addApplicationClasses(InputProgram inputProgram) throws MalformedURLException {
+        dependenciesURL.add((new File(inputProgram.getProgramDir() + "/" + inputProgram.getClassesDir()).toURL()));
+        dependenciesURL.add((new File(inputProgram.getProgramDir() + "/" + inputProgram.getTestClassesDir()).toURL()));
+
     }
 
-
-    protected void initMavenResolver() {
-        resolver = new MavenResolver();
-        resolver.setBasePath(System.getProperty("user.home") + File.separator + ".m2/repository");
-
-        repositoriesUrls = new ArrayList<>();
-        repositoriesUrls.add("http://repo1.maven.org/maven2/");
-    }
 
     protected void updateRepositoriesUrl(MavenProject project) {
         for (Repository repo : project.getRepositories()) {
@@ -86,7 +87,7 @@ public class MavenDependencyResolver {
         }
     }
 
-    public void resolveAllDependencies(MavenProject project) throws MalformedURLException {
+    public void resolveAllDependencies(MavenProject project, Set<String> dependencyResolve) throws MalformedURLException {
         updateRepositoriesUrl(project);
         updateProperties(project.getProperties());
 
@@ -102,28 +103,47 @@ public class MavenDependencyResolver {
                 } else {
                     cachedFile = resolver.resolve(artifactId + ":" + resolveName(dependency.getType(), properties), repositoriesUrls);
                 }
-                jarURL.add(cachedFile.toURI().toURL());
+                dependenciesURL.add(cachedFile.toURI().toURL());
                 Log.debug("resolve artifact: {}", artifactId);
 
                 File pomD = resolver.resolve(artifactId + ":pom", repositoriesUrls);
                 if(!dependencyResolve.contains(pomD.getAbsolutePath())) {
                     dependencyResolve.add(pomD.getAbsolutePath());
-                    resolveAllDependencies(loadProject(pomD));
+                    resolveAllDependencies(loadProject(pomD), dependencyResolve);
                 }
 
             } catch (Exception e) {}
 
         }
-        for(String module: project.getModules()) {
+
+        resolveModulesDependencies(project, dependencyResolve);
+    }
+
+
+    protected void resolveModulesDependencies(MavenProject parentProject, Set<String> dependencyResolve) {
+        for(String module: parentProject.getModules()) {
             try {
-                resolveModuleDependencies(module);
+                MavenProject project = loadProject(new File(baseDir + module + "/pom.xml"));
+                resolveAllDependencies(project, dependencyResolve);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
 
-        URLClassLoader child = new URLClassLoader(jarURL.toArray(new URL[jarURL.size()]), Thread.currentThread().getContextClassLoader());
+    protected void loadDependencies() {
+        URLClassLoader child = new URLClassLoader(dependenciesURL.toArray(new URL[dependenciesURL.size()]), Thread.currentThread().getContextClassLoader());
         Thread.currentThread().setContextClassLoader(child);
+    }
+
+    public void resolveAndroidDependencies(String chosenSdkPlatform) throws InvalidSdkException, MojoExecutionException, MalformedURLException {
+        File chosenSdkPath = new File( getAndroidHomeOrThrow() );
+
+        AndroidSdk androidSdk = new AndroidSdk( chosenSdkPath, chosenSdkPlatform );
+        dependenciesURL.add(androidSdk.getAndroidJar().toURI().toURL());
+        dependenciesURL.add(new File(androidSdk.getDxJarPath()).toURI().toURL());
+
+        loadDependencies();
     }
 
     protected void updateProperties(Properties properties) {
@@ -137,21 +157,6 @@ public class MavenDependencyResolver {
         }
     }
 
-    protected void resolveModuleDependencies(String moduleName) throws IOException, XmlPullParserException {
-        MavenProject project = loadProject(new File(baseDir + moduleName + "/pom.xml"));
-        resolveAllDependencies(project);
-    }
-
-    public void resolveAndroidDependencies(String chosenSdkPlatform) throws InvalidSdkException, MojoExecutionException, MalformedURLException {
-        File chosenSdkPath = new File( getAndroidHomeOrThrow() );
-
-        AndroidSdk androidSdk = new AndroidSdk( chosenSdkPath, chosenSdkPlatform );
-        jarURL.add(androidSdk.getAndroidJar().toURI().toURL());
-        jarURL.add(new File(androidSdk.getDxJarPath()).toURI().toURL());
-
-        URLClassLoader child = new URLClassLoader(jarURL.toArray(new URL[jarURL.size()]), Thread.currentThread().getContextClassLoader());
-        Thread.currentThread().setContextClassLoader(child);
-    }
 
     protected String resolveName(String string, Properties properties) {
         char[] chars = string.toCharArray();
@@ -179,4 +184,8 @@ public class MavenDependencyResolver {
         return androidHome;
     }
 
+    @Override
+    public List<URL> getDependencies() {
+        return dependenciesURL;
+    }
 }

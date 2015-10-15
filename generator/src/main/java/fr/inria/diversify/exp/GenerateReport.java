@@ -37,7 +37,7 @@ public class GenerateReport {
         initLogLevel();
         if (inputConfiguration.getProperty("builder").equals("maven")) {
             MavenDependencyResolver t = new MavenDependencyResolver();
-            t.DependencyResolver(inputConfiguration.getProperty("project") + "/pom.xml");
+            t.resolveDependencies(inputProgram);
         }
         initSpoon();
         buildReport();

@@ -2,15 +2,12 @@ package fr.inria.diversify.factories;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.util.Log;
-import spoon.compiler.SpoonCompiler;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.factory.FactoryImpl;
 import spoon.support.DefaultCoreFactory;
 import spoon.support.StandardEnvironment;
-import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -29,6 +26,16 @@ public class SpoonMetaFactory {
         return buildNewFactory(a, inputProgram.getJavaVersion());
     }
 
+    public DiversityCompiler buildSpoonCompiler(InputProgram inputProgram, boolean withTest) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        ArrayList<String> a = new ArrayList<String>();
+        a.add(inputProgram.getAbsoluteSourceCodeDir());
+        if(withTest) {
+            a.add(inputProgram.getAbsoluteTestSourceCodeDir());
+        }
+        a.add(inputProgram.getExternalSourceCodeDir());
+        return buildSpoonCompiler(a, inputProgram.getJavaVersion());
+    }
+
     public Factory buildNewFactory(String srcDirectory, int javaVersion) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         ArrayList<String> a = new ArrayList<String>();
         a.add(srcDirectory);
@@ -36,6 +43,10 @@ public class SpoonMetaFactory {
     }
 
     public Factory buildNewFactory(Collection<String> srcDirectory, int javaVersion) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+        return buildSpoonCompiler(srcDirectory, javaVersion).getFactory();
+    }
+
+    public DiversityCompiler buildSpoonCompiler(Collection<String> srcDirectory, int javaVersion) {
         StandardEnvironment env = new StandardEnvironment();
         env.setComplianceLevel(javaVersion);
         env.setVerbose(false);
@@ -43,7 +54,7 @@ public class SpoonMetaFactory {
 
         DefaultCoreFactory f = new DefaultCoreFactory();
         Factory factory = new FactoryImpl(f, env);
-        SpoonCompiler compiler = new JDTBasedSpoonCompiler(factory);
+        DiversityCompiler compiler = new DiversityCompiler(factory);
         for (String s : srcDirectory) {
             for (String dir : s.split(System.getProperty("path.separator"))) {
                 try {
@@ -64,6 +75,6 @@ public class SpoonMetaFactory {
             e.printStackTrace();
         }
 
-        return factory;
+        return compiler;
     }
 }

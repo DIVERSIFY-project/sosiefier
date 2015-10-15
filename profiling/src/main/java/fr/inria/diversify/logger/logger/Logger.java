@@ -1,6 +1,7 @@
 package fr.inria.diversify.logger.logger;
 
 
+import java.io.File;
 import java.util.HashMap;
 
 /**
@@ -9,7 +10,7 @@ import java.util.HashMap;
  */
 public class Logger {
     private static HashMap<Thread, LogWriter> logs = null;
-
+    private static File logDir;
     /**
      * This is an option. By the default the verbose log is used.
      * @param log
@@ -27,7 +28,7 @@ public class Logger {
         if ( logs.containsKey(thread) ) {
             return logs.get(thread);
         } else {
-            LogWriter l = new LogWriter(thread);
+            LogWriter l = new LogWriter(thread, logDir);
             logs.put(thread, l);
             return l;
         }
@@ -77,9 +78,13 @@ public class Logger {
         getLog(thread).writeThrow(methodId, localPositionId, exception);
     }
 
-    public  static void close() {
+    public static void close() {
         for ( LogWriter l : logs.values() ) {
             l.close();
         }
+    }
+
+    public static void setLogDir(File dir) {
+        logDir = dir;
     }
 }

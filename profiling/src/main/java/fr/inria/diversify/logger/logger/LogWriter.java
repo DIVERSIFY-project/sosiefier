@@ -28,18 +28,16 @@ public class LogWriter {
     ///Directory where the log is being stored
     protected File dir = null;
 
-    ///Previous logs of variables status. Useful to validate whether they have change
-//    protected Map<String, String> previousVars;
 
     /**
      * Constructor for the logger
      */
-    public LogWriter(Thread thread) {
+    public LogWriter(Thread thread, File logDir) {
+        dir = logDir;
         if (dir == null) {
             initDir();
         }
         initOptions();
-//        previousVars = new HashMap<String, String>();
         pathBuilder = new PathBuilder(fullPath);
         classesObservers = new HashMap<Class, ClassObserver>();
 
@@ -82,11 +80,13 @@ public class LogWriter {
      * Initializes the directory where the files for each thread are going to be stored
      */
     protected void initDir() {
+        if(dir == null) {
         String logDirName = "log";
         dir = new File(logDirName);
         while (!isLogDir(dir)) {
             logDirName = "../" + logDirName;
             dir = new File(logDirName);
+        }
         }
     }
 
