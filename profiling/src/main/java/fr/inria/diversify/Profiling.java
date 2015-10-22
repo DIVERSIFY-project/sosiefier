@@ -175,7 +175,7 @@ public class Profiling {
         condition = Boolean.parseBoolean(properties.getProperty("profiling.test.removeAssert", "false"));
         transform = transform || condition;
         if(condition) {
-            TestCaseProcessor tc = new TestCaseProcessor(testSrc, true);
+            AssertionRemover tc = new AssertionRemover(testSrc, true);
             tc.setLogger(logger+".Logger");
             LoggerUtils.applyProcessor(factory, tc);
         }
