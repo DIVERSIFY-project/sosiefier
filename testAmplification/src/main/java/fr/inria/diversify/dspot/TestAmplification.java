@@ -290,12 +290,12 @@ public class TestAmplification {
         }
     }
 
-    protected Result runTest(CtClass test) throws ClassNotFoundException {
-        List<CtClass> list = new ArrayList<>(1);
-        list.add(test);
-
-        return runTests(list);
-    }
+//    protected Result runTest(CtClass test) throws ClassNotFoundException {
+//        List<CtClass> list = new ArrayList<>(1);
+//        list.add(test);
+//
+//        return runTests(list);
+//    }
 
 
     protected Result runTests(List<CtClass> tests) throws ClassNotFoundException {
@@ -342,7 +342,7 @@ public class TestAmplification {
     protected CtMethod instruMethod(CtMethod method) {
         CtMethod clone = cloneMethod(method);
 
-        TestCaseProcessor testCase = new TestCaseProcessor(inputProgram.getAbsoluteTestSourceCodeDir(), false);
+        AssertionRemover testCase = new AssertionRemover(inputProgram.getAbsoluteTestSourceCodeDir(), false);
         testCase.setLogger(logger + ".Logger");
         testCase.setFactory(inputProgram.getFactory());
         testCase.process(clone);
