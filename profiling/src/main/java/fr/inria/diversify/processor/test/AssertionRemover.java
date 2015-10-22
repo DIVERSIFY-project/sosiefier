@@ -12,7 +12,7 @@ import spoon.support.reflect.code.CtCodeSnippetStatementImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestCaseProcessor extends TestProcessor {
+public class AssertionRemover extends TestProcessor {
     protected String testDir;
     public static int monitorPointCount = 0;
     protected boolean logAssert;
@@ -24,7 +24,7 @@ public class TestCaseProcessor extends TestProcessor {
 	 * */
 
 
-    public TestCaseProcessor(String testDir, boolean logAssert) {
+    public AssertionRemover(String testDir, boolean logAssert) {
         this.testDir = testDir;
         this.logAssert = logAssert;
     }
