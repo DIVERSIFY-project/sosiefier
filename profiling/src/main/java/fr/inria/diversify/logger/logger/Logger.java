@@ -87,4 +87,11 @@ public class Logger {
     public static void setLogDir(File dir) {
         logDir = dir;
     }
+
+    public static void reset() {
+        if(logs != null) {
+            logs.clear();
+        }
+    }
+
 }

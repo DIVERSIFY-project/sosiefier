@@ -1,5 +1,8 @@
 package fr.inria.diversify.factories;
 
+import org.eclipse.jdt.core.compiler.CategorizedProblem;
+import spoon.compiler.Environment;
+import spoon.compiler.ModelBuildingException;
 import spoon.compiler.SpoonFile;
 import spoon.compiler.SpoonFolder;
 import spoon.reflect.factory.Factory;
@@ -11,7 +14,6 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * User: Simon
@@ -97,11 +99,38 @@ public class DiversityCompiler extends JDTBasedSpoonCompiler {
 
         batchCompiler.compile(args.toArray(new String[0]));
 
-        reportProblems(factory.getEnvironment());
+//        reportProblems(factory.getEnvironment());
 
         factory.getEnvironment().debugMessage(
                 "compiled in " + (System.currentTimeMillis() - t) + " ms");
         return getProblems().size() == 0;
+
+    }
+
+    protected void report(Environment environment, CategorizedProblem problem) {
+        if (problem == null) {
+            throw new IllegalArgumentException("problem cannot be null");
+        }
+
+        File file = new File(new String(problem.getOriginatingFileName()));
+        String filename = file.getAbsolutePath();
+
+        String message = problem.getMessage() + " at " + filename + ":"
+                + problem.getSourceLineNumber();
+
+        if (problem.isError()) {
+            if (!environment.getNoClasspath()) {
+                // by default, compilation errors are notified as exception
+                throw new ModelBuildingException(message);
+            }
+//            else {
+//                // in noclasspath mode, errors are only reported
+//                environment.report(
+//                        null,
+//                        problem.isError()? Severity.ERROR:Severity.WARNING,
+//                        message);
+//            }
+        }
 
     }
 

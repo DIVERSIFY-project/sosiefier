@@ -1,5 +1,6 @@
 package fr.inria.diversify.dspot;
 
+import fr.inria.diversify.factories.DiversityCompiler;
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.diversification.InputConfiguration;
@@ -25,24 +26,28 @@ import java.util.stream.Collectors;
  */
 public class DSpot {
 
+    private DiversityCompiler compiler;
     protected InputProgram inputProgram;
     protected MavenBuilder builder;
-    protected String outputDirectory;
 
     protected String logger = "fr.inria.diversify.logger.logger";
 
     public DSpot(String propertiesFile) throws InvalidSdkException, Exception {
         InputConfiguration inputConfiguration = new InputConfiguration(propertiesFile);
         InitUtils.initLogLevel(inputConfiguration);
-        InitUtils.initDependency(inputConfiguration);
         inputProgram = InitUtils.initInputProgram(inputConfiguration);
 
-        outputDirectory = inputConfiguration.getProperty("outputDirectory");
+        String outputDirectory = inputConfiguration.getProperty("tmpDir") + "/tmp_" + System.currentTimeMillis();
+
+        FileUtils.copyDirectory(new File(inputProgram.getProgramDir()), new File(outputDirectory));
+        inputProgram.setProgramDir(outputDirectory);
+
+        InitUtils.initDependency(inputConfiguration);
     }
 
-    protected void generateTest() throws IOException, InterruptedException {
+    protected void generateTest() throws IOException, InterruptedException, ClassNotFoundException {
         init();
-        TestAmplification testAmplification = new TestAmplification(inputProgram, builder, outputDirectory);
+        TestAmplification testAmplification = new TestAmplification(inputProgram, builder, compiler);
 
         for (CtClass cl : getAllTestClasses()) {
 
@@ -61,40 +66,34 @@ public class DSpot {
     }
 
     protected void init() throws IOException, InterruptedException {
-        File dir = new File(outputDirectory);
-        dir.mkdirs();
-        FileUtils.copyDirectory(new File(inputProgram.getProgramDir()), dir);
-
         addBranchLogger();
 
-        InitUtils.initSpoon(inputProgram, true);
+        compiler = InitUtils.initSpoonCompiler(inputProgram, true);
+
         initBuilder();
     }
 
     protected void initBuilder() throws InterruptedException, IOException {
         String[] phases  = new String[]{"clean", "test"};
-        builder = new MavenBuilder(outputDirectory);
+        builder = new MavenBuilder(inputProgram.getProgramDir());
 
         builder.setGoals(phases);
         builder.initTimeOut();
     }
 
     protected void addBranchLogger() throws IOException {
-        String mainSrc = inputProgram.getRelativeSourceCodeDir();
-
         Factory factory = InitUtils.initSpoon(inputProgram, false);
 
-        BranchCoverageProcessor m = new BranchCoverageProcessor(inputProgram, outputDirectory ,true);
+        BranchCoverageProcessor m = new BranchCoverageProcessor(inputProgram, inputProgram.getProgramDir() ,true);
         m.setLogger(logger+".Logger");
         AbstractLoggingInstrumenter.reset();
         LoggerUtils.applyProcessor(factory, m);
 
         File fileFrom = new File(inputProgram.getAbsoluteSourceCodeDir());
-        File out = new File(outputDirectory + "/" + mainSrc);
-        LoggerUtils.writeJavaClass(factory, out, fileFrom);
+        LoggerUtils.writeJavaClass(factory, fileFrom, fileFrom);
 
-        LoggerUtils.copyLoggerFile(inputProgram, outputDirectory, logger);
-        ProcessorUtil.writeInfoFile(outputDirectory);
+        LoggerUtils.copyLoggerFile(inputProgram, inputProgram.getProgramDir(), logger);
+        ProcessorUtil.writeInfoFile(inputProgram.getProgramDir());
     }
 
         public static void main(String[] args) throws Exception, InvalidSdkException {

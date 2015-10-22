@@ -67,8 +67,8 @@ public class CrossCheckingOracleMain {
     protected void init(String propertiesFile) throws Exception, InvalidSdkException {
         inputConfiguration = new InputConfiguration(propertiesFile);
         InitUtils.initLogLevel(inputConfiguration);
-        InitUtils.initDependency(inputConfiguration);
         inputProgram = InitUtils.initInputProgram(inputConfiguration);
+        InitUtils.initDependency(inputConfiguration);
 
         InitUtils.initSpoon(inputProgram, true);
 

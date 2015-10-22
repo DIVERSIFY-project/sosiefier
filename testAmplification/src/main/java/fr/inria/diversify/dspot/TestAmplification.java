@@ -3,14 +3,18 @@ package fr.inria.diversify.dspot;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.diversification.InputProgram;
 
+import fr.inria.diversify.factories.DiversityCompiler;
 import fr.inria.diversify.logger.branch.CoverageReader;
 import fr.inria.diversify.logger.branch.TestCoverage;
 import fr.inria.diversify.processor.test.*;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
 import org.apache.commons.io.FileUtils;
+import org.junit.runner.Result;
+import spoon.compiler.Environment;
 import spoon.reflect.declaration.*;
-import spoon.reflect.reference.CtTypeReference;
+import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
+import spoon.support.JavaOutputProcessor;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,23 +36,41 @@ public class TestAmplification {
     protected List<TestCoverage> ampCoverage;
     protected MavenBuilder builder;
     protected InputProgram inputProgram;
-    protected String outputDirectory;
-    protected boolean guavaTestlib = false;
     protected String logger;
+    protected int totalAmpTest;
+
+    protected DiversityCompiler compiler;
 
 
-    public TestAmplification(InputProgram inputProgram, MavenBuilder builder, String outputDirectory) {
+    public TestAmplification(InputProgram inputProgram, MavenBuilder builder, DiversityCompiler compiler) {
         this.inputProgram = inputProgram;
         this.builder = builder;
-        this.outputDirectory = outputDirectory;
-
-        logger = "fr.inria.diversify.logger.logger";
-
+        this.compiler = compiler;
+        this.logger = "fr.inria.diversify.logger.logger";
     }
 
     protected void init() {
         goodTest = new HashSet<>();
         ampTests = new ArrayList<>();
+
+        if(compiler.getDestinationDirectory() == null) {
+            File classOutputDir = new File("tmpDir/tmpClasses_" + System.currentTimeMillis());
+            if (!classOutputDir.exists()) {
+                classOutputDir.mkdirs();
+            }
+            compiler.setDestinationDirectory(classOutputDir);
+        }
+        if(compiler.getOutputDirectory().toString().equals("spooned")) {
+            File sourceOutputDir = new File("tmpDir/tmpSrc_" + System.currentTimeMillis());
+            if (!sourceOutputDir.exists()) {
+                sourceOutputDir.mkdirs();
+            }
+            compiler.setOutputDirectory(sourceOutputDir);
+        }
+
+        Environment env = compiler.getFactory().getEnvironment();
+        env.setDefaultFileGenerator(new JavaOutputProcessor(compiler.getOutputDirectory(),
+                new DefaultJavaPrettyPrinter(env)));
     }
 
     public void amplification(CtClass classTest, int maxIteration) throws IOException, InterruptedException {
@@ -60,18 +82,27 @@ public class TestAmplification {
         Log.info("amplification of {} ({} test)", classTest.getQualifiedName(), nbTest);
 
         int nbAmpTest = 0;
-        run(classTest);
-
         deleteLogFile();
+//        runTest(classTest);
         List<CtMethod> instruTests = initAmpTest(classTest);
 
         for (int i = 0; i < maxIteration; i++) {
             Log.info("iteration {}:", i);
             Log.info("{} new tests generated", instruTests.size() - nbTest);
 
-            int status = run(classTest);
-            if(status < -1) {
+            boolean status = writeAndCompile(classesFor(instruTests));
+
+            if(!status) {
                 break;
+            }
+            Result result = null;
+            try {
+                result = runTests(classesFor(instruTests));
+                if(result != null) {
+                    Log.debug("{} tests run, {} failure", result.getRunCount(), result.getFailureCount());
+                }
+                } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
             ampCoverage = loadCoverageInfo();
 
@@ -82,38 +113,40 @@ public class TestAmplification {
                 break;
             }
             removeTests(instruTests);
-            instruTests = makeAndWriteAmpTest(testToAmp);
+            instruTests = generateTests(testToAmp);
         }
         Log.info("{} tests amplified", nbAmpTest);
+        totalAmpTest += nbAmpTest;
+        Log.info("total amp test: {}",totalAmpTest);
         removeTests(instruTests);
         makeDSpotClassTest();
     }
 
-    protected int run(CtClass classTest) throws InterruptedException {
-        String goals = "test -Dmaven.compiler.useIncrementalCompilation=false -Dmaven.main.skip=true -Dtest=";
-        if(classTest.getModifiers().contains(ModifierKind.ABSTRACT)) {
-            goals += inputProgram.getAllElement(CtClass.class).stream()
-                        .map(elem -> (CtClass) elem)
-                        .filter(cl -> !cl.getModifiers().contains(ModifierKind.ABSTRACT))
-                        .filter(cl -> {
-                            CtTypeReference superClass = cl.getSuperclass();
-                            while (superClass != null && superClass.getDeclaration() != null) {
-                                if (superClass.getDeclaration() == classTest) {
-                                    return true;
-                                }
-                                superClass = superClass.getSuperclass();
-                            }
-                            return false;
-                        })
-                        .map(CtClass::getQualifiedName)
-                        .collect(Collectors.joining(","));
-        } else {
-            goals += classTest.getQualifiedName();
-        }
-
-        builder.runBuilder(new String[]{goals});
-        return builder.getStatus();
-    }
+//    protected int run(CtClass classTest) throws InterruptedException {
+//        String goals = "test -Dmaven.compiler.useIncrementalCompilation=false -Dmaven.main.skip=true -Dtest=";
+//        if(classTest.getModifiers().contains(ModifierKind.ABSTRACT)) {
+//            goals += inputProgram.getAllElement(CtClass.class).stream()
+//                        .map(elem -> (CtClass) elem)
+//                        .filter(cl -> !cl.getModifiers().contains(ModifierKind.ABSTRACT))
+//                        .filter(cl -> {
+//                            CtTypeReference superClass = cl.getSuperclass();
+//                            while (superClass != null && superClass.getDeclaration() != null) {
+//                                if (superClass.getDeclaration() == classTest) {
+//                                    return true;
+//                                }
+//                                superClass = superClass.getSuperclass();
+//                            }
+//                            return false;
+//                        })
+//                        .map(CtClass::getQualifiedName)
+//                        .collect(Collectors.joining(","));
+//        } else {
+//            goals += classTest.getQualifiedName();
+//        }
+//
+//        builder.runBuilder(new String[]{goals});
+//        return builder.getStatus();
+//    }
 
     protected void removeTests(Collection<CtMethod> tests) {
         tests.stream()
@@ -186,7 +219,7 @@ public class TestAmplification {
     }
 
     protected List<TestCoverage> loadCoverageInfo() throws IOException {
-        CoverageReader reader = new CoverageReader(outputDirectory+ "/log");
+        CoverageReader reader = new CoverageReader(inputProgram.getProgramDir()+ "/log");
         List<TestCoverage> result = reader.loadTest();
 
         deleteLogFile();
@@ -195,7 +228,7 @@ public class TestAmplification {
     }
 
     protected void deleteLogFile() throws IOException {
-        File dir = new File(outputDirectory+ "/log");
+        File dir = new File(inputProgram.getProgramDir()+ "/log");
         for(File file : dir.listFiles()) {
             if(!file.getName().equals("info")) {
                 FileUtils.forceDelete(file);
@@ -205,14 +238,13 @@ public class TestAmplification {
 
     protected List<CtMethod> initAmpTest(CtClass classTest) {
         goodTest = getAllTest(classTest);
-        return makeAndWriteAmpTest(goodTest);
+        return generateTests(goodTest);
     }
 
-    protected List<CtMethod> makeAndWriteAmpTest(Collection<CtMethod> tests) {
+    protected List<CtMethod> generateTests(Collection<CtMethod> tests) {
         ampTests.clear();
         removeTests(goodTest);
 
-        File out = new File(outputDirectory + "/" + inputProgram.getRelativeTestSourceCodeDir());
         List<CtMethod>  currentAmpTests = tests.stream()
                 .flatMap(test -> ampTests(test).stream())
                 .collect(Collectors.toList());
@@ -223,7 +255,11 @@ public class TestAmplification {
         currentAmpTests.stream()
                 .forEach(test -> test.getDeclaringType().removeMethod(test));
 
-        List<CtClass> classesInstru = currentAmpTests.stream()
+        return currentAmpTests;
+    }
+
+    protected List<CtClass> classesFor(List<CtMethod> methods) {
+        return methods.stream()
                 .map(ampTest -> instruMethod(ampTest))
                 .map(instruTest -> {
                     CtClass cl = (CtClass) instruTest.getDeclaringType();
@@ -233,22 +269,44 @@ public class TestAmplification {
                 })
                 .distinct()
                 .collect(Collectors.toList());
+    }
 
+    protected boolean writeAndCompile(List<CtClass> classesInstru) throws IOException {
+        FileUtils.cleanDirectory(compiler.getOutputDirectory());
+        FileUtils.cleanDirectory(compiler.getDestinationDirectory());
         classesInstru.stream()
                 .forEach(cl -> {
                             try {
-                                LoggerUtils.printJavaFile(out, cl);
+                                LoggerUtils.printJavaFile(compiler.getOutputDirectory(), cl);
                             } catch (Exception e) {
                             }
                         }
                 );
-        return currentAmpTests;
+        try {
+            return  compiler.compileFileIn(compiler.getOutputDirectory());
+        } catch (Exception e) {
+            Log.warn("error during compilation",e);
+            return false;
+        }
+    }
+
+    protected Result runTest(CtClass test) throws ClassNotFoundException {
+        List<CtClass> list = new ArrayList<>(1);
+        list.add(test);
+
+        return runTests(list);
+    }
+
+
+    protected Result runTests(List<CtClass> tests) throws ClassNotFoundException {
+        JunitRunner junitRunner = new JunitRunner(inputProgram, compiler.getDestinationDirectory().getAbsolutePath());
+
+        return junitRunner.runTest(tests);
     }
 
     protected void makeDSpotClassTest() {
-        File out = new File(outputDirectory + "/" + inputProgram.getRelativeTestSourceCodeDir());
+        File out = new File(inputProgram.getProgramDir() + "/" + inputProgram.getRelativeTestSourceCodeDir());
         goodTest.stream()
-//                .map(ampTest -> instruMethod(ampTest))
                 .forEach(test -> test.getDeclaringType().addMethod(test));
 
         goodTest.stream()
@@ -330,18 +388,11 @@ public class TestAmplification {
             return false;
         }
 
-        if(!guavaTestlib) {
-            return candidate.getSimpleName().contains("test")
-                    || candidate.getAnnotations().stream()
-                    .map(annotation -> annotation.toString())
-                    .anyMatch(annotation -> annotation.startsWith("@org.junit.Test"));
-        } else {
-            return  subClassOfAbstractTester((CtClass) candidate.getDeclaringType())
-                    && (candidate.getSimpleName().contains("test")
-                    || candidate.getAnnotations().stream()
-                    .map(annotation -> annotation.toString())
-                    .anyMatch(annotation -> annotation.startsWith("@org.junit.Test")));
-        }
+
+        return candidate.getSimpleName().contains("test")
+                || candidate.getAnnotations().stream()
+                .map(annotation -> annotation.toString())
+                .anyMatch(annotation -> annotation.startsWith("@org.junit.Test"));
     }
 
     protected boolean subClassOfAbstractTester(CtClass cl) {
@@ -356,4 +407,17 @@ public class TestAmplification {
         } catch (Exception e) {}
         return false;
     }
+
+
+//    public void iniSourceClasspath(InputProgram inputProgram) throws Exception {
+//        DependencyResolver dp = new MavenDependencyResolver();
+//        dp.resolveDependencies(inputProgram);
+//        String[] sourceCp = new String[dp.getDependencies().size() + 2];
+//        for(int i = 0; i < dp.getDependencies().size(); i++) {
+//            sourceCp[i] = dp.getDependencies().get(i).getPath();
+//        }
+//        sourceCp[sourceCp.length - 2] = builder.getDirectory() + "/" + inputProgram.getClassesDir();
+//        sourceCp[sourceCp.length - 1] = builder.getDirectory() + "/" + inputProgram.getTestClassesDir();
+//        inputProgram.getFactory().getEnvironment().setSourceClasspath(sourceCp);
+//    }
 }
