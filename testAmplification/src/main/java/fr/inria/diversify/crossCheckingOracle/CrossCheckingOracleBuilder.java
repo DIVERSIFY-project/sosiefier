@@ -20,20 +20,20 @@ import java.util.stream.Collectors;
  */
 public class CrossCheckingOracleBuilder {
 
-    public CtMethod builder(CtMethod originalTest) {
-        Factory factory = originalTest.getFactory();
-        CtType<?> declaringClass = originalTest.getDeclaringType();
+    public CtMethod builder(CtMethod test) {
+        Factory factory = test.getFactory();
+        CtType<?> declaringClass = test.getDeclaringType();
 
-        List<CtLocalVariable> localVar = findAllVariableDeclaration(originalTest.getBody());
-        boolean isOverride = originalTest.getAnnotations().stream()
+        List<CtLocalVariable> localVar = findAllVariableDeclaration(test.getBody());
+        boolean isOverride = test.getAnnotations().stream()
                 .anyMatch(annotation -> !annotation.getSignature().contains("Override"));
         if(localVar.isEmpty() && !isOverride) {
             return null;
         }
 
-        Set<CtTypeReference<? extends Throwable>> thrownTypes = getThrow(originalTest);
+        Set<CtTypeReference<? extends Throwable>> thrownTypes = getThrow(test);
 
-        CtMethod runMethod = buildRunMethod(originalTest, thrownTypes, localVar);
+        CtMethod runMethod = buildRunMethod(test, thrownTypes, localVar);
 
         CtBlock<Object> body = factory.Core().createBlock();
         switchToSosie(body, false);
@@ -42,22 +42,22 @@ public class CrossCheckingOracleBuilder {
 
         body.addStatement(factory.Code().createCodeSnippetStatement(runMethod.getSimpleName() + "(objects1)"));
 
-        addTeardownStatement(originalTest, body);
-        addSetUpStatement(originalTest, body);
+        addTeardownStatement(test, body);
+        addSetUpStatement(test, body);
 
         body.addStatement(factory.Code().createCodeSnippetStatement(runMethod.getSimpleName() + "(objects2)"));
         addFilter(body, "objects1", "objects2", "filter");
 
-        addTeardownStatement(originalTest, body);
-        addSetUpStatement(originalTest, body);
+        addTeardownStatement(test, body);
+        addSetUpStatement(test, body);
 
         addLocalListDeclaration(body, "objects3");
         addLocalListDeclaration(body, "objects4");
 
         body.addStatement(factory.Code().createCodeSnippetStatement(runMethod.getSimpleName() + "(objects3)"));
 
-        addTeardownStatement(originalTest, body);
-        addSetUpStatement(originalTest, body);
+        addTeardownStatement(test, body);
+        addSetUpStatement(test, body);
 
         switchToSosie(body, true);
 
@@ -66,23 +66,23 @@ public class CrossCheckingOracleBuilder {
         addCompare(body, "objects3", "objects4", "filter");
 
         CtMethod cloneMethod = factory.Method().create(declaringClass,
-                    originalTest.getModifiers(),
-                    originalTest.getType(),
-                    originalTest.getSimpleName() + "_clone",
-                    originalTest.getParameters(),
+                test.getModifiers(),
+                test.getType(),
+                test.getSimpleName() + "_clone",
+                test.getParameters(),
                     thrownTypes);
 
-        cloneMethod.setAnnotations(getAnnotations(originalTest));
+        cloneMethod.setAnnotations(getAnnotations(test));
         cloneMethod.setBody(body);
 
         return cloneMethod;
     }
 
-    protected CtMethod buildRunMethod(CtMethod originalTest,  Set<CtTypeReference<? extends Throwable>> thrownTypes, List<CtLocalVariable> localVar) {
-        Factory factory = originalTest.getFactory();
-        CtType<?> declaringClass = originalTest.getDeclaringType();
+    protected CtMethod buildRunMethod(CtMethod test,  Set<CtTypeReference<? extends Throwable>> thrownTypes, List<CtLocalVariable> localVar) {
+        Factory factory = test.getFactory();
+        CtType<?> declaringClass = test.getDeclaringType();
 
-        CtBlock tryBody = factory.Core().clone(originalTest.getBody());
+        CtBlock tryBody = factory.Core().clone(test.getBody());
         addCopyObject(tryBody, "_objects_", localVar);
 
         CtParameter<Object> param = factory.Core().createParameter();
@@ -94,13 +94,13 @@ public class CrossCheckingOracleBuilder {
         params.add(param);
 
         CtMethod mth = factory.Method().create(declaringClass,
-                originalTest.getModifiers(),
-                originalTest.getType(),
-                originalTest.getSimpleName() + "_run",
+                test.getModifiers(),
+                test.getType(),
+                test.getSimpleName() + "_run",
                 params,
                 thrownTypes);
 
-        if(isExceptionTest(originalTest)) {
+        if(isExceptionTest(test)) {
             mth.setBody(tryBody);
         } else {
             CtTry tryBlock = buildTryBody(tryBody, factory);
@@ -163,13 +163,13 @@ public class CrossCheckingOracleBuilder {
     protected void addFilter(CtBlock<Object> body, String originalsObjects, String sosiesObjects, String filterName) {
         Factory factory = body.getFactory();
         CtCodeSnippetStatement stmt = factory.Code().createCodeSnippetStatement("java.util.List<Boolean> " + filterName
-                + " = fr.inria.diversify.crossCheckingOracle.compare.Compare.getSingleton().buildFilter(" + originalsObjects + "," + sosiesObjects + ")");
+                + " = fr.inria.diversify.compare.Compare.getSingleton().buildFilter(" + originalsObjects + "," + sosiesObjects + ")");
         body.addStatement(stmt);
     }
 
     protected void addCompare(CtBlock<Object> body, String originalsObjects, String sosiesObjects, String filter) {
         Factory factory = body.getFactory();
-        CtCodeSnippetStatement stmt = factory.Code().createCodeSnippetStatement("org.junit.Assert.assertTrue(fr.inria.diversify.crossCheckingOracle.compare.Compare.getSingleton().compare("
+        CtCodeSnippetStatement stmt = factory.Code().createCodeSnippetStatement("org.junit.Assert.assertTrue(fr.inria.diversify.compare.Compare.getSingleton().compare("
                 + originalsObjects + "," + sosiesObjects + ", "+ filter + "))");
         body.addStatement(stmt);
     }
@@ -200,7 +200,7 @@ public class CrossCheckingOracleBuilder {
     protected void addSetUpStatement(CtMethod mth, CtBlock body) {
         if(!mth.getModifiers().contains(ModifierKind.STATIC)) {
             CtCodeSnippetStatement stmt =
-                    mth.getFactory().Code().createCodeSnippetStatement("fr.inria.diversify.crossCheckingOracle.compare.TestUtils.runTearDown(this)");
+                    mth.getFactory().Code().createCodeSnippetStatement("fr.inria.diversify.compare.TestUtils.runTearDown(this)");
             body.addStatement(stmt);
         }
     }
@@ -213,7 +213,7 @@ public class CrossCheckingOracleBuilder {
 //        }
         if(!mth.getModifiers().contains(ModifierKind.STATIC)) {
             CtCodeSnippetStatement stmt =
-                    mth.getFactory().Code().createCodeSnippetStatement("fr.inria.diversify.crossCheckingOracle.compare.TestUtils.runSetUp(this)");
+                    mth.getFactory().Code().createCodeSnippetStatement("fr.inria.diversify.compare.TestUtils.runSetUp(this)");
             body.addStatement(stmt);
         }
     }

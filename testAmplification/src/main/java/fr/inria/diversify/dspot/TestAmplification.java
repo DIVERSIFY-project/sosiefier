@@ -95,11 +95,15 @@ public class TestAmplification {
             if(!status) {
                 break;
             }
-            Result result = null;
+            Result result;
             try {
                 result = runTests(classesFor(instruTests));
                 if(result != null) {
                     Log.debug("{} tests run, {} failure", result.getRunCount(), result.getFailureCount());
+
+                    AssertGenerator ag = new AssertGenerator( instruTests.get(0), compiler, inputProgram) ;
+                    ag.genereteAssert();
+
                 }
                 } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -121,32 +125,6 @@ public class TestAmplification {
         removeTests(instruTests);
         makeDSpotClassTest();
     }
-
-//    protected int run(CtClass classTest) throws InterruptedException {
-//        String goals = "test -Dmaven.compiler.useIncrementalCompilation=false -Dmaven.main.skip=true -Dtest=";
-//        if(classTest.getModifiers().contains(ModifierKind.ABSTRACT)) {
-//            goals += inputProgram.getAllElement(CtClass.class).stream()
-//                        .map(elem -> (CtClass) elem)
-//                        .filter(cl -> !cl.getModifiers().contains(ModifierKind.ABSTRACT))
-//                        .filter(cl -> {
-//                            CtTypeReference superClass = cl.getSuperclass();
-//                            while (superClass != null && superClass.getDeclaration() != null) {
-//                                if (superClass.getDeclaration() == classTest) {
-//                                    return true;
-//                                }
-//                                superClass = superClass.getSuperclass();
-//                            }
-//                            return false;
-//                        })
-//                        .map(CtClass::getQualifiedName)
-//                        .collect(Collectors.joining(","));
-//        } else {
-//            goals += classTest.getQualifiedName();
-//        }
-//
-//        builder.runBuilder(new String[]{goals});
-//        return builder.getStatus();
-//    }
 
     protected void removeTests(Collection<CtMethod> tests) {
         tests.stream()
@@ -290,18 +268,10 @@ public class TestAmplification {
         }
     }
 
-//    protected Result runTest(CtClass test) throws ClassNotFoundException {
-//        List<CtClass> list = new ArrayList<>(1);
-//        list.add(test);
-//
-//        return runTests(list);
-//    }
-
-
     protected Result runTests(List<CtClass> tests) throws ClassNotFoundException {
         JunitRunner junitRunner = new JunitRunner(inputProgram, compiler.getDestinationDirectory().getAbsolutePath());
 
-        return junitRunner.runTest(tests);
+        return junitRunner.runTestClasses(tests);
     }
 
     protected void makeDSpotClassTest() {

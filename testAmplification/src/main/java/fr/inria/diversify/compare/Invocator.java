@@ -1,4 +1,4 @@
-package fr.inria.diversify.crossCheckingOracle.compare;
+package fr.inria.diversify.compare;
 
 import java.util.concurrent.*;
 

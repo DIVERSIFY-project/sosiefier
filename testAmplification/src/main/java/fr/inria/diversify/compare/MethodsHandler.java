@@ -1,4 +1,4 @@
-package fr.inria.diversify.crossCheckingOracle.compare;
+package fr.inria.diversify.compare;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -60,6 +60,13 @@ public class MethodsHandler {
 
     }
 
+    public List<Method> getAllMethods(Object o) {
+        if (!cache.containsKey(o.getClass())) {
+            findMethods(o);
+        }
+        return cache.get(o.getClass());
+    }
+
     protected void findMethods(Object o) {
         List<Method> methodsList = new ArrayList<Method>();
         for (Method m : o.getClass().getMethods()) {
@@ -77,7 +84,7 @@ public class MethodsHandler {
             return false;
         }
         Class<?>[] parameterTypes = m.getParameterTypes();
-        if (parameterTypes.length != 0) { // we only consider methods that take no parameters
+        if (parameterTypes.length != 0) { // we only consider tests that take no parameters
             return false;
         }
         return true;
