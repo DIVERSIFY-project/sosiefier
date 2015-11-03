@@ -34,7 +34,7 @@ public class TestAmplification {
     //original test + good amp test
     protected Set<CtMethod> goodTest;
     protected List<TestCoverage> ampCoverage;
-    protected MavenBuilder builder;
+//    protected MavenBuilder builder;
     protected InputProgram inputProgram;
     protected String logger;
     protected int totalAmpTest;
@@ -44,7 +44,7 @@ public class TestAmplification {
 
     public TestAmplification(InputProgram inputProgram, MavenBuilder builder, DiversityCompiler compiler) {
         this.inputProgram = inputProgram;
-        this.builder = builder;
+//        this.builder = builder;
         this.compiler = compiler;
         this.logger = "fr.inria.diversify.logger.logger";
     }
@@ -83,7 +83,6 @@ public class TestAmplification {
 
         int nbAmpTest = 0;
         deleteLogFile();
-//        runTest(classTest);
         List<CtMethod> instruTests = initAmpTest(classTest);
 
         for (int i = 0; i < maxIteration; i++) {

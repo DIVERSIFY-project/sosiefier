@@ -41,7 +41,7 @@ public class ObjectLog {
             } else if (isPrimitive(object)) {
                 addObservation(positionId, stringObject, object);
             } else if (isPrimitiveArray(object)) {
-
+                addObservation(positionId, stringObject, object);
             } else {
                 observeNotNullObject(object, stringObject, positionId, deep);
             }

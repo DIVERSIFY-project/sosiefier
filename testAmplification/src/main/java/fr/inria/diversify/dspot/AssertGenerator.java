@@ -45,7 +45,13 @@ public class AssertGenerator {
         for(int i = 0; i < 50; i++) {
             statementsIndexToAssert.add(i);
         }
+    }
 
+    public AssertGenerator(CtMethod test, DiversityCompiler compiler, InputProgram inputProgram, List<Integer> statementsIndexToAssert) throws IOException {
+        this.test = test;
+        this.compiler = compiler;
+        this.junitRunner = new JunitRunner(inputProgram, compiler.getDestinationDirectory().getAbsolutePath());
+        this.statementsIndexToAssert = statementsIndexToAssert;
     }
 
     public CtMethod genereteAssert() {
@@ -78,9 +84,14 @@ public class AssertGenerator {
     protected CtMethod buildNewAssert() throws IOException, ClassNotFoundException {
         CtClass cl = initTestClass();
         testsToRun.clear();
-        CtMethod testWithLog = createTestWithLog();
-        testsToRun.add(testWithLog);
-        cl.addMethod(testWithLog);
+
+        for(int i = 0; i < 3; i++) {
+            CtMethod testWithLog = createTestWithLog();
+            testWithLog.setSimpleName(testWithLog.getSimpleName() + i);
+            testsToRun.add(testWithLog);
+            cl.addMethod(testWithLog);
+        }
+
         writeAndCompile(cl);
         ObjectLog.reset();
         runTest();
