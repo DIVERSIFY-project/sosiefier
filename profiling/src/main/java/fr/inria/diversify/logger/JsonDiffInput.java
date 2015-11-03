@@ -3,6 +3,7 @@ package fr.inria.diversify.logger;
 import fr.inria.diversify.logger.branch.BranchDiff;
 import fr.inria.diversify.logger.exception.ExceptionDiff;
 import fr.inria.diversify.logger.graph.GraphsDiff;
+import fr.inria.diversify.logger.transformationUsed.StaticDiff;
 import fr.inria.diversify.logger.variable.VariableDiff;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.persistence.json.input.JsonSectionInput;
@@ -35,7 +36,7 @@ public class JsonDiffInput extends JsonSectionInput {
                JSONArray diffs = getJsonObject().getJSONArray(JsonDiffOutput.DIFFS);
 
                for(int i = 0; i < diffs.length(); i++) {
-                   JSONObject diff = diffs.getJSONObject(i);
+                    JSONObject diff = diffs.getJSONObject(i);
                    UUID uuid = UUID.fromString(diff.getString(JsonDiffOutput.TRANSFORMATION));
                    Transformation transformation = transformations.get(uuid);
 
@@ -72,6 +73,8 @@ public class JsonDiffInput extends JsonSectionInput {
                     break;
                 case "exception":
                     diffs.add(new ExceptionDiff(diff));
+                case "staticDiff":
+                    diffs.add(new StaticDiff(diff));
             }
         }
         return diffs;

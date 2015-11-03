@@ -123,7 +123,7 @@ public class MavenDependencyResolver implements DependencyResolver {
     protected void resolveModulesDependencies(MavenProject parentProject, Set<String> dependencyResolve) {
         for(String module: parentProject.getModules()) {
             try {
-                MavenProject project = loadProject(new File(baseDir + module + "/pom.xml"));
+                MavenProject project = loadProject(new File(baseDir + "/" + module + "/pom.xml"));
                 resolveAllDependencies(project, dependencyResolve);
             } catch (Exception e) {
                 e.printStackTrace();
