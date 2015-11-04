@@ -66,9 +66,6 @@ public class DiversifyOracle extends SinglePointDiversify {
 
                 trans.setStatus(status);
                 trans.setFailures(builder.getTestFail());
-                if (status == 0) {
-                    copySosieProgram();
-                }
                 // error during runTest
             } catch (Exception e) {
                 trans.setStatus(-2);

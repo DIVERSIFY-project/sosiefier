@@ -1,6 +1,7 @@
 package fr.inria.diversify.issta2;
 
 import fr.inria.diversify.diversification.AbstractDiversify;
+import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.logger.Diff;
 import fr.inria.diversify.logger.JsonDiffOutput;
 import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
@@ -8,16 +9,13 @@ import fr.inria.diversify.transformation.MultiTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
 import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
+import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collector;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -31,15 +29,22 @@ public class MultiTransformationGenerator extends AbstractDiversify {
     protected int transformationSize;
     protected Map<Transformation, Set<Diff>> diffs;
 
+    public MultiTransformationGenerator(InputConfiguration inputConfiguration, String project, String src) {
+        this.sourceDir = src;
+        this.projectDir = project;
+        transformations = new ArrayList<>();
+        this.inputConfiguration = inputConfiguration;
+    }
+
     @Override
     public void run(int n) throws Exception {
         currentMultiTransformation = new MultiTransformation(true);
 
         while(trial < n && transQuery.hasNextTransformation()) {
             applyAndCheck(transQuery.query());
-
+            addTransformation();
             if(currentMultiTransformation.size() == transformationSize) {
-                addTransformation();
+//                addTransformation();
                 currentMultiTransformation = new MultiTransformation(true);
                 transQuery.currentTransformationEnd();
                 trial++;
@@ -50,12 +55,12 @@ public class MultiTransformationGenerator extends AbstractDiversify {
     protected void addTransformation() throws JSONException {
         if(!transformations.contains(currentMultiTransformation)) {
             transformations.add(currentMultiTransformation);
-            Set<Diff> diffSet = currentMultiTransformation.getTransformations().stream()
-                    .filter(t -> diffs.containsKey(t))
-                    .flatMap(t -> diffs.get(t).stream())
-                    .collect(Collectors.toSet());
-            diffs.put(currentMultiTransformation, diffSet);
         }
+        Set<Diff> diffSet = currentMultiTransformation.getTransformations().stream()
+                .filter(t -> diffs.containsKey(t))
+                .flatMap(t -> diffs.get(t).stream())
+                .collect(Collectors.toSet());
+        diffs.put(currentMultiTransformation, diffSet);
     }
 
     protected void applyAndCheck(Transformation trans) throws Exception {
@@ -124,4 +129,11 @@ public class MultiTransformationGenerator extends AbstractDiversify {
         writer.write(transformations, fileName + ".json", inputConfiguration.getInputProgram().getProgramDir() + "/pom.xml");
         return fileName + ".json";
     }
+    public void setTransformationQuery(TransformationQuery transQuery) {
+        if(transQuery instanceof DiffQuery) {
+            diffs = ((DiffQuery) transQuery).getTransToDiffs();
+        }
+        this.transQuery = transQuery;
+    }
+
 }

@@ -10,6 +10,8 @@ import fr.inria.diversify.coverage.MultiCoverageReport;
 import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.diversification.*;
 import fr.inria.diversify.issta2.Compare;
+import fr.inria.diversify.issta2.DiffQuery;
+import fr.inria.diversify.issta2.MultiTransformationGenerator;
 import fr.inria.diversify.issta2.SosieComparator;
 import fr.inria.diversify.logger.branch.BranchComparator;
 import fr.inria.diversify.logger.transformationUsed.StaticDiffBuilder;
@@ -19,7 +21,6 @@ import fr.inria.diversify.statistic.CVLMetric;
 import fr.inria.diversify.switchsosie.SwitchQuery;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.query.*;
-import fr.inria.diversify.transformatonSelection.TestAndBranchSelection;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.visu.Visu;
@@ -88,7 +89,6 @@ public class DiversifyMain {
         String runner = inputConfiguration.getProperty("runner", "simple");
         String project = inputConfiguration.getProperty("project");
         String src = inputConfiguration.getProperty("src");
-        String testSrcDir = inputConfiguration.getProperty("testSrc", null);
         String sosieDir = inputConfiguration.getProperty("copy.sosie.sources.to", "");
         String resultDir = inputConfiguration.getProperty("result");
 
@@ -118,13 +118,7 @@ public class DiversifyMain {
                 abstractDiversify = multi;
                 break;
             }
-            case "fse": {
-                DiversifyAndCompare dac = new DiversifyAndCompare(inputConfiguration, project, src, testSrcDir, inputConfiguration.getProperty("compare.filter"));
-                dac.setAmplifiedTestDir(inputConfiguration.getProperty("amplifiedTestDir"));
-                dac.setOriginalLogDir(inputConfiguration.getProperty("compare.originalLog"));
-                abstractDiversify = dac;
-                break;
-            }
+
             case "compare": {
                 SosieComparator comparator = new SosieComparator(inputConfiguration.getInputProgram());
                 comparator.addComparator(new BranchComparator());
@@ -252,6 +246,13 @@ public class DiversifyMain {
                 query.setRemoveAfterQuery(true);
                 return query;
             }
+            case "diffs": {
+                DiffQuery query = new DiffQuery(inputProgram);
+                query.setShuffle(true);
+                query.setRemoveAfterQuery(true);
+                return query;
+            }
+
             case "switch": {
                 int rangeMin = Integer.parseInt(inputConfiguration.getProperty("transformation.range.min", "-1"));
                 int rangeMax = Integer.parseInt(inputConfiguration.getProperty("transformation.range.max", "-1"));
@@ -265,26 +266,11 @@ public class DiversifyMain {
                 query.setRemoveAfterQuery(true);
                 return query;
             }
-            case "ampsosie": {
-                AmpSosieQuery query = new AmpSosieQuery(inputProgram);
-                query.initDiff(inputConfiguration.getPreviousTransformationPath(), inputConfiguration.getProperty("compare.filter"));
-                query.setShuffle(true);
-                query.setRemoveAfterQuery(false);
-                return query;
-            }
             case "fse":{
                 Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
                 return new ADRTransformationQuery(inputProgram, cl, subType, false);
             }
-            case "issta2": {
-                Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
-                ADRTransformationQuery query = new ADRTransformationQuery(inputProgram, cl, subType, false);
-                String branchInformation = inputConfiguration.getProperty("branchInformation");
-                TestAndBranchSelection functionEval = new TestAndBranchSelection(branchInformation);
-                query.setEvalFunction(functionEval);
 
-                return query;
-            }
             default:
                 //Try to construct the executeQuery from the explicit class
                 try {
