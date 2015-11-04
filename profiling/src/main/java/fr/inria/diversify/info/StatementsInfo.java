@@ -187,14 +187,13 @@ public class StatementsInfo {
     }
 
     public void init() throws Exception {
-        coverageInfo = new CoverageInfo(inputProgram);
-        coverageInfo.init(inputConfiguration.getProperty("tmpDir"));
+//        coverageInfo = new CoverageInfo(inputProgram);
+//        coverageInfo.init(inputConfiguration.getProperty("tmpDir"));
+//
+//        intBranch();
+//
+//        initAssertCount();
 
-        intBranch();
-
-        initAssertCount();
-
-        transformations = new LinkedList<>();
     }
 
     protected void intBranch() {

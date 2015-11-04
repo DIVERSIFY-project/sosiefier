@@ -32,15 +32,17 @@ public class JsonDiffOutput extends JsonSectionOutput {
                 outputObject.put(DIFFS, array);
 
                 for(Transformation transformation : diffs.keySet()) {
-                    JSONObject diffsForTrans = new JSONObject();
-                    diffsForTrans.put(TRANSFORMATION, transformation.getIndex());
+                    if(transformation != null) {
+                        JSONObject diffsForTrans = new JSONObject();
+                        diffsForTrans.put(TRANSFORMATION, transformation.getIndex());
 
-                    JSONArray diffArray = new JSONArray();
-                    for (Diff diff : diffs.get(transformation)) {
-                        diffArray.put(diff.toJSON());
+                        JSONArray diffArray = new JSONArray();
+                        for (Diff diff : diffs.get(transformation)) {
+                            diffArray.put(diff.toJSON());
+                        }
+                        diffsForTrans.put(DIFFS, diffArray);
+                        array.put(diffsForTrans);
                     }
-                    diffsForTrans.put(DIFFS, diffArray);
-                    array.put(diffsForTrans);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
