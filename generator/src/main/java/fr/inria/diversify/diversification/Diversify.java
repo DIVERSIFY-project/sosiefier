@@ -228,7 +228,6 @@ public class Diversify extends AbstractDiversify {
 
         if (status == Transformation.SOSIE) {
             sosie++;
-            copySosieProgram();
         }
 
         //Store transformation status

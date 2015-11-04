@@ -1,49 +1,45 @@
-package fr.inria.diversify.diversification;
+package fr.inria.diversify.issta2;
 
-import fr.inria.diversify.statistic.SinglePointSessionResults;
-import fr.inria.diversify.testamplification.compare.diff.Diff;
+import fr.inria.diversify.diversification.AbstractDiversify;
+import fr.inria.diversify.logger.Diff;
+import fr.inria.diversify.logger.JsonDiffOutput;
+import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
 import fr.inria.diversify.transformation.MultiTransformation;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
 import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
-import fr.inria.diversify.transformation.query.AmpSosieQuery;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
- * Created by Simon on 13/02/15.
+ * User: Simon
+ * Date: 04/11/15
+ * Time: 14:02
  */
-public class MultiTransformationGenerator extends DiversifyAndCompare {
+public class MultiTransformationGenerator extends AbstractDiversify {
     protected MultiTransformation currentMultiTransformation;
     protected boolean onlySosie;
-
-
     protected int transformationSize;
-
-    public MultiTransformationGenerator(InputConfiguration inputConfiguration, String projectDir, String srcDir) {
-        super(inputConfiguration, projectDir, srcDir, null, null);
-    }
+    protected Map<Transformation, Set<Diff>> diffs;
 
     @Override
     public void run(int n) throws Exception {
         currentMultiTransformation = new MultiTransformation(true);
+
         while(trial < n && transQuery.hasNextTransformation()) {
             applyAndCheck(transQuery.query());
 
-            addTransformation();
-
-            if(currentMultiTransformation.size() == transformationSize || !transQuery.hasNextTransformation()) {
+            if(currentMultiTransformation.size() == transformationSize) {
                 addTransformation();
-
-                copySosieProgram();
                 currentMultiTransformation = new MultiTransformation(true);
                 transQuery.currentTransformationEnd();
                 trial++;
@@ -52,14 +48,13 @@ public class MultiTransformationGenerator extends DiversifyAndCompare {
     }
 
     protected void addTransformation() throws JSONException {
-        if(currentMultiTransformation.getStatus() == 0) {
-            Transformation clone = currentMultiTransformation.clone();
-            if(!transformations.contains(clone)) {
-                transformations.add(clone);
-                Diff d = ((AmpSosieQuery) transQuery).getCurrentDiff().clone();
-                d.setSosie(clone);
-                diff.add(d.toJson());
-            }
+        if(!transformations.contains(currentMultiTransformation)) {
+            transformations.add(currentMultiTransformation);
+            Set<Diff> diffSet = currentMultiTransformation.getTransformations().stream()
+                    .filter(t -> diffs.containsKey(t))
+                    .flatMap(t -> diffs.get(t).stream())
+                    .collect(Collectors.toSet());
+            diffs.put(currentMultiTransformation, diffSet);
         }
     }
 
@@ -91,7 +86,7 @@ public class MultiTransformationGenerator extends DiversifyAndCompare {
         }
     }
 
-    protected void writeTransformation(String fileName, ASTTransformation transformation) throws IOException, JSONException {
+    protected void writeTransformation(String fileName, Transformation transformation) throws IOException, JSONException {
         FileWriter out = new FileWriter(fileName);
 
         out.write(transformation.toJSONObject().toString());
@@ -105,5 +100,28 @@ public class MultiTransformationGenerator extends DiversifyAndCompare {
 
     public void setTransformationSize(int transformationSize) {
         this.transformationSize = transformationSize;
+    }
+
+    /**
+     * Write found transformations to file.
+     *
+     *
+     * @param fileName File name where the transformations are going to be stored.
+     * @throws IOException
+     * @throws JSONException
+     */
+    public String writeTransformations(String fileName) throws IOException, JSONException {
+        if (transformations.isEmpty())
+            return "";
+
+        Map<Transformation, Set<Diff>> multiDiffs = new HashMap<>();
+        for(Transformation transformation : transformations) {
+            multiDiffs.put(transformation, diffs.get(transformation));
+        }
+
+        JsonTransformationWriter writer = new JsonTransformationWriter();
+        writer.addSection(JsonDiffOutput.class, new JsonDiffOutput(multiDiffs));
+        writer.write(transformations, fileName + ".json", inputConfiguration.getInputProgram().getProgramDir() + "/pom.xml");
+        return fileName + ".json";
     }
 }

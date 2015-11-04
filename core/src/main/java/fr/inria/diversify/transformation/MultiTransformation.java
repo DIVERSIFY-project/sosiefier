@@ -124,6 +124,10 @@ public class MultiTransformation extends Transformation {
         return ret;
     }
 
+    public Collection<Transformation> getTransformations() {
+        return transformations;
+    }
+
     @Override
     public SourcePosition getPosition() {
         throw new NotImplementedException();

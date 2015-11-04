@@ -71,9 +71,6 @@ public class SinglePointDiversify extends AbstractDiversify {
 
                 trans.setStatus(status);
                 trans.setFailures(builder.getTestFail());
-                if (status == 0) {
-                    copySosieProgram();
-                }
                 // error during runTest
             } catch (Exception e) {
                 trans.setStatus(-2);
@@ -85,10 +82,10 @@ public class SinglePointDiversify extends AbstractDiversify {
 
             ((SinglePointSessionResults) sessionResults).addRunResults(trans);
         } catch (ApplyTransformationException e) {
-            tryRestore(trans,e);
-        } catch (BuildTransplantException e) {}
+            tryRestore(trans, e);
+        } catch (BuildTransplantException e) {
+        }
     }
-
 
     protected void applyTransformation(Transformation trans) throws Exception {
         if(withParent) {

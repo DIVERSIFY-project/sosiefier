@@ -2,7 +2,6 @@ package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.bytecode.CompareBytecode;
 import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
-import fr.inria.diversify.sosie.logger.Instru;
 import fr.inria.diversify.statistic.AbstractSessionResults;
 import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.transformation.SingleTransformation;
@@ -267,55 +266,6 @@ public abstract class AbstractDiversify {
         return status;
     }
 
-
-    protected String copySosieProgram() throws IOException, JSONException {
-        //Store the whole sosie program.
-        try {
-
-            if (getSosieSourcesDir() != null && getSosieSourcesDir().length() > 0) {
-                File f = new File(getSosieSourcesDir());
-                if (!(f.exists())) {
-                    f.mkdirs();
-                }
-
-                String destPath = getSosieDestinationPath();
-
-                boolean intruMethodCall = Boolean.parseBoolean(inputConfiguration.getProperty("intruMethodCall","false"));
-                boolean intruVariable = Boolean.parseBoolean(inputConfiguration.getProperty("intruVariable","false"));
-                boolean intruError = Boolean.parseBoolean(inputConfiguration.getProperty("intruError","false"));
-                boolean intruNewTest = Boolean.parseBoolean(inputConfiguration.getProperty("intruNewTest","false"));
-                int javaVersion = Integer.parseInt(inputConfiguration.getProperty("javaVersion"));
-
-                if (intruMethodCall || intruVariable || intruError || intruNewTest) {
-                    Instru instru = new Instru(tmpDir, sourceDir, inputConfiguration.getProperty("testSrc"), javaVersion, destPath, transformations);
-                    instru.setMethodCall(intruMethodCall);
-                    instru.setVariable(intruVariable);
-                    instru.setError(intruError);
-                    instru.setNewTest(intruNewTest);
-                    instru.instru();
-                } else {
-                    File dest = new File(destPath);
-                    if (!(dest.exists())) {
-                        dest.mkdirs();
-                    }
-                    FileUtils.copyDirectory(new File(tmpDir), dest);
-                }
-
-                FileWriter writer = new FileWriter(destPath + "/trans.json");
-                for (Transformation t : transformations) {
-                    writer.write(t.toJSONObject().toString() + "\n");
-                }
-                writer.close();
-
-                return destPath;
-            }
-            return null;
-        } catch (IOException e) {
-            //We may also don't want to recover from here. If no instrumentation possible... now what?
-            throw new RuntimeException(e);
-        }
-    }
-
     protected String getSosieDestinationPath() {
         return getSosieSourcesDir() + "/" + sessionResults.getBeginTime() + "_trial_" + trial;
     }
@@ -327,11 +277,6 @@ public abstract class AbstractDiversify {
             e.printStackTrace();
             Log.debug("");
         }
-
-//        try {
-//            trans.printJavaFile(tmpDir + "/" + sourceDir);
-//        } catch (Exception print) {}
-
         int status = runTest(tmpDir);
         if (status != 0) {
             throw new Exception(e);
