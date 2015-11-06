@@ -57,7 +57,7 @@ public class FromISSTAToTestEyeFormat {
      * @throws Exception
      */
     private static Collection<Transformation> loadWithSosiesInput(InputConfiguration inputConfiguration) throws Exception {
-        MavenDependencyResolver dr = new MavenDependencyResolver();
+        MavenDependencyResolver dr = MavenDependencyResolver.dependencyResolver();
         dr.resolveDependencies(InitUtils.initInputProgram(inputConfiguration));
         InputProgram p = new InputProgram();
         p.configure(inputConfiguration);

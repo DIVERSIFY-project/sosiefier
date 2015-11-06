@@ -25,7 +25,7 @@ public class CountAbstractVariable {
         srcDirectory = inputConfiguration.getProperty("src");
         javaVersion = Integer.parseInt(inputConfiguration.getProperty("javaVersion", "5"));
 
-        MavenDependencyResolver t = new MavenDependencyResolver();
+        MavenDependencyResolver t = MavenDependencyResolver.dependencyResolver();
         t.resolveDependencies(inputConfiguration.getInputProgram());
 
       //  countVariable();

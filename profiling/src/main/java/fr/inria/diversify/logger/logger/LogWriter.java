@@ -354,8 +354,10 @@ public class LogWriter {
     }
 
     public void logTransformation(String id) {
+        System.out.println("log: "+ id);
         if (!isObserve) {
             try {
+                System.out.println("log2: "+ id);
                 PrintWriter fileWriter = getFileWriter();
                 fileWriter.append(KeyWord.endLine);
                 fileWriter.append(KeyWord.logTransformation);

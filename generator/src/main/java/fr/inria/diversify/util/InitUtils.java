@@ -31,7 +31,7 @@ public class InitUtils {
     }
 
     public static void initDependency(InputConfiguration inputConfiguration) throws Exception, InvalidSdkException {
-        MavenDependencyResolver t = new MavenDependencyResolver();
+        MavenDependencyResolver t = MavenDependencyResolver.dependencyResolver();
         String builder = inputConfiguration.getProperty("builder");
 
         if(builder.equals("maven")) {

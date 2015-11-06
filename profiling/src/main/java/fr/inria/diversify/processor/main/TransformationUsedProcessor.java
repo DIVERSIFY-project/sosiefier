@@ -4,6 +4,7 @@ import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import spoon.reflect.code.*;
+import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
 
@@ -15,16 +16,22 @@ import spoon.reflect.visitor.filter.TypeFilter;
  */
 public class TransformationUsedProcessor extends AbstractLoggingInstrumenter<CtStatement> {
     protected ASTTransformation transformation;
-
+    protected String methodName;
     public TransformationUsedProcessor(InputProgram inputProgram, Transformation transformation) {
         super(inputProgram);
         this.transformation = (ASTTransformation) transformation;
+        this.methodName = this.transformation.methodLocationName();
     }
 
     @Override
     public boolean isToBeProcessed(CtStatement candidate) {
-        return !transformation.getName().equals("delete")
-        && transformation.getCopyTransplant().toString().equals(candidate.toString());
+        if (transformation.getName().equals("delete")) {
+            return false;
+        }
+        CtExecutable mth = candidate.getParent(CtExecutable.class);
+        return mth != null
+            && methodName.equals(mth.getSimpleName())
+            && transformation.getCopyTransplant().toString().equals(candidate.toString());
     }
 
     public void process(CtStatement stmtTrans) {

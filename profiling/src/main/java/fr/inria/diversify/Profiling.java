@@ -44,7 +44,7 @@ public class Profiling {
     }
 
     public void apply() throws Exception {
-        MavenDependencyResolver t = new MavenDependencyResolver();
+        MavenDependencyResolver t = MavenDependencyResolver.dependencyResolver();
         t.resolveDependencies(inputProgram);
 
         transformTest();

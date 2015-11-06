@@ -31,32 +31,48 @@ import java.util.*;
  * Time: 3:47 PM
  */
 public class MavenDependencyResolver implements DependencyResolver {
-    List<URL> dependenciesURL;
-    Properties properties;
-    String baseDir;
-    MavenResolver resolver;
-    ArrayList<String> repositoriesUrls;
+    protected List<URL> dependenciesURL;
+    protected Properties properties;
+    protected String baseDir;
+    protected MavenResolver resolver;
+    protected List<String> repositoriesUrls;
+    protected List<String> alreadyResolve;
+    private static MavenDependencyResolver singleton;
 
 
-    public MavenDependencyResolver() {
+
+    public static MavenDependencyResolver dependencyResolver() {
+        if(singleton == null) {
+            singleton = new MavenDependencyResolver();
+        }
+        return singleton;
+    }
+
+    private MavenDependencyResolver() {
         dependenciesURL = new ArrayList<>();
         resolver = new MavenResolver();
         resolver.setBasePath(System.getProperty("user.home") + File.separator + ".m2/repository");
 
         repositoriesUrls = new ArrayList<>();
         repositoriesUrls.add("http://repo1.maven.org/maven2/");
+
+        alreadyResolve = new ArrayList<>();
     }
 
     public void resolveDependencies(InputProgram inputProgram) throws Exception {
-        File pomFile = new File(inputProgram.getProgramDir() + "/pom.xml");
-        Log.info("resolve dependencies of {}", pomFile);
-        baseDir = inputProgram.getProgramDir();
+        String pom = inputProgram.getProgramDir() + "/pom.xml";
+        if(!alreadyResolve.contains(pom)) {
+            alreadyResolve.add(pom);
+            File pomFile = new File(pom);
+            Log.info("resolve dependencies of {}", pomFile);
+            baseDir = inputProgram.getProgramDir();
 
-        MavenProject project = loadProject(pomFile);
-        resolveAllDependencies(project, new HashSet<String>());
+            MavenProject project = loadProject(pomFile);
+            resolveAllDependencies(project, new HashSet<String>());
 
-        addApplicationClasses(inputProgram);
-        loadDependencies();
+            addApplicationClasses(inputProgram);
+            loadDependencies();
+        }
     }
 
     protected MavenProject loadProject(File pomFile) throws IOException, XmlPullParserException {

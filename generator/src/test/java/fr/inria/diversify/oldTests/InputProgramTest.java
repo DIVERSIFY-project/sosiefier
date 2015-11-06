@@ -23,7 +23,7 @@ public class InputProgramTest {
 
         InputProgram inputProgram = new InputProgram();
         inputProgram.setProgramDir(getResourcePath("easymock-light-3.2"));
-        MavenDependencyResolver dr = new MavenDependencyResolver();
+        MavenDependencyResolver dr = MavenDependencyResolver.dependencyResolver();
         dr.resolveDependencies(inputProgram);
         inputProgram.setFactory(new SpoonMetaFactory().buildNewFactory(getResourcePath("easymock-light-3.2/src/main"), 5));
         inputProgram.setRelativeSourceCodeDir(getResourcePath("easymock-light-3.2"));
@@ -37,7 +37,7 @@ public class InputProgramTest {
 
         InputProgram inputProgram = new InputProgram();
         inputProgram.setProgramDir(getResourcePath("junit"));
-        MavenDependencyResolver dr = new MavenDependencyResolver();
+        MavenDependencyResolver dr = MavenDependencyResolver.dependencyResolver();
         dr.resolveDependencies(inputProgram);
         inputProgram.setFactory(new SpoonMetaFactory().buildNewFactory(getResourcePath("junit/src/main/java"), 5));
         //inputProgram.setSourceCodeDir(getResourcePath("easymock-light-3.2"));

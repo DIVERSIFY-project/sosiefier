@@ -90,6 +90,12 @@ public class StatementsInfo {
                 .filter(t -> t.getStatus() >= 0)
                 .collect(Collectors.toSet());
         writer.write(sosies, output + "_sosie.json", inputProgram.getProgramDir() + "/pom.xml");
+
+        Set<Transformation> sosiesDiff = transToDiffs.keySet().stream()
+                .filter(t -> t != null)
+                .filter(t -> t.getStatus() >= 0)
+                .collect(Collectors.toSet());
+        writer.write(sosiesDiff, output + "_sosieDiff.json", inputProgram.getProgramDir() + "/pom.xml");
     }
 
     protected void writeCSV(String out) throws IOException {

@@ -49,7 +49,7 @@ public class TransformationJSONParserTest extends SosieGeneratorIntegrationTests
     private void testLoadTransformations(InputConfiguration c) {
         Factory factory = null;
         try {
-            MavenDependencyResolver resolver = new MavenDependencyResolver();
+            MavenDependencyResolver resolver = MavenDependencyResolver.dependencyResolver();
             resolver.resolveDependencies(InitUtils.initInputProgram(c));
 
             factory = new SpoonMetaFactory().buildNewFactory(c.getProjectPath() + "/" +c.getRelativeSourceCodeDir(), 7);

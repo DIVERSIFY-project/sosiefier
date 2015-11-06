@@ -23,19 +23,12 @@ import java.util.stream.Collectors;
  * Time: 11:20
  */
 public class StaticDiffBuilder implements Comparator {
-//    protected Map<String, SourcePosition> branchPosition;
-//    protected Map<String, Set<String>> testsByBranch;
-
-//    public StaticDiffBuilder(Map<String, SourcePosition> branchPosition, Map<String, Set<String>> testsByBranch) {
-//        this.branchPosition = branchPosition;
-//        this.testsByBranch = testsByBranch;
-//    }
 
     public StaticDiff buildDiff(ASTTransformation transformation, Map<String, Set<String>> branchesUsedByTest) {
         Set<String> branchesUsed = branchesUsedByTest.values().stream()
                 .flatMap(branches -> branches.stream())
                 .collect(Collectors.toSet());
-
+        branchesUsed.add(transformation.methodLocationName() + ".b");
         return new StaticDiff(branchDiff(transformation, branchesUsed),
                 methodDiff(transformation, branchesUsed));
     }
@@ -64,7 +57,7 @@ public class StaticDiffBuilder implements Comparator {
         }
 
         for(String branch : delete.keySet()) {
-           delete.get(branch).removeAll(newAddExecuted);
+            delete.get(branch).removeAll(newAddExecuted);
            if(!delete.get(branch).isEmpty()) {
                if(!methodDiffs.containsKey("delete")) {
                    methodDiffs.put("delete", new HashSet<>());
@@ -77,16 +70,15 @@ public class StaticDiffBuilder implements Comparator {
 
     public Map<String, Set<String>> branchDiff(ASTTransformation transformation, Set<String> branchesUsed) {
         Map<String, Set<String>> branchesDiff = new HashMap<>();
-        Map<String, CtStatement> add = getAddBranches(transformation);
-        add.remove("b");
-        Map<String, CtStatement> delete = getDeleteBranches(transformation);
-        delete.remove("b");
+        Map<String, CtStatement> add = getAddBranches(transformation, false);
+        Map<String, CtStatement> delete = getDeleteBranches(transformation, false);
         Set<String> newBranchUsed = new HashSet<>();
 
         if(add.isEmpty() && delete.isEmpty()) {
             return branchesDiff;
         }
 
+        String methodFullName = transformation.classLocationName() + "." + transformation.methodLocationName();
         for(String branchFullName : branchesUsed) {
             String branch = branchFullName.split("\\.")[1];
             if(add.containsKey(branch) && !delete.containsKey(branch)) {
@@ -94,7 +86,7 @@ public class StaticDiffBuilder implements Comparator {
                     branchesDiff.put("add", new HashSet<>());
                 }
                 newBranchUsed.add(branch);
-                branchesDiff.get("add").add(branch);
+                branchesDiff.get("add").add(methodFullName + "." + branch);
             }
         }
         for(String branch : delete.keySet()) {
@@ -102,22 +94,22 @@ public class StaticDiffBuilder implements Comparator {
                 if(!branchesDiff.containsKey("delete") ) {
                     branchesDiff.put("delete", new HashSet<>());
                 }
-                branchesDiff.get("delete").add(branch);
+                branchesDiff.get("delete").add(methodFullName + "." + branch);
             }
         }
 
         return branchesDiff;
     }
 
-    protected Map<String, CtStatement> getAddBranches(ASTTransformation transformation) {
+    protected Map<String, CtStatement> getAddBranches(ASTTransformation transformation, boolean withBody) {
         String name = transformation.getName();
         if(name.equals("add")) {
-            return getBranches(transformation.getTransplantationPoint().getCtCodeFragment());
+            return getBranches(transformation.getTransplantationPoint().getCtCodeFragment(), withBody);
         }
         if(name.equals("replace")) {
             ASTReplace replace = (ASTReplace) transformation;
-            Map<String, CtStatement> odlBranches = getBranches(transformation.getTransplantationPoint().getCtCodeFragment());
-            Map<String, CtStatement> newBranches = getBranches(replace.getTransplant().getCtCodeFragment());
+            Map<String, CtStatement> odlBranches = getBranches(transformation.getTransplantationPoint().getCtCodeFragment(), withBody);
+            Map<String, CtStatement> newBranches = getBranches(replace.getTransplant().getCtCodeFragment(), withBody);
             newBranches.keySet().stream()
                     .forEach(key -> odlBranches.remove(key));
             return newBranches;
@@ -125,15 +117,15 @@ public class StaticDiffBuilder implements Comparator {
         return new HashMap<>();
     }
 
-    protected Map<String, CtStatement> getDeleteBranches(ASTTransformation transformation) {
+    protected Map<String, CtStatement> getDeleteBranches(ASTTransformation transformation, boolean withBody) {
         String name = transformation.getName();
         if(name.equals("delete")) {
-            return getBranches(transformation.getTransplantationPoint().getCtCodeFragment());
+            return getBranches(transformation.getTransplantationPoint().getCtCodeFragment(), withBody);
         }
         if(name.equals("replace")) {
             ASTReplace replace = (ASTReplace) transformation;
-            Map<String, CtStatement> odlBranches = getBranches(transformation.getTransplantationPoint().getCtCodeFragment());
-            Map<String, CtStatement> newBranches = getBranches(replace.getTransplant().getCtCodeFragment());
+            Map<String, CtStatement> odlBranches = getBranches(transformation.getTransplantationPoint().getCtCodeFragment(), withBody);
+            Map<String, CtStatement> newBranches = getBranches(replace.getTransplant().getCtCodeFragment(), withBody);
             odlBranches.keySet().stream()
                     .forEach(key -> newBranches.remove(key));
             return odlBranches;
@@ -142,7 +134,7 @@ public class StaticDiffBuilder implements Comparator {
     }
 
     protected Map<String, Set<String>> getAddMethodCall(ASTTransformation transformation) {
-        Map<String, CtStatement> branches = getAddBranches(transformation);
+        Map<String, CtStatement> branches = getAddBranches(transformation, true);
         Map<String, Set<String>> methodsByBranch = new HashMap<>();
         for(String key : branches.keySet()) {
             methodsByBranch.put(key,
@@ -154,7 +146,7 @@ public class StaticDiffBuilder implements Comparator {
     }
 
     protected Map<String, Set<String>> getDeleteMethodCall(ASTTransformation transformation) {
-        Map<String, CtStatement> branches = getDeleteBranches(transformation);
+        Map<String, CtStatement> branches = getDeleteBranches(transformation, true);
         Map<String, Set<String>> methodsByBranch = new HashMap<>();
         for(String key : branches.keySet()) {
             methodsByBranch.put(key,
@@ -165,7 +157,7 @@ public class StaticDiffBuilder implements Comparator {
         return methodsByBranch;
     }
 
-    protected Map<String, CtStatement> getBranches(CtElement stmt) {
+    protected Map<String, CtStatement> getBranches(CtElement stmt, boolean withBody) {
         Map<String, CtStatement> branches = new HashMap<>();
 
         int count = 0;
@@ -191,7 +183,7 @@ public class StaticDiffBuilder implements Comparator {
             count++;
         }
 
-        if(count == 0) {
+        if(withBody) {
             branches.put("b", (CtStatement)stmt);
         }
 

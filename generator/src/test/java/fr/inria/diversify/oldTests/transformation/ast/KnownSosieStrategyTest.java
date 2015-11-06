@@ -39,7 +39,7 @@ public class KnownSosieStrategyTest {
             inputProgram.setFactory(factory);
             inputProgram.setProgramDir(getResourcePath("easymock-light-3.2"));
             inputProgram.setRelativeSourceCodeDir(getResourcePath("easymock-light-3.2"));
-            MavenDependencyResolver dr = new MavenDependencyResolver();
+            MavenDependencyResolver dr = MavenDependencyResolver.dependencyResolver();
             dr.resolveDependencies(inputProgram);
             inputProgram.setPreviousTransformationsPath(getResourcePath("easymock3.2-non-rep-index.json"));
             inputProgram.setTransformationPerRun(5);

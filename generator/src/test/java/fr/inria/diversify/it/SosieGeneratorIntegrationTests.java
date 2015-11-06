@@ -47,7 +47,7 @@ public class SosieGeneratorIntegrationTests {
 
         Factory factory = null;
         try {
-            MavenDependencyResolver resolver = new MavenDependencyResolver();
+            MavenDependencyResolver resolver = MavenDependencyResolver.dependencyResolver();
             resolver.resolveDependencies(inputProgram);
             factory = new SpoonMetaFactory().buildNewFactory(c.getRelativeSourceCodeDir(), 7);
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {

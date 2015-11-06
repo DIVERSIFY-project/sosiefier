@@ -37,7 +37,7 @@ public class ListTestMain {
         inputConfigureation = new InputConfiguration(propertiesFile);
         initLogLevel();
         if(inputConfigureation.getProperty("builder").equals("maven")) {
-            MavenDependencyResolver t = new MavenDependencyResolver();
+            MavenDependencyResolver t = MavenDependencyResolver.dependencyResolver();
             t.resolveDependencies(inputConfigureation.getInputProgram());
         }
         initSpoon();
