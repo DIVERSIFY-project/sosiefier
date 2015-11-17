@@ -213,8 +213,6 @@ public class DiversifyMain {
                 return new CheckReturn(inputProgram);
             case "shufflecollectionbeforereturn":
                 return new ShuffleCollectionBeforeReturnQuery(inputProgram);
-            case "subclassreplace":
-                return new SubClassReplaceQuery(inputProgram);
             case "mutation":
                 return new MutationQuery(inputProgram);
             case "shuffle":
