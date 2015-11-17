@@ -32,6 +32,7 @@ import java.util.*;
  */
 public class MavenDependencyResolver implements DependencyResolver {
     protected List<URL> dependenciesURL;
+    protected List<URL> directDependenciesURL;
     protected Properties properties;
     protected String baseDir;
     protected MavenResolver resolver;
@@ -50,6 +51,7 @@ public class MavenDependencyResolver implements DependencyResolver {
 
     private MavenDependencyResolver() {
         dependenciesURL = new ArrayList<>();
+        directDependenciesURL = new ArrayList<>();
         resolver = new MavenResolver();
         resolver.setBasePath(System.getProperty("user.home") + File.separator + ".m2/repository");
 
@@ -68,7 +70,7 @@ public class MavenDependencyResolver implements DependencyResolver {
             baseDir = inputProgram.getProgramDir();
 
             MavenProject project = loadProject(pomFile);
-            resolveAllDependencies(project, new HashSet<String>());
+            resolveAllDependencies(project, new HashSet<String>(), true);
 
             addApplicationClasses(inputProgram);
             loadDependencies();
@@ -90,10 +92,10 @@ public class MavenDependencyResolver implements DependencyResolver {
         return ret;
     }
 
-    protected void addApplicationClasses(InputProgram inputProgram) throws MalformedURLException {
+    public void addApplicationClasses(InputProgram inputProgram) throws MalformedURLException {
         dependenciesURL.add((new File(inputProgram.getProgramDir() + "/" + inputProgram.getClassesDir()).toURL()));
         dependenciesURL.add((new File(inputProgram.getProgramDir() + "/" + inputProgram.getTestClassesDir()).toURL()));
-
+        loadDependencies();
     }
 
 
@@ -103,7 +105,7 @@ public class MavenDependencyResolver implements DependencyResolver {
         }
     }
 
-    public void resolveAllDependencies(MavenProject project, Set<String> dependencyResolve) throws MalformedURLException {
+    public void resolveAllDependencies(MavenProject project, Set<String> dependencyResolve, boolean isDirectDependencies) throws MalformedURLException {
         updateRepositoriesUrl(project);
         updateProperties(project.getProperties());
 
@@ -121,11 +123,14 @@ public class MavenDependencyResolver implements DependencyResolver {
                 }
                 dependenciesURL.add(cachedFile.toURI().toURL());
                 Log.debug("resolve artifact: {}", artifactId);
+                if(isDirectDependencies) {
+                    directDependenciesURL.add(cachedFile.toURI().toURL());
+                }
 
                 File pomD = resolver.resolve(artifactId + ":pom", repositoriesUrls);
                 if(!dependencyResolve.contains(pomD.getAbsolutePath())) {
                     dependencyResolve.add(pomD.getAbsolutePath());
-                    resolveAllDependencies(loadProject(pomD), dependencyResolve);
+                    resolveAllDependencies(loadProject(pomD), dependencyResolve, false);
                 }
 
             } catch (Exception e) {}
@@ -140,10 +145,8 @@ public class MavenDependencyResolver implements DependencyResolver {
         for(String module: parentProject.getModules()) {
             try {
                 MavenProject project = loadProject(new File(baseDir + "/" + module + "/pom.xml"));
-                resolveAllDependencies(project, dependencyResolve);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                resolveAllDependencies(project, dependencyResolve, true);
+            } catch (Exception e) {}
         }
     }
 
@@ -203,5 +206,9 @@ public class MavenDependencyResolver implements DependencyResolver {
     @Override
     public List<URL> getDependencies() {
         return dependenciesURL;
+    }
+
+    public List<URL> getDirectDependenciesURL() {
+        return directDependenciesURL;
     }
 }

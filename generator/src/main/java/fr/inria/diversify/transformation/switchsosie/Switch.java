@@ -1,4 +1,4 @@
-package fr.inria.diversify.switchsosie;
+package fr.inria.diversify.transformation.switchsosie;
 
 /**
  * User: Simon

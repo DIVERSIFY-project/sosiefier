@@ -1,4 +1,4 @@
-package fr.inria.diversify.switchsosie;
+package fr.inria.diversify.transformation.switchsosie;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;

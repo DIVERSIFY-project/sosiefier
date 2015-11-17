@@ -1,4 +1,4 @@
-package fr.inria.diversify.switchsosie;
+package fr.inria.diversify.transformation.switchsosie;
 
 import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
@@ -62,7 +62,7 @@ public class SwitchTransformation extends SingleTransformation {
         Factory factory = copyTransplant.getFactory();
 
         CtFieldReference<Boolean> fieldRef = factory.Core().createFieldReference();
-        fieldRef.setSimpleName("fr.inria.diversify.switchsosie.Switch.switchTransformation");
+        fieldRef.setSimpleName("fr.inria.diversify.transformation.switchsosie.Switch.switchTransformation");
 
         CtIf stmtIf = factory.Core().createIf();
         stmtIf.setParent(transplantationPoint.getParent());
@@ -98,13 +98,13 @@ public class SwitchTransformation extends SingleTransformation {
 
     protected void copySwitch(String copyDirName) throws IOException {
         File srcFile = new File(System.getProperty("user.dir") + "/generator/src/main/java/fr/inria/diversify/switchsosie/Switch.java");
-        File destFile = new File(copyDirName  + "/fr/inria/diversify/switchsosie/Switch.java");
+        File destFile = new File(copyDirName  + "/fr/inria/diversify/transformation/switchsosie/Switch.java");
 
         FileUtils.copyFile(srcFile, destFile);
     }
 
     protected void deleteSwitch(String copyDirName) throws IOException {
-        File delete = new File(copyDirName  + "/fr/inria/diversify/switchsosie/Switch.java");
+        File delete = new File(copyDirName  + "/fr/inria/diversify/transformation/switchsosie/Switch.java");
 
         FileUtils.forceDelete(delete);
     }

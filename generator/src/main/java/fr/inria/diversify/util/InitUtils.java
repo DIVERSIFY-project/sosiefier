@@ -11,6 +11,7 @@ import spoon.Launcher;
 import spoon.reflect.factory.Factory;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,6 +49,11 @@ public class InitUtils {
                 t.resolveAndroidDependencies(androidSdk);
             }
         }
+    }
+
+    public static  void addApplicationClassesToClassPath(InputProgram inputProgram) throws MalformedURLException {
+        MavenDependencyResolver t = MavenDependencyResolver.dependencyResolver();
+        t.addApplicationClasses(inputProgram);
     }
 
     /**

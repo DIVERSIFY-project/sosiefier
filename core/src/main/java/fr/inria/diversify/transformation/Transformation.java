@@ -7,7 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.cu.SourcePosition;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 import java.util.*;

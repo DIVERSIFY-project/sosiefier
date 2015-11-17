@@ -18,9 +18,10 @@ import fr.inria.diversify.logger.transformationUsed.StaticDiffBuilder;
 import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
 import fr.inria.diversify.statistic.CVLMetric;
-import fr.inria.diversify.switchsosie.SwitchQuery;
+import fr.inria.diversify.transformation.switchsosie.SwitchQuery;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.query.*;
+import fr.inria.diversify.transformation.typeTransformation.TypeTransformationQuery;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.visu.Visu;
@@ -64,11 +65,12 @@ public class DiversifyMain {
         inputProgram = InitUtils.initInputProgram(inputConfiguration);
         InitUtils.initDependency(inputConfiguration);
         InitUtils.initSpoon(inputProgram, false);
-        TransformationQuery query = initTransformationQuery();
-
         AbstractDiversify runner = initRunner();
-        runner.setTransformationQuery(query);
+
         AbstractBuilder builder = initBuilder(runner.getTmpDir());
+        TransformationQuery query = initTransformationQuery();
+        runner.setTransformationQuery(query);
+        InitUtils.addApplicationClassesToClassPath(inputProgram);
         inputProgram.setCoverageReport(initCoverageReport(runner.getTmpDir()));
         runner.setBuilder(builder);
 
@@ -270,7 +272,23 @@ public class DiversifyMain {
                 Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
                 return new ADRTransformationQuery(inputProgram, cl, subType, false);
             }
-
+            case "replaceconstructor" : {
+                return new TypeTransformationQuery(inputProgram, "^(?!java.lang.Throwable).*:.*:.*", false, false);
+            }
+//            case "replacenewlist":
+//                return new ReplaceNewListQuery(inputProgram);
+//            case "replacenewlistrandom":
+//                return new ReplaceNewListRandomQuery(inputProgram);
+//            case "arraylisttolinkedlist":
+//                return new ReplaceArrayListToLinkedListQuery(inputProgram,"LinkedList");
+//            case "arraylisttotreelist":
+//                return new ReplaceArrayListToLinkedListQuery(inputProgram,"TreeList");
+//            case "arraylisttovector":
+//                return new ReplaceArrayListToLinkedListQuery(inputProgram,"Vector");
+//            case "changeconcretetype":
+//                return new ChangeConcreteTypeQuery(inputProgram,inputConfiguration.getProperty("paramslist"),"changeconcretetype");
+//            case "switchtype":
+//                return new ChangeConcreteTypeQuery(inputProgram,inputConfiguration.getProperty("paramslist"),"switchtype");
             default:
                 //Try to construct the executeQuery from the explicit class
                 try {
