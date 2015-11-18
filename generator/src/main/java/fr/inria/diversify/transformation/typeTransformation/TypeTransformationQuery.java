@@ -63,7 +63,7 @@ public class TypeTransformationQuery extends TransformationQuery {
         Arrays.stream(packages)
                 .filter(p -> p.getName().startsWith("java."))
                 .forEach(p ->
-                        reflections.merge(new Reflections(ConfigurationBuilder.build(ClassLoader.getSystemClassLoader())
+                        reflections.merge(new Reflections(ConfigurationBuilder.build()
                                 .setUrls(sun.misc.Launcher.getBootstrapClassPath().getURLs())
                                 .setScanners(new SubTypesScanner(false))
                         .filterInputsBy(new FilterBuilder().includePackage(p.getName())))));
