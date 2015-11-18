@@ -9,39 +9,35 @@ import spoon.reflect.factory.Factory;
  * Date: 13/02/14
  * Time: 14:44
  */
-public class NegateConditionalMutation extends BinaryOperatorMutation {
+public class NegateConditionalMutation extends MutationTransformation<CtBinaryOperator, CtBinaryOperator> {
 
-    public NegateConditionalMutation() {
+    public NegateConditionalMutation(CtBinaryOperator transplantationPoint) {
+        super(transplantationPoint);
         type = "mutation";
         name = "negateConditional";
     }
 
     @Override
-    protected CtBinaryOperator getMutantOperator() {
-        Factory factory = transformationPoint.getFactory();
-        CtBinaryOperator mutant = factory.Code().createBinaryOperator(
-                transformationPoint.getLeftHandOperand(),
-                transformationPoint.getRightHandOperand(),
-                transformationPoint.getKind());
+    protected void buildTransplant() {
+        Factory factory = transplantationPoint.getFactory();
+        transplant = factory.Core().clone(transplantationPoint);
 
-        mutant.setParent(transformationPoint.getParent());
 
-        BinaryOperatorKind kind = transformationPoint.getKind();
+        BinaryOperatorKind kind = transplantationPoint.getKind();
         if(kind.equals(BinaryOperatorKind.EQ))
-            mutant.setKind(BinaryOperatorKind.NE);
+            transplant.setKind(BinaryOperatorKind.NE);
         if(kind.equals(BinaryOperatorKind.NE))
-            mutant.setKind(BinaryOperatorKind.EQ);
+            transplant.setKind(BinaryOperatorKind.EQ);
 
         if(kind.equals(BinaryOperatorKind.LE))
-            mutant.setKind(BinaryOperatorKind.GT);
+            transplant.setKind(BinaryOperatorKind.GT);
         if(kind.equals(BinaryOperatorKind.GE))
-            mutant.setKind(BinaryOperatorKind.LT);
+            transplant.setKind(BinaryOperatorKind.LT);
 
         if(kind.equals(BinaryOperatorKind.LT))
-            mutant.setKind(BinaryOperatorKind.GE);
+            transplant.setKind(BinaryOperatorKind.GE);
         if(kind.equals(BinaryOperatorKind.GT))
-            mutant.setKind(BinaryOperatorKind.LE);
+            transplant.setKind(BinaryOperatorKind.LE);
 
-        return mutant;
     }
 }

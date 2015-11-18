@@ -10,7 +10,6 @@ import fr.inria.diversify.transformation.bytecode.BytecodeAdd;
 import fr.inria.diversify.transformation.bytecode.BytecodeDelete;
 import fr.inria.diversify.transformation.bytecode.BytecodeReplace;
 import fr.inria.diversify.transformation.bytecode.BytecodeTransformation;
-import fr.inria.diversify.transformation.cvl.*;
 import fr.inria.diversify.transformation.mutation.*;
 import fr.inria.diversify.transformation.other.ShuffleStmtTransformation;
 import fr.inria.diversify.util.Log;
@@ -264,8 +263,6 @@ public class TransformationJsonParser {
                 trans = parseStmt(jsonObject);
             if (type.equals("adrBytecode"))
                 trans = parseBytecode(jsonObject);
-            if (type.equals("cvl"))
-                trans = parseCvl(jsonObject);
             if (type.equals("foo"))
                 trans = parseOther(jsonObject);
 
@@ -301,7 +298,7 @@ public class TransformationJsonParser {
 
     protected Transformation parseOther(JSONObject jsonObject) throws JSONException, TransformationParserException {
         ShuffleStmtTransformation shuffle = new ShuffleStmtTransformation();
-        shuffle.setTransformationPoint(getBlock(jsonObject.getString("transformationPoint")));
+        shuffle.setTransplantationPoint(getBlock(jsonObject.getString("transplantationPoint")));
 
         int[] array = parseIntArray(jsonObject.getString("newStmtOrder"));
         boolean ordre = true;
@@ -346,23 +343,6 @@ public class TransformationJsonParser {
         return o;
     }
 
-    protected Transformation parseCvl(JSONObject jsonObject) throws JSONException {
-        String name = jsonObject.getString("name");
-        CVLTransformation trans = null;
-
-        if (name.equals("linkExistence"))
-            trans = parseLinkExistence(jsonObject);
-        if (name.equals("linkSubstitution"))
-            trans = parseLinkSubstitution(jsonObject);
-        if (name.equals("objectExistence"))
-            trans = parseObjectExistence(jsonObject);
-        if (name.equals("objectSubstitution"))
-            trans = parseObjectSubstitution(jsonObject);
-
-
-        trans.setTransformationPoint(getObject(jsonObject.getString("transformationPoint"), jsonObject.getString("nodeType")));
-        return trans;
-    }
 
     protected CtElement getObject(String positionObject, String objectType)
             throws JSONException {
@@ -384,62 +364,7 @@ public class TransformationJsonParser {
         return o;
     }
 
-    protected CVLTransformation parseObjectExistence(JSONObject jsonObject) {
-        ObjectExistence oe = new ObjectExistence();
-        return oe;
-    }
 
-    protected CVLTransformation parseObjectSubstitution(JSONObject jsonObject) throws JSONException {
-        ObjectSubstitution os = new ObjectSubstitution();
-        os.setTransplant(getObject(jsonObject.getString("transplant"), jsonObject.getString("nodeType")));
-        return os;
-    }
-
-    protected CVLTransformation parseLinkSubstitution(JSONObject jsonObject) throws JSONException {
-        LinkSubstitution ls = new LinkSubstitution();
-
-        String nodeType = jsonObject.getString("nodeType");
-        if (nodeType.equals("CtClassImpl")) {
-            String clName = jsonObject.getString("classOrInterfaceExistence");
-            CtClass cl = (CtClass) getObject(jsonObject.getString("transformationPoint"), jsonObject.getString("nodeType"));
-            List<CtTypeReference> set = new ArrayList<>();
-
-            if (cl.getSuperclass() != null)
-                set.add(cl.getSuperclass());
-            set.addAll(cl.getSuperInterfaces());
-
-            for (CtTypeReference ref : set) {
-                if (clName.equals(ref.getPackage() + "." + ref.getSimpleName()))
-                    ls.setClassOrInterfaceSubstitution(ref);
-                break;
-            }
-        }
-
-        ls.setTransplant(getObject(jsonObject.getString("transplant"), nodeType));
-        return ls;
-    }
-
-    protected CVLTransformation parseLinkExistence(JSONObject jsonObject) throws JSONException {
-        LinkExistence le = new LinkExistence();
-
-        String nodeType = jsonObject.getString("nodeType");
-        if (nodeType.equals("CtClassImpl")) {
-            String clName = jsonObject.getString("classOrInterfaceExistence");
-            CtClass cl = (CtClass) getObject(jsonObject.getString("transformationPoint"), jsonObject.getString("nodeType"));
-            List<CtTypeReference> set = new ArrayList<>();
-
-            if (cl.getSuperclass() != null)
-                set.add(cl.getSuperclass());
-            set.addAll(cl.getSuperInterfaces());
-
-            for (CtTypeReference ref : set) {
-                if (clName.equals(ref.getPackage() + "." + ref.getSimpleName()))
-                    le.setClassOrInterfaceExistance(ref);
-                break;
-            }
-        }
-        return le;
-    }
 
     protected Transformation parseMutation(JSONObject jsonObject) throws TransformationParserException {
 
@@ -448,9 +373,7 @@ public class TransformationJsonParser {
         try {
             String name = jsonObject.getString("name");
 
-            if (name.equals("inlineConstant"))
-                trans = parseInlineConstantMutation(jsonObject);
-            else if (name.equals("returnValue"))
+            if (name.equals("returnValue"))
                 trans = parseReturnValueMutation(jsonObject);
             else
                 trans = parseBinaryOperatorMutation(jsonObject);
@@ -512,16 +435,6 @@ public class TransformationJsonParser {
     protected Transformation parseBinaryOperatorMutation(JSONObject jsonObject) throws JSONException,
             TransformationParserException {
 
-        String name = jsonObject.getString("name");
-        BinaryOperatorMutation trans = null;
-        if (name.equals("conditionalBoundary"))
-            trans = new ConditionalBoundaryMutation();
-        if (name.equals("math"))
-            trans = new MathMutation();
-        if (name.equals("negateConditional"))
-            trans = new NegateConditionalMutation();
-        if (name.equals("removeConditional"))
-            trans = new RemoveConditionalMutation();
 
         CtBinaryOperator<?> p = null;
         Object jsonPosition = jsonObject.get("position");
@@ -536,14 +449,21 @@ public class TransformationJsonParser {
         if (p == null) {
             throw new TransformationParserException("Cannot find binary operation mutation at " + jsonPosition);
         }
-        trans.setTransformationPoint(p);
-        return trans;
+        String name = jsonObject.getString("name");
+        if (name.equals("conditionalBoundary"))
+            return  new ConditionalBoundaryMutation(p);
+        if (name.equals("math"))
+            return new MathMutation(p);
+        if (name.equals("negateConditional"))
+            return new NegateConditionalMutation(p);
+        if (name.equals("removeConditional"))
+            return new RemoveConditionalMutation(p);
+
+        return null;
     }
 
     protected Transformation parseReturnValueMutation(JSONObject jsonObject) throws JSONException,
             TransformationParserException {
-        ReturnValueMutation trans = new ReturnValueMutation();
-
         Object jsonPosition = jsonObject.get("position");
         CtReturn p = null;
 
@@ -558,38 +478,10 @@ public class TransformationJsonParser {
         if (p == null) {
             throw new TransformationParserException("Cannot find return statement that matches position " + jsonPosition);
         }
-        trans.setTransformationPoint(p);
 
-        return trans;
+        return new ReturnValueMutation(p);
     }
 
-    protected Transformation parseInlineConstantMutation(JSONObject jsonObject) throws TransformationParserException {
-        InlineConstantMutation trans = new InlineConstantMutation();
-
-        Object jsonPos;
-        try {
-            jsonPos = jsonObject.get("position");
-        } catch (JSONException e) {
-            throw new TransformationParserException("Cannot find position data", e);
-        }
-
-        CtLocalVariable p = null;
-        for (CtLocalVariable<?> ret : inputProgram.getInlineConstant()) {
-            String position = ret.getParent(CtPackage.class).getQualifiedName()
-                    + "." + ret.getParent(CtType.class).getSimpleName() + ":" + ret.getPosition().getLine();
-            if (position.equals(jsonPos)) {
-                p = ret;
-                break;
-            }
-        }
-
-        if (p == null) {
-            throw new TransformationParserException("Cannot find inline constant");
-        }
-        trans.setTransformationPoint(p);
-
-        return trans;
-    }
 
 
     protected BytecodeTransformation parseBytecodeDelete(JSONObject jsonObject) {

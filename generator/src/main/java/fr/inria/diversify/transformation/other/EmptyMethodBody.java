@@ -21,10 +21,10 @@ public class EmptyMethodBody extends RefactorSpoonTransformation<CtMethod, CtEle
 //    public void addSourceCode() throws Exception {
 //        applyInfo();
 //
-//        SourcePosition sp = transformationPoint.getPosition();
+//        SourcePosition sp = transplantationPoint.getPosition();
 //        CompilationUnit compileUnit = sp.getCompilationUnit();
 //        compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**", 0));
-//        sp = transformationPoint.getBody().getPosition();
+//        sp = transplantationPoint.getBody().getPosition();
 //        compileUnit = sp.getCompilationUnit();
 //
 //        compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n"+newMethod().toString()+"\n", 0));

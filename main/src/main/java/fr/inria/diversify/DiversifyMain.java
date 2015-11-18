@@ -271,7 +271,7 @@ public class DiversifyMain {
                 return new ADRTransformationQuery(inputProgram, cl, subType, false);
             }
             case "replaceconstructor" : {
-                return new TypeTransformationQuery(inputProgram, "^(?!java.lang.Throwable).*:.*:.*", false, false);
+                return new TypeTransformationQuery(inputProgram, ".*:.*:.*", false, false);
             }
 //            case "replacenewlist":
 //                return new ReplaceNewListQuery(inputProgram);

@@ -1,8 +1,7 @@
 package fr.inria.diversify.transformation.mutation;
 
+import spoon.reflect.code.CtExpression;
 import spoon.reflect.code.CtLiteral;
-import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.factory.Factory;
 
 /**
@@ -10,28 +9,19 @@ import spoon.reflect.factory.Factory;
  * Date: 13/02/14
  * Time: 14:45
  */
-@Deprecated
-public class RemoveConditionalMutation extends BinaryOperatorMutation {
+public class RemoveConditionalMutation extends MutationTransformation<CtExpression, CtLiteral<Boolean>> {
 
-    public RemoveConditionalMutation() {
+    public RemoveConditionalMutation(CtExpression transplantationPoint) {
+        super(transplantationPoint);
         type = "mutation";
         name = "removeConditional";
     }
 
+
     @Override
-    protected CtLiteral<Boolean> getMutantOperator() {
-        Factory factory = transformationPoint.getFactory();
-        CtLiteral<Boolean> literal = factory.Core().createLiteral();
-        literal.setValue(true);
-        return literal;
-    }
-
-
-    public void addSourceCode() {
-        logInfo();
-        SourcePosition sp = transformationPoint.getPosition();
-        CompilationUnit compileUnit = sp.getCompilationUnit();
-//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
-//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/true", 0));
+    protected void buildTransplant() {
+        Factory factory = transplantationPoint.getFactory();
+        transplant = factory.Core().createLiteral();
+        transplant.setValue(true);
     }
 }

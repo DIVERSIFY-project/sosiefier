@@ -10,28 +10,30 @@ import spoon.reflect.factory.Factory;
  * Date: 11/02/14
  * Time: 11:47
  */
-public class ConditionalBoundaryMutation extends BinaryOperatorMutation {
+public class ConditionalBoundaryMutation extends MutationTransformation<CtBinaryOperator, CtBinaryOperator> {
 
-    public ConditionalBoundaryMutation() {
+    public ConditionalBoundaryMutation(CtBinaryOperator transplantationPoint) {
+        super(transplantationPoint);
         name = "conditionalBoundary";
         type = "mutation";
     }
 
-    protected CtBinaryOperator getMutantOperator() {
-        Factory factory = transformationPoint.getFactory();
-        CtBinaryOperator mutant = factory.Code().createBinaryOperator(transformationPoint.getLeftHandOperand(), transformationPoint.getRightHandOperand(), transformationPoint.getKind());
+    protected void buildTransplant() {
+        Factory factory = transplantationPoint.getFactory();
+        transplant = factory.Core().clone(transplantationPoint);
 
-        mutant.setParent(transformationPoint.getParent());
+        transplant.setParent(transplantationPoint.getParent());
 
-        BinaryOperatorKind kind = transformationPoint.getKind();
+        BinaryOperatorKind kind = transplantationPoint.getKind();
         if(kind.equals(BinaryOperatorKind.LT))
-            mutant.setKind(BinaryOperatorKind.LE);
+            transplant.setKind(BinaryOperatorKind.LE);
         if(kind.equals(BinaryOperatorKind.LE))
-            mutant.setKind(BinaryOperatorKind.LT);
+            transplant.setKind(BinaryOperatorKind.LT);
         if(kind.equals(BinaryOperatorKind.GT))
-            mutant.setKind(BinaryOperatorKind.GE);
+            transplant.setKind(BinaryOperatorKind.GE);
         if(kind.equals(BinaryOperatorKind.GE))
-            mutant.setKind(BinaryOperatorKind.GT);
-        return mutant;
+            transplant.setKind(BinaryOperatorKind.GT);
     }
+
+
 }

@@ -39,7 +39,7 @@ public class ShuffleStmtQuery extends TransformationQuery {
                 || !isCandidate(block)) {
             block = (CtBlock) objects.get(r.nextInt(objects.size()));
         }
-        sst.setTransformationPoint(block);
+        sst.setTransplantationPoint(block);
 
         return sst;
     }

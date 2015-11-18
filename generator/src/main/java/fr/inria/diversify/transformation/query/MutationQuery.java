@@ -70,7 +70,7 @@ public class MutationQuery extends TransformationQuery {
     public Transformation query() {
         try {
             Random r = new Random();
-            int i = r.nextInt(8);
+            int i = r.nextInt(7);
 
             Transformation t = null;
             switch (i) {
@@ -91,9 +91,6 @@ public class MutationQuery extends TransformationQuery {
                 case 6:
                     t = getReturnValueMutation();
                     break;
-                case 7:
-                    t = getInlineConstantMutation();
-                    break;
             }
             return t;
         } catch ( Exception e ) {
@@ -102,76 +99,50 @@ public class MutationQuery extends TransformationQuery {
     }
 
     public NegateConditionalMutation getNegateConditionalMutation() throws Exception {
-        NegateConditionalMutation mutation = new NegateConditionalMutation();
-
         Random r  = new Random();
 
         CtBinaryOperator operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         while (coverageReport.elementCoverage(operator) == 0 || !negateConditional.contains(operator.getKind())) {
             operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         }
-        mutation.setTransformationPoint(operator);
-        return mutation;
+        return new NegateConditionalMutation(operator);
     }
 
     public ConditionalBoundaryMutation getConditionalBoundaryMutation() throws Exception {
-        ConditionalBoundaryMutation mutation = new ConditionalBoundaryMutation();
-
         Random r  = new Random();
 
         CtBinaryOperator operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         while (coverageReport.elementCoverage(operator) == 0 || !conditionalBoundary.contains(operator.getKind())) {
             operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         }
-        mutation.setTransformationPoint(operator);
-        return mutation;
+        return new ConditionalBoundaryMutation(operator);
     }
 
     public MathMutation getMathMutation() throws Exception {
-        MathMutation mutation = new MathMutation();
-
         Random r  = new Random();
         CtBinaryOperator operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         while (coverageReport.elementCoverage(operator) == 0 || !math.contains(operator.getKind())) {
             operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         }
-        mutation.setTransformationPoint(operator);
-        return mutation;
+        return new MathMutation(operator);
     }
 
     public RemoveConditionalMutation getRemoveConditionalMutation() throws Exception {
-        RemoveConditionalMutation mutation = new RemoveConditionalMutation();
-
         Random r  = new Random();
         CtBinaryOperator operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         while (coverageReport.elementCoverage(operator) == 0) {
             operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         }
-        mutation.setTransformationPoint(operator);
-        return mutation;
+        return new RemoveConditionalMutation(operator);
     }
 
     public ReturnValueMutation getReturnValueMutation() {
-        ReturnValueMutation mutation = new ReturnValueMutation();
-
         Random r  = new Random();
         CtReturn ret = returns.get(r.nextInt(returns.size()));
         while (coverageReport.elementCoverage(ret) == 0) {
             ret = returns.get(r.nextInt(returns.size()));
         }
-        mutation.setTransformationPoint(ret);
-        return mutation;
+        return new ReturnValueMutation(ret);
     }
 
-    public InlineConstantMutation getInlineConstantMutation() {
-        InlineConstantMutation mutation = new InlineConstantMutation();
-
-        Random r  = new Random();
-        CtLocalVariable ret = inlineConstant.get(r.nextInt(inlineConstant.size()));
-        while (coverageReport.elementCoverage(ret) == 0) {
-            ret = inlineConstant.get(r.nextInt(inlineConstant.size()));
-        }
-        mutation.setTransformationPoint(ret);
-        return mutation;
-    }
 }
