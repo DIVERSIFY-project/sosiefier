@@ -12,8 +12,7 @@ import org.reflections.util.FilterBuilder;
 import spoon.reflect.code.CtConstructorCall;
 import spoon.reflect.reference.CtTypeReference;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -35,11 +34,11 @@ public class TypeTransformationQuery extends TransformationQuery {
     public TypeTransformationQuery(InputProgram inputProgram, String typeConfiguration, boolean all, boolean withSwitch) {
         super(inputProgram);
 
-        reflections = new Reflections(new ConfigurationBuilder()
-                .setUrls(MavenDependencyResolver.dependencyResolver().getDirectDependenciesURL())
-                .setScanners(new SubTypesScanner(false))
-                .filterInputsBy(new FilterBuilder().includePackage(".*")));
-        reflections.merge(new Reflections("java..*", new SubTypesScanner(false)));
+        try {
+            initReflections();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         parseTypeConfiguration(typeConfiguration);
 
@@ -47,6 +46,20 @@ public class TypeTransformationQuery extends TransformationQuery {
         this.withSwitch = withSwitch;
     }
 
+    protected void initReflections() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        reflections = new Reflections(new ConfigurationBuilder()
+                .setUrls(MavenDependencyResolver.dependencyResolver().getDirectDependenciesURL())
+                .setScanners(new SubTypesScanner(false))
+                .filterInputsBy(new FilterBuilder().includePackage(".*")));
+
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        Method m = ClassLoader.class.getDeclaredMethod("getPackages");
+        m.setAccessible(true);
+        Package[] packages = (Package[]) m.invoke(classLoader, new Class[0]);
+        Arrays.stream(packages)
+                .filter(p -> p.getName().startsWith("java."))
+                .forEach(p -> reflections.merge(new Reflections(p.getName(), new SubTypesScanner(false))));
+    }
 
     protected void parseTypeConfiguration(String typeConfiguration) {
         Set<Class> allType = getAllType();

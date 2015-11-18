@@ -95,6 +95,8 @@ public class MavenDependencyResolver implements DependencyResolver {
     public void addApplicationClasses(InputProgram inputProgram) throws MalformedURLException {
         dependenciesURL.add((new File(inputProgram.getProgramDir() + "/" + inputProgram.getClassesDir()).toURL()));
         dependenciesURL.add((new File(inputProgram.getProgramDir() + "/" + inputProgram.getTestClassesDir()).toURL()));
+        directDependenciesURL.add(new File(inputProgram.getProgramDir() + "/" + inputProgram.getClassesDir()).toURL());
+        directDependenciesURL.add((new File(inputProgram.getProgramDir() + "/" + inputProgram.getTestClassesDir()).toURL()));
         loadDependencies();
     }
 

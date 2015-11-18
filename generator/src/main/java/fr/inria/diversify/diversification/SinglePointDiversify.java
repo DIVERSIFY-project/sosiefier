@@ -69,8 +69,6 @@ public class SinglePointDiversify extends AbstractDiversify {
                 transformations.add(trans);
                 int status = runTest(tmpDir);
 
-
-
                  trans.setStatus(status);
                 trans.setFailures(builder.getTestFail());
                 // error during runTest
