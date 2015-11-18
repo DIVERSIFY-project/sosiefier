@@ -58,7 +58,9 @@ public class TypeTransformationQuery extends TransformationQuery {
         Package[] packages = (Package[]) m.invoke(classLoader, new Class[0]);
         Arrays.stream(packages)
                 .filter(p -> p.getName().startsWith("java."))
-                .forEach(p -> reflections.merge(new Reflections(p.getName(), new SubTypesScanner(false))));
+                .forEach(p -> reflections.merge(new Reflections(ConfigurationBuilder.build()
+                        .setScanners(new SubTypesScanner(false))
+                        .filterInputsBy(new FilterBuilder().includePackage(p.getName())))));
     }
 
     protected void parseTypeConfiguration(String typeConfiguration) {
