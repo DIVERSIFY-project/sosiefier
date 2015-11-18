@@ -221,8 +221,6 @@ public class DiversifyMain {
                 return new OtherQuery(inputProgram);
             case "all":
                 return new CompositeQuery(inputProgram);
-            case "cvl":
-                return new CvlQuery(inputProgram);
             case "bytecode":
                 return new ByteCodeTransformationQuery(inputProgram);
             case "adr": {
