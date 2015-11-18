@@ -11,8 +11,11 @@ import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
 import spoon.reflect.code.CtConstructorCall;
 import spoon.reflect.reference.CtTypeReference;
+import sun.misc.Resource;
 
+import java.io.IOException;
 import java.lang.reflect.*;
+import java.net.URL;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -55,11 +58,14 @@ public class TypeTransformationQuery extends TransformationQuery {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         Method m = ClassLoader.class.getDeclaredMethod("getPackages");
         m.setAccessible(true);
+
         Package[] packages = (Package[]) m.invoke(classLoader, new Class[0]);
         Arrays.stream(packages)
                 .filter(p -> p.getName().startsWith("java."))
-                .forEach(p -> reflections.merge(new Reflections(ConfigurationBuilder.build()
-                        .setScanners(new SubTypesScanner(false))
+                .forEach(p ->
+                        reflections.merge(new Reflections(ConfigurationBuilder.build(ClassLoader.getSystemClassLoader())
+                                .setUrls(sun.misc.Launcher.getBootstrapClassPath().getURLs())
+                                .setScanners(new SubTypesScanner(false))
                         .filterInputsBy(new FilterBuilder().includePackage(p.getName())))));
     }
 
