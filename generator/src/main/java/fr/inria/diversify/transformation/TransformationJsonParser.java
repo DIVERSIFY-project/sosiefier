@@ -328,12 +328,12 @@ public class TransformationJsonParser {
 
     protected CtBlock getBlock(String positionObject) throws TransformationParserException {
         CtBlock o = null;
-
-        for (CtElement object : inputProgram.getAllElement(CtBlock.class)) {
+        List<CtBlock> blocks = inputProgram.getAllElement(CtBlock.class);
+        for (CtBlock object : blocks) {
             String position = object.getParent(CtPackage.class).getQualifiedName()
                     + "." + object.getPosition().getCompilationUnit().getMainType().getSimpleName() + ":" + object.getPosition().getLine();
             if (position.equals(positionObject)) {
-                o = (CtBlock) object;
+                o = object;
                 break;
             }
         }
@@ -438,11 +438,12 @@ public class TransformationJsonParser {
 
         CtBinaryOperator<?> p = null;
         Object jsonPosition = jsonObject.get("position");
-        for (CtElement ret : inputProgram.getAllElement(CtBinaryOperator.class)) {
+        List<CtBinaryOperator> binaryOperators = inputProgram.getAllElement(CtBinaryOperator.class);
+        for (CtBinaryOperator ret : binaryOperators) {
             String position = ret.getParent(CtPackage.class).getQualifiedName()
                     + "." + ret.getParent(CtType.class).getSimpleName() + ":" + ret.getPosition().getLine();
             if (position.equals(jsonPosition)) {
-                p = (CtBinaryOperator) ret;
+                p = ret;
                 break;
             }
         }
@@ -467,7 +468,8 @@ public class TransformationJsonParser {
         Object jsonPosition = jsonObject.get("position");
         CtReturn p = null;
 
-        for (CtReturn<?> ret : inputProgram.getReturns()) {
+        List<CtReturn> allReturns = inputProgram.getAllElement(CtReturn.class);
+        for (CtReturn<?> ret : allReturns) {
             String position = ret.getParent(CtPackage.class).getQualifiedName()
                     + "." + ret.getParent(CtType.class).getSimpleName() + ":" + ret.getPosition().getLine();
             if (position.equals(jsonPosition)) {

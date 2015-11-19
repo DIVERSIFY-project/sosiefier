@@ -194,7 +194,7 @@ public class CrossCheckingOracleBuilder {
 
     protected void switchToSosie(CtBlock<Object> body, boolean sosie) {
         Factory factory = body.getFactory();
-        body.addStatement(factory.Code().createCodeSnippetStatement("fr.inria.diversify.switchsosie.Switch.switchTransformation = " + sosie));
+        body.addStatement(factory.Code().createCodeSnippetStatement("fr.inria.diversify.transformation.switchsosie.Switch.switchTransformation = " + sosie));
     }
 
     protected void addSetUpStatement(CtMethod mth, CtBlock body) {
@@ -206,11 +206,6 @@ public class CrossCheckingOracleBuilder {
     }
 
     protected void addTeardownStatement(CtMethod mth, CtBlock body) {
-//        CtMethod teardownMethod = findTeardownMethod(cl);
-//        if(teardownMethod != null) {
-//            CtCodeSnippetStatement stmt = cl.getFactory().Code().createCodeSnippetStatement(teardownMethod.getSimpleName() + "()");
-//            body.addStatement(stmt);
-//        }
         if(!mth.getModifiers().contains(ModifierKind.STATIC)) {
             CtCodeSnippetStatement stmt =
                     mth.getFactory().Code().createCodeSnippetStatement("fr.inria.diversify.compare.TestUtils.runSetUp(this)");

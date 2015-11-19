@@ -17,6 +17,7 @@ import spoon.reflect.factory.Factory;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -57,9 +58,8 @@ public class DSpot {
 
     protected Collection<CtClass> getAllTestClasses() {
         String testDir = inputProgram.getRelativeTestSourceCodeDir();
-
-        return inputProgram.getAllElement(CtClass.class).stream()
-                .map(elem -> (CtClass) elem)
+        List<CtClass> allClasses = inputProgram.getAllElement(CtClass.class);
+        return allClasses.stream()
                 .filter(cl -> cl.getSimpleName().contains("Test"))
                 .filter(cl -> cl.getPosition().getFile().toString().contains(testDir))
                 .collect(Collectors.toSet());

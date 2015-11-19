@@ -30,34 +30,17 @@ public class OtherQuery extends TransformationQuery {
 
     private ReplaceLiteral getLiteralReplace() {
         ReplaceLiteral rl = new ReplaceLiteral();
-        List<CtElement> literals = getInputProgram().getAllElement(CtLiteral.class);
+        List<CtLiteral> literals = getInputProgram().getAllElement(CtLiteral.class);
 
         int size = literals.size();
         Random r  = new Random();
 
-        CtElement literal = literals.get(r.nextInt(size));
+        CtLiteral literal = literals.get(r.nextInt(size));
         while (inputProgram.getCoverageReport().elementCoverage(literal) == 0) {
             literal = literals.get(r.nextInt(size));
         }
-        rl.setTransplantationPoint((CtLiteral)literal);
-        rl.setTransplant((CtLiteral)literals.get(r.nextInt(size)));
-
-        return null;
-    }
-
-    private ReplaceNew getNewReplace() {
-        ReplaceNew rn = new ReplaceNew();
-        List<CtElement> newClasses = getInputProgram().getAllElement(CtNewClass.class);
-
-        int size = newClasses.size();
-        Random r  = new Random();
-
-        CtElement newClass = newClasses.get(r.nextInt(size));
-        while (coverageReport.elementCoverage(newClass) == 0) {
-            newClass = newClasses.get(r.nextInt(size));
-        }
-        rn.setTransplantationPoint((CtNewClass) newClass);
-        rn.setTransplant((CtNewClass)newClasses.get(r.nextInt(size)));
+        rl.setTransplantationPoint(literal);
+        rl.setTransplant(literals.get(r.nextInt(size)));
 
         return null;
     }
@@ -65,18 +48,18 @@ public class OtherQuery extends TransformationQuery {
     protected EmptyMethodBody getEmptyMethodBody() {
         EmptyMethodBody emb = new EmptyMethodBody();
 
-        List<CtElement> methods = getInputProgram().getAllElement(CtMethod.class);
+        List<CtMethod> methods = getInputProgram().getAllElement(CtMethod.class);
         int size = methods.size();
         Random r  = new Random();
 
-        CtMethod method = (CtMethod) methods.get(r.nextInt(size));
+        CtMethod method = methods.get(r.nextInt(size));
 
         while (inputProgram.getCoverageReport().elementCoverage(method) == 0
                 || method.getBody() == null
                 || method.getBody().getStatements() == null
                 || method.getBody().getStatements().isEmpty()
                 || method.getType().isPrimitive()) {
-            method = (CtMethod) methods.get(r.nextInt(size));
+            method = methods.get(r.nextInt(size));
         }
 
         emb.setTransplantationPoint(method);

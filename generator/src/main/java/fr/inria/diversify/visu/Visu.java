@@ -121,9 +121,8 @@ public class Visu {
     }
 
     protected CtType getClass(String packageName, String className) {
-
-        for(CtElement elem : inputProgram.getAllElement(CtType.class)) {
-            CtType cl = (CtType) elem;
+        List<CtType> types = inputProgram.getAllElement(CtType.class);
+        for(CtType cl : types) {
             try {
             if(cl.getPackage().getQualifiedName().endsWith(packageName) && cl.getQualifiedName().equals(className))
                 return cl;

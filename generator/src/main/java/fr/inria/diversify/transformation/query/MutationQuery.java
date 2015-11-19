@@ -54,16 +54,9 @@ public class MutationQuery extends TransformationQuery {
     }
 
     protected void init() {
-
-        binaryOperators = getInputProgram().getAllElement(CtBinaryOperator.class).stream()
-            .map(operator -> (CtBinaryOperator)operator)
-            .collect(Collectors.toList());
-        returns = getInputProgram().getAllElement(CtReturn.class).stream()
-                                   .map(operator -> (CtReturn)operator)
-                                   .collect(Collectors.toList());
-        inlineConstant = getInputProgram().getAllElement(CtLocalVariable.class).stream()
-            .map(operator -> (CtLocalVariable)operator)
-            .collect(Collectors.toList());
+        binaryOperators = getInputProgram().getAllElement(CtBinaryOperator.class);
+        returns = getInputProgram().getAllElement(CtReturn.class);
+        inlineConstant = getInputProgram().getAllElement(CtLocalVariable.class);
     }
 
     @Override

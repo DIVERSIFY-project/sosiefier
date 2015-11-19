@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,6 +33,7 @@ public class CrossCheckingOracle {
         init();
         CrossCheckingOracleBuilder builder = new CrossCheckingOracleBuilder();
 
+        addSwitch(inputProgram.getRelativeSourceCodeDir(), outputDirectory);
         addCompareFile(inputProgram.getRelativeTestSourceCodeDir(), outputDirectory);
         File output = new File(outputDirectory + "/" + inputProgram.getRelativeTestSourceCodeDir());
 
@@ -55,9 +57,8 @@ public class CrossCheckingOracle {
 
     protected Collection<CtClass> getAllTestClasses() {
         String testDir = inputProgram.getRelativeTestSourceCodeDir();
-
-        return inputProgram.getAllElement(CtClass.class).stream()
-                .map(elem -> (CtClass) elem)
+        List<CtClass> allClasses =  inputProgram.getAllElement(CtClass.class);
+        return allClasses.stream()
                 .filter(cl -> cl.getSimpleName().contains("Test"))
                 .filter(cl -> cl.getPosition().getFile().toString().contains(testDir))
                 .collect(Collectors.toSet());
@@ -69,10 +70,17 @@ public class CrossCheckingOracle {
         FileUtils.copyDirectory(new File(inputProgram.getProgramDir()), dir);
     }
 
-    public void addCompareFile(String mainSrc, String outputDirectory) throws IOException {
-        File srcDir = new File(System.getProperty("user.dir") + "/testAmplification/src/main/java/fr/inria/diversify/crossCheckingOracle/compare/");
+    protected void addSwitch(String mainSrc, String outputDirectory) throws IOException {
+        File srcFile = new File(System.getProperty("user.dir") + "/generator/src/main/java/fr/inria/diversify/transformation/switchsosie/Switch.java");
+        File destFile = new File(outputDirectory + "/" + mainSrc + "/fr/inria/diversify/transformation/switchsosie/Switch.java");
 
-        File destDir = new File(outputDirectory + "/" + mainSrc + "/fr/inria/diversify/crossCheckingOracle/compare/");
+        FileUtils.copyFile(srcFile, destFile);
+    }
+
+    public void addCompareFile(String mainSrc, String outputDirectory) throws IOException {
+        File srcDir = new File(System.getProperty("user.dir") + "/testAmplification/src/main/java/fr/inria/diversify/compare/");
+
+        File destDir = new File(outputDirectory + "/" + mainSrc + "/fr/inria/diversify/compare/");
         FileUtils.forceMkdir(destDir);
         FileUtils.copyDirectory(srcDir, destDir);
     }

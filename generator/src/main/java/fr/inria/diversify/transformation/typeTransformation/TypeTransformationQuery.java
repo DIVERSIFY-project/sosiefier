@@ -11,11 +11,8 @@ import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
 import spoon.reflect.code.CtConstructorCall;
 import spoon.reflect.reference.CtTypeReference;
-import sun.misc.Resource;
 
-import java.io.IOException;
 import java.lang.reflect.*;
-import java.net.URL;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -236,11 +233,11 @@ public class TypeTransformationQuery extends TransformationQuery {
 
     protected  List<CtConstructorCall> getConstructorCall() {
         if (constructorCalls == null) {
-            constructorCalls = getInputProgram().getAllElement(CtConstructorCall.class)
-                    .stream()
+            List<CtConstructorCall> allConstructorCall = getInputProgram().getAllElement(CtConstructorCall.class);
+            constructorCalls = allConstructorCall.stream()
                     .filter(elem -> elem.getPosition() != null)
+                    .filter(elem -> getInputProgram().getCoverageReport().elementCoverage(elem) != 0)
                     .filter(elem -> elem.getPosition().toString().contains(inputProgram.getRelativeSourceCodeDir()))
-                    .map(elem -> (CtConstructorCall) elem)
                     .collect(Collectors.toList());
         }
         return constructorCalls;

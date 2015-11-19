@@ -83,7 +83,6 @@ public class DiversifyOracle extends SinglePointDiversify {
 
     protected Integer runTestFor(String directory, SourcePosition sourcePosition) throws InterruptedException {
         int status;
-
         Log.debug("run test in directory: {}", directory);
         String goals;
         Set<String> tests = new HashSet<>();
@@ -114,7 +113,7 @@ public class DiversifyOracle extends SinglePointDiversify {
 
     protected void copySwitch(String copyDirName) throws IOException {
         File srcFile = new File(System.getProperty("user.dir") + "/generator/src/main/java/fr/inria/diversify/switchsosie/Switch.java");
-        File destFile = new File(copyDirName  + "/fr/inria/diversify/switchsosie/Switch.java");
+        File destFile = new File(copyDirName  + "/fr/inria/diversify/transformation/switchsosie/Switch.java");
 
         FileUtils.copyFile(srcFile, destFile);
     }

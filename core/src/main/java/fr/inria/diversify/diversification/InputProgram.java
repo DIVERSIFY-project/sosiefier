@@ -330,6 +330,7 @@ public class InputProgram {
         return findCodeFragment(position, source, new SourceAccesor());
     }
 
+
     /**
      * Root spoon element for an input program, mostly upper level packages
      */
@@ -383,25 +384,8 @@ public class InputProgram {
         return javassistMethods;
     }
 
-    /**
-     * Get the inline constant statements on the program
-     *
-     * @return
-     */
-    public synchronized List<CtLocalVariable> getInlineConstant() {
-        if (inlineConstant == null) {
-            ProcessingManager pm = new QueueProcessingManager(factory);
-            InlineConstantProcessor processor = new InlineConstantProcessor();
-            pm.addProcessor(processor);
-            pm.process();
-            inlineConstant = processor.getInlineConstant();
-        }
-        return inlineConstant;
-    }
 
-    public synchronized List<CtElement> getAllElement(Class cl) {
-
-
+    public synchronized <T extends CtElement> List<T> getAllElement(Class cl) {
         if (!typeToObject.containsKey(cl)) {
             QueryVisitor query = new QueryVisitor(new TypeFilter(cl));
             List<CtElement> elements = new ArrayList<>();
@@ -419,26 +403,8 @@ public class InputProgram {
             */
             typeToObject.put(cl, elements);
         }
-        return typeToObject.get(cl);
+        return (List<T>)typeToObject.get(cl);
         // return null;
-    }
-
-
-    /**
-     * Get return statements of the program
-     *
-     * @return
-     */
-    public synchronized List<CtReturn> getReturns() {
-        if (returns == null) {
-            ProcessingManager pm = new QueueProcessingManager(factory);
-            ReturnProcessor processor = new ReturnProcessor();
-            pm.addProcessor(processor);
-            pm.process();
-
-            returns = processor.getReturns();
-        }
-        return returns;
     }
 
     /**

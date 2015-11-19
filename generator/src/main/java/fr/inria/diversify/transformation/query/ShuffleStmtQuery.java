@@ -31,13 +31,13 @@ public class ShuffleStmtQuery extends TransformationQuery {
     @Override
     public Transformation query() {
         ShuffleStmtTransformation sst = new ShuffleStmtTransformation();
-        List<CtElement> objects = getInputProgram().getAllElement(CtBlock.class);
+        List<CtBlock> objects = getInputProgram().getAllElement(CtBlock.class);
         Random r = new Random();
 
-        CtBlock block = (CtBlock) objects.get(r.nextInt(objects.size()));
+        CtBlock block = objects.get(r.nextInt(objects.size()));
         while (coverageReport.elementCoverage(block) == 0
                 || !isCandidate(block)) {
-            block = (CtBlock) objects.get(r.nextInt(objects.size()));
+            block = objects.get(r.nextInt(objects.size()));
         }
         sst.setTransplantationPoint(block);
 
