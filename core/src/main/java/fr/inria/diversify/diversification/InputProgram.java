@@ -128,7 +128,7 @@ public class InputProgram {
     protected List<CtReturn> returns;
 
 
-    protected Map<Class, List<CtElement>> typeToObject = new HashMap<Class, List<CtElement>>();
+    protected Map<Class, List<? extends CtElement>> typeToObject = new HashMap<Class, List<? extends CtElement>>();
 
     /**
      * List of inline constants that can be found in this program
@@ -317,6 +317,31 @@ public class InputProgram {
         return result;
     }
 
+    public <T extends CtElement> T findElement(Class type, String position, String searchValue) {
+        return findElement(type, position, searchValue, 5, 0.85);
+    }
+
+    public <T extends CtElement> T findElement(Class type, String position, String searchValue,
+                                         int lineThreshold, double valueThreshold) {
+        T result = null;
+
+        String[] s = position.split(":");
+        String classPosition = s[0];
+        int lineNumberPosition = Integer.parseInt(s[1]);
+
+        List<T> allElements = getAllElement(type);
+        for(T elem : allElements) {
+            String elemClass = elem.getPosition().getCompilationUnit().getMainType().getQualifiedName();
+            int elemLineNumber = elem.getPosition().getLine();
+            if(classPosition.equals(elemClass) && elemLineNumber == lineNumberPosition) {
+                return elem;
+            }
+        }
+
+
+        return result;
+    }
+
     /**
      * Returns an specific code fragment given its position and source. The source is optional.
      * However, you should supply both, since is possible that a code fragment
@@ -387,8 +412,8 @@ public class InputProgram {
 
     public synchronized <T extends CtElement> List<T> getAllElement(Class cl) {
         if (!typeToObject.containsKey(cl)) {
-            QueryVisitor query = new QueryVisitor(new TypeFilter(cl));
-            List<CtElement> elements = new ArrayList<>();
+            QueryVisitor<T> query = new QueryVisitor(new TypeFilter(cl));
+            List<T> elements = new ArrayList<>();
             for (CtElement e : getRoots()) {
                 e.accept(query);
                 elements.addAll(query.getResult());

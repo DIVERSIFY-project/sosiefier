@@ -52,18 +52,10 @@ public class TypeTransformationQuery extends TransformationQuery {
                 .setScanners(new SubTypesScanner(false))
                 .filterInputsBy(new FilterBuilder().includePackage(".*")));
 
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        Method m = ClassLoader.class.getDeclaredMethod("getPackages");
-        m.setAccessible(true);
-
-        Package[] packages = (Package[]) m.invoke(classLoader, new Class[0]);
-        Arrays.stream(packages)
-                .filter(p -> p.getName().startsWith("java."))
-                .forEach(p ->
-                        reflections.merge(new Reflections(ConfigurationBuilder.build()
-                                .setUrls(sun.misc.Launcher.getBootstrapClassPath().getURLs())
-                                .setScanners(new SubTypesScanner(false))
-                        .filterInputsBy(new FilterBuilder().includePackage(p.getName())))));
+        reflections.merge(new Reflections(ConfigurationBuilder.build()
+                .setUrls(sun.misc.Launcher.getBootstrapClassPath().getURLs())
+                .setScanners(new SubTypesScanner(false))
+                .filterInputsBy(new FilterBuilder().includePackage("java..*"))));
     }
 
     protected void parseTypeConfiguration(String typeConfiguration) {
