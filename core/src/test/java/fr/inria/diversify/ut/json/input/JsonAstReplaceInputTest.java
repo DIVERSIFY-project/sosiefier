@@ -1,6 +1,6 @@
 package fr.inria.diversify.ut.json.input;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.persistence.json.input.JsonAstReplaceInput;
 import fr.inria.diversify.persistence.json.input.JsonSectionInput;
@@ -107,11 +107,11 @@ public class JsonAstReplaceInputTest {
     @Test
     public void testCanHandleSection() {
         JsonAstReplaceInput reader = new JsonAstReplaceInput(new InputProgram(), new JSONObject());
-        assertTrue(reader.canRead(TRANSFORMATIONS + ".replace"));
-        assertTrue(reader.canRead(TRANSFORMATIONS + ".replaceWitgestein"));
-        assertFalse(reader.canRead(TRANSFORMATIONS + ".delete"));
-        assertFalse(reader.canRead(TRANSFORMATIONS + ".add"));
-        assertFalse(reader.canRead(TRANSFORMATIONS + ".addWitgestein"));
+        assertTrue(reader.canRead("adrStmt.replace"));
+        assertTrue(reader.canRead("adrStmt.replaceWitgestein"));
+        assertFalse(reader.canRead("adrStmt.delete"));
+        assertFalse(reader.canRead("adrStmt.add"));
+        assertFalse(reader.canRead("adrStmt.addWitgestein"));
     }
 
 }

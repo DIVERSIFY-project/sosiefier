@@ -1,4 +1,4 @@
-package fr.inria.diversify.diversification.accessors;
+package fr.inria.diversify.runner.accessors;
 
 /**
  * Created by marodrig on 22/01/2015.

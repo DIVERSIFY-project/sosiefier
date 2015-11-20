@@ -1,8 +1,8 @@
 package fr.inria.diversify.ut.diversification;
 
-import fr.inria.diversify.diversification.InputConfiguration;
-import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.diversification.accessors.SourceAccesor;
+import fr.inria.diversify.runner.InputConfiguration;
+import fr.inria.diversify.runner.InputProgram;
+import fr.inria.diversify.runner.accessors.SourceAccesor;
 import fr.inria.diversify.ut.MockInputProgram;
 import fr.inria.diversify.ut.SpoonMetaFactoryTest;
 import org.junit.Test;

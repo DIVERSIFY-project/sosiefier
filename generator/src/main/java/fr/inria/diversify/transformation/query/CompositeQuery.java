@@ -1,6 +1,6 @@
 package fr.inria.diversify.transformation.query;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
 

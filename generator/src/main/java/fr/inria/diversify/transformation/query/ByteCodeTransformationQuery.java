@@ -1,7 +1,7 @@
 package fr.inria.diversify.transformation.query;
 
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.bytecode.BytecodeAdd;

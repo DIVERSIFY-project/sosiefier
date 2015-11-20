@@ -2,8 +2,8 @@ package fr.inria.diversify.it;
 
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.factories.SpoonMetaFactory;
-import fr.inria.diversify.diversification.InputConfiguration;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputConfiguration;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;

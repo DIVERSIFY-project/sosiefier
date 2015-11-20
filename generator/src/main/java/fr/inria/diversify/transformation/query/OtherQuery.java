@@ -1,11 +1,10 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.coverage.ICoverageReport;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.other.EmptyMethodBody;
 import fr.inria.diversify.transformation.other.ReplaceLiteral;
-import fr.inria.diversify.transformation.other.ReplaceNew;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;
 

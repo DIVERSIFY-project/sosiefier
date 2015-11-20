@@ -1,7 +1,7 @@
 package fr.inria.diversify.it.persistence;
 
 import com.fasterxml.uuid.UUIDComparator;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.it.SosieGeneratorIntegrationTests;
 import fr.inria.diversify.persistence.json.input.JsonSosiesInput;
 import fr.inria.diversify.persistence.json.output.JsonSosiesOutput;
@@ -18,7 +18,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

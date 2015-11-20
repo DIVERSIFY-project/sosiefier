@@ -1,20 +1,15 @@
 package fr.inria.diversify.statistic;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtField;
-import spoon.reflect.visitor.QueryVisitor;
-import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.reflect.declaration.CtEnumImpl;
-import spoon.support.reflect.declaration.CtFieldImpl;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 

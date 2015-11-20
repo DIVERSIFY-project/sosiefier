@@ -21,20 +21,23 @@ import java.lang.reflect.Constructor;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.POSITION;
+import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.SOURCE_CODE;
+
 /**
  * User: Simon
  * Date: 12/11/15
  * Time: 10:54
  */
-public class TypeTransformation extends Transformation {
+public class NewInstanceTransformation extends Transformation {
     protected Map<CtConstructorCall, Constructor> newClassInstance;
     protected Map<CtElement, CtConstructorCall> newCCtoOldCC;
     protected Set<CtMethod> methodsSwitch;
     protected boolean withSwitch;
 
-    public TypeTransformation() {
+    public NewInstanceTransformation() {
         type = "replaceNew";
-        name = "";
+        name = "replaceNew";
         newClassInstance = new IdentityHashMap<>();
         newCCtoOldCC = new IdentityHashMap<>();
         methodsSwitch = new HashSet<>();
@@ -313,8 +316,8 @@ public class TypeTransformation extends Transformation {
             JSONObject o = new JSONObject();
             array.put(o);
             String position = constructorCall.getPosition().getCompilationUnit().getMainType().getQualifiedName() + ":" + constructorCall.getPosition().getLine();
-            o.put("position", position);
-            o.put("source", constructorCall.toString());
+            o.put(POSITION, position);
+            o.put(SOURCE_CODE, constructorCall.toString());
 
             o.put("newInstance", newClassInstance.get(constructorCall).getDeclaringClass().getCanonicalName());
             o.put("parameterTypes",   newClassInstance.get(constructorCall).getParameterTypes());

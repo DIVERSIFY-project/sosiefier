@@ -1,6 +1,6 @@
 package fr.inria.diversify.persistence.json.input;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONException;
 import org.json.JSONObject;

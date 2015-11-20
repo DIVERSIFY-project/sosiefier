@@ -1,7 +1,7 @@
 package fr.inria.diversify.divers;
 
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
-import fr.inria.diversify.diversification.InputConfiguration;
+import fr.inria.diversify.runner.InputConfiguration;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.util.Log;
 import spoon.processing.ProcessingManager;

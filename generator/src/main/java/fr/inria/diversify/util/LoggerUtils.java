@@ -1,6 +1,6 @@
 package fr.inria.diversify.util;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import org.apache.commons.io.FileUtils;
 import spoon.compiler.Environment;
 import spoon.processing.ProcessingManager;

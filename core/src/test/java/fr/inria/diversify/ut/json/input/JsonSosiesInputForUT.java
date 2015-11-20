@@ -1,6 +1,6 @@
 package fr.inria.diversify.ut.json.input;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.persistence.json.input.JsonHeaderInput;
 import fr.inria.diversify.persistence.json.input.JsonSosiesInput;
 

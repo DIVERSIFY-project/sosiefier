@@ -1,7 +1,7 @@
 package fr.inria.diversify.transformation;
 
 import com.fasterxml.uuid.Generators;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

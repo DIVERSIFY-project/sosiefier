@@ -1,7 +1,5 @@
-package fr.inria.diversify.crossCheckingOracle;
+package fr.inria.diversify.runner;
 
-import fr.inria.diversify.diversification.InputConfiguration;
-import fr.inria.diversify.diversification.SinglePointDiversify;
 import fr.inria.diversify.info.BranchInfo;
 import fr.inria.diversify.info.CoverageInfo;
 
@@ -24,18 +22,16 @@ import java.util.stream.Collectors;
  * Date: 06/10/15
  * Time: 10:33
  */
-public class DiversifyOracle extends SinglePointDiversify {
+public class CoverageRunner extends SinglePointRunner {
     protected CoverageInfo coverageInfo;
     protected BranchInfo branchInfo;
 
-    public DiversifyOracle(InputConfiguration inputConfiguration, String projectDir, String srcDir) {
+    public CoverageRunner(InputConfiguration inputConfiguration, String projectDir, String srcDir) {
         super(inputConfiguration, projectDir, srcDir);
     }
 
     public String init(String dirProject, String dirTarget) throws IOException, InterruptedException {
         super.init(dirProject, dirTarget);
-
-        copySwitch(tmpDir + "/" + sourceDir);
 
         coverageInfo = new CoverageInfo(inputConfiguration.getInputProgram());
         try {
@@ -110,13 +106,5 @@ public class DiversifyOracle extends SinglePointDiversify {
 
         return coverageInfo.getTestForBranch(branch);
     }
-
-    protected void copySwitch(String copyDirName) throws IOException {
-        File srcFile = new File(System.getProperty("user.dir") + "/generator/src/main/java/fr/inria/diversify/switchsosie/Switch.java");
-        File destFile = new File(copyDirName  + "/fr/inria/diversify/transformation/switchsosie/Switch.java");
-
-        FileUtils.copyFile(srcFile, destFile);
-    }
-
 
 }

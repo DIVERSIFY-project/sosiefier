@@ -1,6 +1,6 @@
 package fr.inria.diversify.transformation;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import org.json.JSONException;
 
 import java.io.File;

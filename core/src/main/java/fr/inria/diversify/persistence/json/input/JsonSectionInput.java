@@ -1,7 +1,7 @@
 package fr.inria.diversify.persistence.json.input;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONObject;

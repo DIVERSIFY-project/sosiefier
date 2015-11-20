@@ -1,12 +1,9 @@
 package fr.inria.diversify.persistence.json.input;
 
-import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.MultiTransformation;
 import fr.inria.diversify.transformation.Transformation;
-import jdk.nashorn.api.scripting.JSObject;
-import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.HashMap;

@@ -1,6 +1,6 @@
 package fr.inria.diversify.transformation.query;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.Transformation;
@@ -14,7 +14,6 @@ import spoon.reflect.code.CtReturn;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 /**
  * User: Simon

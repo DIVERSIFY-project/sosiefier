@@ -2,7 +2,7 @@ package fr.inria.diversify.ut;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.ut.diversification.FakeFragmentProcessor;
 
 import java.util.HashMap;

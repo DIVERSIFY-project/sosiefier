@@ -1,6 +1,6 @@
 package fr.inria.diversify.info;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.processor.main.BranchPositionProcessor;
 import fr.inria.diversify.util.LoggerUtils;
 import spoon.reflect.cu.SourcePosition;

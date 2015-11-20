@@ -1,7 +1,7 @@
 package fr.inria.diversify.processor.main;
 
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.processor.ProcessorUtil;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;

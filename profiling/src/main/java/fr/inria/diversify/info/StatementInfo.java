@@ -1,7 +1,7 @@
 package fr.inria.diversify.info;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtReturn;
 

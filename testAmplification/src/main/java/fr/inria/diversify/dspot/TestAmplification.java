@@ -1,7 +1,7 @@
 package fr.inria.diversify.dspot;
 
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 
 import fr.inria.diversify.factories.DiversityCompiler;
 import fr.inria.diversify.logger.branch.CoverageReader;

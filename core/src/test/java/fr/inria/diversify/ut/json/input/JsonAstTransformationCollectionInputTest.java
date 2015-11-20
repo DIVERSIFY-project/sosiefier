@@ -1,6 +1,6 @@
 package fr.inria.diversify.ut.json.input;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.persistence.json.input.*;
 import fr.inria.diversify.transformation.Transformation;
@@ -8,17 +8,13 @@ import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.ut.MockInputProgram;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.UUID;
 
-import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
 import static fr.inria.diversify.ut.json.SectionTestUtils.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

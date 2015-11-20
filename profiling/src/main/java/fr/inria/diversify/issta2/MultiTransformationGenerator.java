@@ -1,7 +1,7 @@
 package fr.inria.diversify.issta2;
 
-import fr.inria.diversify.diversification.AbstractDiversify;
-import fr.inria.diversify.diversification.InputConfiguration;
+import fr.inria.diversify.runner.AbstractRunner;
+import fr.inria.diversify.runner.InputConfiguration;
 import fr.inria.diversify.logger.Diff;
 import fr.inria.diversify.logger.JsonDiffOutput;
 import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  * Date: 04/11/15
  * Time: 14:02
  */
-public class MultiTransformationGenerator extends AbstractDiversify {
+public class MultiTransformationGenerator extends AbstractRunner {
     protected MultiTransformation currentMultiTransformation;
     protected boolean onlySosie;
     protected int transformationSize;

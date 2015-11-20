@@ -1,12 +1,11 @@
 package fr.inria.diversify.visu;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtType;
 
 import java.io.*;

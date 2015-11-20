@@ -1,15 +1,12 @@
 package fr.inria.diversify.ut.json.input;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.persistence.json.input.JsonAstAddInput;
-import fr.inria.diversify.persistence.json.input.JsonAstReplaceInput;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.ut.MockInputProgram;
-import fr.inria.diversify.ut.json.SectionTestUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -19,7 +16,6 @@ import java.util.UUID;
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
 import static fr.inria.diversify.ut.json.SectionTestUtils.TEST_ID_1;
 import static fr.inria.diversify.ut.json.SectionTestUtils.createAddASTTransformationJSON;
-import static fr.inria.diversify.ut.json.SectionTestUtils.createReplaceASTTransformationJSON;
 import static fr.inria.diversify.ut.json.input.JsonAstReplaceInputTest.testErrors;
 import static org.junit.Assert.*;
 
@@ -92,11 +88,11 @@ public class JsonAstAddInputTest {
     @Test
     public void testCanHandleSection() {
         JsonAstAddInput reader = new JsonAstAddInput(new InputProgram(), new JSONObject());
-        assertTrue(reader.canRead(TRANSFORMATIONS + ".add"));
-        assertTrue(reader.canRead(TRANSFORMATIONS + ".addWitgestein"));
-        assertFalse(reader.canRead(TRANSFORMATIONS + ".delete"));
-        assertFalse(reader.canRead(TRANSFORMATIONS + ".replace"));
-        assertFalse(reader.canRead(TRANSFORMATIONS + ".replaceWitgestein"));
+        assertTrue(reader.canRead("adrStmt.add"));
+        assertTrue(reader.canRead("adrStmt.addWitgestein"));
+        assertFalse(reader.canRead("adrStmt.delete"));
+        assertFalse(reader.canRead("adrStmt.replace"));
+        assertFalse(reader.canRead("adrStmt.replaceWitgestein"));
     }
 
 }

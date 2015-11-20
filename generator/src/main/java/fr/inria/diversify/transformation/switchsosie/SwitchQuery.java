@@ -1,6 +1,6 @@
 package fr.inria.diversify.transformation.switchsosie;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
@@ -19,11 +19,11 @@ import java.util.stream.Collectors;
 public class SwitchQuery extends FromListQuery {
 
     public SwitchQuery(InputProgram inputProgram) {
-        super(inputProgram);
+        super(inputProgram, false);
     }
 
     public SwitchQuery(InputProgram inputProgram, int rangeMin, int rangeMax)  {
-        super(inputProgram);
+        super(inputProgram, false);
 
         JsonTransformationLoader parser = new JsonTransformationLoader(getInputProgram());
 

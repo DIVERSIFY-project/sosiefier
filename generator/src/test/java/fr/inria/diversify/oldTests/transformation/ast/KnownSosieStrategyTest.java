@@ -2,12 +2,11 @@ package fr.inria.diversify.oldTests.transformation.ast;
 
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.factories.SpoonMetaFactory;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.KnownSosieQuery;
 import fr.inria.diversify.transformation.query.QueryException;
 import fr.inria.diversify.transformation.query.SeveralTriesUnsuccessful;
-import fr.inria.diversify.util.InitUtils;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

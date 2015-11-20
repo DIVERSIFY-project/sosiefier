@@ -1,8 +1,8 @@
 package fr.inria.diversify.ut.json.input;
 
 import com.fasterxml.uuid.UUIDComparator;
-import fr.inria.diversify.diversification.InputConfiguration;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputConfiguration;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.persistence.json.input.JsonSectionInput;
 import fr.inria.diversify.persistence.json.input.JsonSosiesInput;
 import fr.inria.diversify.transformation.Transformation;

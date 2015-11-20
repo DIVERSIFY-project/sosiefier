@@ -1,13 +1,11 @@
 package fr.inria.diversify.ut.json.input;
 
-import com.fasterxml.uuid.UUIDComparator;
-import fr.inria.diversify.diversification.InputConfiguration;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputConfiguration;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.persistence.Header;
 import fr.inria.diversify.persistence.MavenHeader;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.persistence.json.input.JsonHeaderInput;
-import fr.inria.diversify.persistence.json.input.JsonSosiesInput;
 import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,11 +16,9 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 import static fr.inria.diversify.persistence.json.input.JsonSosiesInput.ERROR;
-import static fr.inria.diversify.persistence.json.input.JsonSosiesInput.WARNING;
 import static fr.inria.diversify.ut.json.output.JsonHeaderOutputTest.generatePOM;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

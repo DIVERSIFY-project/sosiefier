@@ -1,12 +1,11 @@
 package fr.inria.diversify.oldTests;
 
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
-import spoon.reflect.factory.Factory;
 
 /**
  * Created by marodrig on 19/06/2014.

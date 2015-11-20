@@ -1,12 +1,11 @@
 package fr.inria.diversify.issta2;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.logger.Diff;
 import fr.inria.diversify.logger.JsonDiffInput;
 import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.FromListQuery;
-import fr.inria.diversify.transformation.query.TransformationQuery;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,7 +21,7 @@ public class DiffQuery extends FromListQuery {
     protected final Map<Transformation, Set<Diff>> transToDiffs;
 
     public DiffQuery(InputProgram inputProgram) {
-        super(inputProgram);
+        super(inputProgram, false);
         JsonTransformationLoader parser = new JsonTransformationLoader(getInputProgram());
         JsonDiffInput jsonDiffInput = new JsonDiffInput();
         parser.addSection(jsonDiffInput.getClass(), jsonDiffInput);

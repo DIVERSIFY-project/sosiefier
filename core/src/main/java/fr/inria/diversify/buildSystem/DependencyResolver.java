@@ -1,6 +1,6 @@
 package fr.inria.diversify.buildSystem;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 
 import java.net.URL;
 import java.util.List;

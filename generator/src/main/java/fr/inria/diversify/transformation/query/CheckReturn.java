@@ -1,7 +1,7 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import spoon.reflect.code.*;
 import spoon.reflect.reference.CtVariableReference;

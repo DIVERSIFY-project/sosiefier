@@ -1,8 +1,8 @@
 package fr.inria.diversify.constantgenerator;
 
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
-import fr.inria.diversify.diversification.InputConfiguration;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputConfiguration;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.Log;
 import spoon.reflect.declaration.CtType;

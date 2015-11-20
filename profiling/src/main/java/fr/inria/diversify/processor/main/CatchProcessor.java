@@ -1,7 +1,6 @@
 package fr.inria.diversify.processor.main;
 
-import fr.inria.diversify.diversification.InputProgram;
-import spoon.reflect.code.CtCase;
+import fr.inria.diversify.runner.InputProgram;
 import spoon.reflect.code.CtCatch;
 import spoon.reflect.code.CtCodeSnippetStatement;
 import spoon.reflect.declaration.CtExecutable;

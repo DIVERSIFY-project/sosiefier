@@ -1,6 +1,6 @@
 package fr.inria.diversify.factories;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.util.Log;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.factory.FactoryImpl;

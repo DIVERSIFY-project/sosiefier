@@ -1,9 +1,9 @@
 package fr.inria.diversify.persistence.json.input;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.typeTransformation.TypeTransformation;
+import fr.inria.diversify.transformation.typeTransformation.NewInstanceTransformation;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,7 +14,6 @@ import java.util.UUID;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.POSITION;
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.SOURCE_CODE;
-import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TRANSFORMATIONS;
 
 /**
  * User: Simon
@@ -36,13 +35,13 @@ public class NewInstanceTransformationInput extends JsonTransformationInput {
 
     @Override
     protected Transformation build() {
-        return new TypeTransformation();
+        return new NewInstanceTransformation();
     }
 
     @Override
     public void read(Map<UUID, Transformation> transformations) {
         try {
-            TypeTransformation transf = (TypeTransformation)get(transformations); //add the transformation to the transformations map if not present
+            NewInstanceTransformation transf = (NewInstanceTransformation)get(transformations); //add the transformation to the transformations map if not present
 
             JSONArray array = getJsonObject().getJSONArray(NEW_CONSTRUCTORS);
             for(int i = 0; i < array.length(); i++ ) {
@@ -79,8 +78,6 @@ public class NewInstanceTransformationInput extends JsonTransformationInput {
 
     @Override
     public boolean canRead(String s) {
-        String[] r = s.split("\\.");
-        if ( r.length != 2 ) return false;
-        return  r[0].equals("replaceNew");
+        return s.equals("replaceNew.replaceNew");
     }
 }

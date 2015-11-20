@@ -1,7 +1,7 @@
 package fr.inria.diversify.transformation.typeTransformation;
 
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.QueryException;
 import fr.inria.diversify.transformation.query.TransformationQuery;
@@ -130,8 +130,8 @@ public class TypeTransformationQuery extends TransformationQuery {
         }
     }
 
-    protected TypeTransformation buildMultiPointTransformation(List<CtConstructorCall> constructorCalls, CtConstructorCall candidate, Constructor newConstructor) {
-        TypeTransformation transformation = new TypeTransformation();
+    protected NewInstanceTransformation buildMultiPointTransformation(List<CtConstructorCall> constructorCalls, CtConstructorCall candidate, Constructor newConstructor) {
+        NewInstanceTransformation transformation = new NewInstanceTransformation();
         transformation.setWithSwitch(withSwitch);
         StaticTypeFinder staticTypeFinder = new StaticTypeFinder();
 
@@ -146,8 +146,8 @@ public class TypeTransformationQuery extends TransformationQuery {
         return transformation;
     }
 
-    protected TypeTransformation buildSinglePointTransformation(CtConstructorCall candidate, Constructor newConstructor) {
-        TypeTransformation transformation = new TypeTransformation();
+    protected NewInstanceTransformation buildSinglePointTransformation(CtConstructorCall candidate, Constructor newConstructor) {
+        NewInstanceTransformation transformation = new NewInstanceTransformation();
         transformation.setWithSwitch(withSwitch);
         transformation.add(candidate, newConstructor);
 

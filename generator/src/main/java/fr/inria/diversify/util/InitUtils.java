@@ -2,8 +2,8 @@ package fr.inria.diversify.util;
 
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
-import fr.inria.diversify.diversification.InputConfiguration;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputConfiguration;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.factories.DiversityCompiler;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import org.apache.log4j.Level;

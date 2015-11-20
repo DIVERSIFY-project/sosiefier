@@ -1,7 +1,7 @@
 package fr.inria.diversify.issta2;
 
-import fr.inria.diversify.diversification.InputConfiguration;
-import fr.inria.diversify.diversification.SinglePointDiversify;
+import fr.inria.diversify.runner.InputConfiguration;
+import fr.inria.diversify.runner.SinglePointRunner;
 import fr.inria.diversify.logger.Diff;
 import fr.inria.diversify.logger.JsonDiffOutput;
 import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
@@ -22,7 +22,7 @@ import java.util.Set;
 /**
  * Created by Simon on 21/01/15.
  */
-public class Compare extends SinglePointDiversify {
+public class Compare extends SinglePointRunner {
     protected SosieComparator comparator;
     protected Map<Transformation, Set<Diff>> diffs;
 

@@ -1,6 +1,6 @@
 package fr.inria.diversify.persistence.json.input;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONArray;
@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import java.util.*;
 
+import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TRANSF_TYPE;
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.NAME;
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TINDEX;
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TRANSFORMATIONS;
@@ -48,7 +49,7 @@ public class JsonAstTransformationCollectionInput extends JsonSectionInput {
                     throwWarning("Invalid index. ", e, false);
                 }
                 for (JsonTransformationInput si : sections) {
-                    if (si.canRead(TRANSFORMATIONS + "." + obj.getString(NAME))) {
+                    if (si.canRead( obj.getString(TRANSF_TYPE) + "." + obj.getString(NAME))) {
                         si.setJsonObject(obj);
                         si.setFailures(getFailures());
                         si.setLoadMessages(getLoadMessages());

@@ -1,6 +1,6 @@
 package fr.inria.diversify.transformation.query;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.transformation.Transformation;
 
@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * Created by Simon on 27/11/14.
@@ -17,16 +18,19 @@ public class FromListQuery extends TransformationQuery {
     protected List<Transformation> transformations;
     protected boolean removeAfterQuery = true;
     protected boolean shuffle = false;
+    protected boolean onlySosie;
 
-    public FromListQuery(InputProgram inputProgram) {
+    public FromListQuery(InputProgram inputProgram, boolean onlySosie) {
         super(inputProgram);
         JsonTransformationLoader parser = new JsonTransformationLoader(getInputProgram());
 
-        Collection<Transformation> ts = parser.load(getInputProgram().getPreviousTransformationsPath(), true);
-        transformations = new ArrayList(ts);
+        transformations = parser.load(getInputProgram().getPreviousTransformationsPath(), true).stream()
+                .filter(t -> !onlySosie || t.isSosie())
+                .collect(Collectors.toList());
+
     }
 
-    public FromListQuery(InputProgram inputProgram, int rangeMin, int rangeMax)  {
+    public FromListQuery(InputProgram inputProgram, int rangeMin, int rangeMax, boolean onlySosie)  {
         super(inputProgram);
 
         JsonTransformationLoader parser = new JsonTransformationLoader(getInputProgram());
@@ -59,6 +63,10 @@ public class FromListQuery extends TransformationQuery {
 
     public void setShuffle(boolean shuffle) {
         this.shuffle = shuffle;
+    }
+
+    public void setOnlySosie(boolean onlySosie) {
+        this.onlySosie = onlySosie;
     }
 
     public void setRemoveAfterQuery(boolean removeAfterQuery) {

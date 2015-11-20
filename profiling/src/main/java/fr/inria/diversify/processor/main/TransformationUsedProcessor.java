@@ -1,6 +1,6 @@
 package fr.inria.diversify.processor.main;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import spoon.reflect.code.*;

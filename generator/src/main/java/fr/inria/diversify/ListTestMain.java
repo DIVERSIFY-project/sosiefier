@@ -1,7 +1,7 @@
 package fr.inria.diversify;
 
 import fr.inria.diversify.coverage.TestProcessor;
-import fr.inria.diversify.diversification.InputConfiguration;
+import fr.inria.diversify.runner.InputConfiguration;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import spoon.compiler.SpoonCompiler;

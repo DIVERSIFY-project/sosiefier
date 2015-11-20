@@ -1,4 +1,4 @@
-package fr.inria.diversify.diversification;
+package fr.inria.diversify.runner;
 
 import fr.inria.diversify.statistic.RunResults;
 import fr.inria.diversify.statistic.SessionResults;
@@ -23,7 +23,7 @@ import java.util.List;
  * Date: 5/2/13
  * Time: 5:39 PM
  */
-public class Diversify extends AbstractDiversify {
+public class OldRunner extends AbstractRunner {
 
 //    /**
 //     * Session report
@@ -67,7 +67,7 @@ public class Diversify extends AbstractDiversify {
         this.earlyReport = earlyReport;
     }
 
-    public Diversify(InputConfiguration inputConfiguration, TransformationQuery transQuery, String projectDir) {
+    public OldRunner(InputConfiguration inputConfiguration, TransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
         this.projectDir = projectDir;
         transformations = new ArrayList<>();
@@ -77,7 +77,7 @@ public class Diversify extends AbstractDiversify {
         this.inputConfiguration = inputConfiguration;
     }
 
-    public Diversify(InputConfiguration inputConfiguration, String projectDir, String workingDir) {
+    public OldRunner(InputConfiguration inputConfiguration, String projectDir, String workingDir) {
         this.sourceDir = workingDir;
         this.projectDir = projectDir;
         transformations = new ArrayList<>();

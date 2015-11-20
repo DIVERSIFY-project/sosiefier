@@ -2,7 +2,7 @@ package fr.inria.diversify.dspot;
 
 import fr.inria.diversify.compare.ObjectLog;
 import fr.inria.diversify.compare.Observation;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.factories.DiversityCompiler;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;

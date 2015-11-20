@@ -1,7 +1,7 @@
 package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
@@ -19,13 +19,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.code.CtBlock;
-import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtReturn;
-import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtType;
-import spoon.reflect.reference.CtTypeReference;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

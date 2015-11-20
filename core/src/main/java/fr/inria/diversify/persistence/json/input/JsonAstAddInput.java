@@ -1,7 +1,7 @@
 package fr.inria.diversify.persistence.json.input;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
@@ -69,6 +69,6 @@ public class JsonAstAddInput extends JsonTransformationInput {
     public boolean canRead(String s) {
         String[] r = s.split("\\.");
         if ( r.length != 2 ) return false;
-        return  r[0].equals(TRANSFORMATIONS) && r[1].toLowerCase().contains("add");
+        return  r[0].equals("adrStmt") && r[1].toLowerCase().contains("add");
     }
 }

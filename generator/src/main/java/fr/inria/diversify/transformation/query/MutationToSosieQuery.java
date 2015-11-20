@@ -2,7 +2,7 @@ package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.coverage.MultiCoverageReport;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.TransformationParserException;

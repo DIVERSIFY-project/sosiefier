@@ -1,6 +1,6 @@
 package fr.inria.diversify.constantgenerator;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import spoon.reflect.code.CtLiteral;
 
 import java.util.Collection;

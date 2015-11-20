@@ -1,13 +1,11 @@
-package fr.inria.diversify.diversification;
+package fr.inria.diversify.runner;
 
 
-import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.statistic.SinglePointSessionResults;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
 import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
-import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.Log;
 
 import java.io.FileWriter;
@@ -18,7 +16,7 @@ import java.util.Collection;
 /**
  * Created by Simon on 20/08/14.
  */
-public class GHDiversify extends AbstractDiversify {
+public class SinglePointRunner extends AbstractRunner {
     /**
      * Indicates if we also apply the parent transformation
      */
@@ -29,19 +27,13 @@ public class GHDiversify extends AbstractDiversify {
      */
     protected boolean acceptedErrors = false;
 
-    String scriptBefore;
-    String scriptAfter ;
-    String testProject;
 
-    public GHDiversify(InputConfiguration inputConfiguration, String projectDir, String srcDir, String scriptBefore,  String scriptAfter, String testProject) {
+    public SinglePointRunner(InputConfiguration inputConfiguration, String projectDir, String srcDir) {
         this.sourceDir = srcDir;
         this.projectDir = projectDir;
         transformations = new ArrayList<>();
         this.inputConfiguration = inputConfiguration;
         sessionResults = new SinglePointSessionResults();
-        this.scriptBefore = scriptBefore;
-        this.scriptAfter = scriptAfter;
-        this.testProject = testProject;
     }
 
     @Override
@@ -77,12 +69,8 @@ public class GHDiversify extends AbstractDiversify {
                 transformations.add(trans);
                 int status = runTest(tmpDir);
 
-                trans.setStatus(status);
+                 trans.setStatus(status);
                 trans.setFailures(builder.getTestFail());
-                if (status == 0) {
-                   trans.setStatus(runOtherTest());
-
-                }
                 // error during runTest
             } catch (Exception e) {
                 trans.setStatus(-2);
@@ -94,31 +82,10 @@ public class GHDiversify extends AbstractDiversify {
 
             ((SinglePointSessionResults) sessionResults).addRunResults(trans);
         } catch (ApplyTransformationException e) {
-            tryRestore(trans,e);
-        } catch (BuildTransplantException e) {}
+            tryRestore(trans, e);
+        } catch (BuildTransplantException e) {
+        }
     }
-
-    protected int runOtherTest() throws InterruptedException, IOException {
-        Process p = Runtime.getRuntime().exec("sh " +  scriptBefore);
-        p.waitFor();
-//
-//        inputConfiguration = new InputConfiguration(testProject);
-//        InputProgram testInputProgram = InitUtils.initInputProgram(inputConfiguration);
-
-
-        String[] phases = new String[]{"clean", "test"};
-
-        MavenBuilder rb = new MavenBuilder(testProject);
-        rb.setGoals(phases);
-        rb.setTimeOut(1000);
-        rb.runBuilder();
-        Log.info("status: " + rb.getStatus() + ", compile error: " + rb.getCompileError() + ", run all test: " + rb.allTestRun() + ", nb error: " + builder.getTestFail().size());
-
-        p = Runtime.getRuntime().exec("sh " +  scriptAfter);
-        p.waitFor();
-      return rb.getStatus();
-    }
-
 
     protected void applyTransformation(Transformation trans) throws Exception {
         if(withParent) {

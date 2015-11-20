@@ -1,6 +1,6 @@
 package fr.inria.diversify.persistence.json.input;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import org.json.JSONObject;
 
 import java.util.ArrayList;

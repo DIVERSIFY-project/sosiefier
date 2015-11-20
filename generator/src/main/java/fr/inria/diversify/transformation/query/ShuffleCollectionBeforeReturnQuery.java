@@ -1,10 +1,9 @@
 package fr.inria.diversify.transformation.query;
 
-import com.sun.org.apache.bcel.internal.classfile.Code;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.coverage.ICoverageReport;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.other.ShuffleCollectionBeforeReturn;
 import fr.inria.diversify.util.Log;

@@ -1,4 +1,4 @@
-package fr.inria.diversify.diversification;
+package fr.inria.diversify.runner;
 
 import fr.inria.diversify.bytecode.CompareBytecode;
 import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
@@ -6,7 +6,6 @@ import fr.inria.diversify.statistic.AbstractSessionResults;
 import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.GitUtils;
 import fr.inria.diversify.util.Log;
@@ -23,7 +22,7 @@ import java.util.List;
  * Date: 9/2/13
  * Time: 3:05 PM
  */
-public abstract class AbstractDiversify {
+public abstract class AbstractRunner {
 
     /**
      * Number of trials performed

@@ -1,6 +1,6 @@
 package fr.inria.diversify.statistic;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.util.Log;
 import spoon.reflect.declaration.CtClass;

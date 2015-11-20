@@ -1,12 +1,12 @@
-package fr.inria.diversify.diversification;
+package fr.inria.diversify.runner;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.*;
 import fr.inria.diversify.coverage.ICoverageReport;
-import fr.inria.diversify.diversification.accessors.Accessor;
-import fr.inria.diversify.diversification.accessors.SourceAccesor;
-import fr.inria.diversify.diversification.accessors.TypeAccesor;
+import fr.inria.diversify.runner.accessors.Accessor;
+import fr.inria.diversify.runner.accessors.SourceAccesor;
+import fr.inria.diversify.runner.accessors.TypeAccesor;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.StringSimilarity;
 import javassist.ClassPool;

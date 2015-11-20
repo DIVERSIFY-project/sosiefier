@@ -1,6 +1,6 @@
 package fr.inria.diversify.crossCheckingOracle;
 
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.util.LoggerUtils;
 import org.apache.commons.io.FileUtils;
 import spoon.reflect.declaration.CtClass;

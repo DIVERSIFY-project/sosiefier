@@ -4,7 +4,7 @@ package fr.inria.diversify.buildSystem.maven;
 import fr.inria.diversify.buildSystem.DependencyResolver;
 import fr.inria.diversify.buildSystem.android.AndroidSdk;
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.util.Log;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;

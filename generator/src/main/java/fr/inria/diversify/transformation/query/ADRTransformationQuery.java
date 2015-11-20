@@ -2,7 +2,7 @@ package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.Statement;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
@@ -15,7 +15,6 @@ import spoon.reflect.factory.Factory;
 
 import java.util.*;
 import java.util.function.ToDoubleFunction;
-import java.util.stream.Collectors;
 
 
 /**

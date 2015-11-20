@@ -3,9 +3,9 @@ package fr.inria.diversify.crossCheckingOracle;
 import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
-import fr.inria.diversify.diversification.InputConfiguration;
-import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.diversification.SinglePointDiversify;
+import fr.inria.diversify.runner.InputConfiguration;
+import fr.inria.diversify.runner.InputProgram;
+import fr.inria.diversify.runner.SinglePointRunner;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.transformation.typeTransformation.TypeTransformationQuery;
 import fr.inria.diversify.util.InitUtils;
@@ -32,7 +32,7 @@ public class CrossCheckingOracleMain {
         CrossCheckingOracle crossCheckingOracle = new CrossCheckingOracle(inputProgram, outputDirectory);
         String output = crossCheckingOracle.generateTest();
 //        DiversifyOracle diversifyOracle = new DiversifyOracle(inputConfiguration, output, inputProgram.getRelativeSourceCodeDir());
-        SinglePointDiversify diversifyOracle = new SinglePointDiversify(inputConfiguration, output, inputProgram.getRelativeSourceCodeDir());
+        SinglePointRunner diversifyOracle = new SinglePointRunner(inputConfiguration, output, inputProgram.getRelativeSourceCodeDir());
 
         String sosieDir = inputConfiguration.getProperty("copy.sosie.sources.to", "");
         diversifyOracle.setSosieSourcesDir(sosieDir);

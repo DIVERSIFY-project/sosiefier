@@ -2,7 +2,7 @@ package fr.inria.diversify.info;
 
 import fr.inria.diversify.Profiling;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.logger.branch.*;
 import fr.inria.diversify.processor.main.BranchPositionProcessor;
 import fr.inria.diversify.util.Log;

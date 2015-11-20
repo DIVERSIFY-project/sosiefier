@@ -1,14 +1,13 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.coverage.ICoverageReport;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.other.ShuffleStmtTransformation;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.code.CtSuperAccess;
-import spoon.reflect.declaration.CtElement;
 
 import java.util.List;
 import java.util.Random;

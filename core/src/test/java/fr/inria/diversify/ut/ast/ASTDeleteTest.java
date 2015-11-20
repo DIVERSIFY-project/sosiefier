@@ -1,8 +1,7 @@
 package fr.inria.diversify.ut.ast;
 
 import fr.inria.diversify.codeFragmentProcessor.AllStatementsProcessor;
-import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.factories.SpoonMetaFactory;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
 import fr.inria.diversify.ut.SpoonMetaFactoryTest;

@@ -1,7 +1,7 @@
 package fr.inria.diversify.logger.graph;
 
 import fr.inria.diversify.buildSystem.AbstractBuilder;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.logger.Comparator;
 import fr.inria.diversify.logger.Diff;
 import fr.inria.diversify.transformation.SingleTransformation;

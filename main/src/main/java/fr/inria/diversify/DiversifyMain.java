@@ -8,7 +8,7 @@ import fr.inria.diversify.coverage.CoverageReport;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.coverage.MultiCoverageReport;
 import fr.inria.diversify.coverage.NullCoverageReport;
-import fr.inria.diversify.diversification.*;
+import fr.inria.diversify.runner.*;
 import fr.inria.diversify.issta2.Compare;
 import fr.inria.diversify.issta2.DiffQuery;
 import fr.inria.diversify.issta2.MultiTransformationGenerator;
@@ -65,7 +65,7 @@ public class DiversifyMain {
         inputProgram = InitUtils.initInputProgram(inputConfiguration);
         InitUtils.initDependency(inputConfiguration);
         InitUtils.initSpoon(inputProgram, false);
-        AbstractDiversify runner = initRunner();
+        AbstractRunner runner = initRunner();
 
         AbstractBuilder builder = initBuilder(runner.getTmpDir());
         TransformationQuery query = initTransformationQuery();
@@ -86,8 +86,8 @@ public class DiversifyMain {
         }
     }
 
-    protected AbstractDiversify initRunner() throws Exception {
-        AbstractDiversify abstractDiversify = null;
+    protected AbstractRunner initRunner() throws Exception {
+        AbstractRunner abstractRunner = null;
         String runner = inputConfiguration.getProperty("runner", "simple");
         String project = inputConfiguration.getProperty("project");
         String src = inputConfiguration.getProperty("src");
@@ -96,10 +96,13 @@ public class DiversifyMain {
 
         switch (runner) {
             case "simple":
-                abstractDiversify = new SinglePointDiversify(inputConfiguration, project, src);
+                abstractRunner = new SinglePointRunner(inputConfiguration, project, src);
+                break;
+            case "coverage":
+                abstractRunner = new CoverageRunner(inputConfiguration, project, src);
                 break;
             case "gh":
-                abstractDiversify = new GHDiversify(inputConfiguration, project, src, inputConfiguration.getProperty("testScripBefore"), inputConfiguration.getProperty("testScriptAfter") ,inputConfiguration.getProperty("testProject"));
+                abstractRunner = new GHRunner(inputConfiguration, project, src, inputConfiguration.getProperty("testScripBefore"), inputConfiguration.getProperty("testScriptAfter") ,inputConfiguration.getProperty("testProject"));
                 break;
 //            case "dumpfailure":
 //                abstractDiversify = new DumpFailure(inputConfiguration, project, src);
@@ -109,7 +112,7 @@ public class DiversifyMain {
                 MultiTransformationGenerator multi = new MultiTransformationGenerator(inputConfiguration, project, src);
                 multi.setTransformationSize(multiTransformationSize);
                 multi.setOnlySosie(false);
-                abstractDiversify = multi;
+                abstractRunner = multi;
                 break;
             }
             case "multisosie": {
@@ -117,7 +120,7 @@ public class DiversifyMain {
                 MultiTransformationGenerator multi = new MultiTransformationGenerator(inputConfiguration, project, src);
                 multi.setTransformationSize(multiTransformationSize);
                 multi.setOnlySosie(true);
-                abstractDiversify = multi;
+                abstractRunner = multi;
                 break;
             }
 
@@ -128,22 +131,22 @@ public class DiversifyMain {
 //                comparator.addComparator(new ExceptionComparator());
 //                comparator.addComparator(new LogVariableComparator());
                 comparator.addComparator(new StaticDiffBuilder());
-                abstractDiversify = new Compare(inputConfiguration, project, src, comparator);
+                abstractRunner = new Compare(inputConfiguration, project, src, comparator);
                 break;
             }
             case "android": {
-                abstractDiversify = new SinglePointDiversify(inputConfiguration, project, src);
-                abstractDiversify.setAndroid(true);
+                abstractRunner = new SinglePointRunner(inputConfiguration, project, src);
+                abstractRunner.setAndroid(true);
                 break;
             }
 
         }
-        abstractDiversify.setSosieSourcesDir(sosieDir);
-        abstractDiversify.init(project, inputConfiguration.getProperty("tmpDir"));
+        abstractRunner.setSosieSourcesDir(sosieDir);
+        abstractRunner.init(project, inputConfiguration.getProperty("tmpDir"));
 
-        abstractDiversify.setResultDir(resultDir);
+        abstractRunner.setResultDir(resultDir);
 
-        return abstractDiversify;
+        return abstractRunner;
     }
 
     protected AbstractBuilder initBuilder(String directory) throws Exception {
@@ -234,14 +237,16 @@ public class DiversifyMain {
             case "fromlist": {
                 int rangeMin = Integer.parseInt(inputConfiguration.getProperty("transformation.range.min", "-1"));
                 int rangeMax = Integer.parseInt(inputConfiguration.getProperty("transformation.range.max", "-1"));
+                boolean onlysosie = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.onlySosie", "false"));
                 FromListQuery query;
                 if(rangeMax == -1 || rangeMin == -1) {
-                    query = new FromListQuery(inputProgram);
+                    query = new FromListQuery(inputProgram, onlysosie);
                 } else {
-                    query = new FromListQuery(inputProgram, rangeMin, rangeMax);
+                    query = new FromListQuery(inputProgram, rangeMin, rangeMax, onlysosie);
                 }
                 query.setShuffle(true);
                 query.setRemoveAfterQuery(true);
+                query.setOnlySosie(onlysosie);
                 return query;
             }
             case "diffs": {
@@ -365,11 +370,9 @@ public class DiversifyMain {
     }
 
     protected void computeDiversifyStat(String transDir, String output) throws Exception {
-//        TransformationParser tf = new TransformationParser(true, inputProgram);
-//        Collection<Transformation> transformations = tf.parse(transDir);
         JsonTransformationLoader loader = new JsonTransformationLoader(inputProgram);
-          Collection<Transformation> transformations = loader.load(transDir, false);
-//        TransformationsWriter write = new TransformationsWriter(transformations, fileName);
+        Collection<Transformation> transformations = loader.load(transDir, false);
+
         JsonTransformationWriter writer = new JsonTransformationWriter();
         File out = new File(output);
         if(!out.exists()) {
@@ -412,7 +415,7 @@ public class DiversifyMain {
         return types;
     }
 
-    protected void writeResult(AbstractDiversify runner) {
+    protected void writeResult(AbstractRunner runner) {
         String repo = inputConfiguration.getProperty("gitRepository");
 
         if (repo.equals("null")) {

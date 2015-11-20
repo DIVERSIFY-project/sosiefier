@@ -1,10 +1,9 @@
-package fr.inria.diversify.diversification;
+package fr.inria.diversify.runner;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.Statement;
 
 import fr.inria.diversify.util.Log;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.*;
 import java.nio.file.Path;

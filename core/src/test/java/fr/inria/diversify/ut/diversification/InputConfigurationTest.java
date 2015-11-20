@@ -3,7 +3,7 @@ package fr.inria.diversify.ut.diversification;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.Expression;
 import fr.inria.diversify.codeFragment.Statement;
-import fr.inria.diversify.diversification.InputConfiguration;
+import fr.inria.diversify.runner.InputConfiguration;
 import mockit.Expectations;
 import mockit.Mocked;
 import org.junit.Test;

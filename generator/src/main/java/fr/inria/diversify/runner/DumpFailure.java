@@ -1,8 +1,7 @@
-package fr.inria.diversify.diversification;
+package fr.inria.diversify.runner;
 
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
-import org.json.JSONObject;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -15,7 +14,7 @@ import java.util.List;
  * Date: 11/03/15
  * Time: 11:17
  */
-public class DumpFailure extends SinglePointDiversify {
+public class DumpFailure extends SinglePointRunner {
     List<Integer> failures;
 
     public DumpFailure(InputConfiguration inputConfiguration, String projectDir, String srcDir) {

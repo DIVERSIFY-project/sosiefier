@@ -1,8 +1,7 @@
 package fr.inria.diversify.dspot;
 
 import fr.inria.diversify.buildSystem.DiversifyClassLoader;
-import fr.inria.diversify.compare.ObjectLog;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.logger.logger.Logger;
 import org.junit.internal.requests.FilterRequest;
 import org.junit.runner.Computer;
@@ -16,7 +15,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**

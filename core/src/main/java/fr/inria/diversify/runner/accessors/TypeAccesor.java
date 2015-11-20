@@ -1,4 +1,4 @@
-package fr.inria.diversify.diversification.accessors;
+package fr.inria.diversify.runner.accessors;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 

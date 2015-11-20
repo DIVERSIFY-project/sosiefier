@@ -3,7 +3,7 @@ package fr.inria.diversify.oldTests;
 import fr.inria.diversify.TestEyeFileGenerator;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
-import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
