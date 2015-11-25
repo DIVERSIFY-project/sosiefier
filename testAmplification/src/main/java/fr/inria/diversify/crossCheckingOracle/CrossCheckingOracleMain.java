@@ -7,10 +7,7 @@ import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.runner.CoverageRunner;
 import fr.inria.diversify.runner.InputConfiguration;
 import fr.inria.diversify.runner.InputProgram;
-import fr.inria.diversify.runner.SinglePointRunner;
-import fr.inria.diversify.transformation.query.FromListQuery;
 import fr.inria.diversify.transformation.query.TransformationQuery;
-import fr.inria.diversify.transformation.typeTransformation.NewInstanceTransformation;
 import fr.inria.diversify.transformation.typeTransformation.TypeTransformationQuery;
 import fr.inria.diversify.util.InitUtils;
 
