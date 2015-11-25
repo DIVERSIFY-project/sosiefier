@@ -1,10 +1,13 @@
 package fr.inria.diversify.transformation;
 
 import spoon.reflect.code.CtBlock;
+import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: Simon
@@ -17,13 +20,18 @@ public abstract class SingleTransformation extends Transformation {
     public abstract String classLocationName();
     public abstract String packageLocationName();
     public abstract String methodLocationName();
-
+    public abstract SourcePosition getPosition();
     public abstract String getTransformationString() throws Exception;
 
     public abstract int line();
 
     public abstract void printJavaFile(String srcDir) throws IOException;
 
+    public List<SourcePosition> getPositions() {
+        List<SourcePosition> list = new ArrayList<>(1);
+        list.add(getPosition());
+        return list;
+    }
 
     /**
      * Applies the transformation having into consideration the parent transformation

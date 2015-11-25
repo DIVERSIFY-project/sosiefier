@@ -58,10 +58,12 @@ public class SpoonMetaFactory {
         for (String s : srcDirectory) {
             for (String dir : s.split(System.getProperty("path.separator"))) {
                 try {
-                    Log.debug("add {} to classpath", dir);
-                    File dirFile = new File(dir);
-                    if (dirFile.isDirectory()) {
-                        compiler.addInputSource(dirFile);
+                    if(!dir.isEmpty()) {
+                        Log.debug("add {} to classpath", dir);
+                        File dirFile = new File(dir);
+                        if (dirFile.isDirectory()) {
+                            compiler.addInputSource(dirFile);
+                        }
                     }
                 } catch (Exception e) {
                     Log.error("error in initSpoon", e);

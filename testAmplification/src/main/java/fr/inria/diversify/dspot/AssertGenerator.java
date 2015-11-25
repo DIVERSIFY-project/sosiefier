@@ -1,5 +1,6 @@
 package fr.inria.diversify.dspot;
 
+import fr.inria.diversify.buildSystem.spoon.JunitRunner;
 import fr.inria.diversify.compare.ObjectLog;
 import fr.inria.diversify.compare.Observation;
 import fr.inria.diversify.runner.InputProgram;
@@ -40,7 +41,7 @@ public class AssertGenerator {
     public AssertGenerator(CtMethod test, DiversityCompiler compiler, InputProgram inputProgram) throws IOException {
         this.test = test;
         this.compiler = compiler;
-        this.junitRunner = new JunitRunner(inputProgram, compiler.getDestinationDirectory().getAbsolutePath());
+        this.junitRunner = new JunitRunner(Thread.currentThread().getContextClassLoader(), compiler.getDestinationDirectory().getAbsolutePath());
         statementsIndexToAssert = new ArrayList<>();
         for(int i = 0; i < 50; i++) {
             statementsIndexToAssert.add(i);
@@ -50,7 +51,7 @@ public class AssertGenerator {
     public AssertGenerator(CtMethod test, DiversityCompiler compiler, InputProgram inputProgram, List<Integer> statementsIndexToAssert) throws IOException {
         this.test = test;
         this.compiler = compiler;
-        this.junitRunner = new JunitRunner(inputProgram, compiler.getDestinationDirectory().getAbsolutePath());
+        this.junitRunner = new JunitRunner(Thread.currentThread().getContextClassLoader(), compiler.getDestinationDirectory().getAbsolutePath());
         this.statementsIndexToAssert = statementsIndexToAssert;
     }
 

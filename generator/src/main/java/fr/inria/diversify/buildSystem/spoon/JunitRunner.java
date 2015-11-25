@@ -1,8 +1,6 @@
 package fr.inria.diversify.buildSystem.spoon;
 
 import fr.inria.diversify.buildSystem.DiversifyClassLoader;
-import fr.inria.diversify.runner.InputProgram;
-import fr.inria.diversify.logger.logger.Logger;
 import org.junit.internal.requests.FilterRequest;
 import org.junit.runner.Computer;
 import org.junit.runner.JUnitCore;
@@ -11,7 +9,6 @@ import org.junit.runner.Result;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtMethod;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
@@ -23,13 +20,13 @@ import java.util.stream.Collectors;
  * Time: 19:43
  */
 public class JunitRunner {
-    String testClassPath;
-    InputProgram inputProgram;
+    protected ClassLoader parentClassLoader;
+    protected String testClassPath;
     protected int timeout = 60;
     protected static final ExecutorService THREAD_POOL = Executors.newSingleThreadExecutor();
 
-    public JunitRunner(InputProgram inputProgram, String testClassPath) {
-        this.inputProgram = inputProgram;
+    public JunitRunner(ClassLoader parentClassLoader, String testClassPath) {
+        this.parentClassLoader = parentClassLoader;
         this.testClassPath = testClassPath;
     }
 
@@ -53,25 +50,19 @@ public class JunitRunner {
     }
 
     public Result runTestClasses(List<CtClass> tests) {
+        timeout = tests.size() * 2;
         return runTestClasses(tests, new ArrayList<>(0));
     }
 
     protected Result runTestClasses(List<CtClass> tests, List<String> methodsToRun) {
         try {
-            Class<?>[] testClasses = loadClass(tests, testClassPath);
-            Logger.reset();
-            Logger.setLogDir(new File(inputProgram.getProgramDir() + "/log/"));
+            Class<?>[] testClasses = loadClass(tests);
             Result result = runRequest(buildRequest(testClasses, methodsToRun));
-
-            Logger.close();
-//            loadClass(tests, inputProgram.getProgramDir() + "/" + inputProgram.getTestClassesDir());
-        return result;
+            return result;
         } catch (Exception e) {
              return null;
         }
     }
-
-
 
     protected Request buildRequest(Class<?>[] testClasses, List<String> methodsToRun) {
         Request classesRequest = Request.classes(new Computer(), testClasses);
@@ -90,8 +81,8 @@ public class JunitRunner {
         }, timeout, TimeUnit.SECONDS);
     }
 
-    protected Class<?>[] loadClass(List<CtClass> tests, String classPath) throws ClassNotFoundException {
-        DiversifyClassLoader classLoader = new DiversifyClassLoader(Thread.currentThread().getContextClassLoader(), classPath);
+    protected Class<?>[] loadClass(List<CtClass> tests) throws ClassNotFoundException {
+        DiversifyClassLoader classLoader = new DiversifyClassLoader(parentClassLoader, testClassPath);
         classLoader.setClassFilter(tests.stream().map(cl -> cl.getQualifiedName()).collect(Collectors.toList()));
 
         Class<?>[] testClasses = new Class<?>[tests.size()];

@@ -55,13 +55,9 @@ public class DiversifyClassLoader extends ClassLoader {
                 input.close();
 
                 byte[] classData = buffer.toByteArray();
-
                 return defineClass(fullName,
                         classData, 0, classData.length);
-
-            } catch (MalformedURLException e) {
-
-            } catch (IOException e) {
+            } catch (Throwable e) {
             }
         }
         try {

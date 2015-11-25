@@ -38,31 +38,35 @@ public class Compare {
 
     private Compare(boolean equals, boolean onlyPublicMethod, boolean onlyNotStaticMethod, int maxCompare, int nbSampleMethods) {
         this.equals = equals;
-        this.invocator = new Invocator(1);
+        this.invocator = new Invocator(5);
         this.methodsHandler = new MethodsHandler(onlyPublicMethod, onlyNotStaticMethod);
         this.maxCompare = maxCompare;
         this.nbSampleMethods = nbSampleMethods;
     }
 
+    protected boolean filterB = false;
     public List<Boolean> buildFilter(List<Object> list1, List<Object> list2) {
+        filterB = true;
         List<Boolean> filter = new ArrayList<Boolean>(list1.size());
         for(int i = 0; i < list1.size(); i++) {
             filter.add(compareAnything(list1.get(i), list2.get(i), maxCompare));
         }
+        filterB = false;
         return filter;
     }
 
     public boolean compare(List<Object> list1, List<Object> list2, List<Boolean> filter) {
         for(int i = 0; i < list1.size(); i++) {
-            if(filter.get(i) && !compareAnything(list1.get(i), list2.get(i), maxCompare)) {
-                return false;
+            if(filter.get(i)) {
+                boolean result = compareAnything(list1.get(i), list2.get(i), maxCompare);
+                return result;
             }
         }
         return true;
     }
 
     protected boolean compareAnything(Object o1, Object o2, int nbCompare) {
-        if (o1 == null && o2 == null) {
+        if(o1 == o2) {
             return true;
         }
 
@@ -70,12 +74,21 @@ public class Compare {
             return false;
         }
 
-        if(isPrimitive(o1) && isPrimitive(o2)) {
-            return o1 == o2;
+        if(isWrapperType(o1) && isWrapperType(o2)) {
+            if(o1.equals(o2)) {
+                return true;
+            }else {
+                return false;
+            }
         }
 
         if (isString(o1) && isString(o2)) {
-            return equalsString((String) o1, (String) o2);
+            if(equalsString((String) o1, (String) o2)) {
+                return true;
+            }else {
+                return false;
+            }
+//            return equalsString((String) o1, (String) o2);
         }
 
         if(isClass(o1) && isClass(o2)) {
@@ -87,6 +100,16 @@ public class Compare {
             boolean success = false;
             while(count < 8 && !success) {
                 success = compareNotNullCollection((Collection<?>) o1, (Collection<?>) o2, nbCompare);
+                count++;
+            }
+            return success;
+        }
+
+        if(isIterator(o1) && isIterator(o2)) {
+            int count = 0;
+            boolean success = false;
+            while(count < 8 && !success) {
+                success = compareNotNullObject( o1, o2, nbCompare);
                 count++;
             }
             return success;
@@ -200,6 +223,8 @@ public class Compare {
 
                 if (invocation1.sameStatus(invocation2)) {
                     return compareAnything(invocation1.getResult(), invocation2.getResult(), nbCompare - 1);
+                } else {
+                    return invocation1.hasTimeOutError() || invocation2.hasTimeOutError();
                 }
             }
             return true;
@@ -213,6 +238,28 @@ public class Compare {
 
     protected boolean isPrimitive(Object o) {
         return o != null && o.getClass().isPrimitive();
+    }
+
+    public static boolean isWrapperType(Object o)
+    {
+        return WRAPPER_TYPES.contains(o.getClass());
+    }
+
+    private static Set<Class<?>> WRAPPER_TYPES = getWrapperTypes();
+
+    private static Set<Class<?>> getWrapperTypes()
+    {
+        Set<Class<?>> ret = new HashSet<Class<?>>();
+        ret.add(Boolean.class);
+        ret.add(Character.class);
+        ret.add(Byte.class);
+        ret.add(Short.class);
+        ret.add(Integer.class);
+        ret.add(Long.class);
+        ret.add(Float.class);
+        ret.add(Double.class);
+        ret.add(Void.class);
+        return ret;
     }
 
     protected boolean isArray(Object o) {
@@ -234,6 +281,11 @@ public class Compare {
 
     protected boolean isCollection(Object o) {
         return o != null && o instanceof Collection;
+    }
+
+    protected boolean isIterator(Object o) {
+      //  Iterable
+        return o != null && o instanceof Iterator;
     }
 
     protected boolean isList(Object o) {

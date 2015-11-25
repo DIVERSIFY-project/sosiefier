@@ -220,5 +220,5 @@ public abstract class Transformation {
         Transformation.failuresDico = failuresDico;
     }
 
-    public abstract SourcePosition getPosition();
+    public abstract List<SourcePosition> getPositions();
 }

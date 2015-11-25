@@ -85,13 +85,20 @@ public class TestCoverage {
         if(branchPosition == null) {
             return new HashSet<>();
         }
+//        return transformations.parallelStream()
+//                .filter(transformation -> {
+//                    SourcePosition transPosition = transformation.getPosition();
+//                    return branchPosition.getCompilationUnit().equals(transPosition.getCompilationUnit())
+//                            && branchPosition.getSourceStart() <= transPosition.getSourceStart()
+//                            && branchPosition.getSourceEnd() >= transPosition.getSourceEnd();
+//                })
+//                .collect(Collectors.toSet());
         return transformations.parallelStream()
-                .filter(transformation -> {
-                    SourcePosition transPosition = transformation.getPosition();
-                    return branchPosition.getCompilationUnit().equals(transPosition.getCompilationUnit())
-                            && branchPosition.getSourceStart() <= transPosition.getSourceStart()
-                            && branchPosition.getSourceEnd() >= transPosition.getSourceEnd();
-                })
+                .filter(transformation -> transformation.getPositions().stream()
+                        .anyMatch(transPosition -> branchPosition.getCompilationUnit().equals(transPosition.getCompilationUnit())
+                                && branchPosition.getSourceStart() <= transPosition.getSourceStart()
+                                && branchPosition.getSourceEnd() >= transPosition.getSourceEnd())
+                )
                 .collect(Collectors.toSet());
     }
 

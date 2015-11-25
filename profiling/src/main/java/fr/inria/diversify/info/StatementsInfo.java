@@ -16,6 +16,7 @@ import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
 import fr.inria.diversify.processor.main.BranchPositionProcessor;
 import fr.inria.diversify.processor.test.CountProcessor;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTReplace;
@@ -43,7 +44,7 @@ public class StatementsInfo {
     protected final InputConfiguration inputConfiguration;
     protected final InputProgram inputProgram;
     protected Map<Transformation, Set<Diff>> transToDiffs;
-    protected Collection<Transformation> transformations;
+    protected Collection<SingleTransformation> transformations;
 
     protected Map<String, SourcePosition> branchPosition;
     protected CoverageInfo coverageInfo;
@@ -79,7 +80,8 @@ public class StatementsInfo {
         loader.addSection(jsonDiffInput.getClass(), jsonDiffInput);
 
         transformations = loader.load(transDir, true).stream()
-            .collect(Collectors.toList());
+                .map(t -> (SingleTransformation)t)
+                .collect(Collectors.toList());
 
         transToDiffs = jsonDiffInput.getTransToDiffs();
 
@@ -102,7 +104,7 @@ public class StatementsInfo {
         FileWriter writer = new FileWriter(new File(out));
 
         writer.append("uuid;type;name;position;status;diff;graphDiff;branchDiff;variableDiff;exceptionDiff;nbTest;maxDeep;meanDeep;medianDeep;minDeep;nodeTransplantationPoint;nodeTransplant\n");
-        for(Transformation transformation: transformations) {
+        for(SingleTransformation transformation: transformations) {
             writer.append(transformation.getIndex() + ";");
             writer.append(transformation.getType() + ";");
             writer.append(transformation.getName() + ";");

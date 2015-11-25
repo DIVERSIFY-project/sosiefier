@@ -7,6 +7,7 @@ import spoon.reflect.cu.SourcePosition;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by Simon on 28/01/15.
@@ -129,7 +130,14 @@ public class MultiTransformation extends Transformation {
     }
 
     @Override
-    public SourcePosition getPosition() {
-        throw new NotImplementedException();
+    public List<SourcePosition> getPositions() {
+        List<SourcePosition> list = new ArrayList<>();
+        for(Transformation t : transformations) {
+            list.addAll(getPositions());
+        }
+        return list;
+//        return transformations.stream()
+//                .flatMap(t -> t.getPositions().stream())
+//                .collect(Collectors.toList());
     }
 }

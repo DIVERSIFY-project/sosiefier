@@ -47,12 +47,10 @@ public class MethodsHandler {
 
         List<Method> objectMethods = new LinkedList<Method>(cache.get(o.getClass()));
         List<Method> randomMethods = new ArrayList<Method>(nbMethod);
-        if (objectMethods.isEmpty()) {
-            return new LinkedList<Method>();
-        }
+
         while (randomMethods.size() < nbMethod && !objectMethods.isEmpty()) {
             int randomIndex = random.nextInt(objectMethods.size());
-            Method m = objectMethods.get(randomIndex);
+            Method m = objectMethods.remove(randomIndex);
             m.setAccessible(true);
             randomMethods.add(m);
         }

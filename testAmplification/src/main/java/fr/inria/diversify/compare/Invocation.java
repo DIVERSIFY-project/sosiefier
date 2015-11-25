@@ -1,6 +1,7 @@
 package fr.inria.diversify.compare;
 
 import java.lang.reflect.Method;
+import java.util.concurrent.TimeoutException;
 
 /**
  * User: Simon
@@ -41,6 +42,10 @@ public class Invocation {
         } else {
             return (error != null) == (other.error != null);
         }
+    }
+
+    public boolean hasTimeOutError() {
+        return error != null && error instanceof TimeoutException;
     }
 
     public String toString() {

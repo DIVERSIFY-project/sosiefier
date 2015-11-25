@@ -1,6 +1,7 @@
 package fr.inria.diversify.dspot;
 
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
+import fr.inria.diversify.buildSystem.spoon.JunitRunner;
 import fr.inria.diversify.runner.InputProgram;
 
 import fr.inria.diversify.factories.DiversityCompiler;
@@ -268,7 +269,7 @@ public class TestAmplification {
     }
 
     protected Result runTests(List<CtClass> tests) throws ClassNotFoundException {
-        JunitRunner junitRunner = new JunitRunner(inputProgram, compiler.getDestinationDirectory().getAbsolutePath());
+        JunitRunner junitRunner = new JunitRunner(Thread.currentThread().getContextClassLoader(), compiler.getDestinationDirectory().getAbsolutePath());
 
         return junitRunner.runTestClasses(tests);
     }
