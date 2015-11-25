@@ -65,19 +65,19 @@ public class NewInstanceTransformation extends Transformation {
 
     protected CtElement getTransplant(CtConstructorCall oldCallConstructor, Constructor newConstructor) {
         if(withSwitch) {
-            StaticTypeFinder staticTypeFinder = new StaticTypeFinder();
-            CtTypeReference staticType = buildTypeReference(staticTypeFinder.findStaticType(oldCallConstructor),
-                    oldCallConstructor.getType().getActualTypeArguments());
-            CtMethod mth = getMethod(oldCallConstructor, newConstructor);
-            String snippet = "((" + staticType.toString()
-                    + ")"
-                    + mth.getSimpleName()
-                    + "("
-                    + oldCallConstructor.getArguments() .stream()
-                        .map(arg -> arg.toString())
-                        .collect(Collectors.joining(","))
-                    + "))";
-            return getFactory().Code().createCodeSnippetExpression(snippet);
+            return buildNewConditional(oldCallConstructor, newConstructor);
+//            StaticTypeFinder staticTypeFinder = new StaticTypeFinder();
+//            CtTypeReference staticType = buildTypeReference(staticTypeFinder.findStaticType(oldCallConstructor),
+//                    oldCallConstructor.getType().getActualTypeArguments());
+//            CtMethod mth = getMethod(oldCallConstructor, newConstructor);
+//
+//            String snippet = mth.getSimpleName()
+//                    + "("
+//                    + oldCallConstructor.getArguments() .stream()
+//                    .map(arg -> arg.toString())
+//                    .collect(Collectors.joining(","))
+//                    + ")";
+//            return getFactory().Code().createCodeSnippetExpression(snippet);
         }  else {
             return buildNewCallConstructor(newConstructor, oldCallConstructor.getArguments(), oldCallConstructor.getType().getActualTypeArguments());
         }
@@ -183,6 +183,22 @@ public class NewInstanceTransformation extends Transformation {
         return returnTypeRef;
     }
 
+    protected CtConditional buildNewConditional(CtConstructorCall oldCallConstructor, Constructor newConstructor) {
+        CtConditional<Object> conditional = getFactory().Core().createConditional();
+
+        CtFieldReference<Boolean> fieldRef = getFactory().Core().createFieldReference();
+        fieldRef.setSimpleName("fr.inria.diversify.transformation.switchsosie.Switch.switchTransformation");
+        conditional.setCondition(getFactory().Code().createVariableRead(fieldRef, true));
+
+        CtExpression newCallConstructor = buildNewCallConstructor(newConstructor, oldCallConstructor.getArguments(), oldCallConstructor.getType().getActualTypeArguments());
+        conditional.setThenExpression(newCallConstructor);
+
+        CtConstructorCall oldCallConstructorClone = getFactory().Core().clone(oldCallConstructor);
+        conditional.setElseExpression(oldCallConstructorClone);
+
+        return conditional;
+    }
+
     protected String createMethodName(CtConstructorCall oldCallConstructor, Constructor newConstructor) {
         CtTypeReference oldDynamicType = oldCallConstructor.getType();
         String name = "change_" + oldDynamicType.getSimpleName();
@@ -260,8 +276,10 @@ public class NewInstanceTransformation extends Transformation {
     }
 
     @Override
-    public SourcePosition getPosition() {
-        return null;
+    public List<SourcePosition> getPositions() {
+        return newClassInstance.keySet().stream()
+                .map(elem -> elem.getPosition())
+                .collect(Collectors.toList());
     }
 
     @Override

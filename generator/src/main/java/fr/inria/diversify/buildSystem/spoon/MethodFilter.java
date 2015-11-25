@@ -1,4 +1,4 @@
-package fr.inria.diversify.dspot;
+package fr.inria.diversify.buildSystem.spoon;
 
 import org.junit.runner.Description;
 import org.junit.runner.manipulation.Filter;

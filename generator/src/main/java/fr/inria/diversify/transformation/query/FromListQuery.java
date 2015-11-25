@@ -72,4 +72,8 @@ public class FromListQuery extends TransformationQuery {
     public void setRemoveAfterQuery(boolean removeAfterQuery) {
         this.removeAfterQuery = removeAfterQuery;
     }
+
+    public List<Transformation> getTransformations() {
+        return transformations;
+    }
 }
