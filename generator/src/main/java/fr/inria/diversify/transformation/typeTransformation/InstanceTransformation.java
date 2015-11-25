@@ -29,13 +29,13 @@ import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.SOURC
  * Date: 12/11/15
  * Time: 10:54
  */
-public class NewInstanceTransformation extends Transformation {
+public class InstanceTransformation extends Transformation {
     protected Map<CtConstructorCall, Constructor> newClassInstance;
     protected Map<CtElement, CtConstructorCall> newCCtoOldCC;
     protected Set<CtMethod> methodsSwitch;
     protected boolean withSwitch;
 
-    public NewInstanceTransformation() {
+    public InstanceTransformation() {
         type = "replaceNew";
         name = "replaceNew";
         newClassInstance = new IdentityHashMap<>();

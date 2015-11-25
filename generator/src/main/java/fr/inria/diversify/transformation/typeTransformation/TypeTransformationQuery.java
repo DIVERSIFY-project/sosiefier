@@ -130,8 +130,8 @@ public class TypeTransformationQuery extends TransformationQuery {
         }
     }
 
-    protected NewInstanceTransformation buildMultiPointTransformation(List<CtConstructorCall> constructorCalls, CtConstructorCall candidate, Constructor newConstructor) {
-        NewInstanceTransformation transformation = new NewInstanceTransformation();
+    protected InstanceTransformation buildMultiPointTransformation(List<CtConstructorCall> constructorCalls, CtConstructorCall candidate, Constructor newConstructor) {
+        InstanceTransformation transformation = new InstanceTransformation();
         transformation.setWithSwitch(withSwitch);
         StaticTypeFinder staticTypeFinder = new StaticTypeFinder();
 
@@ -146,8 +146,8 @@ public class TypeTransformationQuery extends TransformationQuery {
         return transformation;
     }
 
-    protected NewInstanceTransformation buildSinglePointTransformation(CtConstructorCall candidate, Constructor newConstructor) {
-        NewInstanceTransformation transformation = new NewInstanceTransformation();
+    protected InstanceTransformation buildSinglePointTransformation(CtConstructorCall candidate, Constructor newConstructor) {
+        InstanceTransformation transformation = new InstanceTransformation();
         transformation.setWithSwitch(withSwitch);
         transformation.add(candidate, newConstructor);
 

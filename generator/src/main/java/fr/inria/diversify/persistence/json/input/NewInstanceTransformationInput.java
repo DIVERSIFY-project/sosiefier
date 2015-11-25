@@ -3,7 +3,7 @@ package fr.inria.diversify.persistence.json.input;
 import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.typeTransformation.NewInstanceTransformation;
+import fr.inria.diversify.transformation.typeTransformation.InstanceTransformation;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,13 +35,13 @@ public class NewInstanceTransformationInput extends JsonTransformationInput {
 
     @Override
     protected Transformation build() {
-        return new NewInstanceTransformation();
+        return new InstanceTransformation();
     }
 
     @Override
     public void read(Map<UUID, Transformation> transformations) {
         try {
-            NewInstanceTransformation transf = (NewInstanceTransformation)get(transformations); //add the transformation to the transformations map if not present
+            InstanceTransformation transf = (InstanceTransformation)get(transformations); //add the transformation to the transformations map if not present
 
             JSONArray array = getJsonObject().getJSONArray(NEW_CONSTRUCTORS);
             for(int i = 0; i < array.length(); i++ ) {
