@@ -11,6 +11,8 @@ import fr.inria.diversify.transformation.typeTransformation.InstanceTransformati
 import fr.inria.diversify.util.InitUtils;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -41,11 +43,18 @@ public class CrossCheckingOracleMain {
 
         inputProgram.setCoverageReport(new NullCoverageReport());
 
-        builder.initTimeOut();
+
+        List<String> acceptedErrors = new ArrayList<>();
+        for(int i = 0; i < 8; i++) {
+            builder.initTimeOut();
+            acceptedErrors.addAll(builder.getFailedTests());
+        }
+        builder.setAcceptedErrors(acceptedErrors);
 //        builder.setTimeOut(150);
         diversifyOracle.setTransformationQuery(query());
         diversifyOracle.setBuilder(builder);
-        diversifyOracle.run(100);
+        int n = Integer.parseInt(inputConfiguration.getProperty("nbRun"));
+        diversifyOracle.run(n);
         writeResult(diversifyOracle);
         diversifyOracle.deleteTmpFiles();
     }

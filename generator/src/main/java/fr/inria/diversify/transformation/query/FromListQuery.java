@@ -25,6 +25,7 @@ public class FromListQuery extends TransformationQuery {
 
         transformations = parser.load(getInputProgram().getPreviousTransformationsPath(), true).stream()
                 .filter(t -> !onlySosie || t.isSosie())
+                .distinct()
                 .collect(Collectors.toList());
 
     }
@@ -35,6 +36,7 @@ public class FromListQuery extends TransformationQuery {
         JsonTransformationLoader parser = new JsonTransformationLoader(getInputProgram());
         List<Transformation> tmp = parser.load(getInputProgram().getPreviousTransformationsPath(), true).stream()
                 .filter(t -> !onlySosie || t.isSosie())
+                .distinct()
                 .collect(Collectors.toList());
 
         transformations = new ArrayList<>();

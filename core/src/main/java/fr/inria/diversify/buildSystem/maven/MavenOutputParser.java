@@ -55,7 +55,7 @@ public class MavenOutputParser {
      */
     public int parse(String[] output) {
 
-        Pattern testResumePattern = Pattern.compile("Tests run:\\s*(\\d+),\\s*Failures:\\s*(\\d+),\\s*Errors:\\s*(\\d+),\\s*Skipped:\\s*(\\d+)");
+//        Pattern testResumePattern = Pattern.compile("Tests run:\\s*(\\d+),\\s*Failures:\\s*(\\d+),\\s*Errors:\\s*(\\d+),\\s*Skipped:\\s*(\\d+)");
         Pattern failedTestPattern = Pattern.compile("(\\w+)\\(((\\w+\\.)*\\w+)\\)\\s+Time elapsed:\\s+((\\d+\\.)?\\d+)\\s+sec\\s+<<<\\s+((FAILURE)|(ERROR))!");
 
         setCompileError(false);
@@ -63,24 +63,22 @@ public class MavenOutputParser {
 
         for (int i = 0; i < output.length && getCompileError() == false; i++) {
             String s = output[i];
-            Matcher m = testResumePattern.matcher(s);
+            Matcher m = failedTestPattern.matcher(s);
             boolean matches = m.find();
-//            if (matches) {
-
-//            } else {
-                m = failedTestPattern.matcher(s);
-                matches = m.find();
                 if ( matches ) {
                     this.failedTest.add(m.group(2) + "." + m.group(1));
                 }
-//            }
             //If we find a compile error there is no need for parsing more output
-            //if ( !getCompileError()) {
             if (s.contains("[ERROR] COMPILATION ERROR")) {
                 setCompileError(true);
                 status = -2;
             } else if (s.contains("[INFO] BUILD FAILURE")) {
-                status =-1;
+                failedTest.removeAll(acceptedErrors);
+                if(failedTest.isEmpty()) {
+                    status = 0;
+                } else {
+                    status = -1;
+                }
             } else if ( s.contains("[INFO] BUILD SUCCESS") ) {
                 status = 0;
             }
@@ -119,14 +117,14 @@ public class MavenOutputParser {
         this.compilationErrors = errors;
     }
 
-    /**
-     * Get errors that we don't mind about
-     *
-     * @return
-     */
-    public List<String> getAcceptedErrors() {
-        return acceptedErrors;
-    }
+//    /**
+//     * Get errors that we don't mind about
+//     *
+//     * @return
+//     */
+//    public List<String> getAcceptedErrors() {
+//        return acceptedErrors;
+//    }
 
     public void setAcceptedErrors(List<String> acceptedErrors) {
         this.acceptedErrors = acceptedErrors;

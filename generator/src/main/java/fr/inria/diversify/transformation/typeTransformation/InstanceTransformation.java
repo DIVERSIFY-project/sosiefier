@@ -343,4 +343,23 @@ public class InstanceTransformation extends Transformation {
         return object;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        InstanceTransformation that = (InstanceTransformation) o;
+
+        if (withSwitch != that.withSwitch) return false;
+        return newClassInstance.equals(that.newClassInstance);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + newClassInstance.hashCode();
+        result = 31 * result + (withSwitch ? 1 : 0);
+        return result;
+    }
 }
