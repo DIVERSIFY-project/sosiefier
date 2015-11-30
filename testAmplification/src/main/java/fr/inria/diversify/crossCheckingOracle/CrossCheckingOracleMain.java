@@ -7,6 +7,7 @@ import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.runner.CoverageRunner;
 import fr.inria.diversify.runner.InputConfiguration;
 import fr.inria.diversify.runner.InputProgram;
+import fr.inria.diversify.runner.SinglePointRunner;
 import fr.inria.diversify.transformation.query.FromListQuery;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.transformation.typeTransformation.InstanceTransformation;
@@ -35,7 +36,7 @@ public class CrossCheckingOracleMain {
         CrossCheckingOracle crossCheckingOracle = new CrossCheckingOracle(inputProgram, outputDirectory);
         String output = crossCheckingOracle.generateTest();
 
-        CoverageRunner diversifyOracle = new CoverageRunner(inputConfiguration, output, inputProgram.getRelativeSourceCodeDir());
+        SinglePointRunner diversifyOracle = new SinglePointRunner(inputConfiguration, output, inputProgram.getRelativeSourceCodeDir());
         String sosieDir = inputConfiguration.getProperty("copy.sosie.sources.to", "");
         diversifyOracle.setSosieSourcesDir(sosieDir);
         diversifyOracle.init(output, inputConfiguration.getProperty("tmpDir"));
@@ -45,8 +46,8 @@ public class CrossCheckingOracleMain {
 
         inputProgram.setCoverageReport(new NullCoverageReport());
 
-//        builder.initTimeOut();
-        builder.setTimeOut(150);
+        builder.initTimeOut();
+//        builder.setTimeOut(150);
         diversifyOracle.setTransformationQuery(query());
         diversifyOracle.setBuilder(builder);
         diversifyOracle.run(100);
