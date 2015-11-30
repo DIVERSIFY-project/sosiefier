@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  * Date: 12/11/15
  * Time: 10:54
  */
-public class TypeTransformationQuery extends TransformationQuery {
+public class InstanceTransformationQuery extends TransformationQuery {
     protected Reflections reflections;
     protected List<CtConstructorCall> constructorCalls;
     protected List<Set<Class>> staticTypes;
@@ -31,7 +31,7 @@ public class TypeTransformationQuery extends TransformationQuery {
     protected boolean all;
     protected boolean withSwitch;
 
-    public TypeTransformationQuery(InputProgram inputProgram, String typeConfiguration, boolean all, boolean withSwitch) {
+    public InstanceTransformationQuery(InputProgram inputProgram, String typeConfiguration, boolean all, boolean withSwitch) {
         super(inputProgram);
 
         try {

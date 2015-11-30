@@ -59,6 +59,11 @@ public class Compare {
         for(int i = 0; i < list1.size(); i++) {
             if(filter.get(i)) {
                 boolean result = compareAnything(list1.get(i), list2.get(i), maxCompare);
+                if(!result) {
+                    System.out.println("diff:\n"+ list1.get(i) + "\n\n" +list2.get(i));
+                    System.out.println( list1.get(i).getClass() + "\n" +list2.get(i).getClass());
+                    System.out.println( list1.get(i) instanceof Iterator);
+                }
                 return result;
             }
         }
@@ -66,53 +71,32 @@ public class Compare {
     }
 
     protected boolean compareAnything(Object o1, Object o2, int nbCompare) {
+        if(nbCompare == 0) {
+            return true;
+        }
         if(o1 == o2) {
             return true;
         }
-
         if ((o1 == null && o2 != null) || (o1 != null && o2 == null)) {
             return false;
         }
-
         if(isWrapperType(o1) && isWrapperType(o2)) {
-            if(o1.equals(o2)) {
-                return true;
-            }else {
-                return false;
-            }
+            return o1.equals(o2);
         }
-
         if (isString(o1) && isString(o2)) {
-            if(equalsString((String) o1, (String) o2)) {
-                return true;
-            }else {
-                return false;
-            }
-//            return equalsString((String) o1, (String) o2);
+            return equalsString((String) o1, (String) o2);
         }
-
         if(isClass(o1) && isClass(o2)) {
             return equalsString(o1.toString(), o2.toString());
         }
 
         if(isCollection(o1) && isCollection(o2)) {
-            int count = 0;
-            boolean success = false;
-            while(count < 8 && !success) {
-                success = compareNotNullCollection((Collection<?>) o1, (Collection<?>) o2, nbCompare);
-                count++;
-            }
-            return success;
+            return compareNotNullCollection((Collection<?>) o1, (Collection<?>) o2, nbCompare);
         }
 
         if(isIterator(o1) && isIterator(o2)) {
-            int count = 0;
-            boolean success = false;
-            while(count < 8 && !success) {
-                success = compareNotNullObject( o1, o2, nbCompare);
-                count++;
-            }
-            return success;
+            return true;
+           // return compareNotNullIterator(o1,o2,nbCompare);
         }
 
         if(isArray(o1) && isArray(o2)) {
@@ -162,73 +146,100 @@ public class Compare {
     }
 
     protected boolean compareNotNullArray(Object[] array1, Object[] array2, int nbCompare) {
-        if(nbCompare == 0) {
-            return true;
+        if (array1.length != array2.length) {
+            return false;
         } else {
-            if (array1.length != array2.length) {
-                return false;
+            if (equals) {
+                return Arrays.deepEquals(array1, array2);
             } else {
-                if (equals) {
-                    return Arrays.deepEquals(array1, array2);
-                } else {
-                    for (int i = 0; i < array1.length; i++) {
-                        if (!compareAnything(array1[i], array2[i], nbCompare - 1)) {
-                            return false;
-                        }
+                for (int i = 0; i < array1.length; i++) {
+                    if (!compareAnything(array1[i], array2[i], nbCompare - 1)) {
+                        return false;
                     }
-                    return true;
                 }
+                return true;
             }
         }
     }
 
     protected boolean compareNotNullCollection(Collection<?> collection1, Collection<?> collection2, int nbCompare) {
-        if(nbCompare == 0) {
-            return true;
+        int count = 0;
+        boolean success;
+        if (filterB) {
+            success = true;
+            while (count < 4 && success) {
+                success = success && compareNotNullCollection0(collection1, collection2, nbCompare);
+                count++;
+            }
         } else {
-            if (collection1.size() != collection2.size()) {
-                return false;
+            success = false;
+            while (count < 8 && !success) {
+                success = compareNotNullCollection0(collection1, collection2, nbCompare);
+                count++;
+            }
+        }
+        return success;
+    }
+    protected boolean compareNotNullCollection0(Collection<?> collection1, Collection<?> collection2, int nbCompare) {
+        if (collection1.size() != collection2.size()) {
+            return false;
+        } else {
+            if (equals) {
+                return collection1.equals(collection2);
             } else {
-                if (equals) {
-                    return collection1.equals(collection2);
-                } else {
-                    if (isList(collection1) && isList(collection2)) {
-                        Iterator i1 = collection1.iterator();
-                        Iterator i2 = collection2.iterator();
+                if (isList(collection1) && isList(collection2)) {
+                    Iterator i1 = collection1.iterator();
+                    Iterator i2 = collection2.iterator();
 
-                        while (i1.hasNext()) {
-                            if (!compareAnything(i1.next(), i2.next(), nbCompare - 1)) {
-                                return false;
-                            }
+                    while (i1.hasNext()) {
+                        if (!compareAnything(i1.next(), i2.next(), nbCompare - 1)) {
+                            return false;
                         }
-                        return true;
-                    } else {
-                        return compareNotNullObject(collection1, collection2, nbCompare - 1);
                     }
+                    return true;
+                } else {
+                    return compareNotNullObject(collection1, collection2, nbCompare - 1);
                 }
             }
         }
     }
 
-    protected boolean compareNotNullObject(Object o1, Object o2, int nbCompare) {
-        if(nbCompare == 0) {
-            return true;
-        } else {
-            for (Method method : methodsHandler.getRandomMethods(o1, nbSampleMethods)) {
-                Invocation invocation1 = new Invocation(o1, method);
-                Invocation invocation2 = new Invocation(o2, method);
 
-                invocator.invoke(invocation1);
-                invocator.invoke(invocation2);
-
-                if (invocation1.sameStatus(invocation2)) {
-                    return compareAnything(invocation1.getResult(), invocation2.getResult(), nbCompare - 1);
-                } else {
-                    return invocation1.hasTimeOutError() || invocation2.hasTimeOutError();
-                }
+    protected boolean compareNotNullIterator(Object o1, Object o2, int nbCompare) {
+        int count = 0;
+        boolean success;
+        if (filterB) {
+            success = true;
+            while (count < 8 && success) {
+                success = compareNotNullObject(o1, o2, nbCompare);
+                count++;
             }
-            return true;
+        } else {
+            success = false;
+            while (count < 8 && !success) {
+                success = compareNotNullObject(o1, o2, nbCompare);
+                count++;
+            }
         }
+        return success;
+    }
+
+    protected boolean compareNotNullObject(Object o1, Object o2, int nbCompare) {
+        for (Method method : methodsHandler.getAllMethods(o1)) {
+//        for (Method method : methodsHandler.getRandomMethods(o1, nbSampleMethods)) {
+            Invocation invocation1 = new Invocation(o1, method);
+            Invocation invocation2 = new Invocation(o2, method);
+
+            invocator.invoke(invocation1);
+            invocator.invoke(invocation2);
+
+            if (invocation1.sameStatus(invocation2)) {
+                return compareAnything(invocation1.getResult(), invocation2.getResult(), nbCompare - 1);
+            } else {
+                return invocation1.hasTimeOutError() || invocation2.hasTimeOutError();
+            }
+        }
+        return true;
     }
 
 

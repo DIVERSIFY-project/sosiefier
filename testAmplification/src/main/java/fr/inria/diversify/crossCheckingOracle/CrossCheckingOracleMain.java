@@ -7,8 +7,9 @@ import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.runner.CoverageRunner;
 import fr.inria.diversify.runner.InputConfiguration;
 import fr.inria.diversify.runner.InputProgram;
+import fr.inria.diversify.transformation.query.FromListQuery;
 import fr.inria.diversify.transformation.query.TransformationQuery;
-import fr.inria.diversify.transformation.typeTransformation.TypeTransformationQuery;
+import fr.inria.diversify.transformation.typeTransformation.InstanceTransformation;
 import fr.inria.diversify.util.InitUtils;
 
 import java.io.File;
@@ -54,11 +55,11 @@ public class CrossCheckingOracleMain {
 
 
     protected TransformationQuery query() {
-//        FromListQuery query = new FromListQuery(inputProgram, true);
-//        query.getTransformations().stream()
-//                .forEach(t -> ((NewInstanceTransformation)t).setWithSwitch(true) );
-//        return new FromListQuery(inputProgram, true);
-        return new TypeTransformationQuery(inputProgram, "java.util.Collection:java.util.List:.*", true, true);
+        FromListQuery query = new FromListQuery(inputProgram, true);
+        query.getTransformations().stream()
+                .forEach(t -> ((InstanceTransformation)t).setWithSwitch(true) );
+        return query;
+//        return new TypeTransformationQuery(inputProgram, "java.util.Collection:java.util.List:.*", true, true);
     }
 
 

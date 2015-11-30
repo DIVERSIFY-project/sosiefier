@@ -23,7 +23,7 @@ public class JsonTransformationCollectionInput extends JsonAstTransformationColl
         sections.add(new JsonAstAddInput(getInputProgram()));
         sections.add(new JsonAstReplaceInput(getInputProgram()));
         sections.add(new JsonAstDeleteInput(getInputProgram()));
-        sections.add(new NewInstanceTransformationInput(getInputProgram()));
+        sections.add(new InstanceTransformationInput(getInputProgram()));
 
         return sections;
     }

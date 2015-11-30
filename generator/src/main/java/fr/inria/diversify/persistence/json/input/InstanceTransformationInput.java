@@ -4,6 +4,7 @@ import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.typeTransformation.InstanceTransformation;
+import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,16 +21,16 @@ import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.SOURC
  * Date: 19/11/15
  * Time: 10:36
  */
-public class NewInstanceTransformationInput extends JsonTransformationInput {
+public class InstanceTransformationInput extends JsonTransformationInput {
     public static String NEW_CONSTRUCTORS = "newConstructors";
     public static String NEW_INSTANCE = "newInstance";
     public static String PARAMETER_TYPES = "parameterTypes";
 
-    public NewInstanceTransformationInput(InputProgram inputProgram, JSONObject jsonObject) {
+    public InstanceTransformationInput(InputProgram inputProgram, JSONObject jsonObject) {
         super(inputProgram, jsonObject);
     }
 
-    public NewInstanceTransformationInput(InputProgram inputProgram) {
+    public InstanceTransformationInput(InputProgram inputProgram) {
         super(inputProgram);
     }
 

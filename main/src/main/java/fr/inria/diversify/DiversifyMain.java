@@ -21,7 +21,7 @@ import fr.inria.diversify.statistic.CVLMetric;
 import fr.inria.diversify.transformation.switchsosie.SwitchQuery;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.query.*;
-import fr.inria.diversify.transformation.typeTransformation.TypeTransformationQuery;
+import fr.inria.diversify.transformation.typeTransformation.InstanceTransformationQuery;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.visu.Visu;
@@ -274,7 +274,7 @@ public class DiversifyMain {
                 return new ADRTransformationQuery(inputProgram, cl, subType, false);
             }
             case "replaceconstructor" : {
-                return new TypeTransformationQuery(inputProgram, ".*:.*:.*", true, false);
+                return new InstanceTransformationQuery(inputProgram, ".*:.*:.*", true, false);
             }
 //            case "replacenewlist":
 //                return new ReplaceNewListQuery(inputProgram);

@@ -86,70 +86,70 @@ public class CoverageRunner extends SinglePointRunner {
     }
 
     protected Integer runTestFor(String directory, List<SourcePosition> sourcePositions) throws InterruptedException {
-//        int status;
-//        Log.debug("run test in directory: {}", directory);
-//        String goals;
-//        Set<String> tests = new HashSet<>();
-//        for(String test : testsFor(sourcePositions)) {
-//            tests.add(test.split("#")[0]);
-//        }
-//        if(tests.isEmpty()) {
-//            goals  = "test -Dmaven.compiler.useIncrementalCompilation=false";
-//        }  else {
-//            goals = "test -Dmaven.compiler.useIncrementalCompilation=false -Dtest=" +
-//                    tests.stream()
-//                        .collect(Collectors.joining(","));
-//        }
-//
-//        builder.setDirectory(directory);
-//        builder.runBuilder(new String[]{goals});
-//        Log.info("status: " + builder.getStatus() + ", compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", nb error: " + builder.getTestFail().size());
-//        status = builder.getStatus();
-//
-//        return status;
-
         int status;
         Log.debug("run test in directory: {}", directory);
-        String goals = "clean compile test-compile";
+        String goals;
+        Set<String> tests = new HashSet<>();
+        for(String test : testsFor(sourcePositions)) {
+            tests.add(test.split("#")[0]);
+        }
+        if(tests.isEmpty()) {
+            goals  = "clean test ";
+        }  else {
+            goals = "clean test -Dtest=" +
+                    tests.stream()
+                        .collect(Collectors.joining(","));
+        }
+
         builder.setDirectory(directory);
         builder.runBuilder(new String[]{goals});
-
-        InputProgram inputProgram = inputConfiguration.getInputProgram();
+        Log.info("status: " + builder.getStatus() + ", compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", nb error: " + builder.getTestFail().size());
         status = builder.getStatus();
-        if(status == 0) {
-            List<CtClass> classes = inputProgram.getAllElement(CtClass.class);
-            Set<CtClass> tests = new HashSet<>();
-            for(String test : testsFor(sourcePositions)) {
-                String testName = test.split("#")[0];
-                CtClass testClass = classes.stream()
-                        .filter(cl -> cl.getQualifiedName().equals(testName))
-                        .findFirst()
-                        .orElse(null);
-                if(testClass != null) {
-                    tests.add(testClass);
-                }
-            }
-            try {
-                if(tests.isEmpty()) {
-                    tests = classes.stream()
-                            .filter(cl -> cl.getPosition().getFile().toString().contains(inputProgram.getRelativeTestSourceCodeDir()))
-                            .filter(cl -> cl.getSimpleName().contains("Test"))
-                            .filter(cl -> !cl.getModifiers().contains(ModifierKind.ABSTRACT))
-                            .collect(Collectors.toSet());
-                }
 
-                List<CtType> appClasses = sourcePositions.stream()
-                        .map(position -> position.getCompilationUnit().getMainType())
-                        .collect(Collectors.toList());
-
-                Result result = runTests(new ArrayList<>(tests), appClasses);
-                Log.debug(result.toString());
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-
-        }
         return status;
+
+//        int status;
+//        Log.debug("run test in directory: {}", directory);
+//        String goals = "clean compile test-compile";
+//        builder.setDirectory(directory);
+//        builder.runBuilder(new String[]{goals});
+//
+//        InputProgram inputProgram = inputConfiguration.getInputProgram();
+//        status = builder.getStatus();
+//        if(status == 0) {
+//            List<CtClass> classes = inputProgram.getAllElement(CtClass.class);
+//            Set<CtClass> tests = new HashSet<>();
+//            for(String test : testsFor(sourcePositions)) {
+//                String testName = test.split("#")[0];
+//                CtClass testClass = classes.stream()
+//                        .filter(cl -> cl.getQualifiedName().equals(testName))
+//                        .findFirst()
+//                        .orElse(null);
+//                if(testClass != null) {
+//                    tests.add(testClass);
+//                }
+//            }
+//            try {
+//                if(tests.isEmpty()) {
+//                    tests = classes.stream()
+//                            .filter(cl -> cl.getPosition().getFile().toString().contains(inputProgram.getRelativeTestSourceCodeDir()))
+//                            .filter(cl -> cl.getSimpleName().contains("Test"))
+//                            .filter(cl -> !cl.getModifiers().contains(ModifierKind.ABSTRACT))
+//                            .collect(Collectors.toSet());
+//                }
+//
+//                List<CtType> appClasses = sourcePositions.stream()
+//                        .map(position -> position.getCompilationUnit().getMainType())
+//                        .collect(Collectors.toList());
+//
+//                Result result = runTests(new ArrayList<>(tests), appClasses);
+//                Log.debug(result.toString());
+//            } catch (ClassNotFoundException e) {
+//                e.printStackTrace();
+//            }
+//
+//        }
+//        return status;
     }
 
     protected Result runTests(List<CtClass> tests, List<CtType> appClasses) throws ClassNotFoundException {

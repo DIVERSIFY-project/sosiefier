@@ -46,7 +46,7 @@ public class CrossCheckingOracleBuilder {
         addSetUpStatement(test, body);
 
         body.addStatement(factory.Code().createCodeSnippetStatement(runMethod.getSimpleName() + "(objects2)"));
-        addFilter(body, "objects1", "objects2", "filter");
+        addTeardownStatement(test, body);
 
         addTeardownStatement(test, body);
         addSetUpStatement(test, body);
@@ -62,7 +62,9 @@ public class CrossCheckingOracleBuilder {
         switchToSosie(body, true);
 
         body.addStatement(factory.Code().createCodeSnippetStatement(runMethod.getSimpleName() + "(objects4)"));
+        addTeardownStatement(test, body);
 
+        addFilter(body, "objects1", "objects2", "filter");
         addCompare(body, "objects3", "objects4", "filter");
 
         CtMethod cloneMethod = factory.Method().create(declaringClass,
@@ -200,7 +202,7 @@ public class CrossCheckingOracleBuilder {
     protected void addSetUpStatement(CtMethod mth, CtBlock body) {
         if(!mth.getModifiers().contains(ModifierKind.STATIC)) {
             CtCodeSnippetStatement stmt =
-                    mth.getFactory().Code().createCodeSnippetStatement("fr.inria.diversify.compare.TestUtils.runTearDown(this)");
+                    mth.getFactory().Code().createCodeSnippetStatement("fr.inria.diversify.compare.TestUtils.runSetUp(this)");
             body.addStatement(stmt);
         }
     }
@@ -208,7 +210,7 @@ public class CrossCheckingOracleBuilder {
     protected void addTeardownStatement(CtMethod mth, CtBlock body) {
         if(!mth.getModifiers().contains(ModifierKind.STATIC)) {
             CtCodeSnippetStatement stmt =
-                    mth.getFactory().Code().createCodeSnippetStatement("fr.inria.diversify.compare.TestUtils.runSetUp(this)");
+                    mth.getFactory().Code().createCodeSnippetStatement("fr.inria.diversify.compare.TestUtils.runTearDown(this)");
             body.addStatement(stmt);
         }
     }
