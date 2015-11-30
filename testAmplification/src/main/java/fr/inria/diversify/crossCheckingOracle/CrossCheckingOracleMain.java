@@ -4,10 +4,7 @@ import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.coverage.NullCoverageReport;
-import fr.inria.diversify.runner.CoverageRunner;
-import fr.inria.diversify.runner.InputConfiguration;
-import fr.inria.diversify.runner.InputProgram;
-import fr.inria.diversify.runner.SinglePointRunner;
+import fr.inria.diversify.runner.*;
 import fr.inria.diversify.transformation.query.FromListQuery;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.transformation.typeTransformation.InstanceTransformation;
@@ -49,12 +46,24 @@ public class CrossCheckingOracleMain {
         diversifyOracle.setTransformationQuery(query());
         diversifyOracle.setBuilder(builder);
         diversifyOracle.run(100);
-
+        writeResult(diversifyOracle);
+        diversifyOracle.deleteTmpFiles();
     }
 
+    protected void writeResult(AbstractRunner runner) {
+        String repo = inputConfiguration.getProperty("gitRepository");
+
+        if (repo.equals("null")) {
+            runner.printResult(inputConfiguration.getProperty("result"));
+        } else {
+            runner.printResultInGitRepo(inputConfiguration.getProperty("result"), repo);
+        }
+    }
 
     protected TransformationQuery query() {
-        FromListQuery query = new FromListQuery(inputProgram, true);
+        int rangeMin = Integer.parseInt(inputConfiguration.getProperty("transformation.range.min", "0"));
+        int rangeMax = Integer.parseInt(inputConfiguration.getProperty("transformation.range.max", "10000000"));
+        FromListQuery query = new FromListQuery(inputProgram, rangeMin, rangeMax, true);
         query.getTransformations().stream()
                 .forEach(t -> ((InstanceTransformation)t).setWithSwitch(true) );
         return query;
