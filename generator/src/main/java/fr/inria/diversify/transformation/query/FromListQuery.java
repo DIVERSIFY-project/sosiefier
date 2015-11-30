@@ -5,7 +5,6 @@ import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.transformation.Transformation;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -34,9 +33,10 @@ public class FromListQuery extends TransformationQuery {
         super(inputProgram);
 
         JsonTransformationLoader parser = new JsonTransformationLoader(getInputProgram());
+        List<Transformation> tmp = parser.load(getInputProgram().getPreviousTransformationsPath(), true).stream()
+                .filter(t -> !onlySosie || t.isSosie())
+                .collect(Collectors.toList());
 
-        Collection<Transformation> ts = parser.load(getInputProgram().getPreviousTransformationsPath(), true);
-        ArrayList<Transformation> tmp = new ArrayList(ts);
         transformations = new ArrayList<>();
         for(int i = rangeMin; i < Math.min(rangeMax, tmp.size())  ; i++) {
              transformations.add(tmp.get(i));
