@@ -331,14 +331,14 @@ public class InputProgram {
 
         List<T> allElements = getAllElement(type);
         for(T elem : allElements) {
-            String elemClass = elem.getPosition().getCompilationUnit().getMainType().getQualifiedName();
             int elemLineNumber = elem.getPosition().getLine();
-            if(classPosition.equals(elemClass) && elemLineNumber == lineNumberPosition) {
-                return elem;
+            if(elemLineNumber == lineNumberPosition) {
+                String elemClass = elem.getPosition().getCompilationUnit().getMainType().getQualifiedName();
+                if (classPosition.equals(elemClass) && elem.toString().equals(searchValue)) {
+                    return elem;
+                }
             }
         }
-
-
         return result;
     }
 
