@@ -19,12 +19,13 @@ public class Compare {
     protected MethodsHandler methodsHandler;
     protected int maxCompare;
     protected int nbSampleMethods;
+    protected static Set<Class<?>> WRAPPER_TYPES = getWrapperTypes();
 //    protected Cloner cloner;
 
 
     public static Compare getSingleton() {
         if(singleton == null) {
-            initCompare(false, true, true, 10, 10);
+            initCompare(false, true, true, 4, 10);
         }
         return singleton;
     }
@@ -60,18 +61,18 @@ public class Compare {
             if(filter.get(i)) {
                 boolean result = compareAnything(list1.get(i), list2.get(i), maxCompare);
                 if(!result) {
-                    System.out.println("diff:\n"+ list1.get(i) + "\n\n" +list2.get(i));
-                    System.out.println( list1.get(i).getClass() + "\n" +list2.get(i).getClass());
-                    System.out.println( list1.get(i) instanceof Iterator);
+                    System.out.println(list1.get(i).getClass() + " " +list1.get(i) +"\n");
+                    System.out.println(list2.get(i).getClass() + " " +list2.get(i));
+                    return result;
                 }
-                return result;
             }
         }
         return true;
     }
 
     protected boolean compareAnything(Object o1, Object o2, int nbCompare) {
-        if(nbCompare == 0) {
+
+        if(nbCompare <= 0) {
             return true;
         }
         if(o1 == o2) {
@@ -96,7 +97,7 @@ public class Compare {
 
         if(isIterator(o1) && isIterator(o2)) {
             return true;
-           // return compareNotNullIterator(o1,o2,nbCompare);
+            // return compareNotNullIterator(o1,o2,nbCompare);
         }
 
         if(isArray(o1) && isArray(o2)) {
@@ -168,7 +169,7 @@ public class Compare {
         if (filterB) {
             success = true;
             while (count < 4 && success) {
-                success = success && compareNotNullCollection0(collection1, collection2, nbCompare);
+                success = compareNotNullCollection0(collection1, collection2, nbCompare);
                 count++;
             }
         } else {
@@ -192,13 +193,13 @@ public class Compare {
                     Iterator i2 = collection2.iterator();
 
                     while (i1.hasNext()) {
-                        if (!compareAnything(i1.next(), i2.next(), nbCompare - 1)) {
+                        if (!compareAnything(i1.next(), i2.next(), nbCompare -1)) {
                             return false;
                         }
                     }
                     return true;
                 } else {
-                    return compareNotNullObject(collection1, collection2, nbCompare - 1);
+                    return compareNotNullObject(collection1, collection2, nbCompare);
                 }
             }
         }
@@ -210,7 +211,7 @@ public class Compare {
         boolean success;
         if (filterB) {
             success = true;
-            while (count < 8 && success) {
+            while (count < 4 && success) {
                 success = compareNotNullObject(o1, o2, nbCompare);
                 count++;
             }
@@ -234,7 +235,7 @@ public class Compare {
             invocator.invoke(invocation2);
 
             if (invocation1.sameStatus(invocation2)) {
-                return compareAnything(invocation1.getResult(), invocation2.getResult(), nbCompare - 1);
+                return compareAnything(invocation1.getResult(), invocation2.getResult(), nbCompare -1);
             } else {
                 return invocation1.hasTimeOutError() || invocation2.hasTimeOutError();
             }
@@ -251,15 +252,11 @@ public class Compare {
         return o != null && o.getClass().isPrimitive();
     }
 
-    public static boolean isWrapperType(Object o)
-    {
+    public static boolean isWrapperType(Object o) {
         return WRAPPER_TYPES.contains(o.getClass());
     }
 
-    private static Set<Class<?>> WRAPPER_TYPES = getWrapperTypes();
-
-    private static Set<Class<?>> getWrapperTypes()
-    {
+    protected static Set<Class<?>> getWrapperTypes() {
         Set<Class<?>> ret = new HashSet<Class<?>>();
         ret.add(Boolean.class);
         ret.add(Character.class);
@@ -295,7 +292,7 @@ public class Compare {
     }
 
     protected boolean isIterator(Object o) {
-      //  Iterable
+        //  Iterable
         return o != null && o instanceof Iterator;
     }
 

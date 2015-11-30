@@ -39,6 +39,7 @@ public class CrossCheckingOracleBuilder {
         switchToSosie(body, false);
         addLocalListDeclaration(body, "objects1");
         addLocalListDeclaration(body, "objects2");
+        addLocalListDeclaration(body, "objects3");
 
         body.addStatement(factory.Code().createCodeSnippetStatement(runMethod.getSimpleName() + "(objects1)"));
 
@@ -47,12 +48,7 @@ public class CrossCheckingOracleBuilder {
 
         body.addStatement(factory.Code().createCodeSnippetStatement(runMethod.getSimpleName() + "(objects2)"));
         addTeardownStatement(test, body);
-
-        addTeardownStatement(test, body);
         addSetUpStatement(test, body);
-
-        addLocalListDeclaration(body, "objects3");
-        addLocalListDeclaration(body, "objects4");
 
         body.addStatement(factory.Code().createCodeSnippetStatement(runMethod.getSimpleName() + "(objects3)"));
 
@@ -60,12 +56,13 @@ public class CrossCheckingOracleBuilder {
         addSetUpStatement(test, body);
 
         switchToSosie(body, true);
+        addLocalListDeclaration(body, "objects4");
 
         body.addStatement(factory.Code().createCodeSnippetStatement(runMethod.getSimpleName() + "(objects4)"));
         addTeardownStatement(test, body);
 
-        addFilter(body, "objects1", "objects2", "filter");
-        addCompare(body, "objects3", "objects4", "filter");
+        addFilter(body, "objects1", "objects3", "filter");
+        addCompare(body, "objects2", "objects4", "filter");
 
         CtMethod cloneMethod = factory.Method().create(declaringClass,
                 test.getModifiers(),

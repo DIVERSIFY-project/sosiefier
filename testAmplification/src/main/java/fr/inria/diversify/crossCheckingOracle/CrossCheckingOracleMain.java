@@ -37,8 +37,6 @@ public class CrossCheckingOracleMain {
         String output = crossCheckingOracle.generateTest();
 
         SinglePointRunner diversifyOracle = new SinglePointRunner(inputConfiguration, output, inputProgram.getRelativeSourceCodeDir());
-        String sosieDir = inputConfiguration.getProperty("copy.sosie.sources.to", "");
-        diversifyOracle.setSosieSourcesDir(sosieDir);
         diversifyOracle.init(output, inputConfiguration.getProperty("tmpDir"));
 
         AbstractBuilder builder = new MavenBuilder(diversifyOracle.getTmpDir());
