@@ -1,7 +1,5 @@
 package fr.inria.diversify.runner;
 
-import fr.inria.diversify.buildSystem.DiversifyClassLoader;
-import fr.inria.diversify.buildSystem.spoon.JunitRunner;
 import fr.inria.diversify.info.BranchInfo;
 import fr.inria.diversify.info.CoverageInfo;
 
@@ -12,15 +10,10 @@ import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
-import org.junit.runner.Result;
 import spoon.reflect.cu.SourcePosition;
-import spoon.reflect.declaration.CtClass;
-import spoon.reflect.declaration.CtType;
-import spoon.reflect.declaration.ModifierKind;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -44,17 +37,17 @@ public class CoverageRunner extends SinglePointRunner {
     public String init(String dirProject, String dirTarget) throws IOException, InterruptedException {
         super.init(dirProject, dirTarget);
 
-//        coverageInfo = new CoverageInfo(inputConfiguration.getInputProgram());
-//        try {
-//            File dir = new File(dirTarget + "/tmp_branch_" + System.currentTimeMillis());
-//            coverageInfo.init(dir.getAbsolutePath());
-//            FileUtils.forceDelete(dir);
-//        } catch (Exception e) {
-//            Log.error("error in coverageInfo");
-//        }
-//
-//        branchInfo = new BranchInfo(inputConfiguration.getInputProgram());
-//        branchInfo.intBranch();
+        coverageInfo = new CoverageInfo(inputConfiguration.getInputProgram());
+        try {
+            File dir = new File(dirTarget + "/tmp_branch_" + System.currentTimeMillis());
+            coverageInfo.init(dir.getAbsolutePath());
+            FileUtils.forceDelete(dir);
+        } catch (Exception e) {
+            Log.error("error in coverageInfo");
+        }
+
+        branchInfo = new BranchInfo(inputConfiguration.getInputProgram());
+        branchInfo.intBranch();
         return tmpDir;
     }
     protected void run(Transformation trans) throws Exception {
@@ -108,73 +101,15 @@ public class CoverageRunner extends SinglePointRunner {
 
         return status;
 
-//        int status;
-//        Log.debug("run test in directory: {}", directory);
-//        String goals = "clean compile test-compile";
-//        builder.setDirectory(directory);
-//        builder.runBuilder(new String[]{goals});
-//
-//        InputProgram inputProgram = inputConfiguration.getInputProgram();
-//        status = builder.getStatus();
-//        if(status == 0) {
-//            List<CtClass> classes = inputProgram.getAllElement(CtClass.class);
-//            Set<CtClass> tests = new HashSet<>();
-//            for(String test : testsFor(sourcePositions)) {
-//                String testName = test.split("#")[0];
-//                CtClass testClass = classes.stream()
-//                        .filter(cl -> cl.getQualifiedName().equals(testName))
-//                        .findFirst()
-//                        .orElse(null);
-//                if(testClass != null) {
-//                    tests.add(testClass);
-//                }
-//            }
-//            try {
-//                if(tests.isEmpty()) {
-//                    tests = classes.stream()
-//                            .filter(cl -> cl.getPosition().getFile().toString().contains(inputProgram.getRelativeTestSourceCodeDir()))
-//                            .filter(cl -> cl.getSimpleName().contains("Test"))
-//                            .filter(cl -> !cl.getModifiers().contains(ModifierKind.ABSTRACT))
-//                            .collect(Collectors.toSet());
-//                }
-//
-//                List<CtType> appClasses = sourcePositions.stream()
-//                        .map(position -> position.getCompilationUnit().getMainType())
-//                        .collect(Collectors.toList());
-//
-//                Result result = runTests(new ArrayList<>(tests), appClasses);
-//                Log.debug(result.toString());
-//            } catch (ClassNotFoundException e) {
-//                e.printStackTrace();
-//            }
-//
-//        }
-//        return status;
-    }
-
-    protected Result runTests(List<CtClass> tests, List<CtType> appClasses) throws ClassNotFoundException {
-        InputProgram inputProgram = inputConfiguration.getInputProgram();
-
-        DiversifyClassLoader classLoader = new DiversifyClassLoader(Thread.currentThread().getContextClassLoader(), tmpDir + "/" + inputProgram.getRelativeSourceCodeDir());
-        classLoader.setClassFilter(appClasses.stream().map(cl -> cl.getQualifiedName()).collect(Collectors.toList()));
-        for(int i = 0; i < appClasses.size(); i++) {
-            classLoader.loadClass(appClasses.get(i).getQualifiedName());
-        }
-
-        classLoader.setClassFilter(tests.stream().map(cl -> cl.getQualifiedName()).collect(Collectors.toList()));
-        JunitRunner junitRunner = new JunitRunner(classLoader, tmpDir + "/" + inputProgram.getTestClassesDir());
-
-        return junitRunner.runTestClasses(tests);
     }
     
     protected Set<String> testsFor(List<SourcePosition> sourcePositions) {
-        return new HashSet<>();
-//        return sourcePositions.stream()
-//                .map(position -> branchInfo.smallBranchContaining(position))
-//                .map(branch -> coverageInfo.getTestForBranch(branch))
-//                .filter(tests -> tests != null)
-//                .flatMap(tests ->tests.stream())
-//                .collect(Collectors.toSet());
+        return sourcePositions.stream()
+                .map(position -> branchInfo.smallBranchContaining(position))
+                .map(branch -> coverageInfo.getTestForBranch(branch))
+                .filter(tests -> tests != null)
+                .flatMap(tests ->tests.stream())
+                .collect(Collectors.toSet());
     }
 
 }
