@@ -25,7 +25,7 @@ public class Compare {
 
     public static Compare getSingleton() {
         if(singleton == null) {
-            initCompare(false, true, true, 4, 10);
+            initCompare(false, true, true, 5, 10);
         }
         return singleton;
     }
@@ -39,7 +39,7 @@ public class Compare {
 
     private Compare(boolean equals, boolean onlyPublicMethod, boolean onlyNotStaticMethod, int maxCompare, int nbSampleMethods) {
         this.equals = equals;
-        this.invocator = new Invocator(5);
+        this.invocator = new Invocator(10);
         this.methodsHandler = new MethodsHandler(onlyPublicMethod, onlyNotStaticMethod);
         this.maxCompare = maxCompare;
         this.nbSampleMethods = nbSampleMethods;

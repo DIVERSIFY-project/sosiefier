@@ -266,6 +266,10 @@ public abstract class AbstractBuilder {
         acceptedErrors = ae;
     }
 
+    public int getTimeOut() {
+        return timeOut;
+    }
+
     /**
      * Resets the locate count
      */

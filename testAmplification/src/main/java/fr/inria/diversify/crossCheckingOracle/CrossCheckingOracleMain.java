@@ -30,33 +30,57 @@ public class CrossCheckingOracleMain {
         run();
     }
 
-
     public void run() throws Exception {
         CrossCheckingOracle crossCheckingOracle = new CrossCheckingOracle(inputProgram, outputDirectory);
         String output = crossCheckingOracle.generateTest();
 
-        SinglePointRunner diversifyOracle = new SinglePointRunner(inputConfiguration, output, inputProgram.getRelativeSourceCodeDir());
-        diversifyOracle.init(output, inputConfiguration.getProperty("tmpDir"));
-
-        AbstractBuilder builder = new MavenBuilder(diversifyOracle.getTmpDir());
-        builder.setGoals(new String[]{"clean", "test"});
-
         inputProgram.setCoverageReport(new NullCoverageReport());
 
+        //init timeout and accepted errors
+        AbstractBuilder initBuilder = new MavenBuilder(output);
+        initBuilder.setGoals(new String[]{"clean", "test"});
 
         List<String> acceptedErrors = new ArrayList<>();
-        for(int i = 0; i < 8; i++) {
-            builder.initTimeOut();
-            acceptedErrors.addAll(builder.getFailedTests());
+        for(int i = 0; i < 10; i++) {
+            initBuilder.initTimeOut();
+            acceptedErrors.addAll(initBuilder.getFailedTests());
         }
-        builder.setAcceptedErrors(acceptedErrors);
-//        builder.setTimeOut(150);
-        diversifyOracle.setTransformationQuery(query());
-        diversifyOracle.setBuilder(builder);
-        int n = Integer.parseInt(inputConfiguration.getProperty("nbRun"));
-        diversifyOracle.run(n);
-        writeResult(diversifyOracle);
-        diversifyOracle.deleteTmpFiles();
+        int timeOut = initBuilder.getTimeOut() * 4;
+
+        TransformationQuery query = query();
+
+        List<SinglePointRunner> runners = new ArrayList<>(4);
+        for(int i = 0; i < 4; i++) {
+           try {
+               SinglePointRunner runner = new SinglePointRunner(inputConfiguration, output, inputProgram.getRelativeSourceCodeDir());
+               runner.init(output, inputConfiguration.getProperty("tmpDir"));
+               runner.setTransformationQuery(query);
+
+               AbstractBuilder builder = new MavenBuilder(output);
+               builder.setDirectory(runner.getTmpDir());
+               builder.setGoals(new String[]{"clean", "test"});
+               builder.setTimeOut(timeOut);
+               builder.setAcceptedErrors(acceptedErrors);
+
+               runner.setBuilder(builder);
+               runners.add(runner);
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+       }
+       runners.stream().parallel()
+                .forEach(runner -> {
+                    try {
+                        while (query.hasNextTransformation()) {
+                            runner.run(100);
+                            writeResult(runner);
+                        }
+                        runner.deleteTmpFiles();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
     }
 
     protected void writeResult(AbstractRunner runner) {

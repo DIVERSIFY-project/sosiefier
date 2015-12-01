@@ -46,7 +46,7 @@ public class FromListQuery extends TransformationQuery {
     }
 
     @Override
-    public Transformation query() throws QueryException {
+    public synchronized Transformation query() throws QueryException {
         int index = 0;
         if(shuffle) {
             Random r = new Random();

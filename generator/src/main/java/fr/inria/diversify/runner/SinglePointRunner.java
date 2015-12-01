@@ -39,7 +39,8 @@ public class SinglePointRunner extends AbstractRunner {
     @Override
     public void run(int n) throws Exception {
         if(n > 0) {
-            for (int i = 0; i < n; i++) {
+            int count = 0;
+            while(transQuery.hasNextTransformation() &&  count < n) {
                 run(transQuery.query());
             }
         } else {
