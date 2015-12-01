@@ -49,9 +49,9 @@ public class CrossCheckingOracleMain {
 
         TransformationQuery query = query();
 
-        List<SinglePointRunner> runners = new ArrayList<>(4);
-        for(int i = 0; i < 4; i++) {
-           try {
+//        List<SinglePointRunner> runners = new ArrayList<>(4);
+//        for(int i = 0; i < 4; i++) {
+//           try {
                SinglePointRunner runner = new SinglePointRunner(inputConfiguration, output, inputProgram.getRelativeSourceCodeDir());
                runner.init(output, inputConfiguration.getProperty("tmpDir"));
                runner.setTransformationQuery(query);
@@ -63,24 +63,24 @@ public class CrossCheckingOracleMain {
                builder.setAcceptedErrors(acceptedErrors);
 
                runner.setBuilder(builder);
-               runners.add(runner);
-           } catch (Exception e) {
-               e.printStackTrace();
-           }
-       }
-       runners.stream().parallel()
-                .forEach(runner -> {
-                    try {
+//               runners.add(runner);
+//           } catch (Exception e) {
+//               e.printStackTrace();
+//           }
+//       }
+//       runners.stream().parallel()
+//                .forEach(runner -> {
+//                    try {
                         while (query.hasNextTransformation()) {
                             runner.run(100);
                             writeResult(runner);
                         }
                         runner.deleteTmpFiles();
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                });
     }
 
     protected void writeResult(AbstractRunner runner) {
