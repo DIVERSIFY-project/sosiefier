@@ -2,6 +2,9 @@ package fr.inria.diversify.dspot;
 
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.buildSystem.spoon.JunitRunner;
+import fr.inria.diversify.dspot.processor.TestDataMutator;
+import fr.inria.diversify.dspot.processor.TestMethodCallAdder;
+import fr.inria.diversify.dspot.processor.TestMethodCallRemover;
 import fr.inria.diversify.runner.InputProgram;
 
 import fr.inria.diversify.factories.DiversityCompiler;

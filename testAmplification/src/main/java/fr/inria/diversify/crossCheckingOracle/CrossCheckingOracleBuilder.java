@@ -154,7 +154,7 @@ public class CrossCheckingOracleBuilder {
     }
 
     protected List<CtAnnotation<? extends Annotation>> getAnnotations(CtMethod mth) {
-        return (List<CtAnnotation<? extends Annotation>>)mth.getAnnotations().stream()
+        return mth.getAnnotations().stream()
                 .filter(annotation -> !annotation.getSignature().contains("Override"))
                 .collect(Collectors.toList());
     }
@@ -181,9 +181,6 @@ public class CrossCheckingOracleBuilder {
 
     protected void addCopyObject(CtBlock body, String varName, List<CtLocalVariable> localVariables) {
         Factory factory = body.getFactory();
-//        addField(cl, "java.util.List<Object>", fieldName);
-//        CtCodeSnippetStatement newList = factory.Code().createCodeSnippetStatement(fieldName + " = new java.util.ArrayList<Object>()");
-//        body.addStatement(newList);
 
         for(CtLocalVariable var : localVariables) {
             CtCodeSnippetStatement addVarStmt = factory.Code().createCodeSnippetStatement(varName + ".add(" + var.getSimpleName() + ")");
@@ -249,25 +246,4 @@ public class CrossCheckingOracleBuilder {
                 .filter(var -> ((CtLocalVariable)var).getParent().equals(block))
                 .collect(Collectors.toList());
     }
-
-    protected CtField<Boolean> addField(CtType<?> cl, String type, String name) {
-        Factory factory = cl.getFactory();
-
-        CtTypeReference<Boolean> typeRef = factory.Core().createTypeReference();
-        typeRef.setSimpleName(type);
-
-        CtField<Boolean> field = factory.Core().createField();
-        field.setType(typeRef);
-        field.setSimpleName(name);
-
-        Set<ModifierKind> modifierKinds = new HashSet<>();
-        modifierKinds.add(ModifierKind.STATIC);
-        field.setModifiers(modifierKinds);
-
-        field.setParent(cl);
-        cl.addField(field);
-
-        return field;
-    }
-
 }

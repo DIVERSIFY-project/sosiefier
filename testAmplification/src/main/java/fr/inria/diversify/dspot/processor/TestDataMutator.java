@@ -1,5 +1,6 @@
-package fr.inria.diversify.processor.test;
+package fr.inria.diversify.dspot.processor;
 
+import fr.inria.diversify.processor.test.TestProcessor;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;

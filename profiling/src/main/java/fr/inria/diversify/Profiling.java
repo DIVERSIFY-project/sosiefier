@@ -9,7 +9,6 @@ import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.LoggerUtils;
 import org.apache.commons.io.FileUtils;
-import spoon.processing.Processor;
 import spoon.reflect.factory.Factory;
 
 import java.io.File;
@@ -135,36 +134,36 @@ public class Profiling {
 
         Factory factory = InitUtils.initSpoon(inputProgram, true);
 
-        Boolean condition = Boolean.parseBoolean(properties.getProperty("profiling.test.dataMutator", "false"));
-        transform = transform || condition;
-        if(condition) {
-            TestDataMutator m = new TestDataMutator();
-            LoggerUtils.applyProcessor(factory, m);
-        }
-
-        condition = Boolean.parseBoolean(properties.getProperty("profiling.test.addCall", "false"));
-        transform = transform || condition;
-        if(condition) {
-            TestMethodCallAdder v = new TestMethodCallAdder();
-            LoggerUtils.applyProcessor(factory, v);
-        }
-
-        condition = Boolean.parseBoolean(properties.getProperty("profiling.test.removeCall", "false"));
-        transform = transform || condition;
-        if(condition) {
-            TestMethodCallRemover e = new TestMethodCallRemover();
-            LoggerUtils.applyProcessor(factory, e);
-        }
-
-        condition = Boolean.parseBoolean(properties.getProperty("profiling.test.removeOriginalTest", "false"));
-        transform = transform || condition;
-        if(condition) {
-            RemoveOriginalTestProcessor p = new RemoveOriginalTestProcessor();
-            p.setLogger(logger+".Logger");
-            LoggerUtils.applyProcessor(factory, p);
-        }
-
-        condition = Boolean.parseBoolean(properties.getProperty("profiling.test.logTest", "false"));
+//        Boolean condition = Boolean.parseBoolean(properties.getProperty("profiling.test.dataMutator", "false"));
+//        transform = transform || condition;
+//        if(condition) {
+//            TestDataMutator m = new TestDataMutator();
+//            LoggerUtils.applyProcessor(factory, m);
+//        }
+//
+//        condition = Boolean.parseBoolean(properties.getProperty("profiling.test.addCall", "false"));
+//        transform = transform || condition;
+//        if(condition) {
+//            TestMethodCallAdder v = new TestMethodCallAdder();
+//            LoggerUtils.applyProcessor(factory, v);
+//        }
+//
+//        condition = Boolean.parseBoolean(properties.getProperty("profiling.test.removeCall", "false"));
+//        transform = transform || condition;
+//        if(condition) {
+//            TestMethodCallRemover e = new TestMethodCallRemover();
+//            LoggerUtils.applyProcessor(factory, e);
+//        }
+//
+//        condition = Boolean.parseBoolean(properties.getProperty("profiling.test.removeOriginalTest", "false"));
+//        transform = transform || condition;
+//        if(condition) {
+//            RemoveOriginalTestProcessor p = new RemoveOriginalTestProcessor();
+//            p.setLogger(logger+".Logger");
+//            LoggerUtils.applyProcessor(factory, p);
+//        }
+//
+        Boolean condition = Boolean.parseBoolean(properties.getProperty("profiling.test.logTest", "false"));
         transform = transform || condition;
         if(condition) {
             TestLoggingInstrumenter m = new TestLoggingInstrumenter();
@@ -180,15 +179,15 @@ public class Profiling {
             LoggerUtils.applyProcessor(factory, tc);
         }
 
-        condition = Boolean.parseBoolean(properties.getProperty("profiling.test.evosuite", "false"));
-        transform = transform || condition;
-        if(condition) {
-            Processor tc = new EvosuiteMethodProcessor();
-            LoggerUtils.applyProcessor(factory, tc);
-
-            tc = new EvosuiteClassProcessor();
-            LoggerUtils.applyProcessor(factory, tc);
-        }
+//        condition = Boolean.parseBoolean(properties.getProperty("profiling.test.evosuite", "false"));
+//        transform = transform || condition;
+//        if(condition) {
+//            Processor tc = new EvosuiteMethodProcessor();
+//            LoggerUtils.applyProcessor(factory, tc);
+//
+//            tc = new EvosuiteClassProcessor();
+//            LoggerUtils.applyProcessor(factory, tc);
+//        }
 
         if(transform) {
             File fileFrom = new File(inputProgram.getAbsoluteTestSourceCodeDir());
