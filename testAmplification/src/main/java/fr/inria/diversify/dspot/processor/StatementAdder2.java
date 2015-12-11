@@ -1,6 +1,7 @@
 package fr.inria.diversify.dspot.processor;
 
 import fr.inria.diversify.codeFragment.*;
+import fr.inria.diversify.logger.branch.Coverage;
 import fr.inria.diversify.runner.InputProgram;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;
@@ -24,11 +25,11 @@ public class StatementAdder2 extends AbstractAmp {
     protected List<CodeFragment> localVars;
     protected List<CodeFragment> codeFragments;
 
-    public StatementAdder2(InputProgram inputProgram, CtClass testClass) {
+    public StatementAdder2(InputProgram inputProgram, Coverage coverage, CtClass testClass) {
 
         inputProgram.processCodeFragments();
         HashMap<String, CodeFragmentList> codeFragmentsByClass = inputProgram.getCodeFragmentsByClass();
-        codeFragments = buildCodeFragmentFor(findClassUnderTest(testClass));
+        codeFragments = buildCodeFragmentFor(findClassUnderTest(testClass), coverage);
         Set<CtType> codeFragmentsProvide = computeClassProvider(testClass);
 //        getLiterals(codeFragmentsProvide);
         Set<Integer> ids = new HashSet<>();
@@ -46,28 +47,43 @@ public class StatementAdder2 extends AbstractAmp {
        List<CtMethod> newMethods = new ArrayList<>();
 
         List<InputContext> inputContexts = getInputContexts(method);
-        Set<String> varsInMth = inputContexts.stream()
-                .flatMap(inputContext -> inputContext.getAllVarName().stream())
-                .collect(Collectors.toSet());
-
         for(int i = 0; i < inputContexts.size(); i++) {
             InputContext inputContext = inputContexts.get(i);
-            List<CodeFragment> candidate = getRandomCandidateFor(inputContext, varsInMth);
+            List<CodeFragment> statements = getRandomCandidateFor(inputContext);
                 try {
-                    CtMethod cloned_method = cloneMethodTest(method, "_cf", 1000);
-                    CtStatement stmt = getAssertStatement(cloned_method)
-                            .get(i);
-
-                    candidate.stream()
-                            .forEach(c ->
-                            {
-                                stmt.insertBefore((CtStatement) c.getCtCodeFragment());
-                                ((CtStatement) c.getCtCodeFragment()).setParent(stmt.getParent());
-                            });
-                    newMethods.add(cloned_method);
+                    newMethods.add(apply(method, statements, i));
                 } catch (Exception e) {}
         }
         return filterAmpTest(newMethods, method);
+    }
+
+    public CtMethod applyRandom(CtMethod method) {
+        List<InputContext> inputContexts = getInputContexts(method);
+
+        while(true) {
+            try {
+                int index = getRandom().nextInt(inputContexts.size());
+                List<CodeFragment> statements = getRandomCandidateFor(inputContexts.get(index));
+                return apply(method, statements, index);
+            } catch (Exception e) {}
+        }
+
+
+    }
+
+    protected CtMethod apply(CtMethod method,  List<CodeFragment> statements, int index) {
+        CtMethod cloned_method = cloneMethodTest(method, "_cf", 1000);
+        CtStatement stmt = getAssertStatement(cloned_method)
+                .get(index);
+
+        statements.stream()
+                .forEach(c ->
+                {
+                    stmt.insertBefore((CtStatement) c.getCtCodeFragment());
+                    c.getCtCodeFragment().setParent(stmt.getParent());
+                });
+
+        return cloned_method;
     }
 
     protected List<InputContext> getInputContexts(CtMethod method) {
@@ -86,10 +102,10 @@ public class StatementAdder2 extends AbstractAmp {
         return inputContexts;
     }
 
-    protected List<CodeFragment> getRandomCandidateFor(InputContext inputContext, Set<String> varsInMth) {
+    protected List<CodeFragment> getRandomCandidateFor(InputContext inputContext) {
         List<CodeFragment> list = new ArrayList<>();
-        Random r = new Random();
-        CodeFragment codeFragment = codeFragments.get(r.nextInt(codeFragments.size()));
+
+        CodeFragment codeFragment = codeFragments.get(getRandom().nextInt(codeFragments.size()));
         Factory factory = codeFragment.getCtCodeFragment().getFactory();
 
         CodeFragment clone = factory.Core().clone(codeFragment);
@@ -107,7 +123,7 @@ public class StatementAdder2 extends AbstractAmp {
                     candidate = factory.Code().createLocalVariableReference(localVariable);
                 }
             } else {
-                candidate = candidates.get(r.nextInt(candidates.size()));
+                candidate = candidates.get(getRandom().nextInt(candidates.size()));
             }
             CtVariableReference variable = clone.getInputContext().getVariableOrFieldNamed(var.getSimpleName());
             ReplaceVariableVisitor visitor = new ReplaceVariableVisitor(variable, candidate);
@@ -126,11 +142,10 @@ public class StatementAdder2 extends AbstractAmp {
         if(list.isEmpty()) {
             return null;
         } else {
-            Random r = new Random();
             Factory factory = type.getFactory();
             boolean localVarFind;
             while(!list.isEmpty()) {
-                CodeFragment localVar = factory.Core().clone(list.remove(r.nextInt(list.size())));
+                CodeFragment localVar = factory.Core().clone(list.remove(getRandom().nextInt(list.size())));
                 localVarFind = true;
                 for (CtVariableReference var : localVar.getInputContext().getVar()) {
                     CtVariableReference<?> candidate = inputContext.candidate(var.getType(), true);
@@ -217,13 +232,14 @@ public class StatementAdder2 extends AbstractAmp {
 //        return true;
     }
 
-    protected List<CodeFragment> buildCodeFragmentFor(CtType cl) {
+    protected List<CodeFragment> buildCodeFragmentFor(CtType cl, Coverage coverage) {
         Factory factory = cl.getFactory();
         List<CodeFragment> codeFragments = new ArrayList<>();
 
         for(CtMethod<?> mth : (Set<CtMethod>)cl.getAllMethods()) {
             if(! mth.getModifiers().contains(ModifierKind.ABSTRACT)
-                    && !mth.getModifiers().contains(ModifierKind.PRIVATE)) {
+                    && !mth.getModifiers().contains(ModifierKind.PRIVATE)
+                    && getCoverageForMethod(coverage, cl, mth) != 1.0) {
 
                 CtExecutableReference<?> executableRef = factory.Executable().createReference(mth);
                 CtInvocation invocation;
@@ -234,10 +250,10 @@ public class StatementAdder2 extends AbstractAmp {
                     executableRef.setStatic(false);
                     invocation = factory.Code().createInvocation(null, executableRef);
 
-                    invocation.setTarget(buildVarRef(cl.getQualifiedName(), "var" + cl.getSimpleName(), factory));
+                    invocation.setTarget(buildVarRef(cl.getQualifiedName(), "var_" + cl.getSimpleName(), factory));
                 }
                 invocation.setArguments(mth.getParameters().stream()
-                        .map(param -> buildVarRef(param.getType().getQualifiedName(), "var" + param.getType().getSimpleName(), factory))
+                        .map(param -> buildVarRef(param.getType().getQualifiedName(), "var_" + param.getType().getSimpleName(), factory))
                         .collect(Collectors.toList()));
 
                 codeFragments.add(new Statement(invocation));
@@ -268,7 +284,35 @@ public class StatementAdder2 extends AbstractAmp {
                 .get();
     }
 
+    protected double getCoverageForMethod(Coverage coverage, CtType cl, CtMethod mth) {
+        if(coverage == null) {
+            return 0d;
+        }
 
+        String key = mth.getDeclaringType().getQualifiedName() + "_"
+                +  mth.getType().getQualifiedName()  + "_"
+                + mth.getSimpleName() + "("
+                + mth.getParameters().stream()
+                    .map(param -> ((CtParameter)param).getType().getQualifiedName())
+                    .collect(Collectors.joining(","))
+                + ")";
 
+        if(coverage.getMethodCoverage(key) != null) {
+            return  coverage.getMethodCoverage(key).coverage();
+        } else {
+            key = cl.getQualifiedName() + "_"
+                    +  mth.getType().getQualifiedName()  + "_"
+                    + mth.getSimpleName() + "("
+                    + mth.getParameters().stream()
+                    .map(param -> ((CtParameter)param).getType().getQualifiedName())
+                    .collect(Collectors.joining(","))
+                    + ")";
+            if(coverage.getMethodCoverage(key) != null) {
+                return coverage.getMethodCoverage(key).coverage();
+            } else {
+                return 0d;
+            }
+        }
 
+    }
 }

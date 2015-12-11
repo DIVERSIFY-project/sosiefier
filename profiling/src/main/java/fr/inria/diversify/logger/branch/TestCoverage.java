@@ -31,8 +31,22 @@ public class TestCoverage {
         coverage = new Coverage(list);
     }
 
-    public void merge(TestCoverage find) {
-        coverage.merge(find.coverage);
+    public Set<String> diff(TestCoverage other) {
+        Set<String> branchs = coverage.getCoverageBranch();
+        Set<String> otherBranchs = other.coverage.getCoverageBranch();
+
+        Set<String> diff = otherBranchs.stream()
+                .filter(branch -> !branch.contains(branch))
+                .collect(Collectors.toSet());
+        branchs.stream()
+                .filter(branch -> !otherBranchs.contains(branch))
+                .forEach(branch -> diff.add(branch));
+
+        return diff;
+    }
+
+    public void merge(TestCoverage other) {
+        coverage.merge(other.coverage);
     }
 
     public boolean containsAllBranch(TestCoverage other) {

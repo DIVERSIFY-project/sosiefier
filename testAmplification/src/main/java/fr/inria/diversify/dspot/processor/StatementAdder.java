@@ -73,6 +73,11 @@ public class StatementAdder extends AbstractAmp {
         return filterAmpTest(newMethods, method);
     }
 
+    @Override
+    public CtMethod applyRandom(CtMethod method) {
+        return null;
+    }
+
     protected List<InputContext> getInputContexts(CtMethod method) {
         List<InputContext> inputContexts = new ArrayList<>();
 

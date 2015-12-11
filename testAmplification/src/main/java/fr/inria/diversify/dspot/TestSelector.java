@@ -1,6 +1,7 @@
 package fr.inria.diversify.dspot;
 
 import fr.inria.diversify.dspot.processor.AbstractAmp;
+import fr.inria.diversify.logger.branch.Coverage;
 import fr.inria.diversify.logger.branch.CoverageReader;
 import fr.inria.diversify.logger.branch.TestCoverage;
 import fr.inria.diversify.processor.test.AssertionRemover;
@@ -15,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * User: Simon
@@ -56,29 +58,37 @@ public class TestSelector {
         deleteLogFile();
     }
 
-    protected Collection<CtMethod> selectTestToAmp(Collection<CtMethod> oldTests, Collection<CtMethod> newTests) {
-        Set<CtMethod> selectedTest = new HashSet<>();
-        for (CtMethod test : oldTests) {
-            String testName = test.getSimpleName();
-            if (!testAges.containsKey(testName)) {
-                testAges.put(testName, getAgesFor(test));
-            }
-            if (testAges.get(testName) > 0) {
-                testAges.put(testName, testAges.get(testName) - 1);
-                selectedTest.add(test);
-            }
-        }
+    protected Collection<CtMethod> selectTestToAmp(Collection<CtMethod> oldTests, Collection<CtMethod> newTests, int maxNumberOfTest) {
+        Map<CtMethod, Set<String>> selectedTest = new HashMap<>();
+//        for (CtMethod test : oldTests) {
+//            String testName = test.getSimpleName();
+//            if (!testAges.containsKey(testName)) {
+//                testAges.put(testName, getAgesFor(test));
+//            }
+//            if (testAges.get(testName) > 0) {
+//                testAges.put(testName, testAges.get(testName) - 1);
+//                selectedTest.add(test);
+//            }
+//        }
         for (CtMethod test : newTests) {
             for (TestCoverage tc : getTestCoverageFor(test)) {
-                TestCoverage parentTc = getParentTestCoverageFor(tc);
-                if (parentTc == null || !parentTc.containsAllBranch(tc)) {
-                    selectedTest.add(test);
+                TestCoverage parentTc = getParentTestCoverageFor(test);
+                if (parentTc == null) {
+                    selectedTest.put(test, new HashSet<>());
                     break;
+                } else {
+                    if (!parentTc.containsAllBranch(tc)) {
+                        selectedTest.put(test, tc.diff(parentTc));
+                        break;
+                    }
                 }
             }
         }
-
-        return selectedTest;
+        if(selectedTest.size() > maxNumberOfTest) {
+            return reduceSelectedTest(selectedTest);
+        } else {
+            return selectedTest.keySet();
+        }
     }
 
     protected Integer getAgesFor(CtMethod test) {
@@ -93,26 +103,25 @@ public class TestSelector {
     }
 
 
-    public Set<CtMethod> selectedAmplifiedTests(Collection<CtMethod> tests) {
-        Set<CtMethod> amplifiedTests = new HashSet<>();
-        Set<CtMethod> toRemove = new HashSet<>();
+    public Collection<CtMethod> selectedAmplifiedTests(Collection<CtMethod> tests) {
+        Map<CtMethod, Set<String>> amplifiedTests = new HashMap<>();
+//        Set<CtMethod> toRemove = new HashSet<>();
         for (CtMethod test : tests) {
             for (TestCoverage tc : getTestCoverageFor(test)) {
-                TestCoverage parentTc = getParentTestCoverageFor(tc);
+                TestCoverage parentTc = getParentTestCoverageFor(test);
                 if (parentTc != null && tc.containsAllBranch(parentTc) && !parentTc.containsAllBranch(tc)) {
-                    amplifiedTests.add(test);
-                    toRemove.remove(getParent(test));
-//                    toRemove.remove(getParent(test.getSimpleName(), tests));
+                    amplifiedTests.put(test, tc.diff(parentTc));
+//                    toRemove.remove(getParent(test));
                     break;
                 }
                 if(parentTc != null && !tc.containsAllBranch(parentTc) && !parentTc.containsAllBranch(tc)) {
-                    amplifiedTests.add(test);
+                    amplifiedTests.put(test, tc.diff(parentTc));
                     break;
                 }
             }
         }
-        amplifiedTests.removeAll(toRemove);
-        return amplifiedTests;
+//        amplifiedTests.removeAll(toRemove);
+        return reduceSelectedTest(amplifiedTests);
     }
 
     protected Collection<CtMethod> reduceSelectedTest(Map<CtMethod, Set<String>> selected) {
@@ -123,16 +132,19 @@ public class TestSelector {
                 .sorted((l1, l2) -> Integer.compare(l2.size(), l1.size()))
                 .collect(Collectors.toList());
 
-        Set<String> branches = sortedKey.stream()
-                .flatMap(list -> list.stream())
-                .collect(Collectors.toSet());
-
         List<CtMethod> methods = new ArrayList<>();
-
-        while(!branches.isEmpty()) {
-            Set<String> key = sortedKey.remove(0);
-            branches.removeAll(key);
+        while(!sortedKey.isEmpty()) {
+            Set<String> key = new HashSet<>(sortedKey.remove(0));
             methods.add(map.get(key).stream().findAny().get());
+
+            sortedKey = sortedKey.stream()
+                    .map(k -> {k.removeAll(key); return k;})
+                    .filter(k -> !k.isEmpty())
+                    .sorted((l1, l2) -> Integer.compare(l2.size(), l1.size()))
+                    .collect(Collectors.toList());
+
+            map.keySet().stream()
+                    .forEach(set -> set.removeAll(key));
         }
 
         return methods;
@@ -146,36 +158,22 @@ public class TestSelector {
                 .collect(Collectors.toList());
     }
 
-    protected String parentName(String name) {
-        if(name.contains("_")) {
-            return name.substring(0, name.lastIndexOf("_"));
-        } else {
-            return null;
-        }
-    }
-
-//    protected CtMethod getParent(String name, Collection<CtMethod> tests) {
-//        String parentName = parentName(name);
-//        return tests.stream()
-//                .filter(test -> parentName.equals(test.getSimpleName()))
-//                .findFirst()
-//                .orElse(null);
-//    }
-
     protected CtMethod getParent(CtMethod test) {
         return AbstractAmp.getAmpTestToParent().get(test);
     }
 
-    protected TestCoverage getParentTestCoverageFor(TestCoverage tc) {
-        String parentName = parentName(tc.getTestName());
-        if(parentName != null) {
-            return ampCoverage.stream()
-                    .filter(c -> c.getTestName().endsWith(parentName))
-                    .findFirst()
-                    .orElse(null);
-        } else {
-            return null;
+    protected TestCoverage getParentTestCoverageFor(CtMethod mth) {
+        CtMethod parent = getParent(mth);
+        if(parent != null) {
+            String parentName = parent.getSimpleName();
+            if (parentName != null) {
+                return ampCoverage.stream()
+                        .filter(c -> c.getTestName().endsWith(parentName))
+                        .findFirst()
+                        .orElse(null);
+            }
         }
+        return null;
     }
 
 
@@ -237,5 +235,16 @@ public class TestSelector {
                 FileUtils.forceDelete(file);
             }
         }
+    }
+
+
+    public Coverage getGlobalCoverage() {
+        Coverage coverage = new Coverage();
+
+        for(TestCoverage tc : ampCoverage) {
+            coverage.merge(tc.getCoverage());
+        }
+
+        return coverage;
     }
 }

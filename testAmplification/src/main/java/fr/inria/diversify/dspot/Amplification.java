@@ -3,6 +3,8 @@ package fr.inria.diversify.dspot;
 import fr.inria.diversify.buildSystem.DiversifyClassLoader;
 import fr.inria.diversify.dspot.processor.*;
 import fr.inria.diversify.factories.DiversityCompiler;
+import fr.inria.diversify.logger.branch.Coverage;
+import fr.inria.diversify.logger.branch.TestCoverage;
 import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
@@ -48,7 +50,7 @@ public class Amplification {
     }
 
     public void amplification(CtClass classTest, int maxIteration) throws IOException, InterruptedException, ClassNotFoundException {
-        initAmplifiers(classTest);
+
         Set<CtMethod> tests = getAllTest(classTest);
         int nbTest = tests.size();
         if(nbTest == 0) {
@@ -62,6 +64,9 @@ public class Amplification {
             Log.info("error whit Logger in classes {}", classWithLogger.stream().map(cl ->cl.getQualifiedName()).collect(Collectors.toList()));
             return;
         }
+        runTests(classWithLogger, new ArrayList<>());
+        testSelector.updateLogInfo();
+        initAmplifiers(classTest, testSelector.getGlobalCoverage());
 
         List<CtMethod> ampTest = new ArrayList<>();
         for(CtMethod test : tests) {
@@ -87,7 +92,7 @@ public class Amplification {
         for (int i = 0; i < maxIteration; i++) {
             Log.info("iteration {}:", i);
 
-            Collection<CtMethod> testToAmp = testSelector.selectTestToAmp(allTests, newTests);
+            Collection<CtMethod> testToAmp = testSelector.selectTestToAmp(allTests, newTests, 10);
             if(testToAmp.isEmpty()) {
                 break;
             }
@@ -191,22 +196,22 @@ public class Amplification {
                 .collect(Collectors.toList());
     }
 
-    protected void initAmplifiers(CtClass parentClass) {
+    protected void initAmplifiers(CtClass parentClass, Coverage coverage) {
         amplifiers = new ArrayList<>();
 
         AbstractAmp dataMutator = new TestDataMutator(inputProgram, parentClass);
         dataMutator.reset();
         amplifiers.add(dataMutator);
-//
-//        AbstractAmp methodAdd = new TestMethodCallAdder();
-//        methodAdd.reset();
-//        amplifiers.add(methodAdd);
-//
-//        AbstractAmp methodRemove = new TestMethodCallRemover();
-//        methodRemove.reset();
-//        amplifiers.add(methodRemove);
 
-        AbstractAmp stmtAdder = new StatementAdder2(inputProgram, parentClass);
+        AbstractAmp methodAdd = new TestMethodCallAdder();
+        methodAdd.reset();
+        amplifiers.add(methodAdd);
+
+        AbstractAmp methodRemove = new TestMethodCallRemover();
+        methodRemove.reset();
+        amplifiers.add(methodRemove);
+
+        AbstractAmp stmtAdder = new StatementAdder2(inputProgram, coverage, parentClass);
         stmtAdder.reset();
         amplifiers.add(stmtAdder);
 
@@ -301,5 +306,4 @@ public class Amplification {
         }
         return parent;
     }
-
 }

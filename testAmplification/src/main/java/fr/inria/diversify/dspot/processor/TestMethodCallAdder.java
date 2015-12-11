@@ -12,33 +12,52 @@ import java.util.List;
 
 public class TestMethodCallAdder extends AbstractAmp {
 
-    public  List<CtMethod> apply(CtMethod method) {
+    public List<CtMethod> apply(CtMethod method) {
         List<CtMethod> methods = new ArrayList<>();
-        try{
+
+        if(method.getDeclaringType() != null) {
             //get the list of method calls
             List<CtInvocation> invocations = Query.getElements(method, new TypeFilter(CtInvocation.class));
             //this index serves to replace ith literal is replaced by zero in the ith clone of the method
-            int lit_index = 0;
-            for(CtInvocation invocation : invocations) {
-                if(toAdd(invocation) && !isAssert(invocation)) {
-                    //clone the method
-                    CtMethod cloned_method = cloneMethodTest(method, "_add", 1000);
-                    //add the cloned method in the same class as the original method
-                    if (method.getDeclaringType() != null) {
-                        //get the lit_indexth literal of the cloned method
-                        CtInvocation stmt = Query.getElements(cloned_method, new TypeFilter<CtInvocation>(CtInvocation.class)).get(lit_index);
-                        CtInvocation cloneStmt = method.getFactory().Core().clone(stmt);
-                        cloneStmt.setParent(stmt.getParent());
-                        stmt.insertBefore(cloneStmt);
-                        methods.add(cloned_method);
+            int invocation_index = 0;
+            for (CtInvocation invocation : invocations) {
+                try {
+                    if (toAdd(invocation) && !isAssert(invocation)) {
+                        methods.add(apply(method, invocation_index));
                     }
-
+                } catch (Exception e) {
                 }
-                lit_index++;
+                invocation_index++;
             }
         }
-        catch(Exception e) {}
         return filterAmpTest(methods, method);
+    }
+
+    public CtMethod applyRandom(CtMethod method) {
+        if (method.getDeclaringType() != null) {
+            List<CtInvocation> invocations = Query.getElements(method, new TypeFilter(CtInvocation.class));
+
+            while(true) {
+                try {
+                    int invocation_index = getRandom().nextInt(invocations.size());
+                    return apply(method, invocation_index);
+                } catch (Exception e) {}
+            }
+        } else {
+            return null;
+        }
+    }
+
+    protected CtMethod apply(CtMethod method, int invocation_index) {
+        CtMethod cloned_method = cloneMethodTest(method, "_add", 1000);
+        //add the cloned method in the same class as the original method
+        //get the lit_indexth literal of the cloned method
+        CtInvocation stmt = Query.getElements(cloned_method, new TypeFilter<CtInvocation>(CtInvocation.class)).get(invocation_index);
+        CtInvocation cloneStmt = method.getFactory().Core().clone(stmt);
+        cloneStmt.setParent(stmt.getParent());
+        stmt.insertBefore(cloneStmt);
+
+        return cloned_method;
     }
 
 	public boolean toAdd(CtInvocation invocation) {

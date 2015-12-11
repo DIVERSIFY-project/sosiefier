@@ -23,7 +23,10 @@ public abstract class AbstractAmp {
     protected int cloneNumber;
     protected static Map<CtMethod,CtMethod> ampTestToParent;
 
+    protected Random random;
+
     public abstract List<CtMethod> apply(CtMethod method);
+    public abstract CtMethod applyRandom(CtMethod method);
 
     public void reset() {
         cloneNumber = 1;
@@ -101,7 +104,7 @@ public abstract class AbstractAmp {
         CtMethod cloned_method = method.getFactory().Core().clone(method);
         cloned_method.setParent(method.getParent());
         //rename the clone
-        cloned_method.setSimpleName(method.getSimpleName()+cloneNumber+suffix);
+        cloned_method.setSimpleName(method.getSimpleName()+suffix+cloneNumber);
         cloneNumber++;
 
         CtAnnotation toRemove = cloned_method.getAnnotations().stream()
@@ -162,6 +165,13 @@ public abstract class AbstractAmp {
         return types.stream()
                 .filter(type -> type != null)
                 .collect(Collectors.toSet());
+    }
+
+    protected Random getRandom() {
+        if(random == null) {
+            random = new Random();
+        }
+        return random;
     }
 
     public static Map<CtMethod, CtMethod> getAmpTestToParent() {
