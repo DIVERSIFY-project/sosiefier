@@ -22,8 +22,12 @@ public class BranchCoverage {
         return id;
     }
 
-    public void addDeep(int deep) {
+    protected void addDeep(int deep) {
         deeps.add(deep);
+    }
+
+    protected void addAllDeep(Set<Integer> deeps) {
+        this.deeps.addAll(deeps);
     }
 
     public Set<Integer> getDeeps() {

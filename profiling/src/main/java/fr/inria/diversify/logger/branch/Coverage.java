@@ -7,10 +7,7 @@ import spoon.reflect.cu.SourcePosition;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -24,6 +21,10 @@ public class Coverage {
 
     public Coverage(Collection<MethodCoverage> methodCoverages) {
        this.methodCoverages = methodCoverages;
+    }
+
+    public Coverage() {
+        this.methodCoverages = new ArrayList<>();
     }
 
     public double coverage() {
@@ -76,7 +77,7 @@ public class Coverage {
         Log.info("count: {}",count);
     }
 
-    protected MethodCoverage getMethodCoverage(String name) {
+    public MethodCoverage getMethodCoverage(String name) {
         return methodCoverages.stream()
                 .filter(mc -> mc.getMethodName().equals(name))
                 .findFirst()
@@ -114,7 +115,7 @@ public class Coverage {
     }
 
 
-    public Set<String> getCoverageBranch(Collection<String> classes) {
+    public Set<String> getCoverageBranchFor(Collection<String> classes) {
         Set<String> set = new HashSet<>();
         for(MethodCoverage mc : methodCoverages) {
             if (classes.stream().anyMatch(cl -> mc.getMethodName().startsWith(cl +"_"))) {

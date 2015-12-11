@@ -133,7 +133,20 @@ public class MethodCoverage {
 
     public void merge(MethodCoverage other) {
         this.allPath.addAll(other.allPath);
-        this.coveredBranchCoverages.addAll(other.coveredBranchCoverages);
+        for(BranchCoverage otherBranchCoverage : other.coveredBranchCoverages) {
+            BranchCoverage existing = null;
+            for(BranchCoverage branchCoverage : coveredBranchCoverages) {
+                if(branchCoverage.getId().equals(otherBranchCoverage.getId())) {
+                    existing = branchCoverage;
+                    break;
+                }
+            }
+            if(existing == null) {
+                coveredBranchCoverages.add(otherBranchCoverage);
+            } else {
+                existing.addAllDeep(otherBranchCoverage.getDeeps());
+            }
+        }
     }
 
     public Integer getMethodId() {
