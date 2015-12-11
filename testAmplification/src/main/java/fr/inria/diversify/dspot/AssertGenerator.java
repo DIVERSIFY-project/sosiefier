@@ -1,6 +1,6 @@
 package fr.inria.diversify.dspot;
 
-import fr.inria.diversify.buildSystem.spoon.JunitRunner;
+import fr.inria.diversify.buildSystem.DiversifyClassLoader;
 import fr.inria.diversify.compare.ObjectLog;
 import fr.inria.diversify.compare.Observation;
 import fr.inria.diversify.runner.InputProgram;
@@ -30,35 +30,52 @@ import java.util.stream.Collectors;
  * Time: 10:06
  */
 public class AssertGenerator {
+    protected ClassLoader applicationClassLoader;
     protected CtMethod test;
     protected List<CtMethod> testsToRun;
     protected DiversityCompiler compiler;
-    protected JunitRunner junitRunner;
+    protected InputProgram inputProgram;
+//    protected JunitRunner junitRunner;
     protected List<Integer> statementsIndexToAssert;
 
 
 
-    public AssertGenerator(CtMethod test, DiversityCompiler compiler, InputProgram inputProgram) throws IOException {
+    public AssertGenerator(CtMethod test, InputProgram inputProgram, DiversityCompiler compiler, ClassLoader applicationClassLoader) throws IOException {
         this.test = test;
         this.compiler = compiler;
-        this.junitRunner = new JunitRunner(Thread.currentThread().getContextClassLoader(), compiler.getDestinationDirectory().getAbsolutePath());
+        this.applicationClassLoader = applicationClassLoader;
+//        try {
+//            applicationClassLoader.loadClass("fr.inria.diversify.compare.ObjectLog");
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+        this.inputProgram = inputProgram;
+//        this.junitRunner = new JunitRunner(inputProgram, new DiversifyClassLoader(applicationClassLoader, compiler.getDestinationDirectory().getAbsolutePath()));
         statementsIndexToAssert = new ArrayList<>();
         for(int i = 0; i < 50; i++) {
             statementsIndexToAssert.add(i);
         }
     }
 
-    public AssertGenerator(CtMethod test, DiversityCompiler compiler, InputProgram inputProgram, List<Integer> statementsIndexToAssert) throws IOException {
+    public AssertGenerator(CtMethod test, InputProgram inputProgram, DiversityCompiler compiler, ClassLoader applicationClassLoader, List<Integer> statementsIndexToAssert) throws IOException {
         this.test = test;
         this.compiler = compiler;
-        this.junitRunner = new JunitRunner(Thread.currentThread().getContextClassLoader(), compiler.getDestinationDirectory().getAbsolutePath());
+        this.applicationClassLoader = applicationClassLoader;
+//        try {
+//            applicationClassLoader.loadClass("fr.inria.diversify.compare.ObjectLog");
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+        this.inputProgram = inputProgram;
+
+//        this.junitRunner = new JunitRunner(inputProgram, new DiversifyClassLoader(applicationClassLoader, compiler.getDestinationDirectory().getAbsolutePath()));
         this.statementsIndexToAssert = statementsIndexToAssert;
     }
 
     public CtMethod genereteAssert() {
          CtClass cl = initTestClass();
         try {
-            writeAndCompile(cl);
+            boolean isCompile = writeAndCompile(cl);
             Result result = runTest();
             String testWithoutAssertName = test.getSimpleName() + "_withoutAssert";
            if(testFailed(testWithoutAssertName, result)) {
@@ -97,7 +114,7 @@ public class AssertGenerator {
         ObjectLog.reset();
         runTest();
 
-        return buildTestWithAssert(ObjectLog.getObservations());
+         return buildTestWithAssert(ObjectLog.getObservations());
     }
 
     protected CtMethod buildTestWithAssert(Map<Integer, Observation> observations) {
@@ -160,6 +177,12 @@ public class AssertGenerator {
     }
 
     protected Result runTest() throws ClassNotFoundException {
+        DiversifyClassLoader diversifyClassLoader = new DiversifyClassLoader(applicationClassLoader, compiler.getDestinationDirectory().getAbsolutePath());
+        diversifyClassLoader.setClassFilter(testsToRun.stream()
+                .map(test -> test.getParent(CtClass.class).getQualifiedName())
+                .collect(Collectors.toSet()));
+
+        JunitRunner junitRunner = new JunitRunner(inputProgram,diversifyClassLoader);
         return junitRunner.runTestMethods(testsToRun);
     }
 

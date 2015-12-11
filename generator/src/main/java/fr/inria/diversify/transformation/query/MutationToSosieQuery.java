@@ -1,6 +1,5 @@
 package fr.inria.diversify.transformation.query;
 
-import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.coverage.MultiCoverageReport;
 import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
@@ -58,7 +57,7 @@ public class MutationToSosieQuery extends TransformationQuery {
                     }
                 }
 
-                T thread = new T(new ADRTransformationQuery(inputProgram, Statement.class, subType, false));
+                T thread = new T(new ADRTransformationQuery(inputProgram, subType, false));
 
                 thread.start();
                 int count = 0;

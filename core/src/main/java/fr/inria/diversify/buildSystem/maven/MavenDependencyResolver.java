@@ -72,7 +72,7 @@ public class MavenDependencyResolver implements DependencyResolver {
             MavenProject project = loadProject(pomFile);
             resolveAllDependencies(project, new HashSet<String>(), true);
 
-            addApplicationClasses(inputProgram);
+//            addApplicationClasses(inputProgram);
             loadDependencies();
         }
     }
@@ -96,8 +96,7 @@ public class MavenDependencyResolver implements DependencyResolver {
         dependenciesURL.add((new File(inputProgram.getProgramDir() + "/" + inputProgram.getClassesDir()).toURL()));
         dependenciesURL.add((new File(inputProgram.getProgramDir() + "/" + inputProgram.getTestClassesDir()).toURL()));
         directDependenciesURL.add(new File(inputProgram.getProgramDir() + "/" + inputProgram.getClassesDir()).toURL());
-        directDependenciesURL.add((new File(inputProgram.getProgramDir() + "/" + inputProgram.getTestClassesDir()).toURL()));
-        loadDependencies();
+        directDependenciesURL.add((new File(inputProgram.getProgramDir() + "/" + inputProgram.getTestClassesDir()).toURL()));loadDependencies();
     }
 
 
@@ -160,7 +159,7 @@ public class MavenDependencyResolver implements DependencyResolver {
     public void resolveAndroidDependencies(String chosenSdkPlatform) throws InvalidSdkException, MojoExecutionException, MalformedURLException {
         File chosenSdkPath = new File( getAndroidHomeOrThrow() );
 
-        AndroidSdk androidSdk = new AndroidSdk( chosenSdkPath, chosenSdkPlatform );
+        AndroidSdk androidSdk = new AndroidSdk(chosenSdkPath, chosenSdkPlatform);
         dependenciesURL.add(androidSdk.getAndroidJar().toURI().toURL());
         dependenciesURL.add(new File(androidSdk.getDxJarPath()).toURI().toURL());
 

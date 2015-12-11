@@ -1,7 +1,6 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
@@ -27,11 +26,6 @@ import java.util.function.ToDoubleFunction;
  */
 public class ADRTransformationQuery extends TransformationQuery {
     /**
-     * Class of the code fragment. Defaults to Statement
-     */
-    protected Class codeFragmentClass = Statement.class;
-
-    /**
      * Indicates if we do solely simple transformations. Defaults to the simple ones
      */
     protected boolean stupid = true;
@@ -51,18 +45,15 @@ public class ADRTransformationQuery extends TransformationQuery {
     public ADRTransformationQuery(InputProgram inputProgram) {
         //This we assume be defect
         super(inputProgram);
-        codeFragmentClass = Statement.class;
     }
 
     /**
      * Long constructor assuming nothing
      * @param inputProgram Input Input program over the queries are going to be made
-     * @param fragmentClass Class of the fragments
      * @param isStupid Is this a stupid transformation?
      */
-    public ADRTransformationQuery(InputProgram inputProgram, Class fragmentClass, boolean subType, boolean isStupid) {
+    public ADRTransformationQuery(InputProgram inputProgram, boolean subType, boolean isStupid) {
         super(inputProgram);
-        codeFragmentClass = fragmentClass;
         stupid = isStupid;
         this.subType = subType;
     }

@@ -51,7 +51,7 @@ public class InitUtils {
         }
     }
 
-    public static  void addApplicationClassesToClassPath(InputProgram inputProgram) throws MalformedURLException {
+    public static void addApplicationClassesToClassPath(InputProgram inputProgram) throws MalformedURLException {
         MavenDependencyResolver t = MavenDependencyResolver.dependencyResolver();
         t.addApplicationClasses(inputProgram);
     }

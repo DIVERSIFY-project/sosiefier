@@ -227,12 +227,10 @@ public class DiversifyMain {
             case "bytecode":
                 return new ByteCodeTransformationQuery(inputProgram);
             case "adr": {
-                Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
-                return new ADRTransformationQuery(inputProgram, cl, subType, false);
+                return new ADRTransformationQuery(inputProgram, subType, false);
             }
             case "adrstupid": {
-                Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
-                return new ADRTransformationQuery(inputProgram, cl, subType, true);
+                return new ADRTransformationQuery(inputProgram, subType, true);
             }
             case "fromlist": {
                 int rangeMin = Integer.parseInt(inputConfiguration.getProperty("transformation.range.min", "-1"));
@@ -270,8 +268,7 @@ public class DiversifyMain {
                 return query;
             }
             case "fse":{
-                Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
-                return new ADRTransformationQuery(inputProgram, cl, subType, false);
+                return new ADRTransformationQuery(inputProgram, subType, false);
             }
             case "replaceconstructor" : {
                 return new InstanceTransformationQuery(inputProgram, ".*:.*:.*", true, false);

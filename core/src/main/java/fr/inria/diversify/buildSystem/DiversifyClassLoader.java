@@ -1,13 +1,14 @@
 package fr.inria.diversify.buildSystem;
 
 
+
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.List;
+import java.util.*;
 
 /**
  * User: Simon
@@ -15,20 +16,33 @@ import java.util.List;
  * Time: 13:59
  */
 public class DiversifyClassLoader extends ClassLoader {
-    String classPath;
-    protected List<String> classFilter;
+    protected List<String> classPaths;
+    protected Map<String, Class> classes;
+    protected Collection<String> classFilter;
 
-    public DiversifyClassLoader(ClassLoader parent, String classPath) {
+    public DiversifyClassLoader(ClassLoader parent, List<String> classPaths) {
         super(parent);
-        this.classPath = classPath;
+        this.classPaths = classPaths;
+        this.classes = new HashMap<>();
     }
 
 
-    public void setClassFilter(List<String> classFilter) {
+    public DiversifyClassLoader(ClassLoader parent, String classPath) {
+        super(parent);
+        this.classPaths = new ArrayList<>();
+        classPaths.add(classPath);
+        this.classes = new HashMap<>();
+    }
+
+
+    public void setClassFilter(Collection<String> classFilter) {
         this.classFilter = classFilter;
     }
 
     protected boolean update(String fullName) {
+        if(classFilter == null) {
+            return true;
+        }
         for(String cl : classFilter) {
             if(fullName.contains(cl)) {
                 return true;
@@ -39,30 +53,52 @@ public class DiversifyClassLoader extends ClassLoader {
 
     public Class loadClass(String fullName) throws ClassNotFoundException {
         if(update(fullName)) {
-            try {
-                String url = "file:" + classPath + "/" + fullName.replace(".", "/") + ".class";
-                URL myUrl = new URL(url);
-                URLConnection connection = myUrl.openConnection();
-                InputStream input = connection.getInputStream();
-                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-                int data = input.read();
-
-                while (data != -1) {
-                    buffer.write(data);
-                    data = input.read();
+            if (classes.containsKey(fullName)) {
+                return classes.get(fullName);
+            } else {
+                File classFile = findClassFile(fullName);
+                if (classFile != null) {
+                    try {
+                        classes.put(fullName, loadClass0(classFile, fullName));
+                        return classes.get(fullName);
+                    } catch (Throwable e) {
+                    }
                 }
-
-                input.close();
-
-                byte[] classData = buffer.toByteArray();
-                return defineClass(fullName,
-                        classData, 0, classData.length);
-            } catch (Throwable e) {
             }
         }
-        try {
-            return Class.forName(fullName);
-        } catch (Exception e) {}
         return getParent().loadClass(fullName);
+    }
+
+    protected File findClassFile(String fullName) {
+        File file = null;
+        for(String dir : classPaths) {
+            file = new File(dir + "/" + fullName.replace(".", "/") + ".class");
+            if(file.exists()) {
+                break;
+            } else {
+                file = null;
+            }
+        }
+        return file;
+    }
+
+    protected Class loadClass0(File classFile, String fullName) throws IOException {
+        String url = "file:" + classFile.getAbsolutePath();
+        URL myUrl = new URL(url);
+        URLConnection connection = myUrl.openConnection();
+        InputStream input = connection.getInputStream();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        int data = input.read();
+
+        while (data != -1) {
+            buffer.write(data);
+            data = input.read();
+        }
+
+        input.close();
+
+        byte[] classData = buffer.toByteArray();
+        return defineClass(fullName,
+                classData, 0, classData.length);
     }
 }

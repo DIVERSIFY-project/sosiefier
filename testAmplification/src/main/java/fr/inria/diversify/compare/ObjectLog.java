@@ -46,7 +46,6 @@ public class ObjectLog {
                 observeNotNullObject(object, stringObject, positionId, deep);
             }
         }
-
     }
 
     protected void addObservation(int positionId, String stringObject, Object value) {

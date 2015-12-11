@@ -53,8 +53,6 @@ public abstract class CodeFragment {
     public void init(CtCodeElement cf) {
         codeFragment = cf;
         context = new Context(initInputContext(), initOutputContext());
-//        this.initOutputContext();
-//        this.initInputContext();
     }
 
     /**
@@ -126,12 +124,12 @@ public abstract class CodeFragment {
 
     public void replaceVar(CodeFragment other, Map<String,String> varMapping) {
         if ( varMapping == null || varMapping.size() == 0 ) {
-            Log.debug("No replacement where made, varMapping null or zero size");
+            Log.trace("No replacement where made, varMapping null or zero size");
             return;
         }
-        Log.debug("replace variable");
-        Log.debug("avant:");
-        Log.debug("{}",codeFragment);
+        Log.trace("replace variable");
+        Log.trace("before: {}", codeFragment);
+
         for (String varName: varMapping.keySet()) {
             CtVariableReference variable = getInputContext().getVariableOrFieldNamed(varName);
             CtVariableReference candidate = other.getInputContext().getVariableOrFieldNamed(varMapping.get(varName));
@@ -142,17 +140,21 @@ public abstract class CodeFragment {
         if(codeFragment instanceof CtLocalVariableImpl)
             ((CtLocalVariableImpl)codeFragment).setSimpleName(((CtLocalVariableImpl) other.codeFragment).getSimpleName());
 
-        Log.debug("apres: {}",codeFragment);
+        Log.trace("after: {}",codeFragment);
     }
 
     //validate if this can be replaced by other
     public abstract  boolean isReplaceableBy(CodeFragment other, boolean varNameMatch , boolean subType);
 
     public Map<String,String> randomVariableMapping(CodeFragment other, boolean subType) {
+        return randomVariableMapping(other.getInputContext(), subType);
+    }
+
+    public Map<String,String> randomVariableMapping(InputContext otherInputContext, boolean subType) {
         Map<String,String> varMap = new HashMap<>();
         Random r = new Random();
 
-        for (CtVariableReference<?> variable : other.getInputContext().getVar()) {
+        for (CtVariableReference<?> variable : otherInputContext.getVar()) {
             List<CtVariableReference> list = getInputContext().allCandidate(variable.getType(), subType);
             if ( list.size() > 0 ) {
                 CtVariableReference candidate = list.get(r.nextInt(list.size()));
@@ -161,7 +163,6 @@ public abstract class CodeFragment {
         }
         return varMap;
     }
-
 
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();

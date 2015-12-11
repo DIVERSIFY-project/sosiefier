@@ -1,10 +1,7 @@
 package fr.inria.diversify.dspot;
 
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
-import fr.inria.diversify.buildSystem.spoon.JunitRunner;
-import fr.inria.diversify.dspot.processor.TestDataMutator;
-import fr.inria.diversify.dspot.processor.TestMethodCallAdder;
-import fr.inria.diversify.dspot.processor.TestMethodCallRemover;
+import fr.inria.diversify.dspot.processor.*;
 import fr.inria.diversify.runner.InputProgram;
 
 import fr.inria.diversify.factories.DiversityCompiler;
@@ -104,8 +101,8 @@ public class TestAmplification {
                 if(result != null) {
                     Log.debug("{} tests run, {} failure", result.getRunCount(), result.getFailureCount());
 
-                    AssertGenerator ag = new AssertGenerator( instruTests.get(0), compiler, inputProgram) ;
-                    ag.genereteAssert();
+//                    AssertGenerator ag = new AssertGenerator( instruTests.get(0), compiler, inputProgram) ;
+//                    ag.genereteAssert();
 
                 }
                 } catch (ClassNotFoundException e) {
@@ -272,9 +269,10 @@ public class TestAmplification {
     }
 
     protected Result runTests(List<CtClass> tests) throws ClassNotFoundException {
-        JunitRunner junitRunner = new JunitRunner(Thread.currentThread().getContextClassLoader(), compiler.getDestinationDirectory().getAbsolutePath());
-
-        return junitRunner.runTestClasses(tests);
+//        JunitRunner junitRunner = new JunitRunner(inputProgram, compiler.getDestinationDirectory().getAbsolutePath());
+//
+//        return junitRunner.runTestClasses(tests);
+        return null;
     }
 
     protected void makeDSpotClassTest() {
@@ -297,17 +295,20 @@ public class TestAmplification {
     protected List<CtMethod> ampTests(CtMethod test) {
         List<CtMethod> methods = new ArrayList<>();
 
-        TestDataMutator dataMutator = new TestDataMutator();
-        dataMutator.setFactory(inputProgram.getFactory());
-        methods.addAll(dataMutator.apply(test));
+        AbstractAmp stmtAdder = new StatementAdder(inputProgram, test.getParent(CtClass.class));
+        methods.addAll(stmtAdder.apply(test));
 
-        TestMethodCallAdder methodAdd = new TestMethodCallAdder();
-        methodAdd.setFactory(inputProgram.getFactory());
-        methods.addAll(methodAdd.apply(test));
-
-        TestMethodCallRemover methodRemove = new TestMethodCallRemover();
-        methodRemove.setFactory(inputProgram.getFactory());
-        methods.addAll(methodRemove.apply(test));
+//        AbstractAmp dataMutator = new TestDataMutator();
+//        dataMutator.setInputProgram(inputProgram);
+//        methods.addAll(dataMutator.apply(test));
+//
+//        AbstractAmp methodAdd = new TestMethodCallAdder();
+//        methodAdd.setInputProgram(inputProgram);
+//        methods.addAll(methodAdd.apply(test));
+//
+//        AbstractAmp methodRemove = new TestMethodCallRemover();
+//        dataMutator.setInputProgram(inputProgram);
+//        methods.addAll(methodRemove.apply(test));
 
         return methods;
     }

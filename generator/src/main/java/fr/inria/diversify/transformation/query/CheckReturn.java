@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import spoon.reflect.code.*;
@@ -123,7 +124,7 @@ public class CheckReturn extends ADRTransformationQuery {
 
         Random r = new Random();
         CtCodeElement tmp = (CtCodeElement) copyElem(list.get(r.nextInt(list.size())).getCtCodeFragment());
-        CodeFragment ret = (CodeFragment) codeFragmentClass.newInstance();
+        CodeFragment ret = new Statement();
         ret.init(tmp);
         return ret;
     }

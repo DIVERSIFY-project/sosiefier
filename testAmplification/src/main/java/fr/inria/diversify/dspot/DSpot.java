@@ -1,5 +1,6 @@
 package fr.inria.diversify.dspot;
 
+import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.factories.DiversityCompiler;
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
@@ -43,15 +44,17 @@ public class DSpot {
         FileUtils.copyDirectory(new File(inputProgram.getProgramDir()), new File(outputDirectory));
         inputProgram.setProgramDir(outputDirectory);
 
+
+        String[] phases  = new String[]{"clean"};
+        builder = new MavenBuilder(inputProgram.getProgramDir());
         InitUtils.initDependency(inputConfiguration);
     }
 
     protected void generateTest() throws IOException, InterruptedException, ClassNotFoundException {
         init();
-        TestAmplification testAmplification = new TestAmplification(inputProgram, builder, compiler);
+        Amplification testAmplification = new Amplification(inputProgram, compiler);
 
         for (CtClass cl : getAllTestClasses()) {
-
             testAmplification.amplification(cl, 5);
         }
     }
@@ -78,7 +81,9 @@ public class DSpot {
         builder = new MavenBuilder(inputProgram.getProgramDir());
 
         builder.setGoals(phases);
-        builder.initTimeOut();
+         builder.initTimeOut();
+         InitUtils.addApplicationClassesToClassPath(inputProgram);
+//        builder.setTimeOut(150);
     }
 
     protected void addBranchLogger() throws IOException {

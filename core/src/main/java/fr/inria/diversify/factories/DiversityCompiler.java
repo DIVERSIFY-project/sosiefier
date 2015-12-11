@@ -97,6 +97,7 @@ public class DiversityCompiler extends JDTBasedSpoonCompiler {
 
         System.setProperty("jdt.compiler.useSingleThread", "true");
 
+        args.add("-proceedOnError");
         batchCompiler.compile(args.toArray(new String[0]));
 
 //        reportProblems(factory.getEnvironment());

@@ -1,10 +1,8 @@
 package fr.inria.diversify.codeFragment;
 
-import fr.inria.diversify.util.Log;
 import spoon.reflect.code.CtInvocation;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtVariableAccess;
-import spoon.reflect.factory.FactoryImpl;
 import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.reference.CtLocalVariableReference;
 import spoon.reflect.reference.CtTypeReference;
@@ -18,8 +16,8 @@ import java.util.Set;
 
 public class VariableVisitor extends CtScanner {
     protected boolean withField;
-    protected Set<CtVariableReference<?>> variableReferences = new HashSet();
- 	protected Set<CtVariableReference<?>> localVariableCreate = new HashSet();
+    protected Set<CtVariableReference> variableReferences = new HashSet();
+ 	protected Set<CtVariableReference> localVariableCreate = new HashSet();
 	protected CtTypeReference<?> refThis;
 
 
@@ -77,7 +75,7 @@ public class VariableVisitor extends CtScanner {
 		return thisVariable;
 	}
 
-    public Set<CtVariableReference<?>> getVariableReferences() {
+    public Set<CtVariableReference> getVariableReferences() {
         return variableReferences;
     }
 }

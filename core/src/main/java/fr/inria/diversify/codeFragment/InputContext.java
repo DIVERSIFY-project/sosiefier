@@ -10,10 +10,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputContext {
-    protected Set<CtVariableReference<?>> variableReferences;
+    protected Set<CtVariableReference> variableReferences;
     protected Integer hashCode = null;
 
-    public InputContext(Set<CtVariableReference<?>> inputContext) {
+    public InputContext(Set<CtVariableReference> inputContext) {
         this.variableReferences = inputContext;
     }
 
@@ -107,7 +107,7 @@ public class InputContext {
         return candidate(type, subType) != null;
     }
 
-    public Set<CtVariableReference<?>> getVar() {
+    public Set<CtVariableReference> getVar() {
         return variableReferences;
     }
 
