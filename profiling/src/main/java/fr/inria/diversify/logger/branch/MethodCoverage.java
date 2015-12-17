@@ -41,6 +41,10 @@ public class MethodCoverage {
                 compressPath.add(p);
             }
         }
+        addCompressPath(methodDeep, compressPath);
+    }
+
+    public void addCompressPath(int methodDeep,  List<String> compressPath) {
         allPath.add(compressPath);
 
         for(String id : compressPath) {

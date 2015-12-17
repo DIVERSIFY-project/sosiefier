@@ -4,7 +4,6 @@ import fr.inria.diversify.buildSystem.DiversifyClassLoader;
 import fr.inria.diversify.dspot.processor.*;
 import fr.inria.diversify.factories.DiversityCompiler;
 import fr.inria.diversify.logger.branch.Coverage;
-import fr.inria.diversify.logger.branch.TestCoverage;
 import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
@@ -39,69 +38,83 @@ public class Amplification {
     protected TestSelector testSelector;
     protected List<CtMethod> allTests;
 
-    public Amplification(InputProgram inputProgram, DiversityCompiler compiler) {
+    public Amplification(InputProgram inputProgram, DiversityCompiler compiler, Set<String> classLoaderFilter, List<AbstractAmp> amplifiers) {
         this.inputProgram = inputProgram;
         this.compiler = compiler;
         testSelector = new TestSelector(inputProgram);
         allTests = new ArrayList<>();
-        initClassLoader();
+        this.amplifiers = amplifiers;
+        initClassLoader(classLoaderFilter);
         initCompiler();
-
     }
 
     public void amplification(CtClass classTest, int maxIteration) throws IOException, InterruptedException, ClassNotFoundException {
+        amplification(classTest, getAllTest(classTest), maxIteration);
+    }
 
-        Set<CtMethod> tests = getAllTest(classTest);
-        int nbTest = tests.size();
-        if(nbTest == 0) {
+    public void amplification(CtClass classTest, List<CtMethod> methods, int maxIteration) throws IOException, InterruptedException, ClassNotFoundException {
+        List<CtMethod> tests = methods.stream()
+                .filter(mth -> isTest(mth))
+                .collect(Collectors.toList());
+
+        if(tests.isEmpty()) {
             return;
         }
-        Log.info("amplification of {} ({} test)", classTest.getQualifiedName(), nbTest);
-
-        List<CtClass> classWithLogger = testSelector.getMethodsWithLogger(tests);
+        CtClass classWithLogger = testSelector.getMethodsWithLogger(classTest, tests);
         boolean status = writeAndCompile(classWithLogger);
         if(!status) {
-            Log.info("error whit Logger in classes {}", classWithLogger.stream().map(cl ->cl.getQualifiedName()).collect(Collectors.toList()));
+            Log.info("error whit Logger in class {}", classTest);
             return;
         }
         runTests(classWithLogger, new ArrayList<>());
         testSelector.updateLogInfo();
-        initAmplifiers(classTest, testSelector.getGlobalCoverage());
+        resetAmplifiers(classTest, testSelector.getGlobalCoverage());
+
+        Log.info("amplification of {} ({} test)", classTest.getQualifiedName(), tests.size());
 
         List<CtMethod> ampTest = new ArrayList<>();
-        for(CtMethod test : tests) {
+        for(int i = 0; i < tests.size(); i++) {
+            Log.debug("amp {} ({}/{}))", tests.get(i).getSimpleName(), i, tests.size());
             allTests.clear();
             testSelector.init();
 
             List<CtMethod> t = new ArrayList<>(1);
-            t.add(test);
+            t.add(tests.get(i));
 
-            runTests(classWithLogger, t);
+            classWithLogger = testSelector.getMethodsWithLogger(classTest, tests);
+            writeAndCompile(classWithLogger);
+
+            Result result = runTests(classWithLogger, t);
             testSelector.updateLogInfo();
 
-            amplification(t, maxIteration);
+            amplification(classTest, tests.get(i), maxIteration);
             ampTest.addAll(testSelector.selectedAmplifiedTests(allTests));
+            Log.debug("amptest {}", ampTest.size());
         }
 
         makeDSpotClassTest(ampTest);
     }
 
-    public void amplification(Collection<CtMethod> tests, int maxIteration) throws IOException, InterruptedException, ClassNotFoundException {
-        Collection<CtMethod> newTests = tests;
+
+
+    protected void amplification(CtClass originalClass, CtMethod test, int maxIteration) throws IOException, InterruptedException, ClassNotFoundException {
+        Collection<CtMethod> newTests = new ArrayList<>();
+        newTests.add(test);
         allTests.addAll(newTests);
         for (int i = 0; i < maxIteration; i++) {
-            Log.info("iteration {}:", i);
+            Log.debug("iteration {}:", i);
 
             Collection<CtMethod> testToAmp = testSelector.selectTestToAmp(allTests, newTests, 10);
             if(testToAmp.isEmpty()) {
                 break;
             }
             newTests = ampTest(testToAmp);
-            Log.info("{} new tests generated", newTests.size());
+            Log.debug("{} tests selected to be amplified", testToAmp.size());
+            Log.debug("{} new tests generated", newTests.size());
 
-            List<CtClass> classWithLogger = testSelector.getMethodsWithLogger(newTests);
+            CtClass classWithLogger = testSelector.getMethodsWithLogger(originalClass, newTests);
             boolean status = writeAndCompile(classWithLogger);
-
+            Log.debug("compile status: {}", status);
             if(!status) {
                 break;
             }
@@ -110,6 +123,7 @@ public class Amplification {
 //            ag.genereteAssert();
 
             Result result = runTests(classWithLogger, newTests);
+            Log.debug("tests run");
             allTests.addAll(excludeTimeOutAndCompilationErrorTest(newTests, result));
             testSelector.updateLogInfo();
         }
@@ -154,18 +168,11 @@ public class Amplification {
                 new DefaultJavaPrettyPrinter(env)));
     }
 
-    protected boolean writeAndCompile(List<CtClass> classesInstru) throws IOException {
+    protected boolean writeAndCompile(CtClass classInstru) throws IOException {
         FileUtils.cleanDirectory(compiler.getOutputDirectory());
         FileUtils.cleanDirectory(compiler.getDestinationDirectory());
-        classesInstru.stream()
-                .forEach(cl -> {
-                            try {
-                                LoggerUtils.printJavaFile(compiler.getOutputDirectory(), cl);
-                            } catch (Exception e) {
-                            }
-                        }
-                );
         try {
+            LoggerUtils.printJavaFile(compiler.getOutputDirectory(), classInstru);
             compiler.compileFileIn(compiler.getOutputDirectory());
             return true;
         } catch (Exception e) {
@@ -174,15 +181,13 @@ public class Amplification {
         }
     }
 
-    protected Result runTests(List<CtClass> testClasses, Collection<CtMethod> tests) throws ClassNotFoundException {
+    protected Result runTests(CtClass testClass, Collection<CtMethod> tests) throws ClassNotFoundException {
         JunitRunner junitRunner = new JunitRunner(inputProgram, new DiversifyClassLoader(applicationClassLoader, compiler.getDestinationDirectory().getAbsolutePath()));
 
-        return junitRunner.runTestClasses(testClasses, tests.stream()
+        return junitRunner.runTestClass(testClass, tests.stream()
                 .map(test-> test.getSimpleName())
                 .collect(Collectors.toList()));
     }
-
-
 
     protected List<CtMethod> ampTest(Collection<CtMethod> tests) {
         return tests.stream()
@@ -196,47 +201,30 @@ public class Amplification {
                 .collect(Collectors.toList());
     }
 
-    protected void initAmplifiers(CtClass parentClass, Coverage coverage) {
-        amplifiers = new ArrayList<>();
-
-        AbstractAmp dataMutator = new TestDataMutator(inputProgram, parentClass);
-        dataMutator.reset();
-        amplifiers.add(dataMutator);
-
-        AbstractAmp methodAdd = new TestMethodCallAdder();
-        methodAdd.reset();
-        amplifiers.add(methodAdd);
-
-        AbstractAmp methodRemove = new TestMethodCallRemover();
-        methodRemove.reset();
-        amplifiers.add(methodRemove);
-
-        AbstractAmp stmtAdder = new StatementAdder2(inputProgram, coverage, parentClass);
-        stmtAdder.reset();
-        amplifiers.add(stmtAdder);
-
+    protected void resetAmplifiers(CtClass parentClass, Coverage coverage) {
+        amplifiers.stream()
+                .forEach(amp -> amp.reset(inputProgram, coverage, parentClass));
     }
 
-    protected void initClassLoader() {
+    protected void initClassLoader(Set<String> classLoaderFilter) {
         List<String> classPaths = new ArrayList<>();
         classPaths.add(inputProgram.getProgramDir() + "/" + inputProgram.getClassesDir());
         classPaths.add(inputProgram.getProgramDir() + "/" + inputProgram.getTestClassesDir());
         applicationClassLoader = new DiversifyClassLoader(Thread.currentThread().getContextClassLoader(), classPaths);
-        List<String> filter = new ArrayList<>();
-        filter.add("org.apache.commons.lang3");
-        applicationClassLoader.setClassFilter(filter);
+        applicationClassLoader.setClassFilter(classLoaderFilter);
     }
 
-    protected Set<CtMethod> getAllTest(CtClass classTest) {
+    protected List<CtMethod> getAllTest(CtClass classTest) {
         Set<CtMethod> mths = classTest.getMethods();
         return mths.stream()
                 .filter(mth -> isTest(mth))
-                .collect(Collectors.toSet());
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     protected boolean isTest(CtMethod candidate) {
         if(candidate.isImplicit()
-                || !candidate.getModifiers().contains(ModifierKind.PUBLIC)
+                || !candidate.getVisibility().equals(ModifierKind.PUBLIC)
                 || candidate.getBody() == null
                 || candidate.getBody().getStatements().size() == 0) {
             return false;
@@ -248,8 +236,8 @@ public class Amplification {
 
         return candidate.getSimpleName().contains("test")
                 || candidate.getAnnotations().stream()
-                .map(annotation -> annotation.toString())
-                .anyMatch(annotation -> annotation.startsWith("@org.junit.Test"));
+                    .map(annotation -> annotation.toString())
+                    .anyMatch(annotation -> annotation.startsWith("@org.junit.Test"));
     }
 
     protected void makeDSpotClassTest(Collection<CtMethod> tests) {

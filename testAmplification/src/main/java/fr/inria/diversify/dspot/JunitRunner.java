@@ -47,14 +47,19 @@ public class JunitRunner {
     }
 
     public Result runTestClass(CtClass test) {
+        return runTestClass(test, new ArrayList<>(0));
+    }
+
+    public Result runTestClass(CtClass test, List<String> methodsToRun) {
         List<CtClass> list = new ArrayList<>(1);
         list.add(test);
-        return runTestClasses(list, new ArrayList<>(0));
+        return runTestClasses(list, methodsToRun);
     }
 
     public Result runTestClasses(List<CtClass> tests) {
         return runTestClasses(tests, new ArrayList<>(0));
     }
+
 
     protected Result runTestClasses(List<CtClass> tests, List<String> methodsToRun) {
         try {

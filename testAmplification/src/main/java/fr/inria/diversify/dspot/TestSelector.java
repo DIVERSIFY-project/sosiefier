@@ -7,6 +7,7 @@ import fr.inria.diversify.logger.branch.TestCoverage;
 import fr.inria.diversify.processor.test.AssertionRemover;
 import fr.inria.diversify.processor.test.TestLoggingInstrumenter;
 import fr.inria.diversify.runner.InputProgram;
+import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 import spoon.reflect.declaration.CtAnnotation;
 import spoon.reflect.declaration.CtClass;
@@ -37,23 +38,29 @@ public class TestSelector {
     protected void init() throws IOException {
         deleteLogFile();
         testAges = new HashMap<>();
+        ampCoverage = null;
     }
 
     protected void updateLogInfo() throws IOException {
-        CoverageReader reader = new CoverageReader(inputProgram.getProgramDir()+ "/log");
-        if(ampCoverage == null) {
-            ampCoverage = reader.loadTest();
-        } else {
-            for(TestCoverage coverage : reader.loadTest()) {
-                TestCoverage previous = ampCoverage.stream()
-                        .filter(ac -> ac.getTestName().equals(coverage.getTestName()))
-                        .findFirst()
-                        .orElse(null);
-                if(previous != null) {
-                    ampCoverage.remove(previous);
+        try {
+            CoverageReader reader = new CoverageReader(inputProgram.getProgramDir() + "/log");
+            if (ampCoverage == null) {
+                ampCoverage = reader.loadTest();
+            } else {
+                for (TestCoverage coverage : reader.loadTest()) {
+                    TestCoverage previous = ampCoverage.stream()
+                            .filter(ac -> ac.getTestName().equals(coverage.getTestName()))
+                            .findFirst()
+                            .orElse(null);
+                    if (previous != null) {
+                        ampCoverage.remove(previous);
+                    }
+                    ampCoverage.add(coverage);
                 }
-                ampCoverage.add(coverage);
             }
+        } catch (Throwable e) {
+            e.printStackTrace();
+            System.gc();
         }
         deleteLogFile();
     }
@@ -135,8 +142,11 @@ public class TestSelector {
         List<CtMethod> methods = new ArrayList<>();
         while(!sortedKey.isEmpty()) {
             Set<String> key = new HashSet<>(sortedKey.remove(0));
-            methods.add(map.get(key).stream().findAny().get());
 
+            if(map.containsKey(key)) {
+                methods.add(map.get(key).stream().findAny().get());
+
+            }
             sortedKey = sortedKey.stream()
                     .map(k -> {k.removeAll(key); return k;})
                     .filter(k -> !k.isEmpty())
@@ -177,30 +187,23 @@ public class TestSelector {
     }
 
 
-    protected List<CtClass> getMethodsWithLogger(Collection<CtMethod> tests) {
-        Map<String, CtClass> cloneClasses = new HashMap<>();
-        return tests.stream()
-                .map(test -> getMethodWithLogger(test))
-                .map(instruTest -> {
-                    CtClass cl = (CtClass) instruTest.getDeclaringType();
-                    String className = cl.getQualifiedName();
-                    if(!cloneClasses.containsKey(cl.getQualifiedName())) {
-                        CtClass clone = cl.getFactory().Core().clone(cl);
-                        clone.setParent(cl.getParent());
-                        cloneClasses.put(className, clone);
-                    }
-                    cloneClasses.get(className).removeMethod(instruTest);
-                    cloneClasses.get(className).addMethod(instruTest);
-
-                    return cloneClasses.get(className);
-                })
-                .distinct()
-                .collect(Collectors.toList());
+    protected CtClass getMethodsWithLogger(CtClass originalClass, Collection<CtMethod> tests) {
+        Log.debug("ici");
+        CtClass cloneClass = originalClass.getFactory().Core().clone(originalClass);
+        cloneClass.setParent(originalClass.getParent());
+        tests.stream()
+                .map(test -> getMethodWithLogger(cloneClass, test))
+                .forEach(instruTest -> {
+                    cloneClass.removeMethod(instruTest);
+                    cloneClass.addMethod(instruTest);
+                });
+        return cloneClass;
     }
 
-    protected CtMethod getMethodWithLogger(CtMethod method) {
-        CtMethod clone = cloneMethod(method);
 
+    protected CtMethod getMethodWithLogger(CtClass parentClass, CtMethod method) {
+        CtMethod clone = cloneMethod(method);
+        clone.setParent(parentClass);
         AssertionRemover testCase = new AssertionRemover(inputProgram.getAbsoluteTestSourceCodeDir(), false);
         testCase.setLogger(logger + ".Logger");
         testCase.setFactory(inputProgram.getFactory());
@@ -216,7 +219,7 @@ public class TestSelector {
 
     protected CtMethod cloneMethod(CtMethod method) {
         CtMethod cloned_method = method.getFactory().Core().clone(method);
-        cloned_method.setParent(method.getParent());
+//        cloned_method.setParent(method.getParent());
 
         CtAnnotation toRemove = cloned_method.getAnnotations().stream()
                 .filter(annotation -> annotation.toString().contains("Override"))

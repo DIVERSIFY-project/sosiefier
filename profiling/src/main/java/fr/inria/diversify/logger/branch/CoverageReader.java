@@ -68,7 +68,7 @@ public class CoverageReader {
     protected List<TestCoverage> parseTestCoverageFile(File file, Map<Integer, MethodCoverage> idToMethod) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(file));
         List<TestCoverage> testCoverages = new ArrayList<>();
-        StringBuilder currentTestCoverage = new StringBuilder();
+        List<String> currentTestCoverage = new LinkedList<>();
         String currentTest = null;
 
         String line = br.readLine();
@@ -82,20 +82,19 @@ public class CoverageReader {
                 switch (split[0]) {
                     case KeyWord.testStartObservation:
                         currentTest = split[1];
-                        currentTestCoverage = new StringBuilder();
+                        currentTestCoverage = new LinkedList<>();
                         resetIdMethod(idToMethod);
                         break;
                     case KeyWord.testEndObservation:
                         if (currentTest != null) {
-                            parseCoverage(currentTestCoverage.toString(), idToMethod);
+                            parseCoverage(currentTestCoverage, idToMethod);
                             testCoverages.add(new TestCoverage(currentTest, idToMethod));
                             currentTest = null;
                             resetIdMethod(idToMethod);
                         }
                         break;
                     case KeyWord.branchObservation:
-                        currentTestCoverage.append(logEntry);
-                        currentTestCoverage.append("\n");
+                        currentTestCoverage.add(logEntry);
                         break;
                     default:
                         break;
@@ -103,7 +102,7 @@ public class CoverageReader {
                 logEntry = "";
             }
             if(logEntry.startsWith(KeyWord.testEndObservation) && currentTest != null) {
-                parseCoverage(currentTestCoverage.toString(), idToMethod);
+                parseCoverage(currentTestCoverage, idToMethod);
                 testCoverages.add(new TestCoverage(currentTest, idToMethod));
                 currentTest = null;
                 resetIdMethod(idToMethod);
@@ -114,7 +113,6 @@ public class CoverageReader {
     }
 
     protected void resetIdMethod(Map<Integer, MethodCoverage> idToMethod) {
-
         for(Integer key : idToMethod.keySet()) {
             MethodCoverage mc = idToMethod.get(key);
             if(mc.allPath.size() != 0) {
@@ -133,10 +131,9 @@ public class CoverageReader {
         }
     }
 
-    protected void parseCoverage(String data, Map<Integer, MethodCoverage> idToMethod)  {
-        String[] lines = data.split("\n");
+    protected void parseCoverage(List<String> data, Map<Integer, MethodCoverage> idToMethod)  {
 
-        for(String line : lines) {
+        for(String line : data) {
             parseCoverageLine(line, idToMethod);
         }
     }

@@ -39,11 +39,11 @@ public class LoggerUtils {
         return list;
     }
 
-    public static void copyLoggerFile(InputProgram inputProgram, String outputDirectory, String loggerPackage) throws IOException {
-        copyLoggerFile(inputProgram.getRelativeSourceCodeDir(), outputDirectory, loggerPackage);
+    public static void copyLoggerPackage(InputProgram inputProgram, String outputDirectory, String loggerPackage) throws IOException {
+        copyLoggerPackage(inputProgram.getRelativeSourceCodeDir(), outputDirectory, loggerPackage);
     }
 
-    public static void copyLoggerFile(String mainSrc, String outputDirectory, String loggerPackage) throws IOException {
+    public static void copyLoggerPackage(String mainSrc, String outputDirectory, String loggerPackage) throws IOException {
         File srcDir = new File(System.getProperty("user.dir") + "/profiling/src/main/java/"  + loggerPackage.replace(".","/"));
 
         File destDir = new File(outputDirectory + "/" + mainSrc + "/" + loggerPackage.replace(".","/"));

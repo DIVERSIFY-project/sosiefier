@@ -1,5 +1,7 @@
 package fr.inria.diversify.dspot.processor;
 
+import fr.inria.diversify.logger.branch.Coverage;
+import fr.inria.diversify.runner.InputProgram;
 import spoon.reflect.code.CtInvocation;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.*;
@@ -28,7 +30,7 @@ public abstract class AbstractAmp {
     public abstract List<CtMethod> apply(CtMethod method);
     public abstract CtMethod applyRandom(CtMethod method);
 
-    public void reset() {
+    public void reset(InputProgram inputProgram, Coverage coverage, CtClass testClass) {
         cloneNumber = 1;
         previousTestAmp = new HashSet<>();
         ampTestToParent = new HashMap<>();
@@ -87,7 +89,6 @@ public abstract class AbstractAmp {
         } catch (Exception e) {
             return false;
         }
-
     }
 
     protected boolean isAssertInstance(Class cl) {
@@ -102,7 +103,7 @@ public abstract class AbstractAmp {
 
     protected CtMethod cloneMethod(CtMethod method, String suffix) {
         CtMethod cloned_method = method.getFactory().Core().clone(method);
-        cloned_method.setParent(method.getParent());
+        cloned_method.setParent(null);
         //rename the clone
         cloned_method.setSimpleName(method.getSimpleName()+suffix+cloneNumber);
         cloneNumber++;

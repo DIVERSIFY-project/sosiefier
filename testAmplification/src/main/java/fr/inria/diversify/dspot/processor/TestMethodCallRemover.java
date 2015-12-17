@@ -1,6 +1,9 @@
 package fr.inria.diversify.dspot.processor;
 
+import fr.inria.diversify.logger.branch.Coverage;
+import fr.inria.diversify.runner.InputProgram;
 import spoon.reflect.code.*;
+import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
@@ -51,21 +54,19 @@ public class TestMethodCallRemover extends AbstractAmp {
         if (method.getDeclaringType() != null) {
             List<CtInvocation> invocations = Query.getElements(method, new TypeFilter(CtInvocation.class));
 
-            while(true) {
+            while(!invocations.isEmpty()) {
                 try {
                     int invocation_index = getRandom().nextInt(invocations.size());
                     return apply(method, invocation_index);
                 } catch (Exception e) {}
             }
-        } else {
-            return null;
         }
+        return null;
     }
 
     protected CtMethod apply(CtMethod method, int invocation_index) {
         //clone the method
         CtMethod cloned_method = cloneMethodTest(method, "_remove",1000);
-        //add the cloned method in the same class as the original method
 
             //get the lit_indexth literal of the cloned method
             CtInvocation stmt = Query.getElements(cloned_method, new TypeFilter<CtInvocation>(CtInvocation.class)).get(invocation_index);
@@ -75,4 +76,7 @@ public class TestMethodCallRemover extends AbstractAmp {
             return cloned_method;
     }
 
+    public void reset(InputProgram inputProgram, Coverage coverage, CtClass testClass) {
+        super.reset(inputProgram, coverage, testClass);
+    }
 }

@@ -1,6 +1,8 @@
 package fr.inria.diversify.factories;
 
+import org.apache.commons.io.output.NullWriter;
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
+import org.eclipse.jdt.internal.compiler.batch.Main;
 import spoon.compiler.Environment;
 import spoon.compiler.ModelBuildingException;
 import spoon.compiler.SpoonFile;
@@ -10,6 +12,7 @@ import spoon.support.compiler.FileSystemFolder;
 import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
@@ -98,6 +101,7 @@ public class DiversityCompiler extends JDTBasedSpoonCompiler {
         System.setProperty("jdt.compiler.useSingleThread", "true");
 
         args.add("-proceedOnError");
+        batchCompiler.logger = new Main.Logger(batchCompiler, new PrintWriter(new NullWriter()), new PrintWriter(new NullWriter()));
         batchCompiler.compile(args.toArray(new String[0]));
 
 //        reportProblems(factory.getEnvironment());
@@ -105,7 +109,6 @@ public class DiversityCompiler extends JDTBasedSpoonCompiler {
         factory.getEnvironment().debugMessage(
                 "compiled in " + (System.currentTimeMillis() - t) + " ms");
         return getProblems().size() == 0;
-
     }
 
     protected void report(Environment environment, CategorizedProblem problem) {

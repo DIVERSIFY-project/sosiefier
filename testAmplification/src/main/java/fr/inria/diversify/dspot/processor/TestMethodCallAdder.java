@@ -1,7 +1,10 @@
 package fr.inria.diversify.dspot.processor;
 
+import fr.inria.diversify.logger.branch.Coverage;
+import fr.inria.diversify.runner.InputProgram;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtInvocation;
+import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
@@ -15,7 +18,7 @@ public class TestMethodCallAdder extends AbstractAmp {
     public List<CtMethod> apply(CtMethod method) {
         List<CtMethod> methods = new ArrayList<>();
 
-        if(method.getDeclaringType() != null) {
+        if (method.getDeclaringType() != null) {
             //get the list of method calls
             List<CtInvocation> invocations = Query.getElements(method, new TypeFilter(CtInvocation.class));
             //this index serves to replace ith literal is replaced by zero in the ith clone of the method
@@ -37,15 +40,15 @@ public class TestMethodCallAdder extends AbstractAmp {
         if (method.getDeclaringType() != null) {
             List<CtInvocation> invocations = Query.getElements(method, new TypeFilter(CtInvocation.class));
 
-            while(true) {
+            while (!invocations.isEmpty()) {
                 try {
                     int invocation_index = getRandom().nextInt(invocations.size());
                     return apply(method, invocation_index);
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                }
             }
-        } else {
-            return null;
         }
+        return null;
     }
 
     protected CtMethod apply(CtMethod method, int invocation_index) {
@@ -60,9 +63,13 @@ public class TestMethodCallAdder extends AbstractAmp {
         return cloned_method;
     }
 
-	public boolean toAdd(CtInvocation invocation) {
-		return !invocation.toString().startsWith("super(")
-            && invocation.getParent() instanceof CtBlock;
-	}
+    public boolean toAdd(CtInvocation invocation) {
+        return !invocation.toString().startsWith("super(")
+                && invocation.getParent() instanceof CtBlock;
+    }
+
+    public void reset(InputProgram inputProgram, Coverage coverage, CtClass testClass) {
+        super.reset(inputProgram, coverage, testClass);
+    }
 
 }

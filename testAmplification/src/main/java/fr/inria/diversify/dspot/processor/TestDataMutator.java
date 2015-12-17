@@ -1,7 +1,7 @@
 package fr.inria.diversify.dspot.processor;
 
+import fr.inria.diversify.logger.branch.Coverage;
 import fr.inria.diversify.runner.InputProgram;
-import fr.inria.diversify.util.Log;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
@@ -20,19 +20,10 @@ public class TestDataMutator extends AbstractAmp {
     public static  int dataCount = 0;
     protected Map<Class<?>, List<CtLiteral>> literals;
 
-    public TestDataMutator(InputProgram inputProgram, CtClass testClass) {
-        Set<CtType> codeFragmentsProvide = computeClassProvider(testClass);
-        literals = getLiterals(codeFragmentsProvide).stream()
-                .filter(lit -> lit.getValue() != null)
-                .collect(Collectors.groupingBy(lit -> lit.getValue().getClass()));
-    }
-
     protected CtMethod createNumberMutant(CtMethod method, int original_lit_index, Number newValue) {
         dataCount++;
         //clone the method
         CtMethod cloned_method = cloneMethod(method, "_literalMutation");
-        //add the cloned method in the same class as the original method
-        ((CtClass) method.getDeclaringType()).addMethod(cloned_method);
         //get the lit_indexth literal of the cloned method
         CtLiteral newLiteral = Query.getElements(cloned_method, new TypeFilter<CtLiteral>(CtLiteral.class))
                 .get(original_lit_index);
@@ -84,8 +75,6 @@ public class TestDataMutator extends AbstractAmp {
         dataCount++;
         //clone the method
         CtMethod cloned_method = cloneMethod(method, "_literalMutation");
-        //add the cloned method in the same class as the original method
-        ((CtClass) method.getDeclaringType()).addMethod(cloned_method);
         //get the lit_indexth literal of the cloned method
         CtLiteral newLiteral = Query.getElements(cloned_method, new TypeFilter<CtLiteral>(CtLiteral.class))
                 .get(original_lit_index);
@@ -99,15 +88,19 @@ public class TestDataMutator extends AbstractAmp {
         Set<String> values = new HashSet<>();
         Random r = new Random();
         String string = ((String) literal.getValue());
-        int index = r.nextInt(string.length() -2) +1;
-        values.add(string.substring(0,index - 1) + (char)r.nextInt(256) + string.substring(index , string.length()));
+        if(string.length() > 2) {
+            int index = r.nextInt(string.length() - 2) + 1;
+            values.add(string.substring(0, index - 1) + (char) r.nextInt(256) + string.substring(index, string.length()));
 
-        index = r.nextInt(string.length() -2) +1;
-        values.add(string.substring(0,index) + (char)r.nextInt(256) + string.substring(index, string.length()));
+            index = r.nextInt(string.length() - 2) + 1;
+            values.add(string.substring(0, index) + (char) r.nextInt(256) + string.substring(index, string.length()));
 
-        index = r.nextInt(string.length() -2) +1;
-        values.add(string.substring(0,index ) + string.substring(index +1, string.length()));
+            index = r.nextInt(string.length() - 2) + 1;
+            values.add(string.substring(0, index) + string.substring(index + 1, string.length()));
 
+        } else {
+            values.add("" + (char) r.nextInt(256));
+        }
         List<CtLiteral> lits = literals.get(literal.getClass());
         if(lits != null && !lits.isEmpty()) {
             values.add((String) lits.get(r.nextInt(lits.size())).getValue());
@@ -176,19 +169,21 @@ public class TestDataMutator extends AbstractAmp {
 
     public CtMethod applyRandom(CtMethod method) {
         List<CtLiteral> literals = Query.getElements(method, new TypeFilter(CtLiteral.class));
-        int original_lit_index = getRandom().nextInt(literals.size());
-        CtLiteral literal = literals.get(original_lit_index);
+        if(!literals.isEmpty()) {
+            int original_lit_index = getRandom().nextInt(literals.size());
+            CtLiteral literal = literals.get(original_lit_index);
 
-        if (literal.getValue() instanceof Number) {
-            List<? extends Number> mut = new ArrayList<>(numberMutated(literal));
-            return createNumberMutant(method, original_lit_index, mut.get(mut.size()));
-        }
-        if (literal.getValue() instanceof String) {
-            List<String> mut = new ArrayList<>(stringMutated(literal));
-            return createStringMutant(method, original_lit_index,  mut.get(mut.size()));
-        }
-        if (literal.getValue() instanceof Boolean) {
-            return createBooleanMutant(method, original_lit_index);
+            if (literal.getValue() instanceof Number) {
+                List<? extends Number> mut = new ArrayList<>(numberMutated(literal));
+                return createNumberMutant(method, original_lit_index, mut.get(getRandom().nextInt(mut.size())));
+            }
+            if (literal.getValue() instanceof String) {
+                List<String> mut = new ArrayList<>(stringMutated(literal));
+                return createStringMutant(method, original_lit_index, mut.get(getRandom().nextInt(mut.size())));
+            }
+            if (literal.getValue() instanceof Boolean) {
+                return createBooleanMutant(method, original_lit_index);
+            }
         }
         return null;
     }
@@ -205,7 +200,7 @@ public class TestDataMutator extends AbstractAmp {
                     if (lit.getValue() instanceof Number) {
                         methods.addAll(createAllNumberMutant(method, lit, lit_index));
                     }
-                    if (lit.getValue() instanceof String) {
+                    if (lit.getValue() instanceof String ) {
                         methods.addAll(createAllStringMutant(method, lit, lit_index));
                     }
                     if (lit.getValue() instanceof Boolean) {
@@ -226,5 +221,14 @@ public class TestDataMutator extends AbstractAmp {
                 .distinct()
                 .map(literal -> factory.Code().createLiteral(literal))
                 .collect(Collectors.toSet());
+    }
+
+    public void reset(InputProgram inputProgram, Coverage coverage, CtClass testClass) {
+        super.reset(inputProgram, coverage, testClass);
+
+        Set<CtType> codeFragmentsProvide = computeClassProvider(testClass);
+        literals = getLiterals(codeFragmentsProvide).stream()
+                .filter(lit -> lit.getValue() != null)
+                .collect(Collectors.groupingBy(lit -> lit.getValue().getClass()));
     }
 }

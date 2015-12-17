@@ -49,7 +49,7 @@ public class Profiling {
         transformTest();
         transformMain();
         if(logger != null) {
-            LoggerUtils.copyLoggerFile(inputProgram, inputProgram.getProgramDir(), logger);
+            LoggerUtils.copyLoggerPackage(inputProgram, inputProgram.getProgramDir(), logger);
         }
 
 
