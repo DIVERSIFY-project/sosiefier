@@ -188,7 +188,6 @@ public class TestSelector {
 
 
     protected CtClass getMethodsWithLogger(CtClass originalClass, Collection<CtMethod> tests) {
-        Log.debug("ici");
         CtClass cloneClass = originalClass.getFactory().Core().clone(originalClass);
         cloneClass.setParent(originalClass.getParent());
         tests.stream()

@@ -53,7 +53,6 @@ public class ObjectLog {
             observations.put(positionId, new Observation());
         }
         observations.get(positionId).add(stringObject, value);
-
     }
 
 
@@ -64,7 +63,9 @@ public class ObjectLog {
             invocator.invoke(invocation);
 
             if(invocation.getError() == null) {
-                pLog(invocation.getResult(), stringObject + "." + method.getName() + "()", positionId, deep + 1);
+                String castType = o.getClass().getCanonicalName();
+                pLog(invocation.getResult(),"((" + castType + ")"
+                        + stringObject + ")." + method.getName() + "()", positionId, deep + 1);
             }
         }
     }

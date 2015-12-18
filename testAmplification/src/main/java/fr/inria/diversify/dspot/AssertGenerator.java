@@ -9,10 +9,13 @@ import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
 import org.apache.commons.io.FileUtils;
 import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
 import spoon.reflect.code.*;
+import spoon.reflect.declaration.CtAnnotation;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.factory.Factory;
+import spoon.reflect.reference.CtPackageReference;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
@@ -20,6 +23,7 @@ import spoon.reflect.visitor.filter.TypeFilter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -32,54 +36,47 @@ import java.util.stream.Collectors;
 public class AssertGenerator {
     protected ClassLoader applicationClassLoader;
     protected CtMethod test;
+    protected CtClass originalClass;
     protected List<CtMethod> testsToRun;
     protected DiversityCompiler compiler;
     protected InputProgram inputProgram;
-//    protected JunitRunner junitRunner;
     protected List<Integer> statementsIndexToAssert;
 
 
 
-    public AssertGenerator(CtMethod test, InputProgram inputProgram, DiversityCompiler compiler, ClassLoader applicationClassLoader) throws IOException {
-        this.test = test;
+    public AssertGenerator(CtClass originalClass, InputProgram inputProgram, DiversityCompiler compiler, ClassLoader applicationClassLoader) throws IOException {
+        this.originalClass = originalClass;
         this.compiler = compiler;
         this.applicationClassLoader = applicationClassLoader;
-//        try {
-//            applicationClassLoader.loadClass("fr.inria.diversify.compare.ObjectLog");
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
+
         this.inputProgram = inputProgram;
-//        this.junitRunner = new JunitRunner(inputProgram, new DiversifyClassLoader(applicationClassLoader, compiler.getDestinationDirectory().getAbsolutePath()));
         statementsIndexToAssert = new ArrayList<>();
         for(int i = 0; i < 50; i++) {
             statementsIndexToAssert.add(i);
         }
     }
 
-    public AssertGenerator(CtMethod test, InputProgram inputProgram, DiversityCompiler compiler, ClassLoader applicationClassLoader, List<Integer> statementsIndexToAssert) throws IOException {
-        this.test = test;
+    public AssertGenerator(CtClass originalClass, CtMethod test, InputProgram inputProgram, DiversityCompiler compiler, ClassLoader applicationClassLoader) throws IOException {
+        this.originalClass = originalClass;
         this.compiler = compiler;
         this.applicationClassLoader = applicationClassLoader;
-//        try {
-//            applicationClassLoader.loadClass("fr.inria.diversify.compare.ObjectLog");
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
         this.inputProgram = inputProgram;
-
-//        this.junitRunner = new JunitRunner(inputProgram, new DiversifyClassLoader(applicationClassLoader, compiler.getDestinationDirectory().getAbsolutePath()));
-        this.statementsIndexToAssert = statementsIndexToAssert;
     }
 
-    public CtMethod genereteAssert() {
+    protected CtMethod genereteAssert(CtMethod test, List<Integer> statementsIndexToAssert) {
+        this.test = test;
+        this.statementsIndexToAssert = statementsIndexToAssert;
+        return genereteAssert();
+    }
+
+    protected CtMethod genereteAssert() {
          CtClass cl = initTestClass();
         try {
             boolean isCompile = writeAndCompile(cl);
             Result result = runTest();
             String testWithoutAssertName = test.getSimpleName() + "_withoutAssert";
            if(testFailed(testWithoutAssertName, result)) {
-               return makeFailureTest();
+               return makeFailureTest(getFailure(testWithoutAssertName, result));
            } else if(!testFailed(test.getSimpleName(), result)) {
                if(!statementsIndexToAssert.isEmpty()) {
                    return buildNewAssert();
@@ -91,12 +88,47 @@ public class AssertGenerator {
                }
            }
         } catch (Exception e) {
+        e.printStackTrace();
+        Log.debug("");
         }
         return null;
     }
 
-    protected CtMethod makeFailureTest() {
-        return null;
+    protected CtMethod makeFailureTest(Failure failure) {
+        CtMethod testWithoutAssert = createTestWithoutAssert(new ArrayList<>(), false);
+        testWithoutAssert.setSimpleName(test.getSimpleName());
+        Factory factory = testWithoutAssert.getFactory();
+
+        CtAnnotation testAnnotation = testWithoutAssert.getAnnotations().stream()
+                .filter(annotation -> annotation.toString().contains("Test"))
+                .findFirst().orElse(null);
+
+        if(testAnnotation != null) {
+            testWithoutAssert.removeAnnotation(testAnnotation);
+        }
+
+        testAnnotation = factory.Core().createAnnotation();
+        CtTypeReference<Object> ref = factory.Core().createTypeReference();
+        ref.setSimpleName("Test");
+
+        CtPackageReference refPackage = factory.Core().createPackageReference();
+        refPackage.setSimpleName("org.junit");
+        ref.setPackage(refPackage);
+        testAnnotation.setAnnotationType(ref);
+
+
+        Map<String, Object> elementValue = new HashMap<String, Object>();
+        Throwable exception = failure.getException();
+        if(exception instanceof  AssertionError)   {
+            exception = exception.getCause();
+        }
+        elementValue.put("expected", exception.getClass());
+        testAnnotation.setElementValues(elementValue);
+
+        testWithoutAssert.addAnnotation(testAnnotation);
+
+
+        return testWithoutAssert;
     }
 
     protected CtMethod buildNewAssert() throws IOException, ClassNotFoundException {
@@ -106,20 +138,21 @@ public class AssertGenerator {
         for(int i = 0; i < 3; i++) {
             CtMethod testWithLog = createTestWithLog();
             testWithLog.setSimpleName(testWithLog.getSimpleName() + i);
+            cl.addMethod(testWithLog);
             testsToRun.add(testWithLog);
             cl.addMethod(testWithLog);
         }
 
         writeAndCompile(cl);
         ObjectLog.reset();
-        runTest();
+
+        Result result = runTest();
 
          return buildTestWithAssert(ObjectLog.getObservations());
     }
 
     protected CtMethod buildTestWithAssert(Map<Integer, Observation> observations) {
         CtMethod testWithAssert = getFactory().Core().clone(test);
-        testWithAssert.setSimpleName(test.getSimpleName() + "_withAssert");
 
         List<CtStatement> statements = Query.getElements(testWithAssert, new TypeFilter(CtStatement.class));
         for(Integer id : observations.keySet()) {
@@ -134,7 +167,9 @@ public class AssertGenerator {
 
     protected void removeFailAssert() throws IOException, ClassNotFoundException {
         List<Integer> goodAssert = findGoodAssert();
+        String testName = test.getSimpleName();
         test = createTestWithoutAssert(goodAssert, true);
+        test.setSimpleName(testName);
     }
 
     protected List<Integer> findGoodAssert() throws IOException, ClassNotFoundException {
@@ -148,11 +183,12 @@ public class AssertGenerator {
             stmtIndex++;
         }
 
-        CtClass newClass = copyOriginalClassTest();
+        CtClass newClass = getFactory().Core().clone(originalClass);
+        newClass.setParent(originalClass.getParent());
         testsToRun.clear();
         for(int i = 0; i < assertIndex.size(); i++) {
             List<Integer> assertToKeep = new ArrayList<>();
-            assertToKeep.add(i);
+            assertToKeep.add(assertIndex.get(i));
             CtMethod mth = createTestWithoutAssert(assertToKeep, false);
             mth.setSimpleName(mth.getSimpleName() + "_" + i);
             newClass.addMethod(mth);
@@ -171,19 +207,24 @@ public class AssertGenerator {
         return goodAssertIndex;
     }
 
-    protected boolean testFailed(String methodName, Result result) {
+    protected Failure getFailure(String methodName, Result result) {
         return result.getFailures().stream()
-                .anyMatch(failure -> methodName.equals(failure.getDescription().getMethodName()));
+                .filter(failure -> methodName.equals(failure.getDescription().getMethodName()))
+                .findAny()
+                .orElse(null);
+    }
+
+    protected boolean testFailed(String methodName, Result result) {
+        return getFailure(methodName, result) != null;
     }
 
     protected Result runTest() throws ClassNotFoundException {
         DiversifyClassLoader diversifyClassLoader = new DiversifyClassLoader(applicationClassLoader, compiler.getDestinationDirectory().getAbsolutePath());
-        diversifyClassLoader.setClassFilter(testsToRun.stream()
-                .map(test -> test.getParent(CtClass.class).getQualifiedName())
-                .collect(Collectors.toSet()));
-
-        JunitRunner junitRunner = new JunitRunner(inputProgram,diversifyClassLoader);
-        return junitRunner.runTestMethods(testsToRun);
+        List<String> filter = new ArrayList<>(1);
+        filter.add(originalClass.getQualifiedName());
+        diversifyClassLoader.setClassFilter(filter);
+        JunitRunner junitRunner = new JunitRunner(inputProgram, diversifyClassLoader);
+        return junitRunner.runTestClass(originalClass, testsToRun.stream().map(test -> test.getSimpleName()).collect(Collectors.toList()));
     }
 
     protected boolean writeAndCompile(CtClass cl) throws IOException {
@@ -204,22 +245,20 @@ public class AssertGenerator {
 
     protected CtClass initTestClass() {
         testsToRun = new ArrayList<>();
-        CtClass newClass = copyOriginalClassTest();
+        CtClass newClass = getFactory().Core().clone(originalClass);
+        newClass.setParent(originalClass.getParent());
+
+        CtMethod cloneTest = getFactory().Core().clone(test);
+        newClass.addMethod(cloneTest);
+        testsToRun.add(cloneTest);
 
         CtMethod testWithoutAssert = createTestWithoutAssert(new ArrayList<>(), false);
         testsToRun.add(testWithoutAssert);
         newClass.addMethod(testWithoutAssert);
-        testsToRun.add(test);
 
         return newClass;
     }
 
-    protected CtClass copyOriginalClassTest() {
-        CtClass originalClass = test.getParent(CtClass.class);
-        CtClass newClass = getFactory().Core().clone(originalClass);
-        newClass.setParent(originalClass.getParent());
-        return newClass;
-    }
 
     protected CtMethod createTestWithLog() {
         CtMethod newTest = getFactory().Core().clone(test);
@@ -245,6 +284,7 @@ public class AssertGenerator {
             return !(type.equals("void") || type.equals("void"));
         }
         return statement instanceof CtVariableWrite
+                || statement instanceof CtAssignment
                 || statement instanceof CtLocalVariable;
     }
 
@@ -263,6 +303,13 @@ public class AssertGenerator {
                     + ",\"" + localVar.getSimpleName() + "\"," + id + ")";
             insertAfter = stmt;
         }
+        if(stmt instanceof CtAssignment) {
+            CtAssignment localVar = (CtAssignment) stmt;
+            snippet = "fr.inria.diversify.compare.ObjectLog.log(" + localVar.getAssigned()
+                    + ",\"" + localVar.getAssigned() + "\"," + id + ")";
+            insertAfter = stmt;
+        }
+
         if(stmt instanceof CtInvocation) {
             CtInvocation invocation = (CtInvocation) stmt;
             String snippetStmt = "Object o_" + id + " = " + invocation.toString();

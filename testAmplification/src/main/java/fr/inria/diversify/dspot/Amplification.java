@@ -48,25 +48,25 @@ public class Amplification {
         initCompiler();
     }
 
-    public void amplification(CtClass classTest, int maxIteration) throws IOException, InterruptedException, ClassNotFoundException {
-        amplification(classTest, getAllTest(classTest), maxIteration);
+    public CtClass amplification(CtClass classTest, int maxIteration) throws IOException, InterruptedException, ClassNotFoundException {
+        return amplification(classTest, getAllTest(classTest), maxIteration);
     }
 
-    public void amplification(CtClass classTest, List<CtMethod> methods, int maxIteration) throws IOException, InterruptedException, ClassNotFoundException {
+    public CtClass amplification(CtClass classTest, List<CtMethod> methods, int maxIteration) throws IOException, InterruptedException, ClassNotFoundException {
         List<CtMethod> tests = methods.stream()
                 .filter(mth -> isTest(mth))
                 .collect(Collectors.toList());
 
         if(tests.isEmpty()) {
-            return;
+            return null;
         }
         CtClass classWithLogger = testSelector.getMethodsWithLogger(classTest, tests);
         boolean status = writeAndCompile(classWithLogger);
         if(!status) {
             Log.info("error whit Logger in class {}", classTest);
-            return;
+            return null;
         }
-        runTests(classWithLogger, new ArrayList<>());
+        runTests(classWithLogger, tests);
         testSelector.updateLogInfo();
         resetAmplifiers(classTest, testSelector.getGlobalCoverage());
 
@@ -89,10 +89,11 @@ public class Amplification {
 
             amplification(classTest, tests.get(i), maxIteration);
             ampTest.addAll(testSelector.selectedAmplifiedTests(allTests));
+
             Log.debug("amptest {}", ampTest.size());
         }
 
-        makeDSpotClassTest(ampTest);
+        return makeDSpotClassTest(classTest, ampTest);
     }
 
 
@@ -118,30 +119,33 @@ public class Amplification {
             if(!status) {
                 break;
             }
-//            CtMethod tmp = newTests.stream().findAny().get();
-//            AssertGenerator ag = new AssertGenerator(tmp, inputProgram, compiler, applicationClassLoader ,findStatementToAssert(tmp)) ;
-//            ag.genereteAssert();
 
             Result result = runTests(classWithLogger, newTests);
+            if(result == null) {
+                break;
+            }
             Log.debug("tests run");
-            allTests.addAll(excludeTimeOutAndCompilationErrorTest(newTests, result));
+            newTests = excludeTimeOutAndCompilationErrorTest(newTests, result);
+            allTests.addAll(newTests);
             testSelector.updateLogInfo();
         }
     }
 
-    private Collection<? extends CtMethod> excludeTimeOutAndCompilationErrorTest(Collection<CtMethod> newTests, Result result) {
+    private Collection<CtMethod> excludeTimeOutAndCompilationErrorTest(Collection<CtMethod> newTests, Result result) {
         List<CtMethod> tests = new ArrayList<>(newTests);
-        for(Failure failure : result.getFailures()) {
-            String exceptionMessage = failure.getException().getMessage();
-            if(exceptionMessage == null
-                    || exceptionMessage.contains("Unresolved compilation problem")
-                    || exceptionMessage.contains("test timed out after")) {
-                String testName = failure.getDescription().getMethodName();
-                CtMethod toRemove = newTests.stream()
-                        .filter(test -> test.getSimpleName().equals(testName))
-                        .findFirst()
-                        .get();
-                tests.remove(toRemove);
+        if(result != null) {
+            for (Failure failure : result.getFailures()) {
+                String exceptionMessage = failure.getException().getMessage();
+                if (exceptionMessage == null
+                        || exceptionMessage.contains("Unresolved compilation problem")
+                        || exceptionMessage.contains("test timed out after")) {
+                    String testName = failure.getDescription().getMethodName();
+                    CtMethod toRemove = newTests.stream()
+                            .filter(test -> test.getSimpleName().equals(testName))
+                            .findFirst()
+                            .get();
+                    tests.remove(toRemove);
+                }
             }
         }
         return tests;
@@ -240,25 +244,23 @@ public class Amplification {
                     .anyMatch(annotation -> annotation.startsWith("@org.junit.Test"));
     }
 
-    protected void makeDSpotClassTest(Collection<CtMethod> tests) {
-        //                    AssertGenerator ag = new AssertGenerator( instruTests.get(0), compiler, inputProgram) ;
-//                    ag.genereteAssert();
+    protected CtClass makeDSpotClassTest(CtClass originalClass, Collection<CtMethod> tests) throws IOException {
+        CtClass cloneClass = originalClass.getFactory().Core().clone(originalClass);
+        cloneClass.setParent(originalClass.getParent());
+       try {
+           AssertGenerator ag = new AssertGenerator(originalClass, inputProgram, compiler, applicationClassLoader);
+           tests.stream()
+                   .map(test -> ag.genereteAssert(test, findStatementToAssert(test)))
+                   .forEach(test -> {
+                       cloneClass.addMethod(test);
+                   });
 
-
-        File out = new File(inputProgram.getProgramDir() + "/" + inputProgram.getRelativeTestSourceCodeDir());
-        tests.stream()
-                .forEach(test -> test.getDeclaringType().addMethod(test));
-
-        tests.stream()
-                .map(test -> test.getDeclaringType())
-                .distinct()
-                .forEach(cl -> {
-                            try {
-                                LoggerUtils.printJavaFile(out, cl);
-                            } catch (Exception e) {
-                            }
-                        }
-                );
+           LoggerUtils.printJavaFile(compiler.getOutputDirectory(), cloneClass);
+       } catch (Throwable e) {
+           e.printStackTrace();
+           Log.info("");
+       }
+        return cloneClass;
     }
 
     protected List<Integer> findStatementToAssert(CtMethod test) {

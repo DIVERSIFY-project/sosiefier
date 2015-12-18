@@ -10,6 +10,7 @@ import fr.inria.diversify.processor.ProcessorUtil;
 import fr.inria.diversify.processor.main.AbstractLoggingInstrumenter;
 import fr.inria.diversify.processor.main.BranchCoverageProcessor;
 import fr.inria.diversify.util.InitUtils;
+import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
 import org.apache.commons.io.FileUtils;
 import spoon.reflect.declaration.CtClass;
@@ -59,14 +60,15 @@ public class DSpot {
 
         for (CtClass cl : getAllTestClasses()) {
             testAmplification.amplification(cl, 5);
+            Log.debug("");
         }
     }
 
 
-    public void generateTest(List<CtMethod> tests, CtClass testClass) throws IOException, InterruptedException, ClassNotFoundException {
+    public CtClass generateTest(List<CtMethod> tests, CtClass testClass) throws IOException, InterruptedException, ClassNotFoundException {
         Amplification testAmplification = new Amplification(inputProgram, compiler, filter, initAmplifiers());
 
-        testAmplification.amplification(testClass, tests, 3);
+        return testAmplification.amplification(testClass, tests, 3);
     }
 
 

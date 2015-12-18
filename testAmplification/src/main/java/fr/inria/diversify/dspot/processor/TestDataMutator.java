@@ -86,27 +86,31 @@ public class TestDataMutator extends AbstractAmp {
 
     protected Set<String> stringMutated(CtLiteral literal) {
         Set<String> values = new HashSet<>();
-        Random r = new Random();
         String string = ((String) literal.getValue());
         if(string.length() > 2) {
-            int index = r.nextInt(string.length() - 2) + 1;
-            values.add(string.substring(0, index - 1) + (char) r.nextInt(256) + string.substring(index, string.length()));
+            int index = getRandom().nextInt(string.length() - 2) + 1;
+            values.add(string.substring(0, index - 1) + getRandomChar() + string.substring(index, string.length()));
 
-            index = r.nextInt(string.length() - 2) + 1;
-            values.add(string.substring(0, index) + (char) r.nextInt(256) + string.substring(index, string.length()));
+            index = getRandom().nextInt(string.length() - 2) + 1;
+            values.add(string.substring(0, index) + getRandomChar() + string.substring(index, string.length()));
 
-            index = r.nextInt(string.length() - 2) + 1;
+            index = getRandom().nextInt(string.length() - 2) + 1;
             values.add(string.substring(0, index) + string.substring(index + 1, string.length()));
 
         } else {
-            values.add("" + (char) r.nextInt(256));
+            values.add("" + getRandomChar());
         }
         List<CtLiteral> lits = literals.get(literal.getClass());
         if(lits != null && !lits.isEmpty()) {
-            values.add((String) lits.get(r.nextInt(lits.size())).getValue());
+            values.add((String) lits.get(getRandom().nextInt(lits.size())).getValue());
         }
 
         return values;
+    }
+
+
+    protected char getRandomChar() {
+        return (char) (getRandom().nextInt(94) + 32);
     }
 
     protected Set<? extends Number> numberMutated(CtLiteral literal) {
@@ -121,8 +125,7 @@ public class TestDataMutator extends AbstractAmp {
 
         List<CtLiteral> lits = literals.get(literal.getValue().getClass());
         if(lits.size() != 0) {
-            Random r = new Random();
-            values.add((Number) lits.get(r.nextInt(lits.size())).getValue());
+            values.add((Number) lits.get(getRandom().nextInt(lits.size())).getValue());
         }
 
         return values;

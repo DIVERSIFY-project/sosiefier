@@ -20,7 +20,7 @@ public  class Observation {
         if (!notDeterministValues.contains(stringObject)) {
             if (observations.containsKey(stringObject)) {
                 Object oldValue = observations.get(stringObject);
-                if(oldValue != value) {
+                if(!oldValue.equals(value)) {
                     notDeterministValues.add(stringObject);
                     return false;
                 }
@@ -40,14 +40,14 @@ public  class Observation {
                 Object value = entry.getValue();
                 if (isBoolean(value)) {
                     if ((Boolean) value) {
-                        asserts.add("assertTrue(" + entry.getKey() + ")");
+                        asserts.add("org.junit.Assert.assertTrue(" + entry.getKey() + ")");
                     } else {
-                        asserts.add("assertFalse(" + entry.getKey() + ")");
+                        asserts.add("org.junit.Assert.assertFalse(" + entry.getKey() + ")");
                     }
                 } else if (value.getClass().isArray()) {
-                    asserts.add("assertEquals(" + entry.getKey() + "," + primitiveArrayToString(value) + ")");
+                    asserts.add("org.junit.Assert.assertEquals(" + entry.getKey() + "," + primitiveArrayToString(value) + ")");
                 } else {
-                    asserts.add("assertEquals(" + entry.getKey() + ", " + value + ")");
+                    asserts.add("org.junit.Assert.assertEquals(" + entry.getKey() + ", " + value + ")");
                 }
             }
         }

@@ -79,6 +79,9 @@ public class LoggerUtils {
 
             processor.createJavaFile(type);
             Log.debug("write type {} in directory {}", type.getQualifiedName(), directory);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.debug("");
+        }
     }
 }

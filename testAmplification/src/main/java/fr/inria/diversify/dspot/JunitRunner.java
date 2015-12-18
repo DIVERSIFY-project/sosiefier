@@ -72,7 +72,6 @@ public class JunitRunner {
             Logger.close();
             return result;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
