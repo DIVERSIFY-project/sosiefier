@@ -251,6 +251,7 @@ public class Amplification {
            AssertGenerator ag = new AssertGenerator(originalClass, inputProgram, compiler, applicationClassLoader);
            tests.stream()
                    .map(test -> ag.genereteAssert(test, findStatementToAssert(test)))
+                   .filter(test -> test != null)
                    .forEach(test -> {
                        cloneClass.addMethod(test);
                    });

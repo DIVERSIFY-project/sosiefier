@@ -103,7 +103,7 @@ public abstract class AbstractAmp {
 
     protected CtMethod cloneMethod(CtMethod method, String suffix) {
         CtMethod cloned_method = method.getFactory().Core().clone(method);
-        cloned_method.setParent(null);
+        cloned_method.setParent(method.getParent());
         //rename the clone
         cloned_method.setSimpleName(method.getSimpleName()+suffix+cloneNumber);
         cloneNumber++;

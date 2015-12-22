@@ -122,7 +122,13 @@ public class AssertGenerator {
         if(exception instanceof  AssertionError)   {
             exception = exception.getCause();
         }
-        elementValue.put("expected", exception.getClass());
+        Class exceptionClass;
+        if(exception == null) {
+            exceptionClass = Throwable.class;
+        } else {
+            exceptionClass = exception.getClass();
+        }
+        elementValue.put("expected", exceptionClass);
         testAnnotation.setElementValues(elementValue);
 
         testWithoutAssert.addAnnotation(testAnnotation);
@@ -131,7 +137,7 @@ public class AssertGenerator {
         return testWithoutAssert;
     }
 
-    protected CtMethod buildNewAssert() throws IOException, ClassNotFoundException {
+    protected CtMethod   buildNewAssert() throws IOException, ClassNotFoundException {
         CtClass cl = initTestClass();
         testsToRun.clear();
 
@@ -158,7 +164,17 @@ public class AssertGenerator {
         for(Integer id : observations.keySet()) {
             for(String snippet : observations.get(id).buildAssert()) {
                 CtStatement assertStmt = getFactory().Code().createCodeSnippetStatement(snippet);
-                statements.get(id).insertAfter(assertStmt);
+                CtStatement stmt = statements.get(id);
+                if (stmt instanceof CtInvocation) {
+                    String localVarSnippet = ((CtInvocation) stmt).getType().getQualifiedName()
+                            + " o_" + id + " = "
+                            + stmt.toString();
+                    CtStatement localVarStmt = getFactory().Code().createCodeSnippetStatement(localVarSnippet);
+                    stmt.replace(localVarStmt);
+                    localVarStmt.insertAfter(assertStmt);
+                } else {
+                    stmt.insertAfter(assertStmt);
+                }
             }
         }
 

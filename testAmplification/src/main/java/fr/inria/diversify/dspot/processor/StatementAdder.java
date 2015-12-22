@@ -3,6 +3,7 @@ package fr.inria.diversify.dspot.processor;
 import fr.inria.diversify.codeFragment.*;
 import fr.inria.diversify.logger.branch.Coverage;
 import fr.inria.diversify.runner.InputProgram;
+import fr.inria.diversify.util.Log;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
@@ -35,7 +36,10 @@ public class StatementAdder extends AbstractAmp {
             List<CodeFragment> statements = getRandomCandidateFor(inputContext);
                 try {
                     newMethods.add(apply(method, statements, i));
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.debug("");
+                }
         }
         return filterAmpTest(newMethods, method);
     }
@@ -57,7 +61,7 @@ public class StatementAdder extends AbstractAmp {
         CtMethod cloned_method = cloneMethodTest(method, "_cf", 1000);
         CtStatement stmt = getAssertStatement(cloned_method)
                 .get(index);
-
+//        cloned_method.setParent(method.getParent());
         statements.stream()
                 .forEach(c ->
                 {
@@ -87,8 +91,7 @@ public class StatementAdder extends AbstractAmp {
     protected List<CodeFragment> getRandomCandidateFor(InputContext inputContext) {
         List<CodeFragment> list = new ArrayList<>();
 
-        CodeFragment codeFragment = codeFragments.get(getRandom().nextInt(codeFragments.size()));
-        Factory factory = codeFragment.getCtCodeFragment().getFactory();
+        CodeFragment codeFragment = codeFragments.get(getRandom().nextInt(codeFragments.size()));Factory factory = codeFragment.getCtCodeFragment().getFactory();
 
         CodeFragment clone = factory.Core().clone(codeFragment);
 
@@ -195,25 +198,11 @@ public class StatementAdder extends AbstractAmp {
     protected boolean isValidCodeFragment(CodeFragment cf) {
         CtCodeElement codeElement = cf.getCtCodeFragment();
 
-//        if(CtReturn.class.isInstance(codeElement)
-//                || CtThrow.class.isInstance(codeElement)) {
-////                || cf.getSourceFile().toString().contains("test")) {
-//            return false;
-//        }
-
         if(CtLocalVariable.class.isInstance(codeElement) ) {
             Object defaultExpression = ((CtLocalVariable) codeElement).getDefaultExpression();
-            return defaultExpression != null;// && !(defaultExpression instanceof CtLiteral);
+            return defaultExpression != null;
         }
         return false;
-//
-//        String equalString = cf.equalString();
-//        if(equalString.equals("break")
-//                || equalString.contains("continue")
-//                || equalString.contains("fr.inria")) {
-//            return false;
-//        }
-//        return true;
     }
 
     protected List<CodeFragment> buildCodeFragmentFor(CtType cl, Coverage coverage) {
@@ -239,11 +228,12 @@ public class StatementAdder extends AbstractAmp {
                 invocation.setArguments(mth.getParameters().stream()
                         .map(param -> buildVarRef(param.getType().getQualifiedName(), "var_" + param.getType().getSimpleName(), factory))
                         .collect(Collectors.toList()));
-
-                codeFragments.add(new Statement(invocation));
-                }
-
+                invocation.setType(mth.getType());
+                Statement stmt = new Statement(invocation);
+                codeFragments.add(stmt);
             }
+
+        }
         return codeFragments;
 
     }
