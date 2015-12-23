@@ -91,7 +91,8 @@ public class StatementAdder extends AbstractAmp {
     protected List<CodeFragment> getRandomCandidateFor(InputContext inputContext) {
         List<CodeFragment> list = new ArrayList<>();
 
-        CodeFragment codeFragment = codeFragments.get(getRandom().nextInt(codeFragments.size()));Factory factory = codeFragment.getCtCodeFragment().getFactory();
+        CodeFragment codeFragment = codeFragments.get(getRandom().nextInt(codeFragments.size()));
+        Factory factory = codeFragment.getCtCodeFragment().getFactory();
 
         CodeFragment clone = factory.Core().clone(codeFragment);
 
@@ -100,7 +101,7 @@ public class StatementAdder extends AbstractAmp {
             CtVariableReference candidate;
             if(candidates.isEmpty()) {
                 CodeFragment cfLocalVar = getLocalVar(var.getType(), inputContext);
-                if(cfLocalVar == null) {
+                if(cfLocalVar == null) {                       //Todo var != this
                     candidate = factory.Code().createLocalVariableReference(var.getType(), "null");
                 }  else {
                     list.add(cfLocalVar);
@@ -130,7 +131,7 @@ public class StatementAdder extends AbstractAmp {
             Factory factory = type.getFactory();
             boolean localVarFind;
             while(!list.isEmpty()) {
-                CodeFragment localVar = factory.Core().clone(list.remove(getRandom().nextInt(list.size())));
+                CodeFragment localVar = list.remove(getRandom().nextInt(list.size()));
                 localVarFind = true;
                 for (CtVariableReference var : localVar.getInputContext().getVar()) {
                     CtVariableReference<?> candidate = inputContext.candidate(var.getType(), true);
@@ -138,12 +139,24 @@ public class StatementAdder extends AbstractAmp {
                         localVarFind = false;
                         break;
                     }
-                    CtVariableReference variable = localVar.getInputContext().getVariableOrFieldNamed(var.getSimpleName());
-                    ReplaceVariableVisitor visitor = new ReplaceVariableVisitor(var, variable);
-                    localVar.getCtCodeFragment().accept(visitor);
+//                    CtVariableReference variable = localVar.getInputContext().getVariableOrFieldNamed(var.getSimpleName());
+//                    ReplaceVariableVisitor visitor = new ReplaceVariableVisitor(var, variable);
+//                    localVar.getCtCodeFragment().accept(visitor);
                 }
                 if(localVarFind) {
-                    return localVar;
+                    try {
+                        CodeFragment cloneLocalVar = factory.Core().clone(localVar);
+                        for (CtVariableReference var : localVar.getInputContext().getVar()) {
+
+                            CtVariableReference variable = cloneLocalVar.getInputContext().getVariableOrFieldNamed(var.getSimpleName());
+                            ReplaceVariableVisitor visitor = new ReplaceVariableVisitor(var, variable);
+                            cloneLocalVar.getCtCodeFragment().accept(visitor);
+                        }
+                        return cloneLocalVar;
+                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                        Log.debug("");
+                    }
                 }
             }
             return null;
@@ -222,11 +235,13 @@ public class StatementAdder extends AbstractAmp {
                 } else {
                     executableRef.setStatic(false);
                     invocation = factory.Code().createInvocation(null, executableRef);
-
-                    invocation.setTarget(buildVarRef(cl.getQualifiedName(), "var_" + cl.getSimpleName(), factory));
+                    invocation.setTarget(buildVarRef(cl.getReference(), factory));
                 }
+//                invocation.setArguments(mth.getParameters().stream()
+//                        .map(param -> buildVarRef(param.getType().getQualifiedName(), "var_" + param.getType().getSimpleName(), factory))
+//                        .collect(Collectors.toList()));
                 invocation.setArguments(mth.getParameters().stream()
-                        .map(param -> buildVarRef(param.getType().getQualifiedName(), "var_" + param.getType().getSimpleName(), factory))
+                                .map(param -> buildVarRef(param.getType(), factory))
                         .collect(Collectors.toList()));
                 invocation.setType(mth.getType());
                 Statement stmt = new Statement(invocation);
@@ -238,13 +253,26 @@ public class StatementAdder extends AbstractAmp {
 
     }
 
-    protected CtVariableRead buildVarRef(String typeName, String varName, Factory factory) {
-        CtTypeReference<Object> typeRef = factory.Core().createTypeReference();
-        typeRef.setSimpleName(typeName);
+//    protected CtVariableRead buildVarRef(String typeName, String varName, Factory factory) {
+//        CtTypeReference<Object> typeRef = factory.Core().createTypeReference();
+//        typeRef.setSimpleName(typeName);
+//
+//        CtLocalVariable<Object> localVar = factory.Core().createLocalVariable();
+//        localVar.setType(typeRef);
+//        localVar.setSimpleName(varName);
+//
+//        CtVariableReadImpl varRead = new CtVariableReadImpl();
+//        varRead.setVariable(factory.Code().createLocalVariableReference(localVar));
+//        return varRead;
+//    }
+
+    protected CtVariableRead buildVarRef(CtTypeReference type, Factory factory) {
+        CtTypeReference<Object> typeRef = factory.Core().clone(type);
+//        typeRef.setSimpleName(type.getSimpleName());
 
         CtLocalVariable<Object> localVar = factory.Core().createLocalVariable();
         localVar.setType(typeRef);
-        localVar.setSimpleName(varName);
+        localVar.setSimpleName("var_" + type.getSimpleName() + "_" + System.currentTimeMillis());
 
         CtVariableReadImpl varRead = new CtVariableReadImpl();
         varRead.setVariable(factory.Code().createLocalVariableReference(localVar));

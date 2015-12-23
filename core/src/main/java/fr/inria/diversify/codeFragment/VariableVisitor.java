@@ -61,7 +61,8 @@ public class VariableVisitor extends CtScanner {
     }
 
 	public <T> void visitCtInvocation(CtInvocation<T> invocation) {
-		if(invocation.getTarget() == null)
+		if(!invocation.getExecutable().isStatic()
+            && invocation.getTarget() == null)
 			refThis = invocation.getExecutable().getDeclaringType();
 
 		super.visitCtInvocation(invocation);

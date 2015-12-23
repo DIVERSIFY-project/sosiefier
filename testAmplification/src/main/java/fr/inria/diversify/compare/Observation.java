@@ -20,7 +20,14 @@ public  class Observation {
         if (!notDeterministValues.contains(stringObject)) {
             if (observations.containsKey(stringObject)) {
                 Object oldValue = observations.get(stringObject);
-                if(!oldValue.equals(value)) {
+                if(oldValue == null) {
+                    if (value == null) {
+                        return true;
+                    } else {
+                        notDeterministValues.add(stringObject);
+                        return false;
+                    }
+                } else if(!oldValue.equals(value)) {
                     notDeterministValues.add(stringObject);
                     return false;
                 }
@@ -38,7 +45,9 @@ public  class Observation {
         for (Map.Entry<String, Object> entry : observations.entrySet()) {
             if(!notDeterministValues.contains(entry.getKey())) {
                 Object value = entry.getValue();
-                if (isBoolean(value)) {
+                if(value == null) {
+                    asserts.add("org.junit.Assert.assertNull(" + entry.getKey() + ")");
+                } else if (isBoolean(value)) {
                     if ((Boolean) value) {
                         asserts.add("org.junit.Assert.assertTrue(" + entry.getKey() + ")");
                     } else {

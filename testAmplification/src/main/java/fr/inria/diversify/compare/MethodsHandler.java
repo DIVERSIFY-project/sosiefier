@@ -9,21 +9,23 @@ public class MethodsHandler {
 
     protected Map<Class<?>, List<Method>> cache;
     protected Random random;
-    protected static final Map<String, Object> ignoredMethods;
+    protected static final Map<String, Class> ignoredMethods;
     protected boolean onlyPublicMethod;
     protected boolean onlyNotStaticMethod;
 
     static {
-        Object o = new Object();
-        ignoredMethods = new HashMap<String, Object>();
-        ignoredMethods.put("equals", o);
-        ignoredMethods.put("hashCode", o);
-        ignoredMethods.put("notify", o);
-        ignoredMethods.put("notifyAll", o);
-        ignoredMethods.put("wait", o);
-        ignoredMethods.put("getClass", o);
-        ignoredMethods.put("toString", o);
-        ignoredMethods.put("display", o);
+        Class cl = Object.class;
+        ignoredMethods = new HashMap<String, Class>();
+        ignoredMethods.put("equals", cl);
+        ignoredMethods.put("hashCode", cl);
+        ignoredMethods.put("notify", cl);
+        ignoredMethods.put("notifyAll", cl);
+        ignoredMethods.put("wait", cl);
+        ignoredMethods.put("getClass", cl);
+        ignoredMethods.put("toString", cl);
+        ignoredMethods.put("display", cl);
+
+        ignoredMethods.put("hasExtensions",cl);
     }
 
     public MethodsHandler(Random random, boolean onlyPublicMethod, boolean onlyNotStaticMethod) {

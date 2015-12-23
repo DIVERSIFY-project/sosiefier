@@ -270,6 +270,7 @@ public class AssertGenerator {
 
         CtMethod testWithoutAssert = createTestWithoutAssert(new ArrayList<>(), false);
         testsToRun.add(testWithoutAssert);
+        testWithoutAssert.setParent(newClass);
         newClass.addMethod(testWithoutAssert);
 
         return newClass;
@@ -392,6 +393,7 @@ public class AssertGenerator {
                 .map(arg -> buildVarStatement(arg, blockId + "_" + (idx[0]++)))
                 .forEach(stmt -> block.addStatement(stmt));
 
+        block.setParent(assertInvocation.getParent());
         return block;
     }
 

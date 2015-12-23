@@ -33,11 +33,10 @@ public class DSpot {
     protected InputProgram inputProgram;
     protected MavenBuilder builder;
 
-    protected String logger = "fr.inria.diversify.logger.logger";
-
     public DSpot(String propertiesFile) throws InvalidSdkException, Exception {
         this(new InputConfiguration(propertiesFile));
     }
+
 
     public DSpot(InputConfiguration inputConfiguration) throws InvalidSdkException, Exception {
         InitUtils.initLogLevel(inputConfiguration);

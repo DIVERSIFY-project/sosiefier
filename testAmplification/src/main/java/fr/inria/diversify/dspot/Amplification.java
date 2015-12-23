@@ -247,20 +247,22 @@ public class Amplification {
     protected CtClass makeDSpotClassTest(CtClass originalClass, Collection<CtMethod> tests) throws IOException {
         CtClass cloneClass = originalClass.getFactory().Core().clone(originalClass);
         cloneClass.setParent(originalClass.getParent());
-       try {
+
            AssertGenerator ag = new AssertGenerator(originalClass, inputProgram, compiler, applicationClassLoader);
            tests.stream()
                    .map(test -> ag.genereteAssert(test, findStatementToAssert(test)))
                    .filter(test -> test != null)
                    .forEach(test -> {
+                       try {
                        cloneClass.addMethod(test);
+                       } catch (Throwable e) {
+                           e.printStackTrace();
+                           Log.info("");
+                       }
                    });
 
            LoggerUtils.printJavaFile(compiler.getOutputDirectory(), cloneClass);
-       } catch (Throwable e) {
-           e.printStackTrace();
-           Log.info("");
-       }
+
         return cloneClass;
     }
 
