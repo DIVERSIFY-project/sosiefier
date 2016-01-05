@@ -7,7 +7,6 @@ import fr.inria.diversify.logger.branch.TestCoverage;
 import fr.inria.diversify.processor.test.AssertionRemover;
 import fr.inria.diversify.processor.test.TestLoggingInstrumenter;
 import fr.inria.diversify.runner.InputProgram;
-import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 import spoon.reflect.declaration.CtAnnotation;
 import spoon.reflect.declaration.CtClass;
@@ -17,7 +16,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * User: Simon
@@ -186,12 +184,17 @@ public class TestSelector {
         return null;
     }
 
+    protected CtClass buildClassWithLogger(CtClass originalClass, CtMethod test) {
+        List<CtMethod> tests = new ArrayList<>(1);
+        tests.add(test);
+        return buildClassWithLogger(originalClass, tests);
+    }
 
-    protected CtClass getMethodsWithLogger(CtClass originalClass, Collection<CtMethod> tests) {
+    protected CtClass buildClassWithLogger(CtClass originalClass, Collection<CtMethod> tests) {
         CtClass cloneClass = originalClass.getFactory().Core().clone(originalClass);
         cloneClass.setParent(originalClass.getParent());
         tests.stream()
-                .map(test -> getMethodWithLogger(cloneClass, test))
+                .map(test -> buildMethodWithLogger(cloneClass, test))
                 .forEach(instruTest -> {
                     cloneClass.removeMethod(instruTest);
                     cloneClass.addMethod(instruTest);
@@ -199,8 +202,7 @@ public class TestSelector {
         return cloneClass;
     }
 
-
-    protected CtMethod getMethodWithLogger(CtClass parentClass, CtMethod method) {
+    protected CtMethod buildMethodWithLogger(CtClass parentClass, CtMethod method) {
         CtMethod clone = cloneMethod(method);
         clone.setParent(parentClass);
         AssertionRemover testCase = new AssertionRemover(inputProgram.getAbsoluteTestSourceCodeDir(), false);

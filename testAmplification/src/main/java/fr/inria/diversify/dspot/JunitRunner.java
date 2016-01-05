@@ -25,7 +25,8 @@ import java.util.stream.Collectors;
 public class JunitRunner {
     protected ClassLoader classLoader;
     protected InputProgram inputProgram;
-    protected int timeout = 60;
+    protected int classTimeOut = 120;
+    protected int methodTimeOut = 5;
     protected static final ExecutorService THREAD_POOL = Executors.newSingleThreadExecutor();
 
     public JunitRunner(InputProgram inputProgram, ClassLoader classLoader) {
@@ -67,12 +68,21 @@ public class JunitRunner {
             Logger.reset();
             Logger.setLogDir(new File(inputProgram.getProgramDir() + "/log"));
 
-            Result result = runRequest(buildRequest(testClasses, methodsToRun));
+            int timeOut = computeTimeOut(methodsToRun);
+            Result result = runRequest(buildRequest(testClasses, methodsToRun), timeOut);
 
             Logger.close();
             return result;
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    private int computeTimeOut(List<String> methodsToRun) {
+        if(methodsToRun.isEmpty()) {
+            return classTimeOut;
+        } else {
+            return Math.min(methodsToRun.size() * methodTimeOut, classTimeOut);
         }
     }
 
@@ -85,12 +95,12 @@ public class JunitRunner {
         }
     }
 
-    protected Result runRequest(Request request) throws InterruptedException, ExecutionException, TimeoutException {
+    protected Result runRequest(Request request, int timeOut) throws InterruptedException, ExecutionException, TimeoutException {
         Result result = timedCall(new Callable<Result>() {
             public Result call() throws Exception {
                 return new JUnitCore().run(request);
             }
-        }, timeout, TimeUnit.SECONDS);
+        }, timeOut, TimeUnit.SECONDS);
 
         return result;
     }

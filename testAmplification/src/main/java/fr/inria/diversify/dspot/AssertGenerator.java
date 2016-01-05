@@ -63,17 +63,21 @@ public class AssertGenerator {
         this.inputProgram = inputProgram;
     }
 
-    protected CtMethod genereteAssert(CtMethod test, List<Integer> statementsIndexToAssert) {
+    protected CtMethod genereteAssert(CtMethod test, List<Integer> statementsIndexToAssert) throws IOException, ClassNotFoundException {
         this.test = test;
         this.statementsIndexToAssert = statementsIndexToAssert;
         return genereteAssert();
     }
 
-    protected CtMethod genereteAssert() {
+    protected CtMethod genereteAssert() throws IOException, ClassNotFoundException {
          CtClass cl = initTestClass();
-        try {
+
             boolean isCompile = writeAndCompile(cl);
             Result result = runTest();
+            if(!isCompile || result == null) {
+                return null;
+            }
+        try {
             String testWithoutAssertName = test.getSimpleName() + "_withoutAssert";
            if(testFailed(testWithoutAssertName, result)) {
                return makeFailureTest(getFailure(testWithoutAssertName, result));
