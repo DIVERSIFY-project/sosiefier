@@ -36,13 +36,13 @@ public class Amplification {
     protected List<AbstractAmp> amplifiers;
     protected DiversityCompiler compiler;
     protected TestSelector testSelector;
-//    protected List<CtMethod> allTests;
+    protected List<CtMethod> allTests;
 
     public Amplification(InputProgram inputProgram, DiversityCompiler compiler, Set<String> classLoaderFilter, List<AbstractAmp> amplifiers) {
         this.inputProgram = inputProgram;
         this.compiler = compiler;
         testSelector = new TestSelector(inputProgram);
-//        allTests = new ArrayList<>();
+        allTests = new ArrayList<>();
         this.amplifiers = amplifiers;
         initClassLoader(classLoaderFilter);
         initCompiler();
@@ -95,7 +95,7 @@ public class Amplification {
               testsToRemove.add(tests.get(i));
             }
         }
-
+//        return makeDSpotClassTest(classTest, allTests, testsToRemove);
         return makeDSpotClassTest(classTest, ampTest, testsToRemove);
     }
 
@@ -132,6 +132,7 @@ public class Amplification {
             Log.debug("tests run");
             newTests = excludeTimeOutAndCompilationErrorTest(newTests, result);
             ampTests.addAll(newTests);
+            allTests.addAll(ampTests);
             testSelector.updateLogInfo();
         }
         return ampTests;
@@ -183,7 +184,7 @@ public class Amplification {
         FileUtils.cleanDirectory(compiler.getDestinationDirectory());
         try {
             LoggerUtils.printJavaFile(compiler.getOutputDirectory(), classInstru);
-            compiler.compileFileIn(compiler.getOutputDirectory());
+            compiler.compileFileIn(compiler.getOutputDirectory(), false);
             return true;
         } catch (Exception e) {
             Log.warn("error during compilation",e);
@@ -264,7 +265,10 @@ public class Amplification {
         AssertGenerator ag = new AssertGenerator(originalClass, inputProgram, compiler, applicationClassLoader);
         for(CtMethod test : ampTests) {
             CtMethod ampTest = ag.genereteAssert(test, findStatementToAssert(test));
-            cloneClass.addMethod(ampTest);
+//            CtMethod ampTest = ag.genereteAssert(test);
+            if(ampTest != null) {
+                cloneClass.addMethod(ampTest);
+            }
         }
         LoggerUtils.printJavaFile(compiler.getOutputDirectory(), cloneClass);
 

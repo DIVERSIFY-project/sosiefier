@@ -28,6 +28,7 @@ public class LogWriter {
     ///Directory where the log is being stored
     protected File dir = null;
 
+    protected boolean inTest = false;
 
     /**
      * Constructor for the logger
@@ -52,13 +53,22 @@ public class LogWriter {
             if(propertiesFile.exists()) {
                 Properties properties = new Properties();
                 properties.load(new FileInputStream(propertiesFile));
-                fullPath = Boolean.parseBoolean((String) properties.getOrDefault("fullPath", "false"));
-                logMethodCall = Boolean.parseBoolean((String) properties.getOrDefault("logMethodCall", "true"));
-                writeVar = Boolean.parseBoolean((String) properties.getOrDefault("writeVar", "true"));
+                fullPath = Boolean.parseBoolean(propertiesOrGetDefault(properties,"fullPath", "false"));
+                logMethodCall = Boolean.parseBoolean(propertiesOrGetDefault(properties,"logMethodCall", "true"));
+                writeVar = Boolean.parseBoolean(propertiesOrGetDefault(properties,"writeVar", "true"));
             }
         } catch (IOException e) {
             System.err.println("fr.inria.logger: error with properties file");
         }
+    }
+
+    protected String propertiesOrGetDefault(Properties properties, String key, String defaultValue) {
+        if(properties.containsKey(key)) {
+            return (String) properties.get(key);
+        } else {
+            return defaultValue;
+        }
+
     }
 
     /**
@@ -72,8 +82,10 @@ public class LogWriter {
     }
 
     public void close(){
-        fileWriter.append(KeyWord.endLine);
-        fileWriter.close();
+        if(fileWriter != null) {
+            fileWriter.append(KeyWord.endLine);
+            fileWriter.close();
+        }
     }
 
     /**
@@ -117,13 +129,13 @@ public class LogWriter {
     }
 
     public void branch(String id) {
-        if(!isObserve) {
+        if(!isObserve && inTest) {
             pathBuilder.addbranch(id);
         }
     }
 
     public void methodIn(String methodId) {
-        if(!isObserve) {
+        if(!isObserve && inTest) {
             deep++;
             if(logMethodCall) {
                 try {
@@ -143,7 +155,7 @@ public class LogWriter {
     }
 
     public void methodOut(String id) {
-        if(!isObserve) {
+        if(!isObserve && inTest) {
             try {
                 pathBuilder.printPath(id, deep, getFileWriter());
             } catch (Exception e) {}
@@ -152,6 +164,7 @@ public class LogWriter {
     }
 
     public void writeTestStart(String testName, Object receiver) {
+        inTest = true;
         if(!isObserve) {
             try {
                 deep = 0;
@@ -168,6 +181,7 @@ public class LogWriter {
     }
 
     public void writeTestStart(String testName) {
+        inTest = true;
         if(!isObserve) {
             try {
                 PrintWriter fileWriter = getFileWriter();
@@ -179,6 +193,7 @@ public class LogWriter {
     }
 
     public void writeTestFinish() {
+        inTest = false;
         if(!isObserve) {
             try {
                 pathBuilder.clear();

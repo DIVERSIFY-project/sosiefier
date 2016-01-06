@@ -1,6 +1,7 @@
 package fr.inria.diversify.dspot.processor;
 
 import fr.inria.diversify.codeFragment.*;
+import fr.inria.diversify.codeFragmentProcessor.*;
 import fr.inria.diversify.logger.branch.Coverage;
 import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.util.Log;
@@ -320,10 +321,22 @@ public class StatementAdder extends AbstractAmp {
     public void reset(InputProgram inputProgram, Coverage coverage, CtClass testClass) {
         super.reset(inputProgram, coverage, testClass);
 
-        inputProgram.processCodeFragments();
-        HashMap<String, CodeFragmentList> codeFragmentsByClass = inputProgram.getCodeFragmentsByClass();
-        codeFragments = buildCodeFragmentFor(findClassUnderTest(testClass), coverage);
         Set<CtType> codeFragmentsProvide = computeClassProvider(testClass);
+
+        StatementProcessor codeFragmentProcessor = (StatementProcessor) inputProgram.getCodeFragmentProcessor();
+        codeFragmentsProvide.stream()
+                .flatMap(cl -> {
+                    List<CtStatement> list = Query.getElements(cl, new TypeFilter(CtStatement.class));
+                    return list.stream();
+                })
+                .filter(stmt -> codeFragmentProcessor.isToBeProcessed(stmt))
+                .forEach(stmt -> codeFragmentProcessor.process(stmt));
+
+
+//        inputProgram.processCodeFragments();
+        HashMap<String, CodeFragmentList> codeFragmentsByClass = codeFragmentProcessor.getCodeFragmentsByClass();
+        codeFragments = buildCodeFragmentFor(findClassUnderTest(testClass), coverage);
+
         Set<Integer> ids = new HashSet<>();
         localVars = codeFragmentsProvide.stream()
                 .map(cl -> cl.getQualifiedName())

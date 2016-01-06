@@ -48,7 +48,6 @@ public class DSpot {
         FileUtils.copyDirectory(new File(inputProgram.getProgramDir()), new File(outputDirectory));
         inputProgram.setProgramDir(outputDirectory);
 
-//        builder = new MavenBuilder(inputProgram.getProgramDir());
         InitUtils.initDependency(inputConfiguration);
 
         init();
@@ -59,7 +58,6 @@ public class DSpot {
 
         for (CtClass cl : getAllTestClasses()) {
             testAmplification.amplification(cl, 5);
-            Log.debug("");
         }
     }
 
@@ -108,7 +106,7 @@ public class DSpot {
     protected void init() throws IOException, InterruptedException {
         addBranchLogger();
         compiler = InitUtils.initSpoonCompiler(inputProgram, true);
-         initBuilder();
+        initBuilder();
     }
 
     protected void initBuilder() throws InterruptedException, IOException {
@@ -116,8 +114,8 @@ public class DSpot {
         builder = new MavenBuilder(inputProgram.getProgramDir());
 
         builder.setGoals(phases);
-         builder.initTimeOut();
-         InitUtils.addApplicationClassesToClassPath(inputProgram);
+        builder.initTimeOut();
+        InitUtils.addApplicationClassesToClassPath(inputProgram);
     }
 
     protected void addBranchLogger() throws IOException {
