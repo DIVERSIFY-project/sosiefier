@@ -33,7 +33,7 @@ public class DiversityCompiler extends JDTBasedSpoonCompiler {
         super(factory);
     }
 
-    public boolean compileFileIn(File directory) {
+    public boolean compileFileIn(File directory, boolean withLog) {
         Factory factory = getFactory();
         initInputClassLoader();
         factory.getEnvironment().debugMessage(
@@ -101,14 +101,16 @@ public class DiversityCompiler extends JDTBasedSpoonCompiler {
         System.setProperty("jdt.compiler.useSingleThread", "true");
 
         args.add("-proceedOnError");
-        batchCompiler.logger = new Main.Logger(batchCompiler, new PrintWriter(new NullWriter()), new PrintWriter(new NullWriter()));
+        if(!withLog) {
+            batchCompiler.logger = new Main.Logger(batchCompiler, new PrintWriter(new NullWriter()), new PrintWriter(new NullWriter()));
+        }
         batchCompiler.compile(args.toArray(new String[0]));
 
 //        reportProblems(factory.getEnvironment());
 
         factory.getEnvironment().debugMessage(
                 "compiled in " + (System.currentTimeMillis() - t) + " ms");
-        return getProblems().size() == 0;
+        return batchCompiler.globalErrorsCount == 0;
     }
 
     protected void report(Environment environment, CategorizedProblem problem) {
