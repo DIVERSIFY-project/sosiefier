@@ -47,7 +47,7 @@ public class Exp {
     }
 
     public void runExp() throws IOException {
-        for(int i = 2; i <= nbVersion; i++) {
+        for(int i = 1; i <= nbVersion; i++) {
             try {
                 log.flush();
 

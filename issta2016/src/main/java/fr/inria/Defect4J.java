@@ -208,8 +208,13 @@ public class Defect4J {
         if(workingDir != null) {
             builder.directory(workingDir);
         }
-
-        builder.environment().put("JAVA_HOME", "/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home");
+        if(new File("/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home").exists()) {
+            //osx
+            builder.environment().put("JAVA_HOME", "/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home");
+        } else {
+            //coreff3
+            builder.environment().put("JAVA_HOME", "/usr/lib/jvm/java-7-oracle");
+        }
         Process process = builder.start();
 
 
