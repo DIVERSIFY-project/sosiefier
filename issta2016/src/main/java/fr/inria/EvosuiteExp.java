@@ -18,19 +18,13 @@ public class EvosuiteExp {
     protected Defect4J defect4J;
     protected String tmpDir;
 
-    EvosuiteExp() throws IOException {
+    EvosuiteExp(String projectId, int nbVersion, String defect4JHome) throws Exception {
+        this.projectId = projectId;
+        this.nbVersion = nbVersion;
         tmpDir = "tmpDir/evosuite_"+ System.currentTimeMillis();
 
-//        File tmpDirFile = new File(tmpDir);
-//        tmpDirFile.mkdirs();
-//
-//        FileWriter fw = new FileWriter(tmpDirFile + "/resultLog");
-//        log = new BufferedWriter(fw);
+        defect4J = new Defect4J(defect4JHome +"/framework", tmpDir);
 
-        defect4J = new Defect4J("/Users/Simon/Documents/code/defects4j/framework", tmpDir);
-
-        projectId = "Lang";
-        nbVersion = 65;
     }
 
     private void run() throws IOException, InterruptedException {
@@ -48,6 +42,6 @@ public class EvosuiteExp {
     }
 
     public static void main(String[] args) throws Exception {
-        (new EvosuiteExp()).run();
+        (new EvosuiteExp(args[0], Integer.parseInt(args[1]), args[2])).run();
     }
 }

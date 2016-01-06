@@ -32,7 +32,7 @@ public class Exp {
     BufferedWriter log;
     File resultDir;
 
-    public Exp(String projectId, int nbVersion) throws Exception, InvalidSdkException {
+    public Exp(String projectId, int nbVersion, String defect4JHome) throws Exception, InvalidSdkException {
         this.projectId = projectId;
         this.nbVersion = nbVersion;
 
@@ -42,12 +42,12 @@ public class Exp {
         resultDir = new File(inputConfiguration.getProperty("tmpDir") + "/DSpot_" + System.currentTimeMillis());
         resultDir.mkdirs();
 
-        defect4J = new Defect4J("/Users/Simon/Documents/code/defects4j/framework", resultDir.getAbsolutePath());
+        defect4J = new Defect4J(defect4JHome + "/framework", resultDir.getAbsolutePath());
         initLog(inputConfiguration);
     }
 
     public void runExp() throws IOException {
-        for(int i = 1; i <= nbVersion; i++) {
+        for(int i = 2; i <= nbVersion; i++) {
             try {
                 log.flush();
 
@@ -209,7 +209,7 @@ public class Exp {
     }
 
     public static void main(String[] args) throws Exception, InvalidSdkException {
-        Exp exp = new Exp(args[0], Integer.parseInt(args[1]));
+        Exp exp = new Exp(args[0], Integer.parseInt(args[1]), "/Users/Simon/Documents/code/defects4j");
         exp.runExp();
     }
 
