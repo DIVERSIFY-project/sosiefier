@@ -29,18 +29,19 @@ public class StatementAdder extends AbstractAmp {
 
     @Override
     public List<CtMethod> apply(CtMethod method) {
-       List<CtMethod> newMethods = new ArrayList<>();
-
-        List<InputContext> inputContexts = getInputContexts(method);
-        for(int i = 0; i < inputContexts.size(); i++) {
-            InputContext inputContext = inputContexts.get(i);
-            List<CodeFragment> statements = getRandomCandidateFor(inputContext);
+        List<CtMethod> newMethods = new ArrayList<>();
+        if(!codeFragments.isEmpty()) {
+            List<InputContext> inputContexts = getInputContexts(method);
+            for(int i = 0; i < inputContexts.size(); i++) {
+                InputContext inputContext = inputContexts.get(i);
+                List<CodeFragment> statements = getRandomCandidateFor(inputContext);
                 try {
                     newMethods.add(apply(method, statements, i));
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.debug("");
                 }
+            }
         }
         return filterAmpTest(newMethods, method);
     }
@@ -284,7 +285,7 @@ public class StatementAdder extends AbstractAmp {
         return computeClassProvider(testClass).stream()
                 .filter(cl -> testClass.getQualifiedName().contains(cl.getQualifiedName()) && cl != testClass)
                 .findFirst()
-                .get();
+                .orElse(null);
     }
 
     protected double getCoverageForMethod(Coverage coverage, CtType cl, CtMethod mth) {
@@ -335,7 +336,11 @@ public class StatementAdder extends AbstractAmp {
 
 //        inputProgram.processCodeFragments();
         HashMap<String, CodeFragmentList> codeFragmentsByClass = codeFragmentProcessor.getCodeFragmentsByClass();
-        codeFragments = buildCodeFragmentFor(findClassUnderTest(testClass), coverage);
+        if(findClassUnderTest(testClass) != null) {
+            codeFragments = buildCodeFragmentFor(findClassUnderTest(testClass), coverage);
+        } else {
+            codeFragments = new ArrayList<>();
+        }
 
         Set<Integer> ids = new HashSet<>();
         localVars = codeFragmentsProvide.stream()

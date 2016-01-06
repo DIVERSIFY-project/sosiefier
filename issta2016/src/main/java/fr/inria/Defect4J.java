@@ -214,6 +214,8 @@ public class Defect4J {
         } else {
             //coreff3
             builder.environment().put("JAVA_HOME", "/usr/lib/jvm/java-7-oracle");
+            String path = builder.environment().get("PATH");
+            builder.environment().put("PATH", "/usr/lib/jvm/java-7-oracle/bin:"+path);
         }
         Process process = builder.start();
 

@@ -149,6 +149,10 @@ public abstract class AbstractAmp {
 
     protected Set<CtType> computeClassProvider(CtClass testClass) {
         List<CtType> types = Query.getElements(testClass.getParent(CtPackage.class), new TypeFilter(CtType.class));
+        types = types.stream()
+                .filter(type -> type.getPackage() != null)
+                .filter(type -> type.getPackage().getQualifiedName().equals(testClass.getPackage().getQualifiedName()))
+                .collect(Collectors.toList());
         types.add(testClass.getParent(CtClass.class));
 
         ImportScanner importScanner = new ImportScannerImpl();
