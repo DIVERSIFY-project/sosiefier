@@ -209,7 +209,7 @@ public class Exp {
     }
 
     public static void main(String[] args) throws Exception, InvalidSdkException {
-        Exp exp = new Exp(args[0], Integer.parseInt(args[1]), "/Users/Simon/Documents/code/defects4j");
+        Exp exp = new Exp(args[0], Integer.parseInt(args[1]), args[3]);
         exp.runExp();
     }
 
