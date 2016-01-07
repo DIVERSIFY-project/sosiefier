@@ -111,7 +111,7 @@ public class AssertGenerator {
                     CtMethod cloneTest = getFactory().Core().clone(test);
                     newClass.addMethod(cloneTest);
                     LoggerUtils.printJavaFile(compiler.getOutputDirectory(), newClass);
-
+                    log.flush();
                 }
             } catch (InterruptedException e) {}
         }
