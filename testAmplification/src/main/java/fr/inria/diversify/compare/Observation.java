@@ -8,6 +8,7 @@ import java.util.*;
  * Time: 15:36
  */
 public  class Observation {
+    protected String junitAssertClassName = "junit.framework.Assert";
     protected Set<String> notDeterministValues;
     protected Map<String, Object> observations;
 
@@ -46,21 +47,34 @@ public  class Observation {
             if(!notDeterministValues.contains(entry.getKey())) {
                 Object value = entry.getValue();
                 if(value == null) {
-                    asserts.add("org.junit.Assert.assertNull(" + entry.getKey() + ")");
+                    asserts.add(junitAssertClassName + ".assertNull(" + entry.getKey() + ")");
                 } else if (isBoolean(value)) {
                     if ((Boolean) value) {
-                        asserts.add("org.junit.Assert.assertTrue(" + entry.getKey() + ")");
+                        asserts.add(junitAssertClassName + ".assertTrue(" + entry.getKey() + ")");
                     } else {
-                        asserts.add("org.junit.Assert.assertFalse(" + entry.getKey() + ")");
+                        asserts.add(junitAssertClassName + ".assertFalse(" + entry.getKey() + ")");
                     }
                 } else if (value.getClass().isArray()) {
-                    asserts.add("org.junit.Assert.assertEquals(" + entry.getKey() + "," + primitiveArrayToString(value) + ")");
+                    asserts.add(junitAssertClassName + ".assertEquals(" + entry.getKey() + "," + primitiveArrayToString(value) + ")");
                 } else {
-                    asserts.add("org.junit.Assert.assertEquals(" + entry.getKey() + ", " + value + ")");
+                    asserts.add(junitAssertClassName + ".assertEquals(" + entry.getKey() + ", " + printString(value) + ")");
                 }
             }
         }
         return asserts;
+    }
+
+    protected String printString(Object value) {
+        if(value instanceof Double) {
+            return value.toString() + "D";
+        }
+        if(value instanceof Float) {
+            return value.toString() + "F";
+        }
+        if(value instanceof Long) {
+            return value.toString() + "L";
+        }
+        return value.toString();
     }
 
     protected boolean isBoolean(Object value) {

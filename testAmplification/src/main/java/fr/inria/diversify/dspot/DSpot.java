@@ -1,5 +1,6 @@
 package fr.inria.diversify.dspot;
 
+import fr.inria.diversify.buildSystem.DiversifyClassLoader;
 import fr.inria.diversify.dspot.processor.*;
 import fr.inria.diversify.factories.DiversityCompiler;
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
@@ -33,12 +34,30 @@ public class DSpot {
     protected InputProgram inputProgram;
     protected MavenBuilder builder;
 
+    protected static DiversifyClassLoader regressionClassLoader;
+
     public DSpot(String propertiesFile) throws InvalidSdkException, Exception {
         this(new InputConfiguration(propertiesFile));
     }
 
 
     public DSpot(InputConfiguration inputConfiguration) throws InvalidSdkException, Exception {
+        InitUtils.initLogLevel(inputConfiguration);
+        inputProgram = InitUtils.initInputProgram(inputConfiguration);
+
+        initClassLoaderFilter(inputConfiguration);
+        String outputDirectory = inputConfiguration.getProperty("tmpDir") + "/tmp_" + System.currentTimeMillis();
+
+        FileUtils.copyDirectory(new File(inputProgram.getProgramDir()), new File(outputDirectory));
+        inputProgram.setProgramDir(outputDirectory);
+
+        InitUtils.initDependency(inputConfiguration);
+
+        init();
+    }
+
+    public DSpot(InputConfiguration inputConfiguration, DiversifyClassLoader classLoader) throws Exception, InvalidSdkException {
+        regressionClassLoader = classLoader;
         InitUtils.initLogLevel(inputConfiguration);
         inputProgram = InitUtils.initInputProgram(inputConfiguration);
 

@@ -83,8 +83,8 @@ public class Amplification {
 
             Result result = runTest(classWithLogger, tests.get(i));
             if(result != null
-                    || result.getFailures() != null
-                    || result.getFailures().isEmpty()) {
+                    && result.getFailures() != null
+                    && result.getFailures().isEmpty()) {
                 testSelector.updateLogInfo();
 
                 Collection<CtMethod> allAmpTest = amplification(classTest, tests.get(i), maxIteration);
@@ -264,7 +264,7 @@ public class Amplification {
 
         AssertGenerator ag = new AssertGenerator(originalClass, inputProgram, compiler, applicationClassLoader);
         for(CtMethod test : ampTests) {
-            CtMethod ampTest = ag.genereteAssert(test, findStatementToAssert(test));
+            CtMethod ampTest = ag.generateAssert(test, findStatementToAssert(test));
 //            CtMethod ampTest = ag.genereteAssert(test);
             if(ampTest != null) {
                 cloneClass.addMethod(ampTest);

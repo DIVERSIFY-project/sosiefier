@@ -104,7 +104,11 @@ public class StatementAdder extends AbstractAmp {
             if(candidates.isEmpty()) {
                 CodeFragment cfLocalVar = getLocalVar(var.getType(), inputContext);
                 if(cfLocalVar == null) {                       //Todo var != this
-                    candidate = factory.Code().createLocalVariableReference(var.getType(), "null");
+//                    candidate = factory.Code().createLocalVariableReference(var.getType(), "null");
+                    ValueCreator vc = new ValueCreator();
+                    CtLocalVariable localVar = vc.createRandomLocalVar(var.getType());
+                    list.add(new Statement(localVar));
+                    candidate = factory.Code().createLocalVariableReference(localVar);
                 }  else {
                     list.add(cfLocalVar);
                     CtLocalVariable localVariable = (CtLocalVariable) cfLocalVar.getCtCodeFragment();
@@ -120,6 +124,8 @@ public class StatementAdder extends AbstractAmp {
         list.add(clone);
          return list;
     }
+
+
 
     protected CodeFragment getLocalVar(CtTypeReference type, InputContext inputContext) {
         List<CodeFragment> list = localVars.stream()
@@ -141,9 +147,6 @@ public class StatementAdder extends AbstractAmp {
                         localVarFind = false;
                         break;
                     }
-//                    CtVariableReference variable = localVar.getInputContext().getVariableOrFieldNamed(var.getSimpleName());
-//                    ReplaceVariableVisitor visitor = new ReplaceVariableVisitor(var, variable);
-//                    localVar.getCtCodeFragment().accept(visitor);
                 }
                 if(localVarFind) {
                     try {
@@ -239,9 +242,6 @@ public class StatementAdder extends AbstractAmp {
                     invocation = factory.Code().createInvocation(null, executableRef);
                     invocation.setTarget(buildVarRef(cl.getReference(), factory));
                 }
-//                invocation.setArguments(mth.getParameters().stream()
-//                        .map(param -> buildVarRef(param.getType().getQualifiedName(), "var_" + param.getType().getSimpleName(), factory))
-//                        .collect(Collectors.toList()));
                 invocation.setArguments(mth.getParameters().stream()
                                 .map(param -> buildVarRef(param.getType(), factory))
                         .collect(Collectors.toList()));
@@ -255,22 +255,8 @@ public class StatementAdder extends AbstractAmp {
 
     }
 
-//    protected CtVariableRead buildVarRef(String typeName, String varName, Factory factory) {
-//        CtTypeReference<Object> typeRef = factory.Core().createTypeReference();
-//        typeRef.setSimpleName(typeName);
-//
-//        CtLocalVariable<Object> localVar = factory.Core().createLocalVariable();
-//        localVar.setType(typeRef);
-//        localVar.setSimpleName(varName);
-//
-//        CtVariableReadImpl varRead = new CtVariableReadImpl();
-//        varRead.setVariable(factory.Code().createLocalVariableReference(localVar));
-//        return varRead;
-//    }
-
     protected CtVariableRead buildVarRef(CtTypeReference type, Factory factory) {
         CtTypeReference<Object> typeRef = factory.Core().clone(type);
-//        typeRef.setSimpleName(type.getSimpleName());
 
         CtLocalVariable<Object> localVar = factory.Core().createLocalVariable();
         localVar.setType(typeRef);

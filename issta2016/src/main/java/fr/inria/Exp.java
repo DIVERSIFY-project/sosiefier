@@ -1,5 +1,6 @@
 package fr.inria;
 
+import fr.inria.diversify.buildSystem.DiversifyClassLoader;
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.dspot.DSpot;
 import fr.inria.diversify.runner.InputConfiguration;
@@ -52,7 +53,9 @@ public class Exp {
                 log.flush();
 
                 String dir = checkout(i, false);
-                DSpot sbse = new DSpot(inputConfiguration);
+                initRegressionClassLoader(i);
+
+                DSpot sbse = new DSpot(inputConfiguration, regressionClassLoader);
 
                 Set<String> testsNameToExclude = defect4J.triggerTests(projectId, i);
                 List<CtClass> classes = run(sbse, testsNameToExclude);
@@ -65,8 +68,9 @@ public class Exp {
 
                 boolean status = defect4J.bugDetection(projectId, i, "DSpot");
                 Log.info(projectId + " " + i + ": test status on bug version : " + status);
-//                dir = defect4J.checkout(projectId, i, false);
-//                boolean status = defect4J.runTest(dir, archive);
+                dir = defect4J.checkout(projectId, i, false);
+                boolean status2 = defect4J.runTest(dir, archive);
+
 //                 if (status) {
 //                    dir = defect4J.checkout(projectId, i, true);
 //                    status = defect4J.runTest(dir, archive);
@@ -87,8 +91,24 @@ public class Exp {
     protected void initLog(InputConfiguration inputConfiguration) throws IOException {
         FileWriter fw = new FileWriter(resultDir + "/resultLog");
         log = new BufferedWriter(fw);
-
     }
+
+    public static DiversifyClassLoader regressionClassLoader;
+    protected void initRegressionClassLoader(int i) throws IOException, InterruptedException {
+        String dir = checkout(i, true);
+
+        List<String> classPaths = new ArrayList<>();
+        classPaths.add(dir + "/" + inputConfiguration.getClassesDir());
+        classPaths.add(dir + "/" + inputConfiguration.getRelativeTestSourceCodeDir());
+        regressionClassLoader = new DiversifyClassLoader(Thread.currentThread().getContextClassLoader(), classPaths);
+
+        Set<String> filter = new HashSet<>();
+        for(String s : inputConfiguration.getProperty("filter").split(";") ) {
+            filter.add(s);
+        }
+        regressionClassLoader.setClassFilter(filter);
+    }
+
 
     protected void printClasses(List<CtClass> classes, String dir) {
         File dirFile = new File(dir);
@@ -190,6 +210,7 @@ public class Exp {
                 break;
 
             case "Math":
+                inputConfiguration.getProperties().setProperty("filter", "org.apache.commons.math");
                 break;
         }
     }
@@ -197,7 +218,7 @@ public class Exp {
 
 
     protected void fixLang(int version) {
-        inputConfiguration.getProperties().setProperty("filter", "org.apache.commons.lang3");
+        inputConfiguration.getProperties().setProperty("filter", "org.apache.commons.lang");
         if (version < 35) {
             inputConfiguration.getProperties().setProperty("src", "src/main/java");
             inputConfiguration.getProperties().setProperty("testSrc", "src/test/java");
