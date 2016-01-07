@@ -103,14 +103,14 @@ public class AssertGenerator {
                 if(!equalResult(r1, r2)) {
                     Log.info("");
                     log.write("version: "+ version + ", " + test.getSignature());
-                    File file = new File(resultDir + "/assertGenerationTestSource/"+ version + "/");
+                    File file = new File(resultDir + "/assertGenerationTestSource/"+ version + "/" + System.currentTimeMillis() + "/");
                     file.mkdirs();
 
                     CtClass newClass = initTestClass();
 
                     CtMethod cloneTest = getFactory().Core().clone(test);
                     newClass.addMethod(cloneTest);
-                    LoggerUtils.printJavaFile(compiler.getOutputDirectory(), newClass);
+                    LoggerUtils.printJavaFile(file, newClass);
                     log.flush();
                 }
             } catch (InterruptedException e) {}
