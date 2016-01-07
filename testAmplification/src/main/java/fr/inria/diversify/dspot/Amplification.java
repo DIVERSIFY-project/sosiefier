@@ -75,7 +75,7 @@ public class Amplification {
         List<CtMethod> ampTest = new ArrayList<>();
         List<CtMethod> testsToRemove = new ArrayList<>();
         for(int i = 0; i < tests.size(); i++) {
-            Log.debug("amp {} ({}/{}))", tests.get(i).getSimpleName(), i, tests.size());
+            Log.debug("amp {} ({}/{})", tests.get(i).getSimpleName(), i, tests.size());
             testSelector.init();
 
             classWithLogger = testSelector.buildClassWithLogger(classTest, tests.get(i));
@@ -90,12 +90,12 @@ public class Amplification {
                 Collection<CtMethod> allAmpTest = amplification(classTest, tests.get(i), maxIteration);
                 ampTest.addAll(testSelector.selectedAmplifiedTests(allAmpTest));
 
-                Log.debug("amptest {}", ampTest.size());
+                Log.debug("total amp test: {}", ampTest.size());
             } else {
               testsToRemove.add(tests.get(i));
             }
         }
-//        return makeDSpotClassTest(classTest, allTests, testsToRemove);
+        makeDSpotClassTest(classTest, allTests, testsToRemove);
         return makeDSpotClassTest(classTest, ampTest, testsToRemove);
     }
 
@@ -108,19 +108,19 @@ public class Amplification {
         ampTests.add(test);
 
         for (int i = 0; i < maxIteration; i++) {
-            Log.debug("iteration {}:", i);
+//            Log.debug("iteration {}:", i);
 
             Collection<CtMethod> testToAmp = testSelector.selectTestToAmp(ampTests, newTests, 10);
             if(testToAmp.isEmpty()) {
                 break;
             }
             newTests = ampTest(testToAmp);
-            Log.debug("{} tests selected to be amplified", testToAmp.size());
-            Log.debug("{} new tests generated", newTests.size());
+//            Log.debug("{} tests selected to be amplified", testToAmp.size());
+//            Log.debug("{} new tests generated", newTests.size());
 
             CtClass classWithLogger = testSelector.buildClassWithLogger(originalClass, newTests);
             boolean status = writeAndCompile(classWithLogger);
-            Log.debug("compile status: {}", status);
+//            Log.debug("compile status: {}", status);
             if(!status) {
                 break;
             }
@@ -129,7 +129,7 @@ public class Amplification {
             if(result == null) {
                 break;
             }
-            Log.debug("tests run");
+//            Log.debug("tests run");
             newTests = excludeTimeOutAndCompilationErrorTest(newTests, result);
             ampTests.addAll(newTests);
             allTests.addAll(ampTests);
@@ -201,7 +201,7 @@ public class Amplification {
     protected Result runTests(CtClass testClass, Collection<CtMethod> tests) throws ClassNotFoundException {
         JunitRunner junitRunner = new JunitRunner(inputProgram, new DiversifyClassLoader(applicationClassLoader, compiler.getDestinationDirectory().getAbsolutePath()));
 
-        return junitRunner.runTestClass(testClass, tests.stream()
+        return junitRunner.runTestClass(testClass.getQualifiedName(), tests.stream()
                 .map(test-> test.getSimpleName())
                 .collect(Collectors.toList()));
     }

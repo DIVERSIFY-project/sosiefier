@@ -8,14 +8,11 @@ import org.junit.runner.Computer;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Request;
 import org.junit.runner.Result;
-import spoon.reflect.declaration.CtClass;
-import spoon.reflect.declaration.CtMethod;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
-import java.util.stream.Collectors;
 
 /**
  * User: Simon
@@ -34,35 +31,13 @@ public class JunitRunner {
         this.classLoader = classLoader;
     }
 
-    public Result runTestMethods(List<CtMethod> methods) {
-        List<CtClass> list = methods.stream()
-                .map(mth -> mth.getParent())
-                .map(cl -> (CtClass) cl)
-                .distinct()
-                .collect(Collectors.toList());
-
-        List<String> methodName = methods.stream()
-                .map(mth -> mth.getSimpleName())
-                .collect(Collectors.toList());
-        return runTestClasses(list, methodName);
-    }
-
-    public Result runTestClass(CtClass test) {
-        return runTestClass(test, new ArrayList<>(0));
-    }
-
-    public Result runTestClass(CtClass test, List<String> methodsToRun) {
-        List<CtClass> list = new ArrayList<>(1);
+    public Result runTestClass(String test, List<String> methodsToRun) {
+        List<String> list = new ArrayList<>(1);
         list.add(test);
         return runTestClasses(list, methodsToRun);
     }
 
-    public Result runTestClasses(List<CtClass> tests) {
-        return runTestClasses(tests, new ArrayList<>(0));
-    }
-
-
-    protected Result runTestClasses(List<CtClass> tests, List<String> methodsToRun) {
+    protected Result runTestClasses(List<String> tests, List<String> methodsToRun) {
         try {
             Class<?>[] testClasses = loadClass(tests);
             Logger.reset();
@@ -105,10 +80,10 @@ public class JunitRunner {
         return result;
     }
 
-    protected Class<?>[] loadClass(List<CtClass> tests) throws ClassNotFoundException {
+    protected Class<?>[] loadClass(List<String> tests) throws ClassNotFoundException {
         Class<?>[] testClasses = new Class<?>[tests.size()];
         for(int i = 0; i < tests.size(); i++) {
-            testClasses[i] = classLoader.loadClass(tests.get(i).getQualifiedName());
+            testClasses[i] = classLoader.loadClass(tests.get(i));
         }
         return testClasses;
     }

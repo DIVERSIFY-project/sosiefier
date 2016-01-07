@@ -2,6 +2,8 @@ package fr.inria;
 
 import fr.inria.diversify.buildSystem.DiversifyClassLoader;
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
+import fr.inria.diversify.buildSystem.maven.MavenBuilder;
+import fr.inria.diversify.dspot.AssertGenerator;
 import fr.inria.diversify.dspot.DSpot;
 import fr.inria.diversify.runner.InputConfiguration;
 import fr.inria.diversify.runner.InputProgram;
@@ -51,9 +53,9 @@ public class Exp {
         for(int i = 1; i <= nbVersion; i++) {
             try {
                 log.flush();
-
-                String dir = checkout(i, false);
+                AssertGenerator.initLog(resultDir.getAbsolutePath(), i);
                 initRegressionClassLoader(i);
+                String dir = checkout(i, false);
 
                 DSpot sbse = new DSpot(inputConfiguration, regressionClassLoader);
 
@@ -107,8 +109,17 @@ public class Exp {
             filter.add(s);
         }
         regressionClassLoader.setClassFilter(filter);
+
+        compile(dir);
     }
 
+    protected void compile(String dir) throws InterruptedException, IOException {
+        String[] phases = new String[]{"clean", "compile"};
+        MavenBuilder builder = new MavenBuilder(dir);
+
+        builder.setGoals(phases);
+        builder.initTimeOut();
+    }
 
     protected void printClasses(List<CtClass> classes, String dir) {
         File dirFile = new File(dir);

@@ -53,8 +53,8 @@ public class ValueCreator {
             try {
                 type.getDeclaration().getActualClass().getConstructor(new Class[]{});
                 snippet = "new " + type.getQualifiedName() + "()";
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+//                e.printStackTrace();
             }
         }
 
