@@ -37,6 +37,10 @@ public class JunitRunner {
         return runTestClasses(list, methodsToRun);
     }
 
+    public Result runTestClasses(List<String> tests) {
+       return runTestClasses(tests, new ArrayList<>(0));
+    }
+
     protected Result runTestClasses(List<String> tests, List<String> methodsToRun) {
         try {
             Class<?>[] testClasses = loadClass(tests);
@@ -49,6 +53,7 @@ public class JunitRunner {
             Logger.close();
             return result;
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -71,6 +76,8 @@ public class JunitRunner {
     }
 
     protected Result runRequest(Request request, int timeOut) throws InterruptedException, ExecutionException, TimeoutException {
+//        System.setProperty("user.dir", inputProgram.getProgramDir());
+
         Result result = timedCall(new Callable<Result>() {
             public Result call() throws Exception {
                 return new JUnitCore().run(request);

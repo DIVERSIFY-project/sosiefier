@@ -95,7 +95,7 @@ public class Amplification {
               testsToRemove.add(tests.get(i));
             }
         }
-        makeDSpotClassTest(classTest, allTests, testsToRemove);
+//        makeDSpotClassTest(classTest, allTests, testsToRemove);
         return makeDSpotClassTest(classTest, ampTest, testsToRemove);
     }
 

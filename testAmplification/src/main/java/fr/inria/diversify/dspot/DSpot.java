@@ -11,7 +11,6 @@ import fr.inria.diversify.processor.ProcessorUtil;
 import fr.inria.diversify.processor.main.AbstractLoggingInstrumenter;
 import fr.inria.diversify.processor.main.BranchCoverageProcessor;
 import fr.inria.diversify.util.InitUtils;
-import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
 import org.apache.commons.io.FileUtils;
 import spoon.reflect.declaration.CtClass;
@@ -32,7 +31,6 @@ public class DSpot {
     protected  Set<String> filter;
     protected DiversityCompiler compiler;
     protected InputProgram inputProgram;
-    protected MavenBuilder builder;
 
     protected static DiversifyClassLoader regressionClassLoader;
 
@@ -125,12 +123,12 @@ public class DSpot {
     protected void init() throws IOException, InterruptedException {
         addBranchLogger();
         compiler = InitUtils.initSpoonCompiler(inputProgram, true);
-        initBuilder();
-    }
+    initBuilder();
+}
 
     protected void initBuilder() throws InterruptedException, IOException {
         String[] phases  = new String[]{"clean", "test"};
-        builder = new MavenBuilder(inputProgram.getProgramDir());
+        MavenBuilder builder = new MavenBuilder(inputProgram.getProgramDir());
 
         builder.setGoals(phases);
         builder.initTimeOut();

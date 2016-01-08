@@ -1,5 +1,6 @@
 package fr.inria.diversify.factories;
 
+import fr.inria.diversify.buildSystem.DiversifyClassLoader;
 import org.apache.commons.io.output.NullWriter;
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 import org.eclipse.jdt.internal.compiler.batch.Main;
@@ -24,6 +25,8 @@ import java.util.List;
  * Time: 11:39
  */
 public class DiversityCompiler extends JDTBasedSpoonCompiler {
+    protected DiversifyClassLoader customClassLoader;
+
     /**
      * Default constructor
      *
@@ -31,6 +34,10 @@ public class DiversityCompiler extends JDTBasedSpoonCompiler {
      */
     public DiversityCompiler(Factory factory) {
         super(factory);
+    }
+
+    public void setCustomClassLoader(DiversifyClassLoader customClassLoader) {
+        this.customClassLoader = customClassLoader;
     }
 
     public boolean compileFileIn(File directory, boolean withLog) {
@@ -69,19 +76,33 @@ public class DiversityCompiler extends JDTBasedSpoonCompiler {
         if (getSourceClasspath() != null) {
             finalClassPath = computeJdtClassPath();
         } else {
-            ClassLoader currentClassLoader = Thread.currentThread()
-                    .getContextClassLoader();// ClassLoader.getSystemClassLoader();
-            if (currentClassLoader instanceof URLClassLoader) {
-                URL[] urls = ((URLClassLoader) currentClassLoader).getURLs();
-                if (urls != null && urls.length > 0) {
-                    String classpath = ".";
-                    for (URL url : urls) {
-                        classpath += File.pathSeparator + url.getFile();
-                    }
-                    if (classpath != null) {
-                        finalClassPath = classpath;
-                    }
+            URL[] urls;
+            if(customClassLoader != null) {
+                urls = customClassLoader.getURLs();
+            } else {
+                ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+                urls = ((URLClassLoader) classLoader).getURLs();
+
+            }
+            if (urls != null && urls.length > 0) {
+                String classpath = ".";
+                for (URL url : urls) {
+                    classpath += File.pathSeparator + url.getFile();
                 }
+                if (classpath != null) {
+                    finalClassPath = classpath;
+                }
+//            if (classLoader instanceof URLClassLoader) {
+//                URL[] urls = ((URLClassLoader) classLoader).getURLs();
+//                if (urls != null && urls.length > 0) {
+//                    String classpath = ".";
+//                    for (URL url : urls) {
+//                        classpath += File.pathSeparator + url.getFile();
+//                    }
+//                    if (classpath != null) {
+//                        finalClassPath = classpath;
+//                    }
+//                }
             }
         }
 

@@ -6,7 +6,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.net.URLConnection;
 import java.util.*;
 
@@ -100,5 +102,22 @@ public class DiversifyClassLoader extends ClassLoader {
         byte[] classData = buffer.toByteArray();
         return defineClass(fullName,
                 classData, 0, classData.length);
+    }
+
+    public URL[] getURLs() {
+        List<URL> urls = new ArrayList<>();
+        for(String directory: classPaths) {
+            try {
+                urls.add((new File(directory).toURL()));
+            } catch (MalformedURLException e) {}
+        }
+        if(getParent() instanceof DiversifyClassLoader){
+            urls.addAll(Arrays.asList(((DiversifyClassLoader) getParent()).getURLs()));
+        }
+        if(getParent() instanceof URLClassLoader) {
+            urls.addAll(Arrays.asList(((URLClassLoader) getParent()).getURLs()));
+
+        }
+        return urls.toArray(new URL[urls.size()]);
     }
 }

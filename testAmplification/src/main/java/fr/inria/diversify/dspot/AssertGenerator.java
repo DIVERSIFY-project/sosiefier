@@ -111,9 +111,9 @@ public class AssertGenerator {
                     CtMethod cloneTest = getFactory().Core().clone(test);
                     newClass.addMethod(cloneTest);
                     LoggerUtils.printJavaFile(file, newClass);
-                    log.flush();
                 }
-            } catch (InterruptedException e) {}
+            } catch (Throwable e) {}
+            log.flush();
         }
 
         return newTest;
@@ -287,7 +287,6 @@ public class AssertGenerator {
             newClass.addMethod(mth);
             testsToRun.add(mth);
         }
-//        writeAndCompile(newClass);
         ObjectLog.reset();
         Result result = runTests(testsToRun, assertGeneratorClassLoader);
 
@@ -369,23 +368,6 @@ public class AssertGenerator {
 
         return newClass;
     }
-
-//    protected CtClass initTestClass() {
-//        testsToRun = new ArrayList<>();
-//        CtClass newClass = getFactory().Core().clone(originalClass);
-//        newClass.setParent(originalClass.getParent());
-//
-//        CtMethod cloneTest = getFactory().Core().clone(test);
-//        newClass.addMethod(cloneTest);
-//        testsToRun.add(cloneTest);
-//
-//        CtMethod testWithoutAssert = createTestWithoutAssert(new ArrayList<>(), false);
-//        testsToRun.add(testWithoutAssert);
-//        testWithoutAssert.setParent(newClass);
-//        newClass.addMethod(testWithoutAssert);
-//
-//        return newClass;
-//    }
 
     protected CtMethod createTestWithLog() {
         CtMethod newTest = getFactory().Core().clone(test);
