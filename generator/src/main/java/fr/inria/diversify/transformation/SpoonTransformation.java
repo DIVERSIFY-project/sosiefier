@@ -24,7 +24,7 @@ import java.io.IOException;
 public class SpoonTransformation<P extends CtElement, T extends CtElement> extends SingleTransformation {
     protected P transplantationPoint;
     protected T transplant;
-    protected T copyTransplant;
+    protected P copyTransplantationPoint;
 
     public void printJavaFile(String directory) throws IOException {
         printJavaFile(directory, null);
@@ -84,7 +84,7 @@ public class SpoonTransformation<P extends CtElement, T extends CtElement> exten
     public void apply(String srcDir) throws Exception {
         applyInfo();
         try {
-            copyTransplant = transplantationPoint.getFactory().Core().clone(transplant);
+            copyTransplantationPoint = transplantationPoint.getFactory().Core().clone(transplantationPoint);
             transplantationPoint.replace(transplant);
             printJavaFile(srcDir);
         } catch (Exception e) {
@@ -94,7 +94,7 @@ public class SpoonTransformation<P extends CtElement, T extends CtElement> exten
 
     @Override
     public void restore(String srcDir) throws Exception {
-        transplant.replace(copyTransplant);
+        transplant.replace(copyTransplantationPoint);
         printJavaFile(srcDir);
     }
 

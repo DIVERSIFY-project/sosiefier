@@ -38,6 +38,5 @@ public class NegateConditionalMutation extends MutationTransformation<CtBinaryOp
             transplant.setKind(BinaryOperatorKind.GE);
         if(kind.equals(BinaryOperatorKind.GT))
             transplant.setKind(BinaryOperatorKind.LE);
-
     }
 }

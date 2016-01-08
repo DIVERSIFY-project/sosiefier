@@ -5,15 +5,15 @@ import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.mutation.*;
-import spoon.reflect.code.BinaryOperatorKind;
-import spoon.reflect.code.CtBinaryOperator;
-import spoon.reflect.code.CtLocalVariable;
-import spoon.reflect.code.CtReturn;
+import spoon.reflect.code.*;
+import spoon.reflect.declaration.CtClass;
+import spoon.reflect.declaration.CtElement;
+import spoon.reflect.visitor.Query;
+import spoon.reflect.visitor.filter.TypeFilter;
 
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * User: Simon
@@ -23,8 +23,15 @@ import java.util.Random;
 public class MutationQuery extends TransformationQuery {
     protected ICoverageReport coverageReport;
     protected List<CtBinaryOperator> binaryOperators;
+    protected List<CtUnaryOperator> unaryOperators;
+    protected List<CtLiteral> numbers;
     protected List<CtReturn> returns;
     protected List<CtLocalVariable> inlineConstant;
+
+    protected static List<UnaryOperatorKind> increment = Arrays.asList(
+            new UnaryOperatorKind[]{UnaryOperatorKind.POSTINC,
+                    UnaryOperatorKind.PREINC,UnaryOperatorKind.POSTDEC,
+                    UnaryOperatorKind.PREDEC});
 
     protected static List<BinaryOperatorKind> negateConditional = Arrays.asList(
             new BinaryOperatorKind[]{BinaryOperatorKind.EQ,
@@ -45,7 +52,6 @@ public class MutationQuery extends TransformationQuery {
                     BinaryOperatorKind.SL,BinaryOperatorKind.SR,
                     BinaryOperatorKind.USR});
 
-
     public MutationQuery(InputProgram inputProgram) {
         super(inputProgram);
         this.coverageReport = inputProgram.getCoverageReport();
@@ -54,8 +60,17 @@ public class MutationQuery extends TransformationQuery {
 
     protected void init() {
         binaryOperators = getInputProgram().getAllElement(CtBinaryOperator.class);
+        unaryOperators = getInputProgram().getAllElement(CtUnaryOperator.class);
         returns = getInputProgram().getAllElement(CtReturn.class);
         inlineConstant = getInputProgram().getAllElement(CtLocalVariable.class);
+
+        List<CtLiteral> literals = getInputProgram().getAllElement(CtLiteral.class);
+        numbers = literals.stream()
+                .filter(lit -> lit.getType() != null)
+                .filter(lit -> lit.getValue() != null)
+                .filter(lit -> Number.class.isAssignableFrom(lit.getType().box().getActualClass()))
+                .filter(lit -> ((Number)lit.getValue()).doubleValue() != 0)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -90,51 +105,125 @@ public class MutationQuery extends TransformationQuery {
         }
     }
 
-    public NegateConditionalMutation getNegateConditionalMutation() throws Exception {
-        Random r  = new Random();
+    public IncrementMutation getIncrementMutationMutation() throws Exception {
+        CtUnaryOperator operator = unaryOperators.get(random.nextInt(unaryOperators.size()));
+        while (coverageReport.elementCoverage(operator) == 0 || !increment.contains(operator.getKind())) {
+            operator = unaryOperators.get(random.nextInt(binaryOperators.size()));
+        }
+        return new IncrementMutation(operator);
+    }
 
-        CtBinaryOperator operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
+    public InvertNegativeMutation getInvertNegativeMutation() throws Exception {
+        CtLiteral lit = numbers.get(random.nextInt(numbers.size()));
+        while (coverageReport.elementCoverage(lit) == 0) {
+            lit = numbers.get(random.nextInt(numbers.size()));
+        }
+        return new InvertNegativeMutation(lit);
+    }
+
+    public NegateConditionalMutation getNegateConditionalMutation() throws Exception {
+        CtBinaryOperator operator = binaryOperators.get(random.nextInt(binaryOperators.size()));
         while (coverageReport.elementCoverage(operator) == 0 || !negateConditional.contains(operator.getKind())) {
-            operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
+            operator = binaryOperators.get(random.nextInt(binaryOperators.size()));
         }
         return new NegateConditionalMutation(operator);
     }
 
     public ConditionalBoundaryMutation getConditionalBoundaryMutation() throws Exception {
-        Random r  = new Random();
-
-        CtBinaryOperator operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
+        CtBinaryOperator operator = binaryOperators.get(random.nextInt(binaryOperators.size()));
         while (coverageReport.elementCoverage(operator) == 0 || !conditionalBoundary.contains(operator.getKind())) {
-            operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
+            operator = binaryOperators.get(random.nextInt(binaryOperators.size()));
         }
         return new ConditionalBoundaryMutation(operator);
     }
 
     public MathMutation getMathMutation() throws Exception {
-        Random r  = new Random();
-        CtBinaryOperator operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
+        CtBinaryOperator operator = binaryOperators.get(random.nextInt(binaryOperators.size()));
         while (coverageReport.elementCoverage(operator) == 0 || !math.contains(operator.getKind())) {
-            operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
+            operator = binaryOperators.get(random.nextInt(binaryOperators.size()));
         }
         return new MathMutation(operator);
     }
 
     public RemoveConditionalMutation getRemoveConditionalMutation() throws Exception {
-        Random r  = new Random();
-        CtBinaryOperator operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
-        while (coverageReport.elementCoverage(operator) == 0) {
-            operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
+        CtBinaryOperator operator = binaryOperators.get(random.nextInt(binaryOperators.size()));
+        while (coverageReport.elementCoverage(operator) == 0 || !negateConditional.contains(operator.getKind())) {
+            operator = binaryOperators.get(random.nextInt(binaryOperators.size()));
         }
         return new RemoveConditionalMutation(operator);
     }
 
     public ReturnValueMutation getReturnValueMutation() {
-        Random r  = new Random();
-        CtReturn ret = returns.get(r.nextInt(returns.size()));
-        while (coverageReport.elementCoverage(ret) == 0) {
-            ret = returns.get(r.nextInt(returns.size()));
+        CtReturn ret = returns.get(random.nextInt(returns.size()));
+        while (coverageReport.elementCoverage(ret) == 0 || !(ret.getReturnedExpression() instanceof CtLiteral)) {
+            ret = returns.get(random.nextInt(returns.size()));
         }
         return new ReturnValueMutation(ret);
     }
 
+    public Map<String, MutationTransformation> getAllTransformationFor(CtClass cl) {
+        Map<String, MutationTransformation> transformations = new HashMap<>();
+
+        List<CtBinaryOperator> operators = Query.getElements(cl, new TypeFilter(CtBinaryOperator.class));
+        for(CtBinaryOperator operator : operators) {
+            String position = cl.getQualifiedName() + ":" + operator.getPosition().getLine();
+            BinaryOperatorKind operatorKind = operator.getKind();
+
+            if(negateConditional.contains(operatorKind)) {
+                String id = "NegateConditional_" + operator.toString() + "_" + position;
+                transformations.put(id, new NegateConditionalMutation(operator));
+            }
+
+            if(conditionalBoundary.contains(operatorKind)) {
+                String id = "ConditionalBoundary_" + operator.toString() + "_" + position;
+                transformations.put(id, new ConditionalBoundaryMutation(operator));
+            }
+
+            if(math.contains(operatorKind)) {
+                String id = "Math_" + operator.toString() + "_" + position;
+                transformations.put(id, new MathMutation(operator));
+            }
+
+            if(negateConditional.contains(operatorKind)) {
+                String id = "RemoveConditional_" + operator.toString() + "_" + position;
+                transformations.put(id, new RemoveConditionalMutation(operator));
+            }
+        }
+
+        List<CtUnaryOperator> UOperators = Query.getElements(cl, new TypeFilter(CtUnaryOperator.class));
+        for(CtUnaryOperator operator : UOperators) {
+            String position = cl.getQualifiedName() + ":" + operator.getPosition().getLine();
+            UnaryOperatorKind operatorKind = operator.getKind();
+
+            if(increment.contains(operatorKind)) {
+                String id = "Increment_" + operator.toString() + "_" + position;
+                transformations.put(id, new IncrementMutation(operator));
+            }
+        }
+
+        List<CtReturn> returns = Query.getElements(cl, new TypeFilter(CtReturn.class));
+        for(CtReturn ret : returns) {
+            if(ret.getReturnedExpression() instanceof CtLiteral) {
+                String position = cl.getQualifiedName() + ":" + ret.getPosition().getLine();
+                String id = "ReturnValue_" + ret.toString() + "_" + position;
+                transformations.put(id, new ReturnValueMutation(ret));
+            }
+        }
+
+        List<CtLiteral> literals = Query.getElements(cl, new TypeFilter(CtLiteral.class));
+        List<CtLiteral> numberLit = literals.stream()
+                .filter(lit -> lit.getType() != null)
+                .filter(lit -> lit.getValue() != null)
+                .filter(lit -> Number.class.isAssignableFrom(lit.getType().box().getActualClass()))
+                .filter(lit -> ((Number) lit.getValue()).doubleValue() != 0)
+                .collect(Collectors.toList());
+
+        for(CtLiteral nb : numberLit) {
+            String position = cl.getQualifiedName() + ":" + nb.getPosition().getLine();
+            String id = "InvertNegative_" + nb.toString() + "_" + position;
+            transformations.put(id, new InvertNegativeMutation(nb));
+        }
+
+        return transformations;
+    }
 }

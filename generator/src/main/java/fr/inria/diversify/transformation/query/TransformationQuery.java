@@ -13,11 +13,12 @@ import java.util.*;
  * Time: 18:09
  */
 public abstract class TransformationQuery {
-
+    protected Random random;
     protected InputProgram inputProgram;
 
 
     public TransformationQuery(InputProgram inputProgram) {
+        this.random = new Random();
         this.inputProgram = inputProgram;
     }
 
