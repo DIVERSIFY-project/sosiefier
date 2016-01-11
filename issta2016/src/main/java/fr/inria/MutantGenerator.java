@@ -36,7 +36,6 @@ public class MutantGenerator {
     protected final InputProgram inputProgram;
     protected InputConfiguration inputConfiguration;
     protected DiversityCompiler compiler;
-//    protected DiversifyClassLoader applicationClassLoader;
     protected Set<String> filter;
 
     public MutantGenerator(String propertiesFile) throws Exception, InvalidSdkException {
@@ -52,8 +51,8 @@ public class MutantGenerator {
         InitUtils.initDependency(inputConfiguration);
         initFilter();
         initCompiler(outputDirectory);
-    }
 
+    }
 
     protected CtClass original;
     public void generateMutant(String className) throws Exception {
@@ -67,7 +66,19 @@ public class MutantGenerator {
 
         Map<String, CtClass> mutants = generateAllMutant(cl);
         Map<String, Set<Failure>> mutantsFailures = runMutants(mutants);
+        createMutantTestSuite(mutants, mutantsFailures);
         Log.debug("");
+    }
+    protected void createMutantTestSuite(Map<String, CtClass> mutants, Map<String, Set<Failure>> failures)  {
+        MutantTestSuiteBuilder mutantTestSuiteBuilder = new MutantTestSuiteBuilder(inputProgram, original);
+
+        for(String mutantId : mutants.keySet()) {
+            try {
+                mutantTestSuiteBuilder.createMutantProject(mutants.get(mutantId), failures.get(mutantId));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     protected Map<String, Set<Failure>> runMutants(Map<String, CtClass> mutants) throws Exception {
@@ -86,11 +97,14 @@ public class MutantGenerator {
                     mutantsFailures.put(mutantId, failures);
                     Log.debug("number of test failure: {}", failures.size());
 
-                    List<String> verifyFailure = verifyFailure(mutants.get(mutantId));
-                    if (verifyFailure.size() != failures.size()) {
-                        Log.debug("");
-                    }
-            }else{
+//                    List<String> verifyFailure = verifyFailure(mutants.get(mutantId));
+//                    if (verifyFailure.size() != failures.size()) {
+//                        Log.debug("");
+//                    }
+                    MutantTestSuiteBuilder mutantTestSuiteBuilder = new MutantTestSuiteBuilder(inputProgram, original);
+                    mutantTestSuiteBuilder.addMutant(mutants.get(mutantId), failures);
+
+                }else{
                 Log.debug("mutant not compile");
             }
         }catch(Exception e){
@@ -100,19 +114,18 @@ public class MutantGenerator {
         return mutantsFailures;
     }
 
-    protected List<String> verifyFailure(CtClass cl) throws InterruptedException, IOException {
-
-        LoggerUtils.printJavaFile(new File(inputProgram.getAbsoluteSourceCodeDir()), cl);
-        String[] phases  = new String[]{"clean", "test"};
-        MavenBuilder builder = new MavenBuilder(inputProgram.getProgramDir());
-
-        builder.setGoals(phases);
-        builder.initTimeOut();
-
-        LoggerUtils.printJavaFile(new File(inputProgram.getAbsoluteSourceCodeDir()), original);
-
-        return builder.getFailedTests();
-    }
+//    protected List<String> verifyFailure(CtClass cl) throws InterruptedException, IOException {
+//        LoggerUtils.printJavaFile(new File(inputProgram.getAbsoluteSourceCodeDir()), cl);
+//        String[] phases  = new String[]{"clean", "test"};
+//        MavenBuilder builder = new MavenBuilder(inputProgram.getProgramDir());
+//
+//        builder.setGoals(phases);
+//        builder.initTimeOut();
+//
+//        LoggerUtils.printJavaFile(new File(inputProgram.getAbsoluteSourceCodeDir()), original);
+//
+//        return builder.getFailedTests();
+//    }
 
 
     protected Set<Failure> getFailures(Result result, Set<String> failureFilter) {
