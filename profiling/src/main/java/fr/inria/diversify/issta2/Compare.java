@@ -50,7 +50,7 @@ public class Compare extends SinglePointRunner {
     protected void run(Transformation trans) throws Exception {
         Log.info("trial {}", trial);
         Log.debug("output dir: " + tmpDir + "/" + sourceDir);
-        writePosition(tmpDir + "/transplant.json", (ASTTransformation) trans);
+//        writePosition(tmpDir + "/transplant.json", (ASTTransformation) trans);
 
         try {
             applyTransformation(trans);
@@ -78,10 +78,10 @@ public class Compare extends SinglePointRunner {
             }
 
             ((SinglePointSessionResults) sessionResults).addRunResults(trans);
-        } catch (ApplyTransformationException e) {
+        } catch (Exception e) {
             tryRestore(trans,e);
             e.printStackTrace();
-        } catch (BuildTransplantException e) {}
+        }
     }
 
     /**

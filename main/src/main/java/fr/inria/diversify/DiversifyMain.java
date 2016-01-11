@@ -123,7 +123,6 @@ public class DiversifyMain {
                 abstractRunner = multi;
                 break;
             }
-
             case "compare": {
                 SosieComparator comparator = new SosieComparator(inputConfiguration.getInputProgram());
                 comparator.addComparator(new BranchComparator());

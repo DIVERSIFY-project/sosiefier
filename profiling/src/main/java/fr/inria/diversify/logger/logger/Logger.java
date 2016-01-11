@@ -79,8 +79,10 @@ public class Logger {
     }
 
     public static void close() {
-        for ( LogWriter l : logs.values() ) {
-            l.close();
+        if(logs != null) {
+            for (LogWriter l : logs.values()) {
+                l.close();
+            }
         }
     }
 

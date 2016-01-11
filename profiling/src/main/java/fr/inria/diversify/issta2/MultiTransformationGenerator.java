@@ -27,7 +27,7 @@ public class MultiTransformationGenerator extends AbstractRunner {
     protected MultiTransformation currentMultiTransformation;
     protected boolean onlySosie;
     protected int transformationSize;
-    protected Map<Transformation, Set<Diff>> diffs;
+//    protected Map<Transformation, Set<Diff>> diffs;
 
     public MultiTransformationGenerator(InputConfiguration inputConfiguration, String project, String src) {
         this.sourceDir = src;
@@ -56,11 +56,11 @@ public class MultiTransformationGenerator extends AbstractRunner {
         if(!transformations.contains(currentMultiTransformation)) {
             transformations.add(currentMultiTransformation);
         }
-        Set<Diff> diffSet = currentMultiTransformation.getTransformations().stream()
-                .filter(t -> diffs.containsKey(t))
-                .flatMap(t -> diffs.get(t).stream())
-                .collect(Collectors.toSet());
-        diffs.put(currentMultiTransformation, diffSet);
+//        Set<Diff> diffSet = currentMultiTransformation.getTransformations().stream()
+//                .filter(t -> diffs.containsKey(t))
+//                .flatMap(t -> diffs.get(t).stream())
+//                .collect(Collectors.toSet());
+//        diffs.put(currentMultiTransformation, diffSet);
     }
 
     protected void applyAndCheck(Transformation trans) throws Exception {
@@ -120,9 +120,9 @@ public class MultiTransformationGenerator extends AbstractRunner {
             return "";
 
         Map<Transformation, Set<Diff>> multiDiffs = new HashMap<>();
-        for(Transformation transformation : transformations) {
-            multiDiffs.put(transformation, diffs.get(transformation));
-        }
+//        for(Transformation transformation : transformations) {
+//            multiDiffs.put(transformation, diffs.get(transformation));
+//        }
 
         JsonTransformationWriter writer = new JsonTransformationWriter();
         writer.addSection(JsonDiffOutput.class, new JsonDiffOutput(multiDiffs));
@@ -130,9 +130,9 @@ public class MultiTransformationGenerator extends AbstractRunner {
         return fileName + ".json";
     }
     public void setTransformationQuery(TransformationQuery transQuery) {
-        if(transQuery instanceof DiffQuery) {
-            diffs = ((DiffQuery) transQuery).getTransToDiffs();
-        }
+//        if(transQuery instanceof DiffQuery) {
+//            diffs = ((DiffQuery) transQuery).getTransToDiffs();
+//        }
         this.transQuery = transQuery;
     }
 
