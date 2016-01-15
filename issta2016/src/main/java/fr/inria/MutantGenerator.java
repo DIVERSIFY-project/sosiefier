@@ -14,6 +14,7 @@ import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
 import org.apache.commons.io.FileUtils;
+import org.eclipse.jgit.api.errors.GitAPIException;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 import spoon.compiler.Environment;
@@ -37,6 +38,7 @@ public class MutantGenerator {
     protected InputConfiguration inputConfiguration;
     protected DiversityCompiler compiler;
     protected Set<String> filter;
+    protected CtClass original;
 
     public MutantGenerator(String propertiesFile) throws Exception, InvalidSdkException {
         inputConfiguration = new InputConfiguration(propertiesFile);
@@ -54,7 +56,7 @@ public class MutantGenerator {
 
     }
 
-    protected CtClass original;
+
     public void generateMutant(String className) throws Exception {
         List<CtClass> classes = inputProgram.getAllElement(CtClass.class);
         CtClass cl = classes.stream()
@@ -65,74 +67,77 @@ public class MutantGenerator {
         original = cl;
 
         Map<String, CtClass> mutants = generateAllMutant(cl);
-        Map<String, Set<Failure>> mutantsFailures = runMutants(mutants);
+        Map<String, List<String>> mutantsFailures = runMutants(mutants);
         createMutantTestSuite(mutants, mutantsFailures);
         Log.debug("");
     }
-    protected void createMutantTestSuite(Map<String, CtClass> mutants, Map<String, Set<Failure>> failures)  {
-        MutantTestSuiteBuilder mutantTestSuiteBuilder = new MutantTestSuiteBuilder(inputProgram, original);
+    protected void createMutantTestSuite(Map<String, CtClass> mutants, Map<String, List<String>> failures) throws IOException, GitAPIException {
+        String repo = inputConfiguration.getProperty("result") + "/mutant";
+        MutantTestSuiteBuilder mutantTestSuiteBuilder = new MutantTestSuiteBuilder(inputProgram, original, repo);
 
-        for(String mutantId : mutants.keySet()) {
+        List<String> keySorted = failures.entrySet().stream()
+                .filter(entry -> !entry.getValue().isEmpty())
+                .sorted((e1, e2) -> e1.getValue().size() - e2.getValue().size())
+                .map(entry -> entry.getKey())
+                .collect(Collectors.toList());
+
+        List<String> keySelected = new ArrayList<>(10);
+        if(keySorted.size() > 10) {
+            keySelected.addAll(keySorted.subList(0, 5));
+            keySelected.addAll(keySorted.subList(keySorted.size() - 6, keySorted.size() - 1));
+        } else {
+            keySelected.addAll(keySorted);
+        }
+
+        for(String mutantId : keySelected) {
             try {
-                mutantTestSuiteBuilder.createMutantProject(mutants.get(mutantId), failures.get(mutantId));
+                List<String> failureSet = failures.get(mutantId);
+                if(!failureSet.isEmpty()) {
+                    mutantTestSuiteBuilder.addMutant(mutants.get(mutantId), failureSet, mutantId);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    protected Map<String, Set<Failure>> runMutants(Map<String, CtClass> mutants) throws Exception {
-        Map<String, Set<Failure>> mutantsFailures = new HashMap<>();
-
-        Log.debug("init failure filter");
-        Set<String> failureFilter = initFailureFilter();
+    protected Map<String, List<String>> runMutants(Map<String, CtClass> mutants) throws Exception {
+        Map<String, List<String>> mutantsFailures = new HashMap<>();
+//        Log.debug("init failure filter");
+//        Set<String> failureFilter = initFailureFilter();
 
         for(String mutantId : mutants.keySet()) {
             try {
+                CtClass mutant = mutants.get(mutantId);
                 Log.debug("run mutant: {}", mutantId);
-                boolean status = writeAndCompile(mutants.get(mutantId));
+                boolean status = writeAndCompile(mutant);
                 if (status) {
-                    Result result = runTests(buildClassLoader());
-                    Set<Failure> failures = getFailures(result, failureFilter);
+//                    Result result = runTests(buildClassLoader());
+//                    Set<Failure> failures = getFailures(result, failureFilter);
+                    LoggerUtils.printJavaFile(new File(inputProgram.getAbsoluteSourceCodeDir()), mutant);
+                    List<String> failures = runTest();
                     mutantsFailures.put(mutantId, failures);
                     Log.debug("number of test failure: {}", failures.size());
-
-//                    List<String> verifyFailure = verifyFailure(mutants.get(mutantId));
-//                    if (verifyFailure.size() != failures.size()) {
-//                        Log.debug("");
-//                    }
-                    MutantTestSuiteBuilder mutantTestSuiteBuilder = new MutantTestSuiteBuilder(inputProgram, original);
-                    mutantTestSuiteBuilder.addMutant(mutants.get(mutantId), failures);
-
                 }else{
-                Log.debug("mutant not compile");
-            }
-        }catch(Exception e){
+                    Log.debug("mutant not compile");
+                }
+                LoggerUtils.printJavaFile(new File(inputProgram.getAbsoluteSourceCodeDir()), original);
+            }catch(Exception e){
                 e.printStackTrace();
             }
         }
         return mutantsFailures;
     }
 
-//    protected List<String> verifyFailure(CtClass cl) throws InterruptedException, IOException {
-//        LoggerUtils.printJavaFile(new File(inputProgram.getAbsoluteSourceCodeDir()), cl);
-//        String[] phases  = new String[]{"clean", "test"};
-//        MavenBuilder builder = new MavenBuilder(inputProgram.getProgramDir());
-//
-//        builder.setGoals(phases);
-//        builder.initTimeOut();
-//
-//        LoggerUtils.printJavaFile(new File(inputProgram.getAbsoluteSourceCodeDir()), original);
-//
-//        return builder.getFailedTests();
-//    }
+    protected List<String> runTest() throws InterruptedException, IOException {
+//        String[] phases  = new String[]{"-Dmaven.compiler.useIncrementalCompilation=false", "-Dmaven.test.useIncrementalCompilation=false", "test"};
+        String[] phases  = new String[]{"clean", "test"};
+        MavenBuilder builder = new MavenBuilder(inputProgram.getProgramDir());
+        builder.setGoals(phases);
+        builder.setTimeOut(100);
+        builder.runBuilder();
 
-
-    protected Set<Failure> getFailures(Result result, Set<String> failureFilter) {
-        return result.getFailures().stream()
-                .filter(failure -> !failureFilter.contains(failure.getDescription().getMethodName()))
-                .collect(Collectors.toSet());
-
+        return builder.getFailedTests();
     }
 
     protected DiversifyClassLoader buildClassLoader() {
@@ -140,6 +145,12 @@ public class MutantGenerator {
         classPaths.add(inputProgram.getProgramDir() + "/" + inputProgram.getClassesDir());
         classPaths.add(inputProgram.getProgramDir() + "/" + inputProgram.getTestClassesDir());
         return new DiversifyClassLoader(Thread.currentThread().getContextClassLoader(), classPaths);
+    }
+
+    protected Set<Failure> getFailures(Result result, Set<String> failureFilter) {
+        return result.getFailures().stream()
+                .filter(failure -> !failureFilter.contains(failure.getDescription().getMethodName()))
+                .collect(Collectors.toSet());
     }
 
     protected Set<String> initFailureFilter() throws IOException, ClassNotFoundException {
@@ -221,12 +232,10 @@ public class MutantGenerator {
 
         builder.setGoals(phases);
         builder.initTimeOut();
-//        InitUtils.addApplicationClassesToClassPath(inputProgram);
     }
 
     protected boolean writeAndCompile(CtClass classInstru) throws IOException {
         FileUtils.cleanDirectory(compiler.getOutputDirectory());
-//        FileUtils.cleanDirectory(compiler.getDestinationDirectory());
         try {
             LoggerUtils.printJavaFile(compiler.getOutputDirectory(), classInstru);
             return compiler.compileFileIn(compiler.getOutputDirectory(), true);

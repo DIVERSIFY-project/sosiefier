@@ -101,7 +101,7 @@ public class Exp {
 
         List<String> classPaths = new ArrayList<>();
         classPaths.add(dir + "/" + inputConfiguration.getClassesDir());
-        classPaths.add(dir + "/" + inputConfiguration.getRelativeTestSourceCodeDir());
+        classPaths.add(dir + "/target/test-classes/");
         regressionClassLoader = new DiversifyClassLoader(Thread.currentThread().getContextClassLoader(), classPaths);
 
         Set<String> filter = new HashSet<>();
@@ -114,7 +114,7 @@ public class Exp {
     }
 
     protected void compile(String dir) throws InterruptedException, IOException {
-        String[] phases = new String[]{"clean", "compile"};
+        String[] phases = new String[]{"clean", "test"};
         MavenBuilder builder = new MavenBuilder(dir);
 
         builder.setGoals(phases);

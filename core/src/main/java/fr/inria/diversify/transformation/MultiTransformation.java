@@ -47,7 +47,12 @@ public class MultiTransformation extends Transformation {
 
     @Override
     public String getTransformationString() throws Exception {
-        return null;
+        String ret = "";
+
+        for(Transformation transformation : transformations) {
+            ret += transformation.getTransformationString() +"\n";
+        }
+        return ret;
     }
 
     @Override
@@ -136,8 +141,5 @@ public class MultiTransformation extends Transformation {
             list.addAll(getPositions());
         }
         return list;
-//        return transformations.stream()
-//                .flatMap(t -> t.getPositions().stream())
-//                .collect(Collectors.toList());
     }
 }

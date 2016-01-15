@@ -8,10 +8,9 @@ import java.util.*;
  * Time: 15:36
  */
 public  class Observation {
-    protected String junitAssertClassName = "junit.framework.Assert";
+    public static String junitAssertClassName = "junit.framework.Assert";
     protected Set<String> notDeterministValues;
     protected Map<String, Object> observations;
-
     public Observation() {
         this.observations = new HashMap<String, Object>();
         this.notDeterministValues = new HashSet<String>();

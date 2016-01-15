@@ -15,7 +15,6 @@ import java.io.*;
 public class GitUtils {
     protected String remotePath = "https://github.com/simonAllier/sosie-exp.git";
     protected String localPath;
-    protected Repository localRepository;
     protected Git git;
 
 
@@ -27,7 +26,7 @@ public class GitUtils {
     public GitUtils(String localPath) throws IOException, GitAPIException {
         this.localPath = localPath;
 
-        localRepository = new FileRepository(localPath + "/.git");
+        FileRepository localRepository = new FileRepository(localPath + "/.git");
         git = new Git(localRepository);
     }
 
@@ -74,6 +73,7 @@ public class GitUtils {
     public void commit(String message) throws GitAPIException {
         git.commit().setMessage(message).call();
     }
+
 
     private void updateExpList(String s) throws IOException, GitAPIException {
         BufferedWriter out = new BufferedWriter(new FileWriter(localPath + "/exp"));

@@ -87,6 +87,7 @@ public class AssertGenerator {
     protected CtMethod generateAssert(CtMethod test, List<Integer> statementsIndexToAssert) throws IOException, ClassNotFoundException {
         this.test = test;
         this.statementsIndexToAssert = statementsIndexToAssert;
+
         CtMethod newTest = generateAssert();
         if(newTest == null || !isCorrect(newTest)) {
             return null;
@@ -102,7 +103,7 @@ public class AssertGenerator {
                 Thread.sleep(200);
                 if(!equalResult(r1, r2)) {
                     Log.info("");
-                    log.write("version: "+ version + ", " + test.getSignature());
+                    log.write("version: "+ version + ", " + test.getSignature()+ "\n");
                     File file = new File(resultDir + "/assertGenerationTestSource/"+ version + "/" + System.currentTimeMillis() + "/");
                     file.mkdirs();
 
@@ -119,8 +120,7 @@ public class AssertGenerator {
         return newTest;
     }
 
-    private boolean equalResult(Result r1, Result r2) {
-
+    protected boolean equalResult(Result r1, Result r2) {
         return (r1 == null) == (r2 == null)
                 && r1 == null
                 || r1.getFailures().size() == r2.getFailures().size();
@@ -168,25 +168,6 @@ public class AssertGenerator {
         testWithoutAssert.setSimpleName(test.getSimpleName());
         Factory factory = testWithoutAssert.getFactory();
 
-        CtAnnotation testAnnotation = testWithoutAssert.getAnnotations().stream()
-                .filter(annotation -> annotation.toString().contains("Test"))
-                .findFirst().orElse(null);
-
-        if(testAnnotation != null) {
-            testWithoutAssert.removeAnnotation(testAnnotation);
-        }
-
-        testAnnotation = factory.Core().createAnnotation();
-        CtTypeReference<Object> ref = factory.Core().createTypeReference();
-        ref.setSimpleName("Test");
-
-        CtPackageReference refPackage = factory.Core().createPackageReference();
-        refPackage.setSimpleName("org.junit");
-        ref.setPackage(refPackage);
-        testAnnotation.setAnnotationType(ref);
-
-
-        Map<String, Object> elementValue = new HashMap<String, Object>();
         Throwable exception = failure.getException();
         if(exception instanceof  AssertionError)   {
             exception = exception.getCause();
@@ -197,12 +178,26 @@ public class AssertGenerator {
         } else {
             exceptionClass = exception.getClass();
         }
-        elementValue.put("expected", exceptionClass);
-        testAnnotation.setElementValues(elementValue);
 
-        testWithoutAssert.addAnnotation(testAnnotation);
+        CtTry tryBlock = factory.Core().createTry();
+        tryBlock.setBody(testWithoutAssert.getBody());
+        String snippet = " junit.framework.TestCase.fail(\"" +test.getSimpleName()+" should have thrown " + exceptionClass.getSimpleName()+"\")";
+        tryBlock.getBody().addStatement(factory.Code().createCodeSnippetStatement(snippet));
 
+        CtCatch ctCatch = factory.Core().createCatch();
+        CtTypeReference exceptionType = factory.Type().createReference(exceptionClass);
+        ctCatch.setParameter(factory.Code().createCatchVariable(exceptionType, "eee"));
 
+        ctCatch.setBody(factory.Core().createBlock());
+
+        List<CtCatch> catchers = new ArrayList<>(1);
+        catchers.add(ctCatch);
+        tryBlock.setCatchers(catchers);
+
+        CtBlock body = factory.Core().createBlock();
+        body.addStatement(tryBlock);
+
+        testWithoutAssert.setBody(body);
         return testWithoutAssert;
     }
 
@@ -221,8 +216,7 @@ public class AssertGenerator {
         ObjectLog.reset();
 
         Result result = runTests(testsToRun, assertGeneratorClassLoader);
-
-         return buildTestWithAssert(ObjectLog.getObservations());
+        return buildTestWithAssert(ObjectLog.getObservations());
     }
 
     protected CtMethod buildTestWithAssert(Map<Integer, Observation> observations) {
@@ -239,6 +233,7 @@ public class AssertGenerator {
                             + stmt.toString();
                     CtStatement localVarStmt = getFactory().Code().createCodeSnippetStatement(localVarSnippet);
                     stmt.replace(localVarStmt);
+                    localVarStmt.setParent(stmt.getParent());
                     localVarStmt.insertAfter(assertStmt);
                 } else {
                     stmt.insertAfter(assertStmt);
@@ -249,13 +244,9 @@ public class AssertGenerator {
         return testWithAssert;
     }
 
-    protected boolean isCorrect(CtMethod test) {
-        CtClass newClass = initTestClass();
-
-        CtMethod cloneTest = getFactory().Core().clone(test);
-        newClass.addMethod(cloneTest);
-
-        return writeAndCompile(newClass);
+    protected boolean isCorrect(CtMethod test) throws IOException, ClassNotFoundException {
+        Result result = runSingleTest(test, assertGeneratorClassLoader);
+        return result != null && result.getFailures().isEmpty();
     }
 
     protected void removeFailAssert() throws IOException, ClassNotFoundException {
@@ -436,6 +427,7 @@ public class AssertGenerator {
 
     protected CtMethod createTestWithoutAssert(List<Integer> assertIndexToKeep, boolean updateStatementsIndexToAssert) {
         CtMethod newTest = getFactory().Core().clone(test);
+        newTest.setParent(test.getParent());
         newTest.setSimpleName(test.getSimpleName() + "_withoutAssert");
 
         int stmtIndex = 0;

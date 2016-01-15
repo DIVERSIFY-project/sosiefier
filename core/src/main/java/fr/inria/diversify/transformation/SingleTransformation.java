@@ -21,7 +21,6 @@ public abstract class SingleTransformation extends Transformation {
     public abstract String packageLocationName();
     public abstract String methodLocationName();
     public abstract SourcePosition getPosition();
-    public abstract String getTransformationString() throws Exception;
 
     public abstract int line();
 

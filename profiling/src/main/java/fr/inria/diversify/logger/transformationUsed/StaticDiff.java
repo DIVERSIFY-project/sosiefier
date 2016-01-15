@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
  * Time: 16:48
  */
 public class StaticDiff implements Diff {
-    Map<String, Set<String>> methodDiffs;
-    Map<String, Set<String>> branchesDiff;
+    protected Map<String, Set<String>> methodDiffs;
+    protected Map<String, Set<String>> branchesDiff;
 
     public StaticDiff() {
         this.branchesDiff = new HashMap<>();
@@ -52,7 +52,28 @@ public class StaticDiff implements Diff {
 
     @Override
     public int size() {
-        return methodDiffs.size() + branchesDiff.size();
+        return methodDiffs.values()
+                .stream()
+                .mapToInt(set -> set.size())
+                .sum()
+                + branchesDiff.values()
+                .stream()
+                .mapToInt(set -> set.size())
+                .sum();
+    }
+
+    public int branchDiffSize() {
+        return branchesDiff.values()
+                .stream()
+                .mapToInt(set -> set.size())
+                .sum();
+    }
+
+    public int methodDiffSize() {
+        return methodDiffs.values()
+                .stream()
+                .mapToInt(set -> set.size())
+                .sum();
     }
 
     @Override
@@ -63,10 +84,19 @@ public class StaticDiff implements Diff {
             while (i.hasNext()) {
                 String key = (String) i.next();
                 String value = o.getString(key);
-                Set<String> set = Arrays.stream(value.substring(0, value.length() - 1).split(","))
-                        .map(item -> item.substring(1, item.length() - 1))
-                        .collect(Collectors.toSet());
-                methodDiffs.put(key, set);
+                String[] tmp = value.substring(1, value.length() - 1).split(",");
+                List<String> list = new ArrayList<>();
+                for(int n = 0; n < tmp.length; n++) {
+                    if(n != 0 &&
+                            ((tmp[n].contains(">") && tmp[n-1].contains("<"))
+                                    || (tmp[n].contains(")") && tmp[n-1].contains("(")))) {
+                        String add = list.remove(list.size()-1) + tmp[n];
+                        list.add(add);
+                    } else {
+                        list.add(tmp[n]);
+                    }
+                }
+                methodDiffs.put(key, new HashSet<>(list));
             }
         }
         if(jsonObject.has("branchesDiff")) {
@@ -85,6 +115,34 @@ public class StaticDiff implements Diff {
 
     @Override
     public void merge(Diff other) {
+        StaticDiff otherStaticDiff = (StaticDiff) other;
 
+        if(!methodDiffs.containsKey("add")) {
+            methodDiffs.put("add", new HashSet<>());
+        }
+        if(!methodDiffs.containsKey("delete")) {
+            methodDiffs.put("delete", new HashSet<>());
+        }
+
+        if(!branchesDiff.containsKey("add")) {
+            branchesDiff.put("add", new HashSet<>());
+        }
+        if(!branchesDiff.containsKey("delete")) {
+            branchesDiff.put("delete", new HashSet<>());
+        }
+
+        methodDiffs.get("add").addAll(otherStaticDiff.methodDiffs.getOrDefault("add", new HashSet<>()));
+        methodDiffs.get("delete").addAll(otherStaticDiff.methodDiffs.getOrDefault("delete", new HashSet<>()));
+
+        branchesDiff.get("add").addAll(otherStaticDiff.branchesDiff.getOrDefault("add", new HashSet<>()));
+        branchesDiff.get("delete").addAll(otherStaticDiff.branchesDiff.getOrDefault("delete", new HashSet<>()));
+    }
+
+    public Map<String, Set<String>> getMethodDiffs() {
+        return methodDiffs;
+    }
+
+    public Map<String, Set<String>> getBranchesDiff() {
+        return branchesDiff;
     }
 }

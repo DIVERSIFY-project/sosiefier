@@ -99,7 +99,7 @@ public class StatementAdder extends AbstractAmp {
         CodeFragment clone = factory.Core().clone(codeFragment);
 
         for(CtVariableReference var : codeFragment.getInputContext().getVar()) {
-            List<CtVariableReference> candidates = inputContext.allCandidate(var.getType(), true);
+            List<CtVariableReference> candidates = inputContext.allCandidate(var.getType(), true, false);
             CtVariableReference candidate;
             if(candidates.isEmpty()) {
                 CodeFragment cfLocalVar = getLocalVar(var.getType(), inputContext);

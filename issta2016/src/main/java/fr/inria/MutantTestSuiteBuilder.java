@@ -4,13 +4,14 @@ import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
-import org.junit.runner.notification.Failure;
+//import org.junit.runner.notification.Failure;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.Factory;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,50 +24,78 @@ import java.util.stream.Collectors;
 public class MutantTestSuiteBuilder {
     protected InputProgram inputProgram;
     protected CtClass originalClass;
+    protected int count;
+    protected String repo;
 
-    public MutantTestSuiteBuilder(InputProgram inputProgram , CtClass originalClass) {
+    public MutantTestSuiteBuilder(InputProgram inputProgram , CtClass originalClass, String repo) throws IOException {
         this.inputProgram = inputProgram;
         this.originalClass = originalClass;
+        this.repo = repo;
     }
 
-    public void addMutant(CtClass mutantClass, Collection<Failure> failures) throws IOException {
-        Set<CtClass> mutantTestClasses = createMutantProject(mutantClass, failures);
+    public void addMutant(CtClass mutantClass, Collection<String> failures, String mutationId) throws IOException {
         try {
-            List<String> result = verifyFailure();
-            Log.debug("");
-        } catch (InterruptedException e) {
+            Set<CtClass> mutantTestClasses = createMutantTestClass(mutantClass, failures);
+
+            if (!mutantTestClasses.isEmpty()) {
+                createMutantRepo(mutantClass, mutantTestClasses, failures, mutationId);
+//        addGitBranch(mutantClass, mutantTestClasses);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
-            Log.debug("");
         }
-
-        addGitBranch(mutantClass, mutantTestClasses);
-
-        restore(mutantTestClasses);
     }
 
-    protected List<String> verifyFailure() throws InterruptedException, IOException {
-        String[] phases  = new String[]{"clean", "test"};
+    protected void createMutantRepo(CtClass mutantClass, Set<CtClass> mutantTestClasses, Collection<String> failures, String mutationId) throws IOException {
+        File dir = new File(repo + "/" + count++);
+        dir.mkdirs();
+
+        FileWriter failuresSummary = new FileWriter(dir.getAbsoluteFile() + "/failures");
+        for(String failure : failures) {
+            failuresSummary.write(failure + "\n");
+        }
+        failuresSummary.close();
+
+        FileWriter mutation = new FileWriter(dir.getAbsoluteFile() + "/mutation");
+        mutation.write(mutationId);
+        mutation.close();
+
+        File sourceDir = new File(dir.getAbsolutePath() + "/src/");
+        sourceDir.mkdirs();
+
+        File testSourceDir = new File(dir.getAbsolutePath() + "/test/");
+        testSourceDir.mkdirs();
+
+        LoggerUtils.printJavaFile(sourceDir, mutantClass);
+
+        for (CtClass testClass : mutantTestClasses) {
+            LoggerUtils.printJavaFile(testSourceDir, testClass);
+        }
+    }
+
+    protected List<String> runTest() throws InterruptedException, IOException {
         MavenBuilder builder = new MavenBuilder(inputProgram.getProgramDir());
+//        String[] phases  = new String[]{"-Dmaven.compiler.useIncrementalCompilation=false", "-Dmaven.test.useIncrementalCompilation=false", "test"};
+        String[] phases  = new String[]{"clean", "test"};
 
         builder.setGoals(phases);
         builder.initTimeOut();
 
-        return builder.getFailedTests();
+        if(builder.getCompileError()) {
+            return null;
+        } else {
+            return builder.getFailedTests();
+        }
     }
 
-
-        protected void addGitBranch(CtClass mutantClass, Set<CtClass> mutantTestClasses) {
-
-    }
-
-    protected Set<CtClass> createMutantProject(CtClass mutantClass, Collection<Failure> failures) throws IOException {
+    protected Set<CtClass> createMutantTestClass(CtClass mutantClass, Collection<String> failures) throws IOException, InterruptedException {
         File sourceDir = new File(inputProgram.getAbsoluteSourceCodeDir());
         File testSourceDir = new File(inputProgram.getAbsoluteTestSourceCodeDir());
 
         LoggerUtils.printJavaFile(sourceDir, mutantClass);
 
-        Map<CtClass, List<Failure>> failureByTestClass = failures.stream()
-                .collect(Collectors.groupingBy(failure -> findTestClass(failure.getDescription().getClassName())));
+        Map<CtClass, List<String>> failureByTestClass = failures.stream()
+                .collect(Collectors.groupingBy(failure -> findTestClass(getClass(failure))));
 
         cloneTestClass = new HashMap<>();
         Set<CtClass> mutantTestClasses = failureByTestClass.entrySet().stream()
@@ -77,15 +106,21 @@ public class MutantTestSuiteBuilder {
             LoggerUtils.printJavaFile(testSourceDir, testClass);
         }
 
+        List<String> result = runTest();
+        if(result == null || !result.isEmpty()) {
+                mutantTestClasses.clear();
+        }
+        restore(mutantTestClasses);
         return mutantTestClasses;
     }
+
     Map<String, CtClass> cloneTestClass;
-    protected Collection<CtClass> removeFailTest(CtClass testClass, List<Failure> failures) {
+    protected Collection<CtClass> removeFailTest(CtClass testClass, List<String> failures) {
         Factory factory = testClass.getFactory();
 
 
         Set<String> testMthNames = failures.stream()
-                .map(failure -> failure.getDescription().getMethodName())
+                .map(failure -> getMethod(failure))
                 .collect(Collectors.toSet());
         Set<CtMethod> allTestMths = testClass.getAllMethods();
 
@@ -128,5 +163,16 @@ public class MutantTestSuiteBuilder {
                 .filter(c -> c.getQualifiedName().equals(className))
                 .findFirst()
                 .orElse(null);
+    }
+
+    protected String getMethod(String failure) {
+        String[] tmp = failure.split("\\.");
+
+        return tmp[tmp.length -1];
+    }
+
+    protected String getClass(String failure) {
+
+        return failure.substring(0,failure.lastIndexOf("."));
     }
 }

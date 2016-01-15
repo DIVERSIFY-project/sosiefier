@@ -34,17 +34,23 @@ public class InputContext {
 
 
     public List<CtVariableReference> allCandidate(CtTypeReference<?> type, boolean subType) {
+        return allCandidate(type, subType, true);
+    }
+
+    public List<CtVariableReference> allCandidate(CtTypeReference<?> type, boolean subType, boolean withGenericType) {
         List<CtVariableReference> candidate = new ArrayList<>();
 
         for (CtVariableReference<?> var : variableReferences) {
             try {
                 CtTypeReference<?> varType = var.getType();
                 if (subType) {
-                    if (type.isSubtypeOf(varType) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
+                    if (type.isSubtypeOf(varType)
+                    && (!withGenericType || varType.getActualTypeArguments().equals(type.getActualTypeArguments()))) {
                         candidate.add(var);
                     }
                 } else {
-                    if (varType.equals(type) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
+                    if (varType.equals(type)
+                            &&  (!withGenericType || varType.getActualTypeArguments().equals(type.getActualTypeArguments()))) {
                         candidate.add(var);
                     }
                 }

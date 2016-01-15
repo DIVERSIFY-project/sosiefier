@@ -37,13 +37,6 @@ public class InitUtils {
 
         if(builder.equals("maven")) {
             t.resolveDependencies(inputConfiguration.getInputProgram());
-
-//            String dependencyPom = inputConfiguration.getProperty("dependencyPom");
-//            if (dependencyPom != null) {
-//                t.DependencyResolver(inputConfiguration.getProperty("project") + "/pom.xml");
-//                t.DependencyResolver(inputConfiguration.getProperty("project") + "/" + dependencyPom);
-//            }
-
             String androidSdk = inputConfiguration.getProperty("AndroidSdk");
             if (androidSdk != null) {
                 t.resolveAndroidDependencies(androidSdk);

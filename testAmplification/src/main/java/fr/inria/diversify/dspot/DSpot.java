@@ -144,7 +144,7 @@ public class DSpot {
         LoggerUtils.applyProcessor(factory, m);
 
         File fileFrom = new File(inputProgram.getAbsoluteSourceCodeDir());
-        LoggerUtils.writeJavaClass(factory, fileFrom, fileFrom);
+        LoggerUtils.printAllClasses(factory, fileFrom, fileFrom);
 
         LoggerUtils.copyLoggerPackage(inputProgram, inputProgram.getProgramDir(), "fr.inria.diversify.logger.logger");
         ProcessorUtil.writeInfoFile(inputProgram.getProgramDir());
@@ -153,6 +153,12 @@ public class DSpot {
         public static void main(String[] args) throws Exception, InvalidSdkException {
         DSpot sbse = new DSpot(args[0]);
         sbse.generateTest();
+    }
+
+    public void clean() throws IOException {
+        FileUtils.forceDelete(compiler.getDestinationDirectory());
+        FileUtils.forceDelete(compiler.getOutputDirectory());
+        FileUtils.forceDelete(new File(inputProgram.getProgramDir()));
     }
 
     public InputProgram getInputProgram() {

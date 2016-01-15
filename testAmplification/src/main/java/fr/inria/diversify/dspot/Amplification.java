@@ -108,15 +108,15 @@ public class Amplification {
         ampTests.add(test);
 
         for (int i = 0; i < maxIteration; i++) {
-//            Log.debug("iteration {}:", i);
+            Log.debug("iteration {}:", i);
 
             Collection<CtMethod> testToAmp = testSelector.selectTestToAmp(ampTests, newTests, 10);
             if(testToAmp.isEmpty()) {
                 break;
             }
             newTests = ampTest(testToAmp);
-//            Log.debug("{} tests selected to be amplified", testToAmp.size());
-//            Log.debug("{} new tests generated", newTests.size());
+            Log.debug("{} tests selected to be amplified", testToAmp.size());
+            Log.debug("{} new tests generated", newTests.size());
 
             CtClass classWithLogger = testSelector.buildClassWithLogger(originalClass, newTests);
             boolean status = writeAndCompile(classWithLogger);

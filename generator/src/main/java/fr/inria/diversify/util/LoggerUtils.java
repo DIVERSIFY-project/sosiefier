@@ -58,14 +58,13 @@ public class LoggerUtils {
         pm.process();
     }
 
-    public static void writeJavaClass(Factory factory, File out, File fileFrom) {
+    public static void printAllClasses(Factory factory, File out, File fileFrom) {
         Environment env = factory.getEnvironment();
         Processor processor = new JavaOutputProcessorWithFilter(out, new DefaultJavaPrettyPrinter(env), allClassesName(fileFrom));
         try {
             applyProcessor(factory, processor);
         } catch (Exception e) {
             e.printStackTrace();
-            Log.debug("");
         }
     }
 
@@ -78,10 +77,9 @@ public class LoggerUtils {
             processor.setFactory(factory);
 
             processor.createJavaFile(type);
-            Log.debug("write type {} in directory {}", type.getQualifiedName(), directory);
+            Log.trace("write type {} in directory {}", type.getQualifiedName(), directory);
         } catch (Exception e) {
             e.printStackTrace();
-            Log.debug("");
         }
     }
 }

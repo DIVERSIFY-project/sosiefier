@@ -53,7 +53,6 @@ public class JunitRunner {
             Logger.close();
             return result;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -68,6 +67,7 @@ public class JunitRunner {
 
     protected Request buildRequest(Class<?>[] testClasses, List<String> methodsToRun) {
         Request classesRequest = Request.classes(new Computer(), testClasses);
+       //Request.runner((new Computer()).getSuite(new JUnit4Builder(),testClasses))
         if(methodsToRun.isEmpty()) {
             return classesRequest;
         } else {
@@ -76,8 +76,6 @@ public class JunitRunner {
     }
 
     protected Result runRequest(Request request, int timeOut) throws InterruptedException, ExecutionException, TimeoutException {
-//        System.setProperty("user.dir", inputProgram.getProgramDir());
-
         Result result = timedCall(new Callable<Result>() {
             public Result call() throws Exception {
                 return new JUnitCore().run(request);

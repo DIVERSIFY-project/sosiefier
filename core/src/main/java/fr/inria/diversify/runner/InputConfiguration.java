@@ -84,7 +84,7 @@ public class InputConfiguration {
      * Gets the specific value of a property
      *
      * @param key Key to the value
-     * @return A string with the value
+     * @return A string with the value                                                      g
      */
     public String getProperty(String key) {
         return getProperties().getProperty(key);

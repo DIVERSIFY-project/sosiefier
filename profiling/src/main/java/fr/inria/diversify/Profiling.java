@@ -124,7 +124,7 @@ public class Profiling {
         if(transform) {
             File fileFrom = new File(inputProgram.getAbsoluteSourceCodeDir());
             File out = new File(inputProgram.getProgramDir() + "/" + mainSrc);
-            LoggerUtils.writeJavaClass(factory, out, fileFrom);
+            LoggerUtils.printAllClasses(factory, out, fileFrom);
         }
     }
 
@@ -192,7 +192,7 @@ public class Profiling {
         if(transform) {
             File fileFrom = new File(inputProgram.getAbsoluteTestSourceCodeDir());
             File out = new File(inputProgram.getProgramDir() + "/" + testSrc);
-            LoggerUtils.writeJavaClass(factory, out, fileFrom);
+            LoggerUtils.printAllClasses(factory, out, fileFrom);
         }
     }
 

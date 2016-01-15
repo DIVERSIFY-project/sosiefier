@@ -61,13 +61,13 @@ public abstract class ASTTransformation extends SingleTransformation {
      */
     public String getTransformationString() throws Exception {
         copyTransplant = buildReplacementElement();
-        transplantationPoint.getCtCodeFragment().replace(copyTransplant);
+//        transplantationPoint.getCtCodeFragment().replace(copyTransplant);
+//
+//        String ret = transplantationPoint.getCtCodeFragment().toString();
+//
+//        copyTransplant.replace(transplantationPoint.getCtCodeFragment());
 
-        String ret = transplantationPoint.getCtCodeFragment().getParent().toString();
-
-        copyTransplant.replace(transplantationPoint.getCtCodeFragment());
-
-        return ret;
+        return copyTransplant.toString();
     }
 
     /**
