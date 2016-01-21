@@ -75,7 +75,7 @@ public class Amplification {
         List<CtMethod> ampTest = new ArrayList<>();
         List<CtMethod> testsToRemove = new ArrayList<>();
         for(int i = 0; i < tests.size(); i++) {
-            Log.debug("amp {} ({}/{})", tests.get(i).getSimpleName(), i, tests.size());
+            Log.debug("amp {} ({}/{})", tests.get(i).getSimpleName(), i+1, tests.size());
             testSelector.init();
 
             classWithLogger = testSelector.buildClassWithLogger(classTest, tests.get(i));
@@ -102,7 +102,7 @@ public class Amplification {
 
 
     protected Collection<CtMethod> amplification(CtClass originalClass, CtMethod test, int maxIteration) throws IOException, InterruptedException, ClassNotFoundException {
-        Collection<CtMethod> newTests = new ArrayList<>();
+        List<CtMethod> newTests = new ArrayList<>();
         Collection<CtMethod> ampTests = new ArrayList<>();
         newTests.add(test);
         ampTests.add(test);
@@ -114,31 +114,41 @@ public class Amplification {
             if(testToAmp.isEmpty()) {
                 break;
             }
-            newTests = ampTest(testToAmp);
             Log.debug("{} tests selected to be amplified", testToAmp.size());
+            newTests = ampTest(testToAmp);
             Log.debug("{} new tests generated", newTests.size());
+
+            newTests = reduce(newTests);
 
             CtClass classWithLogger = testSelector.buildClassWithLogger(originalClass, newTests);
             boolean status = writeAndCompile(classWithLogger);
-//            Log.debug("compile status: {}", status);
             if(!status) {
                 break;
             }
-
+            Log.debug("run tests");
             Result result = runTests(classWithLogger, newTests);
             if(result == null) {
                 break;
             }
-//            Log.debug("tests run");
             newTests = excludeTimeOutAndCompilationErrorTest(newTests, result);
             ampTests.addAll(newTests);
             allTests.addAll(ampTests);
+            Log.debug("update coverage info");
             testSelector.updateLogInfo();
         }
         return ampTests;
     }
 
-    private Collection<CtMethod> excludeTimeOutAndCompilationErrorTest(Collection<CtMethod> newTests, Result result) {
+    protected List<CtMethod> reduce(List<CtMethod> newTests) {
+        Random r = new Random();
+        while(newTests.size() > 6000) {
+            newTests.remove(r.nextInt(newTests.size()));
+        }
+        return newTests;
+    }
+
+
+    protected List<CtMethod> excludeTimeOutAndCompilationErrorTest(List<CtMethod> newTests, Result result) {
         List<CtMethod> tests = new ArrayList<>(newTests);
         if(result != null) {
             for (Failure failure : result.getFailures()) {

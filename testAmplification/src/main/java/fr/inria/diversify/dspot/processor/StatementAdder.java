@@ -25,16 +25,19 @@ import java.util.stream.Collectors;
  */
 public class StatementAdder extends AbstractAmp {
     protected List<CodeFragment> localVars;
-    protected List<CodeFragment> codeFragments;
+    protected Map<CtMethod, List<CtLiteral>> literalsByMethod;
+    protected Map<CodeFragment, Double> coverageBycodeFragments;
+    protected CtMethod currentMethod;
 
     @Override
     public List<CtMethod> apply(CtMethod method) {
+        currentMethod = method;
         List<CtMethod> newMethods = new ArrayList<>();
-        if(!codeFragments.isEmpty()) {
+        if(!coverageBycodeFragments.isEmpty()) {
             List<InputContext> inputContexts = getInputContexts(method);
             for(int i = 0; i < inputContexts.size(); i++) {
                 InputContext inputContext = inputContexts.get(i);
-                List<CodeFragment> statements = getRandomCandidateFor(inputContext);
+                List<CodeFragment> statements = getRandomInvocation(inputContext);
                 try {
                     newMethods.add(apply(method, statements, i));
                 } catch (Exception e) {
@@ -47,12 +50,13 @@ public class StatementAdder extends AbstractAmp {
     }
 
     public CtMethod applyRandom(CtMethod method) {
+        currentMethod = method;
         List<InputContext> inputContexts = getInputContexts(method);
 
         while(!inputContexts.isEmpty()) {
             try {
                 int index = getRandom().nextInt(inputContexts.size());
-                List<CodeFragment> statements = getRandomCandidateFor(inputContexts.get(index));
+                List<CodeFragment> statements = getRandomInvocation(inputContexts.get(index));
                 return apply(method, statements, index);
             } catch (Exception e) {}
         }
@@ -63,7 +67,6 @@ public class StatementAdder extends AbstractAmp {
         CtMethod cloned_method = cloneMethodTest(method, "_cf", 1000);
         CtStatement stmt = getAssertStatement(cloned_method)
                 .get(index);
-//        cloned_method.setParent(method.getParent());
         statements.stream()
                 .forEach(c ->
                 {
@@ -90,41 +93,58 @@ public class StatementAdder extends AbstractAmp {
         return inputContexts;
     }
 
-    protected List<CodeFragment> getRandomCandidateFor(InputContext inputContext) {
-        List<CodeFragment> list = new ArrayList<>();
+    protected List<CodeFragment> getRandomInvocation(InputContext inputContext) {
+        List<CodeFragment> stmts = new ArrayList<>();
 
-        CodeFragment codeFragment = codeFragments.get(getRandom().nextInt(codeFragments.size()));
+        CodeFragment codeFragment = getRandomCodeFragment(1.1);
         Factory factory = codeFragment.getCtCodeFragment().getFactory();
 
         CodeFragment clone = factory.Core().clone(codeFragment);
+        InputContext cloneInputContext = inputContext.clone();
+        findLocalVar(cloneInputContext, clone, stmts);
 
-        for(CtVariableReference var : codeFragment.getInputContext().getVar()) {
-            List<CtVariableReference> candidates = inputContext.allCandidate(var.getType(), true, false);
-            CtVariableReference candidate;
-            if(candidates.isEmpty()) {
-                CodeFragment cfLocalVar = getLocalVar(var.getType(), inputContext);
-                if(cfLocalVar == null) {                       //Todo var != this
-//                    candidate = factory.Code().createLocalVariableReference(var.getType(), "null");
-                    ValueCreator vc = new ValueCreator();
-                    CtLocalVariable localVar = vc.createRandomLocalVar(var.getType());
-                    list.add(new Statement(localVar));
-                    candidate = factory.Code().createLocalVariableReference(localVar);
-                }  else {
-                    list.add(cfLocalVar);
-                    CtLocalVariable localVariable = (CtLocalVariable) cfLocalVar.getCtCodeFragment();
-                    candidate = factory.Code().createLocalVariableReference(localVariable);
-                }
-            } else {
-                candidate = candidates.get(getRandom().nextInt(candidates.size()));
-            }
-            CtVariableReference variable = clone.getInputContext().getVariableOrFieldNamed(var.getSimpleName());
-            ReplaceVariableVisitor visitor = new ReplaceVariableVisitor(variable, candidate);
-            clone.getCtCodeFragment().accept(visitor);
-        }
-        list.add(clone);
-         return list;
+        codeFragment = getRandomCodeFragment(1d);
+        clone = factory.Core().clone(codeFragment);
+        findLocalVar(cloneInputContext, clone,stmts);
+
+        return stmts;
     }
 
+    protected void findLocalVar(InputContext inputContext, CodeFragment stmt, List<CodeFragment> stmts) {
+        Factory factory = stmt.getCtCodeFragment().getFactory();
+
+        for(CtVariableReference var : stmt.getInputContext().getVar()) {
+            List<CtVariableReference> candidates = inputContext.allCandidate(var.getType(), true, false);
+            CtVariableReference candidate;
+            if(!candidates.isEmpty()) {
+                candidate = candidates.get(getRandom().nextInt(candidates.size()));
+            } else {
+                CtLocalVariable localVariable = createLocalVarFromMethodLiterals(currentMethod, var.getType());
+                if(false && localVariable != null ) {
+                    candidate = factory.Code().createLocalVariableReference(localVariable);
+                } else {
+                    CodeFragment cfLocalVar = getLocalVar(var.getType(), inputContext);
+                    if (cfLocalVar != null) {
+                        stmts.add(cfLocalVar);
+                        localVariable = (CtLocalVariable) cfLocalVar.getCtCodeFragment();
+                        candidate = factory.Code().createLocalVariableReference(localVariable);
+                    } else {
+                        ValueCreator vc = new ValueCreator();
+                        CtLocalVariable localVar = vc.createRandomLocalVar(var.getType());
+                        stmts.add(new Statement(localVar));
+                        candidate = factory.Code().createLocalVariableReference(localVar);
+                    }
+                }
+                inputContext.addVariableRef(candidate);
+            }
+
+            CtVariableReference variable = stmt.getInputContext().getVariableOrFieldNamed(var.getSimpleName());
+            ReplaceVariableVisitor visitor = new ReplaceVariableVisitor(variable, candidate);
+            stmt.getCtCodeFragment().accept(visitor);
+        }
+
+        stmts.add(stmt);
+    }
 
 
     protected CodeFragment getLocalVar(CtTypeReference type, InputContext inputContext) {
@@ -168,17 +188,12 @@ public class StatementAdder extends AbstractAmp {
         }
     }
 
-    protected List<CodeFragment> getAllCandidateFor(InputContext inputContext, Set<String> varsInMth) {
-        return codeFragments.stream()
-                .filter(cf -> inputContext.containsAll(cf.getInputContext(), true))
-                .filter(cf -> {
-                    if(cf.getCtCodeFragment() instanceof CtLocalVariable) {
-                        return !varsInMth.contains(((CtLocalVariable) cf.getCtCodeFragment()).getSimpleName());
-                    } else {
-                        return true;
-                    }
-                })
+    protected CodeFragment getRandomCodeFragment(double maxCoverage) {
+        List<CodeFragment> codeFragments = coverageBycodeFragments.keySet().stream()
+                .filter(cf -> coverageBycodeFragments.get(cf) < maxCoverage)
                 .collect(Collectors.toList());
+
+        return codeFragments.get(getRandom().nextInt(codeFragments.size()));
     }
 
     protected  List<CtStatement> getAssertStatement(CtMethod method) {
@@ -223,14 +238,14 @@ public class StatementAdder extends AbstractAmp {
         return false;
     }
 
-    protected List<CodeFragment> buildCodeFragmentFor(CtType cl, Coverage coverage) {
+    protected Map<CodeFragment, Double> buildCodeFragmentFor(CtType cl, Coverage coverage) {
         Factory factory = cl.getFactory();
-        List<CodeFragment> codeFragments = new ArrayList<>();
+        Map<CodeFragment, Double> codeFragments = new IdentityHashMap<>();
 
         for(CtMethod<?> mth : (Set<CtMethod>)cl.getAllMethods()) {
             if(! mth.getModifiers().contains(ModifierKind.ABSTRACT)
-                    && !mth.getModifiers().contains(ModifierKind.PRIVATE)
-                    && getCoverageForMethod(coverage, cl, mth) != 1.0) {
+                    && !mth.getModifiers().contains(ModifierKind.PRIVATE)) {
+//                    && getCoverageForMethod(coverage, cl, mth) != 1.0) {
 
                 CtExecutableReference<?> executableRef = factory.Executable().createReference(mth);
                 CtInvocation invocation;
@@ -247,12 +262,11 @@ public class StatementAdder extends AbstractAmp {
                         .collect(Collectors.toList()));
                 invocation.setType(mth.getType());
                 Statement stmt = new Statement(invocation);
-                codeFragments.add(stmt);
+                codeFragments.put(stmt, getCoverageForMethod(coverage, cl, mth));
             }
 
         }
         return codeFragments;
-
     }
 
     protected CtVariableRead buildVarRef(CtTypeReference type, Factory factory) {
@@ -305,8 +319,31 @@ public class StatementAdder extends AbstractAmp {
         }
     }
 
+    protected int count;
+    protected CtLocalVariable createLocalVarFromMethodLiterals(CtMethod method, CtTypeReference type) {
+        List<CtLiteral> literals = getLiterals(method).stream()
+                .filter(lit -> lit.getType() != null)
+                .filter(lit -> lit.getType().equals(type))
+                .collect(Collectors.toList());
+
+        if(literals.isEmpty()) {
+            return null;
+        }
+
+        CtLiteral lit = literals.get(getRandom().nextInt(literals.size()));
+        return type.getFactory().Code().createLocalVariable(type, "vc_"+count++,lit);
+    }
+
+    protected List<CtLiteral> getLiterals(CtMethod method) {
+        if(!literalsByMethod.containsKey(method)) {
+            literalsByMethod.put(method, Query.getElements(method, new TypeFilter<CtLiteral>(CtLiteral.class)));
+        }
+        return literalsByMethod.get(method);
+    }
+
     public void reset(InputProgram inputProgram, Coverage coverage, CtClass testClass) {
         super.reset(inputProgram, coverage, testClass);
+        literalsByMethod = new HashMap<>();
 
         Set<CtType> codeFragmentsProvide = computeClassProvider(testClass);
 
@@ -319,13 +356,11 @@ public class StatementAdder extends AbstractAmp {
                 .filter(stmt -> codeFragmentProcessor.isToBeProcessed(stmt))
                 .forEach(stmt -> codeFragmentProcessor.process(stmt));
 
-
-//        inputProgram.processCodeFragments();
         HashMap<String, CodeFragmentList> codeFragmentsByClass = codeFragmentProcessor.getCodeFragmentsByClass();
         if(findClassUnderTest(testClass) != null) {
-            codeFragments = buildCodeFragmentFor(findClassUnderTest(testClass), coverage);
+            coverageBycodeFragments = buildCodeFragmentFor(findClassUnderTest(testClass), coverage);
         } else {
-            codeFragments = new ArrayList<>();
+            coverageBycodeFragments = new HashMap<>();
         }
 
         Set<Integer> ids = new HashSet<>();

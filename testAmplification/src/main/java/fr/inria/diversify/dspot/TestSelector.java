@@ -65,16 +65,6 @@ public class TestSelector {
 
     protected Collection<CtMethod> selectTestToAmp(Collection<CtMethod> oldTests, Collection<CtMethod> newTests, int maxNumberOfTest) {
         Map<CtMethod, Set<String>> selectedTest = new HashMap<>();
-//        for (CtMethod test : oldTests) {
-//            String testName = test.getSimpleName();
-//            if (!testAges.containsKey(testName)) {
-//                testAges.put(testName, getAgesFor(test));
-//            }
-//            if (testAges.get(testName) > 0) {
-//                testAges.put(testName, testAges.get(testName) - 1);
-//                selectedTest.add(test);
-//            }
-//        }
         for (CtMethod test : newTests) {
             for (TestCoverage tc : getTestCoverageFor(test)) {
                 TestCoverage parentTc = getParentTestCoverageFor(test);
@@ -89,16 +79,40 @@ public class TestSelector {
                 }
             }
         }
+        Set<CtMethod> mths = new HashSet<>();
         if(selectedTest.size() > maxNumberOfTest) {
-            return reduceSelectedTest(selectedTest);
+            mths.addAll(reduceSelectedTest(selectedTest));
         } else {
-            return selectedTest.keySet();
+            mths.addAll(selectedTest.keySet());
+//            return selectedTest.keySet();
         }
+        List<CtMethod> oldMths = new ArrayList<>();
+        for (CtMethod test : oldTests) {
+            String testName = test.getSimpleName();
+            if (!testAges.containsKey(testName)) {
+                testAges.put(testName, getAgesFor(test));
+            }
+            if (testAges.get(testName) > 0) {
+//                testAges.put(testName, testAges.get(testName) - 1);
+                oldMths.add(test);
+            }
+        }
+
+        Random r = new Random();
+        while(oldMths.size() > maxNumberOfTest) {
+            oldMths.remove(r.nextInt(oldMths.size()));
+        }
+        for(CtMethod oltMth : oldMths) {
+            String testName = oltMth.getSimpleName();
+            testAges.put(testName, testAges.get(testName) - 1);
+        }
+
+        return mths;
     }
 
     protected Integer getAgesFor(CtMethod test) {
         String testName = test.getSimpleName();
-        if(testName.endsWith("_cf")) {
+        if(testName.contains("_cf")) {
             return 2;
         }
         if(!AbstractAmp.getAmpTestToParent().containsKey(test)) {
@@ -110,13 +124,11 @@ public class TestSelector {
 
     public Collection<CtMethod> selectedAmplifiedTests(Collection<CtMethod> tests) {
         Map<CtMethod, Set<String>> amplifiedTests = new HashMap<>();
-//        Set<CtMethod> toRemove = new HashSet<>();
         for (CtMethod test : tests) {
             for (TestCoverage tc : getTestCoverageFor(test)) {
                 TestCoverage parentTc = getParentTestCoverageFor(test);
                 if (parentTc != null && tc.containsAllBranch(parentTc) && !parentTc.containsAllBranch(tc)) {
                     amplifiedTests.put(test, tc.diff(parentTc));
-//                    toRemove.remove(getParent(test));
                     break;
                 }
                 if(parentTc != null && !tc.containsAllBranch(parentTc) && !parentTc.containsAllBranch(tc)) {
@@ -125,7 +137,6 @@ public class TestSelector {
                 }
             }
         }
-//        amplifiedTests.removeAll(toRemove);
         return reduceSelectedTest(amplifiedTests);
     }
 

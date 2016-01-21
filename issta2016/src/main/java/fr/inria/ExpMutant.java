@@ -57,7 +57,7 @@ public class ExpMutant {
     }
 
     public void runExp() throws IOException {
-        for(int i = 2; i <= 2; i++)
+        for(int i = 0; i <= nbVersion; i++)
             try {
                 log.flush();
                 AssertGenerator.initLog(resultDir.getAbsolutePath(), i);
@@ -165,12 +165,12 @@ public class ExpMutant {
     }
 
     protected List<CtClass> run(DSpot dSpot, List<String> testsNameToExclude) {
-        List<CtClass> testByClass = testsNameToExclude.stream()
+        Set<CtClass> testClasses = testsNameToExclude.stream()
                 .map(failure -> failure.substring(0,failure.lastIndexOf(".")))
                 .map(className -> findClass(className,  dSpot.getInputProgram()))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
-        return testByClass.stream()
+        return testClasses.stream()
                 .map(cl -> {
                     List<CtMethod> methods = new LinkedList<>(cl.getMethods());
                     try {

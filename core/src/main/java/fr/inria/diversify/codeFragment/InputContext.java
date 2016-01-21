@@ -32,6 +32,9 @@ public class InputContext {
         return result;
     }
 
+    public void addVariableRef(CtVariableReference ref) {
+        variableReferences.add(ref);
+    }
 
     public List<CtVariableReference> allCandidate(CtTypeReference<?> type, boolean subType) {
         return allCandidate(type, subType, true);
@@ -84,8 +87,6 @@ public class InputContext {
             if (!hasCandidate(variable.getType(), subType)) return false;
         }
         return true;
-        // return !other.variableReferences.stream().anyMatch(var -> !hasCandidate(var.getType(), subType));
-        //
     }
 
     public CtVariableReference getVariableOrFieldNamed(String name) {
@@ -102,11 +103,6 @@ public class InputContext {
         HashSet<String> result = new HashSet<>();
         for (CtVariableReference var : variableReferences) result.add(var.getSimpleName());
         return result;
-        /*
-        return variableReferences.stream()
-                .map(var -> var.getSimpleName())
-                .collect(Collectors.toSet());
-        */
     }
 
     protected boolean hasCandidate(CtTypeReference<?> type, boolean subType) {
@@ -122,11 +118,6 @@ public class InputContext {
         for (CtVariableReference var : variableReferences)
             result.add(var.getSimpleName() + ": " + var);
         return result.toString();
-
-        //return variableReferences.stream()
-        //        .map(var -> var.getSimpleName() + ": " + var)
-        //        .collect(Collectors.toSet())
-        //        .toString();
     }
 
     @Override
@@ -150,9 +141,9 @@ public class InputContext {
         for (CtVariableReference<?> var : variableReferences)
             result.add(var.getType());
         return result;
+    }
 
-        //return variableReferences.stream()
-        //        .map(var -> var.getType())
-        //        .collect(Collectors.toList());
+    public InputContext clone() {
+        return new InputContext(new HashSet<>(variableReferences));
     }
 }

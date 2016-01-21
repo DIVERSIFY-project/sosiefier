@@ -38,23 +38,26 @@ public abstract class AbstractAmp {
 
 
     protected List<CtMethod> filterAmpTest(List<CtMethod> tests, CtMethod parentTest) {
-        List<CtMethod> filterTests = tests.stream()
-                .filter(test -> {
-                    try {
-                        return !previousTestAmp.contains(test.toString());
-                    } catch (Exception e) {
-                        return false;
-                    }
-                })
-                .collect(Collectors.toList());
-
-        filterTests.stream()
-                .forEach(test -> {
-                        ampTestToParent.put(test,parentTest);
-                        previousTestAmp.add(test.toString());
-                });
-
-        return filterTests;
+//        List<CtMethod> filterTests = tests.stream()
+//                .filter(test -> {
+//                    try {
+//                        return !previousTestAmp.contains(test.toString());
+//                    } catch (Exception e) {
+//                        return false;
+//                    }
+//                })
+//                .collect(Collectors.toList());
+//
+//        filterTests.stream()
+//                .forEach(test -> {
+//                        ampTestToParent.put(test,parentTest);
+//                        previousTestAmp.add(test.toString());
+//                });
+//
+//        return filterTests;
+        tests.stream()
+                .forEach(test -> ampTestToParent.put(test,parentTest));
+        return tests;
     }
 
     protected boolean isTest(CtMethod candidate) {
