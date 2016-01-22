@@ -80,7 +80,6 @@ public class Exp {
 //                } else {
 //                    log.write("Lang_" + i + ": failing tests on correct version (" +dir +")\n");
 //                }
-                killAllChildrenProcess();
             } catch (Throwable e)  {
                 e.printStackTrace();
                 Log.debug("");

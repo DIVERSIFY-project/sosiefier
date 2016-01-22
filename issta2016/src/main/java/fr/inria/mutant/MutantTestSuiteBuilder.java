@@ -1,4 +1,4 @@
-package fr.inria;
+package fr.inria.mutant;
 
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.runner.InputProgram;

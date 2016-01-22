@@ -1,4 +1,4 @@
-package fr.inria;
+package fr.inria.mutant;
 
 import fr.inria.diversify.runner.InputProgram;
 import org.apache.commons.io.FileUtils;
@@ -22,7 +22,7 @@ public class Mutant {
     String mutantRepo;
 
 
-    protected Mutant(InputProgram inputProgram, String mutantRepo, String mutantDir) {
+    public Mutant(InputProgram inputProgram, String mutantRepo, String mutantDir) {
         this.inputProgram = inputProgram;
         this.mutantRepo = mutantRepo;
     }

@@ -1,4 +1,4 @@
-package fr.inria;
+package fr.inria.mutant;
 
 import fr.inria.diversify.buildSystem.DiversifyClassLoader;
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
@@ -27,8 +27,7 @@ import java.util.stream.Collectors;
  * Date: 14/12/15
  * Time: 14:30
  */
-public class ExpMutant {
-//    protected String projectId;
+public class ExpDSpot {
     protected int nbVersion;
     protected InputConfiguration inputConfiguration;
     protected InputProgram inputProgram;
@@ -37,8 +36,7 @@ public class ExpMutant {
     BufferedWriter log;
     File resultDir;
 
-    public ExpMutant(String propertiesFile, int nbVersion) throws Exception, InvalidSdkException {
-//        this.projectId = projectId;
+    public ExpDSpot(String propertiesFile, int nbVersion) throws Exception, InvalidSdkException {
         this.nbVersion = nbVersion;
 
         inputConfiguration = new InputConfiguration(propertiesFile);
@@ -72,7 +70,7 @@ public class ExpMutant {
 
                 List<String> testsNameToExclude = mutant.triggerTests(i);
                 List<CtClass> testClasses = run(dSpot, testsNameToExclude);
-                printClasses(testClasses, resultDir.getAbsolutePath() + "/testSource/" + "collections" + "/" + i + "/" + inputConfiguration.getRelativeTestSourceCodeDir());
+                printClasses(testClasses, resultDir.getAbsolutePath() + "/DSpotTests/" + i + "/" + inputConfiguration.getRelativeTestSourceCodeDir());
                 if(verify(i, testClasses)) {
                     List<String> failures = findBug(i, testClasses);
                     if(!failures.isEmpty()) {
@@ -206,7 +204,7 @@ public class ExpMutant {
     }
 
     public static void main(String[] args) throws Exception, InvalidSdkException {
-        ExpMutant exp = new ExpMutant(args[0], Integer.parseInt(args[1]));
+        ExpDSpot exp = new ExpDSpot(args[0], Integer.parseInt(args[1]));
         exp.runExp();
     }
 }

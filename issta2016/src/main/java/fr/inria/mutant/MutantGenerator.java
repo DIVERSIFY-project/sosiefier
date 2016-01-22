@@ -1,4 +1,4 @@
-package fr.inria;
+package fr.inria.mutant;
 
 import fr.inria.diversify.buildSystem.DiversifyClassLoader;
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
