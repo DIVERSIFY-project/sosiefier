@@ -27,6 +27,7 @@ public class MutationQuery extends TransformationQuery {
     protected List<CtLiteral> numbers;
     protected List<CtReturn> returns;
     protected List<CtLocalVariable> inlineConstant;
+    protected List<CtInvocation> voidMethodCall;
 
     protected static List<UnaryOperatorKind> increment = Arrays.asList(
             new UnaryOperatorKind[]{UnaryOperatorKind.POSTINC,
@@ -70,6 +71,11 @@ public class MutationQuery extends TransformationQuery {
                 .filter(lit -> lit.getValue() != null)
                 .filter(lit -> Number.class.isAssignableFrom(lit.getType().box().getActualClass()))
                 .filter(lit -> ((Number)lit.getValue()).doubleValue() != 0)
+                .collect(Collectors.toList());
+
+        List<CtInvocation> stmts = getInputProgram().getAllElement(CtStatement.class);
+        voidMethodCall = stmts.stream()
+                .filter(invocation -> invocation.getType().toString().toLowerCase().equals("void"))
                 .collect(Collectors.toList());
     }
 
@@ -120,6 +126,15 @@ public class MutationQuery extends TransformationQuery {
         }
         return new InvertNegativeMutation(lit);
     }
+
+    public VoidMethodCallMutation getVoidMethodCallMutation() throws Exception {
+        CtInvocation voidCall = voidMethodCall.get(random.nextInt(voidMethodCall.size()));
+        while (coverageReport.elementCoverage(voidCall) == 0) {
+            voidCall = voidMethodCall.get(random.nextInt(voidMethodCall.size()));
+        }
+        return new VoidMethodCallMutation(voidCall);
+    }
+
 
     public NegateConditionalMutation getNegateConditionalMutation() throws Exception {
         CtBinaryOperator operator = binaryOperators.get(random.nextInt(binaryOperators.size()));
@@ -222,6 +237,17 @@ public class MutationQuery extends TransformationQuery {
             String position = cl.getQualifiedName() + ":" + nb.getPosition().getLine();
             String id = "InvertNegative_" + nb.toString() + "_" + position;
             transformations.put(id, new InvertNegativeMutation(nb));
+        }
+
+        List<CtInvocation> stmts = Query.getElements(cl, new TypeFilter(CtStatement.class));
+        List<CtInvocation> voidCalls = stmts.stream()
+                .filter(invocation -> invocation.getType().toString().toLowerCase().equals("void"))
+                .collect(Collectors.toList());
+
+        for(CtInvocation voidCall : voidCalls) {
+            String position = cl.getQualifiedName() + ":" + voidCall.getPosition().getLine();
+            String id = "VoidMethodCall_" + voidCall.toString() + "_" + position;
+            transformations.put(id, new VoidMethodCallMutation(voidCall));
         }
 
         return transformations;
