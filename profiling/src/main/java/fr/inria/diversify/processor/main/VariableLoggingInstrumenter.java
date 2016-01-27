@@ -211,8 +211,7 @@ public class VariableLoggingInstrumenter extends AbstractLoggingInstrumenter<CtS
             public <T> void visitCtThisAccess(CtThisAccess<T> tCtThisAccess) {
             }
         };
-
-        visitor.scan(el);
+        el.accept(visitor);
 
         return variables;
     }

@@ -1,10 +1,9 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.coverage.MultiCoverageReport;
+import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.TransformationParser;
-import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 
 import java.io.File;
@@ -25,16 +24,16 @@ public class MutationToSosieQuery extends TransformationQuery {
     protected File jacocoDir;
     protected InputProgram inputProgram;
 
-    public MutationToSosieQuery(InputProgram inputProgram) throws TransformationParserException {
+    public MutationToSosieQuery(InputProgram inputProgram)  {
         super(inputProgram);
         this.classesDir = inputProgram.getProgramDir() + "/" + inputProgram.getClassesDir();
         this.jacocoDir = new File(inputProgram.getCoverageDir());
         init(inputProgram.getPreviousTransformationsPath());
     }
 
-    protected void init(String mutationDirectory) throws TransformationParserException {
-        TransformationParser tf = new TransformationParser(true, inputProgram);
-        mutations = new ArrayList(tf.parseDir(mutationDirectory));
+    protected void init(String mutationDirectory)  {
+        JsonTransformationLoader parser = new JsonTransformationLoader(getInputProgram());
+        mutations = new ArrayList<>(parser.load(getInputProgram().getPreviousTransformationsPath(), true));
     }
 
     public Transformation query() throws QueryException {

@@ -45,7 +45,7 @@ public class CountAbstractVariable {
         ApiCountProcessor processor = new ApiCountProcessor();
         ProcessingManager pm = new QueueProcessingManager(factory);
         pm.addProcessor(processor);
-        pm.process();
+        pm.process(factory.Package().getRootPackage());
 
         Log.info("number of public method: {}", processor.publicCount);
         Log.info("number of protected method: {}", processor.protectedCount);
@@ -64,7 +64,7 @@ public class CountAbstractVariable {
         AbstractVariableProcessor processor = new AbstractVariableProcessor();
         ProcessingManager pm = new QueueProcessingManager(factory);
         pm.addProcessor(processor);
-        pm.process();
+        pm.process(factory.Package().getRootPackage());
 
         Log.info("number of local variable: {}", processor.countVariable);
         Log.info("number of abstract local variable: {}", processor.countAbstractVariable);

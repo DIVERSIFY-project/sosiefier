@@ -74,9 +74,9 @@ public class MutationQuery extends TransformationQuery {
                 .collect(Collectors.toList());
 
         List<CtInvocation> stmts = getInputProgram().getAllElement(CtStatement.class);
-        voidMethodCall = stmts.stream()
-                .filter(invocation -> invocation.getType().toString().toLowerCase().equals("void"))
-                .collect(Collectors.toList());
+//        voidMethodCall = stmts.stream()
+//                .filter(invocation -> invocation.getType().toString().toLowerCase().equals("void"))
+//                .collect(Collectors.toList());
     }
 
     @Override
@@ -240,15 +240,15 @@ public class MutationQuery extends TransformationQuery {
         }
 
         List<CtInvocation> stmts = Query.getElements(cl, new TypeFilter(CtStatement.class));
-        List<CtInvocation> voidCalls = stmts.stream()
-                .filter(invocation -> invocation.getType().toString().toLowerCase().equals("void"))
-                .collect(Collectors.toList());
+//        List<CtInvocation> voidCalls = stmts.stream()
+//                .filter(invocation -> invocation.getType().toString().toLowerCase().equals("void"))
+//                .collect(Collectors.toList());
 
-        for(CtInvocation voidCall : voidCalls) {
-            String position = cl.getQualifiedName() + ":" + voidCall.getPosition().getLine();
-            String id = "VoidMethodCall_" + voidCall.toString() + "_" + position;
-            transformations.put(id, new VoidMethodCallMutation(voidCall));
-        }
+//        for(CtInvocation voidCall : voidCalls) {
+//            String position = cl.getQualifiedName() + ":" + voidCall.getPosition().getLine();
+//            String id = "VoidMethodCall_" + voidCall.toString() + "_" + position;
+//            transformations.put(id, new VoidMethodCallMutation(voidCall));
+//        }
 
         return transformations;
     }

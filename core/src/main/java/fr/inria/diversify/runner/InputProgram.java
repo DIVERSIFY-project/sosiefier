@@ -158,7 +158,7 @@ public class InputProgram {
             ProcessingManager pm = new QueueProcessingManager(factory);
             AbstractCodeFragmentProcessor<?> processor = getCodeFragmentProcessor();
             pm.addProcessor(processor);
-            pm.process();
+            pm.process(factory.Package().getRootPackage());
             codeFragments = processor.getCodeFragments();
             codeFragmentsByClass = processor.getCodeFragmentsByClass();
         }
@@ -181,7 +181,7 @@ public class InputProgram {
             KnownTransfStatementProcessor processor = null;
             processor = new KnownTransfStatementProcessor(transformations);
             pm.addProcessor(processor);
-            pm.process();
+            pm.process(factory.Package().getRootPackage());
             codeFragments = processor.getCodeFragments();
         }
     }
@@ -359,24 +359,25 @@ public class InputProgram {
     /**
      * Root spoon element for an input program, mostly upper level packages
      */
-    public synchronized Set<CtElement> getRoots() {
-        if (roots == null) {
-            roots = new HashSet<>();
-            ProcessingManager pm = new QueueProcessingManager(factory);
-            AbstractProcessor<CtPackage> processor = new AbstractProcessor<CtPackage>() {
-                @Override
-                public void process(CtPackage element) {
-                    CtElement root = element;
-                    while (root.getParent() != null && !root.getParent().toString().equals("")) {
-                        root = root.getParent();
-                    }
-                    roots.add(root);
-                }
-            };
-            pm.addProcessor(processor);
-            pm.process();
-        }
-        return roots;
+    public synchronized Set<CtPackage> getRoots() {
+//        if (roots == null) {
+//            roots = new HashSet<>();
+//            ProcessingManager pm = new QueueProcessingManager(factory);
+//            AbstractProcessor<CtPackage> processor = new AbstractProcessor<CtPackage>() {
+//                @Override
+//                public void process(CtPackage element) {
+//                    CtElement root = element;
+//                    while (root.getParent() != null && !root.getParent().toString().equals("")) {
+//                        root = root.getParent();
+//                    }
+//                    roots.add(root);
+//                }
+//            };
+//            pm.addProcessor(processor);
+//            pm.process();
+//        }
+//        return roots;
+        return factory.Package().getRootPackage().getPackages();
     }
 
     /**

@@ -1,13 +1,10 @@
 package fr.inria.diversify.transformation.query;
 
+import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.TransformationJsonParser;
-import fr.inria.diversify.transformation.TransformationParserException;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -16,6 +13,7 @@ import java.util.List;
  *
  * Created by marodrig on 19/08/2014.
  */
+@Deprecated
 public class SpecificSosiesQuery extends TransformationQuery {
 
     private List<Integer> specificIndex;
@@ -27,18 +25,10 @@ public class SpecificSosiesQuery extends TransformationQuery {
         transformations = transf;
     }
 
-    public SpecificSosiesQuery(InputProgram inputProgram) throws TransformationParserException {
+    public SpecificSosiesQuery(InputProgram inputProgram)  {
         super(inputProgram);
-        TransformationJsonParser parser = new TransformationJsonParser(false, getInputProgram());
-        File f = new File(getInputProgram().getPreviousTransformationsPath());
-        Collection<Transformation> ts;
-        if (f.isDirectory()) {
-            ts = parser.parseDir(f.getAbsolutePath());
-        } else {
-            ts = parser.parseFile(f);
-        }
-        transformations = new ArrayList<>();
-        transformations.addAll(ts);
+        JsonTransformationLoader parser = new JsonTransformationLoader(getInputProgram());
+        transformations = new ArrayList<>(parser.load(getInputProgram().getPreviousTransformationsPath(), true));
     }
 
     @Override

@@ -1,13 +1,13 @@
 package fr.inria.diversify.transformation.other;
 
-import fr.inria.diversify.transformation.RefactorSpoonTransformation;
+import fr.inria.diversify.transformation.SpoonTransformation;
 import spoon.reflect.code.CtLiteral;
 import spoon.support.reflect.code.CtLiteralImpl;
 
 /**
  * Created by Simon on 19/03/14.
  */
-public class ReplaceLiteral extends RefactorSpoonTransformation<CtLiteral, CtLiteral> {
+public class ReplaceLiteral extends SpoonTransformation<CtLiteral, CtLiteral> {
 
 
     @Override

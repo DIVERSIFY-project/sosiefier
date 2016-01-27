@@ -1,6 +1,6 @@
 package fr.inria.diversify.transformation.other;
 
-import fr.inria.diversify.transformation.RefactorSpoonTransformation;
+import fr.inria.diversify.transformation.SpoonTransformation;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtCodeSnippetExpression;
 import spoon.reflect.code.CtReturn;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 /**
  * Created by Simon on 09/04/14.
  */
-public class EmptyMethodBody extends RefactorSpoonTransformation<CtMethod, CtElement> {
+public class EmptyMethodBody extends SpoonTransformation<CtMethod, CtElement> {
 
 //    @Override
 //    public void addSourceCode() throws Exception {

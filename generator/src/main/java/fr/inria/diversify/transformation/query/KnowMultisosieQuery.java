@@ -3,7 +3,6 @@ package fr.inria.diversify.transformation.query;
 import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.statistic.RunResults;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.TransformationParserException;
 
 import java.io.File;
 import java.util.List;
@@ -13,6 +12,7 @@ import java.util.List;
  * <p/>
  * Created by marodrig on 23/06/2014.
  */
+@Deprecated
 public class KnowMultisosieQuery extends TransformationQuery {
 
     //Current run result being replayed
@@ -64,7 +64,7 @@ public class KnowMultisosieQuery extends TransformationQuery {
             }
 
             if (result == null) {
-                throw new TransformationParserException("Could not found any suitable run result");
+//                throw new TransformationParserException("Could not found any suitable run result");
             }
 
             return result;

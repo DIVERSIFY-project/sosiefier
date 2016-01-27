@@ -205,24 +205,24 @@ public class MutantGenerator {
         compiler = InitUtils.initSpoonCompiler(inputProgram, true);
         compileClasses();
 
-        if(compiler.getDestinationDirectory() == null) {
+        if(compiler.getBinaryOutputDirectory() == null) {
             File classOutputDir = new File(inputProgram.getProgramDir() + "/" + inputProgram.getClassesDir());
             if (!classOutputDir.exists()) {
                 classOutputDir.mkdirs();
             }
-            compiler.setDestinationDirectory(classOutputDir);
+            compiler.setBinaryOutputDirectory(classOutputDir);
         }
-        if(compiler.getOutputDirectory().toString().equals("spooned")) {
+        if(compiler.getSourceOutputDirectory().toString().equals("spooned")) {
             File sourceOutputDir = new File(tmpDir + "/tmpSrc" );
             if (!sourceOutputDir.exists()) {
                 sourceOutputDir.mkdirs();
             }
-            compiler.setOutputDirectory(sourceOutputDir);
+            compiler.setSourceOutputDirectory(sourceOutputDir);
         }
         compiler.setCustomClassLoader(buildClassLoader());
 
         Environment env = compiler.getFactory().getEnvironment();
-        env.setDefaultFileGenerator(new JavaOutputProcessor(compiler.getOutputDirectory(),
+        env.setDefaultFileGenerator(new JavaOutputProcessor(compiler.getSourceOutputDirectory(),
                 new DefaultJavaPrettyPrinter(env)));
     }
 
@@ -235,10 +235,10 @@ public class MutantGenerator {
     }
 
     protected boolean writeAndCompile(CtClass classInstru) throws IOException {
-        FileUtils.cleanDirectory(compiler.getOutputDirectory());
+        FileUtils.cleanDirectory(compiler.getSourceOutputDirectory());
         try {
-            LoggerUtils.printJavaFile(compiler.getOutputDirectory(), classInstru);
-            return compiler.compileFileIn(compiler.getOutputDirectory(), true);
+            LoggerUtils.printJavaFile(compiler.getSourceOutputDirectory(), classInstru);
+            return compiler.compileFileIn(compiler.getSourceOutputDirectory(), true);
         } catch (Exception e) {
             Log.warn("error during compilation",e);
             return false;

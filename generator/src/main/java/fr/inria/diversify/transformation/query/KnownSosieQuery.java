@@ -2,10 +2,9 @@ package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.coverage.NullCoverageReport;
+import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.TransformationJsonParser;
-import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.Log;
 
@@ -17,6 +16,7 @@ import java.util.*;
  * <p/>
  * Created by marcel on 6/06/14.
  */
+@Deprecated
 public class KnownSosieQuery extends TransformationQuery {
 
     List<Transformation> transformations;
@@ -226,18 +226,11 @@ public class KnownSosieQuery extends TransformationQuery {
         extractSosies(transf);
     }
 
-    public KnownSosieQuery(InputProgram inputProgram) throws TransformationParserException {
+    public KnownSosieQuery(InputProgram inputProgram)  {
         super(inputProgram);
         transformationFounds = new HashMap<>();
-        TransformationJsonParser parser = new TransformationJsonParser(false, getInputProgram());
-        File f = new File(getInputProgram().getPreviousTransformationsPath());
-        Collection<Transformation> ts;
-        if (f.isDirectory()) {
-            ts = parser.parseDir(f.getAbsolutePath());
-        } else {
-            ts = parser.parseFile(f);
-        }
-        extractSosies(ts);
+        JsonTransformationLoader parser = new JsonTransformationLoader(getInputProgram());
+        extractSosies(parser.load(getInputProgram().getPreviousTransformationsPath(), false));
     }
 
     /**

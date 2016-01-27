@@ -55,7 +55,7 @@ public class LoggerUtils {
     public static void applyProcessor(Factory factory, Processor processor) {
         ProcessingManager pm = new QueueProcessingManager(factory);
         pm.addProcessor(processor);
-        pm.process();
+        pm.process(factory.Package().getRootPackage());
     }
 
     public static void printAllClasses(Factory factory, File out, File fileFrom) {

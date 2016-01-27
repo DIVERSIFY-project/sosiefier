@@ -1,9 +1,8 @@
 package fr.inria.diversify.transformation;
 
+import fr.inria.diversify.ReplaceHelper;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
 import fr.inria.diversify.util.Log;
-import org.json.JSONException;
-import org.json.JSONObject;
 import spoon.compiler.Environment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
@@ -18,26 +17,81 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by Simon on 02/04/14.
+ * User: Simon
+ * Date: 27/05/15
+ * Time: 14:34
  */
-
-public class SpoonTransformation<P extends CtElement, T extends CtElement> extends SingleTransformation {
+public abstract class SpoonTransformation<P extends CtElement, T extends CtElement> extends SingleTransformation {
     protected P transplantationPoint;
     protected T transplant;
-    protected P copyTransplantationPoint;
+    protected T copyTransplant;
 
-    public void printJavaFile(String directory) throws IOException {
-        printJavaFile(directory, null);
+    /**
+     * Apply the transformation. After the transformation is performed, the result will be copied to the output directory
+     *
+     * @param srcDir Path of the output directory
+     * @throws Exception
+     */
+    public void apply(String srcDir) throws Exception {
+        applyInfo();
+        try {
+            copyTransplant = buildReplacementElement();
+            ReplaceHelper.replace(transplantationPoint, copyTransplant);
+            printJavaFile(srcDir);
+        } catch (Exception e) {
+            throw new ApplyTransformationException("", e);
+        }
+
     }
 
-    protected void printJavaFile(String directory, CtType<?> cl) throws IOException {
-        CtType<?> type;
-        if(cl == null) {
-            type = getOriginalClass();
+    protected  T buildReplacementElement() {
+        T clone = transplant.getFactory().Core().clone(transplant);
+//        clone.setParent(transplant.getParent());
+
+        return clone;
+    }
+
+    /**
+     * Applies the transformation having into consideration the parent transformation
+     *
+     * @param srcDir Path of the output directory
+     * @throws Exception
+     */
+    @Override
+    public void applyWithParent(String srcDir) throws Exception {
+        if (parent != null) parent.apply(srcDir);
+        apply(srcDir);
+    }
+
+    /**
+     * Undo the transformation. After the transformation is restored, the result will be copy to the output directory
+     *
+     * @param srcDir Path of the output directory
+     * @throws Exception
+     */
+    public void restore(String srcDir) throws Exception {
+        if (parent != null) {
+            parent.restore(srcDir);
         }
-        else {
-            type = cl;
+        try {
+            ReplaceHelper.replace(copyTransplant, transplantationPoint);
+        } catch (Throwable e) {
+            e.printStackTrace();
+            Log.debug("");
         }
+        printJavaFile(srcDir);
+    }
+
+
+    /**
+     * Prints the modified java file. When the transformation is done a new java file is created. This method performs a
+     * pretty print of it
+     *
+     * @param directory Directory where the java file is going to be placed
+     * @throws IOException
+     */
+    public void printJavaFile(String directory) throws IOException {
+        CtType<?> type = getOriginalClass(transplantationPoint);
         Factory factory = type.getFactory();
         Environment env = factory.getEnvironment();
 
@@ -45,11 +99,11 @@ public class SpoonTransformation<P extends CtElement, T extends CtElement> exten
         processor.setFactory(factory);
 
         processor.createJavaFile(type);
-        Log.debug("copy file: " + directory + " " + type.getQualifiedName());
+        Log.debug("write type {} in directory {}", type.getQualifiedName(), directory);
     }
 
-    public CtType<?> getOriginalClass() {
-        return transplantationPoint.getPosition().getCompilationUnit().getMainType();
+    public CtType<?> getOriginalClass(CtElement element) {
+        return element.getPosition().getCompilationUnit().getMainType();
     }
 
     public String classLocationName() {
@@ -77,86 +131,9 @@ public class SpoonTransformation<P extends CtElement, T extends CtElement> exten
     }
 
     @Override
-    public String getTransformationString() throws Exception {
-        return null;
-    }
-
-    public void apply(String srcDir) throws Exception {
-        applyInfo();
-        try {
-            copyTransplantationPoint = transplantationPoint.getFactory().Core().clone(transplantationPoint);
-            transplantationPoint.replace(transplant);
-            printJavaFile(srcDir);
-        } catch (Exception e) {
-            throw new ApplyTransformationException("", e);
-        }
-    }
-
-    @Override
-    public void restore(String srcDir) throws Exception {
-        transplant.replace(copyTransplantationPoint);
-        printJavaFile(srcDir);
-    }
-
-    @Override
     public int line() {
         return transplantationPoint.getPosition().getLine();
     }
-
-    public void setTransplantationPoint(P object) {
-        this.transplantationPoint = object;
-    }
-
-    public P getTransplantationPoint() {
-        return transplantationPoint;
-    }
-
-    public void setTransplant(T transplant) {
-        this.transplant = transplant;
-    }
-
-    public T getTransplant() {
-        return transplant;
-    }
-
-    @Override
-    public JSONObject toJSONObject() throws JSONException {
-        JSONObject json = super.toJSONObject();
-
-        json.put("transplantationPoint", getCtElementJSonString(transplantationPoint));
-
-        if(transplant != null)
-            json.put("transplant", getCtElementJSonString(transplant));
-
-        return json;
-    }
-
-//    @Override
-//    public String getTransformationString() throws Exception {
-//        return getTransformationString(transplantationPoint);
-//    }
-
-    public  int hashCode() {
-        return super.hashCode() * transplantationPoint.getPosition().hashCode() *
-                transplantationPoint.getPosition().getLine();
-    }
-
-    protected String getCtElementJSonString(CtElement element) {
-        return element.getParent(CtPackage.class).getQualifiedName()
-                + "." + element.getPosition().getCompilationUnit().getMainType().getSimpleName() + ":" + element.getPosition().getLine();
-    }
-
-    public boolean equals(Object other) {
-        if(!this.getClass().isAssignableFrom(other.getClass()))
-            return  false;
-        SpoonTransformation otherTransformation = (SpoonTransformation)other;
-
-        return status == otherTransformation.status &&
-                failures.equals(otherTransformation.failures) &&
-                transplantationPoint.equals(otherTransformation.transplantationPoint) &&
-                transplantationPoint.getPosition().equals(otherTransformation.transplantationPoint.getPosition());
-    }
-
 
     protected void applyInfo() {
         Log.debug("transformation: {}, {}",type,name);
@@ -172,4 +149,32 @@ public class SpoonTransformation<P extends CtElement, T extends CtElement> exten
     public SourcePosition getPosition() {
         return transplantationPoint.getPosition();
     }
+
+    public void setTransplantationPoint(P object) {
+        this.transplantationPoint = object;
+    }
+
+    public P setTransplantationPoint() {
+        return transplantationPoint;
+    }
+
+    public void setTransplant(T transplant) {
+        this.transplant = transplant;
+    }
+
+    public T getTransplant() {
+        return transplant;
+    }
+
+    public String getTransformationString() throws Exception {
+        copyTransplant = buildReplacementElement();
+        ReplaceHelper.replace(transplantationPoint, copyTransplant);
+
+        String ret = transplantationPoint.getParent().toString();
+
+        ReplaceHelper.replace(copyTransplant, transplantationPoint);
+
+        return ret;
+    }
+
 }

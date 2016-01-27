@@ -302,7 +302,7 @@ public class AssertGenerator {
     }
 
     protected Result runTests(List<CtMethod> testsToRun, ClassLoader classLoader) throws ClassNotFoundException {
-        DiversifyClassLoader diversifyClassLoader = new DiversifyClassLoader(classLoader, compiler.getDestinationDirectory().getAbsolutePath());
+        DiversifyClassLoader diversifyClassLoader = new DiversifyClassLoader(classLoader, compiler.getBinaryOutputDirectory().getAbsolutePath());
 
         List<CtClass> classesToCompile = testsToRun.stream()
                 .map(mth -> mth.getDeclaringType())
@@ -340,13 +340,13 @@ public class AssertGenerator {
 
     protected boolean writeAndCompile(CtClass cl) {
         try {
-            FileUtils.cleanDirectory(compiler.getOutputDirectory());
-            FileUtils.cleanDirectory(compiler.getDestinationDirectory());
+            FileUtils.cleanDirectory(compiler.getSourceOutputDirectory());
+            FileUtils.cleanDirectory(compiler.getBinaryOutputDirectory());
 
             copyLoggerFile();
-            LoggerUtils.printJavaFile(compiler.getOutputDirectory(), cl);
+            LoggerUtils.printJavaFile(compiler.getSourceOutputDirectory(), cl);
 
-            return compiler.compileFileIn(compiler.getOutputDirectory(), false);
+            return compiler.compileFileIn(compiler.getSourceOutputDirectory(), false);
         } catch (Exception e) {
             Log.warn("error during compilation", e);
             return false;
@@ -531,7 +531,7 @@ public class AssertGenerator {
     protected void copyLoggerFile() throws IOException {
         File srcDir = new File(System.getProperty("user.dir") + "/testAmplification/src/main/java/fr/inria/diversify/compare/");
 
-        File destDir = new File(compiler.getOutputDirectory() + "/fr/inria/diversify/compare/");
+        File destDir = new File(compiler.getSourceOutputDirectory() + "/fr/inria/diversify/compare/");
         FileUtils.forceMkdir(destDir);
 
         FileUtils.copyDirectory(srcDir, destDir);

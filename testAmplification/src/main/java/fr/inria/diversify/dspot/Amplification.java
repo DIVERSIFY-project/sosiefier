@@ -169,32 +169,32 @@ public class Amplification {
     }
 
     protected void initCompiler() {
-        if(compiler.getDestinationDirectory() == null) {
+        if(compiler.getBinaryOutputDirectory() == null) {
             File classOutputDir = new File("tmpDir/tmpClasses_" + System.currentTimeMillis());
             if (!classOutputDir.exists()) {
                 classOutputDir.mkdirs();
             }
-            compiler.setDestinationDirectory(classOutputDir);
+            compiler.setBinaryOutputDirectory(classOutputDir);
         }
-        if(compiler.getOutputDirectory().toString().equals("spooned")) {
+        if(compiler.getSourceOutputDirectory().toString().equals("spooned")) {
             File sourceOutputDir = new File("tmpDir/tmpSrc_" + System.currentTimeMillis());
             if (!sourceOutputDir.exists()) {
                 sourceOutputDir.mkdirs();
             }
-            compiler.setOutputDirectory(sourceOutputDir);
+            compiler.setSourceOutputDirectory(sourceOutputDir);
         }
 
         Environment env = compiler.getFactory().getEnvironment();
-        env.setDefaultFileGenerator(new JavaOutputProcessor(compiler.getOutputDirectory(),
+        env.setDefaultFileGenerator(new JavaOutputProcessor(compiler.getSourceOutputDirectory(),
                 new DefaultJavaPrettyPrinter(env)));
     }
 
     protected boolean writeAndCompile(CtClass classInstru) throws IOException {
-        FileUtils.cleanDirectory(compiler.getOutputDirectory());
-        FileUtils.cleanDirectory(compiler.getDestinationDirectory());
+        FileUtils.cleanDirectory(compiler.getSourceOutputDirectory());
+        FileUtils.cleanDirectory(compiler.getBinaryOutputDirectory());
         try {
-            LoggerUtils.printJavaFile(compiler.getOutputDirectory(), classInstru);
-            compiler.compileFileIn(compiler.getOutputDirectory(), false);
+            LoggerUtils.printJavaFile(compiler.getSourceOutputDirectory(), classInstru);
+            compiler.compileFileIn(compiler.getSourceOutputDirectory(), false);
             return true;
         } catch (Exception e) {
             Log.warn("error during compilation",e);
@@ -209,7 +209,7 @@ public class Amplification {
     }
 
     protected Result runTests(CtClass testClass, Collection<CtMethod> tests) throws ClassNotFoundException {
-        JunitRunner junitRunner = new JunitRunner(inputProgram, new DiversifyClassLoader(applicationClassLoader, compiler.getDestinationDirectory().getAbsolutePath()));
+        JunitRunner junitRunner = new JunitRunner(inputProgram, new DiversifyClassLoader(applicationClassLoader, compiler.getBinaryOutputDirectory().getAbsolutePath()));
 
         return junitRunner.runTestClass(testClass.getQualifiedName(), tests.stream()
                 .map(test-> test.getSimpleName())
@@ -280,7 +280,7 @@ public class Amplification {
                 cloneClass.addMethod(ampTest);
             }
         }
-        LoggerUtils.printJavaFile(compiler.getOutputDirectory(), cloneClass);
+        LoggerUtils.printJavaFile(compiler.getSourceOutputDirectory(), cloneClass);
 
         return cloneClass;
     }

@@ -1,5 +1,6 @@
 package fr.inria.diversify.transformation.typeTransformation;
 
+import fr.inria.diversify.ReplaceHelper;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
@@ -51,7 +52,7 @@ public class InstanceTransformation extends Transformation {
             CtConstructorCall callConstructor = entry.getKey();
             CtElement transplant = getTransplant(callConstructor, entry.getValue());
             Log.debug("replace {} by {} at line {}", callConstructor.toString(), transplant.toString(), callConstructor.getPosition().toString());
-            callConstructor.replace(transplant);
+            ReplaceHelper.replace(callConstructor, transplant);
             newCCtoOldCC.put(transplant, callConstructor);
             classes.add(callConstructor.getPosition().getCompilationUnit().getMainType());
         }
@@ -262,7 +263,7 @@ public class InstanceTransformation extends Transformation {
         List<CtType> classes = new ArrayList<>();
 
         for(Map.Entry<CtElement, CtConstructorCall> entry : newCCtoOldCC.entrySet()) {
-            entry.getKey().replace(entry.getValue());
+            ReplaceHelper.replace(entry.getKey(), entry.getValue());
             classes.add(entry.getValue().getPosition().getCompilationUnit().getMainType());
         }
         methodsSwitch.stream()

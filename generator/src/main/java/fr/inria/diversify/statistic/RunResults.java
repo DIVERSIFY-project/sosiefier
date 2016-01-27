@@ -2,7 +2,6 @@ package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.TransformationJsonParser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +16,7 @@ import java.util.List;
  * <p>
  * Created by marcel on 22/06/14.
  */
+@Deprecated
 public class RunResults {
 
     private int id;
@@ -145,16 +145,17 @@ public class RunResults {
      * @return
      */
     public List<Transformation> parseTransformations(InputProgram inputProgram) {
-        TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
+
+//        TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
         ArrayList<Transformation> result = new ArrayList<>();
-        for (int i = 0; i < transformationsJSON.length(); i++) {
-            try {
-                Transformation t = parser.parseTransformation(transformationsJSON.getJSONObject(i));
-                result.add(t);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
+//        for (int i = 0; i < transformationsJSON.length(); i++) {
+//            try {
+//                Transformation t = parser.parseTransformation(transformationsJSON.getJSONObject(i));
+//                result.add(t);
+//            } catch (Exception e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
         return result;
     }
 

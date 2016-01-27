@@ -25,7 +25,7 @@ public class InitUtils {
 
 
     public static void initLogLevel(InputConfiguration inputConfiguration) {
-        Launcher.logger.setLevel(Level.OFF);
+        Launcher.LOGGER.setLevel(Level.OFF);
         int level = Integer.parseInt(inputConfiguration.getProperty("logLevel"));
         Log.set(level);
 

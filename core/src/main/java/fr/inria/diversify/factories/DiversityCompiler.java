@@ -61,9 +61,9 @@ public class DiversityCompiler extends JDTBasedSpoonCompiler {
         args.add("-noExit");
         // args.add("-verbose");
         args.add("-proc:none");
-        if (getDestinationDirectory() != null) {
+        if (getBinaryOutputDirectory() != null) {
             args.add("-d");
-            args.add(getDestinationDirectory().getAbsolutePath());
+            args.add(getBinaryOutputDirectory().getAbsolutePath());
         } else {
             args.add("-d");
             args.add("none");
