@@ -4,6 +4,7 @@ import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.processor.ProcessorUtil;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtExecutable;
+import spoon.reflect.declaration.CtParameter;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
@@ -120,7 +121,6 @@ public class BranchCoverageProcessor extends AbstractLoggingInstrumenter<CtExecu
             info += ";c" + branchId;
         }
 
-
         addInOut(method, methodId);
         ProcessorUtil.addInfo(info);
     }
@@ -151,9 +151,7 @@ public class BranchCoverageProcessor extends AbstractLoggingInstrumenter<CtExecu
         Factory factory = method.getFactory();
 
         String snippet = getLogger() + ".methodIn(Thread.currentThread(),\"" + id + "\")";
-
-        CtCodeSnippetStatement beginStmt = factory.Core().createCodeSnippetStatement();
-        beginStmt.setValue(snippet);
+        CtCodeSnippetStatement beginStmt = factory.Code().createCodeSnippetStatement(snippet);
 
         ctTry.getBody().insertBegin(beginStmt);
 

@@ -156,8 +156,8 @@ public class DSpot {
     }
 
     public void clean() throws IOException {
-//        FileUtils.forceDelete(compiler.getDestinationDirectory());
-//        FileUtils.forceDelete(compiler.getOutputDirectory());
+        FileUtils.forceDelete(compiler.getSourceOutputDirectory());
+        FileUtils.forceDelete(compiler.getBinaryOutputDirectory());
         FileUtils.forceDelete(new File(inputProgram.getProgramDir()));
     }
 
