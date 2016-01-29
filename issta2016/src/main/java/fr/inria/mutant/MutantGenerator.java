@@ -24,6 +24,7 @@ import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
 import spoon.support.JavaOutputProcessor;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -68,11 +69,12 @@ public class MutantGenerator {
 
         Map<String, CtClass> mutants = generateAllMutant(cl);
         Map<String, List<String>> mutantsFailures = runMutants(mutants);
+        writeReport(mutantsFailures);
         createMutantTestSuite(mutants, mutantsFailures);
-        Log.debug("");
     }
+
     protected void createMutantTestSuite(Map<String, CtClass> mutants, Map<String, List<String>> failures) throws IOException, GitAPIException {
-        String repo = inputConfiguration.getProperty("result") + "/mutant";
+        String repo = inputConfiguration.getProperty("result") + "/mutant/" + original.getQualifiedName() + "/";
         MutantTestSuiteBuilder mutantTestSuiteBuilder = new MutantTestSuiteBuilder(inputProgram, original, repo);
 
         List<String> keySorted = failures.entrySet().stream()
@@ -130,7 +132,6 @@ public class MutantGenerator {
     }
 
     protected List<String> runTest() throws InterruptedException, IOException {
-//        String[] phases  = new String[]{"-Dmaven.compiler.useIncrementalCompilation=false", "-Dmaven.test.useIncrementalCompilation=false", "test"};
         String[] phases  = new String[]{"clean", "test"};
         MavenBuilder builder = new MavenBuilder(inputProgram.getProgramDir());
         builder.setGoals(phases);
@@ -192,6 +193,16 @@ public class MutantGenerator {
 
         FileUtils.forceDelete(tmpDirFile);
         return mutants;
+    }
+
+    protected void writeReport(Map<String, List<String>> mutantsFailures) throws IOException {
+        String dir = inputConfiguration.getProperty("result") + "/mutant/" + original.getQualifiedName() + "/report";
+        FileWriter writer = new FileWriter(dir);
+
+        for(String id : mutantsFailures.keySet()) {
+            writer.write(id + ": " + mutantsFailures.get(id) + "\n");
+        }
+        writer.close();
     }
 
     protected void initFilter() {

@@ -39,7 +39,6 @@ public class MutantTestSuiteBuilder {
 
             if (!mutantTestClasses.isEmpty()) {
                 createMutantRepo(mutantClass, mutantTestClasses, failures, mutationId);
-//        addGitBranch(mutantClass, mutantTestClasses);
             }
         } catch (Exception e) {
             e.printStackTrace();

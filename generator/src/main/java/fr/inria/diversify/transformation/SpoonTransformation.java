@@ -46,7 +46,6 @@ public abstract class SpoonTransformation<P extends CtElement, T extends CtEleme
 
     protected  T buildReplacementElement() {
         T clone = transplant.getFactory().Core().clone(transplant);
-//        clone.setParent(transplant.getParent());
 
         return clone;
     }
