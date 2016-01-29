@@ -7,7 +7,9 @@ import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.mutation.*;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtClass;
+import spoon.reflect.declaration.CtConstructor;
 import spoon.reflect.declaration.CtElement;
+import spoon.reflect.visitor.CtScanner;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
 
@@ -28,6 +30,7 @@ public class MutationQuery extends TransformationQuery {
     protected List<CtReturn> returns;
     protected List<CtLocalVariable> inlineConstant;
     protected List<CtInvocation> voidMethodCall;
+    protected List<CtConstructorCall> constructorCalls;
 
     protected static List<UnaryOperatorKind> increment = Arrays.asList(
             new UnaryOperatorKind[]{UnaryOperatorKind.POSTINC,
@@ -73,10 +76,16 @@ public class MutationQuery extends TransformationQuery {
                 .filter(lit -> ((Number)lit.getValue()).doubleValue() != 0)
                 .collect(Collectors.toList());
 
-        List<CtInvocation> stmts = getInputProgram().getAllElement(CtStatement.class);
+        List<CtStatement> stmts = getInputProgram().getAllElement(CtStatement.class);
         voidMethodCall = stmts.stream()
+                .filter(stmt -> stmt instanceof CtInvocation)
+                .filter(stmt -> stmt.getParent() instanceof CtBlock)
+                .filter(stmt -> !stmt.toString().startsWith("super("))
+                .map(stmt -> (CtInvocation)stmt)
                 .filter(invocation -> invocation.getType().toString().toLowerCase().equals("void"))
                 .collect(Collectors.toList());
+
+        constructorCalls = getInputProgram().getAllElement(CtConstructorCall.class);
     }
 
     @Override
@@ -135,6 +144,13 @@ public class MutationQuery extends TransformationQuery {
         return new VoidMethodCallMutation(voidCall);
     }
 
+    public ConstructorCallMutation getConstructorCallMutation() throws Exception {
+        CtConstructorCall constructorCall = constructorCalls.get(random.nextInt(constructorCalls.size()));
+        while (coverageReport.elementCoverage(constructorCall) == 0) {
+            constructorCall = constructorCalls.get(random.nextInt(constructorCalls.size()));
+        }
+        return new ConstructorCallMutation(constructorCall);
+    }
 
     public NegateConditionalMutation getNegateConditionalMutation() throws Exception {
         CtBinaryOperator operator = binaryOperators.get(random.nextInt(binaryOperators.size()));
@@ -170,7 +186,7 @@ public class MutationQuery extends TransformationQuery {
 
     public ReturnValueMutation getReturnValueMutation() {
         CtReturn ret = returns.get(random.nextInt(returns.size()));
-        while (coverageReport.elementCoverage(ret) == 0 || !(ret.getReturnedExpression() instanceof CtLiteral)) {
+        while (coverageReport.elementCoverage(ret) == 0) {
             ret = returns.get(random.nextInt(returns.size()));
         }
         return new ReturnValueMutation(ret);
@@ -218,11 +234,9 @@ public class MutationQuery extends TransformationQuery {
 
         List<CtReturn> returns = Query.getElements(cl, new TypeFilter(CtReturn.class));
         for(CtReturn ret : returns) {
-            if(ret.getReturnedExpression() instanceof CtLiteral) {
-                String position = cl.getQualifiedName() + ":" + ret.getPosition().getLine();
-                String id = "ReturnValue_" + ret.toString() + "_" + position;
-                transformations.put(id, new ReturnValueMutation(ret));
-            }
+            String position = cl.getQualifiedName() + ":" + ret.getPosition().getLine();
+            String id = "ReturnValue_" + ret.toString() + "_" + position;
+            transformations.put(id, new ReturnValueMutation(ret));
         }
 
         List<CtLiteral> literals = Query.getElements(cl, new TypeFilter(CtLiteral.class));
@@ -239,8 +253,12 @@ public class MutationQuery extends TransformationQuery {
             transformations.put(id, new InvertNegativeMutation(nb));
         }
 
-        List<CtInvocation> stmts = Query.getElements(cl, new TypeFilter(CtStatement.class));
+        List<CtStatement> stmts = Query.getElements(cl, new TypeFilter(CtStatement.class));
         List<CtInvocation> voidCalls = stmts.stream()
+                .filter(stmt -> stmt instanceof CtInvocation)
+                .filter(stmt -> stmt.getParent() instanceof CtBlock)
+                .filter(stmt -> !stmt.toString().startsWith("super("))
+                .map(stmt -> (CtInvocation) stmt)
                 .filter(invocation -> invocation.getType().toString().toLowerCase().equals("void"))
                 .collect(Collectors.toList());
 
@@ -248,6 +266,13 @@ public class MutationQuery extends TransformationQuery {
             String position = cl.getQualifiedName() + ":" + voidCall.getPosition().getLine();
             String id = "VoidMethodCall_" + voidCall.toString() + "_" + position;
             transformations.put(id, new VoidMethodCallMutation(voidCall));
+        }
+
+        List<CtConstructorCall> cc = Query.getElements(cl, new TypeFilter(CtConstructorCall.class));
+        for(CtConstructorCall cCall : cc) {
+            String position = cl.getQualifiedName() + ":" + cCall.getPosition().getLine();
+            String id = "onstructorCall_" + cCall.toString() + "_" + position;
+            transformations.put(id, new ConstructorCallMutation(cCall));
         }
 
         return transformations;
