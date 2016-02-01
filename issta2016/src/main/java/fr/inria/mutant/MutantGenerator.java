@@ -69,8 +69,9 @@ public class MutantGenerator {
 
         Map<String, CtClass> mutants = generateAllMutant(cl);
         Map<String, List<String>> mutantsFailures = runMutants(mutants);
-        writeReport(mutantsFailures);
+
         createMutantTestSuite(mutants, mutantsFailures);
+        writeReport(mutantsFailures);
     }
 
     protected void createMutantTestSuite(Map<String, CtClass> mutants, Map<String, List<String>> failures) throws IOException, GitAPIException {

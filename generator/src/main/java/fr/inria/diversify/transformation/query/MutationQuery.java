@@ -271,7 +271,7 @@ public class MutationQuery extends TransformationQuery {
         List<CtConstructorCall> cc = Query.getElements(cl, new TypeFilter(CtConstructorCall.class));
         for(CtConstructorCall cCall : cc) {
             String position = cl.getQualifiedName() + ":" + cCall.getPosition().getLine();
-            String id = "constructorCall_" + cCall.toString() + "_" + position;
+            String id = "ConstructorCall_" + cCall.toString() + "_" + position;
             transformations.put(id, new ConstructorCallMutation(cCall));
         }
 
