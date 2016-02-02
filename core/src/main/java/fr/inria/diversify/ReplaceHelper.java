@@ -28,8 +28,7 @@ public class ReplaceHelper extends CtScanner {
 
        visitor.newNode = newNode;
 
-
-       if(oldNode instanceof CtExpression) {
+       if(oldNode instanceof CtExpression && newNode instanceof CtExpression) {
            ((CtExpression) oldNode).replace((CtExpression) newNode);
        } else if(oldNode instanceof CtVariableReference) {
            ((CtVariableReference)oldNode).replace((CtVariableReference) newNode);
@@ -43,15 +42,6 @@ public class ReplaceHelper extends CtScanner {
            oldNode.accept(visitor);
        }
    }
-
-//    public <R> void visitCtBlock(CtBlock<R> block) {
-//        if(newNode instanceof CtBlock) {
-//            block.replace((CtBlock) newNode);
-//        } else {
-//            block.replace((CtStatement) newNode);
-//        }
-//    }
-
 
     public <T> void visitCtMethod(CtMethod<T> m) {
         m.replace((CtMethod) newNode);

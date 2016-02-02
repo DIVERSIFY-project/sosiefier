@@ -78,11 +78,13 @@ public class MutantGenerator {
         String repo = inputConfiguration.getProperty("result") + "/mutant/" + original.getQualifiedName() + "/";
         MutantTestSuiteBuilder mutantTestSuiteBuilder = new MutantTestSuiteBuilder(inputProgram, original, repo);
 
-        List<String> keySorted = failures.entrySet().stream()
-                .filter(entry -> !entry.getValue().isEmpty())
-                .sorted((e1, e2) -> e1.getValue().size() - e2.getValue().size())
-                .map(entry -> entry.getKey())
+        List<String> keys = new ArrayList<>(failures.keySet());
+        Collections.shuffle(keys);
+        List<String> keySorted = keys.stream()
+                .filter(key -> !failures.get(key).isEmpty())
+                .sorted((key1, key2) -> failures.get(key1).size() - failures.get(key2).size())
                 .collect(Collectors.toList());
+
 
         List<String> keySelected = new ArrayList<>(10);
         if(keySorted.size() > 10) {

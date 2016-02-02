@@ -65,7 +65,10 @@ public class MutationQuery extends TransformationQuery {
     protected void init() {
         binaryOperators = getInputProgram().getAllElement(CtBinaryOperator.class);
         unaryOperators = getInputProgram().getAllElement(CtUnaryOperator.class);
-        returns = getInputProgram().getAllElement(CtReturn.class);
+        List<CtReturn> rets = getInputProgram().getAllElement(CtReturn.class);
+        returns = rets.stream()
+            .filter(ret -> ret.getReturnedExpression() != null)
+            .collect(Collectors.toList());
         inlineConstant = getInputProgram().getAllElement(CtLocalVariable.class);
 
         List<CtLiteral> literals = getInputProgram().getAllElement(CtLiteral.class);
@@ -232,7 +235,10 @@ public class MutationQuery extends TransformationQuery {
             }
         }
 
-        List<CtReturn> returns = Query.getElements(cl, new TypeFilter(CtReturn.class));
+        List<CtReturn> rets = Query.getElements(cl, new TypeFilter(CtReturn.class));
+        List<CtReturn> returns = rets.stream()
+                .filter(ret -> ret.getReturnedExpression() != null)
+                .collect(Collectors.toList());
         for(CtReturn ret : returns) {
             String position = cl.getQualifiedName() + ":" + ret.getPosition().getLine();
             String id = "ReturnValue_" + ret.toString() + "_" + position;

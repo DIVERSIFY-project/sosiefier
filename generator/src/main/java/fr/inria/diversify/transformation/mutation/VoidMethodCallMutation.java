@@ -8,7 +8,7 @@ import spoon.reflect.code.CtStatement;
  * Date: 08/01/16
  * Time: 14:44
  */
-public class VoidMethodCallMutation extends MutationTransformation<CtInvocation, CtStatement>{
+public class VoidMethodCallMutation extends MutationTransformation<CtStatement, CtStatement>{
 
     public VoidMethodCallMutation(CtInvocation transplantationPoint) {
         super(transplantationPoint);
