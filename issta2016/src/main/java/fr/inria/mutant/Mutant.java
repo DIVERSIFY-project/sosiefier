@@ -22,7 +22,7 @@ public class Mutant {
     String mutantRepo;
 
 
-    public Mutant(InputProgram inputProgram, String mutantRepo, String mutantDir) {
+    public Mutant(InputProgram inputProgram, String mutantRepo) {
         this.inputProgram = inputProgram;
         this.mutantRepo = mutantRepo;
     }

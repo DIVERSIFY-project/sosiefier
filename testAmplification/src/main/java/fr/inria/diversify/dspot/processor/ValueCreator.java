@@ -1,5 +1,6 @@
 package fr.inria.diversify.dspot.processor;
 
+import fr.inria.diversify.util.Log;
 import spoon.reflect.code.CtExpression;
 import spoon.reflect.code.CtLiteral;
 import spoon.reflect.code.CtLocalVariable;
@@ -19,7 +20,7 @@ import java.util.stream.IntStream;
 public class ValueCreator {
     protected Random random;
     protected int maxArraySize = 5;
-    protected int count;
+    protected static int count;
 
 
     public ValueCreator() {
@@ -28,17 +29,40 @@ public class ValueCreator {
 
     public CtLocalVariable createRandomLocalVar(CtTypeReference type) {
         Factory factory = type.getFactory();
+        CtExpression value = createValue(type);
+       try {
 
-        return factory.Code().createLocalVariable(type, "vc_"+count++, createValue(type));
+
+           if (value != null) {
+               return factory.Code().createLocalVariable(type, "vc_" + count++, createValue(type));
+           } else {
+               return null;
+           }
+       } catch (Exception e) {
+           e.printStackTrace();
+           Log.debug("");
+       }
+        return null;
+    }
+
+    public CtLocalVariable createNull(CtTypeReference type) {
+        Factory factory = type.getFactory();
+        String snippet = "(" + type.getQualifiedName()+")null";
+
+        CtExpression expression = factory.Code().createCodeSnippetExpression(snippet);
+        expression.setType(type);
+
+        return factory.Code().createLocalVariable(type, "vc_"+count++, expression);
     }
 
     public CtExpression createValue(CtTypeReference type) {
+        try {
         if(isPrimitive(type)) {
             return createRandomPrimitive(type);
         }
 
         Factory factory = type.getFactory();
-        String snippet = "(" + type.getQualifiedName()+")null";
+        String snippet = null;
         if(isArray(type)) {
             CtArrayTypeReference arrayType = (CtArrayTypeReference) type;
             CtTypeReference typeComponent = arrayType.getComponentType();
@@ -50,18 +74,20 @@ public class ValueCreator {
                     .collect(Collectors.joining(","))
                     + "}";
         } else {
-            try {
-                type.getDeclaration().getActualClass().getConstructor(new Class[]{});
-                snippet = "new " + type.getQualifiedName() + "()";
-            } catch (Exception e) {
-//                e.printStackTrace();
-            }
+            type.getActualClass().getConstructor(new Class[]{});
+            snippet = "new " + type.getQualifiedName() + "()";
         }
+        if(snippet != null) {
+            CtExpression expression = factory.Code().createCodeSnippetExpression(snippet);
+            expression.setType(type);
 
-        CtExpression expression = factory.Code().createCodeSnippetExpression(snippet);
-        expression.setType(type);
-
-        return expression;
+            return expression;
+        }
+        } catch (Exception e) {
+//                e.printStackTrace();
+//            Log.debug("");
+        }
+        return null;
     }
 
     protected boolean isArray(CtTypeReference type) {

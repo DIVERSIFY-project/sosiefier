@@ -255,7 +255,9 @@ public abstract class CodeFragment {
     protected CtElement copyElem(CtElement elem) {
         Factory factory = elem.getFactory();
         CtElement tmp = factory.Core().clone(elem);
-        tmp.setParent(elem.getParent());
+        try {
+            tmp.setParent(elem.getParent());
+        } catch (Exception e) {}
         return tmp;
     }
 }

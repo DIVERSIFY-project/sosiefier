@@ -106,7 +106,7 @@ public class DSpot {
         amplifiers.add(new TestDataMutator());
         amplifiers.add(new TestMethodCallAdder());
         amplifiers.add(new TestMethodCallRemover());
-        amplifiers.add(new StatementAdder());
+        amplifiers.add(new StatementAdder2());
 
         return amplifiers;
     }
