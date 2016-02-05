@@ -26,6 +26,7 @@ public class ExpEvoSuite {
     protected InputConfiguration inputConfiguration;
     protected InputProgram inputProgram;
     protected Mutant mutant;
+    protected String mutantClass;
 
     BufferedWriter log;
     File resultDir;
@@ -41,7 +42,9 @@ public class ExpEvoSuite {
         FileUtils.copyDirectory(new File(inputProgram.getProgramDir()), new File(tmpDir));
         inputProgram.setProgramDir(tmpDir);
 
-        mutant = new Mutant(inputProgram, "result/test/mutant", "tmpDir/mutantTest/");
+        String mutantDir = inputConfiguration.getProperty("mutant.dir");
+        mutantClass = inputConfiguration.getProperty("mutant.class");
+        mutant = new Mutant(inputProgram, mutantDir);
         resultDir = new File(inputConfiguration.getProperty("tmpDir") + "/EvoSuite_mutant" + System.currentTimeMillis());
         resultDir.mkdirs();
 
@@ -49,35 +52,36 @@ public class ExpEvoSuite {
     }
 
     public void runExp() throws IOException {
-        for(int i = 0; i <= nbVersion; i++)
-            try {
-                EvoSuite evosuite = new EvoSuite("/Users/Simon/Documents/code/defects4j/framework/lib/test_generation/generation/evosuite-0.2.0.jar", resultDir.getAbsolutePath() + "/" + System.currentTimeMillis());
-                log.flush();
+        try {
+            EvoSuite evosuite = new EvoSuite("/Users/Simon/Documents/code/defects4j/framework/lib/test_generation/generation/evosuite-0.2.0.jar", resultDir.getAbsolutePath() + "/" + System.currentTimeMillis());
+            String evoSuiteTestDir = evosuite.run(new File(inputProgram.getProgramDir()).getAbsolutePath() + "/" + inputProgram.getClassesDir(), mutantClass);
 
-                String mutantTestProject = mutant.checkout("tmpDir/mutantTestFT/", i, false, true);
+            for(int i = 0; i <= nbVersion; i++) {
+                log.flush();
+                String mutantTestProject = mutant.checkout(inputConfiguration.getProperty("tmpDir") + "/mutantTestFT/", i, false, true);
+                inputConfiguration.getProperties().setProperty("project", mutantTestProject);
                 runTest(mutantTestProject);
 
-                inputConfiguration.getProperties().setProperty("project", mutantTestProject);
 
-                String evoSuiteTestDir = evosuite.run(new File(inputProgram.getProgramDir()).getAbsolutePath() + "/" + inputProgram.getClassesDir(), "org.apache.commons.collections4.Bag");
-                copyDir(evoSuiteTestDir , resultDir.getAbsolutePath() + "/evoSuite/" + i + "/" + inputConfiguration.getRelativeTestSourceCodeDir());
-                if(verify(i, evoSuiteTestDir)) {
+                copyDir(evoSuiteTestDir, resultDir.getAbsolutePath() + "/evoSuite/" + i + "/" + inputConfiguration.getRelativeTestSourceCodeDir());
+                if (verify(i, evoSuiteTestDir)) {
                     List<String> failures = findBug(i, evoSuiteTestDir);
-                    if(!failures.isEmpty()) {
-                        log.write("mutant "+ i +": " + failures.size() +" test fail\n");
-                        for(String failure : failures) {
-                            log.write("\t"+failure+ "\n");
+                    if (!failures.isEmpty()) {
+                        log.write("mutant " + i + ": " + failures.size() + " test fail\n");
+                        for (String failure : failures) {
+                            log.write("\t" + failure + "\n");
                         }
                     } else {
-                        log.write("mutant "+ i + ": all tests green\n");
+                        log.write("mutant " + i + ": all tests green\n");
                     }
                 } else {
                     log.write(i + ": failing tests on correct version\n");
                 }
-            } catch (Throwable e) {
-                e.printStackTrace();
-                Log.debug("");
             }
+        } catch (Throwable e) {
+            e.printStackTrace();
+            Log.debug("");
+        }
         log.close();
         suicide();
     }
@@ -85,6 +89,8 @@ public class ExpEvoSuite {
     protected boolean verify(int version, String evoSuiteTestDir) throws Exception {
         String  mutantApplicationProject = mutant.checkout(inputConfiguration.getProperty("tmpDir") +"/tmp"+ System.currentTimeMillis(), version, false, true);
         copyDir(evoSuiteTestDir, mutantApplicationProject + "/" + inputConfiguration.getRelativeTestSourceCodeDir());
+
+        FileUtils.copyFile(new File(inputConfiguration.getProperty("mutant.pom")), new File(mutantApplicationProject + "/pom.xml"));
         List<String> failure = runTest(mutantApplicationProject);
 
         FileUtils.forceDelete(new File(mutantApplicationProject));
@@ -96,6 +102,7 @@ public class ExpEvoSuite {
         String  mutantApplicationProject = mutant.checkout(inputConfiguration.getProperty("tmpDir") +"/tmp"+ System.currentTimeMillis(), version, true, true);
         copyDir(evoSuiteTestDir, mutantApplicationProject + "/" + inputConfiguration.getRelativeTestSourceCodeDir());
 
+        FileUtils.copyFile(new File(inputConfiguration.getProperty("mutant.pom")), new File(mutantApplicationProject + "/pom.xml"));
         List<String> failure = runTest(mutantApplicationProject);
 
         FileUtils.forceDelete(new File(mutantApplicationProject));

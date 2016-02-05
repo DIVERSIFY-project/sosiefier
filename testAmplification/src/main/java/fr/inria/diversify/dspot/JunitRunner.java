@@ -81,7 +81,6 @@ public class JunitRunner {
                 return new JUnitCore().run(request);
             }
         }, timeOut, TimeUnit.SECONDS);
-
         return result;
     }
 
@@ -96,7 +95,11 @@ public class JunitRunner {
     protected <T> T timedCall(Callable<T> c, long timeout, TimeUnit timeUnit)
             throws InterruptedException, ExecutionException, TimeoutException {
         FutureTask<T> task = new FutureTask<T>(c);
-        THREAD_POOL.execute(task);
-        return task.get(timeout, timeUnit);
+        try {
+            THREAD_POOL.execute(task);
+            return task.get(timeout, timeUnit);
+        }  finally {
+            task.cancel(true);
+        }
     }
 }

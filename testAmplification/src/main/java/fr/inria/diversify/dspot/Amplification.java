@@ -96,6 +96,7 @@ public class Amplification {
             }
         }
 //        makeDSpotClassTest(classTest, allTests, testsToRemove);
+        Log.debug("assert generation");
         return makeDSpotClassTest(classTest, ampTest, testsToRemove);
     }
 

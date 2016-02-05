@@ -32,6 +32,7 @@ public class ExpDSpot {
     protected InputConfiguration inputConfiguration;
     protected InputProgram inputProgram;
     protected Mutant mutant;
+    protected String mutantClass;
 
     BufferedWriter log;
     File resultDir;
@@ -47,7 +48,9 @@ public class ExpDSpot {
         FileUtils.copyDirectory(new File(inputProgram.getProgramDir()), new File(tmpDir));
         inputProgram.setProgramDir(tmpDir);
 
-        mutant = new Mutant(inputProgram, "result/test/mutant", "tmpDir/mutantTest/");
+        String mutantDir = inputConfiguration.getProperty("mutant.dir");
+        mutantClass = inputConfiguration.getProperty("mutant.class");
+        mutant = new Mutant(inputProgram, mutantDir);
         resultDir = new File(inputConfiguration.getProperty("tmpDir") + "/DSpot_mutant" + System.currentTimeMillis());
         resultDir.mkdirs();
 
@@ -60,8 +63,8 @@ public class ExpDSpot {
                 log.flush();
                 AssertGenerator.initLog(resultDir.getAbsolutePath(), i);
 
-                String mutantTestProject = mutant.checkout("tmpDir/mutantTestFT/", i, false, true);
-                String  mutantApplicationProject = mutant.checkout("tmpDir/mutantTestTF/", i, true, true);
+                String mutantTestProject = mutant.checkout(inputConfiguration.getProperty("tmpDir") + "/mutantTestFT/", i, false, true);
+                String  mutantApplicationProject = mutant.checkout(inputConfiguration.getProperty("tmpDir") + "/mutantTestTF/", i, true, true);
 
                 initRegressionClassLoader(mutantApplicationProject);
 
