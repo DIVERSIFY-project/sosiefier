@@ -3,11 +3,11 @@ package fr.inria.diversify.dspot;
 
 import fr.inria.diversify.logger.logger.Logger;
 import fr.inria.diversify.runner.InputProgram;
+import fr.inria.diversify.util.Log;
 import org.junit.internal.requests.FilterRequest;
-import org.junit.runner.Computer;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Request;
-import org.junit.runner.Result;
+import org.junit.runner.*;
+import org.junit.runner.notification.RunListener;
+import org.junit.runner.notification.RunNotifier;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -42,19 +42,20 @@ public class JunitRunner {
     }
 
     protected Result runTestClasses(List<String> tests, List<String> methodsToRun) {
+        Result result = new Result();
         try {
             Class<?>[] testClasses = loadClass(tests);
             Logger.reset();
             Logger.setLogDir(new File(inputProgram.getProgramDir() + "/log"));
 
             int timeOut = computeTimeOut(methodsToRun);
-            Result result = runRequest(buildRequest(testClasses, methodsToRun), timeOut);
 
-            Logger.close();
-            return result;
+            runRequest(result, buildRequest(testClasses, methodsToRun), timeOut);
         } catch (Exception e) {
-            return null;
+            Log.error("error in JunitRunner", e);
         }
+        Logger.close();
+        return result;
     }
 
     private int computeTimeOut(List<String> methodsToRun) {
@@ -75,13 +76,19 @@ public class JunitRunner {
         }
     }
 
-    protected Result runRequest(Request request, int timeOut) throws InterruptedException, ExecutionException, TimeoutException {
-        Result result = timedCall(new Callable<Result>() {
-            public Result call() throws Exception {
-                return new JUnitCore().run(request);
+    protected void runRequest(final Result result, Request request, int timeOut) throws InterruptedException, ExecutionException, TimeoutException {
+        timedCall(new Runnable() {
+            public void run() {
+                Runner runner = request.getRunner();
+                RunListener listener = result.createListener();
+                RunNotifier fNotifier = new RunNotifier();
+                fNotifier.addFirstListener(listener);
+
+                fNotifier.fireTestRunStarted(runner.getDescription());
+                runner.run(fNotifier);
+                fNotifier.fireTestRunFinished(result);
             }
         }, timeOut, TimeUnit.SECONDS);
-        return result;
     }
 
     protected Class<?>[] loadClass(List<String> tests) throws ClassNotFoundException {
@@ -92,12 +99,12 @@ public class JunitRunner {
         return testClasses;
     }
 
-    protected <T> T timedCall(Callable<T> c, long timeout, TimeUnit timeUnit)
+    protected void timedCall(Runnable runnable, long timeout, TimeUnit timeUnit)
             throws InterruptedException, ExecutionException, TimeoutException {
-        FutureTask<T> task = new FutureTask<T>(c);
+        FutureTask task = new FutureTask(runnable, null);
         try {
             THREAD_POOL.execute(task);
-            return task.get(timeout, timeUnit);
+            task.get(timeout, timeUnit);
         }  finally {
             task.cancel(true);
         }

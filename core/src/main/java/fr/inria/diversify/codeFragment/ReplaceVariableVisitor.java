@@ -10,6 +10,7 @@ import spoon.reflect.visitor.CtScanner;
  * Date: 4/24/13
  * Time: 3:09 PM
  */
+@Deprecated
 public class ReplaceVariableVisitor extends CtScanner {
     protected CtVariableReference oldVar;
     protected CtVariableReference newVar;

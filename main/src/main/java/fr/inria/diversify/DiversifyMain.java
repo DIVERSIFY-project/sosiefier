@@ -205,7 +205,7 @@ public class DiversifyMain {
         }
     }
 
-    protected TransformationQuery initTransformationQuery() throws ClassNotFoundException, NotFoundException, TransformationParserException, IOException, JSONException {
+    protected TransformationQuery initTransformationQuery() throws ClassNotFoundException, NotFoundException, IOException, JSONException {
         String type = inputConfiguration.getProperty("transformation.type").toLowerCase();
         boolean subType = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.subtype", "false"));
         switch (type) {
@@ -217,8 +217,6 @@ public class DiversifyMain {
                 return new ShuffleCollectionBeforeReturnQuery(inputProgram);
             case "mutation":
                 return new MutationQuery(inputProgram);
-            case "shuffle":
-                return new ShuffleStmtQuery(inputProgram);
             case "other":
                 return new OtherQuery(inputProgram);
             case "all":

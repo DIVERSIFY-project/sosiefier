@@ -1,7 +1,6 @@
 package fr.inria.diversify.dspot.processor;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.codeFragment.ReplaceVariableVisitor;
 import fr.inria.diversify.codeFragment.Statement;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.factory.Factory;
@@ -66,18 +65,14 @@ public class VarCartesianProduct {
             codeFragmentsLists.add(cloneStmts);
             CodeFragment stmt = cloneStmts.get(targetIndex);
 
-
             for(int i = 0; i< oldVarRefs.size(); i++) {
-                CtVariableReference oldVarRef = oldVarRefs.get(i);
+                CtVariableReference oldVarRef = stmt.getInputContext().getVariableOrFieldNamed(oldVarRefs.get(i).getSimpleName());
                 CtVariableReference newVarRef = list.get(i);
 
                 if(newLocalVar.containsKey(newVarRef)) {
                     cloneStmts.add(0,newLocalVar.get(newVarRef));
                 }
-
-                CtVariableReference toReplaceRef = stmt.getInputContext().getVariableOrFieldNamed(oldVarRef.getSimpleName());
-                ReplaceVariableVisitor visitor = new ReplaceVariableVisitor(toReplaceRef, newVarRef);
-                stmt.getCtCodeFragment().accept(visitor);
+                oldVarRef.replace(newVarRef);
             }
         }
         return codeFragmentsLists;
