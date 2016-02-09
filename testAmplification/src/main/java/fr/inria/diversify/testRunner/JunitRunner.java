@@ -1,4 +1,4 @@
-package fr.inria.diversify.dspot;
+package fr.inria.diversify.testRunner;
 
 
 import fr.inria.diversify.logger.logger.Logger;
@@ -31,18 +31,18 @@ public class JunitRunner {
         this.classLoader = classLoader;
     }
 
-    public Result runTestClass(String test, List<String> methodsToRun) {
+    public JunitResult runTestClass(String test, List<String> methodsToRun) {
         List<String> list = new ArrayList<>(1);
         list.add(test);
         return runTestClasses(list, methodsToRun);
     }
 
-    public Result runTestClasses(List<String> tests) {
+    public JunitResult runTestClasses(List<String> tests) {
        return runTestClasses(tests, new ArrayList<>(0));
     }
 
-    protected Result runTestClasses(List<String> tests, List<String> methodsToRun) {
-        Result result = new Result();
+    public JunitResult runTestClasses(List<String> tests, List<String> methodsToRun) {
+        JunitResult result = new JunitResult();
         try {
             Class<?>[] testClasses = loadClass(tests);
             Logger.reset();
@@ -58,7 +58,7 @@ public class JunitRunner {
         return result;
     }
 
-    private int computeTimeOut(List<String> methodsToRun) {
+    protected int computeTimeOut(List<String> methodsToRun) {
         if(methodsToRun.isEmpty()) {
             return classTimeOut;
         } else {
@@ -76,17 +76,16 @@ public class JunitRunner {
         }
     }
 
-    protected void runRequest(final Result result, Request request, int timeOut) throws InterruptedException, ExecutionException, TimeoutException {
+    protected void runRequest(final JunitResult result, Request request, int timeOut) throws InterruptedException, ExecutionException, TimeoutException {
         timedCall(new Runnable() {
             public void run() {
                 Runner runner = request.getRunner();
-                RunListener listener = result.createListener();
                 RunNotifier fNotifier = new RunNotifier();
-                fNotifier.addFirstListener(listener);
+                fNotifier.addFirstListener(result);
 
                 fNotifier.fireTestRunStarted(runner.getDescription());
                 runner.run(fNotifier);
-                fNotifier.fireTestRunFinished(result);
+//                fNotifier.fireTestRunFinished(result);
             }
         }, timeOut, TimeUnit.SECONDS);
     }

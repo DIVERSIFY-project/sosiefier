@@ -5,17 +5,16 @@ import fr.inria.diversify.compare.ObjectLog;
 import fr.inria.diversify.compare.Observation;
 import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.factories.DiversityCompiler;
+import fr.inria.diversify.testRunner.JunitResult;
+import fr.inria.diversify.testRunner.JunitRunner;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
 import org.apache.commons.io.FileUtils;
-import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 import spoon.reflect.code.*;
-import spoon.reflect.declaration.CtAnnotation;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.factory.Factory;
-import spoon.reflect.reference.CtPackageReference;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
@@ -93,8 +92,8 @@ public class AssertGenerator {
             return null;
         }
 
-        Result r1 = runSingleTest(newTest, assertGeneratorClassLoader);
-        Result r2 = runSingleTest(newTest, DSpot.regressionClassLoader);
+        JunitResult r1 = runSingleTest(newTest, assertGeneratorClassLoader);
+        JunitResult r2 = runSingleTest(newTest, DSpot.regressionClassLoader);
 
         if(!equalResult(r1, r2)) {
             try {
@@ -120,7 +119,7 @@ public class AssertGenerator {
         return newTest;
     }
 
-    protected boolean equalResult(Result r1, Result r2) {
+    protected boolean equalResult(JunitResult r1, JunitResult r2) {
         return (r1 == null) == (r2 == null)
                 && r1 == null
                 || r1.getFailures().size() == r2.getFailures().size();
@@ -138,7 +137,7 @@ public class AssertGenerator {
         testsToRun.add(testWithoutAssert);
         cl.addMethod(testWithoutAssert);
 
-        Result result = runTests(testsToRun, assertGeneratorClassLoader);
+        JunitResult result = runTests(testsToRun, assertGeneratorClassLoader);
         if(result == null) {
             return null;
         }
@@ -215,7 +214,7 @@ public class AssertGenerator {
 
         ObjectLog.reset();
 
-        Result result = runTests(testsToRun, assertGeneratorClassLoader);
+        JunitResult result = runTests(testsToRun, assertGeneratorClassLoader);
         return buildTestWithAssert(ObjectLog.getObservations());
     }
 
@@ -245,7 +244,7 @@ public class AssertGenerator {
     }
 
     protected boolean isCorrect(CtMethod test) throws IOException, ClassNotFoundException {
-        Result result = runSingleTest(test, assertGeneratorClassLoader);
+        JunitResult result = runSingleTest(test, assertGeneratorClassLoader);
         return result != null && result.getFailures().isEmpty();
     }
 
@@ -279,7 +278,7 @@ public class AssertGenerator {
             testsToRun.add(mth);
         }
         ObjectLog.reset();
-        Result result = runTests(testsToRun, assertGeneratorClassLoader);
+        JunitResult result = runTests(testsToRun, assertGeneratorClassLoader);
 
         List<Integer> goodAssertIndex = new ArrayList<>();
         for(int i = 0; i < testsToRun.size(); i++) {
@@ -290,18 +289,18 @@ public class AssertGenerator {
         return goodAssertIndex;
     }
 
-    protected Failure getFailure(String methodName, Result result) {
+    protected Failure getFailure(String methodName, JunitResult result) {
         return result.getFailures().stream()
                 .filter(failure -> methodName.equals(failure.getDescription().getMethodName()))
                 .findAny()
                 .orElse(null);
     }
 
-    protected boolean testFailed(String methodName, Result result) {
+    protected boolean testFailed(String methodName, JunitResult result) {
         return getFailure(methodName, result) != null;
     }
 
-    protected Result runTests(List<CtMethod> testsToRun, ClassLoader classLoader) throws ClassNotFoundException {
+    protected JunitResult runTests(List<CtMethod> testsToRun, ClassLoader classLoader) throws ClassNotFoundException {
         DiversifyClassLoader diversifyClassLoader = new DiversifyClassLoader(classLoader, compiler.getBinaryOutputDirectory().getAbsolutePath());
 
         List<CtClass> classesToCompile = testsToRun.stream()
@@ -327,7 +326,7 @@ public class AssertGenerator {
         return junitRunner.runTestClasses(ClassName, testsToRun.stream().map(test -> test.getSimpleName()).collect(Collectors.toList()));
     }
 
-    protected Result runSingleTest(CtMethod test, ClassLoader classLoader) throws ClassNotFoundException, IOException {
+    protected JunitResult runSingleTest(CtMethod test, ClassLoader classLoader) throws ClassNotFoundException, IOException {
         List<CtMethod>testsToRun = new ArrayList<>();
         CtClass newClass = initTestClass();
 

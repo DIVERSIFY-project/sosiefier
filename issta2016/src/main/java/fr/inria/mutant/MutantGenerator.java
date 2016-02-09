@@ -3,7 +3,8 @@ package fr.inria.mutant;
 import fr.inria.diversify.buildSystem.DiversifyClassLoader;
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
-import fr.inria.diversify.dspot.JunitRunner;
+import fr.inria.diversify.testRunner.JunitResult;
+import fr.inria.diversify.testRunner.JunitRunner;
 import fr.inria.diversify.factories.DiversityCompiler;
 import fr.inria.diversify.runner.InputConfiguration;
 import fr.inria.diversify.runner.InputProgram;
@@ -15,7 +16,6 @@ import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 import spoon.compiler.Environment;
 import spoon.reflect.declaration.CtClass;
@@ -151,21 +151,21 @@ public class MutantGenerator {
         return new DiversifyClassLoader(Thread.currentThread().getContextClassLoader(), classPaths);
     }
 
-    protected Set<Failure> getFailures(Result result, Set<String> failureFilter) {
+    protected Set<Failure> getFailures(JunitResult result, Set<String> failureFilter) {
         return result.getFailures().stream()
                 .filter(failure -> !failureFilter.contains(failure.getDescription().getMethodName()))
                 .collect(Collectors.toSet());
     }
 
     protected Set<String> initFailureFilter() throws IOException, ClassNotFoundException {
-        Result result = runTests(buildClassLoader());
+        JunitResult result = runTests(buildClassLoader());
 
        return result.getFailures().stream()
                .map(failure -> failure.getDescription().getMethodName())
                .collect(Collectors.toSet());
     }
 
-    protected Result runTests(DiversifyClassLoader classLoader) throws ClassNotFoundException {
+    protected JunitResult runTests(DiversifyClassLoader classLoader) throws ClassNotFoundException {
         JunitRunner junitRunner = new JunitRunner(inputProgram, classLoader);
 
         List<String> testsName = getAllTest().stream()

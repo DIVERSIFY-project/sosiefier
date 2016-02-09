@@ -5,10 +5,11 @@ import fr.inria.diversify.dspot.processor.*;
 import fr.inria.diversify.factories.DiversityCompiler;
 import fr.inria.diversify.logger.branch.Coverage;
 import fr.inria.diversify.runner.InputProgram;
+import fr.inria.diversify.testRunner.JunitResult;
+import fr.inria.diversify.testRunner.JunitRunner;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
 import org.apache.commons.io.FileUtils;
-import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 import spoon.compiler.Environment;
 import spoon.reflect.code.CtStatement;
@@ -81,9 +82,8 @@ public class Amplification {
             classWithLogger = testSelector.buildClassWithLogger(classTest, tests.get(i));
             writeAndCompile(classWithLogger);
 
-            Result result = runTest(classWithLogger, tests.get(i));
+            JunitResult result = runTest(classWithLogger, tests.get(i));
             if(result != null
-                    && result.getFailures() != null
                     && result.getFailures().isEmpty()) {
                 testSelector.updateLogInfo();
 
@@ -127,7 +127,7 @@ public class Amplification {
                 break;
             }
             Log.debug("run tests");
-            Result result = runTests(classWithLogger, newTests);
+            JunitResult result = runTests(classWithLogger, newTests);
             if(result == null) {
                 break;
             }
@@ -149,24 +149,29 @@ public class Amplification {
     }
 
 
-    protected List<CtMethod> excludeTimeOutAndCompilationErrorTest(List<CtMethod> newTests, Result result) {
-        List<CtMethod> tests = new ArrayList<>(newTests);
-        if(result != null) {
-            for (Failure failure : result.getFailures()) {
-                String exceptionMessage = failure.getException().getMessage();
-                if (exceptionMessage == null
-                        || exceptionMessage.contains("Unresolved compilation problem")
-                        || exceptionMessage.contains("test timed out after")) {
-                    String testName = failure.getDescription().getMethodName();
-                    CtMethod toRemove = newTests.stream()
-                            .filter(test -> test.getSimpleName().equals(testName))
-                            .findFirst()
-                            .get();
-                    tests.remove(toRemove);
-                }
-            }
-        }
-        return tests;
+    protected List<CtMethod> excludeTimeOutAndCompilationErrorTest(List<CtMethod> newTests, JunitResult result) {
+        List<String> runTest = result.runTestName();
+        return newTests.stream()
+                .filter(test -> runTest.contains(test.getSimpleName()))
+                .collect(Collectors.toList());
+
+//        List<CtMethod> tests = new ArrayList<>(newTests);
+//        if(result != null) {
+//            for (Failure failure : result.getFailures()) {
+//                String exceptionMessage = failure.getException().getMessage();
+//                if (exceptionMessage == null
+//                        || exceptionMessage.contains("Unresolved compilation problem")
+//                        || exceptionMessage.contains("test timed out after")) {
+//                    String testName = failure.getDescription().getMethodName();
+//                    CtMethod toRemove = newTests.stream()
+//                            .filter(test -> test.getSimpleName().equals(testName))
+//                            .findFirst()
+//                            .get();
+//                    tests.remove(toRemove);
+//                }
+//            }
+//        }
+//        return tests;
     }
 
     protected void initCompiler() {
@@ -203,13 +208,13 @@ public class Amplification {
         }
     }
 
-    protected Result runTest(CtClass testClass, CtMethod test) throws ClassNotFoundException {
+    protected JunitResult runTest(CtClass testClass, CtMethod test) throws ClassNotFoundException {
         List<CtMethod> tests = new ArrayList<>(1);
         tests.add(test);
         return runTests(testClass, tests);
     }
 
-    protected Result runTests(CtClass testClass, Collection<CtMethod> tests) throws ClassNotFoundException {
+    protected JunitResult runTests(CtClass testClass, Collection<CtMethod> tests) throws ClassNotFoundException {
         JunitRunner junitRunner = new JunitRunner(inputProgram, new DiversifyClassLoader(applicationClassLoader, compiler.getBinaryOutputDirectory().getAbsolutePath()));
 
         return junitRunner.runTestClass(testClass.getQualifiedName(), tests.stream()

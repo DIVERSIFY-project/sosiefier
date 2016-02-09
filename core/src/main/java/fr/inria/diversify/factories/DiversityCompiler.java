@@ -43,11 +43,9 @@ public class DiversityCompiler extends JDTBasedSpoonCompiler {
         this.customClassLoader = customClassLoader;
     }
 
-
     public boolean compileFileIn(File directory, boolean withLog) {
         initInputClassLoader();
         factory.getEnvironment().debugMessage("compiling input sources: " + sources.getAllJavaFiles());
-//        long t = System.currentTimeMillis();
         javaCompliance = factory.getEnvironment().getComplianceLevel();
 
         Main batchCompiler = createBatchCompiler(true);
@@ -95,105 +93,8 @@ public class DiversityCompiler extends JDTBasedSpoonCompiler {
 
         batchCompiler.compile(finalArgs);
 
-//        factory.getEnvironment().debugMessage("compiled in " + (System.currentTimeMillis() - t) + " ms");
         return batchCompiler.globalErrorsCount == 0;
     }
-
-
-
-//    public boolean compileFileIn(File directory, boolean withLog) {
-//        Factory factory = getFactory();
-//        initInputClassLoader();
-//        factory.getEnvironment().debugMessage(
-//                "compiling sources: "
-//                        + factory.CompilationUnit().getMap().keySet());
-//        long t = System.currentTimeMillis();
-//        javaCompliance = factory.getEnvironment().getComplianceLevel();
-//
-//        org.eclipse.jdt.internal.compiler.batch.Main batchCompiler = createBatchCompiler(true);
-//        List<String> args = new ArrayList<String>();
-//        args.add("-1." + javaCompliance);
-//        if (encoding != null) {
-//            args.add("-encoding");
-//            args.add(encoding);
-//        }
-//        args.add("-preserveAllLocals");
-//        args.add("-enableJavadoc");
-//        args.add("-noExit");
-//        // args.add("-verbose");
-//        args.add("-proc:none");
-//        if (getBinaryOutputDirectory() != null) {
-//            args.add("-d");
-//            args.add(getBinaryOutputDirectory().getAbsolutePath());
-//        } else {
-//            args.add("-d");
-//            args.add("none");
-//        }
-//
-//        // args.add("-d");
-//        // args.add(getDestinationDirectory().toString());
-//
-//        String finalClassPath = null;
-//        if (getSourceClasspath() != null) {
-//            finalClassPath = computeJdtClassPath();
-//        } else {
-//            URL[] urls;
-//            if(customClassLoader != null) {
-//                urls = customClassLoader.getURLs();
-//            } else {
-//                ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-//                urls = ((URLClassLoader) classLoader).getURLs();
-//
-//            }
-//            if (urls != null && urls.length > 0) {
-//                String classpath = ".";
-//                for (URL url : urls) {
-//                    classpath += File.pathSeparator + url.getFile();
-//                }
-//                if (classpath != null) {
-//                    finalClassPath = classpath;
-//                }
-////            if (classLoader instanceof URLClassLoader) {
-////                URL[] urls = ((URLClassLoader) classLoader).getURLs();
-////                if (urls != null && urls.length > 0) {
-////                    String classpath = ".";
-////                    for (URL url : urls) {
-////                        classpath += File.pathSeparator + url.getFile();
-////                    }
-////                    if (classpath != null) {
-////                        finalClassPath = classpath;
-////                    }
-////                }
-//            }
-//        }
-//
-//        args.add("-cp");
-//        args.add(finalClassPath);
-//
-//        SpoonFolder src = new FileSystemFolder(directory);
-//
-//        List<String> list = new ArrayList<>();
-//        for(SpoonFile sf : src.getAllJavaFiles()) {
-//            list.add(sf.toString());
-//        }
-//        args.addAll(list);
-//
-//        getFactory().getEnvironment().debugMessage("compile args: " + args);
-//
-//        System.setProperty("jdt.compiler.useSingleThread", "true");
-//
-//        args.add("-proceedOnError");
-//        if(!withLog) {
-//            batchCompiler.logger = new Main.Logger(batchCompiler, new PrintWriter(new NullWriter()), new PrintWriter(new NullWriter()));
-//        }
-//        batchCompiler.compile(args.toArray(new String[0]));
-//
-////        reportProblems(factory.getEnvironment());
-//
-//        factory.getEnvironment().debugMessage(
-//                "compiled in " + (System.currentTimeMillis() - t) + " ms");
-//        return batchCompiler.globalErrorsCount == 0;
-//    }
 
     protected void report(Environment environment, CategorizedProblem problem) {
         if (problem == null) {
@@ -211,13 +112,6 @@ public class DiversityCompiler extends JDTBasedSpoonCompiler {
                 // by default, compilation errors are notified as exception
                 throw new ModelBuildingException(message);
             }
-//            else {
-//                // in noclasspath mode, errors are only reported
-//                environment.report(
-//                        null,
-//                        problem.isError()? Severity.ERROR:Severity.WARNING,
-//                        message);
-//            }
         }
 
     }
