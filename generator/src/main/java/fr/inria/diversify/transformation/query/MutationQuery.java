@@ -88,7 +88,10 @@ public class MutationQuery extends TransformationQuery {
                 .filter(invocation -> invocation.getType().toString().toLowerCase().equals("void"))
                 .collect(Collectors.toList());
 
-        constructorCalls = getInputProgram().getAllElement(CtConstructorCall.class);
+        List<CtConstructorCall> tmp = getInputProgram().getAllElement(CtConstructorCall.class);
+        constructorCalls = tmp.stream()
+            .filter(cc -> !(cc.getParent() instanceof CtThrow))
+            .collect(Collectors.toList());
     }
 
     @Override
@@ -274,7 +277,10 @@ public class MutationQuery extends TransformationQuery {
             transformations.put(id, new VoidMethodCallMutation(voidCall));
         }
 
-        List<CtConstructorCall> cc = Query.getElements(cl, new TypeFilter(CtConstructorCall.class));
+        List<CtConstructorCall> tmp = getInputProgram().getAllElement(CtConstructorCall.class);
+        List<CtConstructorCall> cc = tmp.stream()
+                .filter(c -> !(c.getParent() instanceof CtThrow))
+                .collect(Collectors.toList());
         for(CtConstructorCall cCall : cc) {
             String position = cl.getQualifiedName() + ":" + cCall.getPosition().getLine();
             String id = "ConstructorCall_" + cCall.toString() + "_" + position;

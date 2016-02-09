@@ -184,14 +184,16 @@ public class MutantGenerator {
         tmpDirFile.mkdirs();
 
         for(String id : transformations.keySet()) {
-            Transformation trans = transformations.get(id);
-            trans.apply(tmpDir);
+            try {
+                Transformation trans = transformations.get(id);
+                trans.apply(tmpDir);
 
-            CtClass mutant = inputProgram.getFactory().Core().clone(cl);
-            mutant.setParent(cl.getParent());
-            mutants.put(id, mutant);
+                CtClass mutant = inputProgram.getFactory().Core().clone(cl);
+                mutant.setParent(cl.getParent());
+                mutants.put(id, mutant);
 
-            trans.restore(tmpDir);
+                trans.restore(tmpDir);
+            } catch (Exception e) {}
         }
 
         FileUtils.forceDelete(tmpDirFile);

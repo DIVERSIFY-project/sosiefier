@@ -36,7 +36,8 @@ public abstract class SpoonTransformation<P extends CtElement, T extends CtEleme
         applyInfo();
         try {
             copyTransplant = buildReplacementElement();
-            ReplaceHelper.replace(transplantationPoint, copyTransplant);
+            transplantationPoint.replace(copyTransplant);
+//            ReplaceHelper.replace(transplantationPoint, copyTransplant);
             printJavaFile(srcDir);
         } catch (Exception e) {
             throw new ApplyTransformationException("", e);
