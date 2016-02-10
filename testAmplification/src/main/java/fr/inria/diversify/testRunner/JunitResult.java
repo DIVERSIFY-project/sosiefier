@@ -6,7 +6,9 @@ import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunListener;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -16,11 +18,11 @@ import java.util.stream.Collectors;
  * Time: 10:34
  */
 public class JunitResult extends RunListener {
-    List<Description> testRuns;
+    Set<Description> testRuns;
     List<Failure> failures;
 
     public JunitResult() {
-        testRuns = new ArrayList<>();
+        testRuns = new HashSet<>();
         failures = new ArrayList<>();
     }
 
@@ -44,9 +46,12 @@ public class JunitResult extends RunListener {
 
     protected boolean isCompileOrTimeOutError(Failure failure) {
         String exceptionMessage = failure.getException().getMessage();
-        return exceptionMessage == null
-                || exceptionMessage.contains("Unresolved compilation problem")
-                || exceptionMessage.contains("test timed out after");
+        if(exceptionMessage == null) {
+            return false;
+        } else {
+            return exceptionMessage.contains("Unresolved compilation problem")
+                    || exceptionMessage.contains("test timed out after");
+        }
     }
 
     public List<String> runTestName() {

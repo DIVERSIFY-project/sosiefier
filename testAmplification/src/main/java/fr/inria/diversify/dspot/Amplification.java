@@ -10,7 +10,6 @@ import fr.inria.diversify.testRunner.JunitRunner;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
 import org.apache.commons.io.FileUtils;
-import org.junit.runner.notification.Failure;
 import spoon.compiler.Environment;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.CtClass;

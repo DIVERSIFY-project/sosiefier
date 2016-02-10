@@ -123,7 +123,7 @@ public class DSpot {
     protected void init() throws IOException, InterruptedException {
         addBranchLogger();
         compiler = InitUtils.initSpoonCompiler(inputProgram, true);
-    initBuilder();
+        initBuilder();
 }
 
     protected void initBuilder() throws InterruptedException, IOException {
