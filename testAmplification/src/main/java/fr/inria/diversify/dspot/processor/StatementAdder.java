@@ -137,15 +137,11 @@ public class StatementAdder extends AbstractAmp {
                 }
                 inputContext.addVariableRef(candidate);
             }
-
-            CtVariableReference variable = stmt.getInputContext().getVariableOrFieldNamed(var.getSimpleName());
-            ReplaceVariableVisitor visitor = new ReplaceVariableVisitor(variable, candidate);
-            stmt.getCtCodeFragment().accept(visitor);
+            stmt.getInputContext().getVariableOrFieldNamed(var.getSimpleName()).replace(candidate);
         }
 
         stmts.add(stmt);
     }
-
 
     protected CodeFragment getLocalVar(CtTypeReference type, InputContext inputContext) {
         List<CodeFragment> list = localVars.stream()
@@ -174,8 +170,7 @@ public class StatementAdder extends AbstractAmp {
                         for (CtVariableReference var : localVar.getInputContext().getVar()) {
 
                             CtVariableReference variable = cloneLocalVar.getInputContext().getVariableOrFieldNamed(var.getSimpleName());
-                            ReplaceVariableVisitor visitor = new ReplaceVariableVisitor(var, variable);
-                            cloneLocalVar.getCtCodeFragment().accept(visitor);
+                            var.replace(variable);
                         }
                         return cloneLocalVar;
                     } catch (Exception e) {
@@ -247,7 +242,7 @@ public class StatementAdder extends AbstractAmp {
                     && !mth.getModifiers().contains(ModifierKind.PRIVATE)) {
 //                    && getCoverageForMethod(coverage, cl, mth) != 1.0) {
 
-                CtExecutableReference<?> executableRef = factory.Executable().createReference(mth);
+                CtExecutableReference executableRef = factory.Executable().createReference(mth);
                 CtInvocation invocation;
                 if (mth.getModifiers().contains(ModifierKind.STATIC)) {
                     executableRef.setStatic(true);

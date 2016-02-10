@@ -1,7 +1,7 @@
 package fr.inria.diversify.dspot.processor;
 
-import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.Statement;
+import spoon.reflect.code.CtInvocation;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.reference.CtLocalVariableReference;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class VarCartesianProduct {
     List<CtVariableReference> oldVarRefs;
     List<List<CtVariableReference>> newVarsRefs;
-    Map<CtVariableReference, CodeFragment> newLocalVar;
+    Map<CtVariableReference, Statement> newLocalVar;
 
     public VarCartesianProduct() {
         oldVarRefs = new ArrayList<>();
@@ -46,7 +46,7 @@ public class VarCartesianProduct {
         addReplaceVar(oldVarRef, newVarRef);
     }
 
-    public void addReplaceVar(CtVariableReference oldVarRef, CodeFragment cfLocalVar) {
+    public void addReplaceVar(CtVariableReference oldVarRef, Statement cfLocalVar) {
         Factory factory = oldVarRef.getFactory();
         CtLocalVariable localVariable = (CtLocalVariable) cfLocalVar.getCtCodeFragment();
         CtLocalVariableReference newVarRef = factory.Code().createLocalVariableReference(localVariable);
@@ -55,15 +55,15 @@ public class VarCartesianProduct {
     }
 
 
-    public List<List<CodeFragment>> apply(List<CodeFragment> stmts, int targetIndex) {
-        List<List<CodeFragment>> codeFragmentsLists = new ArrayList<>();
+    public List<List<Statement>> apply(List<Statement> stmts, int targetIndex) {
+        List<List<Statement>> codeFragmentsLists = new ArrayList<>();
 
         List<List<CtVariableReference>> cartesianProduct = cartesianProduct(newVarsRefs);
 
         for(List<CtVariableReference> list : cartesianProduct) {
-            List<CodeFragment> cloneStmts = cloneStmts(stmts);
+            List<Statement> cloneStmts = cloneStmts(stmts);
             codeFragmentsLists.add(cloneStmts);
-            CodeFragment stmt = cloneStmts.get(targetIndex);
+            Statement stmt = cloneStmts.get(targetIndex);
 
             for(int i = 0; i< oldVarRefs.size(); i++) {
                 CtVariableReference oldVarRef = stmt.getInputContext().getVariableOrFieldNamed(oldVarRefs.get(i).getSimpleName());
@@ -78,7 +78,7 @@ public class VarCartesianProduct {
         return codeFragmentsLists;
     }
 
-    protected  List<CodeFragment> cloneStmts(List<CodeFragment> stmts) {
+    protected  List<Statement> cloneStmts(List<Statement> stmts) {
         return stmts.stream()
                 .map(stmt -> stmt.clone())
                 .collect(Collectors.toList());
@@ -104,5 +104,9 @@ public class VarCartesianProduct {
         return resultLists;
     }
 
+    protected boolean isReceiver(CtVariableReference var) {
+        CtInvocation invocation = var.getParent(CtInvocation.class);
+        return invocation.getTarget() != null && invocation.getTarget().equals(var);
+    }
 
 }

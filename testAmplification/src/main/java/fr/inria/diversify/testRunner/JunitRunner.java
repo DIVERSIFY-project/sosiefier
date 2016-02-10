@@ -52,7 +52,7 @@ public class JunitRunner {
 
             runRequest(result, buildRequest(testClasses, methodsToRun), timeOut);
         } catch (Exception e) {
-            Log.error("error in JunitRunner", e);
+//            Log.error("error in JunitRunner", e);
         }
         Logger.close();
         return result;
