@@ -277,7 +277,7 @@ public class MutationQuery extends TransformationQuery {
             transformations.put(id, new VoidMethodCallMutation(voidCall));
         }
 
-        List<CtConstructorCall> tmp = getInputProgram().getAllElement(CtConstructorCall.class);
+        List<CtConstructorCall> tmp = Query.getElements(cl, new TypeFilter(CtConstructorCall.class));
         List<CtConstructorCall> cc = tmp.stream()
                 .filter(c -> !(c.getParent() instanceof CtThrow))
                 .collect(Collectors.toList());
