@@ -36,13 +36,13 @@ public class Amplification {
     protected List<AbstractAmp> amplifiers;
     protected DiversityCompiler compiler;
     protected TestSelector testSelector;
-    protected List<CtMethod> allTests;
+    protected Map<Boolean, List<CtMethod>> testsStatus;
 
     public Amplification(InputProgram inputProgram, DiversityCompiler compiler, Set<String> classLoaderFilter, List<AbstractAmp> amplifiers) {
         this.inputProgram = inputProgram;
         this.compiler = compiler;
-        testSelector = new TestSelector(inputProgram);
-        allTests = new ArrayList<>();
+        testSelector = new TestSelector(inputProgram, 10);
+
         this.amplifiers = amplifiers;
         initClassLoader(classLoaderFilter);
         initCompiler();
@@ -86,22 +86,24 @@ public class Amplification {
                     && result.getFailures().isEmpty()) {
                 testSelector.updateLogInfo();
 
-                Collection<CtMethod> allAmpTest = amplification(classTest, tests.get(i), maxIteration);
-                ampTest.addAll(testSelector.selectedAmplifiedTests(allAmpTest));
+                amplification(classTest, tests.get(i), maxIteration);
+
+                ampTest.addAll(testSelector.selectedAmplifiedTests(testsStatus.get(false)));
+                ampTest.addAll(testSelector.selectedAmplifiedTests(testsStatus.get(true)));
 
                 Log.debug("total amp test: {}", ampTest.size());
             } else {
               testsToRemove.add(tests.get(i));
             }
         }
-//        makeDSpotClassTest(classTest, allTests, testsToRemove);
         Log.debug("assert generation");
         return makeDSpotClassTest(classTest, ampTest, testsToRemove);
     }
 
 
 
-    protected Collection<CtMethod> amplification(CtClass originalClass, CtMethod test, int maxIteration) throws IOException, InterruptedException, ClassNotFoundException {
+    protected void amplification(CtClass originalClass, CtMethod test, int maxIteration) throws IOException, InterruptedException, ClassNotFoundException {
+        testsStatus();
         List<CtMethod> newTests = new ArrayList<>();
         Collection<CtMethod> ampTests = new ArrayList<>();
         newTests.add(test);
@@ -110,7 +112,7 @@ public class Amplification {
         for (int i = 0; i < maxIteration; i++) {
             Log.debug("iteration {}:", i);
 
-            Collection<CtMethod> testToAmp = testSelector.selectTestToAmp(ampTests, newTests, 10);
+            Collection<CtMethod> testToAmp = testSelector.selectTestToAmp(ampTests, newTests);
             if(testToAmp.isEmpty()) {
                 break;
             }
@@ -130,13 +132,12 @@ public class Amplification {
             if(result == null) {
                 break;
             }
-            newTests = excludeTimeOutAndCompilationErrorTest(newTests, result);
+            newTests = filterTest(newTests, result);
             ampTests.addAll(newTests);
-            allTests.addAll(ampTests);
+            saveTestStatus(newTests, result);
             Log.debug("update coverage info");
             testSelector.updateLogInfo();
         }
-        return ampTests;
     }
 
     protected List<CtMethod> reduce(List<CtMethod> newTests) {
@@ -147,30 +148,31 @@ public class Amplification {
         return newTests;
     }
 
+    protected void saveTestStatus(Collection<CtMethod> newTests, JunitResult result) {
+        List<String> runTests = result.runTests();
+        List<String> failedTests = result.failureTests();
+        newTests.stream()
+                .filter(test -> runTests.contains(test.getSimpleName()))
+                .forEach(test -> {
+                    if(failedTests.contains(test.getSimpleName())) {
+                        testsStatus.get(false).add(test);
+                    } else {
+                        testsStatus.get(true).add(test);
+                    }
+                });
+    }
 
-    protected List<CtMethod> excludeTimeOutAndCompilationErrorTest(List<CtMethod> newTests, JunitResult result) {
-        List<String> runTest = result.runTestName();
+    protected List<CtMethod> filterTest(List<CtMethod> newTests, JunitResult result) {
+        List<String> goodTests = result.goodTests();
         return newTests.stream()
-                .filter(test -> runTest.contains(test.getSimpleName()))
+                .filter(test -> goodTests.contains(test.getSimpleName()))
                 .collect(Collectors.toList());
+    }
 
-//        List<CtMethod> tests = new ArrayList<>(newTests);
-//        if(result != null) {
-//            for (Failure failure : result.getFailures()) {
-//                String exceptionMessage = failure.getException().getMessage();
-//                if (exceptionMessage == null
-//                        || exceptionMessage.contains("Unresolved compilation problem")
-//                        || exceptionMessage.contains("test timed out after")) {
-//                    String testName = failure.getDescription().getMethodName();
-//                    CtMethod toRemove = newTests.stream()
-//                            .filter(test -> test.getSimpleName().equals(testName))
-//                            .findFirst()
-//                            .get();
-//                    tests.remove(toRemove);
-//                }
-//            }
-//        }
-//        return tests;
+    protected void testsStatus()  {
+        testsStatus = new HashMap<>();
+        testsStatus.put(true, new ArrayList<>());
+        testsStatus.put(false, new ArrayList<>());
     }
 
     protected void initCompiler() {

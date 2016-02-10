@@ -8,7 +8,6 @@ import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
-import spoon.reflect.factory.FactoryImpl;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtVariableReference;
 import spoon.support.reflect.code.CtLocalVariableImpl;
@@ -133,8 +132,7 @@ public abstract class CodeFragment {
         for (String varName: varMapping.keySet()) {
             CtVariableReference variable = getInputContext().getVariableOrFieldNamed(varName);
             CtVariableReference candidate = other.getInputContext().getVariableOrFieldNamed(varMapping.get(varName));
-            ReplaceVariableVisitor visitor = new ReplaceVariableVisitor(variable, candidate);
-            codeFragment.accept(visitor);
+            variable.replace(candidate);
         }
 
         if(codeFragment instanceof CtLocalVariableImpl)
