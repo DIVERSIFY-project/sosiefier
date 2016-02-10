@@ -54,8 +54,23 @@ public class JunitResult extends RunListener {
         }
     }
 
-    public List<String> runTestName() {
+    public List<String> runTests() {
         return testRuns.stream()
+                .map(description -> description.getMethodName())
+                .collect(Collectors.toList());
+    }
+
+    public List<String> goodTests() {
+        List<String> failureTestNames = failureTests();
+        return testRuns.stream()
+                .map(description -> description.getMethodName())
+                .filter(testName -> !failureTestNames.contains(testName))
+                .collect(Collectors.toList());
+    }
+
+    public List<String> failureTests() {
+        return failures.stream()
+                .map(failure -> failure.getDescription())
                 .map(description -> description.getMethodName())
                 .collect(Collectors.toList());
     }

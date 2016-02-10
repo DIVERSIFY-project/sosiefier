@@ -39,11 +39,13 @@ public class VarCartesianProduct {
     }
 
     public void addReplaceVar(CtVariableReference oldVarRef, CtLocalVariable newVarDeclaration)  {
-        Factory factory = oldVarRef.getFactory();
-        CtLocalVariableReference newVarRef = factory.Code().createLocalVariableReference(newVarDeclaration);
-        Statement literalVar = new Statement(newVarDeclaration);
-        newLocalVar.put(newVarRef, literalVar);
-        addReplaceVar(oldVarRef, newVarRef);
+        if(!(isReceiver(oldVarRef) && isNull(newVarDeclaration))) {
+            Factory factory = oldVarRef.getFactory();
+            CtLocalVariableReference newVarRef = factory.Code().createLocalVariableReference(newVarDeclaration);
+            Statement literalVar = new Statement(newVarDeclaration);
+            newLocalVar.put(newVarRef, literalVar);
+            addReplaceVar(oldVarRef, newVarRef);
+        }
     }
 
     public void addReplaceVar(CtVariableReference oldVarRef, Statement cfLocalVar) {
@@ -109,4 +111,7 @@ public class VarCartesianProduct {
         return invocation.getTarget() != null && invocation.getTarget().equals(var);
     }
 
+    protected boolean isNull(CtLocalVariable localVariable) {
+        return localVariable.getAssignment() == null || localVariable.getAssignment().toString().endsWith("null");
+    }
 }

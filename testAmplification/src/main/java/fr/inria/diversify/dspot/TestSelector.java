@@ -27,10 +27,12 @@ public class TestSelector {
     protected Map<String, Integer> testAges;
     protected List<TestCoverage> ampCoverage;
     protected String logger;
+    protected  int maxNumberOfTest;
 
-    public TestSelector(InputProgram inputProgram) {
+    public TestSelector(InputProgram inputProgram,  int maxNumberOfTest) {
         this.inputProgram = inputProgram;
         this.logger = "fr.inria.diversify.logger.logger";
+        this.maxNumberOfTest = maxNumberOfTest;
     }
 
     protected void init() throws IOException {
@@ -63,7 +65,7 @@ public class TestSelector {
         deleteLogFile();
     }
 
-    protected Collection<CtMethod> selectTestToAmp(Collection<CtMethod> oldTests, Collection<CtMethod> newTests, int maxNumberOfTest) {
+    protected Collection<CtMethod> selectTestToAmp(Collection<CtMethod> oldTests, Collection<CtMethod> newTests) {
         Map<CtMethod, Set<String>> selectedTest = new HashMap<>();
         for (CtMethod test : newTests) {
             for (TestCoverage tc : getTestCoverageFor(test)) {

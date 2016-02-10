@@ -36,7 +36,7 @@ public class StatementAdder2 extends AbstractAmp {
         if(!coverageBycodeFragments.isEmpty()) {
             List<InputContext> inputContexts = getInputContexts(method);
             int index = inputContexts.size() - 1;
-            List<List<Statement>> statements = foo(inputContexts.get(index), method.getFactory());
+            List<List<Statement>> statements = foo(inputContexts.get(index));
             for(List<Statement> list : statements) {
                 try {
                     newMethods.add(apply(method, list, index));
@@ -50,16 +50,6 @@ public class StatementAdder2 extends AbstractAmp {
     }
 
     public CtMethod applyRandom(CtMethod method) {
-        currentMethod = method;
-        List<InputContext> inputContexts = getInputContexts(method);
-
-        while(!inputContexts.isEmpty()) {
-            try {
-                int index = getRandom().nextInt(inputContexts.size());
-                List<Statement> statements = getRandomInvocation(inputContexts.get(index));
-                return apply(method, statements, index);
-            } catch (Exception e) {}
-        }
         return null;
     }
 
@@ -93,39 +83,16 @@ public class StatementAdder2 extends AbstractAmp {
         return inputContexts;
     }
 
-    protected List<Statement> getRandomInvocation(InputContext inputContext) {
-        List<Statement> stmts = new ArrayList<>();
-
-        Statement codeFragment = getRandomCodeFragment(1.1);
-        Factory factory = codeFragment.getCtCodeFragment().getFactory();
-
-        Statement clone = factory.Core().clone(codeFragment);
-        InputContext cloneInputContext = inputContext.clone();
-        findLocalVar(cloneInputContext, clone, stmts);
-
-
-        clone = factory.Core().clone(getRandomCodeFragment(1d));
-        stmts.add(clone);
-        findLocalVar(cloneInputContext, clone, stmts);
-
-        return stmts;
-    }
-
-    protected List<List<Statement>> foo(InputContext inputContext, Factory factory) {
-        return coverageBycodeFragments.entrySet().stream()
-                .filter(entry -> entry.getValue() < 1d)
-                .map(entry -> entry.getKey())
+    protected List<List<Statement>> foo(InputContext inputContext) {
+        return coverageBycodeFragments.keySet().stream()
                 .map(cf -> {
                     List<Statement> list = new ArrayList<>(2);
                     list.add(cf.clone());
                     return list;
                 })
                 .flatMap(list -> {
-                    Statement clone = getRandomCodeFragment(1.1).clone();
                     InputContext cloneInputContext = inputContext.clone();
-                    findLocalVar(cloneInputContext, clone, list);
-                    list.add(list.size() - 1, clone);
-                    return  buildContext(cloneInputContext, list, list.size() -1).stream();
+                    return buildContext(cloneInputContext, list, list.size() -1).stream();
                 })
                 .collect(Collectors.toList());
     }
@@ -135,11 +102,8 @@ public class StatementAdder2 extends AbstractAmp {
         Statement statement = stmts.get(targetIndex);
         ValueCreator vc = new ValueCreator();
         for(CtVariableReference var : statement.getInputContext().getVar()) {
-            //var is receiver
-            if(true) {
-//                statement.getCtCodeFragment()
-                varCartesianProduct.addReplaceVar(var, vc.createNull(var.getType()));
-            }
+
+            varCartesianProduct.addReplaceVar(var, vc.createNull(var.getType()));
 
             List<CtVariableReference> candidates = inputContext.allCandidate(var.getType(), true, false);
             if(!candidates.isEmpty()) {
@@ -165,41 +129,11 @@ public class StatementAdder2 extends AbstractAmp {
        return varCartesianProduct.apply(stmts, targetIndex);
     }
 
-    protected void findLocalVar(InputContext inputContext, Statement stmt, List<Statement> stmts) {
-        Factory factory = stmt.getCtCodeFragment().getFactory();
-
-        for(CtVariableReference var : stmt.getInputContext().getVar()) {
-            List<CtVariableReference> candidates = inputContext.allCandidate(var.getType(), true, false);
-            CtVariableReference candidate;
-            if(!candidates.isEmpty()) {
-                candidate = candidates.get(getRandom().nextInt(candidates.size()));
-            } else {
-                CtLocalVariable localVariable;
-                Statement cfLocalVar = getLocalVar(var.getType(), inputContext);
-                    if (cfLocalVar != null) {
-                        stmts.add(0,cfLocalVar);
-                        localVariable = (CtLocalVariable) cfLocalVar.getCtCodeFragment();
-                        candidate = factory.Code().createLocalVariableReference(localVariable);
-                    } else {
-                        ValueCreator vc = new ValueCreator();
-                        CtLocalVariable localVar = vc.createRandomLocalVar(var.getType());
-                        if(localVar == null) {
-                            localVar = vc.createNull(var.getType());
-                        }
-                        stmts.add(0,new Statement(localVar));
-                        candidate = factory.Code().createLocalVariableReference(localVar);
-                    }
-                }
-                inputContext.addVariableRef(candidate);
-
-
-        }
-    }
-
     protected Statement getLocalVar(CtTypeReference type, InputContext inputContext) {
         List<Statement> list = localVars.stream()
                 .filter(var -> var.getCtCodeFragment() != null)
                 .filter(var -> type.equals(((CtLocalVariable) var.getCtCodeFragment()).getType()))
+                .filter(var -> inputContext.getVariableOrFieldNamed(((CtLocalVariable)var.getCtCodeFragment()).getSimpleName()) == null)
                 .collect(Collectors.toList());
 
         if(list.isEmpty()) {
@@ -233,14 +167,6 @@ public class StatementAdder2 extends AbstractAmp {
             }
             return null;
         }
-    }
-
-    protected Statement getRandomCodeFragment(double maxCoverage) {
-        List<Statement> codeFragments = coverageBycodeFragments.keySet().stream()
-                .filter(cf -> coverageBycodeFragments.get(cf) < maxCoverage)
-                .collect(Collectors.toList());
-
-        return codeFragments.get(getRandom().nextInt(codeFragments.size()));
     }
 
     protected  List<CtStatement> getAssertStatement(CtMethod method) {
