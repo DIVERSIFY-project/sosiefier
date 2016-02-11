@@ -37,7 +37,9 @@ public class ASTDeleteTest {
         p.processCodeFragments();
 
         CtCodeSnippetStatement snippetStatement = new CtCodeSnippetStatementImpl();
-        snippetStatement.setValue("//TRANSFORMATION. FRAGMENT DELETED!");
+        snippetStatement.setValue("/** TRANSFORMATION FRAGMENT DELETED:\n" +
+                "super()\n" +
+                "**/");
 
         //Test that the replacement was properly built
         ASTDeleteForTest a = new ASTDeleteForTest();

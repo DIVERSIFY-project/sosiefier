@@ -215,12 +215,8 @@ public class DiversifyMain {
                 return new CheckReturn(inputProgram);
             case "shufflecollectionbeforereturn":
                 return new ShuffleCollectionBeforeReturnQuery(inputProgram);
-            case "mutation":
-                return new MutationQuery(inputProgram);
             case "other":
                 return new OtherQuery(inputProgram);
-            case "all":
-                return new CompositeQuery(inputProgram);
             case "bytecode":
                 return new ByteCodeTransformationQuery(inputProgram);
             case "adr": {
