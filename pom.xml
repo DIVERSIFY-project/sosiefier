@@ -11,10 +11,8 @@
         <module>generator</module>
         <module>core</module>
         <module>profiling</module>
-        <module>testAmplification</module>
         <!--<module>intersGenerator</module>-->
         <module>main</module>
-        <module>issta2016</module>
     </modules>
     <!-- Shared version number properties -->
     <properties>
