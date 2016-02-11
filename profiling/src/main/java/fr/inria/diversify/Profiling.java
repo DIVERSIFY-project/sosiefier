@@ -8,6 +8,7 @@ import fr.inria.diversify.processor.test.*;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.LoggerUtils;
+import fr.inria.diversify.util.PrintClassUtils;
 import org.apache.commons.io.FileUtils;
 import spoon.reflect.factory.Factory;
 
@@ -124,7 +125,7 @@ public class Profiling {
         if(transform) {
             File fileFrom = new File(inputProgram.getAbsoluteSourceCodeDir());
             File out = new File(inputProgram.getProgramDir() + "/" + mainSrc);
-            LoggerUtils.printAllClasses(factory, out, fileFrom);
+            PrintClassUtils.printAllClasses(factory, out, fileFrom);
         }
     }
 
@@ -192,7 +193,7 @@ public class Profiling {
         if(transform) {
             File fileFrom = new File(inputProgram.getAbsoluteTestSourceCodeDir());
             File out = new File(inputProgram.getProgramDir() + "/" + testSrc);
-            LoggerUtils.printAllClasses(factory, out, fileFrom);
+            PrintClassUtils.printAllClasses(factory, out, fileFrom);
         }
     }
 

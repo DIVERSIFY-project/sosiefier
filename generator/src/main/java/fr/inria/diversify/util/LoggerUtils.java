@@ -22,23 +22,6 @@ import java.util.List;
  * Time: 13:36
  */
 public class LoggerUtils {
-
-    public static List<String> allClassesName(File dir) {
-        List<String> list = new ArrayList<>();
-
-        for(File file : dir.listFiles())
-            if(file.isDirectory())
-                list.addAll(allClassesName(file));
-            else {
-                String name = file.getName();
-                if(name.endsWith(".java")) {
-                    String[] tmp = name.substring(0, name.length() - 5).split("/");
-                    list.add(tmp[tmp.length - 1]);
-                }
-            }
-        return list;
-    }
-
     public static void copyLoggerPackage(InputProgram inputProgram, String outputDirectory, String loggerPackage) throws IOException {
         copyLoggerPackage(inputProgram.getRelativeSourceCodeDir(), outputDirectory, loggerPackage);
     }
@@ -56,30 +39,5 @@ public class LoggerUtils {
         ProcessingManager pm = new QueueProcessingManager(factory);
         pm.addProcessor(processor);
         pm.process(factory.Package().getRootPackage());
-    }
-
-    public static void printAllClasses(Factory factory, File out, File fileFrom) {
-        Environment env = factory.getEnvironment();
-        Processor processor = new JavaOutputProcessorWithFilter(out, new DefaultJavaPrettyPrinter(env), allClassesName(fileFrom));
-        try {
-            applyProcessor(factory, processor);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void printJavaFile(File directory, CtType type) throws IOException {
-        try {
-            Factory factory = type.getFactory();
-            Environment env = factory.getEnvironment();
-
-            JavaOutputProcessor processor = new JavaOutputProcessor(directory, new DefaultJavaPrettyPrinter(env));
-            processor.setFactory(factory);
-
-            processor.createJavaFile(type);
-            Log.trace("write type {} in directory {}", type.getQualifiedName(), directory);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
