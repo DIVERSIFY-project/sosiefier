@@ -234,7 +234,7 @@ public class OldRunner extends AbstractRunner {
         for (Transformation tran : transformations) {
             if (tran.getStatus() == Transformation.NOT_TESTED) {
                 tran.setStatus(status);
-                tran.setFailures(builder.getTestFail());
+                tran.setFailures(builder.getFailedTests());
             }
             tran.restore(tmpDir + "/" + sourceDir);
         }
@@ -293,7 +293,7 @@ public class OldRunner extends AbstractRunner {
         result.setIncrementalSeries(series);
         result.setStatus(status);
         result.setTransformations(trans);
-        result.setFailedTests(builder.getTestFail());
+        result.setFailedTests(builder.getFailedTests());
         return result;
     }
 

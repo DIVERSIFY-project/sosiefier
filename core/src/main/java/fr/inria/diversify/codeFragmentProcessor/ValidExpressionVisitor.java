@@ -1,9 +1,6 @@
 package fr.inria.diversify.codeFragmentProcessor;
 
-import spoon.reflect.code.CtExpression;
-import spoon.reflect.code.CtFieldAccess;
-import spoon.reflect.code.CtLocalVariable;
-import spoon.reflect.code.CtVariableAccess;
+import spoon.reflect.code.*;
 import spoon.reflect.visitor.CtScanner;
 
 /**
@@ -32,10 +29,18 @@ public class ValidExpressionVisitor extends CtScanner {
         super.visitCtLocalVariable(localVariable);
     }
 
-    public <T> void visitCtVariableAccess(CtVariableAccess<T> variableAccess) {
-        if(variableAccess == root)
+    @Override
+    public <T> void visitCtVariableRead(CtVariableRead<T> variableRead) {
+        if(variableRead == root)
             valid = false;
-        super.visitCtVariableAccess(variableAccess);
+        super.visitCtVariableRead(variableRead);
+    }
+
+    @Override
+    public <T> void visitCtVariableWrite(CtVariableWrite<T> variableWrite) {
+        if(variableWrite == root)
+            valid = false;
+        super.visitCtVariableWrite(variableWrite);
     }
 
 //    public <T> void visitCtLocalVariableReference(CtLocalVariableReference<T> reference) {

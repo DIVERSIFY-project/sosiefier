@@ -62,7 +62,7 @@ public class CoverageRunner extends SinglePointRunner {
                 int status = runTestFor(tmpDir, trans.getPositions());
 
                 trans.setStatus(status);
-                trans.setFailures(builder.getTestFail());
+                trans.setFailures(builder.getFailedTests());
                 // error during runTest
             } catch (Exception e) {
                 trans.setStatus(-2);
@@ -96,7 +96,7 @@ public class CoverageRunner extends SinglePointRunner {
 
         builder.setDirectory(directory);
         builder.runBuilder(new String[]{goals});
-        Log.info("status: " + builder.getStatus() + ", compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", nb error: " + builder.getTestFail().size());
+        Log.info("status: " + builder.getStatus() + ", compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", nb error: " + builder.getFailedTests().size());
         status = builder.getStatus();
 
         return status;

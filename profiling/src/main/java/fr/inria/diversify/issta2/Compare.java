@@ -60,7 +60,7 @@ public class Compare extends SinglePointRunner {
                 int status = runTest(tmpDir);
 
                 trans.setStatus(status);
-                trans.setFailures(builder.getTestFail());
+                trans.setFailures(builder.getFailedTests());
                 // error during runTest
             } catch (Exception e) {
                 trans.setStatus(-2);

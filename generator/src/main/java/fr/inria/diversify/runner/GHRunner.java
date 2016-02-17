@@ -77,7 +77,7 @@ public class GHRunner extends AbstractRunner {
                 int status = runTest(tmpDir);
 
                 trans.setStatus(status);
-                trans.setFailures(builder.getTestFail());
+                trans.setFailures(builder.getFailedTests());
                 if (status == 0) {
                    trans.setStatus(runOtherTest());
 
@@ -111,7 +111,7 @@ public class GHRunner extends AbstractRunner {
         rb.setGoals(phases);
         rb.setTimeOut(1000);
         rb.runBuilder();
-        Log.info("status: " + rb.getStatus() + ", compile error: " + rb.getCompileError() + ", run all test: " + rb.allTestRun() + ", nb error: " + builder.getTestFail().size());
+        Log.info("status: " + rb.getStatus() + ", compile error: " + rb.getCompileError() + ", run all test: " + rb.allTestRun() + ", nb error: " + builder.getFailedTests().size());
 
         p = Runtime.getRuntime().exec("sh " +  scriptAfter);
         p.waitFor();

@@ -72,7 +72,7 @@ public class MultiTransformationGenerator extends AbstractRunner {
                 int status = runTest(tmpDir);
 
                 currentMultiTransformation.setStatus(status);
-                currentMultiTransformation.setFailures(builder.getTestFail());
+                currentMultiTransformation.setFailures(builder.getFailedTests());
 
             } catch (Exception e) {
                 currentMultiTransformation.setStatus(-2);

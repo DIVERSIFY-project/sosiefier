@@ -1,8 +1,6 @@
 package fr.inria.diversify.codeFragment;
 
-import spoon.reflect.code.CtInvocation;
-import spoon.reflect.code.CtLocalVariable;
-import spoon.reflect.code.CtVariableAccess;
+import spoon.reflect.code.*;
 import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.reference.CtLocalVariableReference;
 import spoon.reflect.reference.CtTypeReference;
@@ -42,9 +40,16 @@ public class VariableVisitor extends CtScanner {
 		super.visitCtLocalVariable(localVariable);
     }
 
-	public <T> void visitCtVariableAccess(CtVariableAccess<T> variableAccess) {
-		variableReferences.add(variableAccess.getVariable());
-		super.visitCtVariableAccess(variableAccess);
+	@Override
+	public <T> void visitCtVariableRead(CtVariableRead<T> variableRead) {
+		variableReferences.add(variableRead.getVariable());
+		super.visitCtVariableRead(variableRead);
+	}
+
+	@Override
+	public <T> void visitCtVariableWrite(CtVariableWrite<T> variableWrite) {
+		variableReferences.add(variableWrite.getVariable());
+		super.visitCtVariableWrite(variableWrite);
 	}
 
 	public <T> void visitCtLocalVariableReference(CtLocalVariableReference<T> reference) {

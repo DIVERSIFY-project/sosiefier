@@ -234,10 +234,6 @@ public abstract class AbstractBuilder {
         return status;
     }
 
-    public List<String> getTestFail() {
-        return failedTests;
-    }
-
     public boolean allTestRun() {
         return allTestRun;
     }

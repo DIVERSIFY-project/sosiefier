@@ -73,7 +73,7 @@ public class SinglePointRunner extends AbstractRunner {
                 int status = runTest(tmpDir);
 
                 trans.setStatus(status);
-                trans.setFailures(builder.getTestFail());
+                trans.setFailures(builder.getFailedTests());
                 // error during runTest
             } catch (Exception e) {
                 trans.setStatus(-2);
