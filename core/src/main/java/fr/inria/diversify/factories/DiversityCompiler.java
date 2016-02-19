@@ -4,11 +4,8 @@ import fr.inria.diversify.buildSystem.DiversifyClassLoader;
 import org.apache.commons.io.output.NullWriter;
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 import org.eclipse.jdt.internal.compiler.batch.Main;
-import org.eclipse.jdt.internal.compiler.impl.StringConstant;
 import spoon.compiler.Environment;
 import spoon.compiler.ModelBuildingException;
-import spoon.compiler.SpoonFile;
-import spoon.compiler.SpoonFolder;
 import spoon.compiler.builder.*;
 import spoon.reflect.factory.Factory;
 import spoon.support.compiler.FileSystemFolder;
@@ -16,11 +13,9 @@ import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
 import java.io.File;
 import java.io.PrintWriter;
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * User: Simon
@@ -45,7 +40,6 @@ public class DiversityCompiler extends JDTBasedSpoonCompiler {
 
     public boolean compileFileIn(File directory, boolean withLog) {
         initInputClassLoader();
-        factory.getEnvironment().debugMessage("compiling input sources: " + sources.getAllJavaFiles());
         javaCompliance = factory.getEnvironment().getComplianceLevel();
 
         Main batchCompiler = createBatchCompiler(true);

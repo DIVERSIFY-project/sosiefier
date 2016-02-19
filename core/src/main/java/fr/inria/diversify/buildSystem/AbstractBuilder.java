@@ -76,12 +76,6 @@ public abstract class AbstractBuilder {
         return failedTests;
     }
 
-
-//    /**
-//     * Resettable latch to wait for the builder
-//     */
-//    protected CountDownLatch latch;
-
     public AbstractBuilder(String directory) {
         this.directory = directory;
         failedTests = new ArrayList<>();
@@ -89,7 +83,6 @@ public abstract class AbstractBuilder {
         runCount = 0;
         saveOutputToFile = false;
         saveOutputDir = "buildoutput";
-//        latch = new CountDownLatch(1);
     }
 
     protected void reset() {
