@@ -44,6 +44,7 @@ public class MatrixVisu extends Application {
     static int nbClass;
     static int maxSize;
     static boolean pause = true;
+    static boolean stepByStep = false;
     static boolean reset = false;
 
 
@@ -99,17 +100,18 @@ public class MatrixVisu extends Application {
                             sleep(50);
                             if (notCompile[x][y]) {
                                 addCell(group, x, y, Color.RED);
-                                sleep(200);
+                                sleepStepByStep();
                             }
                             if (compile[x][y]) {
                                 addCell(group, x, y, Color.BLUE);
-                                sleep(200);
+                                sleepStepByStep();
                             }
                             if (sosie[x][y]) {
-                                addCell(group, x, y, Color.GREEN);
-                                sleep(200);
+                                addCell(group, x, y, Color.LAWNGREEN);
+                                sleepStepByStep();
                             }
                         }
+
                     }
                 }
                 cleanMatrix(group);
@@ -117,6 +119,16 @@ public class MatrixVisu extends Application {
         });
         thread.setDaemon(true);
         thread.start();
+    }
+
+    protected void sleepStepByStep() {
+        if(stepByStep) {
+            pause = true;
+        }
+        while (pause && !reset) {
+            sleep(50);
+        }
+        sleep(200);
     }
 
     protected void addButton(VBox box) {
@@ -130,6 +142,22 @@ public class MatrixVisu extends Application {
             @Override
             public void handle(ActionEvent e) {
                 pause = !pause;
+                stepByStep = false;
+                if(pause) {
+                    pauseButton.setText("Start");
+                } else {
+                    pauseButton.setText("Pause");
+                }
+            }
+        });
+
+        Button stepButton = new Button("Step by step");
+        hBox.getChildren().add(stepButton);
+        stepButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                pause = false;
+                stepByStep = true;
                 if(pause) {
                     pauseButton.setText("Start");
                 } else {
@@ -144,9 +172,10 @@ public class MatrixVisu extends Application {
         resetButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                reset = true;
                 pauseButton.setText("Start");
+                reset = true;
                 pause = true;
+                stepByStep = false;
             }
         });
     }
