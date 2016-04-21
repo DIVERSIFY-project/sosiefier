@@ -3,13 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>fr.irisa.diversify</groupId>
-    <artifactId>Sosies-generator</artifactId>
+    <groupId>fr.inria.diversify.sosiefier</groupId>
+    <artifactId>sosiefier</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <modules>
-        <module>generator</module>
         <module>core</module>
+        <module>generator</module>
         <module>profiling</module>
         <!--<module>intersGenerator</module>-->
         <module>main</module>
@@ -21,22 +21,11 @@
     </properties>
 
 
-
-    <repositories>
-        <repository>
-            <id>gforge.inria.fr-snapshot</id>
-            <name>Maven Repository for Spoon Snapshot</name>
-            <url>http://spoon.gforge.inria.fr/repositories/snapshots/</url>
-            <snapshots/>
-        </repository>
-    </repositories>
-
-
     <dependencies>
         <dependency>
             <groupId>fr.inria.gforge.spoon</groupId>
             <artifactId>spoon-core</artifactId>
-            <version>5.1.0-SNAPSHOT</version>
+            <version>5.1.0</version>
         </dependency>
 
         <dependency>
