@@ -30,6 +30,8 @@ public abstract class JsonSectionOutput {
 
     public static final String TRANSF_TYPE = "type";
 
+    public static final String FAILURES = "failures";
+
     /**
      * Resulting global object
      */

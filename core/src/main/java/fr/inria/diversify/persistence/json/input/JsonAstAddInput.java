@@ -52,6 +52,8 @@ public class JsonAstAddInput extends JsonTransformationInput {
             logCfStatus(transf, cf, cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
             transf.setTransplant(cf);
 
+            addFailuresToTransformation(transf);
+
             //Add transformation if all went OK
             addTransformation(transformations, transf);
         } catch (JSONException e) {

@@ -5,13 +5,11 @@ import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
 
@@ -158,6 +156,17 @@ public abstract class JsonTransformationInput extends JsonSectionInput {
      * @return True if can handle
      */
     public abstract boolean canRead(String s);
+
+
+
+    protected void addFailuresToTransformation(Transformation transf) throws JSONException {
+        JSONArray tests = getJsonObject().getJSONArray(FAILURES);
+        List<String> list = new ArrayList<>(tests.length());
+        for(int i = 0; i < tests.length(); i++) {
+            list.add(failures.get(i));
+        }
+        transf.setFailures(list);
+    }
 
     /**
      * Failures dictionary

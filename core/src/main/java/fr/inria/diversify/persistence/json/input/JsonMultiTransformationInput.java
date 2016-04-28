@@ -43,6 +43,8 @@ public class JsonMultiTransformationInput extends JsonTransformationInput {
 
             trans.addAll(tmp.values());
 
+            addFailuresToTransformation(trans);
+
             //Add transformation if all went OK
             addTransformation(transformations, trans);
         } catch (JSONException e) {

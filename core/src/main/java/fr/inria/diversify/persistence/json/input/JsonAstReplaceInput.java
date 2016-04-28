@@ -47,6 +47,8 @@ public class JsonAstReplaceInput extends JsonTransformationInput {
             logCfStatus(transf, cf, cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
             transf.setTransplant(cf);
 
+            addFailuresToTransformation(transf);
+
             transf.setVarMapping(getVarMap(getJsonObject().getJSONObject(VARIABLE_MAP)));
             //Add transformation if all went OK
             addTransformation(transformations, transf);
