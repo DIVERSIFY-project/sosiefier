@@ -18,6 +18,7 @@ import fr.inria.diversify.logger.transformationUsed.StaticDiffBuilder;
 import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
 import fr.inria.diversify.statistic.CVLMetric;
+import fr.inria.diversify.statistic.TransformationInfo;
 import fr.inria.diversify.transformation.switchsosie.SwitchQuery;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.query.*;
@@ -65,23 +66,25 @@ public class DiversifyMain {
         inputProgram = InitUtils.initInputProgram(inputConfiguration);
         InitUtils.initDependency(inputConfiguration);
         InitUtils.initSpoon(inputProgram, false);
-        AbstractRunner runner = initRunner();
-
-        AbstractBuilder builder = initBuilder(runner.getTmpDir());
-        TransformationQuery query = initTransformationQuery();
-        runner.setTransformationQuery(query);
-        InitUtils.addApplicationClassesToClassPath(inputProgram);
-        inputProgram.setCoverageReport(initCoverageReport(runner.getTmpDir()));
-        runner.setBuilder(builder);
-
 
 
         if (inputConfiguration.getProperty("stat").equals("true")) {
             computeStatistic();
         } else {
             int n = Integer.parseInt(inputConfiguration.getProperty("nbRun"));
-            runner.run(n);
-            writeResult(runner);
+            AbstractRunner runner = initRunner();
+
+            AbstractBuilder builder = initBuilder(runner.getTmpDir());
+            TransformationQuery query = initTransformationQuery();
+            runner.setTransformationQuery(query);
+            InitUtils.addApplicationClassesToClassPath(inputProgram);
+            inputProgram.setCoverageReport(initCoverageReport(runner.getTmpDir()));
+            runner.setBuilder(builder);
+            try {
+                runner.run(n);
+            } finally {
+                writeResult(runner);
+            }
             runner.deleteTmpFiles();
         }
     }
@@ -364,10 +367,7 @@ public class DiversifyMain {
         Collection<Transformation> transformations = loader.load(transDir, false);
 
         JsonTransformationWriter writer = new JsonTransformationWriter();
-        File out = new File(output);
-        if(!out.exists()) {
-            out.mkdirs();
-        }
+
         writer.write(transformations, output+".json", inputProgram.getProgramDir() + "/pom.xml");
         Set<Transformation> sosies = transformations.stream()
                 .filter(t -> t.isSosie())
@@ -378,8 +378,8 @@ public class DiversifyMain {
         Log.info("nb compile: {}", transformations.stream().filter(t -> t.getStatus() >= -1).count());
         Log.info("nb sosie: {}", sosies.size());
 
-        CVLMetric cvlMetric = new CVLMetric(inputProgram);
-        cvlMetric.printMetrics(output + "_cvlMetric.csv");
+        TransformationInfo transformationInfo = new TransformationInfo(transformations);
+        transformationInfo.print(output + "Trial.csv");
 
 //        visu(sosies);
 //        FailureMatrix matrix = new FailureMatrix(transformations,inputConfiguration.getProperty("allTestFile"));
@@ -408,10 +408,12 @@ public class DiversifyMain {
     protected void writeResult(AbstractRunner runner) {
         String repo = inputConfiguration.getProperty("gitRepository");
 
-        if (repo.equals("null")) {
-            runner.printResult(inputConfiguration.getProperty("result"));
-        } else {
-            runner.printResultInGitRepo(inputConfiguration.getProperty("result"), repo);
+        if(!runner.getTransformations().isEmpty()) {
+            if (repo.equals("null")) {
+                runner.printResult(inputConfiguration.getProperty("result"));
+            } else {
+                runner.printResultInGitRepo(inputConfiguration.getProperty("result"), repo);
+            }
         }
     }
 }

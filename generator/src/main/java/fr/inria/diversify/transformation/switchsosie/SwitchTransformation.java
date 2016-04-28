@@ -1,6 +1,5 @@
 package fr.inria.diversify.transformation.switchsosie;
 
-import fr.inria.diversify.ReplaceHelper;
 import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
@@ -89,7 +88,7 @@ public class SwitchTransformation extends SingleTransformation {
     public void apply(String srcDir) throws Exception {
         try {
             copyTransplant = buildReplacementElement();
-            ReplaceHelper.replace(transformation.getTransplantationPoint().getCtCodeFragment(), copyTransplant);
+            transformation.getTransplantationPoint().getCtCodeFragment().replace(copyTransplant);
             copySwitch(srcDir);
             printJavaFile(srcDir);
         } catch (Exception e) {
@@ -117,7 +116,7 @@ public class SwitchTransformation extends SingleTransformation {
             parent.restore(srcDir);
         }
         try {
-            ReplaceHelper.replace(copyTransplant, transformation.getTransplantationPoint().getCtCodeFragment());
+            copyTransplant.replace(transformation.getTransplantationPoint().getCtCodeFragment());
         } catch (Throwable e) {
             e.printStackTrace();
             Log.debug("");

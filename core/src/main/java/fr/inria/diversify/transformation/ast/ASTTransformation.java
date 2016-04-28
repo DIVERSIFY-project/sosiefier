@@ -1,6 +1,5 @@
 package fr.inria.diversify.transformation.ast;
 
-import fr.inria.diversify.ReplaceHelper;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
@@ -108,9 +107,10 @@ public abstract class ASTTransformation extends SingleTransformation {
         applyInfo();
         try {
             copyTransplant = buildReplacementElement();
-            ReplaceHelper.replace(transplantationPoint.getCtCodeFragment(), copyTransplant);
+            transplantationPoint.getCtCodeFragment().replace(copyTransplant);
             printJavaFile(srcDir);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ApplyTransformationException("", e);
         }
     }
@@ -141,7 +141,8 @@ public abstract class ASTTransformation extends SingleTransformation {
             parent.restore(srcDir);
         }
         try {
-            ReplaceHelper.replace(copyTransplant, transplantationPoint.getCtCodeFragment());
+            copyTransplant.replace(transplantationPoint.getCtCodeFragment());
+//             ReplaceHelper.replace(copyTransplant, transplantationPoint.getCtCodeFragment());
         } catch (Throwable e) {
             e.printStackTrace();
             Log.debug("");

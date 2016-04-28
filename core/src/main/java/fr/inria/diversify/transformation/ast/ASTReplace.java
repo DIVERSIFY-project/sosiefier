@@ -82,6 +82,7 @@ public class ASTReplace extends ASTTransformation {
             }
             return stmt.getCtCodeFragment();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException(new BuildTransplantException("", e));
         }
     }

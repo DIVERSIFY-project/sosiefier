@@ -90,8 +90,14 @@ public class Statement extends CodeFragment {
     }
 
     protected boolean containsSuper(CtCodeElement cf) {
-        String string = cf.toString();
-        return string.contains("super(") || string.contains("super.");
+        try {
+            String string = cf.toString();
+            return string.contains("super(") || string.contains("super.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
     public Statement clone() {

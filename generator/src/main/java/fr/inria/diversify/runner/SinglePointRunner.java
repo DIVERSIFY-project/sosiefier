@@ -69,10 +69,9 @@ public class SinglePointRunner extends AbstractRunner {
             applyTransformation(trans);
 
             try {
-                transformations.add(trans);
-                int status = runTest(tmpDir);
-
-                trans.setStatus(status);
+//                int status = runTest(tmpDir);
+//
+//                trans.setStatus(status);
                 trans.setFailures(builder.getFailedTests());
                 // error during runTest
             } catch (Exception e) {
@@ -86,8 +85,8 @@ public class SinglePointRunner extends AbstractRunner {
             ((SinglePointSessionResults) sessionResults).addRunResults(trans);
         } catch (ApplyTransformationException e) {
             tryRestore(trans, e);
-        } catch (BuildTransplantException e) {
-        }
+        } catch (BuildTransplantException e) {}
+        transformations.add(trans);
     }
 
     protected void applyTransformation(Transformation trans) throws Exception {

@@ -1,6 +1,5 @@
 package fr.inria.diversify.transformation;
 
-import fr.inria.diversify.ReplaceHelper;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
 import fr.inria.diversify.util.Log;
 import spoon.compiler.Environment;
@@ -74,7 +73,7 @@ public abstract class SpoonTransformation<P extends CtElement, T extends CtEleme
             parent.restore(srcDir);
         }
         try {
-            ReplaceHelper.replace(copyTransplant, transplantationPoint);
+            copyTransplant.replace(transplantationPoint);
         } catch (Throwable e) {
             e.printStackTrace();
             Log.debug("");
@@ -168,11 +167,10 @@ public abstract class SpoonTransformation<P extends CtElement, T extends CtEleme
 
     public String getTransformationString() throws Exception {
         copyTransplant = buildReplacementElement();
-        ReplaceHelper.replace(transplantationPoint, copyTransplant);
+        transplantationPoint.replace(copyTransplant);
 
         String ret = transplantationPoint.getParent().toString();
-
-        ReplaceHelper.replace(copyTransplant, transplantationPoint);
+        copyTransplant.replace(transplantationPoint);
 
         return ret;
     }
