@@ -69,9 +69,9 @@ public class SinglePointRunner extends AbstractRunner {
             applyTransformation(trans);
 
             try {
-//                int status = runTest(tmpDir);
-//
-//                trans.setStatus(status);
+                int status = runTest(tmpDir);
+
+                trans.setStatus(status);
                 trans.setFailures(builder.getFailedTests());
                 // error during runTest
             } catch (Exception e) {
