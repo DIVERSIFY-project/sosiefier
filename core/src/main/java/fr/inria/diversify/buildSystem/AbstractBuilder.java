@@ -23,6 +23,9 @@ public abstract class AbstractBuilder {
 
     protected String directory;
 
+
+    protected static String builderPath = null;
+
     //Was there a compile error?
     protected boolean compileError;
 
@@ -292,10 +295,9 @@ public abstract class AbstractBuilder {
         this.setting = setting;
     }
 
-//    public void setStatus(int status) {
-//        this.status = status;
-//    }
-
+    public void setBuilderPath(String builderPath) {
+        this.builderPath = builderPath;
+    }
 
     public String getDirectory() {
         return directory;

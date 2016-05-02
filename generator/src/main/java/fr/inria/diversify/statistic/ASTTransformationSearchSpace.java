@@ -26,12 +26,12 @@ import java.util.stream.Collectors;
  * Date: 5/29/13
  * Time: 2:14 PM
  */
-public class ComputeAllPossibleTransformation {
+public class ASTTransformationSearchSpace {
     protected List<CodeFragment> codeFragments;
 
     protected boolean subType;
 
-    public ComputeAllPossibleTransformation(CodeFragmentList list, ICoverageReport coverageReport) {
+    public ASTTransformationSearchSpace(CodeFragmentList list, ICoverageReport coverageReport) {
         Log.debug("nb of statement: {}:", list.size());
         codeFragments = list.stream()
             .filter(fragment -> coverageReport.codeFragmentCoverage(fragment) != 0)

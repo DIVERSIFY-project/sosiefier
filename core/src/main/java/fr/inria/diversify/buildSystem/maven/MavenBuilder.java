@@ -39,25 +39,8 @@ public class MavenBuilder extends AbstractBuilder {
         request.setGoals(l);
 
         MavenInvoker invoker = new MavenInvoker();
-        //freebsd
-        File mvnHome = new File("/usr/local/share/java/maven3");
-        if (!mvnHome.exists())
-            //ubuntu
-            mvnHome = new File("/usr/share/maven-3.3.3");
-        if (!mvnHome.exists())
-            //debian
-            mvnHome = new File("/opt/maven");
-        if (!mvnHome.exists())
-            //osx
-            mvnHome = new File("/usr/local/Cellar/maven/3.3.3/libexec/");
-        if (!mvnHome.exists())
-            //win
-            //mvnHome = new File(System.getenv("M2_HOME"));
-        if (!mvnHome.exists())
-            //ubuntu
-            mvnHome = new File("/usr/share/apache-maven-3.3.3");
 
-        invoker.setMavenHome(mvnHome);
+        invoker.setMavenHome(getBuilderPath());
         invoker.setTimeOut(timeOut);
 
         ByteArrayOutputStream os = new ByteArrayOutputStream();
@@ -86,6 +69,28 @@ public class MavenBuilder extends AbstractBuilder {
             os.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    protected File getBuilderPath() {
+        if(builderPath != null) {
+            return new File(builderPath);
+        } else {
+            //freebsd
+            File mvnHome = new File("/usr/local/share/java/maven3");
+            if (!mvnHome.exists()) {
+                //ubuntu
+                mvnHome = new File("/usr/share/maven-3.3.3");
+            }
+            if (!mvnHome.exists()) {
+                //debian
+                mvnHome = new File("/opt/maven");
+            }
+            if (!mvnHome.exists()) {
+                //osx
+                mvnHome = new File("/usr/local/Cellar/maven/3.3.3/libexec/");
+            }
+            return mvnHome;
         }
     }
 
