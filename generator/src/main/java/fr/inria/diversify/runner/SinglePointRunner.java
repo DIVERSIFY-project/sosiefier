@@ -52,7 +52,6 @@ public class SinglePointRunner extends AbstractRunner {
         }
     }
 
-
     public void run(Collection<Transformation> trans) throws Exception {
         for(Transformation transformation: trans) {
             run(transformation);

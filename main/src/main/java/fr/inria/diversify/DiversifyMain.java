@@ -4,6 +4,7 @@ import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.buildSystem.ant.AntBuilder;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
+import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.coverage.CoverageReport;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.coverage.MultiCoverageReport;
@@ -17,6 +18,7 @@ import fr.inria.diversify.logger.branch.BranchComparator;
 import fr.inria.diversify.logger.transformationUsed.StaticDiffBuilder;
 import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
+import fr.inria.diversify.statistic.ASTTransformationSearchSpace;
 import fr.inria.diversify.statistic.CVLMetric;
 import fr.inria.diversify.statistic.TransformationInfo;
 import fr.inria.diversify.transformation.switchsosie.SwitchQuery;
@@ -28,8 +30,11 @@ import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
 import org.json.JSONException;
+import spoon.reflect.cu.SourcePosition;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.net.URL;
@@ -49,14 +54,14 @@ public class DiversifyMain {
     /**
      * The input program that we are about to sosiefy
      */
-    private InputProgram inputProgram;
+    protected InputProgram inputProgram;
 
     /**
      * The input configuration given by the user is parsed by this class which helps other parts of the program to
      * interact with the input parameters
      * s
      */
-    private InputConfiguration inputConfiguration;
+    protected InputConfiguration inputConfiguration;
 
     public DiversifyMain(String propertiesFile) throws Exception, InvalidSdkException {
 
@@ -162,6 +167,9 @@ public class DiversifyMain {
             }
             rb = new MavenBuilder(directory);
 
+            String builderPath = inputConfiguration.getProperty("mvnHome",null);
+            rb.setBuilderPath(builderPath);
+
             String androidSdk = inputConfiguration.getProperty("AndroidSdk", "null");
             if(!androidSdk.equals("null") ) {
                 rb.stopAndroidEmulation();
@@ -169,7 +177,6 @@ public class DiversifyMain {
             }
 
             rb.setGoals(phases);
-
             initTimeOut(rb);
 
             URL[] URL = new URL[1];
@@ -189,6 +196,7 @@ public class DiversifyMain {
             initTimeOut(rb);
         }
         //Obtain some other builder properties
+
         boolean saveOutput = Boolean.parseBoolean(inputConfiguration.getProperty("save.builder.output", "false"));
         boolean useClojure = Boolean.parseBoolean(inputConfiguration.getProperty("clojure", "false"));
         String results = inputConfiguration.getProperty("result");
@@ -353,13 +361,13 @@ public class DiversifyMain {
 
     protected void computeStatistic() throws Exception {
         String out = inputConfiguration.getProperty("result");
-//        computeCodeFragmentStatistic(out);
 
         String transDir = inputConfiguration.getProperty("transformation.directory");
         if (transDir != null) {
             computeDiversifyStat(transDir, out);
+        } else {
+            computeSearchSpace(out);
         }
-//        computeOtherStat();
     }
 
     protected void computeDiversifyStat(String transDir, String output) throws Exception {
@@ -380,10 +388,21 @@ public class DiversifyMain {
 
         TransformationInfo transformationInfo = new TransformationInfo(transformations);
         transformationInfo.print(output + "Trial.csv");
+    }
 
-//        visu(sosies);
-//        FailureMatrix matrix = new FailureMatrix(transformations,inputConfiguration.getProperty("allTestFile"));
-//        matrix.printAllMatrix(fileName);
+    protected void computeSearchSpace(String out) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(out + "_searchSpace.csv"));
+        writer.write("position;searchSpaceSize\n");
+
+        ASTTransformationSearchSpace tSS = new ASTTransformationSearchSpace(inputProgram.getCodeFragments(), new NullCoverageReport());
+        Map<CodeFragment, Long> searchSpace = tSS.getSearchSpace();
+
+        for(CodeFragment codeFragment : searchSpace.keySet()) {
+            SourcePosition position = codeFragment.getCtCodeFragment().getPosition();
+            writer.write(position.getCompilationUnit().getMainType().getQualifiedName() + ":" + position.getLine());
+            writer.write(";" + searchSpace.get(codeFragment) + "\n");
+        }
+        writer.close();
     }
 
     protected void visu(Collection<Transformation> transformations) throws Exception {

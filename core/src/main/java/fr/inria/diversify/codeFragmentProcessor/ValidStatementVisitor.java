@@ -30,7 +30,7 @@ public class ValidStatementVisitor extends CtScanner {
     }
 
 	public boolean isValid(){
-		return valid;
+		return valid && root.getParent() instanceof CtBlock;
 	}
 	
 	public ValidStatementVisitor(CtElement e, boolean withSuper) {

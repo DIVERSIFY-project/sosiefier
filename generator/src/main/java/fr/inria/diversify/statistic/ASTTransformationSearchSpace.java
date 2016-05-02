@@ -4,21 +4,16 @@ import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.coverage.ICoverageReport;
-import fr.inria.diversify.transformation.*;
-import fr.inria.diversify.transformation.ast.ASTAdd;
-import fr.inria.diversify.transformation.ast.ASTDelete;
-import fr.inria.diversify.transformation.ast.ASTReplace;
+import fr.inria.diversify.transformation.ast.*;
 import fr.inria.diversify.util.Log;
+import spoon.reflect.code.CtLocalVariable;
+import spoon.reflect.code.CtReturn;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.reference.CtVariableReference;
 
-import java.math.BigInteger;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -32,201 +27,123 @@ public class ASTTransformationSearchSpace {
     protected boolean subType;
 
     public ASTTransformationSearchSpace(CodeFragmentList list, ICoverageReport coverageReport) {
-        Log.debug("nb of statement: {}:", list.size());
         codeFragments = list.stream()
             .filter(fragment -> coverageReport.codeFragmentCoverage(fragment) != 0)
             .collect(Collectors.toList());
-        Log.debug("nb of statement: {}:", codeFragments.size());
     }
 
-    public long numberOfNotDiversification() throws InterruptedException {
-        final List<Object> list = new LinkedList<Object>();
-        ExecutorService pool = Executors.newFixedThreadPool(50);
-        for (CodeFragment cf1 : codeFragments) {
-            final CodeFragment cfTmp = cf1;
+    public Map<CodeFragment, Long> getSearchSpace() {
+        Map<CodeFragment, Long> searchSpace = new HashMap<>();
+        codeFragments.parallelStream()
+                .forEach(cf -> {
+                    try {
+                        long count = nbAllReplaceOrAdd(cf) * 2 + nbAllDelete(cf);
+                        searchSpace.put(cf,count);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                });
 
-            pool.submit(new Runnable() {
-                @Override
-                public void run() {
-                    if(findCandidate(cfTmp, false ,subType).isEmpty())
-                    synchronized (list) {list.add(true);}
-                }
-            });
-        }
-
-        pool.shutdown();
-        pool.awaitTermination(10, TimeUnit.DAYS);
-        return list.size();
+        return searchSpace;
     }
 
-    static BigInteger max = new BigInteger("0");
-    public BigInteger numberOfNotDiversification(CodeFragment cf) {
-        BigInteger nb = new BigInteger("0");
+    public Set<ASTTransformation> getAllASTTransformationFor(CodeFragment codeFragment) throws InterruptedException {
+        Set<ASTTransformation> transformations = new HashSet<>();
 
-        for (CodeFragment cf2 : findCandidate(cf, false, subType)) {
-            BigInteger tmp = getNumberOfVarMapping(cf, cf2);
-            nb = nb.add(tmp);
-            if(max.compareTo(tmp) < 0) {
-                max = tmp;
-                Log.debug("{}\ntransplantationPoint: {}\n {}",tmp, cf.getInputContext().equalString() ,cf);
-                Log.debug("replace/add:{}\n{}\n",  cf2.getInputContext().equalString(), cf2);
+        transformations.addAll(getAllReplace(codeFragment));
+        transformations.addAll(getAllAdd(codeFragment));
+        transformations.addAll(getAllDelete(codeFragment));
+
+        return transformations;
+    }
+
+    public Set<ASTTransformation> getAllReplace(CodeFragment codeFragment) throws InterruptedException {
+        Set<ASTTransformation> allReplace = new HashSet<>();
+
+        for (CodeFragment cf2 : findCandidate(codeFragment, false, subType)) {
+            for (Map<String, String> varMapping : getAllVarMapping(codeFragment, cf2)) {
+                ASTReplace r = new ASTReplace();
+                CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
+                r.setTransplantationPoint(codeFragment);
+                r.setTransplant(new Statement(tmp));
+                r.setVarMapping(varMapping);
+                allReplace.add(r);
             }
         }
-        return nb;
+
+        return allReplace;
     }
 
-    public BigInteger numberOfDiversification() throws InterruptedException {
-        final List<Object> list = new LinkedList<Object>();
-        ExecutorService pool = Executors.newFixedThreadPool(50);
-        for (CodeFragment cf1 : codeFragments) {
-            final  CodeFragment cfTmp = cf1;
-            pool.submit(new Runnable() {
-                @Override
-                public void run() {
-                    BigInteger nb = new BigInteger("0");
-                    for (CodeFragment cf2 : findCandidate(cfTmp, false, subType)) {
-                        nb = nb.add(getNumberOfVarMapping(cfTmp,cf2));
-                    }
-                    synchronized (list) {list.add(nb);}
-                }
-            });
+    public Set<ASTTransformation> getAllDelete(CodeFragment codeFragment) {
+        Set<ASTTransformation> allDelete = new HashSet<>();
+
+        if (!(codeFragment.getCtCodeFragment() instanceof CtReturn)
+                && !(codeFragment.getCtCodeFragment() instanceof CtLocalVariable)) {
+            ASTDelete delete = new ASTDelete();
+            delete.setTransplantationPoint(codeFragment);
+            allDelete.add(delete);
         }
-        pool.shutdown();
-        pool.awaitTermination(10, TimeUnit.SECONDS);
-        BigInteger result = new BigInteger("0");
 
-        for(Object number : list)
-            result = result.add((BigInteger)number);
-
-        return result;
+        return allDelete;
     }
 
-    public List<CodeFragment> findCandidate(CodeFragment cf, boolean varNameMatch, boolean subType) {
-        List<CodeFragment> list = new ArrayList<CodeFragment>();
-        for (CodeFragment statement : codeFragments)
-            if (cf.isReplaceableBy(statement, varNameMatch, subType) && !statement.equalString().equals(cf.equalString()))
-                list.add(statement);
+    public Set<ASTTransformation> getAllAdd(CodeFragment codeFragment) throws InterruptedException {
+        Set<ASTTransformation> allAdd = new HashSet<>();
 
+        for (CodeFragment cf2 : findCandidate(codeFragment, false, subType)) {
+            for (Map<String,String> varMapping : getAllVarMapping(codeFragment,cf2)) {
+                ASTAdd r = new ASTAdd();
+                CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
+                r.setTransplantationPoint(codeFragment);
+                r.setTransplant(new Statement(tmp));
+                r.setVarMapping(varMapping);
+                allAdd.add(r);
+            }
+        }
+
+        return allAdd;
+    }
+
+    protected List<CodeFragment> findCandidate(CodeFragment cf, boolean varNameMatch, boolean subType) {
+        List<CodeFragment> list = new ArrayList<>();
+        for (CodeFragment statement : codeFragments) {
+            if (cf.isReplaceableBy(statement, varNameMatch, subType) && !statement.equalString().equals(cf.equalString())) {
+                list.add(statement);
+            }
+        }
         return list;
     }
 
-
-    protected BigInteger getNumberOfVarMapping(CodeFragment before, CodeFragment after) {
-        BigInteger nb = new BigInteger("1");
-
-        for (CtVariableReference<?> variable : after.getInputContext().getVar()) {
-            BigInteger tmp = new BigInteger(before.getInputContext().allCandidate(variable.getType(), subType).size()+"");
-            nb = nb.multiply(tmp);
-        }
-        return nb;
-    }
-
-    public Set<SingleTransformation> getAllReplace() throws InterruptedException {
-        final Set<SingleTransformation> allReplace = new HashSet<SingleTransformation>();
-        ExecutorService pool = Executors.newFixedThreadPool(50);
-        for (CodeFragment cf1 : codeFragments) {
-                final  CodeFragment cfTmp = cf1;
-                pool.submit(new Runnable() {
-                    @Override
-                    public void run() {
-                        for (CodeFragment cf2 : findCandidate(cfTmp, false, subType)) {
-                            for (Map<String, String> varMapping : getAllVarMapping(cfTmp, cf2)) {
-                                ASTReplace r = new ASTReplace();
-                                CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
-                                r.setTransplantationPoint(cfTmp);
-                                r.setTransplant(new Statement(tmp));
-                                r.setVarMapping(varMapping);
-                                synchronized (allReplace) {
-                                    allReplace.add(r);
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-        pool.shutdown();
-        pool.awaitTermination(10, TimeUnit.SECONDS);
-
-        return allReplace;
-    }
-
-    public Set<SingleTransformation> getAllDelete() {
-        Set<SingleTransformation> allReplace = new HashSet<SingleTransformation>();
-
-        for (CodeFragment cf1 : codeFragments) {
-                    ASTDelete r = new ASTDelete();
-                    r.setTransplantationPoint(cf1);
-                    allReplace.add(r);
-        }
-        return allReplace;
-    }
-
-    public Set<SingleTransformation> getAllAdd() throws InterruptedException {
-        final Set<SingleTransformation> allReplace = new HashSet<SingleTransformation>();
-        ExecutorService pool = Executors.newFixedThreadPool(50);
-        for (CodeFragment cf1 : codeFragments) {
-            final  CodeFragment cfTmp = cf1;
-            pool.submit(new Runnable() {
-                @Override
-                public void run() {
-                    for (CodeFragment cf2 : findCandidate(cfTmp, false, subType)) {
-                        for (Map<String,String> varMapping : getAllVarMapping(cfTmp,cf2)) {
-                            ASTAdd r = new ASTAdd();
-                            CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
-                            r.setTransplantationPoint(cfTmp);
-                            r.setTransplant(new Statement(tmp));
-                            r.setVarMapping(varMapping);
-                            synchronized (allReplace) {
-                                allReplace.add(r);
-                            }
-                        }
-                    }
-                }
-            });
-        }
-        pool.shutdown();
-        pool.awaitTermination(10, TimeUnit.SECONDS);
-
-        return allReplace;
-    }
-
-
-    public BigInteger getAllAdd2() throws InterruptedException {
-        BigInteger result = new BigInteger("0");
-        BigInteger tmp;
-        for(CodeFragment cf1 : codeFragments) {
-            for(CodeFragment cf2 : findCandidate(cf1, false, subType)) {
-
-                tmp = getNumberOfVarMapping(cf1, cf2);
-                result = result.add(tmp);
-
-                if (max.compareTo(tmp) < 0) {
-                    max = tmp;
-                    Log.debug("{}  {}  {}", tmp, cf1.getInputContext().size(), cf2.getInputContext().size());
-                    d_nbAllVarMapping(cf1,cf2);
-                    Log.debug("{}\ntransplantationPoint: {}\n {}", tmp, cf1.getInputContext().equalString(), cf1);
-                    Log.debug("replace/add:{}\n{}\n", cf2.getInputContext().equalString(), cf2);
-                    Log.debug("____________________________");
-                }
-            }
-        }
-
-        return result;
-    }
-
     protected List<Map<String, String>> getAllVarMapping(CodeFragment before, CodeFragment after) {
-        List<List<String>> vars = new ArrayList<List<String>>();
+        List<List<String>> vars = new ArrayList<>();
 
         for (CtVariableReference<?> variable : after.getInputContext().getVar()) {
-
-
-            List<String> mapping = new ArrayList<String>();
+            List<String> mapping = new ArrayList<>();
             vars.add(mapping);
             for (Object candidate : before.getInputContext().allCandidate(variable.getType(), subType))
                     mapping.add(variable.toString()+"==="+candidate.toString() );
 
         }
         return computeVarMapping(vars);
+    }
+
+    public long nbAllReplaceOrAdd(CodeFragment codeFragment) throws InterruptedException {
+        long count = 0;
+        for (CodeFragment cf2 : findCandidate(codeFragment, false, subType)) {
+            count += nbAllVarMapping(codeFragment, cf2);
+        }
+
+        return count;
+    }
+
+    public int nbAllDelete(CodeFragment codeFragment) {
+
+        if (!(codeFragment.getCtCodeFragment() instanceof CtReturn)
+                && !(codeFragment.getCtCodeFragment() instanceof CtLocalVariable)) {
+           return 1;
+        } else {
+            return 0;
+        }
     }
 
     protected long nbAllVarMapping(CodeFragment before, CodeFragment after) {
@@ -247,14 +164,14 @@ public class ASTTransformationSearchSpace {
     }
 
     protected List<Map<String, String>> computeVarMapping(List<List<String>> vars) {
-        List<Map<String, String>> map = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> map = new ArrayList<>();
         if(vars.isEmpty())
             return map;
         if(vars.size() == 1) {
             for(String var : vars.get(0)) {
                 String[] mapping = var.split("===");
                 if(mapping.length == 2) {
-                    Map<String,String> tmp = new HashMap<String, String>();
+                    Map<String,String> tmp = new HashMap<>();
                     tmp.put(mapping[0],mapping[1]);
                     map.add(tmp);
                 }
@@ -268,7 +185,7 @@ public class ASTTransformationSearchSpace {
                 String[] mapping = var.split("===");
                 for (Map<String,String> m : currentMapping) {
                     try {
-                        HashMap<String, String> tmp = new HashMap<String, String>(m);
+                        HashMap<String, String> tmp = new HashMap<>(m);
                         if(mapping.length == 0)
                             tmp.put("","");
                         else
@@ -282,8 +199,6 @@ public class ASTTransformationSearchSpace {
         }
         return map;
     }
-
-
 
     protected CtElement copyElem(CtElement elem) {
         Factory factory = elem.getFactory();
