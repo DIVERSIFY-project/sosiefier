@@ -2,7 +2,9 @@ package fr.inria.diversify.transformation.switchsosie;
 
 import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
-import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
+import fr.inria.diversify.transformation.exception.ApplyTransformationException;
+import fr.inria.diversify.transformation.exception.BuildTransplantException;
+import fr.inria.diversify.transformation.exception.RestoreTransformationException;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 import spoon.compiler.Environment;
@@ -55,7 +57,7 @@ public class SwitchTransformation extends SingleTransformation {
     }
 
 
-    protected  CtCodeElement buildReplacementElement() {
+    protected  CtCodeElement buildReplacementElement() throws BuildTransplantException {
         CtCodeElement transplantationPoint = transformation.getTransplantationPoint().getCtCodeFragment();
         CtCodeElement copyTransplant = transformation.buildReplacementElement();
 
@@ -110,18 +112,19 @@ public class SwitchTransformation extends SingleTransformation {
     }
 
     @Override
-    public void restore(String srcDir) throws Exception {
-        deleteSwitch(srcDir);
-        if (parent != null) {
-            parent.restore(srcDir);
-        }
+    public void restore(String srcDir) throws RestoreTransformationException {
         try {
+            deleteSwitch(srcDir);
+            if (parent != null) {
+                parent.restore(srcDir);
+            }
             copyTransplant.replace(transformation.getTransplantationPoint().getCtCodeFragment());
-        } catch (Throwable e) {
+
+            printJavaFile(srcDir);
+        } catch (Exception e) {
             e.printStackTrace();
             Log.debug("");
         }
-        printJavaFile(srcDir);
     }
 
     @Override

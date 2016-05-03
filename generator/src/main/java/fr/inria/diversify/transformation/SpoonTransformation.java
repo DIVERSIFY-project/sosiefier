@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation;
 
-import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
+import fr.inria.diversify.transformation.exception.ApplyTransformationException;
+import fr.inria.diversify.transformation.exception.RestoreTransformationException;
 import fr.inria.diversify.util.Log;
 import spoon.compiler.Environment;
 import spoon.reflect.cu.SourcePosition;
@@ -68,19 +69,18 @@ public abstract class SpoonTransformation<P extends CtElement, T extends CtEleme
      * @param srcDir Path of the output directory
      * @throws Exception
      */
-    public void restore(String srcDir) throws Exception {
+    public void restore(String srcDir) throws RestoreTransformationException {
         if (parent != null) {
             parent.restore(srcDir);
         }
         try {
             copyTransplant.replace(transplantationPoint);
-        } catch (Throwable e) {
+            printJavaFile(srcDir);
+        } catch (Exception e) {
             e.printStackTrace();
             Log.debug("");
         }
-        printJavaFile(srcDir);
     }
-
 
     /**
      * Prints the modified java file. When the transformation is done a new java file is created. This method performs a

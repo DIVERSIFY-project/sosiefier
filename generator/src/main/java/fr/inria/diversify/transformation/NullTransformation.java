@@ -1,7 +1,6 @@
 package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.transformation.ast.ASTTransformation;
-import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
 import spoon.reflect.code.CtCodeElement;
 
 /**

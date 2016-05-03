@@ -2,7 +2,7 @@ package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.InputContext;
-import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
+import fr.inria.diversify.transformation.exception.BuildTransplantException;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,7 +67,7 @@ public class ASTReplace extends ASTTransformation {
         Log.debug("replace by: ({})\n{}", getTransplant().getCodeFragmentType(), getTransplant());
     }
 
-    public CtCodeElement buildReplacementElement() {
+    public CtCodeElement buildReplacementElement() throws BuildTransplantException {
         try {
             CodeFragment stmt = transplant.clone();
             if (withVarMapping()) {
@@ -83,7 +83,7 @@ public class ASTReplace extends ASTTransformation {
             return stmt.getCtCodeFragment();
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException(new BuildTransplantException("", e));
+            throw new BuildTransplantException("", e);
         }
     }
 

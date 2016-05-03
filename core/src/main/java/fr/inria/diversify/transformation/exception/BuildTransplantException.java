@@ -1,4 +1,4 @@
-package fr.inria.diversify.transformation.ast.exception;
+package fr.inria.diversify.transformation.exception;
 
 /**
  * Created by Simon on 30/10/14.

@@ -2,6 +2,7 @@ package fr.inria.diversify.codeFragmentProcessor;
 
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.util.Log;
+import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtStatement;
 
 import java.io.File;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class StatementProcessor extends AbstractCodeFragmentProcessor<CtStatement> {
-    protected ValidStatementVisitor valid;
+//    protected ValidStatementVisitor valid;
     protected List<File> sourceFilter = null;
 
 
@@ -47,9 +48,15 @@ public class StatementProcessor extends AbstractCodeFragmentProcessor<CtStatemen
                 if (file.contains(filter.getCanonicalPath().toString())) return false;
             }
         }
-        valid = new ValidStatementVisitor(element, false);
-        element.getParent().accept(valid);
-        return !valid.inExpression(element) && valid.isValid();
+        if(element.getParent() instanceof CtBlock) {
+            String elementString = element.toString();
+            return !(elementString.startsWith("super") || elementString.startsWith("this("));
+        }
+        return false;
+
+//        valid = new ValidStatementVisitor(element, false);
+//        element.getParent().accept(valid);
+//        return !valid.inExpression(element) && valid.isValid();
     }
 
 }

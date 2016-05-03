@@ -3,7 +3,7 @@ package fr.inria.diversify.ut.ast;
 import fr.inria.diversify.codeFragmentProcessor.AllStatementsProcessor;
 import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.ast.ASTReplace;
-import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
+import fr.inria.diversify.transformation.exception.BuildTransplantException;
 import fr.inria.diversify.ut.SpoonMetaFactoryTest;
 import org.junit.Test;
 import spoon.reflect.code.CtCodeElement;

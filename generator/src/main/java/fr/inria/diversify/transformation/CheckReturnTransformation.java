@@ -2,11 +2,11 @@ package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.transformation.ast.ASTReplace;
-import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
+import fr.inria.diversify.transformation.exception.BuildTransplantException;
+import fr.inria.diversify.transformation.exception.RestoreTransformationException;
 import fr.inria.diversify.util.Log;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.factory.CoreFactory;
 import spoon.reflect.reference.CtTypeReference;
 
@@ -73,7 +73,7 @@ public class CheckReturnTransformation extends ASTReplace {
     }
 
     @Override
-    public void restore(String srcDir) throws Exception {
+    public void restore(String srcDir) throws RestoreTransformationException {
         CtMethod method = transplantationPoint.getCtCodeFragment().getParent(CtMethod.class);
         if(thrownException != null) {
             method.removeThrownType(thrownException);

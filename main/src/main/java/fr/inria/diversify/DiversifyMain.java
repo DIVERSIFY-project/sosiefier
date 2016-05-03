@@ -392,7 +392,7 @@ public class DiversifyMain {
 
     protected void computeSearchSpace(String out) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(out + "_searchSpace.csv"));
-        writer.write("position;searchSpaceSize\n");
+        writer.write("position;searchSpaceSize;nodeType\n");
 
         ASTTransformationSearchSpace tSS = new ASTTransformationSearchSpace(inputProgram.getCodeFragments(), new NullCoverageReport());
         Map<CodeFragment, Long> searchSpace = tSS.getSearchSpace();
@@ -400,7 +400,8 @@ public class DiversifyMain {
         for(CodeFragment codeFragment : searchSpace.keySet()) {
             SourcePosition position = codeFragment.getCtCodeFragment().getPosition();
             writer.write(position.getCompilationUnit().getMainType().getQualifiedName() + ":" + position.getLine());
-            writer.write(";" + searchSpace.get(codeFragment) + "\n");
+            writer.write(";" + searchSpace.get(codeFragment) + ";");
+            writer.write(codeFragment.getCodeFragmentTypeSimpleName() + "\n");
         }
         writer.close();
     }

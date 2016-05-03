@@ -1,5 +1,6 @@
 package fr.inria.diversify.transformation;
 
+import fr.inria.diversify.transformation.exception.RestoreTransformationException;
 import fr.inria.diversify.util.Log;
 import spoon.compiler.Environment;
 import spoon.reflect.code.CtFor;
@@ -79,17 +80,17 @@ public class LoopPerforation extends SingleTransformation {
     }
 
     @Override
-    public void restore(String srcDir) throws Exception {
+    public void restore(String srcDir) throws RestoreTransformationException {
         if (parent != null) {
             parent.restore(srcDir);
         }
         try {
             loopPerforated.replace(loop);
-        } catch (Throwable e) {
+            printJavaFile(srcDir);
+        } catch (Exception e) {
             e.printStackTrace();
             Log.debug("");
         }
-        printJavaFile(srcDir);
     }
 
     @Override

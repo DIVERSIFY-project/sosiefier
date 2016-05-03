@@ -1,5 +1,6 @@
 package fr.inria.diversify.transformation;
 
+import fr.inria.diversify.transformation.exception.RestoreTransformationException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -71,7 +72,7 @@ public class MultiTransformation extends Transformation {
     }
 
     @Override
-    public void restore(String srcDir) throws Exception {
+    public void restore(String srcDir) throws RestoreTransformationException {
         for(Transformation transformation: transformations) {
             transformation.restore(srcDir);
         }

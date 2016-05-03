@@ -2,7 +2,9 @@ package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.transformation.SingleTransformation;
-import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
+import fr.inria.diversify.transformation.exception.ApplyTransformationException;
+import fr.inria.diversify.transformation.exception.BuildTransplantException;
+import fr.inria.diversify.transformation.exception.RestoreTransformationException;
 import fr.inria.diversify.util.Log;
 import spoon.compiler.Environment;
 import spoon.reflect.code.*;
@@ -61,12 +63,6 @@ public abstract class ASTTransformation extends SingleTransformation {
      */
     public String getTransformationString() throws Exception {
         copyTransplant = buildReplacementElement();
-//        transplantationPoint.getCtCodeFragment().replace(copyTransplant);
-//
-//        String ret = transplantationPoint.getCtCodeFragment().toString();
-//
-//        copyTransplant.replace(transplantationPoint.getCtCodeFragment());
-
         return copyTransplant.toString();
     }
 
@@ -107,11 +103,18 @@ public abstract class ASTTransformation extends SingleTransformation {
         applyInfo();
         try {
             copyTransplant = buildReplacementElement();
+        } catch (BuildTransplantException e) {
+            throw e;
+        }
+        if(copyTransplant == null || transplantationPoint == null) {
+            throw new ApplyTransformationException("copyTransplant or transplantationPoint is null");
+        }
+        try {
             transplantationPoint.getCtCodeFragment().replace(copyTransplant);
             printJavaFile(srcDir);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new ApplyTransformationException("", e);
+            throw new ApplyTransformationException("error in replace", e);
         }
     }
 
@@ -128,7 +131,7 @@ public abstract class ASTTransformation extends SingleTransformation {
      * @throws Exception
      * @Note: Renamed after buildCopyElement.
      */
-    public abstract CtCodeElement buildReplacementElement();
+    public abstract CtCodeElement buildReplacementElement() throws BuildTransplantException;
 
     /**
      * Undo the transformation. After the transformation is restored, the result will be copy to the output directory
@@ -136,18 +139,21 @@ public abstract class ASTTransformation extends SingleTransformation {
      * @param srcDir Path of the output directory
      * @throws Exception
      */
-    public void restore(String srcDir) throws Exception {
+    public void restore(String srcDir) throws RestoreTransformationException {
         if (parent != null) {
             parent.restore(srcDir);
         }
-        try {
-            copyTransplant.replace(transplantationPoint.getCtCodeFragment());
-//             ReplaceHelper.replace(copyTransplant, transplantationPoint.getCtCodeFragment());
-        } catch (Throwable e) {
-            e.printStackTrace();
-            Log.debug("");
+        if(copyTransplant == null) {
+            Log.debug("copyTransplant is null, nothing to restore");
+        }  else {
+            try {
+                copyTransplant.replace(transplantationPoint.getCtCodeFragment());
+                printJavaFile(srcDir);
+            } catch (Exception e) {
+                e.printStackTrace();
+               throw new RestoreTransformationException("", e);
+            }
         }
-        printJavaFile(srcDir);
     }
 
     public abstract void updateStatementList();

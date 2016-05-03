@@ -2,6 +2,7 @@ package fr.inria.diversify.transformation;
 
 import com.fasterxml.uuid.Generators;
 import fr.inria.diversify.runner.InputProgram;
+import fr.inria.diversify.transformation.exception.RestoreTransformationException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -86,7 +87,7 @@ public abstract class Transformation {
 
     public abstract void apply(String srcDir) throws Exception;
     public abstract void applyWithParent(String srcDir) throws Exception;
-    public abstract void restore(String srcDir) throws Exception;
+    public abstract void restore(String srcDir) throws RestoreTransformationException;
 
 
 

@@ -9,8 +9,6 @@ import fr.inria.diversify.statistic.SinglePointSessionResults;
 import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
-import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
-import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 

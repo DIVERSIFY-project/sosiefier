@@ -7,8 +7,8 @@ import fr.inria.diversify.logger.JsonDiffOutput;
 import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
 import fr.inria.diversify.transformation.MultiTransformation;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
-import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
+import fr.inria.diversify.transformation.exception.ApplyTransformationException;
+import fr.inria.diversify.transformation.exception.BuildTransplantException;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
@@ -16,7 +16,6 @@ import org.json.JSONException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * User: Simon

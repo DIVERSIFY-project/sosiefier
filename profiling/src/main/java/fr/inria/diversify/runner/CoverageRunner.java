@@ -5,8 +5,8 @@ import fr.inria.diversify.info.CoverageInfo;
 
 import fr.inria.diversify.statistic.SinglePointSessionResults;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
-import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
+import fr.inria.diversify.transformation.exception.ApplyTransformationException;
+import fr.inria.diversify.transformation.exception.BuildTransplantException;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;

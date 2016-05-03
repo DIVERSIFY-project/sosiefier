@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation.bytecode;
 
 import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.exception.RestoreTransformationException;
 import fr.inria.diversify.util.Log;
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -48,22 +49,26 @@ public abstract class BytecodeTransformation extends SingleTransformation {
     protected abstract void apply() throws BadBytecode;
     public void applyWithParent(String srcDir) throws BadBytecode {}
 
-    public void restore(String targetDir) throws Exception {
-        String destination = targetDir+ "/"+backupClass.getName().replace(".","/") + ".class";
-        Log.debug("restore file: " + backupClassFile + " -> " + destination);
+    public void restore(String targetDir) throws RestoreTransformationException {
+        try {
+            String destination = targetDir + "/" + backupClass.getName().replace(".", "/") + ".class";
+            Log.debug("restore file: " + backupClassFile + " -> " + destination);
 
-        for(CtMethod method : methodLocation.getDeclaringClass().getDeclaredMethods())
-            if(!method.isEmpty())
-                methods.remove(method);
-        methodLocation.getDeclaringClass().detach();
+            for (CtMethod method : methodLocation.getDeclaringClass().getDeclaredMethods())
+                if (!method.isEmpty())
+                    methods.remove(method);
+            methodLocation.getDeclaringClass().detach();
 
-        FileUtils.copyFile(backupClassFile, new File(destination));
-        ClassPool pool = ClassPool.getDefault();
-        pool.insertClassPath(destination);
-        pool.get(backupClass.getName());
-        for(CtMethod method : pool.get(backupClass.getName()).getDeclaredMethods())
-            if(!method.isEmpty())
-                methods.add(method);
+            FileUtils.copyFile(backupClassFile, new File(destination));
+            ClassPool pool = ClassPool.getDefault();
+            pool.insertClassPath(destination);
+            pool.get(backupClass.getName());
+            for (CtMethod method : pool.get(backupClass.getName()).getDeclaredMethods())
+                if (!method.isEmpty())
+                    methods.add(method);
+        } catch (Exception e) {
+            throw new RestoreTransformationException("", e);
+        }
     }
 
     protected List<Integer> opCodeIndexList(CodeAttribute ca) throws BadBytecode {

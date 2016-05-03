@@ -2,7 +2,7 @@ package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.InputContext;
-import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
+import fr.inria.diversify.transformation.exception.BuildTransplantException;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -81,6 +81,7 @@ public class ASTAdd extends ASTTransformation {
                 body.addStatement(tmp);
                 body.addStatement((CtStatement) factory.Core().clone(stmtToAdd.getCtCodeFragment()));
             }
+            stmtIf.toString();
             return stmtIf;
         } catch (Exception e) {
             throw new RuntimeException(new BuildTransplantException("", e));

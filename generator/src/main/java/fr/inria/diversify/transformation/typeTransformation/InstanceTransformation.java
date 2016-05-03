@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation.typeTransformation;
 
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.exception.RestoreTransformationException;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
@@ -258,20 +259,24 @@ public class InstanceTransformation extends Transformation {
     }
 
     @Override
-    public void restore(String srcDir) throws Exception {
-        List<CtType> classes = new ArrayList<>();
+    public void restore(String srcDir) throws RestoreTransformationException {
+        try {
+            List<CtType> classes = new ArrayList<>();
 
-        for(Map.Entry<CtElement, CtConstructorCall> entry : newCCtoOldCC.entrySet()) {
-            entry.getKey().replace(entry.getValue());
-            classes.add(entry.getValue().getPosition().getCompilationUnit().getMainType());
-        }
-        methodsSwitch.stream()
-                .forEach(mth -> ((CtClass)mth.getParent()).removeMethod(mth));
+            for (Map.Entry<CtElement, CtConstructorCall> entry : newCCtoOldCC.entrySet()) {
+                entry.getKey().replace(entry.getValue());
+                classes.add(entry.getValue().getPosition().getCompilationUnit().getMainType());
+            }
+            methodsSwitch.stream()
+                    .forEach(mth -> ((CtClass) mth.getParent()).removeMethod(mth));
 
-        printJavaFile(srcDir, classes);
+            printJavaFile(srcDir, classes);
 
-        if(withSwitch) {
-            deleteSwitch(srcDir);
+            if (withSwitch) {
+                deleteSwitch(srcDir);
+            }
+        } catch (Exception e) {
+            throw new RestoreTransformationException("", e);
         }
     }
 
