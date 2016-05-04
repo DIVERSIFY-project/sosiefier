@@ -167,6 +167,7 @@ public abstract class CodeFragment {
         object.put("position", positionString());
         object.put("type", getCodeFragmentType().getSimpleName());
         object.put("sourcecode", equalString());
+        object.put("toString", codeFragment.toString());
         return object;
     }
 

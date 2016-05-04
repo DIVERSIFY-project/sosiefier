@@ -101,11 +101,9 @@ public abstract class ASTTransformation extends SingleTransformation {
      */
     public void apply(String srcDir) throws Exception {
         applyInfo();
-        try {
-            copyTransplant = buildReplacementElement();
-        } catch (BuildTransplantException e) {
-            throw e;
-        }
+
+        copyTransplant = buildReplacementElement();
+
         if(copyTransplant == null || transplantationPoint == null) {
             throw new ApplyTransformationException("copyTransplant or transplantationPoint is null");
         }

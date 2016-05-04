@@ -83,6 +83,7 @@ public class SinglePointRunner extends AbstractRunner {
 
             ((SinglePointSessionResults) sessionResults).addRunResults(trans);
         } catch (ApplyTransformationException e) {
+            trans.setStatus(-2);
             tryRestore(trans, e);
         } catch (BuildTransplantException e) {}
         transformations.add(trans);
