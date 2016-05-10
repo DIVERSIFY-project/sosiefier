@@ -23,6 +23,7 @@ public abstract class AbstractBuilder {
 
     protected String directory;
 
+    protected String output;
 
     protected static String builderPath = null;
 
@@ -301,5 +302,9 @@ public abstract class AbstractBuilder {
 
     public String getDirectory() {
         return directory;
+    }
+
+    public String getOutput() {
+        return output;
     }
 }

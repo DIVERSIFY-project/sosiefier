@@ -23,6 +23,7 @@ public class MavenBuilder extends AbstractBuilder {
     }
 
     protected void runPrivate(String[] goals, boolean verbose) {
+        output = null;
         if(goals == null) {
             goals = this.goals;
         }
@@ -50,7 +51,7 @@ public class MavenBuilder extends AbstractBuilder {
         invoker.setErrorHandler(psh);
         try {
             invoker.execute(request);
-            String output = os.toString();
+            output = os.toString();
             if(verbose) {
                 Log.debug(output);
             }

@@ -2,12 +2,15 @@ package fr.inria.diversify.runner;
 
 
 import fr.inria.diversify.statistic.SinglePointSessionResults;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.exception.ApplyTransformationException;
 import fr.inria.diversify.transformation.exception.BuildTransplantException;
 import fr.inria.diversify.util.Log;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -70,6 +73,10 @@ public class SinglePointRunner extends AbstractRunner {
             try {
                 int status = runTest(tmpDir);
 
+                if(status == 0) {
+                    writeAllInfo((SingleTransformation) trans, trial);
+                }
+
                 trans.setStatus(status);
                 trans.setFailures(builder.getFailedTests());
                 // error during runTest
@@ -117,5 +124,20 @@ public class SinglePointRunner extends AbstractRunner {
 
     public void setAcceptedErrors(boolean acceptedErrors) {
         this.acceptedErrors = acceptedErrors;
+    }
+
+
+    protected void writeAllInfo(SingleTransformation trans, int trial) throws IOException {
+        File dir = new File(tmpDir + "/../../detail/"+ System.currentTimeMillis() + "/");
+        dir.mkdirs();
+
+        writePosition(dir.getAbsolutePath() + "/transplant.json", (ASTTransformation) trans);
+
+        FileWriter mavenOutput = new FileWriter(new File(dir.getAbsoluteFile() + "/maven"));
+        mavenOutput.write(builder.getOutput());
+        mavenOutput.close();
+
+        FileUtils.copyFile(trans.getPosition().getFile(),new File(dir.getAbsoluteFile() + "/java.java"));
+
     }
 }
