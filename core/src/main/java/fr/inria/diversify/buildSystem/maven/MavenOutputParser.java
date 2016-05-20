@@ -54,9 +54,10 @@ public class MavenOutputParser {
      * @return 0 if locate success, -1 if test fails, -2 compilation error, -3 nothing parsed, -4 parsing error
      */
     public int parse(String[] output) {
-
-//        Pattern testResumePattern = Pattern.compile("Tests run:\\s*(\\d+),\\s*Failures:\\s*(\\d+),\\s*Errors:\\s*(\\d+),\\s*Skipped:\\s*(\\d+)");
         Pattern failedTestPattern = Pattern.compile("(\\w+)\\(((\\w+\\.)*\\w+)\\)\\s+Time elapsed:\\s+((\\d+\\.)?\\d+)\\s+sec\\s+<<<\\s+((FAILURE)|(ERROR))!");
+
+        List<String> resultFailedTests = new ArrayList<>();
+        boolean addToFailedTest = false;
 
         setCompileError(false);
         status = -3;
@@ -65,17 +66,35 @@ public class MavenOutputParser {
             String s = output[i];
             Matcher m = failedTestPattern.matcher(s);
             boolean matches = m.find();
-                if ( matches ) {
-                    this.failedTest.add(m.group(2) + "." + m.group(1));
-                }
+            if (matches) {
+                this.failedTest.add(m.group(2) + "." + m.group(1));
+            }
+
+            if(addToFailedTest) {
+                resultFailedTests.add(s);
+            }
+            if(s.contains("Failed tests:")) {
+                addToFailedTest = true;
+                resultFailedTests.add(s.substring("Failed tests:".length(), s.length()));
+            }
+            if(s.contains("Tests in error:")) {
+                addToFailedTest = true;
+//                resultFailedTests.add(s.substring("Failed tests:".length(), s.length()));
+            }
+            if(s.contains("Tests run:")  || s.isEmpty()) {
+                addToFailedTest = false;
+            }
+
             //If we find a compile error there is no need for parsing more output
             if (s.contains("[ERROR] COMPILATION ERROR")) {
                 setCompileError(true);
                 status = -2;
             } else if (s.contains("[INFO] BUILD FAILURE")) {
-                failedTest.removeAll(acceptedErrors);
-                if(failedTest.isEmpty()) {
-                    status = 0;
+                if(!acceptedErrors.isEmpty()) {
+                    failedTest.removeAll(acceptedErrors);
+                    if(failedTest.isEmpty()) {
+                        status = 0;
+                    }
                 } else {
                     status = -1;
                 }
