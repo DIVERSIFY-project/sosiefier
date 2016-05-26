@@ -80,10 +80,10 @@ public class DiversifyMain {
             AbstractRunner runner = initRunner();
 
             AbstractBuilder builder = initBuilder(runner.getTmpDir());
+            inputProgram.setCoverageReport(initCoverageReport(runner.getTmpDir()));
             TransformationQuery query = initTransformationQuery();
             runner.setTransformationQuery(query);
             InitUtils.addApplicationClassesToClassPath(inputProgram);
-            inputProgram.setCoverageReport(initCoverageReport(runner.getTmpDir()));
             runner.setBuilder(builder);
             try {
                 runner.run(n);
@@ -222,8 +222,12 @@ public class DiversifyMain {
         switch (type) {
             case "checkreturnif":
                 return new CheckReturnQuery(inputProgram);
-            case "checkreturn":
-                return new CheckReturn(inputProgram);
+            case "hashcode":
+                return new HashCodeQuery(inputProgram);
+            case "breakdelete":
+                return new BreakDeleteQuery(inputProgram);
+            case "continuedelete":
+                return new ContinueDeleteQuery(inputProgram);
             case "shufflecollectionbeforereturn":
                 return new ShuffleCollectionBeforeReturnQuery(inputProgram);
             case "other":

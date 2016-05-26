@@ -33,6 +33,7 @@ public class CheckReturnQuery extends TransformationQuery {
                 returnStatementList.add(cf);
             }
         }
+        Collections.shuffle(returnStatementList);
     }
 
     protected boolean isReturnVariable(CtCodeElement stmt) {
@@ -62,6 +63,7 @@ public class CheckReturnQuery extends TransformationQuery {
             } catch (Exception e) {
             }
         }
+        Collections.shuffle(ifStatementList);
     }
 
     @Override

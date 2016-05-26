@@ -5,24 +5,39 @@ import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.exception.BuildTransplantException;
 import fr.inria.diversify.transformation.exception.RestoreTransformationException;
 import fr.inria.diversify.util.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.factory.CoreFactory;
 import spoon.reflect.reference.CtTypeReference;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Created by aelie on 30/01/15.
  */
 public class CheckReturnTransformation extends ASTReplace {
 
-    String exception = "java.lang.Exception";
-    CtTypeReference thrownException = null;
+    protected String exception;
+    protected CtTypeReference thrownException = null;
 
     public CheckReturnTransformation(CodeFragment transplantationPoint, CodeFragment copyTransplant) {
         this.transplantationPoint = transplantationPoint;
         this.transplant = copyTransplant;
         name = "checkReturn";
         type = "insertion";
+    }
+
+    @Override
+    public JSONObject toJSONObject() throws JSONException {
+        JSONObject object = super.toJSONObject();
+
+        object.put("exception", exception);
+
+        return object;
     }
 
     @Override
@@ -34,6 +49,7 @@ public class CheckReturnTransformation extends ASTReplace {
                     variableMapping = transplantationPoint.randomVariableMapping(getTransplant(), subType);
                 }
             }
+
             Log.debug("random variable mapping: {}", variableMapping);
             ifStatement.replaceVar(transplantationPoint, variableMapping);
             CoreFactory factory = transplant.getCtCodeFragment().getFactory().Core();
@@ -43,7 +59,7 @@ public class CheckReturnTransformation extends ASTReplace {
             if (((CtIf) ifStatement.getCtCodeFragment()).getElseStatement() == null) {
                 CtBlock elseBlock = factory.createBlock();
                 CtCodeSnippetStatement elseSnippet = factory.createCodeSnippetStatement();
-                elseSnippet.setValue("throw new Exception()");
+                elseSnippet.setValue("throw new " + exception + "()");
                 elseBlock.addStatement(elseSnippet);
                 ((CtIf) ifStatement.getCtCodeFragment()).setElseStatement(elseBlock);
             }
@@ -55,6 +71,9 @@ public class CheckReturnTransformation extends ASTReplace {
 
     @Override
     public void apply(String srcDir) throws Exception {
+        if(exception == null) {
+            setException(transplantationPoint.getCtCodeFragment().getParent(CtMethod.class));
+        }
         CtMethod method = transplantationPoint.getCtCodeFragment().getParent(CtMethod.class);
         CoreFactory factory = transplant.getCtCodeFragment().getFactory().Core();
         boolean exceptionAlreadyPresent = false;
@@ -70,6 +89,16 @@ public class CheckReturnTransformation extends ASTReplace {
             method.addThrownType(thrownException);
         }
         super.apply(srcDir);
+    }
+
+    protected void setException(CtMethod method) {
+        if(method.getThrownTypes().isEmpty()) {
+            exception = "java.lang.RuntimeException";
+        } else {
+            Random r = new Random();
+            List<CtTypeReference> exceptions = new ArrayList<>(method.getThrownTypes());
+            exception = exceptions.get(r.nextInt(exceptions.size())).getQualifiedName();
+        }
     }
 
     @Override

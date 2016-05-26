@@ -73,9 +73,9 @@ public class SinglePointRunner extends AbstractRunner {
             try {
                 int status = runTest(tmpDir);
 
-                if(status == 0) {
-                    writeAllInfo((SingleTransformation) trans, trial);
-                }
+//                if(status == 0) {
+//                    writeAllInfo((SingleTransformation) trans, trial);
+//                }
 
                 trans.setStatus(status);
                 trans.setFailures(builder.getFailedTests());
@@ -127,17 +127,17 @@ public class SinglePointRunner extends AbstractRunner {
     }
 
 
-    protected void writeAllInfo(SingleTransformation trans, int trial) throws IOException {
-        File dir = new File(tmpDir + "/../../detail/"+ System.currentTimeMillis() + "/");
-        dir.mkdirs();
-
-        writePosition(dir.getAbsolutePath() + "/transplant.json", (ASTTransformation) trans);
-
-        FileWriter mavenOutput = new FileWriter(new File(dir.getAbsoluteFile() + "/maven"));
-        mavenOutput.write(builder.getOutput());
-        mavenOutput.close();
-
-        FileUtils.copyFile(trans.getPosition().getFile(),new File(dir.getAbsoluteFile() + "/java.java"));
-
-    }
+//    protected void writeAllInfo(SingleTransformation trans, int trial) throws IOException {
+//        File dir = new File(tmpDir + "/../../detail/"+ System.currentTimeMillis() + "/");
+//        dir.mkdirs();
+//
+//        writePosition(dir.getAbsolutePath() + "/transplant.json", (ASTTransformation) trans);
+//
+//        FileWriter mavenOutput = new FileWriter(new File(dir.getAbsoluteFile() + "/maven"));
+//        mavenOutput.write(builder.getOutput());
+//        mavenOutput.close();
+//
+//        FileUtils.copyFile(trans.getPosition().getFile(),new File(dir.getAbsoluteFile() + "/java.java"));
+//
+//    }
 }
