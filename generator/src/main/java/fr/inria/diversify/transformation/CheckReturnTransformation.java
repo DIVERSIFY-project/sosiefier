@@ -28,7 +28,7 @@ public class CheckReturnTransformation extends ASTReplace {
         this.transplantationPoint = transplantationPoint;
         this.transplant = copyTransplant;
         name = "checkReturn";
-        type = "insertion";
+        type = "special";
     }
 
     @Override

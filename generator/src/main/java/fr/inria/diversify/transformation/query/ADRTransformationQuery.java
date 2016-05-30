@@ -69,9 +69,8 @@ public class ADRTransformationQuery extends TransformationQuery {
 
     public Transformation pQuery() throws QueryException {
         try {
-            Random r = new Random();
             ASTTransformation t = null;
-            int i = r.nextInt(stupid ? 15 : 5);
+            int i = random.nextInt(stupid ? 15 : 5);
             switch (i) {
                 case 0:
                 case 1:
@@ -319,12 +318,11 @@ public class ADRTransformationQuery extends TransformationQuery {
      * @return
      */
     protected CodeFragment findRandomFragment(boolean withCoverage) {
-        Random r = new Random();
         int size = getInputProgram().getCodeFragments().size();
-        CodeFragment stmt = getInputProgram().getCodeFragments().get(r.nextInt(size));
+        CodeFragment stmt = getInputProgram().getCodeFragments().get(random.nextInt(size));
 
         while (withCoverage && getInputProgram().getCoverageReport().codeFragmentCoverage(stmt) == 0) {
-            stmt = getInputProgram().getCodeFragments().get(r.nextInt(size));
+            stmt = getInputProgram().getCodeFragments().get(random.nextInt(size));
         }
         return stmt;
     }
@@ -349,13 +347,6 @@ public class ADRTransformationQuery extends TransformationQuery {
             }
         }
         return null;
-    }
-
-    protected CtElement copyElem(CtElement elem) {
-        Factory factory = elem.getFactory();
-        CtElement tmp = factory.Core().clone(elem);
-        tmp.setParent(elem.getParent());
-        return tmp;
     }
 
     protected List<CodeFragment> getAllUniqueCodeFragments() {
@@ -421,9 +412,5 @@ public class ADRTransformationQuery extends TransformationQuery {
             } catch (Exception e) {}
         }
         return transformations;
-    }
-
-    public void setEvalFunction(ToDoubleFunction<Transformation> evalFunction) {
-        this.evalFunction = evalFunction;
     }
 }
