@@ -1,7 +1,6 @@
 package fr.inria.diversify.transformation;
 
 import spoon.reflect.code.CtIf;
-import spoon.reflect.code.CtStatementList;
 
 /**
  * User: Simon

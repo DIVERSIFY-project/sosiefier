@@ -222,6 +222,10 @@ public class DiversifyMain {
         switch (type) {
             case "checkreturnif":
                 return new CheckReturnQuery(inputProgram);
+            case "removeparamtercondition" :
+                return new RemoveParameterConditionQuery(inputProgram);
+            case "removeput" :
+                return new RemovePutQuery(inputProgram);
             case "hashcode":
                 return new HashCodeQuery(inputProgram);
             case "breakdelete":
