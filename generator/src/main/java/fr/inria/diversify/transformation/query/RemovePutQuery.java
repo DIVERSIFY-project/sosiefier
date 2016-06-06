@@ -6,6 +6,7 @@ import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtIf;
+import spoon.reflect.code.CtInvocation;
 import spoon.reflect.code.CtLoop;
 
 import java.util.Collections;
@@ -40,9 +41,7 @@ public class RemovePutQuery extends ADRTransformationQuery {
 
     protected List<CodeFragment> initPutList(boolean withCoverage) {
         return getInputProgram().getCodeFragments().stream()
-                .filter(cf -> !(cf.getCtCodeFragment() instanceof CtBlock
-                        || cf.getCtCodeFragment() instanceof CtLoop
-                        || cf.getCtCodeFragment() instanceof CtIf))
+                .filter(cf -> cf.getCtCodeFragment() instanceof CtInvocation)
                 .filter(cf -> !withCoverage|| getInputProgram().getCoverageReport().codeFragmentCoverage(cf) != 0)
                 .filter(cf -> cf.getCtCodeFragment().toString().contains(".put("))
                 .collect(Collectors.toList());
