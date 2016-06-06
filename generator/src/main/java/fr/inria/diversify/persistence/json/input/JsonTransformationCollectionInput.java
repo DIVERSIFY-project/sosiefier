@@ -1,5 +1,7 @@
 package fr.inria.diversify.persistence.json.input;
 
+import fr.inria.diversify.persistence.json.input.special.JsonCheckReturnInput;
+import fr.inria.diversify.persistence.json.input.special.JsonRemoveParameterConditionInput;
 import fr.inria.diversify.runner.InputProgram;
 import org.json.JSONObject;
 
@@ -25,6 +27,10 @@ public class JsonTransformationCollectionInput extends JsonAstTransformationColl
         sections.add(new JsonAstDeleteInput(getInputProgram()));
         sections.add(new JsonMultiTransformationInput(getInputProgram()));
         sections.add(new InstanceTransformationInput(getInputProgram()));
+
+        //add special transformation
+        sections.add(new JsonCheckReturnInput(getInputProgram()));
+        sections.add(new JsonRemoveParameterConditionInput(getInputProgram()));
 
         return sections;
     }

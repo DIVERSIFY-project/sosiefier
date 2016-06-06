@@ -20,7 +20,7 @@ import java.util.*;
 public abstract class Transformation {
 
     //A global ID for the transformations. For our purposes is enough a simple global increment.
-    private static int globalID = 0;
+    protected static int globalID = 0;
 
     //public default String getTransformationString() throws Exception {return "";}
     public abstract String getTransformationString() throws Exception;
@@ -55,7 +55,7 @@ public abstract class Transformation {
     /**
      * An index to identify the transformation in the storage
      */
-    private UUID index = null;
+    protected UUID index = null;
 
     /**
      * The series number is an ID for a given serie containing this transformation.

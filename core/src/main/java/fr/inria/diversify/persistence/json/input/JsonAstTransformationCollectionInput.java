@@ -87,6 +87,7 @@ public class JsonAstTransformationCollectionInput extends JsonSectionInput {
         sections.add(new JsonAstReplaceInput(getInputProgram()));
         sections.add(new JsonAstDeleteInput(getInputProgram()));
         sections.add(new JsonMultiTransformationInput(getInputProgram()));
+
         return sections;
     }
 

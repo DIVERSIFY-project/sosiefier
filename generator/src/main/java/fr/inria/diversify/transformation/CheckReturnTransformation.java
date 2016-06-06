@@ -24,6 +24,11 @@ public class CheckReturnTransformation extends ASTReplace {
     protected String exception;
     protected CtTypeReference thrownException = null;
 
+    public CheckReturnTransformation() {
+        name = "checkReturn";
+        type = "special";
+    }
+
     public CheckReturnTransformation(CodeFragment transplantationPoint, CodeFragment copyTransplant) {
         this.transplantationPoint = transplantationPoint;
         this.transplant = copyTransplant;

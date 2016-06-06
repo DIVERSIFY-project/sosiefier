@@ -1,8 +1,11 @@
 package fr.inria.diversify.transformation;
 
+import com.fasterxml.uuid.Generators;
 import fr.inria.diversify.transformation.exception.ApplyTransformationException;
 import fr.inria.diversify.transformation.exception.RestoreTransformationException;
 import fr.inria.diversify.util.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 import spoon.compiler.Environment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
@@ -173,6 +176,29 @@ public abstract class SpoonTransformation<P extends CtElement, T extends CtEleme
         copyTransplant.replace(transplantationPoint);
 
         return ret;
+    }
+
+
+    public JSONObject toJSONObject() throws JSONException {
+        JSONObject object = super.toJSONObject();
+
+        object.put("transplantationPoint", CtElemToJSON(transplantationPoint));
+        object.put("transplant", CtElemToJSON(transplant));
+        return object;
+    }
+
+    protected JSONObject CtElemToJSON(CtElement elem) throws JSONException {
+        JSONObject object = new JSONObject();
+
+        object.put("position", position(elem));
+        object.put("type", elem.getClass().getSimpleName());
+        object.put("sourcecode", elem.toString());
+
+        return object;
+    }
+
+    protected String position(CtElement elem) {
+        return elem.getParent(CtType.class).getQualifiedName() + ":" + elem.getPosition().getLine();
     }
 
 }
