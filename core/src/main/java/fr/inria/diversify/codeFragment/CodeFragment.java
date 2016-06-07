@@ -8,9 +8,11 @@ import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
+import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtVariableReference;
 import spoon.support.reflect.code.CtLocalVariableImpl;
+import spoon.support.reflect.code.CtVariableReadImpl;
 
 import java.io.File;
 import java.util.HashMap;
@@ -132,13 +134,33 @@ public abstract class CodeFragment {
         for (String varName: varMapping.keySet()) {
             CtVariableReference variable = getInputContext().getVariableOrFieldNamed(varName);
             CtVariableReference candidate = other.getInputContext().getVariableOrFieldNamed(varMapping.get(varName));
-            variable.replace(candidate);
+            variable.getParent().replace(createVariableAccess(candidate, (CtVariableAccess) variable.getParent()));
+//            variable.replace(candidate);
         }
 
         if(codeFragment instanceof CtLocalVariableImpl)
             ((CtLocalVariableImpl)codeFragment).setSimpleName(((CtLocalVariableImpl) other.codeFragment).getSimpleName());
 
         Log.trace("after: {}",codeFragment);
+    }
+
+    protected CtVariableAccess createVariableAccess(CtVariableReference variable, CtVariableAccess toReplace) {
+        boolean isStatic = variable.getDeclaration().hasModifier(ModifierKind.STATIC);
+        if(toReplace instanceof CtVariableRead) {
+            return getFactory().Code().createVariableRead(variable, isStatic);
+        } else {
+            CtVariableAccess va;
+            if (variable instanceof CtFieldReference) {
+                va = getFactory().Core().createFieldWrite();
+                if (!isStatic) {
+                    ((CtFieldAccess) va).setTarget(getFactory().Code().createThisAccess(((CtFieldReference) variable).getDeclaringType()));
+                }
+            } else {
+                va = getFactory().Core().createVariableWrite();
+            }
+            va.setVariable(variable).setType(variable.getType());
+            return va;
+        }
     }
 
     //validate if this can be replaced by other

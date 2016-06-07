@@ -331,13 +331,15 @@ public class InputProgram {
 
         List<T> allElements = getAllElement(type);
         for(T elem : allElements) {
-            int elemLineNumber = elem.getPosition().getLine();
-            if(elemLineNumber == lineNumberPosition) {
-                String elemClass = elem.getPosition().getCompilationUnit().getMainType().getQualifiedName();
-                if (classPosition.equals(elemClass) && elem.toString().equals(searchValue)) {
-                    return elem;
+            try {
+                int elemLineNumber = elem.getPosition().getLine();
+                if (elemLineNumber == lineNumberPosition) {
+                    String elemClass = elem.getPosition().getCompilationUnit().getMainType().getQualifiedName();
+                    if (classPosition.equals(elemClass) && elem.toString().equals(searchValue)) {
+                        return elem;
+                    }
                 }
-            }
+            } catch (Exception e) {}
         }
         return result;
     }
@@ -419,18 +421,9 @@ public class InputProgram {
                 e.accept(query);
                 elements.addAll(query.getResult());
             }
-            /*
-            getRoots().stream()
-                    .flatMap(root -> {
-                        root.accept(executeQuery);
-                        return executeQuery.getResult().stream();
-                    })
-                    .collect(Collectors.toList());
-            */
             typeToObject.put(cl, elements);
         }
         return (List<T>)typeToObject.get(cl);
-        // return null;
     }
 
     /**
