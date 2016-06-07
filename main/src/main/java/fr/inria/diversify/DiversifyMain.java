@@ -221,7 +221,10 @@ public class DiversifyMain {
         boolean subType = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.subtype", "false"));
         switch (type) {
             case "checkreturnif":
-                return new CheckReturnQuery(inputProgram);
+                boolean varNameMatching = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.varNameMatching", "false"));
+                CheckReturnQuery returnQuery = new CheckReturnQuery(inputProgram);
+                returnQuery.setVarNameMatching(varNameMatching);
+                return returnQuery;
             case "removeparamtercondition" :
                 return new RemoveParameterConditionQuery(inputProgram);
             case "removeput" :
@@ -383,6 +386,11 @@ public class DiversifyMain {
         Collection<Transformation> transformations = loader.load(transDir, false);
 
         JsonTransformationWriter writer = new JsonTransformationWriter();
+
+        File file = new File(output);
+        if(!file.exists()) {
+            file.mkdirs();
+        }
 
         writer.write(transformations, output+".json", inputProgram.getProgramDir() + "/pom.xml");
         Set<Transformation> sosies = transformations.stream()
