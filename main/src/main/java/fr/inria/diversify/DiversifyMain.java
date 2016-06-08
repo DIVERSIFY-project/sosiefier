@@ -392,15 +392,16 @@ public class DiversifyMain {
             file.mkdirs();
         }
 
-        writer.write(transformations, output+".json", inputProgram.getProgramDir() + "/pom.xml");
         Set<Transformation> sosies = transformations.stream()
                 .filter(t -> t.isSosie())
                 .collect(Collectors.toSet());
-        writer.write(sosies, output+"_sosie.json", inputProgram.getProgramDir() + "/pom.xml");
 
         Log.info("nb transformation: {}", transformations.size());
         Log.info("nb compile: {}", transformations.stream().filter(t -> t.getStatus() >= -1).count());
         Log.info("nb sosie: {}", sosies.size());
+
+        writer.write(transformations, output+".json", inputProgram.getProgramDir() + "/pom.xml");
+        writer.write(sosies, output+"_sosie.json", inputProgram.getProgramDir() + "/pom.xml");
 
         TransformationInfo transformationInfo = new TransformationInfo(transformations);
         transformationInfo.print(output + "Trial.csv");

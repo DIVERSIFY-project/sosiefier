@@ -141,12 +141,6 @@ public class ASTReplace extends ASTTransformation {
     }
 
     public boolean usedOfSubType() {
-        //return variableMapping.entrySet().stream()
-        //        .anyMatch(var -> {
-        //            CtVariableReference variable = tpInputContext.getVariableOrFieldNamed(var.getKey());
-        //           CtVariableReference candidate = tInputContext.getVariableOrFieldNamed(var.getValue());
-        //            return !variable.getType().equals(candidate.getType());
-        //        });
         InputContext tpInputContext = transplant.getContext().getInputContext();
         InputContext tInputContext = transplantationPoint.getContext().getInputContext();
         for (Map.Entry<String, String> var : variableMapping.entrySet()) {
@@ -155,9 +149,5 @@ public class ASTReplace extends ASTTransformation {
             if (!variable.getType().equals(candidate.getType())) return true;
         }
         return false;
-    }
-
-    public void updateStatementList() {
-        getInputProgram().getCodeFragments().remove(transplantationPoint);
     }
 }

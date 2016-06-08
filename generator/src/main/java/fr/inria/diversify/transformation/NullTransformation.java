@@ -20,13 +20,6 @@ public class NullTransformation extends ASTTransformation {
     }
 
     public void apply(String srcDir) throws Exception {
-//        applyInfo();
-//        try {
-//            printJavaFile(srcDir);
-//        } catch (Exception e) {
-//            throw new ApplyTransformationException("", e);
-//        }
-
     }
 
     @Override
@@ -34,8 +27,4 @@ public class NullTransformation extends ASTTransformation {
         return null;
     }
 
-    @Override
-    public void updateStatementList() {
-
-    }
 }

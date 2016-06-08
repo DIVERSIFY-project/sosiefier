@@ -154,8 +154,6 @@ public abstract class ASTTransformation extends SingleTransformation {
         }
     }
 
-    public abstract void updateStatementList();
-
     public CtType<?> getOriginalClass(CodeFragment cf) {
         return cf.getCompilationUnit().getMainType();
     }

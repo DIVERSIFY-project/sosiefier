@@ -147,7 +147,7 @@ public class ASTAdd extends ASTTransformation {
         return false;
     }
 
-    public void updateStatementList() {}
+//    public void updateStatementList() {}
 
     public Map<String, String> getVarMapping() {
         return variableMapping;

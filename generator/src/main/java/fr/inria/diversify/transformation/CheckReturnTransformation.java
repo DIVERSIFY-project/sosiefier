@@ -173,11 +173,6 @@ public class CheckReturnTransformation extends ASTTransformation {
         this.withVariableMapping = withVariableMapping;
     }
 
-    @Override
-    public void updateStatementList() {
-
-    }
-
     public void setVarMapping(Map<String,String> variableMapping) {
         this.variableMapping = variableMapping;
     }
