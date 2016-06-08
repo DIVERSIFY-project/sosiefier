@@ -167,13 +167,22 @@ public class DiversifyMain {
             }
             rb = new MavenBuilder(directory);
 
-            String builderPath = inputConfiguration.getProperty("mvnHome",null);
+            String builderPath = inputConfiguration.getProperty("maven.home",null);
             rb.setBuilderPath(builderPath);
 
-            String androidSdk = inputConfiguration.getProperty("AndroidSdk", "null");
+            String androidSdk = inputConfiguration.getProperty("maven.androidSdk", "null");
             if(!androidSdk.equals("null") ) {
                 rb.stopAndroidEmulation();
                 rb.startAndroidEmulation();
+            }
+
+            String mavenLocalRepository = inputConfiguration.getProperty("maven.localRepository",null);
+            if(mavenLocalRepository != null) {
+                File m2 = new File(mavenLocalRepository);
+                if (!m2.exists()) {
+                    m2.mkdirs();
+                }
+                rb.setSetting(m2);
             }
 
             rb.setGoals(phases);
@@ -184,7 +193,7 @@ public class DiversifyMain {
             URLClassLoader child = new URLClassLoader(URL, Thread.currentThread().getContextClassLoader());
             Thread.currentThread().setContextClassLoader(child);
 
-            String pomFile = inputConfiguration.getProperty("newPomFile");
+            String pomFile = inputConfiguration.getProperty("maven.newPomFile");
             if (!pomFile.equals("")) {
                 rb.initPom(pomFile);
             }
@@ -195,8 +204,8 @@ public class DiversifyMain {
 
             initTimeOut(rb);
         }
-        //Obtain some other builder properties
 
+        //Obtain some other builder properties
         boolean saveOutput = Boolean.parseBoolean(inputConfiguration.getProperty("save.builder.output", "false"));
         boolean useClojure = Boolean.parseBoolean(inputConfiguration.getProperty("clojure", "false"));
         String results = inputConfiguration.getProperty("result");

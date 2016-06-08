@@ -39,10 +39,27 @@ public class MavenDependencyResolver implements DependencyResolver {
     protected List<String> repositoriesUrls;
     protected List<String> alreadyResolve;
     private static MavenDependencyResolver singleton;
+    protected static String localRepository;
 
 
+    public static MavenDependencyResolver dependencyResolver(String localRepository) {
+        if(localRepository != null) {
+            MavenDependencyResolver.localRepository = System.getProperty("user.dir") + File.separator + localRepository;
+        } else {
+            MavenDependencyResolver.localRepository = System.getProperty("user.home") + File.separator + ".m2/repository";
+        }
+
+        if(singleton == null) {
+            singleton = new MavenDependencyResolver();
+        }
+        return singleton;
+    }
 
     public static MavenDependencyResolver dependencyResolver() {
+        if(localRepository == null) {
+            MavenDependencyResolver.localRepository = System.getProperty("user.home") + File.separator + ".m2/repository";
+        }
+
         if(singleton == null) {
             singleton = new MavenDependencyResolver();
         }
@@ -53,7 +70,7 @@ public class MavenDependencyResolver implements DependencyResolver {
         dependenciesURL = new ArrayList<>();
         directDependenciesURL = new ArrayList<>();
         resolver = new MavenResolver();
-        resolver.setBasePath(System.getProperty("user.home") + File.separator + ".m2/repository");
+        resolver.setBasePath(localRepository);
 
         repositoriesUrls = new ArrayList<>();
         repositoriesUrls.add("http://repo1.maven.org/maven2/");

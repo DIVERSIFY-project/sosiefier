@@ -261,7 +261,7 @@ public class InputConfiguration {
                 "fr.inria.diversify.transformation.executeQuery.searchStrategy.SimpleRandomStrategy");
 
         prop.setProperty("syncroRange", "0");
-        prop.setProperty("newPomFile", "");
+        prop.setProperty("maven.newPomFile", "");
         prop.setProperty("transformation.level", "statement");
         prop.setProperty("builder", "maven");
     }

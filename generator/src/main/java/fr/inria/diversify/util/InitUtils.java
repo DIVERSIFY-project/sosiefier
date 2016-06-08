@@ -32,12 +32,12 @@ public class InitUtils {
     }
 
     public static void initDependency(InputConfiguration inputConfiguration) throws Exception, InvalidSdkException {
-        MavenDependencyResolver t = MavenDependencyResolver.dependencyResolver();
+        MavenDependencyResolver t = MavenDependencyResolver.dependencyResolver(inputConfiguration.getProperty("maven.localRepository",null));
         String builder = inputConfiguration.getProperty("builder");
 
         if(builder.equals("maven")) {
             t.resolveDependencies(inputConfiguration.getInputProgram());
-            String androidSdk = inputConfiguration.getProperty("AndroidSdk");
+            String androidSdk = inputConfiguration.getProperty("maven.androidSdk");
             if (androidSdk != null) {
                 t.resolveAndroidDependencies(androidSdk);
             }
