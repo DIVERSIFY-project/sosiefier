@@ -7,7 +7,7 @@ import spoon.reflect.declaration.CtElement;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.support.reflect.code.*;
 
-public class Statement extends CodeFragment {
+public class Statement extends CodeFragment<CtStatement> {
 
     public Statement(CtStatement stmt) {
         init(stmt);
@@ -89,7 +89,7 @@ public class Statement extends CodeFragment {
         return  position == block.getStatements().size();
     }
 
-    protected boolean containsSuper(CtCodeElement cf) {
+    protected boolean containsSuper(CtElement cf) {
         try {
             String string = cf.toString();
             return string.contains("super(") || string.contains("super.");
@@ -101,6 +101,6 @@ public class Statement extends CodeFragment {
     }
 
     public Statement clone() {
-        return new Statement((CtStatement) copyElem(codeFragment));
+        return new Statement(copyElem(codeFragment));
     }
 }

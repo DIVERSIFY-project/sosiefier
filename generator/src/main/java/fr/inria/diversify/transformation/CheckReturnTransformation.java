@@ -85,7 +85,7 @@ public class CheckReturnTransformation extends ASTTransformation {
             Factory factory = getInputProgram().getFactory();
             CtIf ifStmt = factory.Core().createIf();
             ifStmt.setCondition(factory.Core().clone(condition));
-            CodeFragment ifStatement = new Statement(ifStmt);
+            Statement ifStatement = new Statement(ifStmt);
 
             if (withVariableMapping && variableMapping == null) {
                 variableMapping = transplantationPoint.randomVariableMapping(ifStatement, subType);

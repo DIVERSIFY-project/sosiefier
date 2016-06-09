@@ -17,19 +17,6 @@ import java.util.ArrayList;
  */
 public class EmptyMethodBody extends SpoonTransformation<CtMethod, CtElement> {
 
-//    @Override
-//    public void addSourceCode() throws Exception {
-//        applyInfo();
-//
-//        SourcePosition sp = transplantationPoint.getPosition();
-//        CompilationUnit compileUnit = sp.getCompilationUnit();
-//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**", 0));
-//        sp = transplantationPoint.getBody().getPosition();
-//        compileUnit = sp.getCompilationUnit();
-//
-//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n"+newMethod().toString()+"\n", 0));
-//    }
-
     protected CtElement buildReplacementElement() {
         Factory factory = transplantationPoint.getFactory();
         CtMethod newMethod = factory.Core().clone(transplantationPoint);

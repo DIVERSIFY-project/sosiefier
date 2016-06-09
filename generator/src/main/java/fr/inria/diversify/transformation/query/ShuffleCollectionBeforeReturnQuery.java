@@ -21,8 +21,8 @@ import java.util.stream.Collectors;
  * Created by Simon on 04/02/15.
  */
 public class ShuffleCollectionBeforeReturnQuery extends TransformationQuery {
-    protected List<CodeFragment> returnsCollection;
-    protected List<CodeFragment> returnsArray;
+    protected List<Statement> returnsCollection;
+    protected List<Statement> returnsArray;
 
     public ShuffleCollectionBeforeReturnQuery(InputProgram inputProgram) {
         super(inputProgram);
@@ -153,11 +153,12 @@ public class ShuffleCollectionBeforeReturnQuery extends TransformationQuery {
 
     }
 
-    protected List<CodeFragment> allCoveredCodeFragment() {
-        ICoverageReport coverageReport =  getInputProgram().getCoverageReport();
+    protected List<Statement> allCoveredCodeFragment() {
+        ICoverageReport coverageReport = getInputProgram().getCoverageReport();
         return getInputProgram().getCodeFragments().stream()
                 .distinct()
                 .filter(cf -> coverageReport.codeFragmentCoverage(cf) != 0)
+                .map(each -> (Statement)each)
                 .collect(Collectors.toList());
     }
 }

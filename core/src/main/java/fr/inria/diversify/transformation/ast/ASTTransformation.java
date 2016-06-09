@@ -9,6 +9,7 @@ import fr.inria.diversify.util.Log;
 import spoon.compiler.Environment;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.SourcePosition;
+import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.Factory;
@@ -43,7 +44,7 @@ public abstract class ASTTransformation extends SingleTransformation {
      * @return a string describing the level.
      */
     public String getLevel() {
-        CtCodeElement stmt = transplantationPoint.getCtCodeFragment();
+        CtElement stmt = transplantationPoint.getCtCodeFragment();
         if (stmt instanceof CtLocalVariable
                 || stmt instanceof CtNewClass
                 || stmt instanceof CtBreak

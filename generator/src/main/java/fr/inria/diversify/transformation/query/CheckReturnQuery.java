@@ -7,6 +7,8 @@ import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.CheckReturnTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import spoon.reflect.code.*;
+import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtType;
 import spoon.reflect.reference.CtVariableReference;
 
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ import java.util.stream.Collectors;
  */
 public class CheckReturnQuery extends TransformationQuery {
     protected List<CodeFragment> returnStatementList;
-    protected List<CodeFragment> ifStatementList;
+    protected List<CodeFragment> ifConditions;
 
     protected boolean varNameMatching;
 
@@ -41,7 +43,7 @@ public class CheckReturnQuery extends TransformationQuery {
         Collections.shuffle(returnStatementList);
     }
 
-    protected boolean isReturnVariable(CtCodeElement stmt) {
+    protected boolean isReturnVariable(CtElement stmt) {
         if (stmt instanceof CtReturn) {
             CtReturn ret = (CtReturn) stmt;
             if (ret.getReturnedExpression() instanceof CtVariableReference ||
@@ -52,14 +54,10 @@ public class CheckReturnQuery extends TransformationQuery {
         return false;
     }
 
-    protected boolean isThrowStatement(CtCodeElement stmt) {
-        return stmt instanceof CtThrow;
-    }
-
     protected void initFindIfStatements() {
-        ifStatementList = new ArrayList<>();
         List<CtIf> ifs = getInputProgram().getAllElement(CtIf.class);
-        ifStatementList = ifs.stream()
+        ifConditions = ifs.stream()
+                .filter(ifStmt -> ifStmt.getPosition().getCompilationUnit().getMainType().equals(ifStmt.getParent(CtType.class)))
                 .map(ifStmt -> new Expression(ifStmt.getCondition()))
                 .collect(Collectors.toList());
     }
@@ -71,13 +69,13 @@ public class CheckReturnQuery extends TransformationQuery {
         CodeFragment transplant = null;
         CodeFragment transplantationPoint = null;
 
-        Collections.shuffle(ifStatementList, random);
-        Collections.shuffle(ifStatementList);
+        Collections.shuffle(ifConditions, random);
+        Collections.shuffle(ifConditions);
 
-        int counter = ifStatementList.size();
+        int counter = ifConditions.size();
         while(transplant == null && counter-- > 0) {
             transplantationPoint = returnStatementList.get(random.nextInt(returnStatementList.size() - 1));
-            for (CodeFragment ifCodeFragment : ifStatementList) {
+            for (CodeFragment ifCodeFragment : ifConditions) {
                 InputContext tpIp = transplantationPoint.getInputContext();
                 InputContext ifIp = ifCodeFragment.getInputContext();
                 if (tpIp.containsAll(ifIp, true)

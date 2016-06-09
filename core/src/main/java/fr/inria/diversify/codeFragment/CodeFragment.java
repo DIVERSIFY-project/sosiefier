@@ -27,7 +27,7 @@ import java.util.Random;
  * Date: 5/3/13
  * Time: 3:21 PM
  */
-public abstract class CodeFragment {
+public abstract class CodeFragment<T extends CtElement> {
 
     /**
      * Context of the Code fragment, see article by Baudry, et. al "Tailored Source Code Transformations to Synthesize
@@ -38,7 +38,7 @@ public abstract class CodeFragment {
     /**
      * An Spoon code fragment
      */
-    protected CtCodeElement codeFragment;
+    protected T codeFragment;
 
 
     /**
@@ -51,7 +51,7 @@ public abstract class CodeFragment {
      */
     private String positionString;
 
-    public void init(CtCodeElement cf) {
+    public void init(T cf) {
         codeFragment = cf;
         context = new Context(initInputContext(), initOutputContext());
     }
@@ -189,7 +189,6 @@ public abstract class CodeFragment {
         object.put("position", positionString());
         object.put("type", getCodeFragmentType().getSimpleName());
         object.put("sourcecode", equalString());
-        object.put("toString", codeFragment.toString());
         return object;
     }
 
@@ -220,7 +219,7 @@ public abstract class CodeFragment {
         return  null;
     }
 
-    public CtCodeElement getCtCodeFragment()  {
+    public T getCtCodeFragment()  {
         return codeFragment;
     }
 
@@ -273,9 +272,9 @@ public abstract class CodeFragment {
 
     public abstract CodeFragment clone();
 
-    protected CtElement copyElem(CtElement elem) {
+    protected T copyElem(T elem) {
         Factory factory = elem.getFactory();
-        CtElement tmp = factory.Core().clone(elem);
+        T tmp = factory.Core().clone(elem);
         try {
             tmp.setParent(elem.getParent());
         } catch (Exception e) {}

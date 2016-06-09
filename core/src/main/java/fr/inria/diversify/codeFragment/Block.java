@@ -8,10 +8,10 @@ import spoon.reflect.code.CtBlock;
  * Date: 5/3/13
  * Time: 4:28 PM
  */
-public class Block extends CodeFragment {
+public class Block extends CodeFragment<CtBlock> {
     public Block(CtBlock element) {
         codeFragment = element;
-      init(element);
+        init(element);
     }
 
     public Block() {}
@@ -33,6 +33,6 @@ public class Block extends CodeFragment {
     }
 
     public Block clone() {
-        return new Block((CtBlock) copyElem(codeFragment));
+        return new Block(copyElem(codeFragment));
     }
 }

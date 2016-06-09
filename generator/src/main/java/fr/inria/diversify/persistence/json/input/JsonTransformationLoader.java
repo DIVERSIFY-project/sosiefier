@@ -87,9 +87,7 @@ public class JsonTransformationLoader {
     protected void open() {
         BufferedReader br = null;
         try {
-//            if ( getStreamReader() == null ) setStreamReader(new FileReader(getJsonPath()));
             br = new BufferedReader(new FileReader(getJsonPath()));
-//            br = new BufferedReader(getStreamReader());
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
             while (line != null) {

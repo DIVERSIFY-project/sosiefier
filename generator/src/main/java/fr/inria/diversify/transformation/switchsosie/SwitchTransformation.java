@@ -13,6 +13,7 @@ import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtIf;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.cu.SourcePosition;
+import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.reference.CtFieldReference;
@@ -58,7 +59,7 @@ public class SwitchTransformation extends SingleTransformation {
 
 
     protected  CtCodeElement buildReplacementElement() throws BuildTransplantException {
-        CtCodeElement transplantationPoint = transformation.getTransplantationPoint().getCtCodeFragment();
+        CtElement transplantationPoint = transformation.getTransplantationPoint().getCtCodeFragment();
         CtCodeElement copyTransplant = transformation.buildReplacementElement();
 
         Factory factory = copyTransplant.getFactory();

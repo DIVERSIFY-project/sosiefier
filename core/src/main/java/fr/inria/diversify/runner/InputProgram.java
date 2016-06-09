@@ -335,7 +335,8 @@ public class InputProgram {
                 int elemLineNumber = elem.getPosition().getLine();
                 if (elemLineNumber == lineNumberPosition) {
                     String elemClass = elem.getPosition().getCompilationUnit().getMainType().getQualifiedName();
-                    if (classPosition.equals(elemClass) && elem.toString().equals(searchValue)) {
+                    if (classPosition.equals(elemClass)
+                            && (searchValue == null || elem.toString().equals(searchValue))) {
                         return elem;
                     }
                 }

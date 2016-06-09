@@ -236,6 +236,11 @@ public class DiversifyMain {
                 return returnQuery;
             case "removeparamtercondition" :
                 return new RemoveParameterConditionQuery(inputProgram);
+            case "addparamtercondition" :
+                varNameMatching = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.varNameMatching", "false"));
+                AddParameterConditionQuery qquery = new AddParameterConditionQuery(inputProgram);
+                qquery.setVarNameMatching(varNameMatching);
+                return qquery;
             case "removeput" :
                 return new RemovePutQuery(inputProgram);
             case "hashcode":

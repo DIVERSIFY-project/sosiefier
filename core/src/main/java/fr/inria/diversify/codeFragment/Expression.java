@@ -2,13 +2,14 @@ package fr.inria.diversify.codeFragment;
 
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtExpression;
+import spoon.reflect.declaration.CtElement;
 
 /**
  * User: Simon
  * Date: 5/3/13
  * Time: 4:53 PM
  */
-public class Expression extends CodeFragment {
+public class Expression extends CodeFragment<CtExpression<?>> {
 
     public Expression(CtExpression<?> expression) {
         init(expression);
@@ -27,6 +28,6 @@ public class Expression extends CodeFragment {
     }
 
     public Expression clone() {
-        return new Expression((CtExpression<?>) copyElem(codeFragment));
+        return new Expression(copyElem(codeFragment));
     }
 }
