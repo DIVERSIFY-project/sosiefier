@@ -62,6 +62,7 @@ public class AddParameterConditionQuery extends TransformationQuery {
     protected void initMethods() {
         List<CtMethod> mths = getInputProgram().getAllElement(CtMethod.class);
         methods = mths.stream()
+                .filter(method -> method.getBody() != null)
                 .filter(method -> method.getParameters().size() != 0)
                 .collect(Collectors.toList());
     }
