@@ -89,7 +89,6 @@ public class MavenDependencyResolver implements DependencyResolver {
             MavenProject project = loadProject(pomFile);
             resolveAllDependencies(project, new HashSet<String>(), true);
 
-//            addApplicationClasses(inputProgram);
             loadDependencies();
         }
     }

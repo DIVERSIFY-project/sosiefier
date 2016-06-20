@@ -28,11 +28,19 @@ public class StaticTypeFinder extends CtAbstractVisitor {
 
     @Override
     public <T> void visitCtInvocation(CtInvocation<T> invocation) {
+        int[] idx = {0};
         staticType = invocation.getArguments().stream()
-                .filter(arg -> arg.equals(element))
+                .filter(arg -> {
+                    idx[0]++;
+                    return arg.equals(element);
+                })
                 .map(arg -> getActualClass(arg.getType()))
                 .findAny()
                 .orElse(null);
+        try {
+            staticType = invocation.getExecutable().getActualMethod().getParameters()[idx[0] - 1].getType();
+        } catch (Exception e) {
+        }
     }
 
     @Override

@@ -96,7 +96,7 @@ public class InstanceTransformationQuery extends TransformationQuery {
                 .filter(className -> !className.contains("$"))
                 .map(className -> {
                     try {
-                        return Class.forName(className);
+                        return Thread.currentThread().getContextClassLoader().loadClass(className);
                     } catch (Throwable e) {
                         return null;
                     }})
@@ -120,19 +120,21 @@ public class InstanceTransformationQuery extends TransformationQuery {
                 CtConstructorCall candidate = constructorCallStaticType.get(random.nextInt(constructorCallStaticType.size()));
                 List<Constructor> newConstructor = findAllNewConstructors(candidate, newDynamicTypes.get(index));
                 if (!newConstructor.isEmpty()) {
+                    InstanceTransformation transformation = new InstanceTransformation();
+                    transformation.setWithSwitch(withSwitch);
                     if (all) {
-                        return buildMultiPointTransformation(constructorCallStaticType, candidate, newConstructor.get(random.nextInt(newConstructor.size())));
+                        buildMultiPointTransformation(transformation, constructorCallStaticType, candidate, newConstructor.get(random.nextInt(newConstructor.size())));
                     } else {
-                        return buildSinglePointTransformation(candidate,newConstructor.get(random.nextInt(newConstructor.size())));
+                        buildSinglePointTransformation(transformation, candidate, newConstructor.get(random.nextInt(newConstructor.size())));
                     }
+                    return transformation;
                 }
             }
         }
     }
 
-    protected InstanceTransformation buildMultiPointTransformation(List<CtConstructorCall> constructorCalls, CtConstructorCall candidate, Constructor newConstructor) {
-        InstanceTransformation transformation = new InstanceTransformation();
-        transformation.setWithSwitch(withSwitch);
+    protected void buildMultiPointTransformation(InstanceTransformation transformation, List<CtConstructorCall> constructorCalls,
+                                                 CtConstructorCall candidate, Constructor newConstructor) {
         StaticTypeFinder staticTypeFinder = new StaticTypeFinder();
 
         Constructor model = candidate.getExecutable().getActualConstructor();
@@ -142,21 +144,18 @@ public class InstanceTransformationQuery extends TransformationQuery {
                 .filter(constructorCall -> model.equals(constructorCall.getExecutable().getActualConstructor()))
                 .filter(constructorCall -> staticTypeFinder.findStaticType(constructorCall).isAssignableFrom(newConstructor.getDeclaringClass()))
                 .forEach(constructorCall -> transformation.add(constructorCall, newConstructor));
-
-        return transformation;
     }
 
-    protected InstanceTransformation buildSinglePointTransformation(CtConstructorCall candidate, Constructor newConstructor) {
-        InstanceTransformation transformation = new InstanceTransformation();
-        transformation.setWithSwitch(withSwitch);
+    protected void buildSinglePointTransformation(InstanceTransformation transformation, CtConstructorCall candidate, Constructor newConstructor) {
         transformation.add(candidate, newConstructor);
-
-        return transformation;
     }
 
     protected List<Constructor> findAllNewConstructors(CtConstructorCall constructorCall, Set<Class> newDynamicType) {
         Class staticType = findStaticType(constructorCall);
-        Set<Class> subTypes = findAssignableTypeFor(staticType);
+        Set<Class> subTypes = findAssignableTypeFor(staticType).stream()
+                .filter(type -> newDynamicType.contains(type))
+                .collect(Collectors.toSet());
+
         List<Constructor> candidate = findCandidate(constructorCall, subTypes);
         candidate.remove(constructorCall.getExecutable().getActualConstructor());
 

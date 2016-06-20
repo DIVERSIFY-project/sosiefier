@@ -30,10 +30,17 @@ public class JsonHeaderInput extends JsonSectionInput {
      */
     private Header header;
 
+    private boolean verifyProject;
+
     public JsonHeaderInput(InputProgram inputProgram, JSONObject jsonObject) {
         super(inputProgram, jsonObject);
+        this.verifyProject = true;
     }
 
+    public JsonHeaderInput(InputProgram inputProgram, JSONObject jsonObject, boolean verifyProject) {
+        super(inputProgram, jsonObject);
+        this.verifyProject = verifyProject;
+    }
 
 
     @Override
@@ -59,27 +66,29 @@ public class JsonHeaderInput extends JsonSectionInput {
                 header.setVersion(h.getString(MavenHeader.VERSION));
                 header.setGeneratorVersion(h.getString(MavenHeader.GENERATOR_VERSION));
 
-                //Verify
-                Reader reader = getReader(projectPath + "/pom.xml");
-                MavenProject ret;
-                MavenXpp3Reader mavenReader = new MavenXpp3Reader();
-                Model model = mavenReader.read(reader);
-                ret = new MavenProject(model);
+                if(verifyProject) {
+                    //Verify
+                    Reader reader = getReader(projectPath + "/pom.xml");
+                    MavenProject ret;
+                    MavenXpp3Reader mavenReader = new MavenXpp3Reader();
+                    Model model = mavenReader.read(reader);
+                    ret = new MavenProject(model);
 
-                if (!header.getGroupId().equals(ret.getGroupId())) {
-                    throwError(GROUP_ID_DONT_MATCH, null, false);
-                    raise = true;
+                    if (!header.getGroupId().equals(ret.getGroupId())) {
+                        throwError(GROUP_ID_DONT_MATCH, null, false);
+                        raise = true;
+                    }
+                    if (!header.getArtifactId().equals(ret.getArtifactId())) {
+                        throwError(ARTIFACT_DONT_MATCH, null, false);
+                        raise = true;
+                    }
+
+                    raise |= verifyVersion(header.getVersion(), ret.getVersion(), VERSION_DONT_MATCH);
+                    generatorRaise = verifyVersion(header.getGeneratorVersion(),
+                            getInputProgram().getPreferredGeneratorVersion(), GENERATOR_VERSION_DONT_MATCH);
+
+                    reader.close();
                 }
-                if (!header.getArtifactId().equals(ret.getArtifactId())) {
-                    throwError(ARTIFACT_DONT_MATCH, null, false);
-                    raise = true;
-                }
-
-                raise |= verifyVersion(header.getVersion(), ret.getVersion(), VERSION_DONT_MATCH);
-                generatorRaise = verifyVersion(header.getGeneratorVersion(),
-                        getInputProgram().getPreferredGeneratorVersion(), GENERATOR_VERSION_DONT_MATCH);
-
-                reader.close();
             }
             if (header != null)
                 header.setTransformationCount(h.getInt(Header.TRANSF_COUNT));
@@ -130,4 +139,10 @@ public class JsonHeaderInput extends JsonSectionInput {
     public Header getHeader() {
         return header;
     }
+
+    public void setVerifyProject(boolean verifyProject) {
+        this.verifyProject = verifyProject;
+    }
 }
+
+

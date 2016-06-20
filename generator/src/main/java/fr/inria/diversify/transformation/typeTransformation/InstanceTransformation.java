@@ -67,18 +67,6 @@ public class InstanceTransformation extends Transformation {
     protected CtElement getTransplant(CtConstructorCall oldCallConstructor, Constructor newConstructor) {
         if(withSwitch) {
             return buildNewConditional(oldCallConstructor, newConstructor);
-//            StaticTypeFinder staticTypeFinder = new StaticTypeFinder();
-//            CtTypeReference staticType = buildTypeReference(staticTypeFinder.findStaticType(oldCallConstructor),
-//                    oldCallConstructor.getType().getActualTypeArguments());
-//            CtMethod mth = getMethod(oldCallConstructor, newConstructor);
-//
-//            String snippet = mth.getSimpleName()
-//                    + "("
-//                    + oldCallConstructor.getArguments() .stream()
-//                    .map(arg -> arg.toString())
-//                    .collect(Collectors.joining(","))
-//                    + ")";
-//            return getFactory().Code().createCodeSnippetExpression(snippet);
         }  else {
             return buildNewCallConstructor(newConstructor, oldCallConstructor.getArguments(), oldCallConstructor.getType().getActualTypeArguments());
         }

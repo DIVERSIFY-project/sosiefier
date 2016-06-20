@@ -87,7 +87,12 @@ public class CoverageReport implements ICoverageReport {
         }
 
         if(elem instanceof CtLoop) {
-            return coverage(((CtLoop) elem).getBody());
+            CtLoop loop = (CtLoop) elem;
+            if(loop.getBody() != null) {
+                return coverage(loop.getBody());
+            } else {
+                return coverage(loop);
+            }
         }
 
         return coverage(elem);
@@ -102,7 +107,7 @@ public class CoverageReport implements ICoverageReport {
 
         IClassCoverage classCoverage = null;
         if(!(cl == null || cl.getPackage() == null || cl.getPackage().getSignature() == null)) {
-            String name =  cl.getPackage().getSignature().replace(".","/")+"/"+cl.getSimpleName();
+            String name =  cl.getQualifiedName().replace(".","/");
             for (IClassCoverage cc : coverageBuilder.getClasses()) {
                 if(name.equals(cc.getName())) {
                     classCoverage = cc;

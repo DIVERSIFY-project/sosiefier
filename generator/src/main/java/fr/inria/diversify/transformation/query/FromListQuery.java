@@ -49,8 +49,7 @@ public class FromListQuery extends TransformationQuery {
     public synchronized Transformation query() throws QueryException {
         int index = 0;
         if(shuffle) {
-            Random r = new Random();
-            index = r.nextInt(transformations.size());
+            index = random.nextInt(transformations.size());
         }
         if(removeAfterQuery) {
             return transformations.remove(index);

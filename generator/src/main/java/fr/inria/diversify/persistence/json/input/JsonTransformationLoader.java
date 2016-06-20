@@ -18,6 +18,8 @@ import java.util.*;
  */
 public class JsonTransformationLoader {
 
+    private boolean verifyProject;
+
     private String jsonPath;
 
     private InputStreamReader streamReader;
@@ -50,6 +52,15 @@ public class JsonTransformationLoader {
     public JsonTransformationLoader(InputProgram inputProgram) {
         assert inputProgram.getFactory() != null;
 
+        this.verifyProject = true;
+        this.inputProgram = inputProgram;
+        initSections();
+    }
+
+    public JsonTransformationLoader(InputProgram inputProgram, boolean verifyProject) {
+        assert inputProgram.getFactory() != null;
+
+        this.verifyProject = verifyProject;
         this.inputProgram = inputProgram;
         initSections();
     }
@@ -61,6 +72,7 @@ public class JsonTransformationLoader {
 
     public JsonTransformationLoader(String jsonPath, InputProgram inputProgram) {
         this.setJsonPath(jsonPath);
+        this.verifyProject = true;
         this.inputProgram = inputProgram;
         initSections();
     }
@@ -121,7 +133,7 @@ public class JsonTransformationLoader {
         addSection(JsonFailuresInput.class, new JsonFailuresInput(inputProgram, jsonObject));
         addSection(JsonTransformationCollectionInput.class,
                 new JsonTransformationCollectionInput(inputProgram, jsonObject));
-        addSection(JsonHeaderInput.class, new JsonHeaderInput(inputProgram, jsonObject));
+        addSection(JsonHeaderInput.class, new JsonHeaderInput(inputProgram, jsonObject, verifyProject));
     }
 
     /**
@@ -238,5 +250,7 @@ public class JsonTransformationLoader {
         this.streamReader = streamReader;
     }
 
-
+    public void setVerifyProject(boolean verifyProject) {
+        this.verifyProject = verifyProject;
+    }
 }
