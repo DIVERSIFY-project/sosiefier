@@ -1,6 +1,7 @@
 package fr.inria.diversify.coverage;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtConstructor;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtType;
@@ -84,6 +85,11 @@ public class TextTraceCoverageReport extends TraceCoverageReport {
         return 0.0;
         //throw new RuntimeException("Unable to find parent method");
 
+    }
+
+    @Override
+    public double positionCoverage(SourcePosition position) {
+        return 0;
     }
 
 }

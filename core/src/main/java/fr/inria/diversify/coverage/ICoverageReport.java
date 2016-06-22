@@ -3,6 +3,7 @@ package fr.inria.diversify.coverage;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import javassist.CtMethod;
 import spoon.reflect.code.CtBinaryOperator;
+import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 
 import java.io.IOException;
@@ -30,4 +31,6 @@ public interface ICoverageReport {
      * @return A list of integers containing the index of the files in which this statement was covered.
      */
     public List<Integer> getCoverageDistribution(CodeFragment stmt);
+
+    public double positionCoverage(SourcePosition position);
 }

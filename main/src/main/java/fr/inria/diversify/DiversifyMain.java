@@ -19,7 +19,6 @@ import fr.inria.diversify.logger.transformationUsed.StaticDiffBuilder;
 import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
 import fr.inria.diversify.statistic.ASTTransformationSearchSpace;
-import fr.inria.diversify.statistic.CVLMetric;
 import fr.inria.diversify.statistic.TransformationInfo;
 import fr.inria.diversify.transformation.switchsosie.SwitchQuery;
 import fr.inria.diversify.transformation.*;
@@ -391,6 +390,7 @@ public class DiversifyMain {
     }
 
     protected void computeDiversifyStat(String transDir, String output) throws Exception {
+        ICoverageReport coverage = initCoverageReport(inputProgram.getProgramDir());
         JsonTransformationLoader loader = new JsonTransformationLoader(inputProgram);
         Collection<Transformation> transformations = loader.load(transDir, false);
 
@@ -400,6 +400,11 @@ public class DiversifyMain {
         if(!file.exists()) {
             file.mkdirs();
         }
+
+        transformations = transformations.stream()
+                .filter(trans -> trans.getPositions().stream()
+                                .anyMatch(position -> coverage.positionCoverage(position) != 0))
+                .collect(Collectors.toSet());
 
         Set<Transformation> sosies = transformations.stream()
                 .filter(t -> t.isSosie())

@@ -2,6 +2,7 @@ package fr.inria.diversify.coverage;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import javassist.CtMethod;
+import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 
 import java.io.IOException;
@@ -35,6 +36,11 @@ public class NullCoverageReport implements ICoverageReport {
     @Override
     public List<Integer> getCoverageDistribution(CodeFragment stmt) {
         return new ArrayList<>();
+    }
+
+    @Override
+    public double positionCoverage(SourcePosition position) {
+        return 1;
     }
 
 

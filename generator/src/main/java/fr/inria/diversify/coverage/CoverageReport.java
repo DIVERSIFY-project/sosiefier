@@ -14,6 +14,7 @@ import org.jacoco.core.data.ExecutionDataStore;
 import org.jacoco.core.data.SessionInfoStore;
 import spoon.reflect.code.CtIf;
 import spoon.reflect.code.CtLoop;
+import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtType;
 
@@ -106,7 +107,7 @@ public class CoverageReport implements ICoverageReport {
         }
 
         IClassCoverage classCoverage = null;
-        if(!(cl == null || cl.getPackage() == null || cl.getPackage().getSignature() == null)) {
+        if(!(cl == null || cl.getPackage() == null)) {
             String name =  cl.getQualifiedName().replace(".","/");
             for (IClassCoverage cc : coverageBuilder.getClasses()) {
                 if(name.equals(cc.getName())) {
@@ -169,5 +170,38 @@ public class CoverageReport implements ICoverageReport {
         ArrayList<Integer> result = new ArrayList<>(1);
         result.add(codeFragmentCoverage(stmt) > 0 ? 1 : 0);
         return result;
+    }
+
+    @Override
+    public double positionCoverage(SourcePosition position) {
+        CtType<?> cl = position.getCompilationUnit().getMainType();
+
+        if(classToCover != null && !cl.getQualifiedName().equals(classToCover)) {
+            return 0d;
+        }
+
+        IClassCoverage classCoverage = null;
+        if(!(cl == null || cl.getPackage() == null)) {
+            String name =  cl.getQualifiedName().replace(".","/");
+            for (IClassCoverage cc : coverageBuilder.getClasses()) {
+                if(name.equals(cc.getName())) {
+                    classCoverage = cc;
+                    break;
+                }
+            }
+        }
+        if(classCoverage == null) {
+            return 0;
+        }
+
+        double ret = 0;
+        int start = position.getLine();
+        int end = position.getEndLine();
+        for (int i = start; i <= end; i++) {
+            if (classCoverage.getLine(i).getStatus() == ICounter.FULLY_COVERED) {
+                ret++;
+            }
+        }
+        return ret/(double)(end - start + 1);
     }
 }

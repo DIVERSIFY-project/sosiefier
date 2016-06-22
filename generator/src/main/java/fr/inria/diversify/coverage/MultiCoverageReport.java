@@ -2,6 +2,7 @@ package fr.inria.diversify.coverage;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import javassist.CtMethod;
+import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 
 import java.io.File;
@@ -106,5 +107,14 @@ public class MultiCoverageReport implements ICoverageReport {
             }
         }
         return result;
+    }
+
+    @Override
+    public double positionCoverage(SourcePosition position) {
+        double ret = 0;
+        for (ICoverageReport cr : coverages) {
+            ret = Math.max(ret, cr.positionCoverage(position));
+        }
+        return ret;
     }
 }
