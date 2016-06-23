@@ -3,7 +3,6 @@
 /mavenProjects/
 /test/
 **/target/
-*.properties
 **/data/*/visu*.json
 
 # Compiled source #
