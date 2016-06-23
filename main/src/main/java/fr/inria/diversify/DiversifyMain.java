@@ -233,6 +233,11 @@ public class DiversifyMain {
                 CheckReturnQuery returnQuery = new CheckReturnQuery(inputProgram);
                 returnQuery.setVarNameMatching(varNameMatching);
                 return returnQuery;
+            case "addparamtercondition":
+                varNameMatching = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.varNameMatching", "false"));
+                AddParameterConditionQuery apQuery = new AddParameterConditionQuery(inputProgram);
+                apQuery.setVarNameMatching(varNameMatching);
+                return apQuery;
             case "removeparamtercondition" :
                 return new RemoveParameterConditionQuery(inputProgram);
             case "removeput" :
