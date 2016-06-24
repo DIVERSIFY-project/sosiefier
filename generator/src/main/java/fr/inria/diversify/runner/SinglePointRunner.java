@@ -89,10 +89,10 @@ public class SinglePointRunner extends AbstractRunner {
             trans.restore(tmpDir + "/" + sourceDir);
 
             ((SinglePointSessionResults) sessionResults).addRunResults(trans);
-        } catch (ApplyTransformationException e) {
+        } catch (Exception e) {
             trans.setStatus(-2);
             tryRestore(trans, e);
-        } catch (BuildTransplantException e) {}
+        }
         transformations.add(trans);
     }
 
