@@ -4,6 +4,7 @@ import fr.inria.diversify.codeFragment.Method;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.transformation.exception.RestoreTransformationException;
 import fr.inria.diversify.util.Log;
+import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.compiler.Environment;
@@ -17,8 +18,7 @@ import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
 import spoon.support.JavaOutputProcessor;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -36,6 +36,7 @@ public class AddParameterCondition extends SingleTransformation {
     protected boolean withVariableMapping = true;
     protected boolean returnInThen = true;
     protected String exception;
+    protected boolean throwBranchCoverage = false;
 
     public AddParameterCondition(Method method, CtExpression<Boolean> condition) {
         type = "special";
@@ -115,6 +116,7 @@ public class AddParameterCondition extends SingleTransformation {
         oldBody.addStatement(factory.Core().clone(method.getCtCodeFragment().getBody()));
 
         CtBlock throwBlock = factory.Core().createBlock();
+        throwBlock.addStatement(logSnippet(factory, srcDir));
         CtCodeSnippetStatement elseSnippet = factory.Code().createCodeSnippetStatement("throw new " + exception + "()");
         throwBlock.addStatement(elseSnippet);
 
@@ -133,13 +135,38 @@ public class AddParameterCondition extends SingleTransformation {
         printJavaFile(srcDir);
     }
 
+
+    public CtCodeSnippetStatement logSnippet(Factory factory, String srcDir) {
+        File scrFile = new File(srcDir);
+        String snippet = "try {\n"
+                + "java.io.PrintWriter p = new java.io.PrintWriter(\"" + scrFile.getAbsolutePath() + "/logThrowBranch\");\n"
+                + "p.write(\"b\");\n"
+                + "p.close();\n"
+                + "} catch (java.io.FileNotFoundException e) {}";
+
+        return factory.Code().createCodeSnippetStatement(snippet);
+    }
+
     @Override
     public void restore(String srcDir) throws RestoreTransformationException {
+        try {
+            loadThrowBranchCoverage(srcDir);
+        } catch (IOException e) {
+        }
         try {
             method.getCtCodeFragment().replace(copyMethod);
             printJavaFile(srcDir);
         } catch (Exception e) {
             throw new RestoreTransformationException("", e);
+        }
+    }
+
+    protected void loadThrowBranchCoverage(String srcDir) throws IOException {
+        File scrFile = new File(srcDir);
+        File logBranch = new File(scrFile.getAbsolutePath() + "/logThrowBranch");
+        if(logBranch.exists()) {
+            throwBranchCoverage = true;
+            FileUtils.forceDelete(logBranch);
         }
     }
 
@@ -154,6 +181,7 @@ public class AddParameterCondition extends SingleTransformation {
         conditionJSON.put("type", condition.getClass().getSimpleName());
         conditionJSON.put("sourcecode", condition.toString());
         object.put("condition",conditionJSON);
+        object.put("throwBranchCoverage", throwBranchCoverage);
 
         if(withVariableMapping) {
             object.put("variableMap", variableMapping);
@@ -173,6 +201,36 @@ public class AddParameterCondition extends SingleTransformation {
             List<CtTypeReference> exceptions = new ArrayList<>(method.getCtCodeFragment().getThrownTypes());
             exception = exceptions.get(r.nextInt(exceptions.size())).getQualifiedName();
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AddParameterCondition that = (AddParameterCondition) o;
+
+        if (returnInThen != that.returnInThen) return false;
+        if (withVariableMapping != that.withVariableMapping) return false;
+        if (throwBranchCoverage != that.throwBranchCoverage) return false;
+        if (!method.equals(that.method)) return false;
+        if (!condition.equals(that.condition)) return false;
+        if (!exception.equals(that.exception)) return false;
+        return variableMapping != null ? variableMapping.equals(that.variableMapping) : that.variableMapping == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + condition.hashCode();
+        result = 31 * result + (returnInThen ? 1 : 0);
+        result = 31 * result + exception.hashCode();
+        result = 31 * result + method.hashCode();
+        result = 31 * result + (variableMapping != null ? variableMapping.hashCode() : 0);
+        result = 31 * result + (withVariableMapping ? 1 : 0);
+        result = 31 * result + (throwBranchCoverage ? 1 : 0);
+        return result;
     }
 
     public void setReturnInThen(boolean returnInThen) {
@@ -197,5 +255,9 @@ public class AddParameterCondition extends SingleTransformation {
 
     public void setException(String exception) {
         this.exception = exception;
+    }
+
+    public void setThrowBranchCoverage(boolean throwBranchCoverage) {
+        this.throwBranchCoverage = throwBranchCoverage;
     }
 }

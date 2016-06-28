@@ -33,7 +33,7 @@ public abstract class ASTTransformation extends SingleTransformation {
      */
     protected CodeFragment transplantationPoint;
 
-    CtCodeElement copyTransplant;
+    protected CtCodeElement copyTransplant;
 
     public ASTTransformation() {
     }

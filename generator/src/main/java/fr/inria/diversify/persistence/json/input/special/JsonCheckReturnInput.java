@@ -47,6 +47,8 @@ public class JsonCheckReturnInput extends JsonAstReplaceInput {
             transf.setCondition(condition);
             transf.setException(getJsonObject().getString("exception"));
             transf.setReturnInThen((getJsonObject().getBoolean("returnInThen")));
+            transf.setThrowBranchCoverage(getJsonObject().getBoolean("throwBranchCoverage"));
+
 
             if(getJsonObject().has(VARIABLE_MAP)) {
                 transf.setVarMapping(getVarMap(getJsonObject().getJSONObject(VARIABLE_MAP)));

@@ -40,7 +40,6 @@ public abstract class SpoonTransformation<P extends CtElement, T extends CtEleme
         try {
             copyTransplant = buildReplacementElement();
             transplantationPoint.replace(copyTransplant);
-//            ReplaceHelper.replace(transplantationPoint, copyTransplant);
             printJavaFile(srcDir);
         } catch (Exception e) {
             throw new ApplyTransformationException("", e);
@@ -201,4 +200,24 @@ public abstract class SpoonTransformation<P extends CtElement, T extends CtEleme
         return elem.getParent(CtType.class).getQualifiedName() + ":" + elem.getPosition().getLine();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SpoonTransformation<?, ?> that = (SpoonTransformation<?, ?>) o;
+
+        if (transplantationPoint != null ? !transplantationPoint.equals(that.transplantationPoint) : that.transplantationPoint != null)
+            return false;
+        return transplant != null ? transplant.equals(that.transplant) : that.transplant == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (transplantationPoint != null ? transplantationPoint.hashCode() : 0);
+        result = 31 * result + (transplant != null ? transplant.hashCode() : 0);
+        return result;
+    }
 }
