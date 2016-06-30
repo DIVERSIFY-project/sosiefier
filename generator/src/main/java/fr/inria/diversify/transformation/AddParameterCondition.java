@@ -179,7 +179,7 @@ public class AddParameterCondition extends SingleTransformation {
         JSONObject conditionJSON = new JSONObject();
         conditionJSON.put("position", condition.getParent(CtType.class).getQualifiedName() + ":" + condition.getPosition().getLine());
         conditionJSON.put("type", condition.getClass().getSimpleName());
-        conditionJSON.put("sourcecode", condition.toString());
+//        conditionJSON.put("sourcecode", condition.toString());
         object.put("condition",conditionJSON);
         object.put("throwBranchCoverage", throwBranchCoverage);
 

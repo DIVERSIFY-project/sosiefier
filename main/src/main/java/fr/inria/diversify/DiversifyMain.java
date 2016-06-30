@@ -238,6 +238,8 @@ public class DiversifyMain {
                 AddParameterConditionQuery apQuery = new AddParameterConditionQuery(inputProgram);
                 apQuery.setVarNameMatching(varNameMatching);
                 return apQuery;
+            case "deletevaraffectation" :
+                return new DeleteAffectationQuery(inputProgram);
             case "removeparamtercondition" :
                 return new RemoveParameterConditionQuery(inputProgram);
             case "removeput" :
