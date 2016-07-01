@@ -228,4 +228,8 @@ public class CheckReturnTransformation extends ASTTransformation {
         result = 31 * result + (throwBranchCoverage ? 1 : 0);
         return result;
     }
+
+    public boolean getThrowBranchCoverage() {
+        return throwBranchCoverage;
+    }
 }

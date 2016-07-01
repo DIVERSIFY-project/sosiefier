@@ -260,4 +260,9 @@ public class AddParameterCondition extends SingleTransformation {
     public void setThrowBranchCoverage(boolean throwBranchCoverage) {
         this.throwBranchCoverage = throwBranchCoverage;
     }
+
+    public boolean getThrowBranchCoverage() {
+        return this.throwBranchCoverage;
+    }
+
 }
