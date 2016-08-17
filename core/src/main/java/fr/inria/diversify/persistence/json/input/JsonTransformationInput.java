@@ -163,7 +163,7 @@ public abstract class JsonTransformationInput extends JsonSectionInput {
         JSONArray tests = getJsonObject().getJSONArray(FAILURES);
         List<String> list = new ArrayList<>(tests.length());
         for(int i = 0; i < tests.length(); i++) {
-            list.add(failures.get(i));
+            list.add(failures.get(tests.get(i)));
         }
         transf.setFailures(list);
     }

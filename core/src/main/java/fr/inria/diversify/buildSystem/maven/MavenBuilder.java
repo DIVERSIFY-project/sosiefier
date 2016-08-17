@@ -89,7 +89,7 @@ public class MavenBuilder extends AbstractBuilder {
             }
             if (!mvnHome.exists()) {
                 //osx
-                mvnHome = new File("/usr/local/Cellar/maven/3.3.3/libexec/");
+                mvnHome = new File("/usr/local/Cellar/maven/3.3.9/libexec/");
             }
             return mvnHome;
         }

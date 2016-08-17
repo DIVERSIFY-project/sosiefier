@@ -31,13 +31,15 @@ import java.util.*;
  * Time: 3:47 PM
  */
 public class MavenDependencyResolver implements DependencyResolver {
+    protected Map<String, String> dependenciesManager;
     protected List<URL> dependenciesURL;
     protected List<URL> directDependenciesURL;
-    protected Properties properties;
+    protected boolean onlyDirectDependencies = false;
     protected String baseDir;
     protected MavenResolver resolver;
-    protected List<String> repositoriesUrls;
-    protected List<String> alreadyResolve;
+    protected Set<String> repositoriesUrls;
+    protected Map<String, URL> artifactResolve;
+
     private static MavenDependencyResolver singleton;
     protected static String localRepository;
 
@@ -69,28 +71,32 @@ public class MavenDependencyResolver implements DependencyResolver {
     private MavenDependencyResolver() {
         dependenciesURL = new ArrayList<>();
         directDependenciesURL = new ArrayList<>();
+        dependenciesManager = new HashMap<>();
+        artifactResolve = new HashMap<>();
         resolver = new MavenResolver();
         resolver.setBasePath(localRepository);
 
-        repositoriesUrls = new ArrayList<>();
+        repositoriesUrls = new HashSet<>();
         repositoriesUrls.add("http://repo1.maven.org/maven2/");
 
-        alreadyResolve = new ArrayList<>();
     }
 
     public void resolveDependencies(InputProgram inputProgram) throws Exception {
         String pom = inputProgram.getProgramDir() + "/pom.xml";
-        if(!alreadyResolve.contains(pom)) {
-            alreadyResolve.add(pom);
-            File pomFile = new File(pom);
-            Log.info("resolve dependencies of {}", pomFile);
-            baseDir = inputProgram.getProgramDir();
 
-            MavenProject project = loadProject(pomFile);
-            resolveAllDependencies(project, new HashSet<String>(), true);
+        File pomFile = new File(pom);
+        Log.info("resolveURL dependencies of {}", pomFile);
+        baseDir = inputProgram.getProgramDir();
 
-            loadDependencies();
+        MavenProject project = loadProject(pomFile);
+
+        directDependenciesURL = new ArrayList<>(findDirectDependencies(project));
+
+        if(!onlyDirectDependencies) {
+            dependenciesURL.addAll(directDependenciesURL);
+            dependenciesURL.addAll(findDeepDependencies(project, new Properties()));
         }
+        loadDependencies();
     }
 
     protected MavenProject loadProject(File pomFile) throws IOException, XmlPullParserException {
@@ -103,6 +109,14 @@ public class MavenDependencyResolver implements DependencyResolver {
         Model model = mavenReader.read(reader);
         model.setPomFile(pomFile);
         ret = new MavenProject(model);
+        if(model.getParent() != null) {
+            MavenProject parent = new MavenProject();
+            parent.setGroupId(model.getParent().getGroupId());
+            parent.setArtifactId(model.getParent().getArtifactId());
+            parent.setVersion(model.getParent().getVersion());
+            ret.setParent(parent);
+        }
+
         reader.close();
 
         return ret;
@@ -122,49 +136,135 @@ public class MavenDependencyResolver implements DependencyResolver {
         }
     }
 
-    public void resolveAllDependencies(MavenProject project, Set<String> dependencyResolve, boolean isDirectDependencies) throws MalformedURLException {
+    protected Set<URL> findDeepDependencies(MavenProject project, Properties properties) throws IOException, XmlPullParserException {
+        Set<String> done = new HashSet<>();
+        Set<URL> dependencies = new HashSet<>();
+        List<Dependency> file = new LinkedList<>();
         updateRepositoriesUrl(project);
-        updateProperties(project.getProperties());
+        updateProperties(project, properties);
 
-        for (Dependency dependency : project.getDependencies()) {
+        file.addAll(project.getDependencies());
+        for(String module: project.getModules()) {
             try {
-                String artifactId = "mvn:" + resolveName(dependency.getGroupId(), properties) +
-                        ":" + resolveName(dependency.getArtifactId(), properties) +
-                        ":" + resolveName(dependency.getVersion(), properties);
-
-                File cachedFile;
-                if(dependency.getScope() != null && dependency.getScope().equals("system")) {
-                    cachedFile = new File(resolveName(dependency.getSystemPath(), properties));
-                } else {
-                    cachedFile = resolver.resolve(artifactId + ":" + resolveName(dependency.getType(), properties), repositoriesUrls);
-                }
-                dependenciesURL.add(cachedFile.toURI().toURL());
-                Log.debug("resolve artifact: {}", artifactId);
-                if(isDirectDependencies) {
-                    directDependenciesURL.add(cachedFile.toURI().toURL());
-                }
-
-                File pomD = resolver.resolve(artifactId + ":pom", repositoriesUrls);
-                if(!dependencyResolve.contains(pomD.getAbsolutePath())) {
-                    dependencyResolve.add(pomD.getAbsolutePath());
-                    resolveAllDependencies(loadProject(pomD), dependencyResolve, false);
-                }
-
+                MavenProject moduleProject = loadProject(new File(baseDir + "/" + module + "/pom.xml"));
+                updateRepositoriesUrl(moduleProject);
+                updateProperties(moduleProject, properties);
+                file.addAll(moduleProject.getDependencies());
             } catch (Exception e) {}
+        }
+        int count = 0;
+        while(!file.isEmpty()) {
+            Dependency dependency = file.remove(0);
+            try {
+                String artifactId = resolveName(dependency.getGroupId(), properties)
+                        + ":" + resolveName(dependency.getArtifactId(), properties);
+                String version;
+                if(dependenciesManager.containsKey(artifactId)) {
+                    version = dependenciesManager.get(artifactId);
+                } else {
+                    version = resolveName(dependency.getVersion(), properties);
+                }
+               count++;
+                if(!artifactId.contains(":null") && !artifactId.contains("null:") && !artifactId.contains("${")
+                        && version != null && !version.equals("null")
+                        && !done.contains(artifactId)) {
+                    dependencies.add(resolveURL(dependency, properties));
+                    done.add(artifactId);
 
+                    MavenProject dependencyProject = resolveProject(artifactId + ":"+ version);
+                    file.addAll(dependencyProject.getDependencies());
+
+                    updateRepositoriesUrl(dependencyProject);
+                    updateProperties(dependencyProject, properties);
+
+                    Log.debug("{}:{} {} {}",artifactId, version, dependencies.size(), file.size());
+                }
+            } catch (Exception e) {
+//                e.printStackTrace();
+//                Log.debug("error: {}:{}:{} {}",dependency.getGroupId(), dependency.getArtifactId(), dependency.getVersion(), count);
+            }
         }
 
-        resolveModulesDependencies(project, dependencyResolve);
+        return dependencies;
     }
 
+    protected Set<URL> findDirectDependencies(MavenProject project) throws Exception {
+        return findDirectDependencies(project, new Properties());
+    }
 
-    protected void resolveModulesDependencies(MavenProject parentProject, Set<String> dependencyResolve) {
-        for(String module: parentProject.getModules()) {
-            try {
-                MavenProject project = loadProject(new File(baseDir + "/" + module + "/pom.xml"));
-                resolveAllDependencies(project, dependencyResolve, true);
-            } catch (Exception e) {}
+    protected Set<URL> findDirectDependencies(MavenProject project, Properties properties) throws Exception {
+        Set<URL> dependencies = new HashSet<>();
+
+        if(project.hasParent()) {
+            MavenProject parent = project.getParent();
+            String artifactId =  parent.getGroupId() + ":" + parent.getArtifactId() + ":" + parent.getVersion();
+            parent = resolveProject(artifactId);
+            dependencies.addAll(findDirectDependencies(parent, properties));
         }
+        updateRepositoriesUrl(project);
+        properties.putAll(project.getProperties());
+
+        if(project.getDependencyManagement() != null) {
+            project.getDependencyManagement().getDependencies().stream()
+                    .forEach(dependency -> {
+                        try {
+                            String artifactId = resolveName(dependency.getGroupId(), properties) +
+                                    ":" + resolveName(dependency.getArtifactId(), properties);
+                            String version = resolveName(dependency.getVersion(), properties);
+                            if (!dependenciesManager.containsKey(artifactId)) {
+                                dependenciesManager.put(artifactId, version);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.debug("");
+                        }
+                    });
+        }
+        project.getDependencies().stream()
+                .forEach(dependency ->  {
+                    try {
+                        URL url = resolveURL(dependency, properties);
+                        dependencies.add(url);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.debug("");
+                    }
+                });
+
+        return dependencies;
+    }
+
+    protected URL resolveURL(Dependency dependency, Properties properties) throws MalformedURLException {
+        String artifactId = resolveName(dependency.getGroupId(), properties) +
+                ":" + resolveName(dependency.getArtifactId(), properties);
+
+        String version;
+        if(dependenciesManager.containsKey(artifactId)) {
+            version = dependenciesManager.get(artifactId);
+        } else {
+            version = resolveName(dependency.getVersion(), properties);
+        }
+
+        if(!artifactResolve.containsKey(artifactId) || version.equals("null")) {
+            File cachedFile;
+            if (dependency.getScope() != null && dependency.getScope().equals("system")) {
+                cachedFile = new File(resolveName(dependency.getSystemPath(), properties));
+            } else {
+                cachedFile = resolver.resolve("mvn:" + artifactId + ":" + version + ":" + resolveName(dependency.getType(), properties), repositoriesUrls);
+            }
+            URL url = cachedFile.toURI().toURL();
+            artifactResolve.put(artifactId, url);
+
+            Log.debug("resolve URL: {}", artifactId);
+            return url;
+        } else {
+            return artifactResolve.get(artifactId);
+        }
+    }
+
+    protected MavenProject resolveProject(String artifactId) throws IOException, XmlPullParserException {
+        File pomD = resolver.resolve("mvn:" + artifactId + ":pom", repositoriesUrls);
+        return loadProject(pomD);
     }
 
     protected void loadDependencies() {
@@ -182,17 +282,14 @@ public class MavenDependencyResolver implements DependencyResolver {
         loadDependencies();
     }
 
-    protected void updateProperties(Properties properties) {
-        if(this.properties == null) {
-            this.properties = new Properties(properties);
-            properties.setProperty("basedir", baseDir);
-        } else {
-            for (Object key : properties.keySet()) {
-                this.properties.put(key, properties.get(key));
-            }
+    protected void updateProperties(MavenProject project, Properties properties) throws IOException, XmlPullParserException {
+        if(project.hasParent()) {
+            MavenProject parent = project.getParent();
+            parent = resolveProject(parent.getGroupId() + ":" + parent.getArtifactId() + ":" + parent.getVersion());
+            updateProperties(parent, properties);
         }
+        properties.putAll(project.getProperties());
     }
-
 
     protected String resolveName(String string, Properties properties) {
         char[] chars = string.toCharArray();
@@ -214,8 +311,7 @@ public class MavenDependencyResolver implements DependencyResolver {
         return string;
     }
 
-    protected String getAndroidHomeOrThrow()
-    {
+    protected String getAndroidHomeOrThrow() {
         final String androidHome = System.getenv( AndroidSdk.ENV_ANDROID_HOME );
         return androidHome;
     }
@@ -227,5 +323,9 @@ public class MavenDependencyResolver implements DependencyResolver {
 
     public List<URL> getDirectDependenciesURL() {
         return directDependenciesURL;
+    }
+
+    public void setOnlyDirectDependencies(boolean onlyDirectDependencies) {
+        this.onlyDirectDependencies = onlyDirectDependencies;
     }
 }

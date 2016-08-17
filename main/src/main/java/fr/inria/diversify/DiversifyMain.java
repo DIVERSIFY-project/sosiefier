@@ -69,6 +69,10 @@ public class DiversifyMain {
         InitUtils.initLogLevel(inputConfiguration);
         inputProgram = InitUtils.initInputProgram(inputConfiguration);
         InitUtils.initDependency(inputConfiguration);
+
+//        MavenDependencyResolver2 dependencyResolver = new MavenDependencyResolver2((MavenBuilder) initBuilder(inputProgram.getProgramDir()));
+//        dependencyResolver.resolveDependencies(inputProgram);
+
         InitUtils.initSpoon(inputProgram, false);
 
 
@@ -303,20 +307,6 @@ public class DiversifyMain {
             case "replaceconstructor" : {
                 return new InstanceTransformationQuery(inputProgram, ".*:.*:.*", true, false);
             }
-//            case "replacenewlist":
-//                return new ReplaceNewListQuery(inputProgram);
-//            case "replacenewlistrandom":
-//                return new ReplaceNewListRandomQuery(inputProgram);
-//            case "arraylisttolinkedlist":
-//                return new ReplaceArrayListToLinkedListQuery(inputProgram,"LinkedList");
-//            case "arraylisttotreelist":
-//                return new ReplaceArrayListToLinkedListQuery(inputProgram,"TreeList");
-//            case "arraylisttovector":
-//                return new ReplaceArrayListToLinkedListQuery(inputProgram,"Vector");
-//            case "changeconcretetype":
-//                return new ChangeConcreteTypeQuery(inputProgram,inputConfiguration.getProperty("paramslist"),"changeconcretetype");
-//            case "switchtype":
-//                return new ChangeConcreteTypeQuery(inputProgram,inputConfiguration.getProperty("paramslist"),"switchtype");
             default:
                 //Try to construct the executeQuery from the explicit class
                 try {
@@ -420,6 +410,8 @@ public class DiversifyMain {
         Log.info("nb transformation: {}", transformations.size());
         Log.info("nb compile: {}", transformations.stream().filter(t -> t.getStatus() >= -1).count());
         Log.info("nb sosie: {}", sosies.size());
+
+
 
         writer.write(transformations, output+".json", inputProgram.getProgramDir() + "/pom.xml");
         writer.write(sosies, output+"_sosie.json", inputProgram.getProgramDir() + "/pom.xml");
