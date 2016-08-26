@@ -32,7 +32,12 @@ public class InitUtils {
     }
 
     public static void initDependency(InputConfiguration inputConfiguration) throws Exception, InvalidSdkException {
+        initDependency(inputConfiguration, false);
+    }
+
+    public static void initDependency(InputConfiguration inputConfiguration, boolean onlyDirectDependencies) throws Exception, InvalidSdkException {
         MavenDependencyResolver t = MavenDependencyResolver.dependencyResolver(inputConfiguration.getProperty("maven.localRepository",null));
+        t.setOnlyDirectDependencies(onlyDirectDependencies);
         String builder = inputConfiguration.getProperty("builder");
 
         if(builder.equals("maven")) {

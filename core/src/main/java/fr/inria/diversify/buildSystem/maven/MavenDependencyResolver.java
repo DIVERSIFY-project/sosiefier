@@ -91,6 +91,7 @@ public class MavenDependencyResolver implements DependencyResolver {
         MavenProject project = loadProject(pomFile);
 
         directDependenciesURL = new ArrayList<>(findDirectDependencies(project));
+        dependenciesURL.addAll(directDependenciesURL);
 
         if(!onlyDirectDependencies) {
             dependenciesURL.addAll(directDependenciesURL);
@@ -208,6 +209,9 @@ public class MavenDependencyResolver implements DependencyResolver {
             project.getDependencyManagement().getDependencies().stream()
                     .forEach(dependency -> {
                         try {
+                            URL url = resolveURL(dependency, properties);
+                            dependencies.add(url);
+
                             String artifactId = resolveName(dependency.getGroupId(), properties) +
                                     ":" + resolveName(dependency.getArtifactId(), properties);
                             String version = resolveName(dependency.getVersion(), properties);
