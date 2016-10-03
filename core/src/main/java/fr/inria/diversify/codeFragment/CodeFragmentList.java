@@ -39,8 +39,9 @@ public class CodeFragmentList extends LinkedList<CodeFragment> {
     }
 
     public boolean add(CodeFragment cf) {
-        addUniqueStatement(cf);
-
+        try {
+            addUniqueStatement(cf);
+        } catch (Exception e) {}
         return super.add(cf);
     }
 
