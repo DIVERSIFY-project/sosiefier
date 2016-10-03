@@ -3,6 +3,7 @@ package fr.inria.diversify.factories;
 import fr.inria.diversify.buildSystem.DiversifyClassLoader;
 import org.apache.commons.io.output.NullWriter;
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
+import org.eclipse.jdt.internal.compiler.batch.FileSystem;
 import org.eclipse.jdt.internal.compiler.batch.Main;
 import spoon.compiler.Environment;
 import spoon.compiler.ModelBuildingException;
@@ -10,6 +11,7 @@ import spoon.compiler.builder.*;
 import spoon.reflect.factory.Factory;
 import spoon.support.compiler.FileSystemFolder;
 import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
+import spoon.support.compiler.jdt.MainCompiler;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -24,6 +26,8 @@ import java.net.URLClassLoader;
  */
 public class DiversityCompiler extends JDTBasedSpoonCompiler {
     protected DiversifyClassLoader customClassLoader;
+    FileSystem environment;
+
 
     /**
      * Default constructor
@@ -38,11 +42,12 @@ public class DiversityCompiler extends JDTBasedSpoonCompiler {
         this.customClassLoader = customClassLoader;
     }
 
+
     public boolean compileFileIn(File directory, boolean withLog) {
         initInputClassLoader();
         javaCompliance = factory.getEnvironment().getComplianceLevel();
 
-        Main batchCompiler = createBatchCompiler(true);
+        MainCompiler compiler = new MainCompiler(this, true, environment);
 
         final SourceOptions sourcesOptions = new SourceOptions();
         sourcesOptions.sources((new FileSystemFolder(directory).getAllJavaFiles()));
@@ -82,12 +87,13 @@ public class DiversityCompiler extends JDTBasedSpoonCompiler {
         }
 
         if(!withLog) {
-            batchCompiler.logger = new Main.Logger(batchCompiler, new PrintWriter(new NullWriter()), new PrintWriter(new NullWriter()));
+            compiler.logger = new Main.Logger(compiler, new PrintWriter(new NullWriter()), new PrintWriter(new NullWriter()));
         }
 
-        batchCompiler.compile(finalArgs);
+        compiler.compile(finalArgs);
+        environment = compiler.getEnvironment();
 
-        return batchCompiler.globalErrorsCount == 0;
+        return compiler.globalErrorsCount == 0;
     }
 
     protected void report(Environment environment, CategorizedProblem problem) {
