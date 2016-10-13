@@ -162,7 +162,7 @@ public class InstanceTransformationQuery extends TransformationQuery {
         return candidate.stream()
                 .filter(c -> !Modifier.isAbstract(c.getDeclaringClass().getModifiers()))
                 .filter(c -> newDynamicType.stream()
-                        .anyMatch(dt -> dt.isAssignableFrom(c.getDeclaringClass())))
+                        .anyMatch(dt -> dt == c.getDeclaringClass() || dt.isAssignableFrom(c.getDeclaringClass())))
                 .collect(Collectors.toList());
 
     }
@@ -179,12 +179,17 @@ public class InstanceTransformationQuery extends TransformationQuery {
     }
 
     protected List<CtConstructorCall> findAllConstructorCallWithDynamicType(List<CtConstructorCall> constructorCalls, Set<Class> dynamicType) {
-        return constructorCalls.stream()
+        return constructorCalls.parallelStream()
                 .filter(constructorCall -> {
-                    CtTypeReference typeRef = constructorCall.getType();
-                    return typeRef != null
-                            && dynamicType.stream()
-                                .anyMatch(dt -> dt.isAssignableFrom(typeRef.getActualClass()));
+                    try {
+                        CtTypeReference typeRef = constructorCall.getType();
+                        if (typeRef != null) {
+                            Class cl = typeRef.getActualClass();
+                            return dynamicType.stream()
+                                    .anyMatch(dt -> dt.isAssignableFrom(cl));
+                        }
+                    } catch (Exception e) {}
+                    return false;
                 })
                 .collect(Collectors.toList());
     }
@@ -225,7 +230,7 @@ public class InstanceTransformationQuery extends TransformationQuery {
     protected  List<CtConstructorCall> getConstructorCall() {
         if (constructorCalls == null) {
             List<CtConstructorCall> allConstructorCall = getInputProgram().getAllElement(CtConstructorCall.class);
-            constructorCalls = allConstructorCall.stream()
+            constructorCalls = allConstructorCall.parallelStream()
                     .filter(elem -> elem.getPosition() != null)
                     .filter(elem -> getInputProgram().getCoverageReport().elementCoverage(elem) != 0)
                     .filter(elem -> elem.getPosition().toString().contains(inputProgram.getRelativeSourceCodeDir()))

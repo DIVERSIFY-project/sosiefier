@@ -295,9 +295,12 @@ public class InstanceTransformation extends Transformation {
         classes.stream()
             .forEach(cl -> {
                 Log.debug("print java file: {}",directory + "/" +cl.getQualifiedName().replace(".", "/") + ".java");
-                JavaOutputProcessor processor = new JavaOutputProcessor(new File(directory), new DefaultJavaPrettyPrinter(env));
-                processor.setFactory(getFactory());
-                processor.createJavaFile(cl);});
+                cl.getPosition().getCompilationUnit().getDeclaredTypes().stream()
+                        .forEach(cc -> {
+                            JavaOutputProcessor processor = new JavaOutputProcessor(new File(directory), new DefaultJavaPrettyPrinter(env));
+                            processor.setFactory(getFactory());
+                            processor.createJavaFile(cc);
+                        });});
     }
 
     protected Factory getFactory() {
