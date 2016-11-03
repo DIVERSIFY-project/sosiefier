@@ -1,7 +1,7 @@
 package fr.inria.diversify.buildSystem;
 
+import fr.inria.diversify.util.FileUtils;
 import fr.inria.diversify.util.Log;
-import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.FileWriter;

@@ -7,8 +7,8 @@ import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.logger.Comparator;
 import fr.inria.diversify.logger.Diff;
 import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.util.FileUtils;
 import fr.inria.diversify.util.Log;
-import org.apache.commons.io.FileUtils;
 import spoon.reflect.cu.SourcePosition;
 
 import java.io.File;

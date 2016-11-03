@@ -6,9 +6,9 @@ import fr.inria.diversify.logger.Comparator;
 import fr.inria.diversify.logger.Diff;
 import fr.inria.diversify.processor.main.BranchPositionProcessor;
 import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.util.FileUtils;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
-import org.apache.commons.io.FileUtils;
 import spoon.reflect.cu.SourcePosition;
 
 import java.io.File;

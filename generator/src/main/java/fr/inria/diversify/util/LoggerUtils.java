@@ -1,20 +1,13 @@
 package fr.inria.diversify.util;
 
 import fr.inria.diversify.runner.InputProgram;
-import org.apache.commons.io.FileUtils;
-import spoon.compiler.Environment;
 import spoon.processing.ProcessingManager;
 import spoon.processing.Processor;
-import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.Factory;
-import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
-import spoon.support.JavaOutputProcessor;
 import spoon.support.QueueProcessingManager;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * User: Simon

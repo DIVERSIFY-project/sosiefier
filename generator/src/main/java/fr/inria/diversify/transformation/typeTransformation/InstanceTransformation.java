@@ -2,8 +2,8 @@ package fr.inria.diversify.transformation.typeTransformation;
 
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.exception.RestoreTransformationException;
+import fr.inria.diversify.util.FileUtils;
 import fr.inria.diversify.util.Log;
-import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

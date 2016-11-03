@@ -2,12 +2,12 @@ package fr.inria.diversify.transformation.bytecode;
 
 import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.exception.RestoreTransformationException;
+import fr.inria.diversify.util.FileUtils;
 import fr.inria.diversify.util.Log;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.bytecode.*;
-import org.apache.commons.io.FileUtils;
 import spoon.reflect.cu.SourcePosition;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
