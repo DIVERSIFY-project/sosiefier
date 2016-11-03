@@ -139,7 +139,7 @@ public class MultiTransformation extends Transformation {
     public List<SourcePosition> getPositions() {
         List<SourcePosition> list = new ArrayList<>();
         for(Transformation t : transformations) {
-            list.addAll(getPositions());
+            list.addAll(t.getPositions());
         }
         return list;
     }

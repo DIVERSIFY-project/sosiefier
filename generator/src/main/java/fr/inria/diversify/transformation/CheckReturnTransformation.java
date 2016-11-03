@@ -6,14 +6,13 @@ import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.exception.ApplyTransformationException;
 import fr.inria.diversify.transformation.exception.BuildTransplantException;
 import fr.inria.diversify.transformation.exception.RestoreTransformationException;
+import fr.inria.diversify.util.FileUtils;
 import fr.inria.diversify.util.Log;
-import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtType;
-import spoon.reflect.factory.CoreFactory;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.reference.CtTypeReference;
 

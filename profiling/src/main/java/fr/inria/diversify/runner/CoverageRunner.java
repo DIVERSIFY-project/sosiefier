@@ -7,9 +7,9 @@ import fr.inria.diversify.statistic.SinglePointSessionResults;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.exception.ApplyTransformationException;
 import fr.inria.diversify.transformation.exception.BuildTransplantException;
+import fr.inria.diversify.util.FileUtils;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.Log;
-import org.apache.commons.io.FileUtils;
 import spoon.reflect.cu.SourcePosition;
 
 import java.io.File;

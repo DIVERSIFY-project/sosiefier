@@ -16,13 +16,13 @@ import java.util.List;
  */
 public interface ICoverageReport {
 
-    public void create() throws IOException;
+    void create() throws IOException;
 
-    public double codeFragmentCoverage(CodeFragment stmt);
+    double codeFragmentCoverage(CodeFragment stmt);
 
-    public int opCodeCoverage(CtMethod method, int indexOpcode);
+    int opCodeCoverage(CtMethod method, int indexOpcode);
 
-    public double elementCoverage(CtElement operator);
+    double elementCoverage(CtElement operator);
 
     /**
      * This method returns for a given code fragment, its distribution along several coverage data files.
@@ -30,7 +30,7 @@ public interface ICoverageReport {
      * @param stmt CodeFragment for which we want to know distribution
      * @return A list of integers containing the index of the files in which this statement was covered.
      */
-    public List<Integer> getCoverageDistribution(CodeFragment stmt);
+    List<Integer> getCoverageDistribution(CodeFragment stmt);
 
-    public double positionCoverage(SourcePosition position);
+    double positionCoverage(SourcePosition position);
 }

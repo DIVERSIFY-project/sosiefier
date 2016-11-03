@@ -6,10 +6,10 @@ import fr.inria.diversify.processor.ProcessorUtil;
 import fr.inria.diversify.processor.main.*;
 import fr.inria.diversify.processor.test.*;
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.util.FileUtils;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.util.LoggerUtils;
 import fr.inria.diversify.util.PrintClassUtils;
-import org.apache.commons.io.FileUtils;
 import spoon.reflect.factory.Factory;
 
 import java.io.File;

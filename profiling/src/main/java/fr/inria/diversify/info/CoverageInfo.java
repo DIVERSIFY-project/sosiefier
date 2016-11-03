@@ -5,9 +5,9 @@ import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.logger.branch.*;
 import fr.inria.diversify.processor.main.BranchPositionProcessor;
+import fr.inria.diversify.util.FileUtils;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.LoggerUtils;
-import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
