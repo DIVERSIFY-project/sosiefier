@@ -80,6 +80,10 @@ public class MavenBuilder extends AbstractBuilder {
             //freebsd
             File mvnHome = new File("/usr/local/share/java/maven3");
             if (!mvnHome.exists()) {
+                //ubuntu 2
+                mvnHome = new File("/usr/share/maven/");
+            }
+            if (!mvnHome.exists()) {
                 //ubuntu
                 mvnHome = new File("/usr/share/maven-3.3.3");
             }

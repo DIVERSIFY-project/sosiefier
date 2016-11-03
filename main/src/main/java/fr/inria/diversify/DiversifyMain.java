@@ -64,6 +64,7 @@ public class DiversifyMain {
 
     public DiversifyMain(String propertiesFile) throws Exception, InvalidSdkException {
 
+        //System.out.println("Cur dir " + System.getProperty("user.dir"));
         inputConfiguration = new InputConfiguration(propertiesFile);
 
         InitUtils.initLogLevel(inputConfiguration);
@@ -93,7 +94,7 @@ public class DiversifyMain {
             } finally {
                 writeResult(runner);
             }
-            runner.deleteTmpFiles();
+            //runner.deleteTmpFiles();
         }
     }
 
@@ -260,6 +261,10 @@ public class DiversifyMain {
                 return new OtherQuery(inputProgram);
             case "bytecode":
                 return new ByteCodeTransformationQuery(inputProgram);
+            case "x1":
+                return new MultiplyByOneQuery(inputProgram);
+            case "loopflip":
+                return new LoopFlipQuery(inputProgram);
             case "adr": {
                 return new ADRTransformationQuery(inputProgram, subType, false);
             }
