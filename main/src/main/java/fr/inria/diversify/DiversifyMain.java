@@ -20,6 +20,7 @@ import fr.inria.diversify.persistence.json.input.JsonTransformationLoader;
 import fr.inria.diversify.persistence.json.output.JsonTransformationWriter;
 import fr.inria.diversify.statistic.ASTTransformationSearchSpace;
 import fr.inria.diversify.statistic.TransformationInfo;
+import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.switchsosie.SwitchQuery;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.query.*;
@@ -30,11 +31,9 @@ import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
 import org.json.JSONException;
 import spoon.reflect.cu.SourcePosition;
+import spoon.reflect.declaration.*;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -268,6 +267,9 @@ public class DiversifyMain {
             case "adr": {
                 return new ADRTransformationQuery(inputProgram, subType, false);
             }
+            case "pureadr": {
+                return new PureADRTransformationQuery(inputProgram, subType, false, inputConfiguration.getProperty("pureMethods", ""));
+            }
             case "adrstupid": {
                 return new ADRTransformationQuery(inputProgram, subType, true);
             }
@@ -385,10 +387,115 @@ public class DiversifyMain {
 
         String transDir = inputConfiguration.getProperty("transformation.directory");
         if (transDir != null) {
-            computeDiversifyStat(transDir, out);
+            if(inputConfiguration.getProperty("pure", "false").equalsIgnoreCase("true"))
+                computePureDiversifyStat(transDir, out);
+            else
+                computeDiversifyStat(transDir, out);
         } else {
             computeSearchSpace(out);
         }
+    }
+
+    Set<String> pureMethods = new HashSet<>();
+    protected void loadPureMethodList(File f) {
+        Scanner sc = null;
+        try {
+            sc = new Scanner(f);
+            while (sc.hasNextLine()) {
+                pureMethods.add(sc.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected boolean isPure(ASTTransformation t) {
+        CtElement ct = t.getTransplantationPoint().getCtCodeFragment();
+        CtExecutable parent = ct.getParent(CtExecutable.class);
+        String mName, mSig;
+
+        if(parent instanceof CtConstructor) {
+            t.inConstructor = true;
+            CtConstructor m = (CtConstructor) parent;
+            mName = m.getSimpleName();
+            mSig = m.getSignature();
+        } else if(parent instanceof CtMethod) {
+            CtMethod m = (CtMethod) parent;
+            mName = m.getSimpleName();
+            mSig = m.getSignature();
+            if(mName.substring(0,1).compareTo(mName.substring(0,1).toUpperCase()) == 0) t.inConstructor = true;
+
+        /*} else if(parent instanceof CtConstructor) {
+            t.inConstructor = true;
+            CtConstructor m = (CtConstructor) parent;
+            mName = m.getSimpleName();
+            mSig = m.getSignature();*/
+        } else {
+            return false;
+        }
+        try {
+            String sig = mSig.split("\\(")[1];
+            if(sig.split("\\)").length == 0) sig = "";
+            else sig = sig.split("\\)")[0];
+            String meth = t.classLocationName() + "." + mName + "(" + sig + ")";
+            if (pureMethods.contains(meth))
+                return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    protected void computePureDiversifyStat(String transDir, String output) throws Exception {
+        if(inputConfiguration.getProperty("pureMethods") != null) {
+            loadPureMethodList(new File(inputConfiguration.getProperty("pureMethods")));
+            System.out.println("------------------------- Pure Methods OK ? " + (pureMethods != null) + "---------------------");
+        }
+        ICoverageReport coverage = initCoverageReport(inputProgram.getProgramDir());
+        JsonTransformationLoader loader = new JsonTransformationLoader(inputProgram);
+        Collection<Transformation> transformationsRaw = loader.load(transDir, false);
+        Collection<Transformation> transformationsRawSet = new HashSet<>(transformationsRaw);
+        Collection<ASTTransformation> transformations = new HashSet<>();
+        for(Transformation t : transformationsRawSet) {
+            ASTTransformation a = (ASTTransformation) t;
+            transformations.add(a);
+            if(isPure(a)) a.inPure = true;
+        }
+
+        JsonTransformationWriter writer = new JsonTransformationWriter();
+
+
+        File file = new File(output);
+        if(!file.exists()) {
+            file.mkdirs();
+        }
+
+        transformations = transformations.stream()
+                .filter(trans -> trans.getPositions().stream()
+                        .anyMatch(position -> coverage.positionCoverage(position) != 0))
+                .collect(Collectors.toSet());
+
+        Set<ASTTransformation> sosies = transformations.stream()
+                .filter(t -> t.isSosie())
+                .collect(Collectors.toSet());
+
+        Log.info("nb transformation: {}", transformations.size());
+        Log.info("nb pure transformation: {}", transformations.stream().filter(t -> isPure(t)).count());
+        Log.info("nb compile: {}", transformations.stream().filter(t -> t.getStatus() >= -1).count());
+        Log.info("nb pure compile: {}", transformations.stream().filter(t -> (t.getStatus() >= -1) && isPure(t)).count());
+        Log.info("nb sosie: {}", sosies.size());
+        Log.info("nb pure sosie: {}", sosies.stream().filter(t -> isPure(t)).count());
+
+
+
+        //writer.write(transformationsRaw, output+".json", inputProgram.getProgramDir() + "/pom.xml");
+        //writer.write(sosies, output+"_sosie.json", inputProgram.getProgramDir() + "/pom.xml");
+
+        TransformationInfo transformationInfo = new TransformationInfo(transformationsRawSet);
+        transformationInfo.printPurity = true;
+        transformationInfo.print(output + "Trial.csv");
+
+
     }
 
     protected void computeDiversifyStat(String transDir, String output) throws Exception {

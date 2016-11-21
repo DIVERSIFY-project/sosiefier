@@ -1,6 +1,7 @@
 package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.ast.ASTTransformation;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
  */
 public class TransformationInfo {
     Collection<Transformation> transformations;
+    public boolean printPurity = false;
 
     public TransformationInfo(Collection<Transformation> transformations) {
         this.transformations = transformations;
@@ -22,8 +24,9 @@ public class TransformationInfo {
 
     public void print(String fileName) throws IOException {
         BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
-        out.append("uuid;type;name;position;status;nbFailures\n");
-
+        out.append("uuid;type;name;position;status;nbFailures");
+        if(printPurity) out.append(";inPure;inConstructor");
+        out.append("\n");
 
 
         for(Transformation transformation : transformations) {
@@ -34,7 +37,12 @@ public class TransformationInfo {
                     .map(position -> position.getCompilationUnit().getMainType().getQualifiedName() + ":" + position.getLine())
                     .collect(Collectors.joining(",")) + ";");
             out.append(transformation.getStatus() + ";");
-            out.append(transformation.getFailures().size() + "\n");
+            out.append(transformation.getFailures().size() + "");
+            if(printPurity && (transformation instanceof ASTTransformation)) {
+                ASTTransformation a = (ASTTransformation) transformation;
+                out.append(";" + a.inPure + ";" + a.inConstructor);
+            }
+            out.append("\n");
         }
 
         out.close();

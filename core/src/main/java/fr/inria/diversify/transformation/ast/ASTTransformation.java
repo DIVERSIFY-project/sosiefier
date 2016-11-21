@@ -1,11 +1,14 @@
 package fr.inria.diversify.transformation.ast;
 
+import com.fasterxml.uuid.Generators;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.exception.ApplyTransformationException;
 import fr.inria.diversify.transformation.exception.BuildTransplantException;
 import fr.inria.diversify.transformation.exception.RestoreTransformationException;
 import fr.inria.diversify.util.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 import spoon.compiler.Environment;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.SourcePosition;
@@ -27,6 +30,8 @@ import java.io.IOException;
 public abstract class ASTTransformation extends SingleTransformation {
 
     protected boolean subType;
+    public boolean inPure = false;
+    public boolean inConstructor = false;
 
     /**
      * Transplantation point that is going to be modified, either by an Add, Replace or Delete transformation
@@ -228,6 +233,15 @@ public abstract class ASTTransformation extends SingleTransformation {
 
     public CtCodeElement getCopyTransplant() {
         return copyTransplant;
+    }
+
+    @Override
+    public JSONObject toJSONObject() throws JSONException {
+        JSONObject object = super.toJSONObject();
+        object.put("inPure", inPure);
+        object.put("inConstructor", inConstructor);
+
+        return object;
     }
 }
 
