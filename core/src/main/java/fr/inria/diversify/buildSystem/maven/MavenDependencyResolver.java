@@ -90,7 +90,7 @@ public class MavenDependencyResolver implements DependencyResolver {
 
         MavenProject project = loadProject(pomFile);
 
-        directDependenciesURL = new ArrayList<>(findDirectDependencies(project));
+        directDependenciesURL = new ArrayList<>(findDirectDependencies(project, inputProgram));
         dependenciesURL.addAll(directDependenciesURL);
 
         if(!onlyDirectDependencies) {
@@ -189,8 +189,10 @@ public class MavenDependencyResolver implements DependencyResolver {
         return dependencies;
     }
 
-    protected Set<URL> findDirectDependencies(MavenProject project) throws Exception {
-        return findDirectDependencies(project, new Properties());
+    protected Set<URL> findDirectDependencies(MavenProject project, InputProgram inputProgram) throws Exception {
+        Properties properties = new Properties();
+        properties.setProperty("basedir", inputProgram.getProgramDir());
+        return findDirectDependencies(project, properties);
     }
 
     protected Set<URL> findDirectDependencies(MavenProject project, Properties properties) throws Exception {
