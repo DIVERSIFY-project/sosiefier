@@ -1,6 +1,5 @@
 package fr.inria.diversify.transformation;
 
-import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.transformation.exception.RestoreTransformationException;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,13 +7,9 @@ import spoon.reflect.code.*;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtType;
-import spoon.reflect.declaration.CtVariable;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.reference.CtVariableReference;
 import spoon.support.reflect.code.*;
-
-import java.io.IOException;
-import java.util.function.BinaryOperator;
 
 /**
  * Created by nicolas on 11.10.16.

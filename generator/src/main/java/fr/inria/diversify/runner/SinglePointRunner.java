@@ -2,6 +2,7 @@ package fr.inria.diversify.runner;
 
 
 import fr.inria.diversify.statistic.SinglePointSessionResults;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.Log;
@@ -100,6 +101,8 @@ public class SinglePointRunner extends AbstractRunner {
         } else {
             trans.apply(tmpDir + "/" + sourceDir);
         }
+        System.out.println("Soesie src dir: "+getSosieDestinationPath());
+        ((SingleTransformation) trans).printJavaFile(getSosieDestinationPath());
     }
 
     protected void writePosition(String fileName, ASTTransformation transformation) throws IOException {

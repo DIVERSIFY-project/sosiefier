@@ -93,7 +93,7 @@ public class DiversifyMain {
             } finally {
                 writeResult(runner);
             }
-            //runner.deleteTmpFiles();
+            runner.deleteTmpFiles();
         }
     }
 
@@ -264,6 +264,8 @@ public class DiversifyMain {
                 return new MultiplyByOneQuery(inputProgram);
             case "loopflip":
                 return new LoopFlipQuery(inputProgram);
+            case "addmi":
+                return new AddMethodInvocationQuerry(inputProgram);
             case "adr": {
                 return new ADRTransformationQuery(inputProgram, subType, false);
             }
