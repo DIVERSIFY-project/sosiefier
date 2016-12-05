@@ -157,7 +157,13 @@ public class VarFinder {
 
                     paramFillList.add(expression);
                 } else {
-                    if(param.getType().getDeclaration() instanceof CtClass) {
+                    /*if(param.getType().getDeclaration() instanceof CtEnum) {
+                        CtExpression expression;
+                        List<CtEnumValue> vals = ((CtEnum) param.getType().getDeclaration()).getEnumValues();
+                        Collections.shuffle(vals);
+                        expression = f.Core().clone(vals.get(0).getAssignment());
+                        paramFillList.add(expression);
+                    } else */if(param.getType().getDeclaration() instanceof CtClass) {
                         CtClass cla = (CtClass) param.getType().getDeclaration();
                         Collection<CtConstructor> constructors = cla.getConstructors();
                         List<CtExpression> constParamFillList;

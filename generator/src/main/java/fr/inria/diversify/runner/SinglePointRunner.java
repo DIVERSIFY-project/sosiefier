@@ -101,8 +101,8 @@ public class SinglePointRunner extends AbstractRunner {
         } else {
             trans.apply(tmpDir + "/" + sourceDir);
         }
-        System.out.println("Soesie src dir: "+getSosieDestinationPath());
-        ((SingleTransformation) trans).printJavaFile(getSosieDestinationPath());
+        //System.out.println("Soesie src dir: "+getSosieDestinationPath());
+        //((SingleTransformation) trans).printJavaFile(getSosieDestinationPath());
     }
 
     protected void writePosition(String fileName, ASTTransformation transformation) throws IOException {

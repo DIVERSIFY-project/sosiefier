@@ -1,12 +1,15 @@
 package fr.inria.diversify.util;
 
 import spoon.reflect.code.CtLiteral;
+import spoon.reflect.declaration.CtEnum;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.reference.CtTypeReference;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by nharrand on 22/11/16.
@@ -120,7 +123,6 @@ public class RandomLiteralFactory {
             sr.nextBytes(b);
             if(b[0] <= 127) return f.Code().createLiteral(true);
             else return f.Code().createLiteral(false);
-
         } else {
             return f.Code().createLiteral(null);
         }

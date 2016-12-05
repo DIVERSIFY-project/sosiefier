@@ -66,7 +66,7 @@ public abstract class AbstractBuilder {
     }
 
     /**
-     * Gets wheter output to file for further analysis or not
+     * Gets whether output to file for further analysis or not
      *
      * @return
      */

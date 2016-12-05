@@ -25,13 +25,12 @@ public class AddMethodInvocation extends SingleTransformation {
     CtBlock b;
     CtStatement save;
     CtTry tryInv;
-    boolean tryInvocation = true;
 
     public AddMethodInvocation(CtStatement tp, CtStatement invocation) {
         System.out.println("tp: " + tp);
         System.out.println("inv: " + invocation);
         this.tp = tp;
-        type = "special";
+        type = "add";
         name = "addMethodInvocation";
         Factory factory = tp.getFactory();
         save = factory.Core().clone(tp);
@@ -149,8 +148,12 @@ public class AddMethodInvocation extends SingleTransformation {
     public JSONObject toJSONObject() throws JSONException {
 
         JSONObject object = super.toJSONObject();
-        object.put("position", tp.getParent(CtType.class).getQualifiedName() + ":" + tp.getPosition().getLine());
-        object.put("insert", invocation.toString());
+        object.put("insert", tryInv.toString());
+        JSONObject tpJSON = new JSONObject();
+        tpJSON.put("position", tp.getParent(CtType.class).getQualifiedName() + ":" + tp.getPosition().getLine());
+        tpJSON.put("type", tp.getClass().getName());
+        tpJSON.put("sourcecode", tp.toString());
+        object.put("transplantationPoint",tpJSON);
         return object;
     }
 }

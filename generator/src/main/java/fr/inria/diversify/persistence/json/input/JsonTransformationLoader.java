@@ -145,18 +145,21 @@ public class JsonTransformationLoader {
         open(); //Open the json file
 
         HashMap<UUID, Transformation> result = new HashMap<>();
+        System.out.println("result size: " + result.size());
         JsonHeaderInput headerInput = (JsonHeaderInput)getSection(JsonHeaderInput.class);
         headerInput.setJsonObject(jsonObject);
         headerInput.setInputProgram(inputProgram);
         headerInput.setLoadMessages(getLoadMessages());
         headerInput.read(result);
         header = headerInput.getHeader();
+        System.out.println("result size: " + result.size());
 
         JsonFailuresInput failures = (JsonFailuresInput) getSection(JsonFailuresInput.class);
         failures.setJsonObject(jsonObject);
         failures.setInputProgram(inputProgram);
         failures.setLoadMessages(getLoadMessages());
         failures.read(result);
+        System.out.println("result size: " + result.size());
 
         JsonTransformationCollectionInput asts = (JsonTransformationCollectionInput)
                 getSection(JsonTransformationCollectionInput.class);
@@ -165,6 +168,7 @@ public class JsonTransformationLoader {
         asts.setLoadMessages(getLoadMessages());
         asts.setFailures(failures.getFailures());
         asts.read(result);
+        System.out.println("result size: " + result.size());
 
         for ( JsonSectionInput s : sections.values() ) {
             if ( s.equals(headerInput) || s.equals(failures) || s.equals(asts) ) continue;
@@ -184,10 +188,12 @@ public class JsonTransformationLoader {
             transformations = new ArrayList<>();
         }
         File file = new File(dirOrFile);
+        System.out.println("load JSON from: " + file.getAbsolutePath());
 
         if(file.isDirectory()) {
             for(File f: file.listFiles()) {
                 try {
+                    System.out.println("\t- " + f.getAbsolutePath());
                     jsonPath = f.getAbsolutePath();
                     transformations.addAll(read());
                 } catch (Exception e) {

@@ -29,6 +29,7 @@ import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
+import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
@@ -389,7 +390,9 @@ public class DiversifyMain {
 
         String transDir = inputConfiguration.getProperty("transformation.directory");
         if (transDir != null) {
-            if(inputConfiguration.getProperty("pure", "false").equalsIgnoreCase("true"))
+            if(inputConfiguration.getProperty("stackTransformations", "false").equalsIgnoreCase("true"))
+                stackProduceTransformationFromJSON(transDir, out);
+            else if(inputConfiguration.getProperty("pure", "false").equalsIgnoreCase("true"))
                 computePureDiversifyStat(transDir, out);
             else
                 computeDiversifyStat(transDir, out);
@@ -579,5 +582,39 @@ public class DiversifyMain {
                 runner.printResultInGitRepo(inputConfiguration.getProperty("result"), repo);
             }
         }
+    }
+
+    protected void stackProduceTransformationFromJSON(String transDir, String output) throws Exception {
+        ICoverageReport coverage = initCoverageReport(inputProgram.getProgramDir());
+        JsonTransformationLoader loader = new JsonTransformationLoader(inputProgram);
+        Collection<Transformation> transformations = loader.load(transDir, false);
+
+        File file = new File(output);
+        if(!file.exists()) {
+            file.mkdirs();
+        }
+
+        transformations = transformations.stream()
+                .filter(trans -> trans.getPositions().stream()
+                        .anyMatch(position -> coverage.positionCoverage(position) != 0))
+                .collect(Collectors.toSet());
+
+        Set<Transformation> sosies = transformations.stream()
+                .filter(t -> t.isSosie())
+                .collect(Collectors.toSet());
+
+        Log.info("nb transformation: {}", transformations.size());
+        Log.info("nb compile: {}", transformations.stream().filter(t -> t.getStatus() >= -1).count());
+        Log.info("nb sosie: {}", sosies.size());
+
+        File prgDir = new File(inputProgram.getProgramDir());
+        File outputDir = new File(output, "soesie");
+        fr.inria.diversify.util.FileUtils.copyDirectory(prgDir,outputDir);
+
+        for(Transformation t : sosies) {
+            t.apply(inputProgram.getAbsoluteSourceCodeDir());
+        }
+
+
     }
 }

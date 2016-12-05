@@ -32,6 +32,10 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
     }
 
     private boolean isInsertable(CtStatement el) {
+        if((el instanceof CtCase) ||
+                ((el.getParent() instanceof CtFor) && (((CtFor) el.getParent()).getForInit().contains(el)
+                    || ((CtFor) el.getParent()).getForUpdate().contains(el)))
+                ) return false;
         try {
             CtStatement stmt = el.getFactory().Code().createCodeSnippetStatement("");
             el.insertBefore(stmt);
@@ -129,12 +133,7 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
                             } catch (Exception e) {
                             }
                         }
-                    }/* else if (!curMethod.equals(m) && m.getModifiers().contains(ModifierKind.STATIC)) {
-                        res = createInvocation(m, vars, staticCtx);
-                        if (res != null) {
-                            return res;
-                        }
-                    }*/
+                    }
                 }
             }
         }
@@ -241,6 +240,7 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
         }*/
 
         //CtStatement invocation = buildSuitableInvocation(curCandidate, curMethods);
+        Collections.shuffle(curMethods);
         CtStatement invocation = buildInvocation(curCandidate, curMethods);
         curMethods.removeAll(toRemove);
         toRemove.clear();
