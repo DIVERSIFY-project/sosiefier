@@ -21,21 +21,34 @@ public class AddMethodInvocation extends SingleTransformation {
 
     CtStatement invocation;
     CtStatement tp;
-    CtStatement src;
-    CtBlock b;
-    CtStatement save;
-    CtTry tryInv;
+    CtStatement tryInv;
+    CtField well;
+    CtClass parentClass;
+    CtMethod parentMethod;
+    CtInvocation aInv;
+
+    String jPos, jType, jSC, jStatic;
 
     public AddMethodInvocation(CtStatement tp, CtStatement invocation) {
         System.out.println("tp: " + tp);
         System.out.println("inv: " + invocation);
-        this.tp = tp;
-        type = "add";
-        name = "addMethodInvocation";
-        Factory factory = tp.getFactory();
-        save = factory.Core().clone(tp);
-
+        this.setTp(tp);
+        this.type = "add";
+        this.name = "addMethodInvocation";
         this.invocation = invocation;
+
+        Factory f = tp.getFactory();
+        CtCodeSnippetStatement empty = f.Code().createCodeSnippetStatement("");
+        CtBlock eBlock = f.Code().createCtBlock(empty);
+        tryInv = f.Core().createTry();
+        CtBlock b = f.Code().createCtBlock(invocation);
+        ((CtTry) tryInv).setBody(b);
+        b.setParent(tryInv);
+        CtCatch catchInv = f.Code().createCtCatch(RandomLiteralFactory.createString(),Exception.class,eBlock);
+        List<CtCatch> catchers = new LinkedList<CtCatch>();
+        catchers.add(catchInv);
+        ((CtTry) tryInv).setCatchers(catchers);
+        createWell();
     }
 
 
@@ -87,46 +100,51 @@ public class AddMethodInvocation extends SingleTransformation {
     }
 
     protected void createWell() {
-        CtInvocation aInv = actualInvocation();
+        aInv = actualInvocation();
         if(aInv.getType().getActualClass() != void.class) {
-            CtClass cl = tp.getParent(CtClass.class);
-            CtMethod m = tp.getParent(CtMethod.class);
 
-            CtField field;
-            if(m.getModifiers().contains(ModifierKind.STATIC)) {
-                field = tp.getFactory().Code().createCtField(RandomLiteralFactory.createString(), aInv.getType(), RandomLiteralFactory.randomValue(aInv.getType()).toString(), ModifierKind.PUBLIC, ModifierKind.STATIC);
+            if(parentMethod.getModifiers().contains(ModifierKind.STATIC)) {
+                well = tp.getFactory().Code().createCtField(RandomLiteralFactory.createString(), aInv.getType(), RandomLiteralFactory.randomValue(aInv.getType()).toString(), ModifierKind.PUBLIC, ModifierKind.STATIC);
             } else {
-                field = tp.getFactory().Code().createCtField(RandomLiteralFactory.createString(), aInv.getType(), RandomLiteralFactory.randomValue(aInv.getType()).toString(), ModifierKind.PUBLIC);
+                well = tp.getFactory().Code().createCtField(RandomLiteralFactory.createString(), aInv.getType(), RandomLiteralFactory.randomValue(aInv.getType()).toString(), ModifierKind.PUBLIC);
             }
-            cl.addField(field);
             CtInvocation bInv = tp.getFactory().Core().clone(aInv);
             //CtAssignment assignment = tp.getFactory().Code().createVariableAssignment(VarFinder.createRef(field), false, bInv);
-            CtStatement assignment = tp.getFactory().Code().createCodeSnippetStatement(field.getSimpleName() + " = " + bInv);
+            CtStatement assignment = tp.getFactory().Code().createCodeSnippetStatement(well.getSimpleName() + " = " + bInv);
             aInv.replace((CtStatement) assignment);
-            System.out.println("assignement: " + assignment);
         }
 
     }
 
+    public void setTp(CtStatement tp) {
+        this.tp = tp;
+        this.parentClass = tp.getParent(CtClass.class);
+        this.parentMethod = tp.getParent(CtMethod.class);
+        jPos = tp.getParent(CtType.class).getQualifiedName() + ":" + tp.getPosition().getLine();
+        jType =  tp.getClass().getName();
+        jSC = tp.toString();
+        jStatic = "" + parentMethod.getModifiers().contains(ModifierKind.STATIC);
+    }
+
+    public void setWell(CtField well) {
+        this.well = well;
+    }
+
+    public void setTryInv(CtStatement tryInv) {
+        this.tryInv = tryInv;
+    }
+
+    public AddMethodInvocation() {}
+
     @Override
     public void apply(String srcDir) throws Exception {
-        Factory f = tp.getFactory();
-        src = f.Core().clone(tp);
-        System.out.println("old stmt: " + tp.toString());
-        CtCodeSnippetStatement empty = f.Code().createCodeSnippetStatement("");
-        CtBlock eBlock = f.Code().createCtBlock(empty);
-        tryInv = f.Core().createTry();
-        CtBlock b = f.Code().createCtBlock(invocation);
-        tryInv.setBody(b);
-        b.setParent(tryInv);
-        CtCatch catchInv = f.Code().createCtCatch(RandomLiteralFactory.createString(),Exception.class,eBlock);
-        List<CtCatch> catchers = new LinkedList<CtCatch>();
-        catchers.add(catchInv);
-        tryInv.setCatchers(catchers);
-        createWell();
         tp.insertBefore(tryInv);
-        //((CtBlockImpl) tp).insertBegin(invocation);
+        if(well != null) {
+            parentClass.addField(well);
+        }
 
+        System.out.println("old stmt: " + tp.toString());
+        System.out.println("well: " + well);
         System.out.println("newt stmt: " + tryInv.toString());
         printJavaFile(srcDir);
     }
@@ -137,6 +155,9 @@ public class AddMethodInvocation extends SingleTransformation {
             //b.replace(save);
             //invocation.delete();
             tryInv.delete();
+            if(well != null) {
+                parentClass.removeField(well);
+            }
             printJavaFile(srcDir);
         } catch (Exception e) {
             throw new RestoreTransformationException("", e);
@@ -148,12 +169,25 @@ public class AddMethodInvocation extends SingleTransformation {
     public JSONObject toJSONObject() throws JSONException {
 
         JSONObject object = super.toJSONObject();
-        object.put("insert", tryInv.toString());
+
+        JSONObject insertJSON = new JSONObject();
+            insertJSON.put("stmt", tryInv.toString());
+            insertJSON.put("static", aInv.getExecutable().isStatic());
+            if(well != null) {
+                insertJSON.put("createdWell", "true");
+                insertJSON.put("well", well.toString());
+            } else {
+                insertJSON.put("createdWell", "false");
+            }
+        object.put("insert", insertJSON);
+
         JSONObject tpJSON = new JSONObject();
-        tpJSON.put("position", tp.getParent(CtType.class).getQualifiedName() + ":" + tp.getPosition().getLine());
-        tpJSON.put("type", tp.getClass().getName());
-        tpJSON.put("sourcecode", tp.toString());
+            tpJSON.put("position",jPos);
+            tpJSON.put("type", jType);
+            tpJSON.put("sourcecode", jSC);
+            tpJSON.put("static", jStatic);
         object.put("transplantationPoint",tpJSON);
+
         return object;
     }
 }

@@ -63,7 +63,7 @@ public class DiversifyMain {
     protected InputConfiguration inputConfiguration;
 
     public DiversifyMain(String propertiesFile) throws Exception, InvalidSdkException {
-
+        Runtime.getRuntime().traceMethodCalls(true);
         //System.out.println("Cur dir " + System.getProperty("user.dir"));
         inputConfiguration = new InputConfiguration(propertiesFile);
 
@@ -89,6 +89,7 @@ public class DiversifyMain {
             runner.setTransformationQuery(query);
             InitUtils.addApplicationClassesToClassPath(inputProgram);
             runner.setBuilder(builder);
+
             try {
                 runner.run(n);
             } finally {
@@ -267,6 +268,8 @@ public class DiversifyMain {
                 return new LoopFlipQuery(inputProgram);
             case "addmi":
                 return new AddMethodInvocationQuerry(inputProgram);
+            case "swapsubtype":
+                return new SwapSubTypeQuery(inputProgram);
             case "adr": {
                 return new ADRTransformationQuery(inputProgram, subType, false);
             }

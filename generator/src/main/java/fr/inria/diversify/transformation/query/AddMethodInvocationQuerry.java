@@ -40,7 +40,10 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
             CtStatement stmt = el.getFactory().Code().createCodeSnippetStatement("");
             el.insertBefore(stmt);
             stmt.delete();
-            return true;
+            if(el.getParent() instanceof CtStatementList)
+                return true;
+            else
+                return false;
         } catch (Exception e) {
             return false;
         }
@@ -64,7 +67,7 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
             }
         }
         System.out.println(" --- Done (" + candidateList.size() + ") --- ");
-        Collections.shuffle(candidateList);
+        //Collections.shuffle(candidateList);
         candidateIt = candidateList.iterator();
     }
 
@@ -119,11 +122,12 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
             if(notPrimitiveNotAnArray(v)) {
                 for(CtMethod m : methods) {
                     toRemove.add(m);
-                    if(!curMethod.equals(m) && !m.getModifiers().contains(ModifierKind.STATIC)) {
+                    if(!curMethod.equals(m) && !m.getModifiers().contains(ModifierKind.STATIC)
+                            && !m.getModifiers().contains(ModifierKind.PRIVATE)) {
                         CtClass cl = m.getParent(CtClass.class);
                         if(cl != null) {
-                            CtTypeReference t = f.Code().createCtTypeReference(cl.getActualClass());
                             try {
+                                CtTypeReference t = f.Code().createCtTypeReference(cl.getActualClass());
                                 if (v.getType().isSubtypeOf(t)) {
                                     res = createInvocation(v, m, vars, staticCtx);
                                     if (res != null) {
@@ -204,7 +208,7 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
                             List<CtConstructor> constructors = new LinkedList<>(targetClass.getConstructors());
                             List<CtExpression> paramsConst;
                             //boolean constFound = false;
-                            Collections.shuffle(constructors);
+                            //Collections.shuffle(constructors);
                             for(CtConstructor constructor: constructors) {
                                 paramsConst = new LinkedList<>();
                                 if(VarFinder.fillParameter(paramsConst, constructor, vars)) {
@@ -240,7 +244,7 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
         }*/
 
         //CtStatement invocation = buildSuitableInvocation(curCandidate, curMethods);
-        Collections.shuffle(curMethods);
+        //Collections.shuffle(curMethods);
         CtStatement invocation = buildInvocation(curCandidate, curMethods);
         curMethods.removeAll(toRemove);
         toRemove.clear();

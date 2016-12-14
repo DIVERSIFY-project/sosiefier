@@ -255,7 +255,7 @@ public class InputProgram {
         double sDiff = 0;
         //double sDiff = valueThreshold;
 
-        int similiarFragmentCount = 0;
+        int similarFragmentCount = 0;
         int similarMinDist = Integer.MAX_VALUE;
 
         CodeFragmentList fragments = getCodeFragmentsByClass().get(position);
@@ -269,6 +269,7 @@ public class InputProgram {
                     if (ctValue.equals(searchValue) && cfLine == lineNumber) {
                         //If it is of the same code and the same line: we found it!!
                         return codeFragment;
+                    //} else if (ctValue.contains(searchValue) && cfLine == lineNumber) {
                     } else {
                         //Similarity factor (provide flexibility...)
                         double x = StringSimilarity.CompareStrings(ctValue, searchValue);
@@ -279,12 +280,12 @@ public class InputProgram {
                         if (x < valueThreshold || k > lineThreshold) continue;
 
                         if (x > sDiff) {
-                            similiarFragmentCount = 0;//A better value is found, erase similar count
+                            similarFragmentCount = 0;//A better value is found, erase similar count
                             minDiff = k;//Store line distance
                             sDiff = x;
                             result = codeFragment;
                         } else if (Math.abs(x - sDiff) < 0.0000001) {
-                            similiarFragmentCount++; //equally good fragment found, augment the amount of fragments
+                            similarFragmentCount++; //equally good fragment found, augment the amount of fragments
                             int d = Math.abs(cfLine - lineNumber);
                             if (d < minDiff) {
                                 similarMinDist = minDiff;
@@ -306,8 +307,8 @@ public class InputProgram {
             if (!result.positionString().equals(position)) {
                 Log.warn("Unable to find fragment at " + position);
                 Log.info("Best match at " + result.positionString());
-                if (sDiff < 1.0 || similiarFragmentCount != 0) {
-                    Log.info("Dice: " + sDiff + " Similars: " + similiarFragmentCount + " Similar MinDist: " + similarMinDist);
+                if (sDiff < 1.0 || similarFragmentCount != 0) {
+                    Log.info("Dice: " + sDiff + " Similars: " + similarFragmentCount + " Similar MinDist: " + similarMinDist);
                     Log.info("Search value: " + searchValue);
                     if (sDiff < 0) Log.info("Value found: " + accesor.getValue(result));
                 }

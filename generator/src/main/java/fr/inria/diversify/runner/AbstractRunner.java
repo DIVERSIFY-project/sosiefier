@@ -243,7 +243,7 @@ public abstract class AbstractRunner {
     public void deleteTmpFiles() {
         try {
             FileUtils.cleanDirectory(new File(tmpDir));
-           FileUtils.forceDelete(new File(tmpDir));
+            FileUtils.forceDelete(new File(tmpDir));
         } catch (IOException e) {
             try {
                 init(projectDir, originalTmpDir);

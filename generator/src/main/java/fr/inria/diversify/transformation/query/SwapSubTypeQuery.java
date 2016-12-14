@@ -2,13 +2,18 @@ package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.AddMethodInvocation;
+import fr.inria.diversify.transformation.SwapSubType;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.VarFinder;
 import spoon.reflect.code.CtAssignment;
+import spoon.reflect.code.CtConstructorCall;
+import spoon.reflect.code.CtExpression;
 import spoon.reflect.code.CtStatement;
-import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtType;
+import spoon.reflect.declaration.*;
+import spoon.reflect.factory.Factory;
+import spoon.reflect.reference.CtExecutableReference;
 import spoon.reflect.reference.CtTypeReference;
+import spoon.support.reflect.code.CtAssignmentImpl;
 
 import java.util.*;
 
@@ -16,54 +21,87 @@ import java.util.*;
  * Created by nharrand on 06/12/16.
  */
 public class SwapSubTypeQuery extends TransformationQuery {
-    private List<CtStatement> candidateList;
-    private Iterator<CtStatement> candidateIt;
-    private CtStatement curCandidate = null;
-    private List<CtMethod> curMethods = new LinkedList<>();
-    private List<CtMethod> toRemove = new LinkedList<>();
-
+    private Map<CtConstructorCall, CtExecutableReference> candidates;
+    private Collection<CtType> types;
+    private Iterator<Map.Entry<CtConstructorCall, CtExecutableReference>> candidateIt;
 
 
     public SwapSubTypeQuery(InputProgram inputProgram) {
         super(inputProgram);
-        findCandidates();
-    }
-
-    private void findCandidates() {
-        candidateList = new ArrayList<>();
-        System.out.println(" --- Search for for Candidates --- ");
-        /*candidateAndMethods.putAll(getInputProgram().getAllElement(CtStatement.class).stream()
-                .filter(ce -> ce.getParent(CtMethod.class) != null)
-                .map(ce -> (CtStatement) ce)
-                //.collect(Collectors.toList())
-                .collect(Collectors.toMap(ce -> ce, ce -> VarFinder.getAccessibleMethods(ce)))
-        );*/
-        Collection<CtAssignment> assignments = getInputProgram().getAllElement(CtAssignment.class);
-        Collection<CtType> types = getInputProgram().getAllElement(CtType.class);
+        CtClass cl;
+        types = getInputProgram().getAllElement(CtType.class);
         for(CtType t : types) {
             if(t.isPrimitive()) types.remove(t);
         }
+        findCandidates();
+        candidateIt = candidates.entrySet().iterator();
+    }
 
-        for(CtAssignment a : assignments) {
-            if(a.getType().isPrimitive()) continue;
-            if(a.getType().getSuperclass().getActualClass() == Object.class) continue;
-            CtTypeReference parent = a.getType().getSuperclass();
-            //parent.isAssignableFrom();
+    private boolean parametersMatch(CtConstructorCall curCall, CtExecutableReference candidate) {
+        if(curCall.getArguments().size() != candidate.getParameters().size()) return false;
+        List<CtExpression> args = curCall.getArguments();
+        List<CtTypeReference> params = candidate.getParameters();
+        for(int i = 0; i < args.size(); i++) {
+            if(!args.get(i).getType().equals(params.get(i))) return false;
         }
-        System.out.println(" --- Done (" + candidateList.size() + ") --- ");
-        Collections.shuffle(candidateList);
-        candidateIt = candidateList.iterator();
+        return true;
+    }
+
+    private void findCandidates() {
+        candidates = new HashMap<>();
+        System.out.println(" --- Search for for Candidates --- ");
+        Collection<CtConstructorCall> calls = getInputProgram().getAllElement(CtConstructorCall.class);
+        //CtAssignmentImpl
+
+        for(CtConstructorCall call : calls) {
+            Factory f = call.getFactory();
+            System.out.println("c: " + call + " in " + ((CtClass) call.getParent(CtClass.class)).getSimpleName());
+            CtTypedElement parent = call.getParent(CtTypedElement.class);
+            if(parent.getType().getModifiers().contains(ModifierKind.STATIC)) continue;
+            if(call.getType().getModifiers().contains(ModifierKind.STATIC)) continue;
+            if(call.getType().getActualClass() == parent.getType().getActualClass()) continue;
+            System.out.println("Expect: " + parent.getType() + " -> found: " + call.getType());
+            for(CtType t : types) {
+                CtTypeReference tref = f.Code().createCtTypeReference(t.getActualClass());
+                try {
+                if(parent.getType().isAssignableFrom(tref)) {
+                    for(CtExecutableReference e:  tref.getDeclaration().getAllExecutables()) {
+                        if(e.isConstructor()){
+                            if(parametersMatch(call,  e)) {
+                                System.out.println("Found candidate !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                                candidates.put(call, e);
+                            }
+                        }
+                    }
+                }
+                } catch(Exception e) {
+                    ;
+                }
+            }
+        }
+        System.out.println(" --- Done (" + candidates.keySet().size() + ") --- ");
     }
 
 
     @Override
     public Transformation query() throws QueryException {
-        throw new QueryException("No valid candidate");
+        try {
+            Map.Entry<CtConstructorCall, CtExecutableReference> cur = candidateIt.next();
+            CtConstructorCall tp = cur.getKey();
+            CtExecutableReference c = cur.getValue();
+            Factory f = tp.getFactory();
+            List<CtExpression> params = tp.getArguments();
+            CtExpression[] array = params.toArray(new CtExpression[params.size()]);
+            CtConstructorCall cc = f.Code().createConstructorCall(c.getType(), array);
+            return new SwapSubType(tp, cc);
+        } catch (Exception e) {
+            throw new QueryException("No valid candidate");
+        }
     }
     //
 
     @Override
     public boolean hasNextTransformation() {
-        return (!curMethods.isEmpty() || candidateIt.hasNext());
+        return (candidateIt.hasNext());
     }
 }

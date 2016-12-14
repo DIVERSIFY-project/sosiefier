@@ -13,18 +13,18 @@ import spoon.reflect.factory.Factory;
  */
 public class SwapSubType extends SingleTransformation {
 
-    CtAssignment newAssignment;
-    CtAssignment tp;
-    CtAssignment save;
+    CtConstructorCall newCall;
+    CtConstructorCall tp;
+    CtConstructorCall save;
 
-    public SwapSubType(CtAssignment tp, CtAssignment newAssignment) {
+    public SwapSubType(CtConstructorCall tp, CtConstructorCall newCall) {
         this.tp = tp;
         type = "replace";
         name = "swapSubType";
         Factory factory = tp.getFactory();
         save = factory.Core().clone(tp);
 
-        this.newAssignment = newAssignment;
+        this.newCall = newCall;
     }
 
 
@@ -63,16 +63,16 @@ public class SwapSubType extends SingleTransformation {
     @Override
     public void apply(String srcDir) throws Exception {
         System.out.println("old stmt: " + tp.toString());
-        tp.replace((CtStatement) newAssignment);
+        tp.replace((CtStatement) newCall);
 
-        System.out.println("newt stmt: " + newAssignment.toString());
+        System.out.println("newt stmt: " + newCall.toString());
         printJavaFile(srcDir);
     }
 
     @Override
     public void restore(String srcDir) throws RestoreTransformationException {
         try {
-            tp.replace((CtStatement) save);
+            newCall.replace((CtStatement) tp);
             printJavaFile(srcDir);
         } catch (Exception e) {
             throw new RestoreTransformationException("", e);
@@ -84,7 +84,7 @@ public class SwapSubType extends SingleTransformation {
     public JSONObject toJSONObject() throws JSONException {
 
         JSONObject object = super.toJSONObject();
-        object.put("newAssignement", newAssignment.toString());
+        object.put("newCall", newCall.toString());
         JSONObject tpJSON = new JSONObject();
         tpJSON.put("position", tp.getParent(CtType.class).getQualifiedName() + ":" + tp.getPosition().getLine());
         tpJSON.put("type", tp.getClass().getName());
