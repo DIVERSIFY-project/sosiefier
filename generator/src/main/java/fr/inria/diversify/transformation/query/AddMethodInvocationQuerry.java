@@ -25,6 +25,11 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
     private List<CtMethod> curMethods = new LinkedList<>();
     private List<CtMethod> toRemove = new LinkedList<>();
 
+    private boolean internalMethods = false;
+    private boolean externalMethods = true;
+    private boolean staticMethods = false;
+    private boolean nonstaticMethods = true;
+
 
     public AddMethodInvocationQuerry(InputProgram inputProgram) {
         super(inputProgram);
@@ -71,7 +76,6 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
         candidateIt = candidateList.iterator();
     }
 
-    private boolean notPrimitiveNotAnArray(CtVariable v) { return !v.getType().isPrimitive() && !v.toString().contains("[]");}
 
     //Static methods
     private CtStatement createInvocation(CtVariable target, CtMethod method, List<CtVariable> vars) {
@@ -118,52 +122,56 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
         CtMethod curMethod = tp.getParent(CtMethod.class);
         boolean staticCtx = curMethod.getModifiers().contains(ModifierKind.STATIC);
         List<CtVariable> vars = VarFinder.getAccessibleVars(tp);
-        for(CtVariable v : vars) {
-            if(notPrimitiveNotAnArray(v)) {
-                for(CtMethod m : methods) {
-                    toRemove.add(m);
-                    if(!curMethod.equals(m) && !m.getModifiers().contains(ModifierKind.STATIC)
-                            && !m.getModifiers().contains(ModifierKind.PRIVATE)) {
-                        CtClass cl = m.getParent(CtClass.class);
-                        if(cl != null) {
-                            try {
-                                CtTypeReference t = f.Code().createCtTypeReference(cl.getActualClass());
-                                if (v.getType().isSubtypeOf(t)) {
-                                    res = createInvocation(v, m, vars, staticCtx);
-                                    if (res != null) {
-                                        return res;
+        if(externalMethods) {
+            for(CtVariable v : vars) {
+                if(VarFinder.notPrimitiveNotAnArray(v)) {
+                    for(CtMethod m : methods) {
+                        toRemove.add(m);
+                        if(!curMethod.equals(m) && !m.getModifiers().contains(ModifierKind.STATIC)
+                                && !m.getModifiers().contains(ModifierKind.PRIVATE)) {
+                            CtClass cl = m.getParent(CtClass.class);
+                            if(cl != null) {
+                                try {
+                                    CtTypeReference t = f.Code().createCtTypeReference(cl.getActualClass());
+                                    if (v.getType().isSubtypeOf(t)) {
+                                        res = createInvocation(v, m, vars, staticCtx);
+                                        if (res != null) {
+                                            return res;
+                                        }
                                     }
+                                } catch (Exception e) {
                                 }
-                            } catch (Exception e) {
                             }
                         }
                     }
                 }
             }
         }
-        //This
-        for(CtMethod m : methods) {
-            toRemove.add(m);
-            if(!curMethod.equals(m) && !m.getModifiers().contains(ModifierKind.STATIC)) {
-                try {
-                    CtClass cl = m.getParent(CtClass.class);
-                    CtClass cltp = tp.getParent(CtClass.class);
-                    if ((cl != null) && (cltp != null)) {
-                        CtTypeReference t = f.Code().createCtTypeReference(cl.getActualClass());
-                        CtTypeReference ttp = f.Code().createCtTypeReference(cltp.getActualClass());
-                        if (ttp.isSubtypeOf(t)) {
-                            res = createInvocation(null, m, vars, staticCtx);
-                            if (res != null) {
-                                return res;
+        if(internalMethods) {
+            //This
+            for (CtMethod m : methods) {
+                toRemove.add(m);
+                if (!curMethod.equals(m) && !m.getModifiers().contains(ModifierKind.STATIC)) {
+                    try {
+                        CtClass cl = m.getParent(CtClass.class);
+                        CtClass cltp = tp.getParent(CtClass.class);
+                        if ((cl != null) && (cltp != null)) {
+                            CtTypeReference t = f.Code().createCtTypeReference(cl.getActualClass());
+                            CtTypeReference ttp = f.Code().createCtTypeReference(cltp.getActualClass());
+                            if (ttp.isSubtypeOf(t)) {
+                                res = createInvocation(null, m, vars, staticCtx);
+                                if (res != null) {
+                                    return res;
+                                }
                             }
                         }
+                    } catch (Exception e) {
                     }
-                } catch (Exception e) {
-                }
-            } else if (!curMethod.equals(m) && m.getModifiers().contains(ModifierKind.STATIC)) {
-                res = createInvocation(m, vars, staticCtx);
-                if (res != null) {
-                    return res;
+                } else if (!curMethod.equals(m) && m.getModifiers().contains(ModifierKind.STATIC)) {
+                    res = createInvocation(m, vars, staticCtx);
+                    if (res != null) {
+                        return res;
+                    }
                 }
             }
         }
@@ -236,14 +244,17 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
 
     @Override
     public Transformation query() throws QueryException {
-        curCandidate = candidateIt.next();
-        curMethods = new ArrayList<>(VarFinder.getAccessibleMethods(curCandidate));
-        /*if(((curCandidate == null) || curMethods.isEmpty()) && (candidateIt.hasNext())) {
+        //curCandidate = candidateIt.next();
+        //curMethods = new ArrayList<>(VarFinder.getAccessibleMethods(curCandidate));
+        if(((curCandidate == null) || curMethods.isEmpty()) && (candidateIt.hasNext())) {
             curCandidate = candidateIt.next();
-            curMethods = new ArrayList<>(VarFinder.getAccessibleMethods(curCandidate));
-        }*/
+            if(externalMethods && nonstaticMethods && !internalMethods && !staticMethods)
+                curMethods = new ArrayList<>(VarFinder.getTargetableMethods(curCandidate));
+            else
+                curMethods = new ArrayList<>(VarFinder.getAccessibleMethods(curCandidate, staticMethods, nonstaticMethods));
+        }
+        System.out.println("Methods: " + curMethods.size());
 
-        //CtStatement invocation = buildSuitableInvocation(curCandidate, curMethods);
         //Collections.shuffle(curMethods);
         CtStatement invocation = buildInvocation(curCandidate, curMethods);
         curMethods.removeAll(toRemove);

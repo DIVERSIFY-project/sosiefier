@@ -44,17 +44,18 @@ public class VarFinder {
 
     public static Set<CtVariable> getAccessibleVarsFromBlock(CtElement el) {
         Set<CtVariable> res = new HashSet<>();
-        CtBlock elBlock = el.getParent(CtBlock.class);
+        if (el == null) return res;
+                CtBlock elBlock = el.getParent(CtBlock.class);
         if(elBlock != null) {
+            res.addAll(getAccessibleVarsFromBlock(elBlock));
             for(CtStatement statement : elBlock.getStatements()) {
-                if(el.equals(statement)) {
-                    break;
+                if(el.getPosition() != null && (statement.getPosition().getSourceEnd() > el.getPosition().getSourceStart())) {
+                    return res;
                 }
                 if(statement instanceof CtLocalVariable) {
                     res.add(((CtLocalVariable) statement));
                 }
             }
-            res.addAll(getAccessibleVarsFromBlock(elBlock));
         }
         return res;
     }
@@ -71,6 +72,9 @@ public class VarFinder {
     }
 
     public static Set<CtMethod> getAccessibleMethods(CtElement el) {
+        return getAccessibleMethods(el, false, true);
+    }
+    public static Set<CtMethod> getAccessibleMethods(CtElement el, boolean acceptStatic, boolean acceptNonStatic) {
         Set<CtMethod> res = new HashSet<>();
         CtClass elClass = el.getParent(CtClass.class);
         CtPackage elPackage = elClass.getPackage();
@@ -84,10 +88,32 @@ public class VarFinder {
                                     || c.equals(elClass)
                             )
                     )
+                    .filter(
+                            m -> (acceptStatic || !m.getModifiers().contains(ModifierKind.STATIC)                            )
+                    )
+                    .filter(
+                            m -> (acceptNonStatic || m.getModifiers().contains(ModifierKind.STATIC)                            )
+                    )
                     .collect(Collectors.toSet())
             );
         }
+        //WARNING
         res.remove(el.getParent(CtMethod.class));
+        return res;
+    }
+    public static boolean notPrimitiveNotAnArray(CtVariable v) { return !v.getType().isPrimitive() && !v.toString().contains("[]");}
+
+    public static Set<CtMethod> getTargetableMethods(CtElement el) {
+        Set<CtMethod> res = new HashSet<>();
+        List<CtVariable> vars = getAccessibleVars(el);
+        for(CtVariable v: vars) {
+            if(VarFinder.notPrimitiveNotAnArray(v)) {
+                try {
+                    CtClass target = (CtClass) v.getType().getDeclaration();
+                    res.addAll(target.getAllMethods());
+                } catch (Exception e) {}
+            }
+        }
         return res;
     }
 

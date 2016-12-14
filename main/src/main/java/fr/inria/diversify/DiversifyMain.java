@@ -79,6 +79,16 @@ public class DiversifyMain {
 
         if (inputConfiguration.getProperty("stat").equals("true")) {
             computeStatistic();
+        } else if (inputConfiguration.getProperty("printCandidates", "false").equals("true")) {
+            int n = Integer.parseInt(inputConfiguration.getProperty("nbRun"));
+            TransformationQuery query = initTransformationQuery();
+            int i = 0;
+            List<Transformation> transformations = new ArrayList<>();
+            while((i < n) && query.hasNextTransformation()) {
+                transformations.add(query.query());
+            }
+            JsonTransformationWriter writer = new JsonTransformationWriter();
+            writer.write(transformations, inputConfiguration.getProperty("transformationsOutput", "transoformationOutput.json") , inputConfiguration.getInputProgram().getProgramDir() + "/pom.xml");
         } else {
             int n = Integer.parseInt(inputConfiguration.getProperty("nbRun"));
             AbstractRunner runner = initRunner();

@@ -27,7 +27,8 @@ public class AddMethodInvocation extends SingleTransformation {
     CtMethod parentMethod;
     CtInvocation aInv;
 
-    String jPos, jType, jSC, jStatic;
+    String jPos, jType, jSC;
+    boolean jStatic;
 
     public AddMethodInvocation(CtStatement tp, CtStatement invocation) {
         System.out.println("tp: " + tp);
@@ -123,7 +124,7 @@ public class AddMethodInvocation extends SingleTransformation {
         jPos = tp.getParent(CtType.class).getQualifiedName() + ":" + tp.getPosition().getLine();
         jType =  tp.getClass().getName();
         jSC = tp.toString();
-        jStatic = "" + parentMethod.getModifiers().contains(ModifierKind.STATIC);
+        jStatic = parentMethod.getModifiers().contains(ModifierKind.STATIC);
     }
 
     public void setWell(CtField well) {
