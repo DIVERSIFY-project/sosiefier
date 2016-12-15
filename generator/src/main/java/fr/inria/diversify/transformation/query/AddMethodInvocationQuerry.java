@@ -29,6 +29,9 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
     private boolean externalMethods = false;
     private boolean staticMethods = false;
     private boolean nonstaticMethods = true;
+    private boolean dumpMethodsAfterSuccess = false;
+    private boolean shuffleCandidate = false;
+    private boolean shuffleMethods = false;
 
 
     public AddMethodInvocationQuerry(InputProgram inputProgram) {
@@ -72,7 +75,7 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
             }
         }
         System.out.println(" --- Done (" + candidateList.size() + ") --- ");
-        //Collections.shuffle(candidateList);
+        if(shuffleCandidate) Collections.shuffle(candidateList);
         candidateIt = candidateList.iterator();
     }
 
@@ -219,7 +222,7 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
                             List<CtConstructor> constructors = new LinkedList<>(targetClass.getConstructors());
                             List<CtExpression> paramsConst;
                             //boolean constFound = false;
-                            //Collections.shuffle(constructors);
+                            Collections.shuffle(constructors);
                             for(CtConstructor constructor: constructors) {
                                 paramsConst = new LinkedList<>();
                                 if(VarFinder.fillParameter(paramsConst, constructor, vars)) {
@@ -252,7 +255,7 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
 
         //curMethods = new ArrayList<>(VarFinder.getInternalMethods(curCandidate, staticMethods, nonstaticMethods));
 
-        if(((curCandidate == null) || curMethods.isEmpty()) && (candidateIt.hasNext())) {
+        if(dumpMethodsAfterSuccess || (((curCandidate == null) || curMethods.isEmpty()) && (candidateIt.hasNext()))) {
             curCandidate = candidateIt.next();
             if(externalMethods && nonstaticMethods && !internalMethods && !staticMethods)
                 curMethods = new ArrayList<>(VarFinder.getTargetableMethods(curCandidate));
@@ -261,9 +264,10 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
             else
                 curMethods = new ArrayList<>(VarFinder.getAccessibleMethods(curCandidate, staticMethods, nonstaticMethods));
         }
+
         System.out.println("Methods: " + curMethods.size());
 
-        Collections.shuffle(curMethods);
+        if(shuffleMethods) Collections.shuffle(curMethods);
         CtStatement invocation = buildInvocation(curCandidate, curMethods);
         curMethods.removeAll(toRemove);
         toRemove.clear();
