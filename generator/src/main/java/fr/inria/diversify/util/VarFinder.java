@@ -26,15 +26,22 @@ public class VarFinder {
         return varName;
     }
 
-    //Pre: El is an instruction inside an executable.
     public static List<CtVariable> getAccessibleVars(CtElement el) {
+        return getAccessibleVars(el, false);
+    }
+    //Pre: El is an instruction inside an executable.
+    public static List<CtVariable> getAccessibleVars(CtElement el, boolean staticContext) {
         Set<CtVariable> res = new HashSet<>();
 
         CtExecutable elExecutable = el.getParent(CtExecutable.class);
         res.addAll(elExecutable.getParameters());
 
         CtClass elClass = el.getParent(CtClass.class);
-        res.addAll(elClass.getFields());
+        Collection<CtField> fields = elClass.getFields();
+        for(CtField f: fields) {
+            if(!staticContext || f.getModifiers().contains(ModifierKind.STATIC))
+                res.add(f);
+        }
 
         res.addAll(getAccessibleVarsFromBlock(el));
         List<CtVariable> lres = new ArrayList<>(res);

@@ -81,14 +81,19 @@ public class DiversifyMain {
             computeStatistic();
         } else if (inputConfiguration.getProperty("printCandidates", "false").equals("true")) {
             int n = Integer.parseInt(inputConfiguration.getProperty("nbRun"));
+            AbstractRunner runner = initRunner();
+
+            AbstractBuilder builder = initBuilder(runner.getTmpDir());
+            inputProgram.setCoverageReport(initCoverageReport(runner.getTmpDir()));
             TransformationQuery query = initTransformationQuery();
             int i = 0;
             List<Transformation> transformations = new ArrayList<>();
-            while((i < n) && query.hasNextTransformation()) {
+            while ((i < n) && query.hasNextTransformation()) {
                 transformations.add(query.query());
+                i++;
             }
             JsonTransformationWriter writer = new JsonTransformationWriter();
-            writer.write(transformations, inputConfiguration.getProperty("transformationsOutput", "transoformationOutput.json") , inputConfiguration.getInputProgram().getProgramDir() + "/pom.xml");
+            writer.write(transformations, inputConfiguration.getProperty("transformationsOutput", "transoformationOutput.json"), inputConfiguration.getInputProgram().getProgramDir() + "/pom.xml");
         } else {
             int n = Integer.parseInt(inputConfiguration.getProperty("nbRun"));
             AbstractRunner runner = initRunner();
