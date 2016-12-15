@@ -81,6 +81,7 @@ public class VarFinder {
     public static Set<CtMethod> getAccessibleMethods(CtElement el) {
         return getAccessibleMethods(el, false, true);
     }
+
     public static Set<CtMethod> getAccessibleMethods(CtElement el, boolean acceptStatic, boolean acceptNonStatic) {
         Set<CtMethod> res = new HashSet<>();
         CtClass elClass = el.getParent(CtClass.class);
@@ -90,16 +91,17 @@ public class VarFinder {
             res.addAll(
                     methods.stream()
                     .filter(
-                            m -> (m.getModifiers().contains(ModifierKind.PUBLIC)
+                            m -> (
+                                    m.getModifiers().contains(ModifierKind.PUBLIC)
                                     || (c.getPackage().equals(elPackage) && m.getModifiers().contains(ModifierKind.PROTECTED))
                                     || c.equals(elClass)
                             )
                     )
                     .filter(
-                            m -> (acceptStatic || !m.getModifiers().contains(ModifierKind.STATIC)                            )
+                            m -> (acceptStatic || !m.getModifiers().contains(ModifierKind.STATIC))
                     )
                     .filter(
-                            m -> (acceptNonStatic || m.getModifiers().contains(ModifierKind.STATIC)                            )
+                            m -> (acceptNonStatic || m.getModifiers().contains(ModifierKind.STATIC))
                     )
                     .collect(Collectors.toSet())
             );
@@ -108,6 +110,22 @@ public class VarFinder {
         res.remove(el.getParent(CtMethod.class));
         return res;
     }
+
+    public static Set<CtMethod> getInternalMethods(CtElement el, boolean acceptStatic, boolean acceptNonStatic) {
+        Set<CtMethod> res = new HashSet<>();
+        CtClass elClass = el.getParent(CtClass.class);
+        Set<CtMethod> methods = elClass.getAllMethods();
+        res.addAll(methods.stream()
+                .filter(
+                        m -> (acceptStatic || !m.getModifiers().contains(ModifierKind.STATIC))
+                )
+                .filter(
+                        m -> (acceptNonStatic || m.getModifiers().contains(ModifierKind.STATIC))
+                )
+                .collect(Collectors.toSet()));
+        return res;
+    }
+
     public static boolean notPrimitiveNotAnArray(CtVariable v) { return !v.getType().isPrimitive() && !v.toString().contains("[]");}
 
     public static Set<CtMethod> getTargetableMethods(CtElement el) {
@@ -168,20 +186,20 @@ public class VarFinder {
     public static boolean fillParameter(List<CtExpression> paramFillList, CtExecutable exe, List<CtVariable> vars, boolean staticCall) {
         Factory f = exe.getFactory();
         List<CtParameter> ps = exe.getParameters();
-        for(CtParameter param : ps) {
+        for (CtParameter param : ps) {
             CtVariableReference varRef;
             CtVariable var = getTypedVar(param.getReference().getType(), vars);
-            if(var != null) {
-                if(staticCall) {
+            if (var != null) {//Search among local var, fields, and parameters
+                if (staticCall) {
                     paramFillList.add(f.Code().createCodeSnippetExpression(var.getSimpleName()));
                 } else {
                     varRef = createRef(var);
                     paramFillList.add(f.Code().createVariableRead(varRef, false));
                 }
             } else {
-                if(param.getType().isPrimitive()) {
+                if (param.getType().isPrimitive()) { //Primitive literal building
                     CtExpression expression;
-                    if((param.getType().getActualClass() == byte.class)
+                    if ((param.getType().getActualClass() == byte.class)
                             || (param.getType().getActualClass() == short.class)) {
                         expression = f.Code().createCodeSnippetExpression("(" + param.getType().getActualClass().toString() + ")" + RandomLiteralFactory.randomValue(param.getType()));
                     } else {
@@ -189,29 +207,30 @@ public class VarFinder {
                     }
 
                     paramFillList.add(expression);
-                } else {
-                    /*if(param.getType().getDeclaration() instanceof CtEnum) {
-                        CtExpression expression;
-                        List<CtEnumValue> vals = ((CtEnum) param.getType().getDeclaration()).getEnumValues();
-                        Collections.shuffle(vals);
-                        expression = f.Core().clone(vals.get(0).getAssignment());
-                        paramFillList.add(expression);
-                    } else */if(param.getType().getDeclaration() instanceof CtClass) {
+                } else { // Enum, array and object
+                /*if(param.getType().getDeclaration() instanceof CtEnum) {
+                    CtExpression expression;
+                    List<CtEnumValue> vals = ((CtEnum) param.getType().getDeclaration()).getEnumValues();
+                    Collections.shuffle(vals);
+                    expression = f.Core().clone(vals.get(0).getAssignment());
+                    paramFillList.add(expression);
+                } else */
+                    if (param.getType().getDeclaration() instanceof CtClass) {
                         CtClass cla = (CtClass) param.getType().getDeclaration();
                         Collection<CtConstructor> constructors = cla.getConstructors();
                         List<CtExpression> constParamFillList;
                         boolean constructable = false;
                         for (CtConstructor c : constructors) {
                             constParamFillList = new LinkedList<CtExpression>();
-                            if(fillParameter(constParamFillList,c,vars)) {
+                            if (fillParameter(constParamFillList, c, vars)) {
                                 CtExpression[] array = constParamFillList.toArray(new CtExpression[constParamFillList.size()]);
-                                CtConstructorCall call = f.Code().createConstructorCall(param.getType(),array);
+                                CtConstructorCall call = f.Code().createConstructorCall(param.getType(), array);
                                 paramFillList.add(call);
                                 constructable = true;
                                 break;
                             }
                         }
-                        if(!constructable) return false;
+                        if (!constructable) return false;
                     } else {
                         return false;
                     }

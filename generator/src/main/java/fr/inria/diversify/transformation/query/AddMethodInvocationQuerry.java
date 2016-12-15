@@ -25,10 +25,10 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
     private List<CtMethod> curMethods = new LinkedList<>();
     private List<CtMethod> toRemove = new LinkedList<>();
 
-    private boolean internalMethods = false;
-    private boolean externalMethods = true;
-    private boolean staticMethods = true;
-    private boolean nonstaticMethods = false;
+    private boolean internalMethods = true;
+    private boolean externalMethods = false;
+    private boolean staticMethods = false;
+    private boolean nonstaticMethods = true;
 
 
     public AddMethodInvocationQuerry(InputProgram inputProgram) {
@@ -87,7 +87,10 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
         CtStatement res = null;
         List<CtExpression> params = new LinkedList<>();
         if (VarFinder.fillParameter(params, method, vars, staticParam)) {
-            CtExpression ttarget = f.Code().createVariableRead(VarFinder.createRef(target), target.getModifiers().contains(ModifierKind.STATIC));
+            CtExpression ttarget = null;
+            if(target != null) {
+                ttarget = f.Code().createVariableRead(VarFinder.createRef(target), target.getModifiers().contains(ModifierKind.STATIC));
+            }
             CtExecutableReference exeRef = method.getReference();
             CtExpression[] array = params.toArray(new CtExpression[params.size()]);
             res = f.Code().createInvocation(ttarget, exeRef, array);
@@ -242,15 +245,18 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
 
     @Override
     public Transformation query() throws QueryException {
-        curCandidate = candidateIt.next();
-        curMethods = new ArrayList<>(VarFinder.getAccessibleMethods(curCandidate, staticMethods, nonstaticMethods));
-        /*if(((curCandidate == null) || curMethods.isEmpty()) && (candidateIt.hasNext())) {
+        //curCandidate = candidateIt.next();
+        //curMethods = new ArrayList<>(VarFinder.getAccessibleMethods(curCandidate, staticMethods, nonstaticMethods));
+
+        //curMethods = new ArrayList<>(VarFinder.getInternalMethods(curCandidate, staticMethods, nonstaticMethods));
+
+        if(((curCandidate == null) || curMethods.isEmpty()) && (candidateIt.hasNext())) {
             curCandidate = candidateIt.next();
             if(externalMethods && nonstaticMethods && !internalMethods && !staticMethods)
                 curMethods = new ArrayList<>(VarFinder.getTargetableMethods(curCandidate));
             else
                 curMethods = new ArrayList<>(VarFinder.getAccessibleMethods(curCandidate, staticMethods, nonstaticMethods));
-        }*/
+        }
         System.out.println("Methods: " + curMethods.size());
 
         Collections.shuffle(curMethods);
