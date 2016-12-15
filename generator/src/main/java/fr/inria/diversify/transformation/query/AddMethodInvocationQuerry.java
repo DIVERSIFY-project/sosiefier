@@ -151,28 +151,30 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
             }
         }
         //This
-        for (CtMethod m : methods) {
-            toRemove.add(m);
-            if (nonstaticMethods && !curMethod.equals(m) && !m.getModifiers().contains(ModifierKind.STATIC)) {
-                try {
-                    CtClass cl = m.getParent(CtClass.class);
-                    CtClass cltp = tp.getParent(CtClass.class);
-                    if ((cl != null) && (cltp != null)) {
-                        CtTypeReference t = f.Code().createCtTypeReference(cl.getActualClass());
-                        CtTypeReference ttp = f.Code().createCtTypeReference(cltp.getActualClass());
-                        if (ttp.isSubtypeOf(t)) {
-                            res = createInvocation(null, m, vars, staticCtx);
-                            if (res != null) {
-                                return res;
+        if(!staticCtx) {
+            for (CtMethod m : methods) {
+                toRemove.add(m);
+                if (nonstaticMethods && !curMethod.equals(m) && !m.getModifiers().contains(ModifierKind.STATIC)) {
+                    try {
+                        CtClass cl = m.getParent(CtClass.class);
+                        CtClass cltp = tp.getParent(CtClass.class);
+                        if ((cl != null) && (cltp != null)) {
+                            CtTypeReference t = f.Code().createCtTypeReference(cl.getActualClass());
+                            CtTypeReference ttp = f.Code().createCtTypeReference(cltp.getActualClass());
+                            if (ttp.isSubtypeOf(t)) {
+                                res = createInvocation(null, m, vars, staticCtx);
+                                if (res != null) {
+                                    return res;
+                                }
                             }
                         }
+                    } catch (Exception e) {
                     }
-                } catch (Exception e) {
-                }
-            } else if (staticMethods && !curMethod.equals(m) && m.getModifiers().contains(ModifierKind.STATIC)) {
-                res = createInvocation(m, vars, staticCtx);
-                if (res != null) {
-                    return res;
+                } else if (staticMethods && !curMethod.equals(m) && m.getModifiers().contains(ModifierKind.STATIC)) {
+                    res = createInvocation(m, vars, staticCtx);
+                    if (res != null) {
+                        return res;
+                    }
                 }
             }
         }
@@ -254,6 +256,8 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
             curCandidate = candidateIt.next();
             if(externalMethods && nonstaticMethods && !internalMethods && !staticMethods)
                 curMethods = new ArrayList<>(VarFinder.getTargetableMethods(curCandidate));
+            else if (!externalMethods && internalMethods)
+                curMethods = new ArrayList<>(VarFinder.getInternalMethods(curCandidate, staticMethods, nonstaticMethods));
             else
                 curMethods = new ArrayList<>(VarFinder.getAccessibleMethods(curCandidate, staticMethods, nonstaticMethods));
         }
