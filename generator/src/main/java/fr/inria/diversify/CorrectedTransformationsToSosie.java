@@ -62,9 +62,9 @@ public class CorrectedTransformationsToSosie {
 
         //Path for resulting files of sosies and non-sosies
 
-        String transfPath = inputConfiguration.getResultPath() + "/coll-minus_sosies.json";
+        String transfPath = inputConfiguration.getOutputDirectory() + "/coll-minus_sosies.json";
 
-        String sosiePath = inputConfiguration.getResultPath() + System.currentTimeMillis() + ".sosies.json" ;
+        String sosiePath = inputConfiguration.getOutputDirectory() + System.currentTimeMillis() + ".sosies.json" ;
 
         sosies = new ArrayList<>();
 

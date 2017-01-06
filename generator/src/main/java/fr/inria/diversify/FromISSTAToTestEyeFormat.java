@@ -43,7 +43,7 @@ public class FromISSTAToTestEyeFormat {
         Collection<Transformation> r = loadWithSosiesInput(inputConfiguration);
 
         //Save the corrected(*) sosies
-        JsonSosiesOutput sosiesOutput = new JsonSosiesOutput(r, inputConfiguration.getResultPath() + ".corrected.json",
+        JsonSosiesOutput sosiesOutput = new JsonSosiesOutput(r, inputConfiguration.getOutputDirectory() + ".corrected.json",
                 inputConfiguration.getProjectPath() + "/pom.xml", InputConfiguration.LATEST_GENERATOR_VERSION);
         sosiesOutput.write();
 
@@ -71,7 +71,7 @@ public class FromISSTAToTestEyeFormat {
         Log.info("Process code fragment Time: " + Math.abs(System.currentTimeMillis() - t));
 
         t = System.currentTimeMillis();
-        JsonSosiesInput input = new JsonSosiesInput(inputConfiguration.getResultPath(), p);
+        JsonSosiesInput input = new JsonSosiesInput(inputConfiguration.getOutputDirectory(), p);
         Collection<Transformation> r = input.read();
         Log.info("Read Time: " + Math.abs(System.currentTimeMillis() - t));
         return r;
@@ -119,7 +119,7 @@ public class FromISSTAToTestEyeFormat {
             }
         }
 
-        FileWriter fw = new FileWriter(inputConfiguration.getResultPath());
+        FileWriter fw = new FileWriter(inputConfiguration.getOutputDirectory());
         result.write(fw);
         fw.close();
 
