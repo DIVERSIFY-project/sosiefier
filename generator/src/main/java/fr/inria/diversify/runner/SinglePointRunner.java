@@ -37,8 +37,8 @@ public class SinglePointRunner extends AbstractRunner {
 
     @Override
     public void run(int n) throws Exception {
-        transformations = new ArrayList<>(n);
         if(n > 0) {
+            transformations = new ArrayList<>(n);
             int count = 0;
             while(transQuery.hasNextTransformation() &&  count < n) {
                 run(transQuery.query());

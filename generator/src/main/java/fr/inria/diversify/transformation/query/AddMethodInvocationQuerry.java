@@ -34,6 +34,24 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
     private boolean shuffleMethods = false;
 
 
+    public AddMethodInvocationQuerry(InputProgram inputProgram, boolean internalMethods, boolean externalMethods,
+                                     boolean staticMethods, boolean nonstaticMethods, boolean dumpMethodsAfterSuccess,
+                                     boolean shuffleCandidate, boolean shuffleMethods) {
+        super(inputProgram);
+
+
+        this.internalMethods = internalMethods;
+        this.externalMethods = externalMethods;
+        this.staticMethods = staticMethods;
+        this.nonstaticMethods = nonstaticMethods;
+        this.dumpMethodsAfterSuccess = dumpMethodsAfterSuccess;
+        this.shuffleCandidate = shuffleCandidate;
+        this.shuffleMethods = shuffleMethods;
+
+        findCandidates();
+    }
+
+
     public AddMethodInvocationQuerry(InputProgram inputProgram) {
         super(inputProgram);
         findCandidates();
@@ -265,7 +283,7 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
                 curMethods = new ArrayList<>(VarFinder.getAccessibleMethods(curCandidate, staticMethods, nonstaticMethods));
         }
 
-        System.out.println("Methods: " + curMethods.size());
+        //System.out.println("Methods: " + curMethods.size());
 
         if(shuffleMethods) Collections.shuffle(curMethods);
         CtStatement invocation = buildInvocation(curCandidate, curMethods);

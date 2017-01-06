@@ -184,6 +184,12 @@ public class VarFinder {
     }
 
     public static boolean fillParameter(List<CtExpression> paramFillList, CtExecutable exe, List<CtVariable> vars, boolean staticCall) {
+        return fillParameter(paramFillList, exe, vars, false, 100);
+    }
+    public static boolean fillParameter(List<CtExpression> paramFillList, CtExecutable exe, List<CtVariable> vars, boolean staticCall, int maxdepth) {
+        if(maxdepth < 0) {
+            return false;
+        }
         Factory f = exe.getFactory();
         List<CtParameter> ps = exe.getParameters();
         for (CtParameter param : ps) {
@@ -217,12 +223,24 @@ public class VarFinder {
                 } else */
                     if (param.getType().getDeclaration() instanceof CtClass) {
                         CtClass cla = (CtClass) param.getType().getDeclaration();
-                        Collection<CtConstructor> constructors = cla.getConstructors();
+                        //Collection<CtConstructor> constructors = cla.getConstructors();
+                        List<CtConstructor> constructors = new LinkedList<>(cla.getConstructors());
+                        Collections.shuffle(constructors);
                         List<CtExpression> constParamFillList;
                         boolean constructable = false;
                         for (CtConstructor c : constructors) {
                             constParamFillList = new LinkedList<CtExpression>();
-                            if (fillParameter(constParamFillList, c, vars)) {
+                            boolean selfref = false;
+                            Collection<CtParameter> consParams = c.getParameters();
+                            for(CtParameter t : consParams) {
+                                if(t.getType().getQualifiedName().equalsIgnoreCase(param.getType().getQualifiedName())) {
+                                    selfref = true;
+                                    break;
+                                }
+                            }
+                            if(selfref) continue;
+                            if(fillParameter(constParamFillList, c, vars, staticCall, maxdepth--)) {
+                            //if (fillParameter(constParamFillList, c, vars)) {
                                 CtExpression[] array = constParamFillList.toArray(new CtExpression[constParamFillList.size()]);
                                 CtConstructorCall call = f.Code().createConstructorCall(param.getType(), array);
                                 paramFillList.add(call);

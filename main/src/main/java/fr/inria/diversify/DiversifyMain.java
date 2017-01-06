@@ -86,14 +86,43 @@ public class DiversifyMain {
             AbstractBuilder builder = initBuilder(runner.getTmpDir());
             inputProgram.setCoverageReport(initCoverageReport(runner.getTmpDir()));
             TransformationQuery query = initTransformationQuery();
-            int i = 0;
-            List<Transformation> transformations = new ArrayList<>();
-            while ((i < n) && query.hasNextTransformation()) {
-                transformations.add(query.query());
-                i++;
-            }
+
+            int maxTransformationPerFile = Integer.parseInt(inputConfiguration.getProperty("maxTransformationPerFile", "100"));
             JsonTransformationWriter writer = new JsonTransformationWriter();
-            writer.write(transformations, inputConfiguration.getProperty("transformationsOutput", "transoformationOutput.json"), inputConfiguration.getInputProgram().getProgramDir() + "/pom.xml");
+
+            int i = 0;
+            int j = 0;
+            List<Transformation> transformations = new ArrayList<>();
+            try {
+                if (n > 0) {
+                    while ((i < n) && query.hasNextTransformation()) {
+                        transformations.add(query.query());
+                        if(transformations.size() > maxTransformationPerFile) {
+
+                            writer.write(transformations,
+                                    inputConfiguration.getProperty("transformationsOutput", "transoformationOutput") + j + ".json",
+                                    inputConfiguration.getInputProgram().getProgramDir() + "/pom.xml");
+                            j++;
+                            transformations.clear();
+                        }
+                        i++;
+                    }
+                } else {
+                    while (query.hasNextTransformation()) {
+                        transformations.add(query.query());
+                        if(transformations.size() > maxTransformationPerFile) {
+
+                            writer.write(transformations,
+                                    inputConfiguration.getProperty("transformationsOutput", "transoformationOutput") + j + ".json",
+                                    inputConfiguration.getInputProgram().getProgramDir() + "/pom.xml");
+                            j++;
+                            transformations.clear();
+                        }
+                    }
+                }
+            } catch (QueryException e) {
+            }
+
         } else {
             int n = Integer.parseInt(inputConfiguration.getProperty("nbRun"));
             AbstractRunner runner = initRunner();
@@ -210,6 +239,9 @@ public class DiversifyMain {
 
             URL[] URL = new URL[1];
             URL[0] = new File(directory +  "/"+ inputProgram.getClassesDir()).toURI().toURL();
+
+
+
             URLClassLoader child = new URLClassLoader(URL, Thread.currentThread().getContextClassLoader());
             Thread.currentThread().setContextClassLoader(child);
 
@@ -282,9 +314,20 @@ public class DiversifyMain {
             case "loopflip":
                 return new LoopFlipQuery(inputProgram);
             case "addmi":
-                return new AddMethodInvocationQuerry(inputProgram);
+                boolean internalMethods = Boolean.parseBoolean(inputConfiguration.getProperty("addmi.internalMethods", "true"));
+                boolean externalMethods = Boolean.parseBoolean(inputConfiguration.getProperty("addmi.externalMethods", "false"));
+                boolean staticMethods = Boolean.parseBoolean(inputConfiguration.getProperty("addmi.staticMethods", "false"));
+                boolean nonstaticMethods = Boolean.parseBoolean(inputConfiguration.getProperty("addmi.nonstaticMethods", "true"));
+                boolean dumpMethodsAfterSuccess = Boolean.parseBoolean(inputConfiguration.getProperty("addmi.dumpMethodsAfterSuccess", "false"));
+                boolean shuffleCandidate = Boolean.parseBoolean(inputConfiguration.getProperty("addmi.shuffleCandidate", "false"));
+                boolean shuffleMethods = Boolean.parseBoolean(inputConfiguration.getProperty("addmi.shuffleMethods", "false"));
+                return new AddMethodInvocationQuerry(inputProgram, internalMethods, externalMethods,
+                        staticMethods, nonstaticMethods, dumpMethodsAfterSuccess, shuffleCandidate,
+                        shuffleMethods);
             case "swapsubtype":
                 return new SwapSubTypeQuery(inputProgram);
+            case "removecheck":
+                return new RemoveCheckQuerry(inputProgram);
             case "adr": {
                 return new ADRTransformationQuery(inputProgram, subType, false);
             }

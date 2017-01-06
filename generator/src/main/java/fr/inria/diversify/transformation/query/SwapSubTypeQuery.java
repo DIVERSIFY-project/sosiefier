@@ -16,23 +16,24 @@ import spoon.reflect.reference.CtTypeReference;
 import spoon.support.reflect.code.CtAssignmentImpl;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by nharrand on 06/12/16.
  */
 public class SwapSubTypeQuery extends TransformationQuery {
     private Map<CtConstructorCall, CtExecutableReference> candidates;
-    private Collection<CtType> types;
+    private List<CtType> types;
     private Iterator<Map.Entry<CtConstructorCall, CtExecutableReference>> candidateIt;
 
 
     public SwapSubTypeQuery(InputProgram inputProgram) {
         super(inputProgram);
         CtClass cl;
-        types = getInputProgram().getAllElement(CtType.class);
-        for(CtType t : types) {
-            if(t.isPrimitive()) types.remove(t);
-        }
+        Collection<CtType> ts = getInputProgram().getAllElement(CtType.class);
+        types = new LinkedList<CtType>(ts.stream().filter(
+                t -> !((CtType)t).getModifiers().contains(ModifierKind.PRIVATE) && !((CtType)t).getModifiers().contains(ModifierKind.STATIC)
+        ).collect(Collectors.toList()));
         findCandidates();
         candidateIt = candidates.entrySet().iterator();
     }
@@ -61,6 +62,7 @@ public class SwapSubTypeQuery extends TransformationQuery {
             if(call.getType().getModifiers().contains(ModifierKind.STATIC)) continue;
             if(call.getType().getActualClass() == parent.getType().getActualClass()) continue;
             System.out.println("Expect: " + parent.getType() + " -> found: " + call.getType());
+            Collections.shuffle(types);
             for(CtType t : types) {
                 CtTypeReference tref = f.Code().createCtTypeReference(t.getActualClass());
                 try {
