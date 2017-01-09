@@ -13,6 +13,7 @@
         <module>profiling</module>
         <!--<module>intersGenerator</module>-->
         <module>main</module>
+        <module>diversify-profiling</module>
     </modules>
     <!-- Shared version number properties -->
     <properties>
