@@ -6,6 +6,7 @@ import fr.inria.diversify.persistence.json.output.JsonSectionOutput;
 import fr.inria.diversify.runner.InputProgram;
 import fr.inria.diversify.transformation.AddMethodInvocation;
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.util.PrimitiveUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.code.CtStatement;
@@ -13,6 +14,7 @@ import spoon.reflect.code.CtTry;
 import spoon.reflect.declaration.CtField;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.declaration.ModifierKind;
+import spoon.reflect.factory.Factory;
 import spoon.reflect.reference.CtTypeReference;
 
 import java.util.ArrayList;
@@ -39,14 +41,23 @@ public class JsonAddMethodInvocationInput extends JsonAstReplaceInput {
             transf = (AddMethodInvocation) get(transformations); //add the transformation to the transformations map if not present
 
             JSONObject cfJson = getJsonObject().getJSONObject(JsonSectionOutput.TRANSPLANT_POINT);
-
-            CodeFragment cf = getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
-            CtStatement tp = (CtStatement) cf.getCtCodeFragment();
-            transf.setTp(tp);
-
-
-
             JSONObject insertJson = getJsonObject().getJSONObject("insert");
+
+            //CodeFragment cf = getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
+            //CtStatement tp = (CtStatement) cf.getCtCodeFragment();
+
+
+            CtStatement tp = getInputProgram().findElement(
+                            Class.forName(cfJson.getString("type")),
+                            cfJson.getString(POSITION),
+                            cfJson.getString(SOURCE_CODE)
+                    );
+
+            Factory f = tp.getFactory();
+            transf.setTp(tp);
+            transf.setup();
+
+
 
             CtField well = null;
             if(insertJson.getString("createdWell").compareTo("true") == 0) {
@@ -56,22 +67,34 @@ public class JsonAddMethodInvocationInput extends JsonAstReplaceInput {
                     wellType = wellstr[2];
                     wellName = wellstr[3];
                     wellInit = wellstr[5];
-                    CtType t = cf.getCtCodeFragment().getFactory().Class().get(wellType);
-                    CtTypeReference type = cf.getCtCodeFragment().getFactory().Type().createReference(t);
-                    well = cf.getCtCodeFragment().getFactory().Code().createCtField(wellName, type, wellInit, ModifierKind.PUBLIC, ModifierKind.STATIC);
+                    CtTypeReference type;
+                    if(PrimitiveUtil.isPrimitive(wellType)) {
+                        type = PrimitiveUtil.get(wellType, f);
+                    } else {
+                        CtType t = f.Class().get(wellType);
+                        type = f.Type().createReference(t);
+                    }
+                    well = f.Code().createCtField(wellName, type, wellInit, ModifierKind.PUBLIC, ModifierKind.STATIC);
                 } else {
                     wellType = wellstr[1];
                     wellName = wellstr[2];
                     wellInit = wellstr[4];
-                    CtType t = cf.getCtCodeFragment().getFactory().Class().get(wellType);
-                    CtTypeReference type = cf.getCtCodeFragment().getFactory().Type().createReference(t);
-                    well = cf.getCtCodeFragment().getFactory().Code().createCtField(wellName, type,wellInit, ModifierKind.PUBLIC);
+                    CtTypeReference type;
+                    if(PrimitiveUtil.isPrimitive(wellType)) {
+                        type = PrimitiveUtil.get(wellType, f);
+                    } else {
+                        CtType t = f.Class().get(wellType);
+                        type = f.Type().createReference(t);
+                    }
+                    well = f.Code().createCtField(wellName, type,wellInit, ModifierKind.PUBLIC);
                 }
             }
             transf.setWell(well);
 
-            CtStatement tryInv = cf.getCtCodeFragment().getFactory().Code().createCodeSnippetStatement(insertJson.getString("stmt"));
+            CtStatement tryInv = f.Code().createCodeSnippetStatement(insertJson.getString("stmt"));
             transf.setTryInv(tryInv);
+            transf.setInsertIsStatic(insertJson.getString("static").compareTo("true") == 0);
+
             addTransformation(transformations, transf);
 
         } catch (Exception e) {

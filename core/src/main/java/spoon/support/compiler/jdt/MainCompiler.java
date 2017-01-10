@@ -2,6 +2,7 @@ package spoon.support.compiler.jdt;
 
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.Compiler;
+import org.eclipse.jdt.internal.compiler.batch.CompilationUnit;
 import org.eclipse.jdt.internal.compiler.batch.FileSystem;
 import org.eclipse.jdt.internal.compiler.impl.CompilerOptions;
 import org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment;
@@ -20,6 +21,11 @@ public class MainCompiler extends JDTBatchCompiler {
     public MainCompiler(JDTBasedSpoonCompiler jdtCompiler, boolean useFactory, FileSystem environment ) {
         super(jdtCompiler, useFactory);
         this.environment = environment;
+    }
+
+    @Override
+    public CompilationUnit[] getCompilationUnits() {
+        return new CompilationUnit[0];
     }
 
 

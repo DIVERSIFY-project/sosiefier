@@ -28,6 +28,7 @@ public class FromListQuery extends TransformationQuery {
                 .distinct()
                 .collect(Collectors.toList());
 
+        System.out.println("Found " + transformations.size() + " transformations");
     }
 
     public FromListQuery(InputProgram inputProgram, int rangeMin, int rangeMax, boolean onlySosie)  {

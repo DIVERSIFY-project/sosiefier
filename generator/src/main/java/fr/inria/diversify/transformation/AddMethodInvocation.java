@@ -34,10 +34,8 @@ public class AddMethodInvocation extends SingleTransformation {
         System.out.println("tp: " + tp);
         System.out.println("inv: " + invocation);
         this.setTp(tp);
-        this.type = "add";
-        this.name = "addMethodInvocation";
         this.invocation = invocation;
-
+        setup();
         Factory f = tp.getFactory();
         CtCodeSnippetStatement empty = f.Code().createCodeSnippetStatement("");
         CtBlock eBlock = f.Code().createCtBlock(empty);
@@ -50,6 +48,11 @@ public class AddMethodInvocation extends SingleTransformation {
         catchers.add(catchInv);
         ((CtTry) tryInv).setCatchers(catchers);
         createWell();
+    }
+
+    public void setup() {
+        this.type = "add";
+        this.name = "addMethodInvocation";
     }
 
 
@@ -102,6 +105,7 @@ public class AddMethodInvocation extends SingleTransformation {
 
     protected void createWell() {
         aInv = actualInvocation();
+        insertIsStatic = aInv.getExecutable().isStatic();
         if(aInv.getType().getActualClass() != void.class) {
 
             if(parentMethod.getModifiers().contains(ModifierKind.STATIC)) {
@@ -135,7 +139,14 @@ public class AddMethodInvocation extends SingleTransformation {
         this.tryInv = tryInv;
     }
 
-    public AddMethodInvocation() {}
+    boolean insertIsStatic = false;
+    public void setInsertIsStatic(boolean isStatic) {
+        insertIsStatic = isStatic;
+    }
+
+    public AddMethodInvocation() {
+        setup();
+    }
 
     @Override
     public void apply(String srcDir) throws Exception {
@@ -173,7 +184,7 @@ public class AddMethodInvocation extends SingleTransformation {
 
         JSONObject insertJSON = new JSONObject();
             insertJSON.put("stmt", tryInv.toString());
-            insertJSON.put("static", aInv.getExecutable().isStatic());
+            insertJSON.put("static", insertIsStatic);
             if(well != null) {
                 insertJSON.put("createdWell", "true");
                 insertJSON.put("well", well.toString());
