@@ -265,10 +265,10 @@ public class InputProgram {
                 //Analyze only code fragments in the file of the one we are looking for
                 if (cfPos[0].equals(position)) {
                     int cfLine = Integer.parseInt(cfPos[1]);
-                    if(codeFragment.getCtCodeFragment().toString().equals(searchValue) && cfLine == lineNumber) {
+                    /*if(codeFragment.getCtCodeFragment().toString().equals(searchValue) && cfLine == lineNumber) {
                         //If it is of the same code and the same line: we found it!!
                         return codeFragment;
-                    }
+                    }*/
                     String ctValue = accesor.getValue(codeFragment);
                     if (ctValue.equals(searchValue) && cfLine == lineNumber) {
                         //If it is of the same code and the same line: we found it!!

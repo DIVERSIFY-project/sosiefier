@@ -88,7 +88,11 @@ public class DiversifyMain {
             TransformationQuery query = initTransformationQuery();
 
             int maxTransformationPerFile = Integer.parseInt(inputConfiguration.getProperty("maxTransformationPerFile", "100"));
+
+            File outputDir = new File("./" + inputConfiguration.getProperty("transformationsOutput", "transoformationOutput"));
+            if(!outputDir.exists()) outputDir.mkdirs();
             JsonTransformationWriter writer = new JsonTransformationWriter();
+
 
             int i = 0;
             int j = 0;

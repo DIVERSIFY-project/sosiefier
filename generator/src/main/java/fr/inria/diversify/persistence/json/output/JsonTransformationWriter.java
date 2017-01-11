@@ -131,14 +131,14 @@ public class JsonTransformationWriter {
      */
     public void write() {
 
+        System.out.println("Attempt to write in: " + outputPath);
         writeToJson();
-
         try {
             FileWriter fw = new FileWriter(outputPath);
             outputObject.write(fw);
             fw.close();
         } catch (IOException | JSONException e) {
-            throw new PersistenceException(UNABLE_WRITE_JSON_MSG + e.getMessage(), e);
+            throw new PersistenceException(UNABLE_WRITE_JSON_MSG + "\n" + e.getMessage(), e);
         }
     }
 }
