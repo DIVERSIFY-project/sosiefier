@@ -30,6 +30,7 @@ public class ASTDeleteTest {
      */
     @Test
     public void testTransformation() throws Exception {
+
         Factory f = new SpoonMetaFactoryTest().build();
         InputProgram p = new InputProgram();
         p.setFactory(f);
@@ -38,12 +39,12 @@ public class ASTDeleteTest {
 
         CtCodeSnippetStatement snippetStatement = new CtCodeSnippetStatementImpl();
         snippetStatement.setValue("/** TRANSFORMATION FRAGMENT DELETED:\n" +
-                "super()\n" +
+                "return a + b\n" +
                 "**/");
 
         //Test that the replacement was properly built
         ASTDeleteForTest a = new ASTDeleteForTest();
-        a.setTransplantationPoint(p.getCodeFragments().get(0));
+        a.setTransplantationPoint(p.getCodeFragments().get(1));
         assertEquals(snippetStatement.getValue(), ((CtCodeSnippetStatement)a.buildReplacement()).getValue());
     }
 }

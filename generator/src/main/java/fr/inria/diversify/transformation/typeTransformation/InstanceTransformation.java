@@ -48,7 +48,7 @@ public class InstanceTransformation extends Transformation {
     public void apply(String srcDir) throws Exception {
         List<CtType> classes = new ArrayList<>();
 
-        for(Map.Entry<CtConstructorCall, Constructor> entry : newClassInstance.entrySet()) {
+        for (Map.Entry<CtConstructorCall, Constructor> entry : newClassInstance.entrySet()) {
             CtConstructorCall callConstructor = entry.getKey();
             CtElement transplant = getTransplant(callConstructor, entry.getValue());
             Log.debug("replace {} by {} at line {}", callConstructor.toString(), transplant.toString(), callConstructor.getPosition().toString());
@@ -59,15 +59,15 @@ public class InstanceTransformation extends Transformation {
 
         printJavaFile(srcDir, classes);
 
-        if(withSwitch) {
+        if (withSwitch) {
             copySwitch(srcDir);
         }
     }
 
     protected CtElement getTransplant(CtConstructorCall oldCallConstructor, Constructor newConstructor) {
-        if(withSwitch) {
+        if (withSwitch) {
             return buildNewConditional(oldCallConstructor, newConstructor);
-        }  else {
+        } else {
             return buildNewCallConstructor(newConstructor, oldCallConstructor.getArguments(), oldCallConstructor.getType().getActualTypeArguments());
         }
     }
@@ -91,19 +91,17 @@ public class InstanceTransformation extends Transformation {
         method.setType(buildTypeReference(staticTypeFinder.findStaticType(oldCallConstructor), oldCallConstructor.getType().getActualTypeArguments()));
         method.addModifier(ModifierKind.STATIC);
 
-
-
         List<CtTypeReference<?>> parameters = oldCallConstructor.getExecutable().getParameters();
-        method.setFormalTypeParameters(getActualType(oldCallConstructor.getType(), parameters));
+
+        method.setFormalCtTypeParameters(getActualType(oldCallConstructor.getType(), parameters));
 
         int i[] = {0};
-        parameters.stream()
-                .forEach(param -> {
-                    CtParameter newParam = getFactory().Core().createParameter();
-                    newParam.setType(param);
-                    newParam.setSimpleName("arg_" + i[0]++);
-                    method.addParameter(newParam);
-                });
+        parameters.forEach(param -> {
+            CtParameter newParam = getFactory().Core().createParameter();
+            newParam.setType(param);
+            newParam.setSimpleName("arg_" + i[0]++);
+            method.addParameter(newParam);
+        });
 
         CtBlock body = getFactory().Core().createBlock();
         method.setBody(body);
@@ -141,23 +139,21 @@ public class InstanceTransformation extends Transformation {
         return method;
     }
 
-    protected List<CtTypeReference<?>> getActualType(CtTypeReference returnType, List<CtTypeReference<?>> parameters) {
-        List<CtTypeReference<?>> list = new ArrayList<>();
+    protected List<CtTypeParameter> getActualType(CtTypeReference returnType, List<CtTypeReference<?>> parameters) {
+        List<CtTypeParameterReference> list = new ArrayList<>();
         list.addAll(getActualType(returnType));
-        parameters.stream()
-                .forEach(param -> list.addAll(getActualType(param)));
-
-        return list;
+        parameters.forEach(param -> list.addAll(getActualType(param)));
+        return list.stream().map(CtTypeParameterReference::getDeclaration).collect(Collectors.toList());
     }
 
-    protected List<CtTypeReference<?>> getActualType(CtTypeReference returnType) {
-        List<CtTypeReference<?>> list = new ArrayList<>();
-        for(CtTypeReference<?> type : returnType.getActualTypeArguments()) {
-            if(!type.getActualTypeArguments().isEmpty()) {
+    protected List<CtTypeParameterReference> getActualType(CtTypeReference returnType) {
+        List<CtTypeParameterReference> list = new ArrayList<>();
+        for (CtTypeReference<?> type : returnType.getActualTypeArguments()) {
+            if (!type.getActualTypeArguments().isEmpty()) {
                 list.addAll(getActualType(type));
             } else {
-                if(type instanceof CtTypeParameterReference) {
-                    list.add(type);
+                if (type instanceof CtTypeParameterReference) {
+                    list.add((CtTypeParameterReference) type);
                 }
             }
         }
@@ -193,15 +189,15 @@ public class InstanceTransformation extends Transformation {
         String name = "change_" + oldDynamicType.getSimpleName();
 
         name += oldDynamicType.getActualTypeArguments().stream()
-                    .map(type -> type.getSimpleName())
-                    .collect(Collectors.joining("_"));
+                .map(type -> type.getSimpleName())
+                .collect(Collectors.joining("_"));
 
         name += "_with_";
 
         List<CtExpression> expressions = oldCallConstructor.getArguments();
         name += expressions.stream()
-                    .map(expresion -> expresion.getType().getSimpleName())
-                    .collect(Collectors.joining("_"));
+                .map(expresion -> expresion.getType().getSimpleName())
+                .collect(Collectors.joining("_"));
 
         name += "_To_" + newConstructor.getDeclaringClass().getSimpleName();
 
@@ -209,7 +205,7 @@ public class InstanceTransformation extends Transformation {
     }
 
 
-    protected CtExpression buildNewCallConstructor(Constructor newConstructor,  List<CtExpression> arguments,  List<CtTypeReference<?>> geneticType) {
+    protected CtExpression buildNewCallConstructor(Constructor newConstructor, List<CtExpression> arguments, List<CtTypeReference<?>> geneticType) {
         String geneticTypeString = "";
         if (!geneticType.isEmpty()) {
             geneticTypeString = "<"
@@ -224,8 +220,8 @@ public class InstanceTransformation extends Transformation {
                 + geneticTypeString
                 + "("
                 + arguments.stream()
-                    .map(arg -> arg.toString())
-                    .collect(Collectors.joining(","))
+                .map(arg -> arg.toString())
+                .collect(Collectors.joining(","))
                 + ")";
 
         return getFactory().Code().createCodeSnippetExpression(snippet);
@@ -293,14 +289,15 @@ public class InstanceTransformation extends Transformation {
         Environment env = getFactory().getEnvironment();
 
         classes.stream()
-            .forEach(cl -> {
-                Log.debug("print java file: {}",directory + "/" +cl.getQualifiedName().replace(".", "/") + ".java");
-                cl.getPosition().getCompilationUnit().getDeclaredTypes().stream()
-                        .forEach(cc -> {
-                            JavaOutputProcessor processor = new JavaOutputProcessor(new File(directory), new DefaultJavaPrettyPrinter(env));
-                            processor.setFactory(getFactory());
-                            processor.createJavaFile(cc);
-                        });});
+                .forEach(cl -> {
+                    Log.debug("print java file: {}", directory + "/" + cl.getQualifiedName().replace(".", "/") + ".java");
+                    cl.getPosition().getCompilationUnit().getDeclaredTypes().stream()
+                            .forEach(cc -> {
+                                JavaOutputProcessor processor = new JavaOutputProcessor(new File(directory), new DefaultJavaPrettyPrinter(env));
+                                processor.setFactory(getFactory());
+                                processor.createJavaFile(cc);
+                            });
+                });
     }
 
     protected Factory getFactory() {
@@ -309,20 +306,20 @@ public class InstanceTransformation extends Transformation {
 
     protected void copySwitch(String copyDirName) throws IOException {
         File srcFile = new File(System.getProperty("user.dir") + "/generator/src/main/java/fr/inria/diversify/transformation/switchsosie/Switch.java");
-        File destFile = new File(copyDirName  + "/fr/inria/diversify/transformation/switchsosie/Switch.java");
+        File destFile = new File(copyDirName + "/fr/inria/diversify/transformation/switchsosie/Switch.java");
 
         FileUtils.copyFile(srcFile, destFile);
     }
 
     protected void deleteSwitch(String copyDirName) throws IOException {
-        File delete = new File(copyDirName  + "/fr/inria/diversify/transformation/switchsosie/Switch.java");
+        File delete = new File(copyDirName + "/fr/inria/diversify/transformation/switchsosie/Switch.java");
 
         FileUtils.forceDelete(delete);
     }
 
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = super.toJSONObject();
-        object.put("withSwitch",withSwitch);
+        object.put("withSwitch", withSwitch);
 
         JSONArray array = new JSONArray();
         object.put("newConstructors", array);
@@ -334,7 +331,7 @@ public class InstanceTransformation extends Transformation {
             o.put(SOURCE_CODE, constructorCall.toString());
 
             o.put("newInstance", newClassInstance.get(constructorCall).getDeclaringClass().getCanonicalName());
-            o.put("parameterTypes",   newClassInstance.get(constructorCall).getParameterTypes());
+            o.put("parameterTypes", newClassInstance.get(constructorCall).getParameterTypes());
         }
         return object;
     }

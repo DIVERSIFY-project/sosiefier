@@ -111,7 +111,7 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
     protected boolean isAssert(CtInvocation invocation) {
         try {
             Class cl = invocation.getExecutable().getDeclaringType().getActualClass();
-            String signature = invocation.getSignature();
+            String signature = invocation.getExecutable().getSimpleName();
             return (signature.contains("assert") || signature.contains("fail"))
              && isAssertInstance(cl);
         } catch (Exception e) {

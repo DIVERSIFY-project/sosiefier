@@ -18,8 +18,8 @@ import org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding;
 public class MainCompiler extends JDTBatchCompiler {
     FileSystem environment;
 
-    public MainCompiler(JDTBasedSpoonCompiler jdtCompiler, boolean useFactory, FileSystem environment ) {
-        super(jdtCompiler, useFactory);
+    public MainCompiler(JDTBasedSpoonCompiler jdtCompiler, FileSystem environment ) {
+        super(jdtCompiler);
         this.environment = environment;
     }
 
