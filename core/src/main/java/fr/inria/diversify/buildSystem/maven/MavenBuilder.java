@@ -81,7 +81,7 @@ public class MavenBuilder extends AbstractBuilder {
             File mvnHome = new File("/usr/local/share/java/maven3");
             if (!mvnHome.exists()) {
                 //ubuntu 2
-                mvnHome = new File("/usr/share/maven/");
+                mvnHome = new File("/usr/share/maven");
             }
             if (!mvnHome.exists()) {
                 //ubuntu

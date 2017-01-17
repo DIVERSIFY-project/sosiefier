@@ -642,7 +642,11 @@ public class DiversifyMain {
 
         if(!runner.getTransformations().isEmpty()) {
             if (repo.equals("null")) {
-                runner.printResult(inputConfiguration.getProperty("result"));
+                if(inputConfiguration.getProperty("result").matches("(.+)\\.json"))
+                    runner.printResult(inputConfiguration.getProperty("result"), true);
+                else
+                    runner.printResult(inputConfiguration.getProperty("result"));
+
             } else {
                 runner.printResultInGitRepo(inputConfiguration.getProperty("result"), repo);
             }

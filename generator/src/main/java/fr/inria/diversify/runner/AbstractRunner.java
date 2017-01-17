@@ -154,12 +154,19 @@ public abstract class AbstractRunner {
      * @return
      */
     public String printResult(String output) {
+        return printResult(output, false);
+    }
+
+    public String printResult(String output, boolean sp) {
         Log.info("session result: {}", sessionResults);
         mkDirResult(output);
         String prefix = output + System.currentTimeMillis();
         String fileName = "";
         try {
-            fileName = writeTransformations(prefix);
+            if(sp)
+                fileName = writeTransformationsIntoSpecificFile(output);
+            else
+                fileName = writeTransformations(prefix);
             Log.info("write result in {}", fileName);
         } catch (Exception e) {
             Log.error("error in Builder.printResult", e);
@@ -200,6 +207,15 @@ public abstract class AbstractRunner {
         JsonTransformationWriter writer = new JsonTransformationWriter();
         writer.write(transformations, fileName + ".json", inputConfiguration.getInputProgram().getProgramDir() + "/pom.xml");
         return fileName + ".json";
+    }
+
+    public String writeTransformationsIntoSpecificFile(String fileName) throws IOException, JSONException {
+        if (transformations.isEmpty())
+            return "";
+
+        JsonTransformationWriter writer = new JsonTransformationWriter();
+        writer.write(transformations, fileName, inputConfiguration.getInputProgram().getProgramDir() + "/pom.xml");
+        return fileName;
     }
 
     protected void mkDirResult(String output) {

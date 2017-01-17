@@ -29,6 +29,7 @@ import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.QueueProcessingManager;
 
 import java.util.*;
+import java.util.stream.Collectors;
 //import java.util.stream.Collectors;
 
 /**
@@ -335,17 +336,17 @@ public class InputProgram {
         int lineNumberPosition = Integer.parseInt(s[1]);
 
         List<T> allElements = getAllElement(type);
-        for(T elem : allElements) {
-            try {
-                int elemLineNumber = elem.getPosition().getLine();
-                if (elemLineNumber == lineNumberPosition) {
-                    String elemClass = elem.getPosition().getCompilationUnit().getMainType().getQualifiedName();
-                    if (classPosition.equals(elemClass)
-                            && (searchValue == null || elem.toString().equals(searchValue))) {
-                        return elem;
-                    }
+        List<T> elements = allElements.stream()
+                .filter(e -> (e.getPosition().getLine() == lineNumberPosition)
+                        && (e.getPosition().getCompilationUnit().getMainType().getQualifiedName().equals(classPosition))
+                ).collect(Collectors.toList());
+        if(elements.size() == 1) return  elements.get(0);
+        else {
+            for(T elem : elements) {
+                if ((searchValue == null || elem.toString().equals(searchValue))) {
+                    return elem;
                 }
-            } catch (Exception e) {}
+            }
         }
         return result;
     }

@@ -1,5 +1,6 @@
 package fr.inria.diversify.util;
 
+import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.reference.CtTypeReference;
 
@@ -39,4 +40,30 @@ public class PrimitiveUtil {
                 return null;
         }
     }
+
+    public static CtTypeReference getTypeReference(String className, Factory f) {
+        CtTypeReference type;
+        try {
+            if(className.endsWith("[]")) {
+                CtTypeReference baseType = getTypeReference(className.substring(0,className.length()-2), f);
+                type = f.Class().createArrayReference(baseType);
+            } else {
+                if (PrimitiveUtil.isPrimitive(className)) {
+                    type = PrimitiveUtil.get(className, f);
+                } else {
+                    CtType t = f.Class().get(className);
+                    if (t == null)
+                        type = f.Code().createCtTypeReference(Class.forName(className));
+                    else
+                        type = f.Type().createReference(t);
+                }
+            }
+            return type;
+        } catch (Exception e) {
+            System.out.println("Could not recreate type");
+        }
+        return null;
+    }
+
+
 }

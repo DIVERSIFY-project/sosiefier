@@ -53,6 +53,15 @@ public class JsonAddMethodInvocationInput extends JsonAstReplaceInput {
                             cfJson.getString(SOURCE_CODE)
                     );
 
+            if(tp == null) {
+                System.out.println(cfJson.toString());
+                tp = getInputProgram().findElement(
+                        Class.forName(cfJson.getString("type")),
+                        cfJson.getString(POSITION),
+                        cfJson.getString(SOURCE_CODE)
+                );
+            }
+
             Factory f = tp.getFactory();
             transf.setTp(tp);
             transf.setup();
@@ -67,25 +76,13 @@ public class JsonAddMethodInvocationInput extends JsonAstReplaceInput {
                     wellType = wellstr[2];
                     wellName = wellstr[3];
                     wellInit = wellstr[5];
-                    CtTypeReference type;
-                    if(PrimitiveUtil.isPrimitive(wellType)) {
-                        type = PrimitiveUtil.get(wellType, f);
-                    } else {
-                        CtType t = f.Class().get(wellType);
-                        type = f.Type().createReference(t);
-                    }
+                    CtTypeReference type = PrimitiveUtil.getTypeReference(wellType, f);
                     well = f.Code().createCtField(wellName, type, wellInit, ModifierKind.PUBLIC, ModifierKind.STATIC);
                 } else {
                     wellType = wellstr[1];
                     wellName = wellstr[2];
                     wellInit = wellstr[4];
-                    CtTypeReference type;
-                    if(PrimitiveUtil.isPrimitive(wellType)) {
-                        type = PrimitiveUtil.get(wellType, f);
-                    } else {
-                        CtType t = f.Class().get(wellType);
-                        type = f.Type().createReference(t);
-                    }
+                    CtTypeReference type = PrimitiveUtil.getTypeReference(wellType, f);
                     well = f.Code().createCtField(wellName, type,wellInit, ModifierKind.PUBLIC);
                 }
             }
