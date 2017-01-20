@@ -93,7 +93,7 @@ public class VarFinder {
                     .filter(
                             m -> (
                                     m.getModifiers().contains(ModifierKind.PUBLIC)
-                                    || (c.getPackage().equals(elPackage) && m.getModifiers().contains(ModifierKind.PROTECTED))
+                                    || ((c.getPackage() != null) && c.getPackage().equals(elPackage) && m.getModifiers().contains(ModifierKind.PROTECTED))
                                     || c.equals(elClass)
                             )
                     )

@@ -32,6 +32,7 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
     private boolean dumpMethodsAfterSuccess = false;
     private boolean shuffleCandidate = false;
     private boolean shuffleMethods = false;
+    private int maxMethodsPerStmt = 10;
 
 
     public AddMethodInvocationQuerry(InputProgram inputProgram, boolean internalMethods, boolean externalMethods,
@@ -266,6 +267,8 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
     }
 
 
+    int cur = 0;
+
     @Override
     public Transformation query() throws QueryException {
         //curCandidate = candidateIt.next();
@@ -273,7 +276,8 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
 
         //curMethods = new ArrayList<>(VarFinder.getInternalMethods(curCandidate, staticMethods, nonstaticMethods));
 
-        if(dumpMethodsAfterSuccess || (((curCandidate == null) || curMethods.isEmpty()) && (candidateIt.hasNext()))) {
+        if((dumpMethodsAfterSuccess && (cur >= maxMethodsPerStmt)) || (((curCandidate == null) || curMethods.isEmpty()) && (candidateIt.hasNext()))) {
+            cur = 0;
             curCandidate = candidateIt.next();
             if(externalMethods && nonstaticMethods && !internalMethods && !staticMethods)
                 curMethods = new ArrayList<>(VarFinder.getTargetableMethods(curCandidate));
@@ -290,6 +294,7 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
         curMethods.removeAll(toRemove);
         toRemove.clear();
         if(invocation != null) {
+            cur++;
             return new AddMethodInvocation(curCandidate, invocation);
         } else if (hasNextTransformation()) {
             return query();

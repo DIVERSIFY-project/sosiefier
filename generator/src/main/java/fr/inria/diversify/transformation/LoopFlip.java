@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.SourcePosition;
+import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.Factory;
@@ -44,7 +45,7 @@ public class LoopFlip extends SingleTransformation {
 
     @Override
     public String methodLocationName() {
-        return "unknown";
+        return tp.getParent(CtMethod.class).getSimpleName();
     }
 
     @Override
