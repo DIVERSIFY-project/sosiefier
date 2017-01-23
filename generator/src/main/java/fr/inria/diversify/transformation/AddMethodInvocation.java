@@ -27,8 +27,57 @@ public class AddMethodInvocation extends SingleTransformation {
     CtMethod parentMethod;
     CtInvocation aInv;
 
-    String jPos, jType, jSC;
     boolean jStatic;
+    String jPos, jType, jSC;
+
+    public CtStatement getTryInv() {
+        return tryInv;
+    }
+
+    public CtStatement getTp() {
+        return tp;
+    }
+
+    public CtField getWell() {
+        return well;
+    }
+
+    public CtClass getParentClass() {
+        return parentClass;
+    }
+
+    public CtMethod getParentMethod() {
+        return parentMethod;
+    }
+
+    public CtInvocation getaInv() {
+        return aInv;
+    }
+
+    public boolean isjStatic() {
+        return jStatic;
+    }
+
+    public String getjPos() {
+        return jPos;
+    }
+
+    public String getjType() {
+        return jType;
+    }
+
+    public String getjSC() {
+        return jSC;
+    }
+
+    public boolean isInsertIsStatic() {
+        return insertIsStatic;
+    }
+
+    public CtStatement getInvocation() {
+
+        return invocation;
+    }
 
     public AddMethodInvocation(CtStatement tp, CtStatement invocation) {
         System.out.println("tp: " + tp);

@@ -29,7 +29,7 @@ public class LoopFlipQueryTest {
     @Before
     public void setUp() {
         try {
-            FileInputStream propertiesFile = new FileInputStream(new File("src/test/resources/jDummy/loopflip.properties"));
+            FileInputStream propertiesFile = new FileInputStream(new File("src/test/resources/jDummy/loopflip/loopflip.properties"));
             InputConfiguration inputConfiguration = new InputConfiguration(propertiesFile);
 
             inputProgram = InitUtils.initInputProgram(inputConfiguration);
