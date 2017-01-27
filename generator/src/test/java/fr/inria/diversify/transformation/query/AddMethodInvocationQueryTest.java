@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 /**
  * Created by nharrand on 23/01/17.
  */
-public class AddMethodInvocationQuerryTest {
+public class AddMethodInvocationQueryTest {
 
     InputProgram inputProgram;
 
@@ -42,16 +42,16 @@ public class AddMethodInvocationQuerryTest {
     @Test
     public void query() throws Exception {
         setUp(true, true);
-        AddMethodInvocationQuerry q = new AddMethodInvocationQuerry(inputProgram);
+        AddMethodInvocationQuery q = new AddMethodInvocationQuery(inputProgram);
 
         while(q.hasNextTransformation()) {
             AddMethodInvocation t = (AddMethodInvocation) q.query();
-            //assertTrue(t.isjStatic());
+            assertTrue(t.isjStatic());
         }
 
 
         setUp(true, false);
-        q = new AddMethodInvocationQuerry(inputProgram);
+        q = new AddMethodInvocationQuery(inputProgram);
 
         while(q.hasNextTransformation()) {
             AddMethodInvocation t = (AddMethodInvocation) q.query();

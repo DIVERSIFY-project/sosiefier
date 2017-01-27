@@ -8,6 +8,9 @@ package inria;
  */
 public class App 
 {
+    public static int three = 3;
+    public int five = 5;
+
     public static void main( String[] args ) {
 
         System.out.println("0: ");
@@ -17,6 +20,8 @@ public class App
         ab.print();
         System.out.println("1: " + loops());
         System.out.println("2: " + conditions(15));
+        System.out.println("3: " + three);
+        branch(6);
     }
 
     public static int loops(){
@@ -69,5 +74,23 @@ public class App
                 r += 3;
         }
         return r;
+    }
+
+    public static void branch(int i) {
+        int a = 0;
+        if(i > 0) {
+            int b = 0;
+            System.out.print(b);
+            if(i>10) {
+                int c = 0;
+                System.out.print(c);
+            } else {
+                int d=0,e=0;
+                System.out.print(d+e);
+                int f=0,g=0;
+                System.out.print(f+g);
+            }
+        }
+        System.out.print(a);
     }
 }

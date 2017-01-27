@@ -28,7 +28,7 @@ public class A
         this.bo = bo;
     }
 
-    public static void printHello() {
+    static public void printHello() {
         System.out.println("Hello");
     }
 

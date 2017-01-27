@@ -18,7 +18,7 @@ import static fr.inria.diversify.util.VarFinder.getTypedVar;
 /**
  * Created by nharrand on 22/11/16.
  */
-public class AddMethodInvocationQuerry extends TransformationQuery {
+public class AddMethodInvocationQuery extends TransformationQuery {
     private List<CtStatement> candidateList;
     private Iterator<CtStatement> candidateIt;
     private CtStatement curCandidate = null;
@@ -35,9 +35,9 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
     private int maxMethodsPerStmt = 10;
 
 
-    public AddMethodInvocationQuerry(InputProgram inputProgram, boolean internalMethods, boolean externalMethods,
-                                     boolean staticMethods, boolean nonstaticMethods, boolean dumpMethodsAfterSuccess,
-                                     boolean shuffleCandidate, boolean shuffleMethods) {
+    public AddMethodInvocationQuery(InputProgram inputProgram, boolean internalMethods, boolean externalMethods,
+                                    boolean staticMethods, boolean nonstaticMethods, boolean dumpMethodsAfterSuccess,
+                                    boolean shuffleCandidate, boolean shuffleMethods) {
         super(inputProgram);
 
 
@@ -53,7 +53,7 @@ public class AddMethodInvocationQuerry extends TransformationQuery {
     }
 
 
-    public AddMethodInvocationQuerry(InputProgram inputProgram) {
+    public AddMethodInvocationQuery(InputProgram inputProgram) {
         super(inputProgram);
         findCandidates();
     }

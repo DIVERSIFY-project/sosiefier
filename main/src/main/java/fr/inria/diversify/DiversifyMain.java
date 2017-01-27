@@ -29,7 +29,6 @@ import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.InitUtils;
 import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
-import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
@@ -325,7 +324,7 @@ public class DiversifyMain {
                 boolean dumpMethodsAfterSuccess = Boolean.parseBoolean(inputConfiguration.getProperty("addmi.dumpMethodsAfterSuccess", "false"));
                 boolean shuffleCandidate = Boolean.parseBoolean(inputConfiguration.getProperty("addmi.shuffleCandidate", "false"));
                 boolean shuffleMethods = Boolean.parseBoolean(inputConfiguration.getProperty("addmi.shuffleMethods", "false"));
-                return new AddMethodInvocationQuerry(inputProgram, internalMethods, externalMethods,
+                return new AddMethodInvocationQuery(inputProgram, internalMethods, externalMethods,
                         staticMethods, nonstaticMethods, dumpMethodsAfterSuccess, shuffleCandidate,
                         shuffleMethods);
             case "swapsubtype":
