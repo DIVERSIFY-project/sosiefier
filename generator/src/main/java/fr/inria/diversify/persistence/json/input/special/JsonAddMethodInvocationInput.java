@@ -24,6 +24,7 @@ import java.util.UUID;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.POSITION;
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.SOURCE_CODE;
+import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.STATUS;
 
 /**
  * Created by nharrand on 12/12/16.
@@ -39,6 +40,7 @@ public class JsonAddMethodInvocationInput extends JsonAstReplaceInput {
         AddMethodInvocation transf = null;
         try {
             transf = (AddMethodInvocation) get(transformations); //add the transformation to the transformations map if not present
+
 
             JSONObject cfJson = getJsonObject().getJSONObject(JsonSectionOutput.TRANSPLANT_POINT);
             JSONObject insertJson = getJsonObject().getJSONObject("insert");
@@ -87,10 +89,13 @@ public class JsonAddMethodInvocationInput extends JsonAstReplaceInput {
                 }
             }
             transf.setWell(well);
+            int status = Integer.parseInt(getJsonObject().getString(STATUS));
+            if(status > -3) transf.setStatus(status);
 
             CtStatement tryInv = f.Code().createCodeSnippetStatement(insertJson.getString("stmt"));
             transf.setTryInv(tryInv);
             transf.setInsertIsStatic(insertJson.getString("static").compareTo("true") == 0);
+
 
             addTransformation(transformations, transf);
 

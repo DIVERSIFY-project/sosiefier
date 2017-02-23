@@ -137,7 +137,7 @@ public class AddMethodInvocation extends SingleTransformation {
         return getPosition().getLine();
     }
 
-    protected CtInvocation actualInvocation() {
+    public CtInvocation actualInvocation() {
         CtInvocation actual = null;
         if(invocation instanceof CtInvocation) {
             actual = (CtInvocation) invocation;
@@ -195,6 +195,24 @@ public class AddMethodInvocation extends SingleTransformation {
 
     public AddMethodInvocation() {
         setup();
+    }
+
+    public CtInvocation getInvocationT() {
+
+        if(tryInv instanceof CtCodeSnippetStatement) {
+            CtCodeSnippetStatement s = (CtCodeSnippetStatement) tryInv;
+            String assi = s.getValue().split("\n")[1];
+            String mi;
+            if(assi.split("=").length > 1)
+                mi = assi.split("=")[1];
+            else
+                mi = assi;
+
+            CtStatement smi = tp.getFactory().Code().createCodeSnippetStatement(mi).compile();
+            System.out.println("hourra");
+            return (CtInvocation) smi;
+        } else return null;
+
     }
 
     @Override

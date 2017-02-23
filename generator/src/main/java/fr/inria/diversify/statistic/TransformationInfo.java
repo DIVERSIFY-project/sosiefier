@@ -1,7 +1,9 @@
 package fr.inria.diversify.statistic;
 
+import fr.inria.diversify.transformation.AddMethodInvocation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
+import spoon.reflect.declaration.CtExecutable;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 public class TransformationInfo {
     Collection<Transformation> transformations;
     public boolean printPurity = false;
+    public boolean isAddMI = false;
 
     public TransformationInfo(Collection<Transformation> transformations) {
         this.transformations = transformations;
@@ -26,6 +29,7 @@ public class TransformationInfo {
         BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
         out.append("uuid;type;name;position;status;nbFailures");
         if(printPurity) out.append(";inPure;inConstructor");
+        if(isAddMI) out.append(";insertedMethod");
         out.append("\n");
 
 
@@ -41,6 +45,10 @@ public class TransformationInfo {
             if(printPurity && (transformation instanceof ASTTransformation)) {
                 ASTTransformation a = (ASTTransformation) transformation;
                 out.append(";" + a.inPure + ";" + a.inConstructor);
+            }
+            if(isAddMI && (transformation instanceof AddMethodInvocation)) {
+                AddMethodInvocation t = (AddMethodInvocation) transformation;
+                out.append(";" + ((CtExecutable) t.getInvocationT().getExecutable()).getSignature());
             }
             out.append("\n");
         }

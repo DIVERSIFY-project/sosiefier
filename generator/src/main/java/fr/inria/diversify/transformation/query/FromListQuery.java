@@ -17,7 +17,7 @@ public class FromListQuery extends TransformationQuery {
     protected List<Transformation> transformations;
     protected boolean removeAfterQuery = true;
     protected boolean shuffle = false;
-    protected boolean onlySosie;
+    protected boolean onlySosie = false;
 
     public FromListQuery(InputProgram inputProgram, boolean onlySosie) {
         super(inputProgram);

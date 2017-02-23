@@ -158,6 +158,9 @@ public class DiversifyMain {
             case "simple":
                 abstractRunner = new SinglePointRunner(inputConfiguration, project, src);
                 break;
+            case "secondpass":
+                abstractRunner = new SecondPassRunner(inputConfiguration, project, src);
+                break;
             case "coverage":
                 abstractRunner = new CoverageRunner(inputConfiguration, project, src);
                 break;
@@ -597,7 +600,10 @@ public class DiversifyMain {
         writer.write(transformations, output+".json", inputProgram.getProgramDir() + "/pom.xml");
         writer.write(sosies, output+"_sosie.json", inputProgram.getProgramDir() + "/pom.xml");
 
+        for(Transformation t : transformations) {t.setInputProgram(inputProgram);}
+
         TransformationInfo transformationInfo = new TransformationInfo(transformations);
+        if(inputConfiguration.getProperty("transformation.type").toLowerCase().equals("addmi")) transformationInfo.isAddMI = true;
         transformationInfo.print(output + "Trial.csv");
     }
 

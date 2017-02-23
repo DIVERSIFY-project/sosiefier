@@ -200,7 +200,8 @@ public abstract class AbstractBuilder {
         String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
         Runtime r = Runtime.getRuntime();
         try {
-            r.exec("pkill -P " + pid);
+            r.exec("pkill --signal SIGKILL -P " + pid);
+            //r.exec("pkill -P " + pid);
 
             Thread.sleep(1000);
         } catch (Exception e) {

@@ -18,19 +18,17 @@ import java.util.List;
  */
 public class RemoveCheck extends SingleTransformation  {
 
-    CtIf tp;
-    CtIf save;
-    CtIf insert;
-    CtInvocation invocation;
+    CtExpression tp;
+    CtExpression save;
+    CtExpression insert;
     String pattern;
+    boolean force;
 
-    public RemoveCheck(CtIf tp, CtInvocation invocation, String pattern) {
+    public RemoveCheck(CtExpression tp, String pattern, boolean force) {
         this.tp = tp;
         save = tp.getFactory().Core().clone(tp);
-        insert = tp.getFactory().Core().clone(tp);
-        //insert.setCondition(tp.getFactory().Code().createLiteral(true));
-        insert.setCondition(tp.getFactory().Code().createLiteral(false));
-        this.invocation = invocation;
+        insert = tp.getFactory().Code().createLiteral(force);
+        this.force = force;
         this.pattern = pattern;
     }
 
@@ -93,6 +91,7 @@ public class RemoveCheck extends SingleTransformation  {
         JSONObject insertJSON = new JSONObject();
         insertJSON.put("stmt", insert.toString());
         insertJSON.put("pattern", pattern);
+        insertJSON.put("force", force);
         object.put("insert", insertJSON);
 
         JSONObject tpJSON = new JSONObject();

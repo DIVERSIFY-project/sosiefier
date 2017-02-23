@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  */
 public class AddMethodInvocationQueryTest {
 
-    InputProgram inputProgram;
+    /*InputProgram inputProgram;
 
     public void setUp(boolean isStatic, boolean isInternal) {
         try {
@@ -63,6 +63,6 @@ public class AddMethodInvocationQueryTest {
     @Test
     public void hasNextTransformation() throws Exception {
 
-    }
+    }*/
 
 }

@@ -12,7 +12,7 @@ public class App
     public int five = 5;
 
     public static void main( String[] args ) {
-
+        Runtime.getRuntime().traceMethodCalls(true);
         System.out.println("0: ");
         A a = new A((byte) 0, (short) 0, (int) 0, (long) 0, (float) 0.0, (double) 0.0, '0', false);
         B b = new B(a);
