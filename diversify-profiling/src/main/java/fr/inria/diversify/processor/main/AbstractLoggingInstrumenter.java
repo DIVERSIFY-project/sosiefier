@@ -12,6 +12,7 @@ import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
+import spoon.support.reflect.code.CtTryImpl;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -98,7 +99,7 @@ public abstract class AbstractLoggingInstrumenter<E extends CtElement> extends A
             CtStatement thisStatement = getThisOrSuperCall(method.getBody());
 
             CtTry ctTry = factory.Core().createTry();
-            ctTry.setBody(method.getBody());
+            ((CtTryImpl)ctTry).setBody(method.getBody());
 
             CtBlock finalizerBlock = factory.Core().createBlock();
             ctTry.setFinalizer(finalizerBlock);

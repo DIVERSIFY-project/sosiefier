@@ -44,10 +44,10 @@ public class DiversityCompiler extends JDTBasedSpoonCompiler {
 
 
     public boolean compileFileIn(File directory, boolean withLog) {
-        initInputClassLoader();
+//        initInputClassLoader();
         javaCompliance = factory.getEnvironment().getComplianceLevel();
 
-        MainCompiler compiler = new MainCompiler(this, true, environment);
+        MainCompiler compiler = new MainCompiler(this, environment);
 
         final SourceOptions sourcesOptions = new SourceOptions();
         sourcesOptions.sources((new FileSystemFolder(directory).getAllJavaFiles()));

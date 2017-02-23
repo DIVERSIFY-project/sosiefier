@@ -1,39 +1,48 @@
 package fr.inria.diversify.codeFragment;
 
 import spoon.compiler.Environment;
-import spoon.reflect.code.*;
+import spoon.reflect.code.CtInvocation;
+import spoon.reflect.code.CtLocalVariable;
+import spoon.reflect.code.CtVariableAccess;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.reference.CtLocalVariableReference;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
+import spoon.reflect.visitor.printer.ElementPrinterHelper;
+import spoon.reflect.visitor.printer.PrinterHelper;
 
 import java.util.Stack;
 
 public class CodeFragmentEqualPrinter extends DefaultJavaPrettyPrinter {
+
+	private final PrinterHelper printer;
+	private final ElementPrinterHelper elementPrinterHelper;
 	public PrintingContext context = new PrintingContext();
 
 	public CodeFragmentEqualPrinter(Environment env) {
 		super(env);
-		
+		this.printer = new PrinterHelper(env);
+		this.elementPrinterHelper = new ElementPrinterHelper(this.printer, this, env);
 	}
 
     public <T> void visitCtInvocation(CtInvocation<T> invocation) {
 		if(invocation.getTarget() == null){
-			write(invocation.getExecutable().getDeclaringType().toString());
-			write(".");
+			printer.write(invocation.getExecutable().getDeclaringType().toString());
+			printer.write(".");
 		}
 		super.visitCtInvocation(invocation);
 	}
+
 	public <T> void visitCtVariableAccess(CtVariableAccess<T> variableAccess) {
 		enterCtExpression(variableAccess);
-		write(variableAccess.getType().toString());
+		printer.write(variableAccess.getType().toString());
 		exitCtExpression(variableAccess);
 	}
 
 	public <T> void visitCtLocalVariableReference(
 			CtLocalVariableReference<T> reference) {
-		write(reference.getType().toString());
+		printer.write(reference.getType().toString());
 	}
 
 	public <T> void visitCtFieldReference(CtFieldReference<T> reference) {
@@ -43,7 +52,7 @@ public class CodeFragmentEqualPrinter extends DefaultJavaPrettyPrinter {
 							.getDeclaringType().isAnonymous())) {
 				context.ignoreGenerics = true;
 				scan(reference.getDeclaringType());
-				write(".");
+				printer.write(".");
 				context.ignoreGenerics = false;
 			}
 		} else {
@@ -78,22 +87,22 @@ public class CodeFragmentEqualPrinter extends DefaultJavaPrettyPrinter {
 				context.ignoreGenerics = true;
 				scan(reference.getDeclaringType());
 				context.ignoreGenerics = false;
-				write(".");
+				printer.write(".");
 			}
 		}
-		write(reference.getType().toString());
+		printer.write(reference.getType().toString());
 	}
-	
+
 	public <T> DefaultJavaPrettyPrinter writeLocalVariable(
 		CtLocalVariable<T> localVariable) {
 	if (!context.noTypeDecl) {
-		writeModifiers(localVariable);
+		elementPrinterHelper.writeModifiers(localVariable);
 		scan(localVariable.getType());
-		write(" ");
+		printer.write(" ");
 	}
-	write(localVariable.getType().toString());
+	printer.write(localVariable.getType().toString());
 	if (localVariable.getDefaultExpression() != null) {
-		write(" = ");
+		printer.write(" = ");
 		scan(localVariable.getDefaultExpression());
 	}
 	return this;

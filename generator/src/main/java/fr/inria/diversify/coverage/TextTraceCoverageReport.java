@@ -4,6 +4,7 @@ import fr.inria.diversify.codeFragment.CodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtConstructor;
 import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtNamedElement;
 import spoon.reflect.declaration.CtType;
 
 import java.io.BufferedReader;
@@ -80,7 +81,7 @@ public class TextTraceCoverageReport extends TraceCoverageReport {
 
         if (foundMethod ) {
             String className = stmt.getCtCodeFragment().getParent(CtType.class).getQualifiedName();
-            return methodSignatures.contains(className + "." + e.getSignature()) ? 1.0 : 0.0;
+            return methodSignatures.contains(className + "." + ((CtNamedElement)e).getSimpleName()) ? 1.0 : 0.0;
         }
         return 0.0;
         //throw new RuntimeException("Unable to find parent method");

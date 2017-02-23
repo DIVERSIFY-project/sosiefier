@@ -77,14 +77,14 @@ class MethodMerge extends SingleTransformation {
 
         List<CtExpression> args = inv.getArguments();
         if(isFirst) {
-            args.addAll(other.getFormalTypeParameters().stream().map(t -> defaultValue(t.getDeclaration())).collect(Collectors.toList()));
+            args.addAll(other.getFormalCtTypeParameters().stream().map(t -> defaultValue(t.getDeclaringType())).collect(Collectors.toList()));
             args.add(factory.Code().createLiteral(true));
             newInv.setExecutable(newMethod.getReference());
             newInv.setTarget(inv.getTarget());
             newInv.setArguments(args);
         } else {
             args.clear();
-            args.addAll(other.getFormalTypeParameters().stream().map(t -> defaultValue(t.getDeclaration())).collect(Collectors.toList()));
+            args.addAll(other.getFormalCtTypeParameters().stream().map(t -> defaultValue(t.getDeclaringType())).collect(Collectors.toList()));
             args.addAll(inv.getArguments());
             args.add(factory.Code().createLiteral(false));
             newInv.setExecutable(newMethod.getReference());
