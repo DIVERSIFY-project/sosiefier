@@ -90,35 +90,36 @@ public class RandomLiteralFactory {
         Factory f = t.getFactory();
         SecureRandom sr = new SecureRandom();
         byte b[];
-        if(t.getActualClass() == byte.class) {
+        //if(t.getActualClass() == byte.class) {
+        if(t.getQualifiedName() == "byte") {
             b = new byte[1];
             sr.nextBytes(b);
             return f.Code().createLiteral(toByte(b));
-        } else if (t.getActualClass() == short.class) {
+        } else if (t.getQualifiedName() == "short") {
             b = new byte[2];
             sr.nextBytes(b);
             return f.Code().createLiteral(toShort(b));
-        } else if (t.getActualClass() == char.class) {
+        } else if (t.getQualifiedName() == "char") {
             b = new byte[2];
             sr.nextBytes(b);
             return f.Code().createLiteral(toChar(b));
-        } else if (t.getActualClass() == int.class) {
+        } else if (t.getQualifiedName() == "int") {
             b = new byte[4];
             sr.nextBytes(b);
             return f.Code().createLiteral(toInt(b));
-        } else if (t.getActualClass() == long.class) {
+        } else if (t.getQualifiedName() == "long") {
             b = new byte[8];
             sr.nextBytes(b);
             return f.Code().createLiteral(toLong(b));
-        } else if (t.getActualClass() == float.class) {
+        } else if (t.getQualifiedName() == "float") {
             b = new byte[4];
             sr.nextBytes(b);
             return f.Code().createLiteral(toFloat(b));
-        } else if (t.getActualClass() == double.class) {
+        } else if (t.getQualifiedName() == "double") {
             b = new byte[8];
             sr.nextBytes(b);
             return f.Code().createLiteral(toDouble(b));
-        } else if (t.getActualClass() == boolean.class) {
+        } else if (t.getQualifiedName() == "boolean") {
             b = new byte[1];
             sr.nextBytes(b);
             if(b[0] <= 127) return f.Code().createLiteral(true);

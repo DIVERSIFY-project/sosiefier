@@ -34,7 +34,7 @@ public class SwapSubTypeQueryTest {
     @Test
     public void query() throws Exception {
         SwapSubTypeQuery q = new SwapSubTypeQuery(inputProgram);
-
+        q.query();
     }
 
     @Test

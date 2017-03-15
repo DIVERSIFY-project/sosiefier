@@ -69,7 +69,7 @@ public class SecondPassRunner  extends AbstractRunner {
                 //int status = runTest(tmpDir);
 
                 AddMethodInvocation a = (AddMethodInvocation) trans;
-                a.getInvocationT();
+                a.fillInvocationSignature();
 
                 //trans.setStatus(status);
                 trans.setFailures(builder.getFailedTests());

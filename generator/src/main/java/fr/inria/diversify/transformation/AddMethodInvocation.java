@@ -3,6 +3,7 @@ package fr.inria.diversify.transformation;
 import fr.inria.diversify.transformation.exception.RestoreTransformationException;
 import fr.inria.diversify.util.RandomLiteralFactory;
 import fr.inria.diversify.util.VarFinder;
+import org.codehaus.plexus.util.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.code.*;
@@ -155,7 +156,8 @@ public class AddMethodInvocation extends SingleTransformation {
     protected void createWell() {
         aInv = actualInvocation();
         insertIsStatic = aInv.getExecutable().isStatic();
-        if(aInv.getType().getActualClass() != void.class) {
+        if(aInv.getType().getQualifiedName() != "void") {
+        //if(aInv.getType().getActualClass() != void.class) {
 
             if(parentMethod.getModifiers().contains(ModifierKind.STATIC)) {
                 well = tp.getFactory().Code().createCtField(RandomLiteralFactory.createString(), aInv.getType(), RandomLiteralFactory.randomValue(aInv.getType()).toString(), ModifierKind.PUBLIC, ModifierKind.STATIC);
@@ -197,21 +199,33 @@ public class AddMethodInvocation extends SingleTransformation {
         setup();
     }
 
-    public CtInvocation getInvocationT() {
+    public String invSignature = null;
+    public void fillInvocationSignature() {
+        //FIXME: Try to find something better than this horror
 
         if(tryInv instanceof CtCodeSnippetStatement) {
             CtCodeSnippetStatement s = (CtCodeSnippetStatement) tryInv;
             String assi = s.getValue().split("\n")[1];
-            String mi;
+            String mi, fullMethodName, methodName, className, tmp;
             if(assi.split("=").length > 1)
                 mi = assi.split("=")[1];
             else
                 mi = assi;
 
-            CtStatement smi = tp.getFactory().Code().createCodeSnippetStatement(mi).compile();
-            System.out.println("hourra");
-            return (CtInvocation) smi;
-        } else return null;
+            fullMethodName = mi.split("\\(")[0];
+            methodName = fullMethodName.substring(fullMethodName.lastIndexOf('.')+1, fullMethodName.length());
+            tmp = fullMethodName.substring(0,fullMethodName.lastIndexOf('.'));
+            className = tmp.replace(" ","");
+            int paramNumber = StringUtils.countMatches(mi.split("\\(")[1], ".");
+            //FIXME:
+            CtMethod method = tp.getFactory().Class().get(className).getMethodsByName(methodName).stream().filter(
+                    m -> (m.getParameters().size() == paramNumber)
+            ).findAny().orElse(null); //Will not necessarly be the good one... Let's hope that it doesn't change the methods purity
+
+            if(method != null)
+                invSignature = method.getSignature();
+
+        }
 
     }
 
@@ -258,6 +272,8 @@ public class AddMethodInvocation extends SingleTransformation {
             } else {
                 insertJSON.put("createdWell", "false");
             }
+            if(invSignature != null)
+                insertJSON.put("invSignature", invSignature);
         object.put("insert", insertJSON);
 
         JSONObject tpJSON = new JSONObject();

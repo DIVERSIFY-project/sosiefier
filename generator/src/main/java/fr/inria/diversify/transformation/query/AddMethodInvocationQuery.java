@@ -32,7 +32,7 @@ public class AddMethodInvocationQuery extends TransformationQuery {
     private boolean dumpMethodsAfterSuccess = false;
     private boolean shuffleCandidate = false;
     private boolean shuffleMethods = false;
-    private int maxMethodsPerStmt = 10;
+    private int maxMethodsPerStmt = 1;
 
 
     public AddMethodInvocationQuery(InputProgram inputProgram, boolean internalMethods, boolean externalMethods,
@@ -276,7 +276,8 @@ public class AddMethodInvocationQuery extends TransformationQuery {
 
         //curMethods = new ArrayList<>(VarFinder.getInternalMethods(curCandidate, staticMethods, nonstaticMethods));
 
-        if((dumpMethodsAfterSuccess && (cur >= maxMethodsPerStmt)) || (((curCandidate == null) || curMethods.isEmpty()) && (candidateIt.hasNext()))) {
+        if((dumpMethodsAfterSuccess && (cur >= maxMethodsPerStmt)) || (((curCandidate == null) || curMethods.isEmpty()))) {
+            if(!candidateIt.hasNext()) throw new QueryException("No valid candidate");
             cur = 0;
             curCandidate = candidateIt.next();
             if(externalMethods && nonstaticMethods && !internalMethods && !staticMethods)

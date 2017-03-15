@@ -48,7 +48,8 @@ public class TransformationInfo {
             }
             if(isAddMI && (transformation instanceof AddMethodInvocation)) {
                 AddMethodInvocation t = (AddMethodInvocation) transformation;
-                out.append(";" + ((CtExecutable) t.getInvocationT().getExecutable()).getSignature());
+                t.fillInvocationSignature();
+                out.append(";" + t.invSignature);
             }
             out.append("\n");
         }

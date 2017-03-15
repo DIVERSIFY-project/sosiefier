@@ -146,7 +146,7 @@ public class VarFinder {
         Collections.shuffle(vars);
 
         for(CtVariable var : vars) {
-            if (var.getType().getActualClass() == t.getActualClass()) return var;
+            if (var.getType().getQualifiedName() == t.getQualifiedName()) return var;
         }
         return null;
     }
@@ -205,8 +205,8 @@ public class VarFinder {
             } else {
                 if (param.getType().isPrimitive()) { //Primitive literal building
                     CtExpression expression;
-                    if ((param.getType().getActualClass() == byte.class)
-                            || (param.getType().getActualClass() == short.class)) {
+                    if ((param.getType().getSimpleName() == "Byte")
+                            || (param.getType().getSimpleName() == "Short")) {
                         expression = f.Code().createCodeSnippetExpression("(" + param.getType().getActualClass().toString() + ")" + RandomLiteralFactory.randomValue(param.getType()));
                     } else {
                         expression = RandomLiteralFactory.randomValue(param.getType());

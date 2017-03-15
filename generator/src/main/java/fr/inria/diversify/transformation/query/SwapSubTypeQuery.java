@@ -157,7 +157,8 @@ public class SwapSubTypeQuery extends TransformationQuery {
             skippedCalls.add(call);
             if(parent.getType().getModifiers().contains(ModifierKind.STATIC)) continue;
             if(call.getType().getModifiers().contains(ModifierKind.STATIC)) continue;
-            if(call.getType().getActualClass() == parent.getType().getActualClass()) continue;
+            //if(call.getType().getActualClass() == parent.getType().getActualClass()) continue;
+            if(call.getType().getQualifiedName() == parent.getType().getQualifiedName()) continue;
             skipped--;
             skippedCalls.remove(call);
             //System.out.println("Expect: " + parent.getType() + " -> found: " + call.getType());https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/BlockingDeque.html
