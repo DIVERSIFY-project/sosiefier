@@ -161,6 +161,9 @@ public class DiversifyMain {
             case "secondpass":
                 abstractRunner = new SecondPassRunner(inputConfiguration, project, src);
                 break;
+            case "checkdistance":
+                abstractRunner = new CheckDistanceRunner(inputConfiguration, project, src);
+                break;
             case "coverage":
                 abstractRunner = new CoverageRunner(inputConfiguration, project, src);
                 break;
@@ -221,7 +224,9 @@ public class DiversifyMain {
                 phases = new String[]{"clean", "test" };
             }
             rb = new MavenBuilder(directory);
-
+            MavenBuilder mb = (MavenBuilder) rb;
+            String pomPath = inputConfiguration.getProperty("pom", "/pom.xml");
+            mb.pomRelativePath = pomPath;
             String builderPath = inputConfiguration.getProperty("maven.home",null);
             rb.setBuilderPath(builderPath);
 
@@ -319,6 +324,8 @@ public class DiversifyMain {
                 return new MultiplyByOneQuery(inputProgram);
             case "loopflip":
                 return new LoopFlipQuery(inputProgram);
+            case "addmistats":
+                return new AddMethodInvocationStatsQuery(inputProgram, inputConfiguration.getProperty("statFile", "stats.json"));
             case "addmi":
                 boolean internalMethods = Boolean.parseBoolean(inputConfiguration.getProperty("addmi.internalMethods", "true"));
                 boolean externalMethods = Boolean.parseBoolean(inputConfiguration.getProperty("addmi.externalMethods", "false"));
@@ -327,13 +334,16 @@ public class DiversifyMain {
                 boolean dumpMethodsAfterSuccess = Boolean.parseBoolean(inputConfiguration.getProperty("addmi.dumpMethodsAfterSuccess", "false"));
                 boolean shuffleCandidate = Boolean.parseBoolean(inputConfiguration.getProperty("addmi.shuffleCandidate", "false"));
                 boolean shuffleMethods = Boolean.parseBoolean(inputConfiguration.getProperty("addmi.shuffleMethods", "false"));
+                int maxMethodTryPerStmt = Integer.parseInt(inputConfiguration.getProperty("addmi.maxMethodTryPerStmt", "10"));
                 return new AddMethodInvocationQuery(inputProgram, internalMethods, externalMethods,
                         staticMethods, nonstaticMethods, dumpMethodsAfterSuccess, shuffleCandidate,
-                        shuffleMethods);
+                        shuffleMethods, maxMethodTryPerStmt);
             case "swapsubtype":
                 return new SwapSubTypeQuery(inputProgram);
             case "removecheck":
                 return new RemoveCheckQuerry(inputProgram);
+            case "removetypeformating":
+                return new RemoveTypeFormatingQuery(inputProgram);
             case "adr": {
                 return new ADRTransformationQuery(inputProgram, subType, false);
             }
@@ -574,6 +584,8 @@ public class DiversifyMain {
         ICoverageReport coverage = initCoverageReport(inputProgram.getProgramDir());
         JsonTransformationLoader loader = new JsonTransformationLoader(inputProgram);
         Collection<Transformation> transformations = loader.load(transDir, false);
+
+        System.out.println("Read " + transformations.size() + " transformations");
 
         JsonTransformationWriter writer = new JsonTransformationWriter();
 

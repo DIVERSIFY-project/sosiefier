@@ -2,6 +2,9 @@ package inria;
 
 
 import java.util.*;
+import inria.A;
+import inria.AA;
+import inria.AB;
 
 /**
  * Hello world!
@@ -14,11 +17,13 @@ public class App
         List<Integer> integerList = new LinkedList<Integer>();
         Collection<Integer> integerCollection = new TreeSet<Integer>();
         AbstractList<Integer> integerAbstractList = new Stack<Integer>();
+        A a = new AA();
 
         for(int i = 0; i < 5; i++) {
             integerList.add(i);
             integerCollection.add(i);
             integerAbstractList.add(i);
+            System.out.println(a.print());
         }
 
         Iterator<Integer> it = integerCollection.iterator();

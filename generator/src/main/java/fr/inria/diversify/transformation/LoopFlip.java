@@ -28,9 +28,26 @@ public class LoopFlip extends SingleTransformation {
         name = "loopflip";
         Factory factory = tp.getFactory();
         save = factory.Core().clone(tp);
+        position = tp.getParent(CtType.class).getQualifiedName()
+                + ":" + tp.getPosition().getLine();
     }
 
+    public LoopFlip() {
+        type = "special";
+        name = "loopflip";}
 
+    public void setTp(CtFor f) {
+        tp = f;
+        Factory factory = tp.getFactory();
+        save = factory.Core().clone(tp);
+        position = tp.getParent(CtType.class).getQualifiedName()
+                + ":" + tp.getPosition().getLine();
+
+    }
+
+    public void setPosition(String str) {
+        position = str;
+    }
 
     @Override
     public String classLocationName() {
@@ -255,11 +272,12 @@ public class LoopFlip extends SingleTransformation {
         }
     }
 
-    @Override
-    public void apply(String srcDir) throws Exception {
+    boolean preApplied = false;
+
+    public void preApply() {
+        preApplied = true;
         Factory factory = tp.getFactory();
         src = factory.Core().clone(tp);
-        System.out.println("replace: " + tp.toString());
 
         readInit();
         readExpression();
@@ -268,7 +286,12 @@ public class LoopFlip extends SingleTransformation {
         modifyUpdate();
         modifyExpression();
         modifyInit();
+    }
 
+    @Override
+    public void apply(String srcDir) throws Exception {
+        System.out.println("replace: " + tp.toString());
+        preApply();
         tp.replace(src);
 
         System.out.println("with: " + src.toString());
@@ -278,12 +301,12 @@ public class LoopFlip extends SingleTransformation {
 
     @Override
     public void restore(String srcDir) throws RestoreTransformationException {
-            try {
-                src.replace(save);
-                printJavaFile(srcDir);
-            } catch (Exception e) {
-                throw new RestoreTransformationException("", e);
-            }
+        try {
+            src.replace(save);
+            printJavaFile(srcDir);
+        } catch (Exception e) {
+            throw new RestoreTransformationException("", e);
+        }
     }
 
     static public boolean isApplyPossible(CtFor tp) {
@@ -320,13 +343,20 @@ public class LoopFlip extends SingleTransformation {
         return true;
     }
 
+    String position = null;
+
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
-
+        if(!preApplied) preApply();;
         JSONObject object = super.toJSONObject();
         object.put("newFor", src.toString());
-        object.put("position", src.getParent(CtType.class).getQualifiedName() + ":" + src.getPosition().getLine());
+        if(position != null ) object.put("position", position);
+        else {
+            object.put("position",
+                    src.getParent(CtType.class).getQualifiedName()
+                            + ":" + src.getPosition().getLine());
+        }
         JSONObject conditionJSON = new JSONObject();
         conditionJSON.put("oldFor", save.toString());
         object.put("save",conditionJSON);

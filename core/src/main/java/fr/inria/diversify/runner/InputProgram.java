@@ -332,20 +332,27 @@ public class InputProgram {
         T result = null;
 
         String[] s = position.split(":");
-        String classPosition = s[0];
+        String classPositionTmp = s[0];
+        if(classPositionTmp.contains("$")) classPositionTmp = classPositionTmp.split("\\$")[0];
+        String classPosition = classPositionTmp;
         int lineNumberPosition = Integer.parseInt(s[1]);
 
         List<T> allElements = getAllElement(type);
-        List<T> elements = allElements.stream()
+        /*List<T> elements = allElements.stream()
                 .filter(e -> (e.getPosition().getLine() == lineNumberPosition)
                         && (e.getPosition().getCompilationUnit().getMainType().getQualifiedName().equals(classPosition))
-                ).collect(Collectors.toList());
+                ).collect(Collectors.toList());*/
+        List<T> elements = allElements.stream()
+                .filter(e -> (e.getPosition().getLine() == lineNumberPosition))
+                .collect(Collectors.toList());
         if(elements.size() == 1) return  elements.get(0);
-        else {
-            for(T elem : elements) {
-                if ((searchValue == null || elem.toString().equals(searchValue))) {
-                    return elem;
-                }
+        List<T> elementsFiltered = elements.stream()
+                .filter(e -> e.getPosition().getCompilationUnit().getMainType().getQualifiedName().equals(classPosition))
+                .collect(Collectors.toList());
+        if(elements.size() == 1) return  elements.get(0);
+        for(T elem : elements) {
+            if ((searchValue == null || elem.toString().equals(searchValue))) {
+                return elem;
             }
         }
         return result;

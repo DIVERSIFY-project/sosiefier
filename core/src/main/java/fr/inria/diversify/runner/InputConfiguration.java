@@ -259,6 +259,7 @@ public class InputConfiguration {
         prop.setProperty("maven.newPomFile", "");
         prop.setProperty("transformation.level", "statement");
         prop.setProperty("builder", "maven");
+        prop.setProperty("pom", "/pom.xml");
     }
 
     protected String getAbsolutePath(String path) {

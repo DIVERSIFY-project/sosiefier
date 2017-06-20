@@ -142,24 +142,35 @@ public class JsonTransformationLoader {
      * @throws fr.inria.diversify.persistence.PersistenceException in case the read has to many errors
      */
     public Collection<Transformation> read() {
+        System.out.println("open: " + jsonPath);
         open(); //Open the json file
 
         HashMap<UUID, Transformation> result = new HashMap<>();
-        System.out.println("result size: " + result.size());
-        JsonHeaderInput headerInput = (JsonHeaderInput)getSection(JsonHeaderInput.class);
-        headerInput.setJsonObject(jsonObject);
-        headerInput.setInputProgram(inputProgram);
-        headerInput.setLoadMessages(getLoadMessages());
-        headerInput.read(result);
-        header = headerInput.getHeader();
-        System.out.println("result size: " + result.size());
+        //System.out.println("result size: " + result.size());
+
+        JsonHeaderInput headerInput = (JsonHeaderInput) getSection(JsonHeaderInput.class);
+        try {
+
+            headerInput.setJsonObject(jsonObject);
+            headerInput.setInputProgram(inputProgram);
+            headerInput.setLoadMessages(getLoadMessages());
+            headerInput.read(result);
+            header = headerInput.getHeader();
+            //System.out.println("result size: " + result.size());
+        } catch (PersistenceException e) {
+            System.err.println("Can't read header");
+        }
 
         JsonFailuresInput failures = (JsonFailuresInput) getSection(JsonFailuresInput.class);
-        failures.setJsonObject(jsonObject);
-        failures.setInputProgram(inputProgram);
-        failures.setLoadMessages(getLoadMessages());
-        failures.read(result);
-        System.out.println("result size: " + result.size());
+        try {
+            failures.setJsonObject(jsonObject);
+            failures.setInputProgram(inputProgram);
+            failures.setLoadMessages(getLoadMessages());
+            failures.read(result);
+        //System.out.println("result size: " + result.size());
+        } catch (PersistenceException e) {
+            System.err.println("Can't read dictionarry");
+        }
 
         JsonTransformationCollectionInput asts = (JsonTransformationCollectionInput)
                 getSection(JsonTransformationCollectionInput.class);
@@ -168,7 +179,7 @@ public class JsonTransformationLoader {
         asts.setLoadMessages(getLoadMessages());
         asts.setFailures(failures.getFailures());
         asts.read(result);
-        System.out.println("result size: " + result.size());
+        //System.out.println("result size: " + result.size());
 
         for ( JsonSectionInput s : sections.values() ) {
             if ( s.equals(headerInput) || s.equals(failures) || s.equals(asts) ) continue;

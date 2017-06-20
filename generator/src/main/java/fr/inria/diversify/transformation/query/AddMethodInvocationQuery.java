@@ -31,13 +31,13 @@ public class AddMethodInvocationQuery extends TransformationQuery {
     private boolean nonstaticMethods = true;
     private boolean dumpMethodsAfterSuccess = false;
     private boolean shuffleCandidate = false;
-    private boolean shuffleMethods = false;
-    private int maxMethodsPerStmt = 1;
+    private boolean shuffleMethods = true;
+    private int maxMethodsPerStmt = 100;
 
 
     public AddMethodInvocationQuery(InputProgram inputProgram, boolean internalMethods, boolean externalMethods,
                                     boolean staticMethods, boolean nonstaticMethods, boolean dumpMethodsAfterSuccess,
-                                    boolean shuffleCandidate, boolean shuffleMethods) {
+                                    boolean shuffleCandidate, boolean shuffleMethods, int maxMethodsPerStmt) {
         super(inputProgram);
 
 
@@ -48,6 +48,7 @@ public class AddMethodInvocationQuery extends TransformationQuery {
         this.dumpMethodsAfterSuccess = dumpMethodsAfterSuccess;
         this.shuffleCandidate = shuffleCandidate;
         this.shuffleMethods = shuffleMethods;
+        this.maxMethodsPerStmt = maxMethodsPerStmt;
 
         findCandidates();
     }

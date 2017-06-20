@@ -22,6 +22,8 @@ public class MavenBuilder extends AbstractBuilder {
         super(directory);
     }
 
+    public String pomRelativePath = "/pom.xml";
+
     protected void runPrivate(String[] goals, boolean verbose) {
         output = null;
         if(goals == null) {

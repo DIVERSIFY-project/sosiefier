@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.transformation.exception.RestoreTransformationException;
+import fr.inria.diversify.util.RandomLiteralFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.code.*;
@@ -8,40 +9,26 @@ import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
 
+import java.lang.reflect.Type;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
- * Created by nharrand on 06/12/16.
+ * Created by nharrand on 19/12/16.
  */
-public class SwapSubType extends SingleTransformation {
+public class RemoveTypeFormating extends SingleTransformation  {
 
-    //CtConstructorCall newCall;
-    CtExpression newCall;
-    CtConstructorCall tp;
-    CtConstructorCall save;
-    CtCodeSnippetExpression newCallSnippet;
+    CtExpression tp;
+    CtExpression save;
+    CtExpression insert;
+    String pattern;
 
-    public SwapSubType(CtConstructorCall tp, CtConstructorCall newCall) {
+    public RemoveTypeFormating(CtExpression tp, String pattern, CtExpression insert) {
         this.tp = tp;
-        type = "replace";
-        name = "swapSubType";
-        Factory factory = tp.getFactory();
-        save = factory.Core().clone(tp);
-
-        this.newCall = newCall;
+        save = tp.getFactory().Core().clone(tp);
+        this.insert = tp.getFactory().Core().clone(insert);
+        this.pattern = pattern;
     }
-
-    public SwapSubType() {
-        type = "replace";
-        name = "swapSubType";
-    }
-
-    public void setTpAndNewCall(CtConstructorCall tp, CtCodeSnippetExpression newCall) {
-        this.tp = tp;
-        Factory factory = tp.getFactory();
-        save = factory.Core().clone(tp);
-
-        newCallSnippet = newCall;
-    }
-
 
     @Override
     public String classLocationName() {
@@ -76,20 +63,17 @@ public class SwapSubType extends SingleTransformation {
 
     @Override
     public void apply(String srcDir) throws Exception {
-        System.out.println("old stmt: " + tp.toString());
-        //if(newCall == null) newCall = (CtConstructorCall) newCallSnippet.compile();
-        //tp.replace((CtStatement) newCall);
-        if(newCall == null) newCall = newCallSnippet;
-        tp.replace(newCall);
 
-        System.out.println("newt stmt: " + newCall.toString());
+        System.out.println("old stmt: " + tp.toString());
+        tp.replace(insert);
+        System.out.println("newt stmt: " + insert.toString());
         printJavaFile(srcDir);
     }
 
     @Override
     public void restore(String srcDir) throws RestoreTransformationException {
         try {
-            newCall.replace((CtStatement) tp);
+            tp.replace(save);
             printJavaFile(srcDir);
         } catch (Exception e) {
             throw new RestoreTransformationException("", e);
@@ -101,14 +85,17 @@ public class SwapSubType extends SingleTransformation {
     public JSONObject toJSONObject() throws JSONException {
 
         JSONObject object = super.toJSONObject();
-        if(newCall != null) object.put("newCall", newCall.toString());
-       else object.put("newCall", newCallSnippet.toString());
+
+        JSONObject insertJSON = new JSONObject();
+        insertJSON.put("stmt", insert.toString());
+        insertJSON.put("pattern", pattern);
+        object.put("insert", insertJSON);
+
         JSONObject tpJSON = new JSONObject();
         tpJSON.put("position", tp.getParent(CtType.class).getQualifiedName() + ":" + tp.getPosition().getLine());
-        tpJSON.put("type", tp.getClass().getName());
-        tpJSON.put("sourcecode", tp.toString());
-        object.put("transplantationPoint",tpJSON);
+        tpJSON.put("sourcecode", save.toString());
+        object.put("transplantationPoint", tpJSON);
+
         return object;
     }
 }
-

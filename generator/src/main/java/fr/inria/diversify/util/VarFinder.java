@@ -90,11 +90,18 @@ public class VarFinder {
             Set<CtMethod> methods = c.getAllMethods();
             res.addAll(
                     methods.stream()
-                    .filter(
+                    /*.filter(
                             m -> (
                                     m.getModifiers().contains(ModifierKind.PUBLIC)
                                     || ((c.getPackage() != null) && c.getPackage().equals(elPackage) && m.getModifiers().contains(ModifierKind.PROTECTED))
                                     || c.equals(elClass)
+                            )
+                    )*/
+                    .filter(
+                            m -> (
+                                    m.getModifiers().contains(ModifierKind.PUBLIC)
+                                            || ((m.getParent(CtClass.class) != null) && (m.getParent(CtClass.class).getPackage() != null) && m.getParent(CtClass.class).getPackage().equals(elPackage) && m.getModifiers().contains(ModifierKind.PROTECTED))
+                                            || ((m.getParent(CtClass.class) != null) && m.getParent(CtClass.class).equals(elClass))
                             )
                     )
                     .filter(
@@ -102,6 +109,8 @@ public class VarFinder {
                     )
                     .filter(
                             m -> (acceptNonStatic || m.getModifiers().contains(ModifierKind.STATIC))
+                    ).filter(
+                            m -> !(m.getSignature().startsWith("<") || m.getType().isGenerics())
                     )
                     .collect(Collectors.toSet())
             );
@@ -114,19 +123,36 @@ public class VarFinder {
     public static Set<CtMethod> getInternalMethods(CtElement el, boolean acceptStatic, boolean acceptNonStatic) {
         Set<CtMethod> res = new HashSet<>();
         CtClass elClass = el.getParent(CtClass.class);
+        CtPackage elPackage = elClass.getPackage();
         Set<CtMethod> methods = elClass.getAllMethods();
         res.addAll(methods.stream()
+                .filter(
+                        m -> (
+                                m.getModifiers().contains(ModifierKind.PUBLIC)
+                                        || ((m.getParent(CtClass.class) != null) && (m.getParent(CtClass.class).getPackage() != null) && m.getParent(CtClass.class).getPackage().equals(elPackage) && m.getModifiers().contains(ModifierKind.PROTECTED))
+                                        || ((m.getParent(CtClass.class) != null) && m.getParent(CtClass.class).equals(elClass))
+                        )
+                )
+                /*.filter(
+                        m -> (m.getType().getQualifiedName().equals(elClass.getQualifiedName()) || m.getModifiers().contains(ModifierKind.PUBLIC))
+                )*/
                 .filter(
                         m -> (acceptStatic || !m.getModifiers().contains(ModifierKind.STATIC))
                 )
                 .filter(
                         m -> (acceptNonStatic || m.getModifiers().contains(ModifierKind.STATIC))
+                ).filter(
+                        m -> !(m.getSignature().startsWith("<") || m.getType().isGenerics())
                 )
                 .collect(Collectors.toSet()));
         return res;
     }
 
     public static boolean notPrimitiveNotAnArray(CtVariable v) { return !v.getType().isPrimitive() && !v.toString().contains("[]");}
+
+    public static boolean notParametricType(CtMethod m) {
+        return m.getType().isGenerics();
+    }
 
     public static Set<CtMethod> getTargetableMethods(CtElement el) {
         Set<CtMethod> res = new HashSet<>();
@@ -205,8 +231,8 @@ public class VarFinder {
             } else {
                 if (param.getType().isPrimitive()) { //Primitive literal building
                     CtExpression expression;
-                    if ((param.getType().getSimpleName() == "Byte")
-                            || (param.getType().getSimpleName() == "Short")) {
+                    if ((param.getType().getQualifiedName().equals("byte"))
+                            || (param.getType().getQualifiedName().equals("short"))) {
                         expression = f.Code().createCodeSnippetExpression("(" + param.getType().getActualClass().toString() + ")" + RandomLiteralFactory.randomValue(param.getType()));
                     } else {
                         expression = RandomLiteralFactory.randomValue(param.getType());

@@ -1,8 +1,8 @@
 package fr.inria.diversify.util;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import org.json.JSONObject;
+
+import java.io.*;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 
@@ -153,6 +153,34 @@ public class FileUtils {
         Files.copy(Paths.get(srcFile.getAbsolutePath()),
                 Paths.get(destFile.getAbsolutePath()),
                 StandardCopyOption.COPY_ATTRIBUTES);
+    }
+
+    public static String readFile(File in) {
+        String result = null;
+        try {
+            InputStream input = new FileInputStream(in);
+            if (input != null) {
+                result = org.apache.commons.io.IOUtils.toString(input);
+                input.close();
+            } else {
+                System.out.println("[Error] File not found: " + in.getPath());
+            }
+        } catch (Exception e) {
+            //e.printStackTrace();
+            return null; // the template was not found
+        }
+        return result;
+    }
+
+    public static void writeFile(JSONObject obj, File f) {
+        try {
+            PrintWriter w = new PrintWriter(f);
+            w.print(obj.toString());
+            w.close();
+        } catch (Exception ex) {
+            System.err.println("Problem writing " + f.getPath());
+            ex.printStackTrace();
+        }
     }
 
 }
