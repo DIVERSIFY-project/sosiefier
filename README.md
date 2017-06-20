@@ -1,4 +1,4 @@
-#Sosiefier
+# Sosiefier
 Sosiefier is a project that aims at exporing the space of sosie of java programs.
 It can be used to:
  * Explore java sources in order to build source transformations
@@ -6,19 +6,23 @@ It can be used to:
  * Chain these operations
 Project > Transformation exploration > apply transformation > build & run tests > results
 
-#Architecture
+# Architecture
 
-##Transformation
+## Transformation
 Describe a source transformation.
-##Querry
+## Querry
 Explore a program to find transofrmations.
 (In order to test your query see `generator/src/test/java/fr/inria/diversify/transformation/query/LoopFlipQueryTest.java`)
-##Runner
+## Runner
 Behavior to execute whith a set of transformations.
-##JSON input
+## JSON input
 Read a transformation from a json file
 
-##Configuration Files
+## Configuration Files
 See examples in `./configurationFiles`
 
+# Usage
 
+```sh
+java -jar main/target/main-1.0.0-jar-with-dependencies.jar path/to/config/file.properties
+```
