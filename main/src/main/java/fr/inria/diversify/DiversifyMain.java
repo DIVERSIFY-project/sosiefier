@@ -340,6 +340,8 @@ public class DiversifyMain {
                         shuffleMethods, maxMethodTryPerStmt);
             case "swapsubtype":
                 return new SwapSubTypeQuery(inputProgram);
+            case "randomprotocol":
+                return new RandomProtocolQuery(inputProgram);
             case "removecheck":
                 return new RemoveCheckQuerry(inputProgram);
             case "removetypeformating":
