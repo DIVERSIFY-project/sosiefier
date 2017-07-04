@@ -26,7 +26,9 @@ public class RandomProtocolQuery extends TransformationQuery {
     @Override
     public Transformation query() throws QueryException {
         int n = 20;
-        int partitionID = r.nextInt((int) Math.pow(2,n-1));
+        //int partitionID = r.nextInt((int) Math.pow(2,n-1));
+        //int partitionID = 507647;
+        int partitionID = 458667;
         List<byte[]> keys = new LinkedList<>();
         for(int i = 0; i < n; i ++) {
             byte[] bytes = new byte[5];

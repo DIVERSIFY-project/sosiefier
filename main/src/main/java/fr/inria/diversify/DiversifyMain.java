@@ -27,6 +27,7 @@ import fr.inria.diversify.transformation.query.*;
 import fr.inria.diversify.transformation.typeTransformation.InstanceTransformationQuery;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.InitUtils;
+import fr.inria.diversify.util.TestBaseInfo;
 import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
 import org.json.JSONException;
@@ -75,8 +76,10 @@ public class DiversifyMain {
 
         InitUtils.initSpoon(inputProgram, false);
 
-
-        if (inputConfiguration.getProperty("stat").equals("true")) {
+        if (inputConfiguration.getProperty("mutationtesting", "false").equals("true")) {
+            TestBaseInfo testBaseInfo = new TestBaseInfo(inputProgram,
+                    inputConfiguration);
+        } else if (inputConfiguration.getProperty("stat").equals("true")) {
             computeStatistic();
         } else if (inputConfiguration.getProperty("printCandidates", "false").equals("true")) {
             int n = Integer.parseInt(inputConfiguration.getProperty("nbRun"));
@@ -142,7 +145,9 @@ public class DiversifyMain {
             } finally {
                 writeResult(runner);
             }
-            runner.deleteTmpFiles();
+            if(!inputConfiguration.getProperty("deleteTmpDir", "true").equalsIgnoreCase("false")) {
+                runner.deleteTmpFiles();
+            }
         }
     }
 

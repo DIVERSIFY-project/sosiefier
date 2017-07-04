@@ -173,9 +173,13 @@ public class FileUtils {
     }
 
     public static void writeFile(JSONObject obj, File f) {
+        writeFile(obj.toString(), f);
+    }
+
+    public static void writeFile(String str, File f) {
         try {
             PrintWriter w = new PrintWriter(f);
-            w.print(obj.toString());
+            w.print(str);
             w.close();
         } catch (Exception ex) {
             System.err.println("Problem writing " + f.getPath());
