@@ -215,6 +215,9 @@ public class DiversifyMain {
         abstractRunner.init(project, inputConfiguration.getProperty("tmpDir"));
 
         abstractRunner.setResultDir(resultDir);
+        if(!inputConfiguration.getProperty("test-impact", "").equalsIgnoreCase("")) {
+            abstractRunner.setTestImpactReport(new File(inputConfiguration.getProperty("test-impact")));
+        }
 
         return abstractRunner;
     }

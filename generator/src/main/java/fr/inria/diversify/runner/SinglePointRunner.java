@@ -2,15 +2,18 @@ package fr.inria.diversify.runner;
 
 
 import fr.inria.diversify.statistic.SinglePointSessionResults;
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.AddMethodInvocation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.Log;
+import spoon.reflect.declaration.CtMethod;
+import spoon.reflect.declaration.CtParameter;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Simon on 20/08/14.
@@ -67,7 +70,26 @@ public class SinglePointRunner extends AbstractRunner {
             applyTransformation(trans);
 
             try {
-                int status = runTest(tmpDir);
+                int status;
+                if(trans instanceof AddMethodInvocation) {
+                    AddMethodInvocation a = (AddMethodInvocation) trans;
+                    CtMethod m = a.getTp().getParent(CtMethod.class);
+                    String params = "(";
+                    boolean isFirst = true;
+                    List<CtParameter> ps = m.getParameters();
+                    for(CtParameter p : ps) {
+                        if(isFirst) isFirst = false;
+                        else params +=", ";
+                        params += p.getType().getQualifiedName();
+                    }
+                    params += ")";
+                    String method = m.getDeclaringType().getQualifiedName() + "." +
+                            m.getSimpleName() + params;
+                    status = runTest(tmpDir, method);
+                } else {
+                    status = runTest(tmpDir);
+                }
+
 
 //                if(status == 0) {
 //                    writeAllInfo((SingleTransformation) trans, trial);
@@ -138,4 +160,18 @@ public class SinglePointRunner extends AbstractRunner {
 //        FileUtils.copyFile(trans.getPosition().getFile(),new File(dir.getAbsoluteFile() + "/java.java"));
 //
 //    }
+    protected Integer runTest(String directory, String method) throws InterruptedException {
+        int status;
+
+        Log.debug("run test in directory: {}", directory);
+        builder.setDirectory(directory);
+        if(testImpact != null) {
+            builder.runBuilder(null,getTests(method));
+        }
+        else builder.runBuilder();
+        Log.info("status: " + builder.getStatus() + ", compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", nb error: " + builder.getFailedTests().size());
+        status = builder.getStatus();
+
+        return status;
+    }
 }

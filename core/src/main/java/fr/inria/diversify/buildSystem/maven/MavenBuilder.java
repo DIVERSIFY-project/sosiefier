@@ -9,6 +9,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * User: Simon
@@ -25,6 +26,11 @@ public class MavenBuilder extends AbstractBuilder {
     public String pomRelativePath = "/pom.xml";
 
     protected void runPrivate(String[] goals, boolean verbose) {
+        runPrivate(goals, verbose, null);
+    }
+
+    @Override
+    protected void runPrivate(String[] goals, boolean verbose, String tests) {
         output = null;
         if(goals == null) {
             goals = this.goals;
@@ -33,6 +39,12 @@ public class MavenBuilder extends AbstractBuilder {
 
         InvocationRequest request = new DefaultInvocationRequest();
         request.setPomFile(new File(directory + "/pom.xml"));
+
+        if(tests != null) {
+            Properties p = new Properties();
+            p.put("test",tests);
+            request.setProperties(p);
+        }
 
         List<String> l = new ArrayList<String>();
 

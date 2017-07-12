@@ -169,7 +169,7 @@ public class CheckDistanceRunner extends AbstractRunner {
     public Map<String, Set<String>> methodsTests = new HashMap<>();
 
     public void initMethodImpact() {
-        File json = new File(sourceDir, "methodsImpact.json");
+        File json = new File(sourceDir, "tie-report.json");
         if(!json.exists())
             System.err.println("The src project must contain a json named methodsImpact.json containing a map (method, set(test-case))");
 

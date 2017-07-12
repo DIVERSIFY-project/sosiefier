@@ -99,8 +99,8 @@ public class StmtInfo {
                 "\"methodClassTargetByTests\"" + "," +
                 "\"nbDiff\"" + "," +
                 "\"nbStaticDiff\"" + "," +
-                "\"nbMutantKilled\"" + "," +
-                "\"nbMutantSurvived\"" + "\n";
+                "\"nbMutantSurvived\"" + "," +
+                "\"nbMutantTried\"" + "\n";
     }
 
 }

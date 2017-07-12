@@ -11,11 +11,13 @@ import fr.inria.diversify.util.FileUtils;
 import fr.inria.diversify.util.GitUtils;
 import fr.inria.diversify.util.Log;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import spoon.reflect.declaration.CtType;
 
 import java.io.*;
-import java.util.List;
+import java.util.*;
 
 /**
  * User: Simon
@@ -267,6 +269,42 @@ public abstract class AbstractRunner {
                 throw new RuntimeException(e1);
             }
         }
+    }
+
+    Map<String, Set<String>> testImpact = null;
+
+    public void setTestImpactReport(File f) {
+        if(!f.canRead()) System.err.println("Unreadable file: " + f.getName());
+        try {
+            testImpact = new HashMap<>();
+            String s = FileUtils.readFile(f);
+            JSONObject reportF = new JSONObject(s);
+            JSONArray report = reportF.getJSONArray("methodList");
+            for(int i = 0; i < report.length(); i++) {
+                String method = report.getJSONObject(i).getString("method");
+                Set<String> tests = new HashSet<>();
+                JSONArray testA = report.getJSONObject(i).getJSONArray("called-in");
+                for(int j = 0; j < testA.length(); j++) {
+                    tests.add(testA.getString(j));
+                }
+                testImpact.put(method,tests);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getTests(String method) {
+        String res = "";
+        if(testImpact == null) return null;
+        if(!testImpact.containsKey(method)) return "";
+        boolean isFirst = true;
+        for(String t: testImpact.get(method)) {
+            if(isFirst) isFirst = false;
+            else res += ",";
+            res += t;
+        }
+        return res;
     }
 
     protected Integer runTest(String directory) throws InterruptedException {

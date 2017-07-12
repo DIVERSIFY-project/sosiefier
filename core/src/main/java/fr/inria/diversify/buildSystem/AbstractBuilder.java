@@ -101,11 +101,15 @@ public abstract class AbstractBuilder {
     }
 
     public void runBuilder(final String[] goals) throws InterruptedException {
+        runBuilder(goals,null);
+    }
+
+    public void runBuilder(final String[] goals, String tests) throws InterruptedException {
         initThreadGroup();
         reset();
         Thread thread = new Thread() {
             public void run() {
-                runPrivate(goals, true);
+                runPrivate(goals, true, tests);
             }
         };
         thread.start();
@@ -176,6 +180,9 @@ public abstract class AbstractBuilder {
     /**
      * Method to run in the compiler's thread
      */
+    protected void runPrivate(String[] goals, boolean verbose, String tests) {
+        runPrivate(goals, verbose);
+    }
     protected abstract void runPrivate(String[] goals, boolean verbose);
 
     protected void initThreadGroup() {
