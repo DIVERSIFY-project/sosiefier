@@ -35,6 +35,7 @@ public class JsonTransformationCollectionInput extends JsonAstTransformationColl
         sections.add(new JsonAddMethodInvocationInput(getInputProgram()));
         sections.add(new JsonLoopFlipInput(getInputProgram()));
         sections.add(new JsonSwapSubTypeInput(getInputProgram()));
+        sections.add(new JsonRemoveInvocationInput(getInputProgram()));
 
         return sections;
     }

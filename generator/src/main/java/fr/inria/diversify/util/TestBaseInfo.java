@@ -200,7 +200,7 @@ public class TestBaseInfo {
 
     public static class InvalidCharacter extends Exception {}
 
-    public String getMethod(String stmtPosition) {
+    public String getMethod(String stmtPosition) {//@
         CtStatement stmt = inputProgram.findElement(CtStatement.class,stmtPosition,null);
         if(stmt != null) {
             CtMethod method = stmt.getParent(CtMethod.class);

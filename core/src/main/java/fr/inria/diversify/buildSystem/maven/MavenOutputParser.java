@@ -25,6 +25,8 @@ public class MavenOutputParser {
     //Indicates if they where compile errors
     private boolean compileError;
 
+    public boolean hasDeviated = false;
+
 
     //Errors we don't mind about
     private List<String> acceptedErrors;
@@ -55,6 +57,8 @@ public class MavenOutputParser {
      */
     public int parse(String[] output) {
         Pattern failedTestPattern = Pattern.compile("(\\w+)\\(((\\w+\\.)*\\w+)\\)\\s+Time elapsed:\\s+((\\d+\\.)?\\d+)\\s+sec\\s+<<<\\s+((FAILURE)|(ERROR))!");
+        Pattern deviationPattern = Pattern.compile(".+>>>> OffTrack <<<<");
+
 
         List<String> resultFailedTests = new ArrayList<>();
         boolean addToFailedTest = false;
@@ -68,6 +72,11 @@ public class MavenOutputParser {
             boolean matches = m.find();
             if (matches) {
                 this.failedTest.add(m.group(2) + "." + m.group(1));
+            }
+            Matcher mDev = deviationPattern.matcher(s);
+            boolean matchesmDev = mDev.find();
+            if (matchesmDev) {
+                this.hasDeviated = true;
             }
 
             if(addToFailedTest) {

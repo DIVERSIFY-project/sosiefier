@@ -41,7 +41,7 @@ public class InitUtils {
         String builder = inputConfiguration.getProperty("builder");
 
         if(builder.equals("maven")) {
-            t.resolveDependencies(inputConfiguration.getInputProgram());
+            t.resolveDependencies(inputConfiguration.getInputProgram(), inputConfiguration.getProperty("dependenciesLoading", "True").equalsIgnoreCase("true"));
             String androidSdk = inputConfiguration.getProperty("maven.androidSdk");
             if (androidSdk != null) {
                 t.resolveAndroidDependencies(androidSdk);

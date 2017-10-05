@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Created by Simon on 20/08/14.
@@ -85,7 +86,11 @@ public class SinglePointRunner extends AbstractRunner {
                     params += ")";
                     String method = m.getDeclaringType().getQualifiedName() + "." +
                             m.getSimpleName() + params;
-                    status = runTest(tmpDir, method);
+                    Properties p = new Properties();
+                    if(testImpact != null) {
+                        p.setProperty("test", getTests(method));
+                    }
+                    status = runTest(tmpDir, p);
                 } else {
                     status = runTest(tmpDir);
                 }
@@ -160,15 +165,12 @@ public class SinglePointRunner extends AbstractRunner {
 //        FileUtils.copyFile(trans.getPosition().getFile(),new File(dir.getAbsoluteFile() + "/java.java"));
 //
 //    }
-    protected Integer runTest(String directory, String method) throws InterruptedException {
+    protected Integer runTest(String directory, Properties properties) throws InterruptedException {
         int status;
 
         Log.debug("run test in directory: {}", directory);
         builder.setDirectory(directory);
-        if(testImpact != null) {
-            builder.runBuilder(null,getTests(method));
-        }
-        else builder.runBuilder();
+        builder.runBuilder(null,properties);
         Log.info("status: " + builder.getStatus() + ", compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", nb error: " + builder.getFailedTests().size());
         status = builder.getStatus();
 

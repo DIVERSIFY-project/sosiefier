@@ -5,10 +5,7 @@ import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.buildSystem.ant.AntBuilder;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.coverage.CoverageReport;
-import fr.inria.diversify.coverage.ICoverageReport;
-import fr.inria.diversify.coverage.MultiCoverageReport;
-import fr.inria.diversify.coverage.NullCoverageReport;
+import fr.inria.diversify.coverage.*;
 import fr.inria.diversify.runner.*;
 import fr.inria.diversify.issta2.Compare;
 import fr.inria.diversify.issta2.DiffQuery;
@@ -31,6 +28,7 @@ import fr.inria.diversify.util.TestBaseInfo;
 import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
 import org.json.JSONException;
+import spoon.reflect.code.CtStatement;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
 
@@ -75,8 +73,9 @@ public class DiversifyMain {
 //        dependencyResolver.resolveDependencies(inputProgram);
 
         InitUtils.initSpoon(inputProgram, false);
-
-        if (inputConfiguration.getProperty("mutationtesting", "false").equals("true")) {
+        if (inputConfiguration.getProperty("printnodetype", "false").equals("true")) {
+            exploreNodeType(inputProgram);
+        } else if (inputConfiguration.getProperty("mutationtesting", "false").equals("true")) {
             TestBaseInfo testBaseInfo = new TestBaseInfo(inputProgram,
                     inputConfiguration);
         } else if (inputConfiguration.getProperty("stat").equals("true")) {
@@ -86,7 +85,8 @@ public class DiversifyMain {
             AbstractRunner runner = initRunner();
 
             AbstractBuilder builder = initBuilder(runner.getTmpDir());
-            inputProgram.setCoverageReport(initCoverageReport(runner.getTmpDir()));
+            //inputProgram.setCoverageReport(initCoverageReport(runner.getTmpDir()));
+            inputProgram.setCoverageReport(initCoverageReport(inputProgram.getProgramDir()));
             TransformationQuery query = initTransformationQuery();
 
             int maxTransformationPerFile = Integer.parseInt(inputConfiguration.getProperty("maxTransformationPerFile", "100"));
@@ -103,7 +103,7 @@ public class DiversifyMain {
                 if (n > 0) {
                     while ((i < n) && query.hasNextTransformation()) {
                         transformations.add(query.query());
-                        if(transformations.size() > maxTransformationPerFile) {
+                        if(transformations.size() >= maxTransformationPerFile || !query.hasNextTransformation()) {
 
                             writer.write(transformations,
                                     inputConfiguration.getProperty("transformationsOutput", "transoformationOutput") + j + ".json",
@@ -116,7 +116,7 @@ public class DiversifyMain {
                 } else {
                     while (query.hasNextTransformation()) {
                         transformations.add(query.query());
-                        if(transformations.size() > maxTransformationPerFile) {
+                        if(transformations.size() >= maxTransformationPerFile || !query.hasNextTransformation()) {
 
                             writer.write(transformations,
                                     inputConfiguration.getProperty("transformationsOutput", "transoformationOutput") + j + ".json",
@@ -167,7 +167,7 @@ public class DiversifyMain {
                 abstractRunner = new SecondPassRunner(inputConfiguration, project, src);
                 break;
             case "checkdistance":
-                abstractRunner = new CheckDistanceRunner(inputConfiguration, project, src);
+                abstractRunner = new CheckDistanceRunner(inputConfiguration, project, src, new File(""));
                 break;
             case "coverage":
                 abstractRunner = new CoverageRunner(inputConfiguration, project, src);
@@ -352,6 +352,8 @@ public class DiversifyMain {
                 return new RandomProtocolQuery(inputProgram);
             case "removecheck":
                 return new RemoveCheckQuerry(inputProgram);
+            case "delmi":
+                return new RemoveInvocationQuery(inputProgram);
             case "removetypeformating":
                 return new RemoveTypeFormatingQuery(inputProgram);
             case "adr": {
@@ -429,8 +431,12 @@ public class DiversifyMain {
                 if (file.isDirectory()) {
                     icr = new MultiCoverageReport(classes, file);
                 } else {
-                    String classToCover = inputConfiguration.getProperty("coverage.class", null);
-                    icr = new CoverageReport(classes, file, classToCover);
+                    if(file.getName().endsWith(".xml")) {
+                        icr = new XMLCoverageReport(file);
+                    } else {
+                        String classToCover = inputConfiguration.getProperty("coverage.class", null);
+                        icr = new CoverageReport(classes, file, classToCover);
+                    }
                 }
                 icr.create();
                 return icr;
@@ -711,6 +717,39 @@ public class DiversifyMain {
             t.apply(inputProgram.getAbsoluteSourceCodeDir());
         }
 
+
+    }
+
+    static Map<String,Integer> nodeTypeStats = new HashMap<>();
+
+    public void exploreNodeType(InputProgram inputProgram) {
+        inputProgram.getAllElement(CtStatement.class).forEach((s) -> {
+            if(s instanceof CtStatement) {
+                if(nodeTypeStats.containsKey(s.getClass().getName())) {
+                    nodeTypeStats.put(
+                            s.getClass().getName(),
+                            nodeTypeStats.get(s.getClass().getName()) + 1
+                    );
+
+                } else {
+                    nodeTypeStats.put(s.getClass().getName(), 1);
+                }
+            }
+        });
+        System.out.println("Done");
+        String out = inputConfiguration.getProperty("result");
+
+        String res = "Node Type,Population";
+        for(Map.Entry<String,Integer> e: nodeTypeStats.entrySet()) {
+            String nodeType = e.getKey().replace("spoon.support.reflect.","");
+            nodeType = nodeType.replace("code.Ct","");
+            nodeType = nodeType.replace("declaration.Ct","");
+            nodeType = nodeType.replace("Impl","");
+            res += "\n" + nodeType + "," + e.getValue();
+        }
+
+        File resFile = new File(out);
+        fr.inria.diversify.util.FileUtils.writeFile(res, resFile);
 
     }
 }

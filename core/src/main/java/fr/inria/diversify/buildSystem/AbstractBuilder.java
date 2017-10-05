@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 /**
@@ -104,12 +105,12 @@ public abstract class AbstractBuilder {
         runBuilder(goals,null);
     }
 
-    public void runBuilder(final String[] goals, String tests) throws InterruptedException {
+    public void runBuilder(final String[] goals, Properties properties) throws InterruptedException {
         initThreadGroup();
         reset();
         Thread thread = new Thread() {
             public void run() {
-                runPrivate(goals, true, tests);
+                runPrivate(goals, true, properties);
             }
         };
         thread.start();
@@ -180,7 +181,7 @@ public abstract class AbstractBuilder {
     /**
      * Method to run in the compiler's thread
      */
-    protected void runPrivate(String[] goals, boolean verbose, String tests) {
+    protected void runPrivate(String[] goals, boolean verbose, Properties properties) {
         runPrivate(goals, verbose);
     }
     protected abstract void runPrivate(String[] goals, boolean verbose);

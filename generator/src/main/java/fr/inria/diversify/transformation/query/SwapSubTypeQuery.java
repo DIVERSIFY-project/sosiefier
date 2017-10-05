@@ -144,37 +144,38 @@ public class SwapSubTypeQuery extends TransformationQuery {
         List<CtConstructorCall> colCalls = new ArrayList<>();
         List<CtConstructorCall> skippedCalls = new ArrayList<>();
         for(CtConstructorCall call : calls) {
-            Factory f = call.getFactory();
-            CtTypedElement parent = call.getParent(CtTypedElement.class);
-            skipped++;
-            skippedCalls.add(call);
-            if(parent.getType() == null) continue;
-            if(parent.getType().getModifiers().contains(ModifierKind.STATIC)) continue;
-            if(call.getType().getModifiers().contains(ModifierKind.STATIC)) continue;
+            try {
+                Factory f = call.getFactory();
+                CtTypedElement parent = call.getParent(CtTypedElement.class);
+                skipped++;
+                skippedCalls.add(call);
+                if (parent.getType() == null) continue;
+                if (parent.getType().getModifiers().contains(ModifierKind.STATIC)) continue;
+                if (call.getType().getModifiers().contains(ModifierKind.STATIC)) continue;
 
-            if(call.getType().getQualifiedName() == parent.getType().getQualifiedName()) continue;
-            skipped--;
-            skippedCalls.remove(call);
+                if (call.getType().getQualifiedName() == parent.getType().getQualifiedName()) continue;
+                skipped--;
+                skippedCalls.remove(call);
 
-            if(interfaces.keySet().contains(parent.getType().getQualifiedName())) {
-                //String type = call.getType().getActualTypeArguments().stream().
-                //        map(Object::toString).
-                 //       collect(Collectors.joining(",")).toString();
-                String type = parent.getType().getActualTypeArguments().stream().
-                        map(Object::toString).
-                        collect(Collectors.joining(",")).toString();
-                String param = call.getArguments().stream().
-                        map(Object::toString).
-                        collect(Collectors.joining(",")).toString();
+                if (interfaces.keySet().contains(parent.getType().getQualifiedName())) {
+                    //String type = call.getType().getActualTypeArguments().stream().
+                    //        map(Object::toString).
+                    //       collect(Collectors.joining(",")).toString();
+                    String type = parent.getType().getActualTypeArguments().stream().
+                            map(Object::toString).
+                            collect(Collectors.joining(",")).toString();
+                    String param = call.getArguments().stream().
+                            map(Object::toString).
+                            collect(Collectors.joining(",")).toString();
 
-                collections++;
-                colCalls.add(call);
+                    collections++;
+                    colCalls.add(call);
 
-                for(CtCodeSnippetExpression c : buildConstructorCall(call, interfaces.get(parent.getType().getQualifiedName()), type, param)) {
-                    candidates.add(new HashMap.SimpleEntry<>(call, c));
+                    for (CtCodeSnippetExpression c : buildConstructorCall(call, interfaces.get(parent.getType().getQualifiedName()), type, param)) {
+                        candidates.add(new HashMap.SimpleEntry<>(call, c));
+                    }
                 }
-            }
-
+            } catch (spoon.support.SpoonClassNotFoundException e) {}
 
         }
         System.out.println(" --- Done (" + candidates.size() + " coll: " + collections + " skipped: " + skipped + ") --- ");

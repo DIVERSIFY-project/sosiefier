@@ -87,9 +87,23 @@ public class AddMethodInvocationQuery extends TransformationQuery {
                 .collect(Collectors.toMap(ce -> ce, ce -> VarFinder.getAccessibleMethods(ce)))
         );*/
         Collection<CtStatement> stmts = getInputProgram().getAllElement(CtStatement.class);
+
+        Collection<CtStatement> stmtsFiltered = new ArrayList<>();
+        for(CtStatement statement: stmts) {
+            try {
+                if(getInputProgram().getCoverageReport().positionCoverage(statement.getPosition()) != 0) {
+                    stmtsFiltered.add(statement);
+                } else {
+                    System.out.println("Pos: " + statement.getPosition() + " not covered");
+                }
+            } catch (Exception e) {
+                System.out.println("problem");
+            }
+        }
+
         System.out.println(" --- found (" + stmts.size() + ") --- ");
         int i = 0;
-        for(CtStatement ce : stmts) {
+        for(CtStatement ce : stmtsFiltered) {
             if(ce.getParent(CtMethod.class) != null) {
                 if(isInsertable(ce)) candidateList.add(ce);
             }

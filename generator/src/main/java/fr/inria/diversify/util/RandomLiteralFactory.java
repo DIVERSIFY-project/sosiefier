@@ -128,4 +128,29 @@ public class RandomLiteralFactory {
             return f.Code().createLiteral(null);
         }
     }
+
+    public static CtLiteral defaultValue(CtTypeReference t) {
+        Factory f = t.getFactory();
+        if(t.getQualifiedName().equals("byte")) {
+            return f.Code().createLiteral((byte) 0);
+        } else if (t.getQualifiedName().equals("short")) {
+            return f.Code().createLiteral((short) 0);
+        } else if (t.getQualifiedName().equals("char")) {
+            return f.Code().createLiteral((char) 0);
+        } else if (t.getQualifiedName().equals("int")) {
+            return f.Code().createLiteral(0);
+        } else if (t.getQualifiedName().equals("long")) {
+            return f.Code().createLiteral(0L);
+        } else if (t.getQualifiedName().equals("float")) {
+            return f.Code().createLiteral(0.0F);
+        } else if (t.getQualifiedName().equals("double")) {
+            return f.Code().createLiteral(0.0D);
+        } else if (t.getQualifiedName().equals("boolean")) {
+            return f.Code().createLiteral(false);
+        } else if (t.getQualifiedName().equals("java.lang.String")) {
+            return f.Code().createLiteral("");
+        } else {
+            return f.Code().createLiteral(null);
+        }
+    }
 }

@@ -349,10 +349,19 @@ public class InputProgram {
         List<T> elementsFiltered = elements.stream()
                 .filter(e -> e.getPosition().getCompilationUnit().getMainType().getQualifiedName().equals(classPosition))
                 .collect(Collectors.toList());
-        if(elements.size() == 1) return  elements.get(0);
-        for(T elem : elements) {
-            if ((searchValue == null || elem.toString().equals(searchValue))) {
+        //if(elements.size() == 1) return  elements.get(0);
+        if(elementsFiltered.size() == 1) return  elementsFiltered.get(0);
+        //if(elements.size() > 0 && searchValue == null) return elements.get(0);
+        //for(T elem : elements) {
+        if(elementsFiltered.size() > 0 && searchValue == null) return elementsFiltered.get(0);
+        for(T elem : elementsFiltered) {
+            if (elem.toString().equals(searchValue))
                 return elem;
+            String buf = elem.toString();
+            while(buf.startsWith("(") && buf.endsWith(")")) {
+                buf = buf.substring(1,buf.length()-1);
+                if (buf.equals(searchValue))
+                    return elem;
             }
         }
         return result;

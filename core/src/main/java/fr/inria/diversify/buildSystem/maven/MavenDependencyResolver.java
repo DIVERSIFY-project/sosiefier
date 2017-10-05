@@ -82,6 +82,10 @@ public class MavenDependencyResolver implements DependencyResolver {
     }
 
     public void resolveDependencies(InputProgram inputProgram) throws Exception {
+        resolveDependencies(inputProgram, true);
+    }
+    public void resolveDependencies(InputProgram inputProgram, boolean dependenciesLoading) throws Exception {
+
         String pom = inputProgram.getProgramDir() + "/pom.xml";
 
         File pomFile = new File(pom);
@@ -90,12 +94,15 @@ public class MavenDependencyResolver implements DependencyResolver {
 
         MavenProject project = loadProject(pomFile);
 
-        directDependenciesURL = new ArrayList<>(findDirectDependencies(project, inputProgram));
+
+
+        if(dependenciesLoading) directDependenciesURL = new ArrayList<>(findDirectDependencies(project, inputProgram));
+        else directDependenciesURL = new ArrayList<>();
         dependenciesURL.addAll(directDependenciesURL);
 
         if(!onlyDirectDependencies) {
             dependenciesURL.addAll(directDependenciesURL);
-            dependenciesURL.addAll(findDeepDependencies(project, new Properties()));
+            if(dependenciesLoading) dependenciesURL.addAll(findDeepDependencies(project, new Properties()));
         }
         loadDependencies();
     }

@@ -30,7 +30,7 @@ public class MavenBuilder extends AbstractBuilder {
     }
 
     @Override
-    protected void runPrivate(String[] goals, boolean verbose, String tests) {
+    protected void runPrivate(String[] goals, boolean verbose, Properties properties) {
         output = null;
         if(goals == null) {
             goals = this.goals;
@@ -40,10 +40,8 @@ public class MavenBuilder extends AbstractBuilder {
         InvocationRequest request = new DefaultInvocationRequest();
         request.setPomFile(new File(directory + "/pom.xml"));
 
-        if(tests != null) {
-            Properties p = new Properties();
-            p.put("test",tests);
-            request.setProperties(p);
+        if(properties != null) {
+            request.setProperties(properties);
         }
 
         List<String> l = new ArrayList<String>();
@@ -113,6 +111,8 @@ public class MavenBuilder extends AbstractBuilder {
         }
     }
 
+    public boolean hasDeviated = false;
+
     /**
      * Parse status from the maven output
      * @param r
@@ -126,6 +126,7 @@ public class MavenBuilder extends AbstractBuilder {
 //        errors = parser.getCompileErrors();
         failedTests = parser.getFailedTests();
         status = parser.getStatus();
+        this.hasDeviated = parser.hasDeviated;
     }
 
     protected void parseClojureResult(String r) {
