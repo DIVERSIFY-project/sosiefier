@@ -67,8 +67,9 @@ public class DiversityCompiler extends JDTBasedSpoonCompiler {
             finalClassPath[i] = urls[i].getFile();
         }
 
+
         final ClasspathOptions classpathOptions = new ClasspathOptions()
-                .encoding(this.encoding)
+                .encoding(this.getEnvironment().getEncoding().name())
                 .classpath(finalClassPath)
                 .binaries(getBinaryOutputDirectory());
 

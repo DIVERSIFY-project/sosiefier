@@ -1,5 +1,5 @@
 # Sosiefier
-Sosiefier is a project that aims at exporing the space of sosie of java programs.
+Sosiefier is a project that aims at exploring the space of sosie of java programs. (Sosie means here a program variant that passes the original test suit.)
 It can be used to:
  * Explore java sources in order to build source transformations
  * Apply transformation and run tests in order to determine if the variant obtained is a sosie or not.

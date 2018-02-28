@@ -7,7 +7,6 @@ import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.Query;
-import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.reflect.code.CtTryImpl;
 
@@ -83,9 +82,11 @@ public abstract class AbstractLoggingInstrumenter<E extends CtElement> extends A
     }
 
     protected boolean containsGoto(CtElement elem) {
-        QueryVisitor query = new QueryVisitor(new TypeFilter(CtBreak.class));
+       /* QueryVisitor query = new QueryVisitor(new TypeFilter(CtBreak.class));
         elem.accept(query);
-        for(Object o : query.getResult()) {
+        for(Object o : query.getResult()) {*/
+
+        for(Object o : elem.getElements(new TypeFilter(CtBreak.class))) {
             CtBreak ctBreak = (CtBreak) o;
             if(ctBreak.getTargetLabel() != null) {
                 return true;

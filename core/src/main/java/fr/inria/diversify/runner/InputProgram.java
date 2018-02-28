@@ -24,7 +24,7 @@ import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.Factory;
-import spoon.reflect.visitor.QueryVisitor;
+//import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.QueueProcessingManager;
 
@@ -438,12 +438,14 @@ public class InputProgram {
 
     public synchronized <T extends CtElement> List<T> getAllElement(Class cl) {
         if (!typeToObject.containsKey(cl)) {
-            QueryVisitor<T> query = new QueryVisitor(new TypeFilter(cl));
+            List<T> elements = new ArrayList<>();
+            elements.addAll(getFactory().getModel().getElements(new TypeFilter(cl)));
+            /*QueryVisitor<T> query = new QueryVisitor(new TypeFilter(cl));
             List<T> elements = new ArrayList<>();
             for (CtElement e : getRoots()) {
                 e.accept(query);
                 elements.addAll(query.getResult());
-            }
+            }*/
             typeToObject.put(cl, elements);
         }
         return (List<T>)typeToObject.get(cl);

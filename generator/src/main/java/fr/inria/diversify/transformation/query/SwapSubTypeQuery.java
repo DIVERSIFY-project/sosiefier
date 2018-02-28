@@ -116,6 +116,43 @@ public class SwapSubTypeQuery extends TransformationQuery {
         interfaces.put("java.util.NavigableMap", lNavigableMap);
         interfaces.put("java.util.SortedMap", lSortedMap);
         interfaces.put("java.util.Map", lMap);
+
+        commonsCollection();
+    }
+
+
+    public void commonsCollection() {
+
+        Set<String> lList = interfaces.get("java.util.List");
+        lList.add("org.apache.commons.collections4.list.TreeList");
+        lList.add("org.apache.commons.collections4.list.GrowthList");
+        lList.add("org.apache.commons.collections4.list.NodeCachingLinkedList");
+        lList.add("org.apache.commons.collections4.list.CursorableLinkedList");
+        lList.add("org.apache.commons.collections4.ArrayStack");
+
+        Set<String> lSet = interfaces.get("java.util.Set");
+        lSet.add("org.apache.commons.collections4.set.ListOrderedSet");
+
+        //        Bag
+        //org.apache.commons.collections4.bag.HashBag
+        //org.apache.commons.collections4.bag.TreeBag
+
+        Set<String> lQueue = interfaces.get("java.util.Queue");
+        lQueue.add("org.apache.commons.collections4.queue.CircularFifoQueue");
+
+        Set<String> lMap = interfaces.get("java.util.Map");
+        lMap.add("org.apache.commons.collections4.map.CaseInsensitiveMap");
+        lMap.add("org.apache.commons.collections4.map.Flat3Map");
+        lMap.add("org.apache.commons.collections4.map.HashedMap");
+        lMap.add("org.apache.commons.collections4.map.LRUMap");
+        lMap.add("org.apache.commons.collections4.map.LinkedMap");
+        lMap.add("org.apache.commons.collections4.map.ListOrderedMap");
+        lMap.add("org.apache.commons.collections4.map.PassiveExpiringMap");
+        lMap.add("org.apache.commons.collections4.map.ReferenceIdentityMap");
+        lMap.add("org.apache.commons.collections4.map.ReferenceMap");
+        lMap.add("org.apache.commons.collections4.map.SingletonMap");
+        lMap.add("org.apache.commons.collections4.map.StaticBucketMap");
+
     }
 
     public SwapSubTypeQuery(InputProgram inputProgram) {
@@ -190,7 +227,7 @@ public class SwapSubTypeQuery extends TransformationQuery {
             if(!call.getType().getQualifiedName().equals(c)) {
                 //try {
                     //res.add((CtConstructorCall) f.Code().createCodeSnippetExpression("new " + c + "<" + type + ">("+ param + ")").compile());
-                    res.add(f.Code().createCodeSnippetExpression("new " + c + "<" + type + ">("+ param + ")"));
+                    res.add(f.Code().createCodeSnippetExpression("new " + c + "<" + type + ">(" + param + ")"));
                 //} catch (Exception ex) {}
             }
         }

@@ -6,7 +6,7 @@ import fr.inria.diversify.processor.ProcessorUtil;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;
 import spoon.reflect.visitor.CtAbstractVisitor;
-import spoon.reflect.visitor.QueryVisitor;
+//import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
 
 import java.util.*;
@@ -222,9 +222,11 @@ public class VariableLoggingInstrumenter extends AbstractLoggingInstrumenter<CtS
         if (parent == null)
             return false;
 
-        QueryVisitor query = new QueryVisitor(new TypeFilter(CtContinue.class));
+        /*QueryVisitor query = new QueryVisitor(new TypeFilter(CtContinue.class));
         parent.accept(query);
         return query.getResult().stream()
+                .anyMatch(cnt -> ((CtContinue) cnt).getTargetLabel() != null);*/
+        return parent.getElements(new TypeFilter(CtContinue.class)).stream()
                 .anyMatch(cnt -> ((CtContinue) cnt).getTargetLabel() != null);
     }
 

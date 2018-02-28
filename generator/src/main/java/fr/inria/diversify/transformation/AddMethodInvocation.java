@@ -29,7 +29,7 @@ public class AddMethodInvocation extends SingleTransformation {
     CtInvocation aInv;
 
     boolean jStatic;
-    String jPos, jType, jSC;
+    String jPos, jType, jSC, jPath;
 
     public CtStatement getTryInv() {
         return tryInv;
@@ -177,6 +177,7 @@ public class AddMethodInvocation extends SingleTransformation {
         this.parentClass = tp.getParent(CtClass.class);
         this.parentMethod = tp.getParent(CtMethod.class);
         jPos = tp.getParent(CtType.class).getQualifiedName() + ":" + tp.getPosition().getLine();
+        jPath = tp.getPath().toString();
         jType =  tp.getClass().getName();
         jSC = tp.toString();
         jStatic = parentMethod.getModifiers().contains(ModifierKind.STATIC);
@@ -278,6 +279,7 @@ public class AddMethodInvocation extends SingleTransformation {
 
         JSONObject tpJSON = new JSONObject();
             tpJSON.put("position",jPos);
+            tpJSON.put("path",jPath);
             tpJSON.put("type", jType);
             tpJSON.put("sourcecode", jSC);
             tpJSON.put("static", jStatic);

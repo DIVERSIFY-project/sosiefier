@@ -7,7 +7,7 @@ import spoon.reflect.code.CtInvocation;
 import spoon.reflect.code.CtTry;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.factory.Factory;
-import spoon.reflect.visitor.QueryVisitor;
+//import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
 
 
@@ -60,10 +60,11 @@ public class MethodCallInstrumenter extends AbstractLoggingInstrumenter<CtMethod
     }
 
     protected boolean hasCall(CtMethod method) {
-        QueryVisitor query = new QueryVisitor(new TypeFilter(CtInvocation.class));
+        /*QueryVisitor query = new QueryVisitor(new TypeFilter(CtInvocation.class));
         method.accept(query);
 
-        for(Object o : query.getResult()) {
+        for(Object o : query.getResult()) {*/
+        for(Object o : method.getElements(new TypeFilter(CtInvocation.class))) {
             CtInvocation target = (CtInvocation) o;
             if(target.getExecutable() != null && target.getExecutable().getDeclaration() != null)
                 if (inputProgram.getAllElement(CtMethod.class).contains(target.getExecutable().getDeclaration())) {

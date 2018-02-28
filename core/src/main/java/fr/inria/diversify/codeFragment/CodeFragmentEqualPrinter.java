@@ -1,6 +1,7 @@
 package fr.inria.diversify.codeFragment;
 
 import spoon.compiler.Environment;
+import spoon.reflect.code.CtComment;
 import spoon.reflect.code.CtInvocation;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtVariableAccess;
@@ -9,8 +10,10 @@ import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.reference.CtLocalVariableReference;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
-import spoon.reflect.visitor.printer.ElementPrinterHelper;
-import spoon.reflect.visitor.printer.PrinterHelper;
+import spoon.reflect.visitor.DefaultTokenWriter;
+import spoon.reflect.visitor.ElementPrinterHelper;
+import spoon.reflect.visitor.PrinterHelper;
+import spoon.reflect.visitor.TokenWriter;
 
 import java.util.Stack;
 
@@ -18,12 +21,14 @@ public class CodeFragmentEqualPrinter extends DefaultJavaPrettyPrinter {
 
 	private final PrinterHelper printer;
 	private final ElementPrinterHelper elementPrinterHelper;
+	private final TokenWriter printerTokenWriter;
 	public PrintingContext context = new PrintingContext();
 
 	public CodeFragmentEqualPrinter(Environment env) {
 		super(env);
 		this.printer = new PrinterHelper(env);
-		this.elementPrinterHelper = new ElementPrinterHelper(this.printer, this, env);
+		this.printerTokenWriter = new DefaultTokenWriter(this.printer);
+		this.elementPrinterHelper = new ElementPrinterHelper(this.printerTokenWriter, this, env);
 	}
 
     public <T> void visitCtInvocation(CtInvocation<T> invocation) {
@@ -125,5 +130,5 @@ public class CodeFragmentEqualPrinter extends DefaultJavaPrettyPrinter {
 
 		boolean ignoreStaticAccess = false;
 	}
-	
+
 }

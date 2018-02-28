@@ -5,7 +5,7 @@ import fr.inria.diversify.processor.ProcessorUtil;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.reference.CtFieldReference;
-import spoon.reflect.visitor.QueryVisitor;
+//import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
 
 import java.io.File;
@@ -77,9 +77,10 @@ public class FieldUsedInstrumenter extends AbstractLoggingInstrumenter<CtExecuta
     }
 
     protected List<CtStatement> getSubStatement(CtStatement statement) {
-        QueryVisitor query = new QueryVisitor(new TypeFilter(CtStatement.class));
+        /*QueryVisitor query = new QueryVisitor(new TypeFilter(CtStatement.class));
 
         statement.accept(query);
-        return query.getResult();
+        return query.getResult();*/
+        return statement.getElements(new TypeFilter(CtStatement.class));
     }
 }

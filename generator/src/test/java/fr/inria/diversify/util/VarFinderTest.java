@@ -89,8 +89,8 @@ public class VarFinderTest {
                 for(CtMethod method : methodSet) {
                     assertTrue(!method.getModifiers().contains(ModifierKind.STATIC));
                 }
-                assertTrue(methodSet.size() == 16);//7
-                assertTrue(VarFinder.getAccessibleMethods(m.getBody().getLastStatement(), true, true).size() == 21);//13
+                assertTrue(methodSet.size() == 7);//16
+                assertTrue(VarFinder.getAccessibleMethods(m.getBody().getLastStatement(), true, true).size() == 12);//12
             }
         }
     }
@@ -107,11 +107,11 @@ public class VarFinderTest {
                     assertTrue(method.getModifiers().contains(ModifierKind.STATIC));
                 }
                 methodSet = VarFinder.getInternalMethods(m.getBody().getLastStatement(), false, true);
-                assertTrue(methodSet.size() == 9); //0
+                assertTrue(methodSet.size() == 0); //0
                 for(CtMethod method : methodSet) {
                     assertTrue(!method.getModifiers().contains(ModifierKind.STATIC));
                 }
-                assertTrue(VarFinder.getInternalMethods(m.getBody().getLastStatement(), true, true).size() == 13); //4
+                assertTrue(VarFinder.getInternalMethods(m.getBody().getLastStatement(), true, true).size() == 4); //4
             } else if((m.getSimpleName().compareTo("addA") == 0) && (m.getParent(CtClass.class).getSimpleName().compareTo("A") == 0)) {
                 Set<CtMethod> methodSet = VarFinder.getInternalMethods(m.getBody().getLastStatement(), true, false);
                 assertTrue(methodSet.size() == 2); //2
@@ -119,11 +119,11 @@ public class VarFinderTest {
                     assertTrue(method.getModifiers().contains(ModifierKind.STATIC));
                 }
                 methodSet = VarFinder.getInternalMethods(m.getBody().getLastStatement(), false, true);
-                assertTrue(methodSet.size() == 14); //5
+                assertTrue(methodSet.size() == 5); //5
                 for(CtMethod method : methodSet) {
                     assertTrue(!method.getModifiers().contains(ModifierKind.STATIC));
                 }
-                assertTrue(VarFinder.getInternalMethods(m.getBody().getLastStatement(), true, true).size() == 16); //7
+                assertTrue(VarFinder.getInternalMethods(m.getBody().getLastStatement(), true, true).size() == 7); //7
             }
         }
     }

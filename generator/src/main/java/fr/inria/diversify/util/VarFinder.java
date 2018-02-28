@@ -87,7 +87,8 @@ public class VarFinder {
         CtClass elClass = el.getParent(CtClass.class);
         CtPackage elPackage = elClass.getPackage();
         for(CtClass c : getAccessibleClasses(el)) {
-            Set<CtMethod> methods = c.getAllMethods();
+            //Set<CtMethod> methods = c.getAllMethods();
+            Set<CtMethod> methods = c.getMethods();
             res.addAll(
                     methods.stream()
                     /*.filter(
@@ -124,7 +125,8 @@ public class VarFinder {
         Set<CtMethod> res = new HashSet<>();
         CtClass elClass = el.getParent(CtClass.class);
         CtPackage elPackage = elClass.getPackage();
-        Set<CtMethod> methods = elClass.getAllMethods();
+        //Set<CtMethod> methods = elClass.getAllMethods();
+        Set<CtMethod> methods = elClass.getMethods();
         res.addAll(methods.stream()
                 .filter(
                         m -> (
@@ -161,7 +163,8 @@ public class VarFinder {
             if(VarFinder.notPrimitiveNotAnArray(v)) {
                 try {
                     CtClass target = (CtClass) v.getType().getDeclaration();
-                    res.addAll(target.getAllMethods());
+                    //res.addAll(target.getAllMethods());
+                    res.addAll(target.getMethods());
                 } catch (Exception e) {}
             }
         }
