@@ -160,6 +160,9 @@ public class DiversifyMain {
         String resultDir = inputConfiguration.getProperty("result");
 
         switch (runner) {
+            case "smart":
+                abstractRunner = new SmartRunner(inputConfiguration, project, src);
+                break;
             case "simple":
                 abstractRunner = new SinglePointRunner(inputConfiguration, project, src);
                 break;

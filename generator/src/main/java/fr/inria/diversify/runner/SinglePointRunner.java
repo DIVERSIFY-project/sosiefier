@@ -72,28 +72,7 @@ public class SinglePointRunner extends AbstractRunner {
 
             try {
                 int status;
-                if(trans instanceof AddMethodInvocation) {
-                    AddMethodInvocation a = (AddMethodInvocation) trans;
-                    CtMethod m = a.getTp().getParent(CtMethod.class);
-                    String params = "(";
-                    boolean isFirst = true;
-                    List<CtParameter> ps = m.getParameters();
-                    for(CtParameter p : ps) {
-                        if(isFirst) isFirst = false;
-                        else params +=", ";
-                        params += p.getType().getQualifiedName();
-                    }
-                    params += ")";
-                    String method = m.getDeclaringType().getQualifiedName() + "." +
-                            m.getSimpleName() + params;
-                    Properties p = new Properties();
-                    if(testImpact != null) {
-                        p.setProperty("test", getTests(method));
-                    }
-                    status = runTest(tmpDir, p);
-                } else {
                     status = runTest(tmpDir);
-                }
 
 
 //                if(status == 0) {

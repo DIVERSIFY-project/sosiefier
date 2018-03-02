@@ -57,7 +57,7 @@ public class MavenOutputParser {
      */
     public int parse(String[] output) {
         Pattern failedTestPattern = Pattern.compile("(\\w+)\\(((\\w+\\.)*\\w+)\\)\\s+Time elapsed:\\s+((\\d+\\.)?\\d+)\\s+sec\\s+<<<\\s+((FAILURE)|(ERROR))!");
-        Pattern deviationPattern = Pattern.compile(".+>>>> OffTrack <<<<");
+        Pattern deviationPattern = Pattern.compile(".*\\[OFF TRACK\\].*");
 
 
         List<String> resultFailedTests = new ArrayList<>();
@@ -111,6 +111,7 @@ public class MavenOutputParser {
                 status = 0;
             }
         }
+        if((status == 0) && (this.hasDeviated)) status = 1;
 
         //We assume that if no explicit Build success message was issue something really wrong happened
         if ( status == -3 ) {

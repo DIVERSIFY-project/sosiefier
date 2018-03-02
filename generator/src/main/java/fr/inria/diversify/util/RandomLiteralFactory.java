@@ -91,39 +91,42 @@ public class RandomLiteralFactory {
         SecureRandom sr = new SecureRandom();
         byte b[];
         //if(t.getActualClass() == byte.class) {
-        if(t.getQualifiedName() == "byte") {
+        if(t.getQualifiedName().equals("byte")) {
             b = new byte[1];
             sr.nextBytes(b);
             return f.Code().createLiteral(toByte(b));
-        } else if (t.getQualifiedName() == "short") {
+        } else if (t.getQualifiedName().equals("short")) {
             b = new byte[2];
             sr.nextBytes(b);
             return f.Code().createLiteral(toShort(b));
-        } else if (t.getQualifiedName() == "char") {
+        } else if (t.getQualifiedName().equals("char")) {
             b = new byte[2];
             sr.nextBytes(b);
             return f.Code().createLiteral(toChar(b));
-        } else if (t.getQualifiedName() == "int") {
+        } else if (t.getQualifiedName().equals("int")) {
             b = new byte[4];
             sr.nextBytes(b);
             return f.Code().createLiteral(toInt(b));
-        } else if (t.getQualifiedName() == "long") {
+        } else if (t.getQualifiedName().equals("long")) {
             b = new byte[8];
             sr.nextBytes(b);
             return f.Code().createLiteral(toLong(b));
-        } else if (t.getQualifiedName() == "float") {
+        } else if (t.getQualifiedName().equals("float")) {
             b = new byte[4];
             sr.nextBytes(b);
             return f.Code().createLiteral(toFloat(b));
-        } else if (t.getQualifiedName() == "double") {
+        } else if (t.getQualifiedName().equals("double")) {
             b = new byte[8];
             sr.nextBytes(b);
             return f.Code().createLiteral(toDouble(b));
-        } else if (t.getQualifiedName() == "boolean") {
+        } else if (t.getQualifiedName().equals("boolean")) {
             b = new byte[1];
             sr.nextBytes(b);
-            if(b[0] <= 127) return f.Code().createLiteral(true);
+            if(b[0] <= 0) return f.Code().createLiteral(true);
             else return f.Code().createLiteral(false);
+        } else if (t.getQualifiedName().equals("java.lang.String")) {
+
+            return f.Code().createLiteral(createString());
         } else {
             return f.Code().createLiteral(null);
         }

@@ -61,8 +61,10 @@ public abstract class SingleTransformation extends Transformation {
         Factory factory = type.getFactory();
         Environment env = factory.getEnvironment();
 
-        JavaOutputProcessor processor = new JavaOutputProcessor(new File(directory), new DefaultJavaPrettyPrinter(env));
+        JavaOutputProcessor processor = new JavaOutputProcessor(new DefaultJavaPrettyPrinter(env));
+        //JavaOutputProcessor processor = new JavaOutputProcessor(new File(directory), new DefaultJavaPrettyPrinter(env));
         processor.setFactory(factory);
+        processor.setOutputDirectory(new File(directory));
 
         processor.createJavaFile(type);
         Log.debug("write type {} in directory {}", type.getQualifiedName(), directory);

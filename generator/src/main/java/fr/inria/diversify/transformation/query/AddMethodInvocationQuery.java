@@ -9,6 +9,7 @@ import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.reference.CtExecutableReference;
 import spoon.reflect.reference.CtTypeReference;
+import spoon.reflect.visitor.filter.TypeFilter;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -86,7 +87,11 @@ public class AddMethodInvocationQuery extends TransformationQuery {
                 //.collect(Collectors.toList())
                 .collect(Collectors.toMap(ce -> ce, ce -> VarFinder.getAccessibleMethods(ce)))
         );*/
-        Collection<CtStatement> stmts = getInputProgram().getAllElement(CtStatement.class);
+        //Collection<CtStatement> stmts = getInputProgram().getAllElement(CtStatement.class);
+        Collection<CtStatement> stmts = getInputProgram()
+                .getFactory()
+                .getModel()
+                .getElements(new TypeFilter<>(CtStatement.class));
 
         Collection<CtStatement> stmtsFiltered = new ArrayList<>();
         for(CtStatement statement: stmts) {
@@ -284,6 +289,34 @@ public class AddMethodInvocationQuery extends TransformationQuery {
 
     int cur = 0;
 
+    public Transformation buildTransformation() throws QueryException {
+        Transformation res = null;
+        while (res == null && hasNextTransformation()) {
+            if((dumpMethodsAfterSuccess && (cur >= maxMethodsPerStmt)) || (((curCandidate == null) || curMethods.isEmpty()))) {
+                if(!candidateIt.hasNext()) throw new QueryException("No valid candidate");
+                cur = 0;
+                curCandidate = candidateIt.next();
+                if(externalMethods && nonstaticMethods && !internalMethods && !staticMethods)
+                    curMethods = new ArrayList<>(VarFinder.getTargetableMethods(curCandidate));
+                else if (!externalMethods && internalMethods)
+                    curMethods = new ArrayList<>(VarFinder.getInternalMethods(curCandidate, staticMethods, nonstaticMethods));
+                else
+                    curMethods = new ArrayList<>(VarFinder.getAccessibleMethods(curCandidate, staticMethods, nonstaticMethods));
+            }
+
+
+            if(shuffleMethods) Collections.shuffle(curMethods);
+            CtStatement invocation = buildInvocation(curCandidate, curMethods);
+            curMethods.removeAll(toRemove);
+            toRemove.clear();
+            if(invocation != null) {
+                cur++;
+                res = new AddMethodInvocation(curCandidate, invocation);
+            }
+        }
+        return res;
+    }
+
     @Override
     public Transformation query() throws QueryException {
         //curCandidate = candidateIt.next();
@@ -291,7 +324,7 @@ public class AddMethodInvocationQuery extends TransformationQuery {
 
         //curMethods = new ArrayList<>(VarFinder.getInternalMethods(curCandidate, staticMethods, nonstaticMethods));
 
-        if((dumpMethodsAfterSuccess && (cur >= maxMethodsPerStmt)) || (((curCandidate == null) || curMethods.isEmpty()))) {
+        /*if((dumpMethodsAfterSuccess && (cur >= maxMethodsPerStmt)) || (((curCandidate == null) || curMethods.isEmpty()))) {
             if(!candidateIt.hasNext()) throw new QueryException("No valid candidate");
             cur = 0;
             curCandidate = candidateIt.next();
@@ -316,7 +349,12 @@ public class AddMethodInvocationQuery extends TransformationQuery {
             return query();
         } else {
             throw new QueryException("No valid candidate");
+        }*/
+        Transformation t = buildTransformation();
+        if(t == null) {
+            new QueryException("No valid candidate");
         }
+        return t;
     }
     //
 

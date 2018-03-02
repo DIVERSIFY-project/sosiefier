@@ -8,6 +8,8 @@ import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
 
+import java.util.List;
+
 /**
  * Created by nharrand on 06/12/16.
  */
@@ -56,7 +58,20 @@ public class SwapSubType extends SingleTransformation {
 
     @Override
     public String methodLocationName() {
-        return "unknown";
+
+        CtMethod m = tp.getParent(CtMethod.class);
+        String params = "(";
+        boolean isFirst = true;
+        List<CtParameter> ps = m.getParameters();
+        for(CtParameter p : ps) {
+            if(isFirst) isFirst = false;
+            else params +=", ";
+            params += p.getType().getQualifiedName();
+        }
+        params += ")";
+        String method = m.getDeclaringType().getQualifiedName() + "." +
+                m.getSimpleName() + params;
+        return method;
     }
 
     @Override

@@ -15,6 +15,7 @@ import spoon.reflect.declaration.CtField;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.declaration.ModifierKind;
 import spoon.reflect.factory.Factory;
+import spoon.reflect.path.CtPathStringBuilder;
 import spoon.reflect.reference.CtTypeReference;
 
 import java.util.ArrayList;
@@ -48,12 +49,19 @@ public class JsonAddMethodInvocationInput extends JsonAstReplaceInput {
             //CodeFragment cf = getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
             //CtStatement tp = (CtStatement) cf.getCtCodeFragment();
 
-
-            CtStatement tp = getInputProgram().findElement(
+            CtStatement tp = (CtStatement) new CtPathStringBuilder()
+                    .fromString(cfJson.getString("path"))
+                    .evaluateOn(getInputProgram()
+                            .getFactory()
+                            .getModel()
+                            .getRootPackage())
+                    .iterator()
+                    .next();
+            /*CtStatement tp = getInputProgram().findElement(
                             Class.forName(cfJson.getString("type")),
                             cfJson.getString(POSITION),
                             cfJson.getString(SOURCE_CODE)
-                    );
+                    );*/
 
             if(tp == null) {
                 System.out.println(cfJson.toString());

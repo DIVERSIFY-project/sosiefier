@@ -42,7 +42,7 @@ public class LoopFlipQueryTest {
 
     public static boolean containsString(Iterable<String> s, String v) {
         for(String str : s) {
-            if(str.compareTo(v) == 0) return true;
+            if(v.contains(str)) return true;
         }
         return false;
     }

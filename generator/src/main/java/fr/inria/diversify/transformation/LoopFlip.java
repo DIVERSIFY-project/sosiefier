@@ -7,10 +7,13 @@ import spoon.reflect.code.*;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtPackage;
+import spoon.reflect.declaration.CtParameter;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.reference.CtVariableReference;
 import spoon.support.reflect.code.*;
+
+import java.util.List;
 
 /**
  * Created by nicolas on 11.10.16.
@@ -62,7 +65,20 @@ public class LoopFlip extends SingleTransformation {
 
     @Override
     public String methodLocationName() {
-        return tp.getParent(CtMethod.class).getSimpleName();
+
+        CtMethod m = tp.getParent(CtMethod.class);
+        String params = "(";
+        boolean isFirst = true;
+        List<CtParameter> ps = m.getParameters();
+        for(CtParameter p : ps) {
+            if(isFirst) isFirst = false;
+            else params +=", ";
+            params += p.getType().getQualifiedName();
+        }
+        params += ")";
+        String method = m.getDeclaringType().getQualifiedName() + "." +
+                m.getSimpleName() + params;
+        return method;
     }
 
     @Override

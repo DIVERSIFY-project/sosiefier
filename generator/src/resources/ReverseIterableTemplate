@@ -1,0 +1,30 @@
+new java.util.Iterable<#TYPE#>() {
+    java.util.List<#TYPE#> list = new java.util.ArrayList<>();
+    boolean initialized = false;
+
+    void init() {
+        for (#TYPE# o : #ITERABLE#) list.add(o);
+        initialized = true;
+    }
+
+    @Override
+    public Iterator<#TYPE#> iterator() {
+
+        return new Iterator() {
+            int i = list.size() - 1;
+            java.util.List<#TYPE#> l2 = list;
+
+            @Override
+            public boolean hasNext() {
+                if(!initialized) {init();i = list.size() - 1;}
+                return i >= 0;
+            }
+
+            @Override
+            public #TYPE# next() {
+                if(!initialized) {init();i = list.size() - 1;}
+                return l2.get(i--);
+            }
+        };
+    }
+}
