@@ -25,17 +25,22 @@ public class SmartRunner extends SinglePointRunner {
     }
 
     private String buildAgentLine(String test) {
+        System.out.println("traces: " + inputConfiguration.getProperty("traces"));
+        System.out.println("traceAgent: " + inputConfiguration.getProperty("traceAgent"));
+        System.out.println("tracePackage: " + inputConfiguration.getProperty("tracePackage"));
         if(inputConfiguration.getProperty("traces") == null) return null;
         if(inputConfiguration.getProperty("traceAgent") == null) return null;
         if(inputConfiguration.getProperty("tracePackage") == null) return null;
+
+
         return"-javaagent:" +
                 inputConfiguration.getProperty("traceAgent") +
-                "=\"strict-includes|includes=" +
+                "=strict-includes|includes=" +
                 inputConfiguration.getProperty("tracePackage") +
-                "|excludes=fr.inria.yalta|follow=" +
+                "|excludes=fr.inria.yalta|mfollow=" +
                 inputConfiguration.getProperty("traces") +
                 "/" + test +
-                "\"";
+                "";
     }
 
     @Override
@@ -53,10 +58,27 @@ public class SmartRunner extends SinglePointRunner {
                     SingleTransformation a = (SingleTransformation) trans;
                     Properties p = new Properties();
                     if(testImpact != null) {
-                        p.setProperty("test", getTests(a.methodLocationName()));
-                        p.setProperty("argLine", buildAgentLine(getTests(a.methodLocationName())));
+                        String rawTests = getTests(a.methodLocationName());
+                        String tests[] = rawTests.split(",");
+                        //p.setProperty("test", );
+                        status = -2;
+                        boolean divergent = false;
+                        for(int i = 0; i < tests.length; i++) {
+                            p.setProperty("test", tests[i]);
+                            p.setProperty("argLine", buildAgentLine(tests[i]));
+                            System.out.println("-DargLine=\"" + buildAgentLine(tests[i]) + "\"");
+                            status = runTest(tmpDir, p);
+                            System.out.println("[STATUS] -------> " + status);
+                            if(status < 0) {
+                                break;
+                            } else if (status >= 1) {
+                                divergent = true;
+                            }
+                        }
+                        if(divergent && status >= 0) status = 1;
+                    } else {
+                        status = runTest(tmpDir, p);
                     }
-                    status = runTest(tmpDir, p);
                 } else {
                     status = runTest(tmpDir);
                 }

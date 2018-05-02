@@ -18,6 +18,7 @@ public class SinglePointSessionResults extends AbstractSessionResults {
 
 
     public SinglePointSessionResults() {
+        execSosieCount = 0;
         sosieCount = 0;
         testFailedCount = 0;
         compileFailedCount = 0;
@@ -35,8 +36,11 @@ public class SinglePointSessionResults extends AbstractSessionResults {
      */
     public void addRunResults(Transformation results) {
 
-        if (results.getStatus() == 0) {
+        if (results.getStatus() >= 0) {
             sosieCount++;
+            if(results.getStatus() >= 1) {
+                execSosieCount++;
+            }
         } else if (results.getStatus() == -1) {
             testFailedCount++;
         } else if (results.getStatus() == -2) {

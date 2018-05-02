@@ -21,8 +21,6 @@ Read a transformation from a json file
 ## Configuration Files
 See examples in `./configurationFiles`
 
-# Usage
+## Exemple
 
-```sh
-java -jar main/target/main-1.0.0-jar-with-dependencies.jar path/to/config/file.properties
-```
+See [Exemple_README.md](Exemple_README.md)

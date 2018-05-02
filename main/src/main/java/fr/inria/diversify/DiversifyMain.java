@@ -619,12 +619,13 @@ public class DiversifyMain {
                 .collect(Collectors.toSet());
 
         Set<Transformation> sosies = transformations.stream()
-                .filter(t -> t.isSosie())
+                .filter(t -> t.getStatus() >= 0)
                 .collect(Collectors.toSet());
 
         Log.info("nb transformation: {}", transformations.size());
         Log.info("nb compile: {}", transformations.stream().filter(t -> t.getStatus() >= -1).count());
-        Log.info("nb sosie: {}", sosies.size());
+        Log.info("nb sosie: {}", transformations.stream().filter(t -> t.getStatus() >= 0).count());
+        Log.info("nb exec sosie: {}", transformations.stream().filter(t -> t.getStatus() >= 1).count());
 
 
 

@@ -28,6 +28,11 @@ public abstract class AbstractSessionResults {
      */
     protected int compileFailedCount;
 
+    /**
+     * Amount of locate compile failed  runs during the session
+     */
+    protected int execSosieCount;
+
 
     public abstract void saveReport(String report) throws IOException;
 
@@ -63,6 +68,7 @@ public abstract class AbstractSessionResults {
     public String toString() {
         String ret = "name: " + name + "\n";
         ret += "\ttrial: " + (testFailedCount + sosieCount + compileFailedCount);
+        ret += "\n\texec sosie: " + execSosieCount;
         ret += "\n\tsosie: " + sosieCount;
         ret += "\n\tcompile: " + (sosieCount + testFailedCount);
         ret += "\n\tnot compile: " + compileFailedCount;

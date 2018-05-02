@@ -30,19 +30,33 @@ public class SwapSubTypeQuery extends TransformationQuery {
     public void init() {
 
         Set<String> lList = new HashSet<>();
+        Set<String> lBlockingDeque = new HashSet<>();
+        Set<String> lDeque = new HashSet<>();
+        Set<String> lBlockingQueue = new HashSet<>();
+        Set<String> lTransferQueue = new HashSet<>();
+        Set<String> lQueue = new HashSet<>();
+        Set<String> lNavigableSet = new HashSet<>();
+        Set<String> lSortedSet = new HashSet<>();
+        Set<String> lSet = new HashSet<>();
+        Set<String> lCollection = new HashSet<>();
+        Set<String> lIterable = new HashSet<>();
+        Set<String> lConcurrentNavigableMap = new HashSet<>();
+        Set<String> lConcurrentMap = new HashSet<>();
+        Set<String> lNavigableMap = new HashSet<>();
+        Set<String> lSortedMap = new HashSet<>();
+        Set<String> lMap = new HashSet<>();
+
+
         lList.add("java.util.ArrayList");
         lList.add("java.util.LinkedList");
         lList.add("java.util.Stack");
         lList.add("java.util.Vector");
         lList.add("java.util.concurrent.CopyOnWriteArrayList");
-        Set<String> lBlockingDeque = new HashSet<>();
         lBlockingDeque.add("java.util.concurrent.LinkedBlockingDeque");
-        Set<String> lDeque = new HashSet<>();
         lDeque.addAll(lBlockingDeque);
         lDeque.add("java.util.ArrayDeque");
         lDeque.add("java.util.LinkedList");
         lDeque.add("java.util.concurrent.ConcurrentLinkedDeque");
-        Set<String> lBlockingQueue = new HashSet<>();
         lBlockingQueue.addAll(lBlockingDeque);
         lBlockingQueue.add("java.util.concurrent.ArrayBlockingQueue");
         lBlockingQueue.add("java.util.concurrent.DelayQueue");
@@ -50,9 +64,7 @@ public class SwapSubTypeQuery extends TransformationQuery {
         lBlockingQueue.add("java.util.concurrent.LinkedTransferQueue");
         lBlockingQueue.add("java.util.concurrent.PriorityBlockingQueue");
         lBlockingQueue.add("java.util.concurrent.SynchronousQueue");
-        Set<String> lTransferQueue = new HashSet<>();
         lTransferQueue.add("java.util.concurrent.LinkedTransferQueue");
-        Set<String> lQueue = new HashSet<>();
         lQueue.addAll(lDeque);
         lQueue.addAll(lBlockingQueue);
         lQueue.addAll(lTransferQueue);
@@ -62,35 +74,25 @@ public class SwapSubTypeQuery extends TransformationQuery {
         lQueue.add("java.util.PriorityQueue");
 
 
-        Set<String> lNavigableSet = new HashSet<>();
         lNavigableSet.add("java.util.concurrent.ConcurrentSkipListSet");
         lNavigableSet.add("java.util.TreeSet");
-        Set<String> lSortedSet = new HashSet<>();
         lSortedSet.addAll(lNavigableSet);
-        Set<String> lSet = new HashSet<>();
         lSet.addAll(lSortedSet);
         lSet.add("java.util.concurrent.CopyOnWriteArraySet");
         lSet.add("java.util.HashSet");
         lSet.add("java.util.LinkedHashSet");
 
-        Set<String> lCollection = new HashSet<>();
         lCollection.addAll(lSet);
         lCollection.addAll(lQueue);
         lCollection.addAll(lList);
-        Set<String> lIterable = new HashSet<>();
         lIterable.addAll(lCollection);
 
-        Set<String> lConcurrentNavigableMap = new HashSet<>();
         lConcurrentNavigableMap.add("java.util.concurrent.ConcurrentSkipListMap");
-        Set<String> lConcurrentMap = new HashSet<>();
         lConcurrentMap.addAll(lConcurrentNavigableMap);
         lConcurrentMap.add("java.util.concurrent.ConcurrentHashMap");
-        Set<String> lNavigableMap = new HashSet<>();
         lNavigableMap.addAll(lConcurrentNavigableMap);
         lNavigableMap.add("java.util.TreeMap");
-        Set<String> lSortedMap = new HashSet<>();
         lSortedMap.addAll(lNavigableMap);
-        Set<String> lMap = new HashSet<>();
         lMap.addAll(lConcurrentMap);
         lMap.addAll(lSortedMap);
         lMap.add("java.util.HashMap");
@@ -118,6 +120,7 @@ public class SwapSubTypeQuery extends TransformationQuery {
         interfaces.put("java.util.Map", lMap);
 
         commonsCollection();
+        gnuTorve();
     }
 
 
@@ -153,6 +156,23 @@ public class SwapSubTypeQuery extends TransformationQuery {
         lMap.add("org.apache.commons.collections4.map.SingletonMap");
         lMap.add("org.apache.commons.collections4.map.StaticBucketMap");
 
+    }
+
+
+    public void gnuTorve() {
+
+        /*<dependency>
+            <groupId>net.sf.trove4j</groupId>
+            <artifactId>trove4j</artifactId>
+            <version>3.0.3</version>
+        </dependency>*/
+        Set<String> lSet = interfaces.get("java.util.Set");
+        lSet.add("gnu.trove.set.hash.TCustomHashSet");
+        lSet.add("gnu.trove.set.hash.THashSet");
+
+        Set<String> lMap = interfaces.get("java.util.Map");
+        lMap.add("gnu.trove.map.hash.THashMap");
+        lMap.add("gnu.trove.map.hash.TCustomHashMap");
     }
 
     public SwapSubTypeQuery(InputProgram inputProgram) {

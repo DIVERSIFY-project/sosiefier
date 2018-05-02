@@ -294,7 +294,7 @@ public abstract class AbstractRunner {
         }
     }
 
-    public String getTests(String method) {
+    public  String getTests(String method) {
         String res = "";
         if(testImpact == null) return null;
         if(!testImpact.containsKey(method)) return "";
