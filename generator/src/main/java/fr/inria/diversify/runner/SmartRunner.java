@@ -25,19 +25,21 @@ public class SmartRunner extends SinglePointRunner {
     }
 
     private String buildAgentLine(String test) {
-        System.out.println("traces: " + inputConfiguration.getProperty("traces"));
-        System.out.println("traceAgent: " + inputConfiguration.getProperty("traceAgent"));
-        System.out.println("tracePackage: " + inputConfiguration.getProperty("tracePackage"));
         if(inputConfiguration.getProperty("traces") == null) return null;
         if(inputConfiguration.getProperty("traceAgent") == null) return null;
         if(inputConfiguration.getProperty("tracePackage") == null) return null;
-
+        String exclude = "";
+        if(inputConfiguration.getProperty("traceExclude") != null) {
+            exclude = "," + inputConfiguration.getProperty("traceExclude");
+        }
 
         return"-javaagent:" +
                 inputConfiguration.getProperty("traceAgent") +
                 "=strict-includes|includes=" +
                 inputConfiguration.getProperty("tracePackage") +
-                "|excludes=fr.inria.yalta|mfollow=" +
+                "|excludes=fr.inria.yalta" +
+                exclude +
+                "|mfollow=" +
                 inputConfiguration.getProperty("traces") +
                 "/" + test +
                 "";
@@ -66,6 +68,7 @@ public class SmartRunner extends SinglePointRunner {
                         for(int i = 0; i < tests.length; i++) {
                             p.setProperty("test", tests[i]);
                             p.setProperty("argLine", buildAgentLine(tests[i]));
+                            p.setProperty("failIfNoTests","false");
                             System.out.println("-DargLine=\"" + buildAgentLine(tests[i]) + "\"");
                             status = runTest(tmpDir, p);
                             System.out.println("[STATUS] -------> " + status);

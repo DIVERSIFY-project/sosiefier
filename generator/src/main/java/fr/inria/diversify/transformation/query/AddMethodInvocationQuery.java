@@ -201,9 +201,10 @@ public class AddMethodInvocationQuery extends TransformationQuery {
                         CtClass cl = m.getParent(CtClass.class);
                         CtClass cltp = tp.getParent(CtClass.class);
                         if ((cl != null) && (cltp != null)) {
-                            CtTypeReference t = f.Code().createCtTypeReference(cl.getActualClass());
-                            CtTypeReference ttp = f.Code().createCtTypeReference(cltp.getActualClass());
-                            if (ttp.isSubtypeOf(t)) {
+                            //CtTypeReference t = f.Code().createCtTypeReference(cl.getActualClass());
+                            //CtTypeReference ttp = f.Code().createCtTypeReference(cltp.getActualClass());
+                            //if (ttp.isSubtypeOf(t)) {
+                            if(cltp.isSubtypeOf(cl.getReference())) {
                                 res = createInvocation(null, m, vars, staticCtx);
                                 if (res != null) {
                                     return res;
