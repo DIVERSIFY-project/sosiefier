@@ -177,7 +177,8 @@ public class AddMethodInvocationQuery extends TransformationQuery {
                             CtClass cl = m.getParent(CtClass.class);
                             if(cl != null) {
                                 try {
-                                    CtTypeReference t = f.Code().createCtTypeReference(cl.getActualClass());
+                                    //CtTypeReference t = f.Code().createCtTypeReference(cl.getActualClass());
+                                    CtTypeReference t = cl.getReference();
                                     if (v.getType().isSubtypeOf(t)) {
                                         res = createInvocation(v, m, vars, staticCtx);
                                         if (res != null) {
@@ -258,7 +259,8 @@ public class AddMethodInvocationQuery extends TransformationQuery {
                             return res;
                         } else {
                             CtClass targetClass = m.getParent(CtClass.class);
-                            CtTypeReference classRef = f.Code().createCtTypeReference(targetClass.getActualClass());
+                            //CtTypeReference classRef = f.Code().createCtTypeReference(targetClass.getActualClass());
+                            CtTypeReference classRef = targetClass.getReference();
                             List<CtConstructor> constructors = new LinkedList<>(targetClass.getConstructors());
                             List<CtExpression> paramsConst;
                             //boolean constFound = false;
