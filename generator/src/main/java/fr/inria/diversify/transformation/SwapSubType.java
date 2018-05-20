@@ -60,18 +60,22 @@ public class SwapSubType extends SingleTransformation {
     public String methodLocationName() {
 
         CtMethod m = tp.getParent(CtMethod.class);
-        String params = "(";
-        boolean isFirst = true;
-        List<CtParameter> ps = m.getParameters();
-        for(CtParameter p : ps) {
-            if(isFirst) isFirst = false;
-            else params +=", ";
-            params += p.getType().getQualifiedName();
+        if(m != null) {
+            String params = "(";
+            boolean isFirst = true;
+            List<CtParameter> ps = m.getParameters();
+            for(CtParameter p : ps) {
+                if(isFirst) isFirst = false;
+                else params +=", ";
+                params += p.getType().getQualifiedName();
+            }
+            params += ")";
+            String method = m.getDeclaringType().getQualifiedName() + "." +
+                    m.getSimpleName() + params;
+            return method;
+        } else {
+            return null;
         }
-        params += ")";
-        String method = m.getDeclaringType().getQualifiedName() + "." +
-                m.getSimpleName() + params;
-        return method;
     }
 
     @Override

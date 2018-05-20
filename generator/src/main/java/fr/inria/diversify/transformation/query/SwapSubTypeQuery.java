@@ -5,6 +5,7 @@ import fr.inria.diversify.transformation.AddMethodInvocation;
 import fr.inria.diversify.transformation.SwapSubType;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.VarFinder;
+import spoon.SpoonException;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
@@ -126,6 +127,12 @@ public class SwapSubTypeQuery extends TransformationQuery {
 
     public void commonsCollection() {
 
+        /*<dependency>
+              <groupId>org.apache.commons</groupId>
+              <artifactId>commons-collections4</artifactId>
+              <version>4.0</version>
+        </dependency>*/
+
         Set<String> lList = interfaces.get("java.util.List");
         lList.add("org.apache.commons.collections4.list.TreeList");
         lList.add("org.apache.commons.collections4.list.GrowthList");
@@ -232,7 +239,9 @@ public class SwapSubTypeQuery extends TransformationQuery {
                         candidates.add(new HashMap.SimpleEntry<>(call, c));
                     }
                 }
-            } catch (spoon.support.SpoonClassNotFoundException e) {}
+            } catch (SpoonException e) {
+                e.printStackTrace();
+            }
 
         }
         System.out.println(" --- Done (" + candidates.size() + " coll: " + collections + " skipped: " + skipped + ") --- ");

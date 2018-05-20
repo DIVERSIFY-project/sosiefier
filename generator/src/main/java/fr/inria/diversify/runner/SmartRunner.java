@@ -58,18 +58,25 @@ public class SmartRunner extends SinglePointRunner {
                 int status;
                 if(trans instanceof SingleTransformation) {
                     SingleTransformation a = (SingleTransformation) trans;
+                    String method = a.methodLocationName();
+
                     Properties p = new Properties();
-                    if(testImpact != null) {
-                        String rawTests = getTests(a.methodLocationName());
+                    if(testImpact != null && method != null) {
+                        String rawTests = getTests(method);
                         String tests[] = rawTests.split(",");
                         //p.setProperty("test", );
                         status = -2;
                         boolean divergent = false;
                         for(int i = 0; i < tests.length; i++) {
                             p.setProperty("test", tests[i]);
-                            p.setProperty("argLine", buildAgentLine(tests[i]));
+                            String argLine = buildAgentLine(tests[i]);
+                            if(argLine != null) {
+                                System.out.println("-DargLine=\"" + argLine + "\"");
+                                p.setProperty("argLine", argLine);
+                            } else {
+                                System.out.println("No agent to run");
+                            }
                             p.setProperty("failIfNoTests","false");
-                            System.out.println("-DargLine=\"" + buildAgentLine(tests[i]) + "\"");
                             status = runTest(tmpDir, p);
                             System.out.println("[STATUS] -------> " + status);
                             if(status < 0) {
