@@ -67,7 +67,8 @@ public class SmartRunner extends SinglePointRunner {
                         //p.setProperty("test", );
                         status = -2;
                         boolean divergent = false;
-                        for(int i = 0; i < tests.length; i++) {
+                        int i = 0;
+                        for(; i < tests.length; i++) {
                             p.setProperty("test", tests[i]);
                             String argLine = buildAgentLine(tests[i]);
                             if(argLine != null) {
@@ -83,6 +84,22 @@ public class SmartRunner extends SinglePointRunner {
                                 break;
                             } else if (status >= 1) {
                                 divergent = true;
+                                break;
+                            }
+                        }
+                        if(status >= 0) {
+                            String remainingTests = "";
+                            int first = i;
+                            for(; i < tests.length; i++) {
+                                if(i != first) remainingTests += "," + tests[i];
+                                else remainingTests += tests[i];
+                            }
+                            if(!remainingTests.equals("")) {
+
+                                Properties p2 = new Properties();
+                                p2.setProperty("test", remainingTests);
+                                p2.setProperty("failIfNoTests","false");
+                                status = runTest(tmpDir, p2);
                             }
                         }
                         if(divergent && status >= 0) status = 1;
