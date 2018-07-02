@@ -63,46 +63,53 @@ public class SmartRunner extends SinglePointRunner {
                     Properties p = new Properties();
                     if(testImpact != null && method != null) {
                         String rawTests = getTests(method);
-                        String tests[] = rawTests.split(",");
-                        //p.setProperty("test", );
-                        status = -2;
-                        boolean divergent = false;
-                        int i = 0;
-                        for(; i < tests.length; i++) {
-                            p.setProperty("test", tests[i]);
-                            String argLine = buildAgentLine(tests[i]);
-                            if(argLine != null) {
-                                System.out.println("-DargLine=\"" + argLine + "\"");
-                                p.setProperty("argLine", argLine);
-                            } else {
-                                System.out.println("No agent to run");
+                        Log.debug("Run the following tests: <" + rawTests + ">");
+                        if(rawTests.equals("")) {
+                            status = -4;
+                            Log.debug("No test covering method " + method);
+                        } else {
+                            String tests[] = rawTests.split(",");
+                            //p.setProperty("test", );
+                            status = -2;
+                            boolean divergent = false;
+                            int i = 0;
+                            for (; i < tests.length; i++) {
+                                p.setProperty("test", tests[i]);
+                                String argLine = buildAgentLine(tests[i]);
+                                if (argLine != null) {
+                                    System.out.println("-DargLine=\"" + argLine + "\"");
+                                    p.setProperty("argLine", argLine);
+                                } else {
+                                    System.out.println("No agent to run");
+                                }
+                                p.setProperty("failIfNoTests", "false");
+                                status = runTest(tmpDir, p);
+                                System.out.println("[STATUS] -------> " + status);
+                                if (status < 0) {
+                                    break;
+                                } else if (status >= 1) {
+                                    divergent = true;
+                                    break;
+                                }
                             }
-                            p.setProperty("failIfNoTests","false");
-                            status = runTest(tmpDir, p);
-                            System.out.println("[STATUS] -------> " + status);
-                            if(status < 0) {
-                                break;
-                            } else if (status >= 1) {
-                                divergent = true;
-                                break;
-                            }
-                        }
-                        if(status >= 0) {
-                            String remainingTests = "";
-                            int first = i;
-                            for(; i < tests.length; i++) {
-                                if(i != first) remainingTests += "," + tests[i];
-                                else remainingTests += tests[i];
-                            }
-                            if(!remainingTests.equals("")) {
+                            if (status >= 0) {
+                                String remainingTests = "";
+                                int first = i+1;//either all tests have been ran or previous loop has exited through break;
+                                for (; i < tests.length; i++) {
+                                    if (i != first) remainingTests += "," + tests[i];
+                                    else remainingTests += tests[i];
+                                }
+                                Log.debug("Run the following remaining tests: <" + remainingTests + ">");
+                                if (!remainingTests.equals("")) {
 
-                                Properties p2 = new Properties();
-                                p2.setProperty("test", remainingTests);
-                                p2.setProperty("failIfNoTests","false");
-                                status = runTest(tmpDir, p2);
+                                    Properties p2 = new Properties();
+                                    p2.setProperty("test", remainingTests);
+                                    p2.setProperty("failIfNoTests", "false");
+                                    status = runTest(tmpDir, p2);
+                                }
                             }
+                            if (divergent && status >= 0) status = 1;
                         }
-                        if(divergent && status >= 0) status = 1;
                     } else {
                         status = runTest(tmpDir, p);
                     }

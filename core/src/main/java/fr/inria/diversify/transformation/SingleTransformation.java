@@ -57,6 +57,7 @@ public abstract class SingleTransformation extends Transformation {
 
 
     public void printJavaFile(String directory) throws IOException {
+        removeClass(directory + "/../target/classes");
         CtType<?> type = getPosition().getCompilationUnit().getMainType();
         Factory factory = type.getFactory();
         Environment env = factory.getEnvironment();
@@ -68,6 +69,15 @@ public abstract class SingleTransformation extends Transformation {
 
         processor.createJavaFile(type);
         Log.debug("write type {} in directory {}", type.getQualifiedName(), directory);
+    }
+
+    public void removeClass(String classDir) {
+        CtType<?> type = getPosition().getCompilationUnit().getMainType();
+        String qn = type.getQualifiedName();
+        qn.replace(".", "/");
+        File cl = new File(classDir + "/" + qn + ".class");
+        if(cl.exists()) cl.delete();
+
     }
 
 //    /**

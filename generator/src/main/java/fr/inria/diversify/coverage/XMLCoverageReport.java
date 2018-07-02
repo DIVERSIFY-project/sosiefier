@@ -30,7 +30,7 @@ import java.util.Map;
 public class XMLCoverageReport implements ICoverageReport {
 
     File reportFile;
-    Map<String, Map<String, Map<Integer, LineReport>>> report;
+    Map<String,Map<Integer, Double>> report;
 
     public XMLCoverageReport(File reportFile) {
         this.reportFile = reportFile;
@@ -56,9 +56,9 @@ public class XMLCoverageReport implements ICoverageReport {
                 }
             });*/
             Document doc = dBuilder.parse(reportFile);
-            NodeList nList = doc.getElementsByTagName("report");
+            NodeList nList = doc.getElementsByTagName("packages");
             if(nList.getLength() == 1) {
-                readReport(nList.item(0));
+                readPackages(nList.item(0));
                 System.out.println("OK");
             } else {
                 System.err.println("Error in xml report coverage format");
@@ -71,48 +71,86 @@ public class XMLCoverageReport implements ICoverageReport {
         }
     }
 
-    void readReport(Node r) {
+    void readPackages(Node r) {
         NodeList reportChild = r.getChildNodes();
         for(int i = 0; i < reportChild.getLength(); i++) {
             if(reportChild.item(i).getNodeName().equals("package")) {
                 readPackage(reportChild.item(i));
-            } else if (reportChild.item(i).getNodeName().equals("class")) {
-                readClass(reportChild.item(i));
             }
         }
     }
 
     void readPackage(Node p) {
-        String packageName = p.getAttributes().getNamedItem("name").getNodeValue().replace('/','.');
-        report.put(packageName,new HashMap<>());
-        NodeList packageChild = p.getChildNodes();
-        for(int i = 0; i < packageChild.getLength(); i++) {
-            if(packageChild.item(i).getNodeName().equals("sourcefile")) {
-                readSourceFile(packageChild.item(i), packageName);
+        NodeList nList = p.getChildNodes();
+        for(int j = 0; j < nList.getLength(); j++) {
+            if (nList.item(j).getNodeName().equals("classes")) {
+                NodeList classes = nList.item(j).getChildNodes();
+                for (int i = 0; i < classes.getLength(); i++) {
+                    if (classes.item(i).getNodeName().equals("class")) {
+                        readClass(classes.item(i));
+                    }
+                }
             }
         }
     }
 
-    void readClass(Node c) {}
-
-    void readMethod() {}
-
-    void readSourceFile(Node s, String packageName) {
-        String fileName = s.getAttributes().getNamedItem("name").getNodeValue();
-        report.get(packageName).put(fileName, new HashMap<>());
-        NodeList sourceFileChild = s.getChildNodes();
-        for(int i = 0; i < sourceFileChild.getLength(); i++) {
-            if(sourceFileChild.item(i).getNodeName().equals("line")) {
-                Node l = sourceFileChild.item(i);
-                int nr = Integer.parseInt(l.getAttributes().getNamedItem("nr").getNodeValue());
-                int mi = Integer.parseInt(l.getAttributes().getNamedItem("mi").getNodeValue());
-                int ci = Integer.parseInt(l.getAttributes().getNamedItem("ci").getNodeValue());
-                int mb = Integer.parseInt(l.getAttributes().getNamedItem("mb").getNodeValue());
-                int cb = Integer.parseInt(l.getAttributes().getNamedItem("cb").getNodeValue());
-                report.get(packageName).get(fileName).put(nr, new LineReport(mi,ci,mb,cb));
+    void readClass(Node c) {
+        NodeList nList = c.getChildNodes();
+        String fileName = c.getAttributes().getNamedItem("filename").getNodeValue();
+        for(int j = 0; j < nList.getLength(); j++) {
+            if (nList.item(j).getNodeName().equals("methods")) {
+                NodeList methods = nList.item(j).getChildNodes();
+                for (int i = 0; i < methods.getLength(); i++) {
+                    if (methods.item(i).getNodeName().equals("method")) {
+                        readMethod(methods.item(i), fileName);
+                    }
+                }
             }
         }
     }
+
+    void readMethod(Node m, String fileName) {
+        NodeList nList = m.getChildNodes();
+        for(int j = 0; j < nList.getLength(); j++) {
+            if(nList.item(j).getNodeName().equals("lines")) {
+                NodeList lines = nList.item(j).getChildNodes();
+                for(int i = 0; i < lines.getLength(); i++) {
+                    if(lines.item(i).getNodeName().equals("line")) {
+                        readLine(lines.item(i), fileName);
+                    }
+                }
+            }
+        }
+    }
+
+    void readLine(Node l, String fileName) {
+        double score;
+        int hits = Integer.parseInt(l.getAttributes().getNamedItem("hits").getNodeValue());
+        int number = Integer.parseInt(l.getAttributes().getNamedItem("number").getNodeValue());
+        if(hits != 0) {
+            Node conditionCov = l.getAttributes().getNamedItem("condition-coverage");
+            if(conditionCov != null) {
+                score = Integer.parseInt(conditionCov.getNodeValue().split("%")[0]) / 100.0;
+            } else {
+                score = 1;
+            }
+        } else {
+            score = 0;
+        }
+        if(!report.containsKey(fileName)) report.put(fileName,new HashMap<>());
+        Map<Integer,Double> lines = report.get(fileName);
+        lines.put(number,score);
+        /*NodeList nList = l.getChildNodes();
+        if(nList.getLength() == 1 && nList.item(0).getNodeName().equals("conditions")) {
+            NodeList lines = nList.item(0).getChildNodes();
+            for(int i = 0; i < lines.getLength(); i++) {
+                if(lines.item(i).getNodeName().equals("condition")) {
+                    //readLine(lines.item(i));
+                }
+            }
+        }*/
+    }
+
 
     @Override
     public double codeFragmentCoverage(CodeFragment stmt) {
@@ -138,38 +176,23 @@ public class XMLCoverageReport implements ICoverageReport {
     public double positionCoverage(SourcePosition position) {
         CtType<?> cl = position.getCompilationUnit().getMainType();
 
-        String packageName = cl.getPackage().getQualifiedName();
-        String sourceFile = cl.getSimpleName() + ".java";
+        String packageName = cl.getPackage().getQualifiedName().replace(".","/");
+        String sourceFile = packageName + "/" + cl.getSimpleName() + ".java";
 
-        if(!report.containsKey(packageName)
-                || !report.get(packageName).containsKey(sourceFile)) {
+        if(!report.containsKey(sourceFile)) {
             return 0;
         }
 
         double ret = 0;
         int start = position.getLine();
         int end = position.getEndLine();
-        Map<Integer, LineReport> lineReports = report.get(packageName).get(sourceFile);
+        Map<Integer, Double> lineReports = report.get(sourceFile);
         for (int i = start; i <= end; i++) {
             if (lineReports.containsKey(i)) {
-                LineReport l = lineReports.get(i);
-                ret += ((double) l.ci) / (((double) l.mi) + ((double) l.ci));
+                Double l = lineReports.get(i);
+                ret += l;
             }
         }
         return ret/(double)(end - start + 1);
-    }
-
-    public class LineReport {
-        public int mi;
-        public int ci;
-        public int mb;
-        public int cb;
-
-        public LineReport(int mi, int ci, int mb, int cb) {
-            this.mi = mi;
-            this.ci = ci;
-            this.mb = mb;
-            this.cb = cb;
-        }
     }
 }

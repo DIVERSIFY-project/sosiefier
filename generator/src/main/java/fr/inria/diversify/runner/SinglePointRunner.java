@@ -3,6 +3,7 @@ package fr.inria.diversify.runner;
 
 import fr.inria.diversify.statistic.SinglePointSessionResults;
 import fr.inria.diversify.transformation.AddMethodInvocation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.Log;
